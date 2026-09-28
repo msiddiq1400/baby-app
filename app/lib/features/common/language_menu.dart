@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/providers.dart';
 import '../../core/reminders.dart';
+import '../../data/local_db.dart';
 import '../../l10n/app_localizations.dart';
 import '../auth/google_auth.dart';
 
@@ -38,6 +39,7 @@ class LanguageMenu extends ConsumerWidget {
           const PopupMenuDivider(),
           PopupMenuItem(
             value: () async {
+              if (!await _confirmSignOut(context, ref)) return;
               await Reminders.cancelAll();
               await GoogleAuth.signOut();
               await ref.read(supabaseProvider).auth.signOut();
@@ -51,5 +53,25 @@ class LanguageMenu extends ConsumerWidget {
         ],
       ],
     );
+  }
+
+  /// Signing out wipes the phone's database, so warn if offline changes
+  /// haven't uploaded yet.
+  Future<bool> _confirmSignOut(BuildContext context, WidgetRef ref) async {
+    final pending = await ref.read(powerSyncProvider).getNextCrudTransaction() != null;
+    if (!pending || !context.mounted) return true;
+    final l10n = AppLocalizations.of(context);
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.unsyncedSignOutTitle),
+        content: Text(l10n.unsyncedSignOutBody),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.cancelButton)),
+          TextButton(onPressed: () => Navigator.pop(context, true), child: Text(l10n.signOutAnyway)),
+        ],
+      ),
+    );
+    return confirmed ?? false;
   }
 }

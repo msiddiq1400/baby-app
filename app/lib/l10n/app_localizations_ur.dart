@@ -842,6 +842,27 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get sumFooter => 'والدین نے بے بی ایپ میں درج کیا۔';
+
+  @override
+  String get firstSyncLoading => 'آپ کے خاندان کا ڈیٹا لوڈ ہو رہا ہے…';
+
+  @override
+  String get firstSyncNeedsInternet =>
+      'پہلی بار اس کے لیے انٹرنیٹ ضروری ہے۔ اس کے بعد ایپ انٹرنیٹ کے بغیر بھی چلتی ہے۔';
+
+  @override
+  String get offlineBanner =>
+      'آف لائن: تبدیلیاں محفوظ ہیں اور انٹرنیٹ آنے پر سنک ہو جائیں گی۔';
+
+  @override
+  String get unsyncedSignOutTitle => 'کچھ تبدیلیاں ابھی سنک نہیں ہوئیں';
+
+  @override
+  String get unsyncedSignOutBody =>
+      'اگر آپ ابھی سائن آؤٹ کریں تو آف لائن کیے گئے اندراجات ضائع ہو جائیں گے۔ انہیں محفوظ رکھنے کے لیے پہلے انٹرنیٹ سے جڑیں۔';
+
+  @override
+  String get signOutAnyway => 'پھر بھی سائن آؤٹ کریں';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -1685,4 +1706,25 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get sumFooter => 'Walidain ne Baby App mein record kiya.';
+
+  @override
+  String get firstSyncLoading => 'Aap ki family ka data load ho raha hai…';
+
+  @override
+  String get firstSyncNeedsInternet =>
+      'Pehli baar is ke liye internet zaroori hai. Us ke baad app internet ke baghair bhi chalti hai.';
+
+  @override
+  String get offlineBanner =>
+      'Offline: tabdeeliyan save hain aur internet aane par sync ho jayengi.';
+
+  @override
+  String get unsyncedSignOutTitle => 'Kuch tabdeeliyan abhi sync nahi hui';
+
+  @override
+  String get unsyncedSignOutBody =>
+      'Agar aap abhi sign out karein to offline kiye gaye indrajaat zaaya ho jayenge. Unhein mehfooz rakhne ke liye pehle internet se judein.';
+
+  @override
+  String get signOutAnyway => 'Phir bhi sign out karein';
 }

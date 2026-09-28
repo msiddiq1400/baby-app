@@ -1,26 +1,25 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:powersync/powersync.dart';
 
 import '../core/dates.dart';
-import '../core/providers.dart';
+import 'local_db.dart';
 import 'models.dart';
 
 class SymptomRepository {
   SymptomRepository(this._db);
 
-  final SupabaseClient _db;
+  final PowerSyncDatabase _db;
+
+  static const _sql = 'SELECT id, symptom, occurred_at, temperature_c, severity, notes FROM symptom_logs '
+      'WHERE baby_id = ? AND deleted_at IS NULL AND julianday(occurred_at) >= julianday(?) '
+      'ORDER BY julianday(occurred_at) DESC';
 
   /// Entries since [from], newest first.
-  Future<List<SymptomLog>> since(String babyId, DateTime from) async {
-    final rows = await _db
-        .from('symptom_logs')
-        .select('id, symptom, occurred_at, temperature_c, severity, notes')
-        .eq('baby_id', babyId)
-        .isFilter('deleted_at', null)
-        .gte('occurred_at', utcTimestamp(from))
-        .order('occurred_at', ascending: false);
-    return rows.map(SymptomLog.fromJson).toList();
-  }
+  Future<List<SymptomLog>> since(String babyId, DateTime from) async =>
+      (await _db.getAll(_sql, [babyId, utcTimestamp(from)])).map(SymptomLog.fromJson).toList();
+
+  Stream<List<SymptomLog>> watchSince(String babyId, DateTime from) =>
+      _db.watch(_sql, parameters: [babyId, utcTimestamp(from)]).map((rows) => rows.map(SymptomLog.fromJson).toList());
 
   /// Adds an entry, or updates [existingId].
   Future<void> save(
@@ -31,7 +30,7 @@ class SymptomRepository {
     double? temperatureC,
     int? severity,
     String? notes,
-  }) {
+  }) async {
     final fields = {
       'symptom': symptom,
       'occurred_at': utcTimestamp(occurredAt),
@@ -39,18 +38,17 @@ class SymptomRepository {
       'severity': severity,
       'notes': notes,
     };
-    if (existingId != null) return _db.from('symptom_logs').update(fields).eq('id', existingId);
-    return _db.from('symptom_logs').insert({'family_id': baby.familyId, 'baby_id': baby.id, ...fields});
+    if (existingId != null) return updateRow(_db, 'symptom_logs', existingId, fields);
+    await insertRow(_db, 'symptom_logs', {'family_id': baby.familyId, 'baby_id': baby.id, ...fields});
   }
 
-  Future<void> delete(String id) =>
-      _db.from('symptom_logs').update({'deleted_at': utcTimestamp(DateTime.now())}).eq('id', id);
+  Future<void> delete(String id) => updateRow(_db, 'symptom_logs', id, {'deleted_at': utcTimestamp(DateTime.now())});
 }
 
-final symptomRepositoryProvider = Provider((ref) => SymptomRepository(ref.watch(supabaseProvider)));
+final symptomRepositoryProvider = Provider((ref) => SymptomRepository(ref.watch(powerSyncProvider)));
 
 /// The last 14 days, which is what the diary shows and the summary can cover.
-final recentSymptomsProvider = FutureProvider.family<List<SymptomLog>, String>((ref, babyId) {
+final recentSymptomsProvider = StreamProvider.family<List<SymptomLog>, String>((ref, babyId) {
   final now = DateTime.now();
-  return ref.watch(symptomRepositoryProvider).since(babyId, DateTime(now.year, now.month, now.day - 14));
+  return ref.watch(symptomRepositoryProvider).watchSince(babyId, DateTime(now.year, now.month, now.day - 14));
 });

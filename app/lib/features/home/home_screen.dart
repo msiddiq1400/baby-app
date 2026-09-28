@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../data/baby_repository.dart';
+import '../../data/local_db.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
 import '../baby/add_baby_screen.dart';
@@ -23,11 +24,23 @@ class BabyShell extends ConsumerWidget {
     ref.listen(vaccineRemindersProvider, (_, _) {});
     ref.listen(medicineRemindersProvider, (_, _) {});
     ref.listen(milkRemindersProvider, (_, _) {});
+
+    // Until the first download after signing in has finished, "no baby"
+    // might just mean "not synced yet": don't offer to add one.
+    final status = ref.watch(syncStatusProvider).value;
+    if (status?.hasSynced != true) return const _FirstSync();
+    final offline = !status!.connected && !status.connecting;
+
     return ref.watch(currentBabyProvider).when(
           data: (baby) => baby == null
               ? const AddBabyScreen()
               : Scaffold(
-                  body: shell,
+                  body: Column(
+                    children: [
+                      Expanded(child: shell),
+                      if (offline) const _OfflineBanner(),
+                    ],
+                  ),
                   bottomNavigationBar: NavigationBar(
                     selectedIndex: shell.currentIndex,
                     onDestinationSelected: (i) => shell.goBranch(i, initialLocation: i == shell.currentIndex),
@@ -71,6 +84,59 @@ class BabyShell extends ConsumerWidget {
             ),
           ),
         );
+  }
+}
+
+class _FirstSync extends StatelessWidget {
+  const _FirstSync();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(height: 24),
+              Text(l10n.firstSyncLoading, style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center),
+              const SizedBox(height: 8),
+              Text(l10n.firstSyncNeedsInternet, textAlign: TextAlign.center),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _OfflineBanner extends StatelessWidget {
+  const _OfflineBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return Material(
+      color: colors.surfaceContainerHighest,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        child: Row(
+          children: [
+            Icon(Icons.cloud_off, size: 18, color: colors.onSurfaceVariant),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                AppLocalizations.of(context).offlineBanner,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

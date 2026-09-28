@@ -1,8 +1,21 @@
-// Plain data classes for rows from Supabase. Timestamps are stored in UTC
-// and converted to the phone's local time here.
+import 'dart:convert';
+
+// Plain data classes for rows from the database on the phone. Timestamps are
+// stored in UTC and converted to the phone's local time here.
 
 DateTime _local(String value) => DateTime.parse(value).toLocal();
 DateTime? _localOrNull(Object? value) => value == null ? null : _local(value as String);
+
+/// Arrays are JSON text on the phone.
+List<Object?> _jsonList(Object? value) => switch (value) {
+      null => const [],
+      String s => jsonDecode(s) as List<Object?>,
+      List<Object?> l => l,
+      _ => const [],
+    };
+
+/// Booleans are 0/1 on the phone.
+bool _bool(Object? value) => value == true || value == 1;
 
 class Baby {
   const Baby({
@@ -114,8 +127,8 @@ class Diaper {
   factory Diaper.fromJson(Map<String, dynamic> json) => Diaper(
         id: json['id'] as String,
         occurredAt: _local(json['occurred_at'] as String),
-        isWet: json['is_wet'] as bool,
-        isDirty: json['is_dirty'] as bool,
+        isWet: _bool(json['is_wet']),
+        isDirty: _bool(json['is_dirty']),
       );
 }
 
@@ -294,8 +307,8 @@ class Medication {
         id: json['id'] as String,
         name: json['name'] as String,
         prescribedDose: json['prescribed_dose'] as String,
-        doseTimes: [for (final t in json['dose_times'] as List) DoseTime.parse(t as String)]..sort(),
-        asNeeded: json['as_needed'] as bool,
+        doseTimes: [for (final t in _jsonList(json['dose_times'])) DoseTime.parse(t as String)]..sort(),
+        asNeeded: _bool(json['as_needed']),
         startDate: DateTime.parse(json['start_date'] as String),
         endDate: json['end_date'] == null ? null : DateTime.parse(json['end_date'] as String),
         prescribedBy: json['prescribed_by'] as String?,
@@ -325,7 +338,7 @@ class MedicationDose {
         id: json['id'] as String,
         medicationId: json['medication_id'] as String,
         givenAt: DateTime.parse(json['given_at'] as String).toLocal(),
-        skipped: json['skipped'] as bool,
+        skipped: _bool(json['skipped']),
         scheduledFor: json['scheduled_for'] == null ? null : DateTime.parse(json['scheduled_for'] as String).toLocal(),
       );
 }

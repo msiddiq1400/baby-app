@@ -871,4 +871,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sumFooter => 'Recorded by the parent in Baby App.';
+
+  @override
+  String get firstSyncLoading => 'Loading your family\'s data…';
+
+  @override
+  String get firstSyncNeedsInternet =>
+      'The first time, this needs an internet connection. After that the app works offline.';
+
+  @override
+  String get offlineBanner =>
+      'Offline: changes are saved and will sync when you\'re back online.';
+
+  @override
+  String get unsyncedSignOutTitle => 'Some changes haven\'t synced yet';
+
+  @override
+  String get unsyncedSignOutBody =>
+      'If you sign out now, entries made while offline will be lost. Connect to the internet first to keep them.';
+
+  @override
+  String get signOutAnyway => 'Sign out anyway';
 }

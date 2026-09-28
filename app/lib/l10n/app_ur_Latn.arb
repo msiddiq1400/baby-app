@@ -603,5 +603,11 @@
     }
   },
   "sumEntries": "Tamam indrajaat",
-  "sumFooter": "Walidain ne Baby App mein record kiya."
+  "sumFooter": "Walidain ne Baby App mein record kiya.",
+  "firstSyncLoading": "Aap ki family ka data load ho raha hai…",
+  "firstSyncNeedsInternet": "Pehli baar is ke liye internet zaroori hai. Us ke baad app internet ke baghair bhi chalti hai.",
+  "offlineBanner": "Offline: tabdeeliyan save hain aur internet aane par sync ho jayengi.",
+  "unsyncedSignOutTitle": "Kuch tabdeeliyan abhi sync nahi hui",
+  "unsyncedSignOutBody": "Agar aap abhi sign out karein to offline kiye gaye indrajaat zaaya ho jayenge. Unhein mehfooz rakhne ke liye pehle internet se judein.",
+  "signOutAnyway": "Phir bhi sign out karein"
 }

@@ -1,0 +1,49 @@
+# PowerSync Sync Streams: which rows each phone downloads.
+# Deploy by pasting into PowerSync dashboard > Sync Streams.
+#
+# Each signed-in user gets every family they belong to, and only those.
+# Soft-deleted rows (deleted_at set) are left out, so deletions disappear
+# from other caregivers' phones too.
+#
+# Keep in step with: supabase/migrations/*_powersync_publication.sql (tables
+# streamed) and app/lib/data/local_schema.dart (tables/columns on the phone).
+
+config:
+  edition: 3
+
+streams:
+  family_data:
+    auto_subscribe: true
+    queries:
+      - SELECT * FROM families
+        WHERE id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM babies WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM feeds WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM pumping_sessions WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM diapers WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM sleeps WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM growth_measurements WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM medications WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM medication_doses WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM vaccinations WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM symptom_logs WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM milk_stash WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+
+  # Reference data for everyone. PowerSync needs a single "id" column.
+  vaccine_schedule:
+    auto_subscribe: true
+    query: |
+      SELECT country_code || '-' || code AS id, country_code, code, name, dose_label,
+        due_age_value, due_age_unit, sort_order, verified
+      FROM vaccine_schedule

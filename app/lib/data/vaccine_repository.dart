@@ -1,34 +1,31 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:powersync/powersync.dart';
 
 import '../core/dates.dart';
-import '../core/providers.dart';
+import 'local_db.dart';
 import 'models.dart';
 
 class VaccineRepository {
   VaccineRepository(this._db);
 
-  final SupabaseClient _db;
+  final PowerSyncDatabase _db;
 
   /// The national schedule, in order. Pakistan only for now.
-  Future<List<VaccineDose>> schedule({String country = 'PK'}) async {
-    final rows = await _db
-        .from('vaccine_schedule')
-        .select('code, name, dose_label, due_age_value, due_age_unit, sort_order')
-        .eq('country_code', country)
-        .order('sort_order');
-    return rows.map(VaccineDose.fromJson).toList();
-  }
+  Stream<List<VaccineDose>> watchSchedule({String country = 'PK'}) => _db
+      .watch(
+        'SELECT code, name, dose_label, due_age_value, due_age_unit, sort_order FROM vaccine_schedule '
+        'WHERE country_code = ? ORDER BY sort_order',
+        parameters: [country],
+      )
+      .map((rows) => rows.map(VaccineDose.fromJson).toList());
 
-  Future<List<Vaccination>> given(String babyId) async {
-    final rows = await _db
-        .from('vaccinations')
-        .select('id, vaccine_code, given_on, batch_number, clinic, notes')
-        .eq('baby_id', babyId)
-        .isFilter('deleted_at', null)
-        .order('given_on');
-    return rows.map(Vaccination.fromJson).toList();
-  }
+  Stream<List<Vaccination>> watchGiven(String babyId) => _db
+      .watch(
+        'SELECT id, vaccine_code, given_on, batch_number, clinic, notes FROM vaccinations '
+        'WHERE baby_id = ? AND deleted_at IS NULL ORDER BY given_on',
+        parameters: [babyId],
+      )
+      .map((rows) => rows.map(Vaccination.fromJson).toList());
 
   /// Records [codes] as given on the same day (e.g. a whole clinic visit).
   Future<void> markGiven(
@@ -39,9 +36,9 @@ class VaccineRepository {
     String? clinic,
     String? notes,
   }) {
-    return _db.from('vaccinations').insert([
-      for (final code in codes)
-        {
+    return _db.writeTransaction((tx) async {
+      for (final code in codes) {
+        await insertRow(tx, 'vaccinations', {
           'family_id': baby.familyId,
           'baby_id': baby.id,
           'vaccine_code': code,
@@ -49,8 +46,9 @@ class VaccineRepository {
           'batch_number': batchNumber,
           'clinic': clinic,
           'notes': notes,
-        },
-    ]);
+        });
+      }
+    });
   }
 
   Future<void> update(
@@ -60,24 +58,21 @@ class VaccineRepository {
     String? clinic,
     String? notes,
   }) {
-    return _db.from('vaccinations').update({
+    return updateRow(_db, 'vaccinations', id, {
       'given_on': dateOnly(givenOn),
       'batch_number': batchNumber,
       'clinic': clinic,
       'notes': notes,
-    }).eq('id', id);
+    });
   }
 
-  Future<void> delete(String id) {
-    return _db.from('vaccinations').update({'deleted_at': utcTimestamp(DateTime.now())}).eq('id', id);
-  }
+  Future<void> delete(String id) => updateRow(_db, 'vaccinations', id, {'deleted_at': utcTimestamp(DateTime.now())});
 }
 
-final vaccineRepositoryProvider = Provider((ref) => VaccineRepository(ref.watch(supabaseProvider)));
+final vaccineRepositoryProvider = Provider((ref) => VaccineRepository(ref.watch(powerSyncProvider)));
 
-/// The schedule rarely changes, so it's loaded once per app run.
-final vaccineScheduleProvider = FutureProvider((ref) => ref.watch(vaccineRepositoryProvider).schedule());
+final vaccineScheduleProvider = StreamProvider((ref) => ref.watch(vaccineRepositoryProvider).watchSchedule());
 
-final vaccinationsProvider = FutureProvider.family<List<Vaccination>, String>(
-  (ref, babyId) => ref.watch(vaccineRepositoryProvider).given(babyId),
+final vaccinationsProvider = StreamProvider.family<List<Vaccination>, String>(
+  (ref, babyId) => ref.watch(vaccineRepositoryProvider).watchGiven(babyId),
 );

@@ -603,5 +603,11 @@
     }
   },
   "sumEntries": "All entries",
-  "sumFooter": "Recorded by the parent in Baby App."
+  "sumFooter": "Recorded by the parent in Baby App.",
+  "firstSyncLoading": "Loading your family's data…",
+  "firstSyncNeedsInternet": "The first time, this needs an internet connection. After that the app works offline.",
+  "offlineBanner": "Offline: changes are saved and will sync when you're back online.",
+  "unsyncedSignOutTitle": "Some changes haven't synced yet",
+  "unsyncedSignOutBody": "If you sign out now, entries made while offline will be lost. Connect to the internet first to keep them.",
+  "signOutAnyway": "Sign out anyway"
 }

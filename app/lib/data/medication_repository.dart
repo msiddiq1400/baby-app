@@ -1,39 +1,34 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:powersync/powersync.dart';
 
 import '../core/dates.dart';
-import '../core/providers.dart';
+import 'local_db.dart';
 import 'models.dart';
 
 class MedicationRepository {
   MedicationRepository(this._db);
 
-  final SupabaseClient _db;
+  final PowerSyncDatabase _db;
 
-  Future<List<Medication>> all(String babyId) async {
-    final rows = await _db
-        .from('medications')
-        .select(Medication.columns)
-        .eq('baby_id', babyId)
-        .isFilter('deleted_at', null)
-        .order('start_date', ascending: false);
-    return rows.map(Medication.fromJson).toList();
-  }
+  static const _medicationsSql =
+      'SELECT ${Medication.columns} FROM medications WHERE baby_id = ? AND deleted_at IS NULL ORDER BY start_date DESC';
+  static const _dosesSql = 'SELECT id, medication_id, given_at, skipped, scheduled_for FROM medication_doses '
+      'WHERE baby_id = ? AND deleted_at IS NULL AND julianday(given_at) >= julianday(?) '
+      'ORDER BY julianday(given_at) DESC';
+
+  Future<List<Medication>> all(String babyId) async =>
+      (await _db.getAll(_medicationsSql, [babyId])).map(Medication.fromJson).toList();
+
+  Stream<List<Medication>> watchAll(String babyId) =>
+      _db.watch(_medicationsSql, parameters: [babyId]).map((rows) => rows.map(Medication.fromJson).toList());
+
+  Future<List<MedicationDose>> dosesSince(String babyId, DateTime since) async =>
+      (await _db.getAll(_dosesSql, [babyId, utcTimestamp(since)])).map(MedicationDose.fromJson).toList();
 
   /// Doses recorded in the last [days] days, newest first.
-  Future<List<MedicationDose>> recentDoses(String babyId, {int days = 3}) =>
-      dosesSince(babyId, DateTime.now().subtract(Duration(days: days)));
-
-  Future<List<MedicationDose>> dosesSince(String babyId, DateTime since) async {
-    final rows = await _db
-        .from('medication_doses')
-        .select('id, medication_id, given_at, skipped, scheduled_for')
-        .eq('baby_id', babyId)
-        .isFilter('deleted_at', null)
-        .gte('given_at', utcTimestamp(since))
-        .order('given_at', ascending: false);
-    return rows.map(MedicationDose.fromJson).toList();
-  }
+  Stream<List<MedicationDose>> watchRecentDoses(String babyId, {int days = 3}) => _db
+      .watch(_dosesSql, parameters: [babyId, utcTimestamp(DateTime.now().subtract(Duration(days: days)))])
+      .map((rows) => rows.map(MedicationDose.fromJson).toList());
 
   /// Adds a medicine, or updates [existingId].
   Future<void> save(
@@ -47,7 +42,7 @@ class MedicationRepository {
     DateTime? endDate,
     String? prescribedBy,
     String? notes,
-  }) {
+  }) async {
     final fields = {
       'name': name,
       'prescribed_dose': prescribedDose,
@@ -58,17 +53,16 @@ class MedicationRepository {
       'prescribed_by': prescribedBy,
       'notes': notes,
     };
-    if (existingId != null) return _db.from('medications').update(fields).eq('id', existingId);
-    return _db.from('medications').insert({'family_id': baby.familyId, 'baby_id': baby.id, ...fields});
+    if (existingId != null) return updateRow(_db, 'medications', existingId, fields);
+    await insertRow(_db, 'medications', {'family_id': baby.familyId, 'baby_id': baby.id, ...fields});
   }
 
-  Future<void> delete(String id) =>
-      _db.from('medications').update({'deleted_at': utcTimestamp(DateTime.now())}).eq('id', id);
+  Future<void> delete(String id) => updateRow(_db, 'medications', id, {'deleted_at': utcTimestamp(DateTime.now())});
 
   /// Records a dose as given now (or skipped), for [scheduledFor] if it was
   /// a scheduled one.
-  Future<void> recordDose(Baby baby, Medication medication, {DateTime? scheduledFor, bool skipped = false}) {
-    return _db.from('medication_doses').insert({
+  Future<void> recordDose(Baby baby, Medication medication, {DateTime? scheduledFor, bool skipped = false}) async {
+    await insertRow(_db, 'medication_doses', {
       'family_id': baby.familyId,
       'baby_id': baby.id,
       'medication_id': medication.id,
@@ -79,15 +73,15 @@ class MedicationRepository {
   }
 
   Future<void> undoDose(String doseId) =>
-      _db.from('medication_doses').update({'deleted_at': utcTimestamp(DateTime.now())}).eq('id', doseId);
+      updateRow(_db, 'medication_doses', doseId, {'deleted_at': utcTimestamp(DateTime.now())});
 }
 
-final medicationRepositoryProvider = Provider((ref) => MedicationRepository(ref.watch(supabaseProvider)));
+final medicationRepositoryProvider = Provider((ref) => MedicationRepository(ref.watch(powerSyncProvider)));
 
-final medicationsProvider = FutureProvider.family<List<Medication>, String>(
-  (ref, babyId) => ref.watch(medicationRepositoryProvider).all(babyId),
+final medicationsProvider = StreamProvider.family<List<Medication>, String>(
+  (ref, babyId) => ref.watch(medicationRepositoryProvider).watchAll(babyId),
 );
 
-final recentDosesProvider = FutureProvider.family<List<MedicationDose>, String>(
-  (ref, babyId) => ref.watch(medicationRepositoryProvider).recentDoses(babyId),
+final recentDosesProvider = StreamProvider.family<List<MedicationDose>, String>(
+  (ref, babyId) => ref.watch(medicationRepositoryProvider).watchRecentDoses(babyId),
 );

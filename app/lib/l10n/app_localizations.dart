@@ -1568,6 +1568,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recorded by the parent in Baby App.'**
   String get sumFooter;
+
+  /// No description provided for @firstSyncLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading your family\'s data…'**
+  String get firstSyncLoading;
+
+  /// No description provided for @firstSyncNeedsInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'The first time, this needs an internet connection. After that the app works offline.'**
+  String get firstSyncNeedsInternet;
+
+  /// No description provided for @offlineBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline: changes are saved and will sync when you\'re back online.'**
+  String get offlineBanner;
+
+  /// No description provided for @unsyncedSignOutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Some changes haven\'t synced yet'**
+  String get unsyncedSignOutTitle;
+
+  /// No description provided for @unsyncedSignOutBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If you sign out now, entries made while offline will be lost. Connect to the internet first to keep them.'**
+  String get unsyncedSignOutBody;
+
+  /// No description provided for @signOutAnyway.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out anyway'**
+  String get signOutAnyway;
 }
 
 class _AppLocalizationsDelegate

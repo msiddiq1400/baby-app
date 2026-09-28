@@ -1,54 +1,51 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:powersync/powersync.dart';
 
 import '../core/dates.dart';
 import '../core/providers.dart';
+import 'local_db.dart';
 import 'models.dart';
 
 class BabyRepository {
   BabyRepository(this._db);
 
-  final SupabaseClient _db;
+  final PowerSyncDatabase _db;
 
   /// The family's first baby. Choosing between several babies comes later.
-  Future<Baby?> currentBaby() async {
-    final row = await _db
-        .from('babies')
-        .select(Baby.columns)
-        .isFilter('deleted_at', null)
-        .order('created_at')
-        .limit(1)
-        .maybeSingle();
-    return row == null ? null : Baby.fromJson(row);
-  }
+  static const _currentBabySql = 'SELECT ${Baby.columns} FROM babies WHERE deleted_at IS NULL '
+      'ORDER BY julianday(created_at) LIMIT 1';
+
+  Stream<Baby?> watchCurrentBaby() =>
+      _db.watch(_currentBabySql).map((rows) => rows.isEmpty ? null : Baby.fromJson(rows.first));
 
   /// Adds a baby, creating the user's family first if they don't have one.
+  /// The server makes the creator the family's owner when the family uploads.
   Future<void> addBaby({
     required String name,
     required DateTime birthDate,
     String? sex,
     int? birthWeightG,
-  }) async {
-    final family = await _db.from('families').select('id').limit(1).maybeSingle();
-    final familyId = family?['id'] as String? ??
-        (await _db.from('families').insert({'name': '$name family'}).select('id').single())['id'] as String;
-
-    await _db.from('babies').insert({
-      'family_id': familyId,
-      'name': name,
-      'birth_date': dateOnly(birthDate),
-      'sex': ?sex,
-      'birth_weight_g': ?birthWeightG,
+  }) {
+    return _db.writeTransaction((tx) async {
+      final family = await tx.getOptional('SELECT id FROM families LIMIT 1');
+      final familyId = family?['id'] as String? ?? await insertRow(tx, 'families', {'name': '$name family'});
+      await insertRow(tx, 'babies', {
+        'family_id': familyId,
+        'name': name,
+        'birth_date': dateOnly(birthDate),
+        'sex': sex,
+        'birth_weight_g': birthWeightG,
+        'created_at': utcTimestamp(DateTime.now()),
+      });
     });
   }
 
-  Future<void> setSex(String babyId, String sex) =>
-      _db.from('babies').update({'sex': sex}).eq('id', babyId);
+  Future<void> setSex(String babyId, String sex) => updateRow(_db, 'babies', babyId, {'sex': sex});
 }
 
-final babyRepositoryProvider = Provider((ref) => BabyRepository(ref.watch(supabaseProvider)));
+final babyRepositoryProvider = Provider((ref) => BabyRepository(ref.watch(powerSyncProvider)));
 
-final currentBabyProvider = FutureProvider<Baby?>((ref) {
-  if (ref.watch(currentUserIdProvider) == null) return null;
-  return ref.watch(babyRepositoryProvider).currentBaby();
+final currentBabyProvider = StreamProvider<Baby?>((ref) {
+  if (ref.watch(currentUserIdProvider) == null) return Stream.value(null);
+  return ref.watch(babyRepositoryProvider).watchCurrentBaby();
 });
