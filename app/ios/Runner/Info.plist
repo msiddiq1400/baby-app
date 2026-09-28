@@ -14,6 +14,16 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<!-- Sign-in links from emails: app.babyapp://login-callback -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app.babyapp</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleName</key>
 	<string>baby_app</string>
 	<key>CFBundlePackageType</key>

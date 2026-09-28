@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../core/config/env.dart';
 import '../../core/providers.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/language_menu.dart';
@@ -35,25 +36,32 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final auth = ref.read(supabaseProvider).auth;
     try {
       if (_isSignUp) {
-        await auth.signUp(
+        final response = await auth.signUp(
           email: _email.text.trim(),
           password: _password.text,
           data: {'full_name': _name.text.trim()},
+          emailRedirectTo: Env.authRedirectUrl,
         );
+        // No session means the email must be confirmed first. The link in
+        // the email opens the app and signs them in.
+        if (response.session == null && mounted) {
+          setState(() => _isSignUp = false);
+          _showMessage(AppLocalizations.of(context).checkEmail);
+        }
       } else {
         await auth.signInWithPassword(email: _email.text.trim(), password: _password.text);
       }
       // The router moves on by itself once the session changes.
     } on AuthException catch (e) {
-      _showError(e.message);
+      _showMessage(e.message);
     } catch (_) {
-      if (mounted) _showError(AppLocalizations.of(context).errorGeneric);
+      if (mounted) _showMessage(AppLocalizations.of(context).errorGeneric);
     } finally {
       if (mounted) setState(() => _busy = false);
     }
   }
 
-  void _showError(String message) {
+  void _showMessage(String message) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
   }

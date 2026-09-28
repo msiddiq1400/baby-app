@@ -60,6 +60,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get switchToSignUp => 'New here? Create an account';
 
   @override
+  String get checkEmail =>
+      'Account created. Check your email and tap the link to confirm — it opens the app and signs you in.';
+
+  @override
   String get switchToSignIn => 'Already have an account? Sign in';
 
   @override

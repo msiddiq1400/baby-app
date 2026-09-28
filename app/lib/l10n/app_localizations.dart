@@ -201,6 +201,12 @@ abstract class AppLocalizations {
   /// **'New here? Create an account'**
   String get switchToSignUp;
 
+  /// No description provided for @checkEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Account created. Check your email and tap the link to confirm — it opens the app and signs you in.'**
+  String get checkEmail;
+
   /// No description provided for @switchToSignIn.
   ///
   /// In en, this message translates to:

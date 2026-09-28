@@ -18,6 +18,7 @@
   "signInButton": "Sign in",
   "signUpButton": "Create account",
   "switchToSignUp": "New here? Create an account",
+  "checkEmail": "Account created. Check your email and tap the link to confirm — it opens the app and signs you in.",
   "switchToSignIn": "Already have an account? Sign in",
 
   "addBabyTitle": "Add your baby",

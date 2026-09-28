@@ -61,6 +61,10 @@ class AppLocalizationsUr extends AppLocalizations {
   String get switchToSignUp => 'نئے ہیں؟ اکاؤنٹ بنائیں';
 
   @override
+  String get checkEmail =>
+      'اکاؤنٹ بن گیا۔ اپنی ای میل دیکھیں اور تصدیق کے لیے لنک پر ٹیپ کریں — یہ ایپ کھول کر آپ کو سائن ان کر دے گا۔';
+
+  @override
   String get switchToSignIn => 'پہلے سے اکاؤنٹ ہے؟ سائن ان کریں';
 
   @override
@@ -270,6 +274,10 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get switchToSignUp => 'Naye hain? Account banayein';
+
+  @override
+  String get checkEmail =>
+      'Account ban gaya. Apni email check karein aur confirm karne ke liye link par tap karein — yeh app khol kar aap ko sign in kar dega.';
 
   @override
   String get switchToSignIn => 'Pehle se account hai? Sign in karein';

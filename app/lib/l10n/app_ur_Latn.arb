@@ -18,6 +18,7 @@
   "signInButton": "Sign in",
   "signUpButton": "Account banayein",
   "switchToSignUp": "Naye hain? Account banayein",
+  "checkEmail": "Account ban gaya. Apni email check karein aur confirm karne ke liye link par tap karein — yeh app khol kar aap ko sign in kar dega.",
   "switchToSignIn": "Pehle se account hai? Sign in karein",
 
   "addBabyTitle": "Apne baby ko add karein",
