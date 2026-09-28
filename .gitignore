@@ -1,0 +1,10 @@
+# Belongs to the toolbox project, not this repo
+/deploy.sh
+
+# Supabase local state
+supabase/.branches
+supabase/.temp
+supabase/.env
+
+.env
+.env.*
