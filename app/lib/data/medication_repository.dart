@@ -21,8 +21,10 @@ class MedicationRepository {
   }
 
   /// Doses recorded in the last [days] days, newest first.
-  Future<List<MedicationDose>> recentDoses(String babyId, {int days = 3}) async {
-    final since = DateTime.now().subtract(Duration(days: days));
+  Future<List<MedicationDose>> recentDoses(String babyId, {int days = 3}) =>
+      dosesSince(babyId, DateTime.now().subtract(Duration(days: days)));
+
+  Future<List<MedicationDose>> dosesSince(String babyId, DateTime since) async {
     final rows = await _db
         .from('medication_doses')
         .select('id, medication_id, given_at, skipped, scheduled_for')

@@ -329,3 +329,93 @@ class MedicationDose {
         scheduledFor: json['scheduled_for'] == null ? null : DateTime.parse(json['scheduled_for'] as String).toLocal(),
       );
 }
+
+class PumpingSession {
+  const PumpingSession({required this.id, required this.startedAt, this.endedAt, this.side, this.amountMl});
+
+  final String id;
+  final DateTime startedAt;
+  final DateTime? endedAt;
+  final BreastSide? side;
+  final int? amountMl;
+
+  factory PumpingSession.fromJson(Map<String, dynamic> json) => PumpingSession(
+        id: json['id'] as String,
+        startedAt: DateTime.parse(json['started_at'] as String).toLocal(),
+        endedAt: json['ended_at'] == null ? null : DateTime.parse(json['ended_at'] as String).toLocal(),
+        side: json['side'] == null ? null : BreastSide.values.byName(json['side'] as String),
+        amountMl: json['amount_ml'] as int?,
+      );
+}
+
+/// Where a bag of stored milk is kept; decides how long it lasts.
+enum MilkLocation { room, cooler, fridge, freezer, thawed }
+
+/// One bag or bottle of stored breast milk.
+class MilkBag {
+  const MilkBag({
+    required this.id,
+    required this.pumpedAt,
+    required this.amountMl,
+    required this.location,
+    this.frozenAt,
+    this.thawedAt,
+  });
+
+  final String id;
+  final DateTime pumpedAt;
+  final int amountMl;
+  final MilkLocation location;
+  final DateTime? frozenAt;
+  final DateTime? thawedAt;
+
+  static const columns = 'id, pumped_at, amount_ml, location, frozen_at, thawed_at';
+
+  static DateTime? _time(Object? v) => v == null ? null : DateTime.parse(v as String).toLocal();
+
+  factory MilkBag.fromJson(Map<String, dynamic> json) => MilkBag(
+        id: json['id'] as String,
+        pumpedAt: DateTime.parse(json['pumped_at'] as String).toLocal(),
+        amountMl: json['amount_ml'] as int,
+        location: MilkLocation.values.byName(json['location'] as String),
+        frozenAt: _time(json['frozen_at']),
+        thawedAt: _time(json['thawed_at']),
+      );
+}
+
+/// Symptom codes, matching the database check constraint.
+const symptomCodes = [
+  'fever', 'cough', 'runny_nose', 'vomiting', 'diarrhea', 'constipation',
+  'rash', 'teething', 'feeding_refusal', 'crying', 'congestion', 'other',
+];
+
+class SymptomLog {
+  const SymptomLog({
+    required this.id,
+    required this.symptom,
+    required this.occurredAt,
+    this.temperatureC,
+    this.severity,
+    this.notes,
+  });
+
+  final String id;
+
+  /// One of [symptomCodes].
+  final String symptom;
+  final DateTime occurredAt;
+  final double? temperatureC;
+
+  /// 1 mild, 2 moderate, 3 severe.
+  final int? severity;
+  final String? notes;
+
+  factory SymptomLog.fromJson(Map<String, dynamic> json) => SymptomLog(
+        id: json['id'] as String,
+        symptom: json['symptom'] as String,
+        occurredAt: DateTime.parse(json['occurred_at'] as String).toLocal(),
+        temperatureC: (json['temperature_c'] as num?)?.toDouble(),
+        severity: json['severity'] as int?,
+        notes: json['notes'] as String?,
+      );
+}

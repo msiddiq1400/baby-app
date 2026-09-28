@@ -575,4 +575,300 @@ class AppLocalizationsEn extends AppLocalizations {
   String medicineReminderBody(String medicine, String dose) {
     return '$medicine: $dose';
   }
+
+  @override
+  String get tabMilk => 'Milk';
+
+  @override
+  String get milkTitle => 'Breast milk';
+
+  @override
+  String get logPumping => 'Log pumping';
+
+  @override
+  String get editPumping => 'Edit pumping';
+
+  @override
+  String get addStoredMilk => 'Add stored milk';
+
+  @override
+  String pumpedToday(int ml, int count) {
+    return 'Pumped today: $ml ml ($count times)';
+  }
+
+  @override
+  String get storeMilkIn => 'Where is this milk now?';
+
+  @override
+  String get notStored => 'Fed right away';
+
+  @override
+  String get locationRoom => 'Room';
+
+  @override
+  String get locationCooler => 'Cooler with ice';
+
+  @override
+  String get locationFridge => 'Fridge';
+
+  @override
+  String get locationFreezer => 'Freezer';
+
+  @override
+  String get locationThawed => 'Thawed, in fridge';
+
+  @override
+  String get pumpedAtLabel => 'Pumped at';
+
+  @override
+  String pumpedOn(String date) {
+    return 'Pumped $date';
+  }
+
+  @override
+  String useBy(String time) {
+    return 'Use by $time';
+  }
+
+  @override
+  String get milkExpired => 'Expired: throw away';
+
+  @override
+  String milkNeedsAttention(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count stored milk items expire soon or have expired.',
+      one: '1 stored milk item expires soon or has expired.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get useForFeed => 'Use for a feed';
+
+  @override
+  String get moveToFridge => 'Move to fridge';
+
+  @override
+  String get moveToCooler => 'Move to cooler';
+
+  @override
+  String get moveToFreezer => 'Freeze';
+
+  @override
+  String get thawMilk => 'Thaw in fridge';
+
+  @override
+  String get throwAway => 'Throw away';
+
+  @override
+  String get noStoredMilk => 'No stored milk.';
+
+  @override
+  String get noRefreeze => 'Don\'t refreeze';
+
+  @override
+  String get storageGuideTitle => 'How long milk keeps';
+
+  @override
+  String get storageGuide =>
+      'Freshly pumped milk (CDC guidance):\n• Room, 25°C or cooler: up to 4 hours\n• Cooler bag with ice packs: up to 24 hours\n• Fridge: up to 4 days\n• Freezer: best within 6 months, up to 12 months\n\nThawed milk: use within 24 hours in the fridge, or within 2 hours once warmed. Never refreeze thawed milk.\nLeftover milk after a feed: use within 2 hours, then throw away.\n\nIn Pakistani summers rooms are often hotter than 25°C, so put milk in the fridge or a cooler with ice right after pumping.';
+
+  @override
+  String get loadSheddingTitle => 'During load-shedding';
+
+  @override
+  String get loadSheddingGuide =>
+      '• Keep the fridge and freezer closed. A closed fridge stays cold for about 4 hours; a full freezer for about 48 hours (24 if half full).\n• For longer outages, move milk to a cooler bag with ice or frozen gel packs. Keep a few packs frozen for this.\n• If frozen milk has thawed, don\'t refreeze it: keep it cold and use it within 24 hours.';
+
+  @override
+  String get milkExpiresTitle => 'Stored milk expires soon';
+
+  @override
+  String milkExpiresBody(int ml, String location, String time) {
+    return '$ml ml ($location): use by $time';
+  }
+
+  @override
+  String storedMilkTotal(int ml) {
+    return '$ml ml';
+  }
+
+  @override
+  String get tabSymptoms => 'Symptoms';
+
+  @override
+  String get logSymptom => 'Log symptom';
+
+  @override
+  String get editSymptom => 'Edit symptom';
+
+  @override
+  String get symptomFever => 'Fever';
+
+  @override
+  String get symptomCough => 'Cough';
+
+  @override
+  String get symptomRunnyNose => 'Runny nose';
+
+  @override
+  String get symptomVomiting => 'Vomiting';
+
+  @override
+  String get symptomDiarrhea => 'Diarrhoea';
+
+  @override
+  String get symptomConstipation => 'Constipation';
+
+  @override
+  String get symptomRash => 'Rash';
+
+  @override
+  String get symptomTeething => 'Teething';
+
+  @override
+  String get symptomFeedingRefusal => 'Refusing feeds';
+
+  @override
+  String get symptomCrying => 'Unusual crying';
+
+  @override
+  String get symptomCongestion => 'Blocked nose';
+
+  @override
+  String get symptomOther => 'Other';
+
+  @override
+  String get temperatureLabel => 'Temperature (optional)';
+
+  @override
+  String get invalidTemperature => 'Enter 30–45 °C or 86–113 °F';
+
+  @override
+  String get severityLabel => 'How bad?';
+
+  @override
+  String get severityMild => 'Mild';
+
+  @override
+  String get severityModerate => 'Moderate';
+
+  @override
+  String get severitySevere => 'Severe';
+
+  @override
+  String get youngFeverWarning =>
+      'A temperature of 38°C (100.4°F) or higher in a baby under 3 months needs a doctor right away.';
+
+  @override
+  String get noSymptoms => 'No symptoms logged in the last 14 days.';
+
+  @override
+  String get doctorSummary => 'Summary for the doctor';
+
+  @override
+  String get summarySinceStart => 'Since symptoms started';
+
+  @override
+  String lastNDays(int count) {
+    return 'Last $count days';
+  }
+
+  @override
+  String get showInEnglish => 'In English (for the doctor)';
+
+  @override
+  String get shareButton => 'Share';
+
+  @override
+  String get copyButton => 'Copy';
+
+  @override
+  String get copied => 'Copied';
+
+  @override
+  String sumTitle(String name) {
+    return 'Health summary: $name';
+  }
+
+  @override
+  String sumAge(String age) {
+    return 'Age: $age';
+  }
+
+  @override
+  String sumPeriod(String from, String to) {
+    return 'Period: $from to $to';
+  }
+
+  @override
+  String sumWeight(String weight, String date) {
+    return 'Latest weight: $weight ($date)';
+  }
+
+  @override
+  String get sumSymptoms => 'Symptoms';
+
+  @override
+  String sumSymptomLine(String symptom, String first, String last, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries',
+      one: '1 entry',
+    );
+    return '$symptom: from $first to $last ($_temp0)';
+  }
+
+  @override
+  String sumHighestTemp(String temp, String when) {
+    return 'highest $temp on $when';
+  }
+
+  @override
+  String sumFeedsPerDay(String days) {
+    return 'Feeds per day: $days';
+  }
+
+  @override
+  String sumWetPerDay(String days) {
+    return 'Wet diapers per day: $days';
+  }
+
+  @override
+  String sumDirtyPerDay(String days) {
+    return 'Dirty diapers per day: $days';
+  }
+
+  @override
+  String sumUsually(String count) {
+    return 'usually about $count';
+  }
+
+  @override
+  String sumTodaySoFar(int count) {
+    return 'today so far $count';
+  }
+
+  @override
+  String get sumMedicines => 'Medicines given';
+
+  @override
+  String sumMedicineLine(String name, String dose, int count, String when) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count doses',
+      one: '1 dose',
+    );
+    return '$name ($dose): $_temp0, last $when';
+  }
+
+  @override
+  String get sumEntries => 'All entries';
+
+  @override
+  String get sumFooter => 'Recorded by the parent in Baby App.';
 }

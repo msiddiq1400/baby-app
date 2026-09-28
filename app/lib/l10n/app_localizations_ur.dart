@@ -564,6 +564,284 @@ class AppLocalizationsUr extends AppLocalizations {
   String medicineReminderBody(String medicine, String dose) {
     return '$medicine: $dose';
   }
+
+  @override
+  String get tabMilk => 'دودھ';
+
+  @override
+  String get milkTitle => 'ماں کا دودھ';
+
+  @override
+  String get logPumping => 'پمپنگ درج کریں';
+
+  @override
+  String get editPumping => 'پمپنگ میں ترمیم';
+
+  @override
+  String get addStoredMilk => 'محفوظ دودھ شامل کریں';
+
+  @override
+  String pumpedToday(int ml, int count) {
+    return 'آج پمپ کیا: $ml ملی لیٹر ($count بار)';
+  }
+
+  @override
+  String get storeMilkIn => 'یہ دودھ اب کہاں ہے؟';
+
+  @override
+  String get notStored => 'فوراً پلا دیا';
+
+  @override
+  String get locationRoom => 'کمرہ';
+
+  @override
+  String get locationCooler => 'برف والا کولر';
+
+  @override
+  String get locationFridge => 'فریج';
+
+  @override
+  String get locationFreezer => 'فریزر';
+
+  @override
+  String get locationThawed => 'پگھلا ہوا، فریج میں';
+
+  @override
+  String get pumpedAtLabel => 'پمپ کرنے کا وقت';
+
+  @override
+  String pumpedOn(String date) {
+    return '$date کو پمپ کیا';
+  }
+
+  @override
+  String useBy(String time) {
+    return '$time تک استعمال کریں';
+  }
+
+  @override
+  String get milkExpired => 'میعاد ختم: ضائع کر دیں';
+
+  @override
+  String milkNeedsAttention(int count) {
+    return '$count محفوظ دودھ کی میعاد جلد ختم ہو رہی ہے یا ختم ہو چکی ہے۔';
+  }
+
+  @override
+  String get useForFeed => 'خوراک کے لیے استعمال کریں';
+
+  @override
+  String get moveToFridge => 'فریج میں رکھیں';
+
+  @override
+  String get moveToCooler => 'کولر میں رکھیں';
+
+  @override
+  String get moveToFreezer => 'فریز کریں';
+
+  @override
+  String get thawMilk => 'فریج میں پگھلائیں';
+
+  @override
+  String get throwAway => 'ضائع کریں';
+
+  @override
+  String get noStoredMilk => 'کوئی محفوظ دودھ نہیں۔';
+
+  @override
+  String get noRefreeze => 'دوبارہ فریز نہ کریں';
+
+  @override
+  String get storageGuideTitle => 'دودھ کتنی دیر محفوظ رہتا ہے';
+
+  @override
+  String get storageGuide =>
+      'تازہ پمپ کیا ہوا دودھ (CDC کی ہدایات):\n• کمرہ، 25°C یا اس سے کم: 4 گھنٹے تک\n• برف کے پیک والا کولر بیگ: 24 گھنٹے تک\n• فریج: 4 دن تک\n• فریزر: 6 ماہ کے اندر بہتر، 12 ماہ تک\n\nپگھلا ہوا دودھ: فریج میں 24 گھنٹے کے اندر، یا گرم کرنے کے بعد 2 گھنٹے کے اندر استعمال کریں۔ پگھلا ہوا دودھ کبھی دوبارہ فریز نہ کریں۔\nپلانے کے بعد بچا ہوا دودھ: 2 گھنٹے کے اندر استعمال کریں، پھر ضائع کر دیں۔\n\nپاکستان کی گرمیوں میں کمرے اکثر 25°C سے زیادہ گرم ہوتے ہیں، اس لیے پمپ کرنے کے فوراً بعد دودھ فریج یا برف والے کولر میں رکھیں۔';
+
+  @override
+  String get loadSheddingTitle => 'لوڈ شیڈنگ کے دوران';
+
+  @override
+  String get loadSheddingGuide =>
+      '• فریج اور فریزر بند رکھیں۔ بند فریج تقریباً 4 گھنٹے ٹھنڈا رہتا ہے؛ بھرا ہوا فریزر تقریباً 48 گھنٹے (آدھا بھرا ہو تو 24)۔\n• لمبی بجلی بندش میں دودھ برف یا جمے ہوئے جیل پیک والے کولر بیگ میں رکھیں۔ اس کے لیے چند پیک ہمیشہ جما کر رکھیں۔\n• اگر جما ہوا دودھ پگھل جائے تو دوبارہ فریز نہ کریں: ٹھنڈا رکھیں اور 24 گھنٹے کے اندر استعمال کریں۔';
+
+  @override
+  String get milkExpiresTitle => 'محفوظ دودھ کی میعاد جلد ختم ہو گی';
+
+  @override
+  String milkExpiresBody(int ml, String location, String time) {
+    return '$ml ملی لیٹر ($location): $time تک استعمال کریں';
+  }
+
+  @override
+  String storedMilkTotal(int ml) {
+    return '$ml ملی لیٹر';
+  }
+
+  @override
+  String get tabSymptoms => 'علامات';
+
+  @override
+  String get logSymptom => 'علامت درج کریں';
+
+  @override
+  String get editSymptom => 'علامت میں ترمیم';
+
+  @override
+  String get symptomFever => 'بخار';
+
+  @override
+  String get symptomCough => 'کھانسی';
+
+  @override
+  String get symptomRunnyNose => 'ناک بہنا';
+
+  @override
+  String get symptomVomiting => 'الٹی';
+
+  @override
+  String get symptomDiarrhea => 'دست';
+
+  @override
+  String get symptomConstipation => 'قبض';
+
+  @override
+  String get symptomRash => 'دانے';
+
+  @override
+  String get symptomTeething => 'دانت نکلنا';
+
+  @override
+  String get symptomFeedingRefusal => 'دودھ نہ پینا';
+
+  @override
+  String get symptomCrying => 'غیر معمولی رونا';
+
+  @override
+  String get symptomCongestion => 'بند ناک';
+
+  @override
+  String get symptomOther => 'دیگر';
+
+  @override
+  String get temperatureLabel => 'درجہ حرارت (اختیاری)';
+
+  @override
+  String get invalidTemperature => '30 سے 45 °C یا 86 سے 113 °F درج کریں';
+
+  @override
+  String get severityLabel => 'کتنی شدید؟';
+
+  @override
+  String get severityMild => 'ہلکی';
+
+  @override
+  String get severityModerate => 'درمیانی';
+
+  @override
+  String get severitySevere => 'شدید';
+
+  @override
+  String get youngFeverWarning =>
+      '3 ماہ سے کم عمر بچے میں 38°C (100.4°F) یا اس سے زیادہ درجہ حرارت ہو تو فوراً ڈاکٹر کو دکھائیں۔';
+
+  @override
+  String get noSymptoms => 'پچھلے 14 دنوں میں کوئی علامت درج نہیں۔';
+
+  @override
+  String get doctorSummary => 'ڈاکٹر کے لیے خلاصہ';
+
+  @override
+  String get summarySinceStart => 'علامات شروع ہونے سے';
+
+  @override
+  String lastNDays(int count) {
+    return 'پچھلے $count دن';
+  }
+
+  @override
+  String get showInEnglish => 'انگریزی میں (ڈاکٹر کے لیے)';
+
+  @override
+  String get shareButton => 'شیئر کریں';
+
+  @override
+  String get copyButton => 'کاپی کریں';
+
+  @override
+  String get copied => 'کاپی ہو گیا';
+
+  @override
+  String sumTitle(String name) {
+    return 'صحت کا خلاصہ: $name';
+  }
+
+  @override
+  String sumAge(String age) {
+    return 'عمر: $age';
+  }
+
+  @override
+  String sumPeriod(String from, String to) {
+    return 'مدت: $from سے $to تک';
+  }
+
+  @override
+  String sumWeight(String weight, String date) {
+    return 'تازہ ترین وزن: $weight ($date)';
+  }
+
+  @override
+  String get sumSymptoms => 'علامات';
+
+  @override
+  String sumSymptomLine(String symptom, String first, String last, int count) {
+    return '$symptom: $first سے $last تک ($count اندراج)';
+  }
+
+  @override
+  String sumHighestTemp(String temp, String when) {
+    return 'سب سے زیادہ $temp، $when';
+  }
+
+  @override
+  String sumFeedsPerDay(String days) {
+    return 'روزانہ خوراک: $days';
+  }
+
+  @override
+  String sumWetPerDay(String days) {
+    return 'روزانہ گیلے ڈائپر: $days';
+  }
+
+  @override
+  String sumDirtyPerDay(String days) {
+    return 'روزانہ گندے ڈائپر: $days';
+  }
+
+  @override
+  String sumUsually(String count) {
+    return 'عام طور پر تقریباً $count';
+  }
+
+  @override
+  String sumTodaySoFar(int count) {
+    return 'آج اب تک $count';
+  }
+
+  @override
+  String get sumMedicines => 'دی گئی دوائیں';
+
+  @override
+  String sumMedicineLine(String name, String dose, int count, String when) {
+    return '$name ($dose): $count خوراکیں، آخری $when';
+  }
+
+  @override
+  String get sumEntries => 'تمام اندراجات';
+
+  @override
+  String get sumFooter => 'والدین نے بے بی ایپ میں درج کیا۔';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -1129,4 +1407,282 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String medicineReminderBody(String medicine, String dose) {
     return '$medicine: $dose';
   }
+
+  @override
+  String get tabMilk => 'Doodh';
+
+  @override
+  String get milkTitle => 'Maa ka doodh';
+
+  @override
+  String get logPumping => 'Pumping record karein';
+
+  @override
+  String get editPumping => 'Pumping edit karein';
+
+  @override
+  String get addStoredMilk => 'Stored doodh add karein';
+
+  @override
+  String pumpedToday(int ml, int count) {
+    return 'Aaj pump kiya: $ml ml ($count baar)';
+  }
+
+  @override
+  String get storeMilkIn => 'Yeh doodh ab kahan hai?';
+
+  @override
+  String get notStored => 'Foran pila diya';
+
+  @override
+  String get locationRoom => 'Kamra';
+
+  @override
+  String get locationCooler => 'Barf wala cooler';
+
+  @override
+  String get locationFridge => 'Fridge';
+
+  @override
+  String get locationFreezer => 'Freezer';
+
+  @override
+  String get locationThawed => 'Pighla hua, fridge mein';
+
+  @override
+  String get pumpedAtLabel => 'Pump karne ka waqt';
+
+  @override
+  String pumpedOn(String date) {
+    return '$date ko pump kiya';
+  }
+
+  @override
+  String useBy(String time) {
+    return '$time tak istemal karein';
+  }
+
+  @override
+  String get milkExpired => 'Expire ho gaya: zaaya kar dein';
+
+  @override
+  String milkNeedsAttention(int count) {
+    return '$count stored doodh jald expire ho raha hai ya ho chuka hai.';
+  }
+
+  @override
+  String get useForFeed => 'Feed ke liye istemal karein';
+
+  @override
+  String get moveToFridge => 'Fridge mein rakhein';
+
+  @override
+  String get moveToCooler => 'Cooler mein rakhein';
+
+  @override
+  String get moveToFreezer => 'Freeze karein';
+
+  @override
+  String get thawMilk => 'Fridge mein pighlayein';
+
+  @override
+  String get throwAway => 'Zaaya karein';
+
+  @override
+  String get noStoredMilk => 'Koi stored doodh nahi.';
+
+  @override
+  String get noRefreeze => 'Dobara freeze na karein';
+
+  @override
+  String get storageGuideTitle => 'Doodh kitni der mehfooz rehta hai';
+
+  @override
+  String get storageGuide =>
+      'Taaza pump kiya hua doodh (CDC ki hidayat):\n• Kamra, 25°C ya kam: 4 ghante tak\n• Barf ke pack wala cooler bag: 24 ghante tak\n• Fridge: 4 din tak\n• Freezer: 6 mahine ke andar behtar, 12 mahine tak\n\nPighla hua doodh: fridge mein 24 ghante ke andar, ya garam karne ke baad 2 ghante ke andar istemal karein. Pighla hua doodh kabhi dobara freeze na karein.\nPilane ke baad bacha hua doodh: 2 ghante ke andar istemal karein, phir zaaya kar dein.\n\nPakistan ki garmiyon mein kamre aksar 25°C se zyada garam hote hain, is liye pump karne ke foran baad doodh fridge ya barf wale cooler mein rakhein.';
+
+  @override
+  String get loadSheddingTitle => 'Load-shedding ke dauran';
+
+  @override
+  String get loadSheddingGuide =>
+      '• Fridge aur freezer band rakhein. Band fridge taqreeban 4 ghante thanda rehta hai; bhara hua freezer taqreeban 48 ghante (aadha bhara ho to 24).\n• Lambi bijli bandish mein doodh barf ya jame hue gel pack wale cooler bag mein rakhein. Is ke liye chand pack hamesha jama kar rakhein.\n• Agar jama hua doodh pighal jaye to dobara freeze na karein: thanda rakhein aur 24 ghante ke andar istemal karein.';
+
+  @override
+  String get milkExpiresTitle => 'Stored doodh jald expire hoga';
+
+  @override
+  String milkExpiresBody(int ml, String location, String time) {
+    return '$ml ml ($location): $time tak istemal karein';
+  }
+
+  @override
+  String storedMilkTotal(int ml) {
+    return '$ml ml';
+  }
+
+  @override
+  String get tabSymptoms => 'Alamaat';
+
+  @override
+  String get logSymptom => 'Alamat record karein';
+
+  @override
+  String get editSymptom => 'Alamat edit karein';
+
+  @override
+  String get symptomFever => 'Bukhar';
+
+  @override
+  String get symptomCough => 'Khansi';
+
+  @override
+  String get symptomRunnyNose => 'Naak behna';
+
+  @override
+  String get symptomVomiting => 'Ulti';
+
+  @override
+  String get symptomDiarrhea => 'Dast';
+
+  @override
+  String get symptomConstipation => 'Qabz';
+
+  @override
+  String get symptomRash => 'Daane';
+
+  @override
+  String get symptomTeething => 'Daant nikalna';
+
+  @override
+  String get symptomFeedingRefusal => 'Doodh na peena';
+
+  @override
+  String get symptomCrying => 'Ghair mamooli rona';
+
+  @override
+  String get symptomCongestion => 'Band naak';
+
+  @override
+  String get symptomOther => 'Deegar';
+
+  @override
+  String get temperatureLabel => 'Temperature (optional)';
+
+  @override
+  String get invalidTemperature => '30–45 °C ya 86–113 °F likhein';
+
+  @override
+  String get severityLabel => 'Kitni shadeed?';
+
+  @override
+  String get severityMild => 'Halki';
+
+  @override
+  String get severityModerate => 'Darmiyani';
+
+  @override
+  String get severitySevere => 'Shadeed';
+
+  @override
+  String get youngFeverWarning =>
+      '3 mahine se kam umar ke bache mein 38°C (100.4°F) ya zyada temperature ho to foran doctor ko dikhayein.';
+
+  @override
+  String get noSymptoms => 'Pichhle 14 din mein koi alamat record nahi.';
+
+  @override
+  String get doctorSummary => 'Doctor ke liye khulasa';
+
+  @override
+  String get summarySinceStart => 'Alamaat shuru hone se';
+
+  @override
+  String lastNDays(int count) {
+    return 'Pichhle $count din';
+  }
+
+  @override
+  String get showInEnglish => 'English mein (doctor ke liye)';
+
+  @override
+  String get shareButton => 'Share karein';
+
+  @override
+  String get copyButton => 'Copy karein';
+
+  @override
+  String get copied => 'Copy ho gaya';
+
+  @override
+  String sumTitle(String name) {
+    return 'Sehat ka khulasa: $name';
+  }
+
+  @override
+  String sumAge(String age) {
+    return 'Umar: $age';
+  }
+
+  @override
+  String sumPeriod(String from, String to) {
+    return 'Muddat: $from se $to tak';
+  }
+
+  @override
+  String sumWeight(String weight, String date) {
+    return 'Taaza tareen wazan: $weight ($date)';
+  }
+
+  @override
+  String get sumSymptoms => 'Alamaat';
+
+  @override
+  String sumSymptomLine(String symptom, String first, String last, int count) {
+    return '$symptom: $first se $last tak ($count entries)';
+  }
+
+  @override
+  String sumHighestTemp(String temp, String when) {
+    return 'sab se zyada $temp, $when';
+  }
+
+  @override
+  String sumFeedsPerDay(String days) {
+    return 'Rozana feeds: $days';
+  }
+
+  @override
+  String sumWetPerDay(String days) {
+    return 'Rozana geelay diapers: $days';
+  }
+
+  @override
+  String sumDirtyPerDay(String days) {
+    return 'Rozana gandey diapers: $days';
+  }
+
+  @override
+  String sumUsually(String count) {
+    return 'aam taur par taqreeban $count';
+  }
+
+  @override
+  String sumTodaySoFar(int count) {
+    return 'aaj ab tak $count';
+  }
+
+  @override
+  String get sumMedicines => 'Di gayi dawaiyan';
+
+  @override
+  String sumMedicineLine(String name, String dose, int count, String when) {
+    return '$name ($dose): $count khurakein, aakhri $when';
+  }
+
+  @override
+  String get sumEntries => 'Tamam indrajaat';
+
+  @override
+  String get sumFooter => 'Walidain ne Baby App mein record kiya.';
 }

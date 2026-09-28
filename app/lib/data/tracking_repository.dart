@@ -49,6 +49,26 @@ class TrackingRepository {
     );
   }
 
+  /// Feeds and diapers since [from], e.g. for the doctor summary.
+  Future<(List<Feed>, List<Diaper>)> feedsAndDiapersSince(String babyId, DateTime from) async {
+    final since = utcTimestamp(from);
+    final results = await Future.wait([
+      _db
+          .from('feeds')
+          .select('id, type, side, started_at, ended_at, amount_ml')
+          .eq('baby_id', babyId)
+          .isFilter('deleted_at', null)
+          .gte('started_at', since),
+      _db
+          .from('diapers')
+          .select('id, occurred_at, is_wet, is_dirty')
+          .eq('baby_id', babyId)
+          .isFilter('deleted_at', null)
+          .gte('occurred_at', since),
+    ]);
+    return (results[0].map(Feed.fromJson).toList(), results[1].map(Diaper.fromJson).toList());
+  }
+
   /// Adds a feed, or updates [existingId] with the same fields.
   Future<void> saveFeed(
     Baby baby, {

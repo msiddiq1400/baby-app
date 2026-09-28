@@ -355,5 +355,253 @@
         "type": "String"
       }
     }
-  }
+  },
+  "tabMilk": "دودھ",
+  "milkTitle": "ماں کا دودھ",
+  "logPumping": "پمپنگ درج کریں",
+  "editPumping": "پمپنگ میں ترمیم",
+  "addStoredMilk": "محفوظ دودھ شامل کریں",
+  "pumpedToday": "آج پمپ کیا: {ml} ملی لیٹر ({count} بار)",
+  "@pumpedToday": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "storeMilkIn": "یہ دودھ اب کہاں ہے؟",
+  "notStored": "فوراً پلا دیا",
+  "locationRoom": "کمرہ",
+  "locationCooler": "برف والا کولر",
+  "locationFridge": "فریج",
+  "locationFreezer": "فریزر",
+  "locationThawed": "پگھلا ہوا، فریج میں",
+  "pumpedAtLabel": "پمپ کرنے کا وقت",
+  "pumpedOn": "{date} کو پمپ کیا",
+  "@pumpedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "useBy": "{time} تک استعمال کریں",
+  "@useBy": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "milkExpired": "میعاد ختم: ضائع کر دیں",
+  "milkNeedsAttention": "{count} محفوظ دودھ کی میعاد جلد ختم ہو رہی ہے یا ختم ہو چکی ہے۔",
+  "@milkNeedsAttention": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "useForFeed": "خوراک کے لیے استعمال کریں",
+  "moveToFridge": "فریج میں رکھیں",
+  "moveToCooler": "کولر میں رکھیں",
+  "moveToFreezer": "فریز کریں",
+  "thawMilk": "فریج میں پگھلائیں",
+  "throwAway": "ضائع کریں",
+  "noStoredMilk": "کوئی محفوظ دودھ نہیں۔",
+  "noRefreeze": "دوبارہ فریز نہ کریں",
+  "storageGuideTitle": "دودھ کتنی دیر محفوظ رہتا ہے",
+  "storageGuide": "تازہ پمپ کیا ہوا دودھ (CDC کی ہدایات):\n• کمرہ، 25°C یا اس سے کم: 4 گھنٹے تک\n• برف کے پیک والا کولر بیگ: 24 گھنٹے تک\n• فریج: 4 دن تک\n• فریزر: 6 ماہ کے اندر بہتر، 12 ماہ تک\n\nپگھلا ہوا دودھ: فریج میں 24 گھنٹے کے اندر، یا گرم کرنے کے بعد 2 گھنٹے کے اندر استعمال کریں۔ پگھلا ہوا دودھ کبھی دوبارہ فریز نہ کریں۔\nپلانے کے بعد بچا ہوا دودھ: 2 گھنٹے کے اندر استعمال کریں، پھر ضائع کر دیں۔\n\nپاکستان کی گرمیوں میں کمرے اکثر 25°C سے زیادہ گرم ہوتے ہیں، اس لیے پمپ کرنے کے فوراً بعد دودھ فریج یا برف والے کولر میں رکھیں۔",
+  "loadSheddingTitle": "لوڈ شیڈنگ کے دوران",
+  "loadSheddingGuide": "• فریج اور فریزر بند رکھیں۔ بند فریج تقریباً 4 گھنٹے ٹھنڈا رہتا ہے؛ بھرا ہوا فریزر تقریباً 48 گھنٹے (آدھا بھرا ہو تو 24)۔\n• لمبی بجلی بندش میں دودھ برف یا جمے ہوئے جیل پیک والے کولر بیگ میں رکھیں۔ اس کے لیے چند پیک ہمیشہ جما کر رکھیں۔\n• اگر جما ہوا دودھ پگھل جائے تو دوبارہ فریز نہ کریں: ٹھنڈا رکھیں اور 24 گھنٹے کے اندر استعمال کریں۔",
+  "milkExpiresTitle": "محفوظ دودھ کی میعاد جلد ختم ہو گی",
+  "milkExpiresBody": "{ml} ملی لیٹر ({location}): {time} تک استعمال کریں",
+  "@milkExpiresBody": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      },
+      "location": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "storedMilkTotal": "{ml} ملی لیٹر",
+  "@storedMilkTotal": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
+  },
+  "tabSymptoms": "علامات",
+  "logSymptom": "علامت درج کریں",
+  "editSymptom": "علامت میں ترمیم",
+  "symptomFever": "بخار",
+  "symptomCough": "کھانسی",
+  "symptomRunnyNose": "ناک بہنا",
+  "symptomVomiting": "الٹی",
+  "symptomDiarrhea": "دست",
+  "symptomConstipation": "قبض",
+  "symptomRash": "دانے",
+  "symptomTeething": "دانت نکلنا",
+  "symptomFeedingRefusal": "دودھ نہ پینا",
+  "symptomCrying": "غیر معمولی رونا",
+  "symptomCongestion": "بند ناک",
+  "symptomOther": "دیگر",
+  "temperatureLabel": "درجہ حرارت (اختیاری)",
+  "invalidTemperature": "30 سے 45 °C یا 86 سے 113 °F درج کریں",
+  "severityLabel": "کتنی شدید؟",
+  "severityMild": "ہلکی",
+  "severityModerate": "درمیانی",
+  "severitySevere": "شدید",
+  "youngFeverWarning": "3 ماہ سے کم عمر بچے میں 38°C (100.4°F) یا اس سے زیادہ درجہ حرارت ہو تو فوراً ڈاکٹر کو دکھائیں۔",
+  "noSymptoms": "پچھلے 14 دنوں میں کوئی علامت درج نہیں۔",
+  "doctorSummary": "ڈاکٹر کے لیے خلاصہ",
+  "summarySinceStart": "علامات شروع ہونے سے",
+  "lastNDays": "پچھلے {count} دن",
+  "@lastNDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "showInEnglish": "انگریزی میں (ڈاکٹر کے لیے)",
+  "shareButton": "شیئر کریں",
+  "copyButton": "کاپی کریں",
+  "copied": "کاپی ہو گیا",
+  "sumTitle": "صحت کا خلاصہ: {name}",
+  "@sumTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sumAge": "عمر: {age}",
+  "@sumAge": {
+    "placeholders": {
+      "age": {
+        "type": "String"
+      }
+    }
+  },
+  "sumPeriod": "مدت: {from} سے {to} تک",
+  "@sumPeriod": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "sumWeight": "تازہ ترین وزن: {weight} ({date})",
+  "@sumWeight": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sumSymptoms": "علامات",
+  "sumSymptomLine": "{symptom}: {first} سے {last} تک ({count} اندراج)",
+  "@sumSymptomLine": {
+    "placeholders": {
+      "symptom": {
+        "type": "String"
+      },
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sumHighestTemp": "سب سے زیادہ {temp}، {when}",
+  "@sumHighestTemp": {
+    "placeholders": {
+      "temp": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "sumFeedsPerDay": "روزانہ خوراک: {days}",
+  "@sumFeedsPerDay": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "sumWetPerDay": "روزانہ گیلے ڈائپر: {days}",
+  "@sumWetPerDay": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "sumDirtyPerDay": "روزانہ گندے ڈائپر: {days}",
+  "@sumDirtyPerDay": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "sumUsually": "عام طور پر تقریباً {count}",
+  "@sumUsually": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "sumTodaySoFar": "آج اب تک {count}",
+  "@sumTodaySoFar": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sumMedicines": "دی گئی دوائیں",
+  "sumMedicineLine": "{name} ({dose}): {count} خوراکیں، آخری {when}",
+  "@sumMedicineLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "dose": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "sumEntries": "تمام اندراجات",
+  "sumFooter": "والدین نے بے بی ایپ میں درج کیا۔"
 }

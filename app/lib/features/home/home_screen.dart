@@ -7,6 +7,7 @@ import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
 import '../baby/add_baby_screen.dart';
 import '../health/health_reminders.dart';
+import '../milk/milk_reminders.dart';
 
 /// Wraps the tabs: shows the add-baby form until there is a baby, then
 /// the bottom navigation with the current tab.
@@ -21,6 +22,7 @@ class BabyShell extends ConsumerWidget {
     // Keep the phone's reminders up to date while the app is open.
     ref.listen(vaccineRemindersProvider, (_, _) {});
     ref.listen(medicineRemindersProvider, (_, _) {});
+    ref.listen(milkRemindersProvider, (_, _) {});
     return ref.watch(currentBabyProvider).when(
           data: (baby) => baby == null
               ? const AddBabyScreen()
@@ -34,6 +36,11 @@ class BabyShell extends ConsumerWidget {
                         icon: const Icon(Icons.today_outlined),
                         selectedIcon: const Icon(Icons.today),
                         label: l10n.tabToday,
+                      ),
+                      NavigationDestination(
+                        icon: const Icon(Icons.water_drop_outlined),
+                        selectedIcon: const Icon(Icons.water_drop),
+                        label: l10n.tabMilk,
                       ),
                       NavigationDestination(
                         icon: const Icon(Icons.show_chart),

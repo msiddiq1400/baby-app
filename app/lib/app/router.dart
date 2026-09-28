@@ -11,6 +11,7 @@ import '../features/growth/growth_screen.dart';
 import '../features/health/health_screen.dart';
 import '../features/home/dashboard.dart';
 import '../features/home/home_screen.dart';
+import '../features/milk/milk_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final auth = ref.watch(supabaseProvider).auth;
@@ -32,6 +33,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         branches: [
           StatefulShellBranch(routes: [
             GoRoute(path: '/', builder: (context, state) => WithBaby(builder: (baby) => Dashboard(baby: baby))),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+              path: '/milk',
+              builder: (context, state) => WithBaby(builder: (baby) => MilkScreen(baby: baby)),
+            ),
           ]),
           StatefulShellBranch(routes: [
             GoRoute(

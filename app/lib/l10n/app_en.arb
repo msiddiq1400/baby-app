@@ -355,5 +355,253 @@
         "type": "String"
       }
     }
-  }
+  },
+  "tabMilk": "Milk",
+  "milkTitle": "Breast milk",
+  "logPumping": "Log pumping",
+  "editPumping": "Edit pumping",
+  "addStoredMilk": "Add stored milk",
+  "pumpedToday": "Pumped today: {ml} ml ({count} times)",
+  "@pumpedToday": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "storeMilkIn": "Where is this milk now?",
+  "notStored": "Fed right away",
+  "locationRoom": "Room",
+  "locationCooler": "Cooler with ice",
+  "locationFridge": "Fridge",
+  "locationFreezer": "Freezer",
+  "locationThawed": "Thawed, in fridge",
+  "pumpedAtLabel": "Pumped at",
+  "pumpedOn": "Pumped {date}",
+  "@pumpedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "useBy": "Use by {time}",
+  "@useBy": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "milkExpired": "Expired: throw away",
+  "milkNeedsAttention": "{count, plural, =1{1 stored milk item expires soon or has expired.} other{{count} stored milk items expire soon or have expired.}}",
+  "@milkNeedsAttention": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "useForFeed": "Use for a feed",
+  "moveToFridge": "Move to fridge",
+  "moveToCooler": "Move to cooler",
+  "moveToFreezer": "Freeze",
+  "thawMilk": "Thaw in fridge",
+  "throwAway": "Throw away",
+  "noStoredMilk": "No stored milk.",
+  "noRefreeze": "Don't refreeze",
+  "storageGuideTitle": "How long milk keeps",
+  "storageGuide": "Freshly pumped milk (CDC guidance):\n• Room, 25°C or cooler: up to 4 hours\n• Cooler bag with ice packs: up to 24 hours\n• Fridge: up to 4 days\n• Freezer: best within 6 months, up to 12 months\n\nThawed milk: use within 24 hours in the fridge, or within 2 hours once warmed. Never refreeze thawed milk.\nLeftover milk after a feed: use within 2 hours, then throw away.\n\nIn Pakistani summers rooms are often hotter than 25°C, so put milk in the fridge or a cooler with ice right after pumping.",
+  "loadSheddingTitle": "During load-shedding",
+  "loadSheddingGuide": "• Keep the fridge and freezer closed. A closed fridge stays cold for about 4 hours; a full freezer for about 48 hours (24 if half full).\n• For longer outages, move milk to a cooler bag with ice or frozen gel packs. Keep a few packs frozen for this.\n• If frozen milk has thawed, don't refreeze it: keep it cold and use it within 24 hours.",
+  "milkExpiresTitle": "Stored milk expires soon",
+  "milkExpiresBody": "{ml} ml ({location}): use by {time}",
+  "@milkExpiresBody": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      },
+      "location": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "storedMilkTotal": "{ml} ml",
+  "@storedMilkTotal": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
+  },
+  "tabSymptoms": "Symptoms",
+  "logSymptom": "Log symptom",
+  "editSymptom": "Edit symptom",
+  "symptomFever": "Fever",
+  "symptomCough": "Cough",
+  "symptomRunnyNose": "Runny nose",
+  "symptomVomiting": "Vomiting",
+  "symptomDiarrhea": "Diarrhoea",
+  "symptomConstipation": "Constipation",
+  "symptomRash": "Rash",
+  "symptomTeething": "Teething",
+  "symptomFeedingRefusal": "Refusing feeds",
+  "symptomCrying": "Unusual crying",
+  "symptomCongestion": "Blocked nose",
+  "symptomOther": "Other",
+  "temperatureLabel": "Temperature (optional)",
+  "invalidTemperature": "Enter 30–45 °C or 86–113 °F",
+  "severityLabel": "How bad?",
+  "severityMild": "Mild",
+  "severityModerate": "Moderate",
+  "severitySevere": "Severe",
+  "youngFeverWarning": "A temperature of 38°C (100.4°F) or higher in a baby under 3 months needs a doctor right away.",
+  "noSymptoms": "No symptoms logged in the last 14 days.",
+  "doctorSummary": "Summary for the doctor",
+  "summarySinceStart": "Since symptoms started",
+  "lastNDays": "Last {count} days",
+  "@lastNDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "showInEnglish": "In English (for the doctor)",
+  "shareButton": "Share",
+  "copyButton": "Copy",
+  "copied": "Copied",
+  "sumTitle": "Health summary: {name}",
+  "@sumTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sumAge": "Age: {age}",
+  "@sumAge": {
+    "placeholders": {
+      "age": {
+        "type": "String"
+      }
+    }
+  },
+  "sumPeriod": "Period: {from} to {to}",
+  "@sumPeriod": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "sumWeight": "Latest weight: {weight} ({date})",
+  "@sumWeight": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sumSymptoms": "Symptoms",
+  "sumSymptomLine": "{symptom}: from {first} to {last} ({count, plural, =1{1 entry} other{{count} entries}})",
+  "@sumSymptomLine": {
+    "placeholders": {
+      "symptom": {
+        "type": "String"
+      },
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sumHighestTemp": "highest {temp} on {when}",
+  "@sumHighestTemp": {
+    "placeholders": {
+      "temp": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "sumFeedsPerDay": "Feeds per day: {days}",
+  "@sumFeedsPerDay": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "sumWetPerDay": "Wet diapers per day: {days}",
+  "@sumWetPerDay": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "sumDirtyPerDay": "Dirty diapers per day: {days}",
+  "@sumDirtyPerDay": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "sumUsually": "usually about {count}",
+  "@sumUsually": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "sumTodaySoFar": "today so far {count}",
+  "@sumTodaySoFar": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sumMedicines": "Medicines given",
+  "sumMedicineLine": "{name} ({dose}): {count, plural, =1{1 dose} other{{count} doses}}, last {when}",
+  "@sumMedicineLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "dose": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "sumEntries": "All entries",
+  "sumFooter": "Recorded by the parent in Baby App."
 }

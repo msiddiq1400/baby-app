@@ -1094,6 +1094,480 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{medicine}: {dose}'**
   String medicineReminderBody(String medicine, String dose);
+
+  /// No description provided for @tabMilk.
+  ///
+  /// In en, this message translates to:
+  /// **'Milk'**
+  String get tabMilk;
+
+  /// No description provided for @milkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Breast milk'**
+  String get milkTitle;
+
+  /// No description provided for @logPumping.
+  ///
+  /// In en, this message translates to:
+  /// **'Log pumping'**
+  String get logPumping;
+
+  /// No description provided for @editPumping.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit pumping'**
+  String get editPumping;
+
+  /// No description provided for @addStoredMilk.
+  ///
+  /// In en, this message translates to:
+  /// **'Add stored milk'**
+  String get addStoredMilk;
+
+  /// No description provided for @pumpedToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Pumped today: {ml} ml ({count} times)'**
+  String pumpedToday(int ml, int count);
+
+  /// No description provided for @storeMilkIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Where is this milk now?'**
+  String get storeMilkIn;
+
+  /// No description provided for @notStored.
+  ///
+  /// In en, this message translates to:
+  /// **'Fed right away'**
+  String get notStored;
+
+  /// No description provided for @locationRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Room'**
+  String get locationRoom;
+
+  /// No description provided for @locationCooler.
+  ///
+  /// In en, this message translates to:
+  /// **'Cooler with ice'**
+  String get locationCooler;
+
+  /// No description provided for @locationFridge.
+  ///
+  /// In en, this message translates to:
+  /// **'Fridge'**
+  String get locationFridge;
+
+  /// No description provided for @locationFreezer.
+  ///
+  /// In en, this message translates to:
+  /// **'Freezer'**
+  String get locationFreezer;
+
+  /// No description provided for @locationThawed.
+  ///
+  /// In en, this message translates to:
+  /// **'Thawed, in fridge'**
+  String get locationThawed;
+
+  /// No description provided for @pumpedAtLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Pumped at'**
+  String get pumpedAtLabel;
+
+  /// No description provided for @pumpedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Pumped {date}'**
+  String pumpedOn(String date);
+
+  /// No description provided for @useBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Use by {time}'**
+  String useBy(String time);
+
+  /// No description provided for @milkExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired: throw away'**
+  String get milkExpired;
+
+  /// No description provided for @milkNeedsAttention.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 stored milk item expires soon or has expired.} other{{count} stored milk items expire soon or have expired.}}'**
+  String milkNeedsAttention(int count);
+
+  /// No description provided for @useForFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Use for a feed'**
+  String get useForFeed;
+
+  /// No description provided for @moveToFridge.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to fridge'**
+  String get moveToFridge;
+
+  /// No description provided for @moveToCooler.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to cooler'**
+  String get moveToCooler;
+
+  /// No description provided for @moveToFreezer.
+  ///
+  /// In en, this message translates to:
+  /// **'Freeze'**
+  String get moveToFreezer;
+
+  /// No description provided for @thawMilk.
+  ///
+  /// In en, this message translates to:
+  /// **'Thaw in fridge'**
+  String get thawMilk;
+
+  /// No description provided for @throwAway.
+  ///
+  /// In en, this message translates to:
+  /// **'Throw away'**
+  String get throwAway;
+
+  /// No description provided for @noStoredMilk.
+  ///
+  /// In en, this message translates to:
+  /// **'No stored milk.'**
+  String get noStoredMilk;
+
+  /// No description provided for @noRefreeze.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t refreeze'**
+  String get noRefreeze;
+
+  /// No description provided for @storageGuideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How long milk keeps'**
+  String get storageGuideTitle;
+
+  /// No description provided for @storageGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Freshly pumped milk (CDC guidance):\n• Room, 25°C or cooler: up to 4 hours\n• Cooler bag with ice packs: up to 24 hours\n• Fridge: up to 4 days\n• Freezer: best within 6 months, up to 12 months\n\nThawed milk: use within 24 hours in the fridge, or within 2 hours once warmed. Never refreeze thawed milk.\nLeftover milk after a feed: use within 2 hours, then throw away.\n\nIn Pakistani summers rooms are often hotter than 25°C, so put milk in the fridge or a cooler with ice right after pumping.'**
+  String get storageGuide;
+
+  /// No description provided for @loadSheddingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'During load-shedding'**
+  String get loadSheddingTitle;
+
+  /// No description provided for @loadSheddingGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'• Keep the fridge and freezer closed. A closed fridge stays cold for about 4 hours; a full freezer for about 48 hours (24 if half full).\n• For longer outages, move milk to a cooler bag with ice or frozen gel packs. Keep a few packs frozen for this.\n• If frozen milk has thawed, don\'t refreeze it: keep it cold and use it within 24 hours.'**
+  String get loadSheddingGuide;
+
+  /// No description provided for @milkExpiresTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stored milk expires soon'**
+  String get milkExpiresTitle;
+
+  /// No description provided for @milkExpiresBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{ml} ml ({location}): use by {time}'**
+  String milkExpiresBody(int ml, String location, String time);
+
+  /// No description provided for @storedMilkTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'{ml} ml'**
+  String storedMilkTotal(int ml);
+
+  /// No description provided for @tabSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms'**
+  String get tabSymptoms;
+
+  /// No description provided for @logSymptom.
+  ///
+  /// In en, this message translates to:
+  /// **'Log symptom'**
+  String get logSymptom;
+
+  /// No description provided for @editSymptom.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit symptom'**
+  String get editSymptom;
+
+  /// No description provided for @symptomFever.
+  ///
+  /// In en, this message translates to:
+  /// **'Fever'**
+  String get symptomFever;
+
+  /// No description provided for @symptomCough.
+  ///
+  /// In en, this message translates to:
+  /// **'Cough'**
+  String get symptomCough;
+
+  /// No description provided for @symptomRunnyNose.
+  ///
+  /// In en, this message translates to:
+  /// **'Runny nose'**
+  String get symptomRunnyNose;
+
+  /// No description provided for @symptomVomiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Vomiting'**
+  String get symptomVomiting;
+
+  /// No description provided for @symptomDiarrhea.
+  ///
+  /// In en, this message translates to:
+  /// **'Diarrhoea'**
+  String get symptomDiarrhea;
+
+  /// No description provided for @symptomConstipation.
+  ///
+  /// In en, this message translates to:
+  /// **'Constipation'**
+  String get symptomConstipation;
+
+  /// No description provided for @symptomRash.
+  ///
+  /// In en, this message translates to:
+  /// **'Rash'**
+  String get symptomRash;
+
+  /// No description provided for @symptomTeething.
+  ///
+  /// In en, this message translates to:
+  /// **'Teething'**
+  String get symptomTeething;
+
+  /// No description provided for @symptomFeedingRefusal.
+  ///
+  /// In en, this message translates to:
+  /// **'Refusing feeds'**
+  String get symptomFeedingRefusal;
+
+  /// No description provided for @symptomCrying.
+  ///
+  /// In en, this message translates to:
+  /// **'Unusual crying'**
+  String get symptomCrying;
+
+  /// No description provided for @symptomCongestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked nose'**
+  String get symptomCongestion;
+
+  /// No description provided for @symptomOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get symptomOther;
+
+  /// No description provided for @temperatureLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature (optional)'**
+  String get temperatureLabel;
+
+  /// No description provided for @invalidTemperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter 30–45 °C or 86–113 °F'**
+  String get invalidTemperature;
+
+  /// No description provided for @severityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'How bad?'**
+  String get severityLabel;
+
+  /// No description provided for @severityMild.
+  ///
+  /// In en, this message translates to:
+  /// **'Mild'**
+  String get severityMild;
+
+  /// No description provided for @severityModerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get severityModerate;
+
+  /// No description provided for @severitySevere.
+  ///
+  /// In en, this message translates to:
+  /// **'Severe'**
+  String get severitySevere;
+
+  /// No description provided for @youngFeverWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'A temperature of 38°C (100.4°F) or higher in a baby under 3 months needs a doctor right away.'**
+  String get youngFeverWarning;
+
+  /// No description provided for @noSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'No symptoms logged in the last 14 days.'**
+  String get noSymptoms;
+
+  /// No description provided for @doctorSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary for the doctor'**
+  String get doctorSummary;
+
+  /// No description provided for @summarySinceStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Since symptoms started'**
+  String get summarySinceStart;
+
+  /// No description provided for @lastNDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Last {count} days'**
+  String lastNDays(int count);
+
+  /// No description provided for @showInEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'In English (for the doctor)'**
+  String get showInEnglish;
+
+  /// No description provided for @shareButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareButton;
+
+  /// No description provided for @copyButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get copyButton;
+
+  /// No description provided for @copied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied'**
+  String get copied;
+
+  /// No description provided for @sumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Health summary: {name}'**
+  String sumTitle(String name);
+
+  /// No description provided for @sumAge.
+  ///
+  /// In en, this message translates to:
+  /// **'Age: {age}'**
+  String sumAge(String age);
+
+  /// No description provided for @sumPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Period: {from} to {to}'**
+  String sumPeriod(String from, String to);
+
+  /// No description provided for @sumWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest weight: {weight} ({date})'**
+  String sumWeight(String weight, String date);
+
+  /// No description provided for @sumSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms'**
+  String get sumSymptoms;
+
+  /// No description provided for @sumSymptomLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{symptom}: from {first} to {last} ({count, plural, =1{1 entry} other{{count} entries}})'**
+  String sumSymptomLine(String symptom, String first, String last, int count);
+
+  /// No description provided for @sumHighestTemp.
+  ///
+  /// In en, this message translates to:
+  /// **'highest {temp} on {when}'**
+  String sumHighestTemp(String temp, String when);
+
+  /// No description provided for @sumFeedsPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Feeds per day: {days}'**
+  String sumFeedsPerDay(String days);
+
+  /// No description provided for @sumWetPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Wet diapers per day: {days}'**
+  String sumWetPerDay(String days);
+
+  /// No description provided for @sumDirtyPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Dirty diapers per day: {days}'**
+  String sumDirtyPerDay(String days);
+
+  /// No description provided for @sumUsually.
+  ///
+  /// In en, this message translates to:
+  /// **'usually about {count}'**
+  String sumUsually(String count);
+
+  /// No description provided for @sumTodaySoFar.
+  ///
+  /// In en, this message translates to:
+  /// **'today so far {count}'**
+  String sumTodaySoFar(int count);
+
+  /// No description provided for @sumMedicines.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicines given'**
+  String get sumMedicines;
+
+  /// No description provided for @sumMedicineLine.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} ({dose}): {count, plural, =1{1 dose} other{{count} doses}}, last {when}'**
+  String sumMedicineLine(String name, String dose, int count, String when);
+
+  /// No description provided for @sumEntries.
+  ///
+  /// In en, this message translates to:
+  /// **'All entries'**
+  String get sumEntries;
+
+  /// No description provided for @sumFooter.
+  ///
+  /// In en, this message translates to:
+  /// **'Recorded by the parent in Baby App.'**
+  String get sumFooter;
 }
 
 class _AppLocalizationsDelegate

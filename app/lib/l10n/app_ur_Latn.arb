@@ -355,5 +355,253 @@
         "type": "String"
       }
     }
-  }
+  },
+  "tabMilk": "Doodh",
+  "milkTitle": "Maa ka doodh",
+  "logPumping": "Pumping record karein",
+  "editPumping": "Pumping edit karein",
+  "addStoredMilk": "Stored doodh add karein",
+  "pumpedToday": "Aaj pump kiya: {ml} ml ({count} baar)",
+  "@pumpedToday": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "storeMilkIn": "Yeh doodh ab kahan hai?",
+  "notStored": "Foran pila diya",
+  "locationRoom": "Kamra",
+  "locationCooler": "Barf wala cooler",
+  "locationFridge": "Fridge",
+  "locationFreezer": "Freezer",
+  "locationThawed": "Pighla hua, fridge mein",
+  "pumpedAtLabel": "Pump karne ka waqt",
+  "pumpedOn": "{date} ko pump kiya",
+  "@pumpedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "useBy": "{time} tak istemal karein",
+  "@useBy": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "milkExpired": "Expire ho gaya: zaaya kar dein",
+  "milkNeedsAttention": "{count} stored doodh jald expire ho raha hai ya ho chuka hai.",
+  "@milkNeedsAttention": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "useForFeed": "Feed ke liye istemal karein",
+  "moveToFridge": "Fridge mein rakhein",
+  "moveToCooler": "Cooler mein rakhein",
+  "moveToFreezer": "Freeze karein",
+  "thawMilk": "Fridge mein pighlayein",
+  "throwAway": "Zaaya karein",
+  "noStoredMilk": "Koi stored doodh nahi.",
+  "noRefreeze": "Dobara freeze na karein",
+  "storageGuideTitle": "Doodh kitni der mehfooz rehta hai",
+  "storageGuide": "Taaza pump kiya hua doodh (CDC ki hidayat):\n• Kamra, 25°C ya kam: 4 ghante tak\n• Barf ke pack wala cooler bag: 24 ghante tak\n• Fridge: 4 din tak\n• Freezer: 6 mahine ke andar behtar, 12 mahine tak\n\nPighla hua doodh: fridge mein 24 ghante ke andar, ya garam karne ke baad 2 ghante ke andar istemal karein. Pighla hua doodh kabhi dobara freeze na karein.\nPilane ke baad bacha hua doodh: 2 ghante ke andar istemal karein, phir zaaya kar dein.\n\nPakistan ki garmiyon mein kamre aksar 25°C se zyada garam hote hain, is liye pump karne ke foran baad doodh fridge ya barf wale cooler mein rakhein.",
+  "loadSheddingTitle": "Load-shedding ke dauran",
+  "loadSheddingGuide": "• Fridge aur freezer band rakhein. Band fridge taqreeban 4 ghante thanda rehta hai; bhara hua freezer taqreeban 48 ghante (aadha bhara ho to 24).\n• Lambi bijli bandish mein doodh barf ya jame hue gel pack wale cooler bag mein rakhein. Is ke liye chand pack hamesha jama kar rakhein.\n• Agar jama hua doodh pighal jaye to dobara freeze na karein: thanda rakhein aur 24 ghante ke andar istemal karein.",
+  "milkExpiresTitle": "Stored doodh jald expire hoga",
+  "milkExpiresBody": "{ml} ml ({location}): {time} tak istemal karein",
+  "@milkExpiresBody": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      },
+      "location": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "storedMilkTotal": "{ml} ml",
+  "@storedMilkTotal": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
+  },
+  "tabSymptoms": "Alamaat",
+  "logSymptom": "Alamat record karein",
+  "editSymptom": "Alamat edit karein",
+  "symptomFever": "Bukhar",
+  "symptomCough": "Khansi",
+  "symptomRunnyNose": "Naak behna",
+  "symptomVomiting": "Ulti",
+  "symptomDiarrhea": "Dast",
+  "symptomConstipation": "Qabz",
+  "symptomRash": "Daane",
+  "symptomTeething": "Daant nikalna",
+  "symptomFeedingRefusal": "Doodh na peena",
+  "symptomCrying": "Ghair mamooli rona",
+  "symptomCongestion": "Band naak",
+  "symptomOther": "Deegar",
+  "temperatureLabel": "Temperature (optional)",
+  "invalidTemperature": "30–45 °C ya 86–113 °F likhein",
+  "severityLabel": "Kitni shadeed?",
+  "severityMild": "Halki",
+  "severityModerate": "Darmiyani",
+  "severitySevere": "Shadeed",
+  "youngFeverWarning": "3 mahine se kam umar ke bache mein 38°C (100.4°F) ya zyada temperature ho to foran doctor ko dikhayein.",
+  "noSymptoms": "Pichhle 14 din mein koi alamat record nahi.",
+  "doctorSummary": "Doctor ke liye khulasa",
+  "summarySinceStart": "Alamaat shuru hone se",
+  "lastNDays": "Pichhle {count} din",
+  "@lastNDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "showInEnglish": "English mein (doctor ke liye)",
+  "shareButton": "Share karein",
+  "copyButton": "Copy karein",
+  "copied": "Copy ho gaya",
+  "sumTitle": "Sehat ka khulasa: {name}",
+  "@sumTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sumAge": "Umar: {age}",
+  "@sumAge": {
+    "placeholders": {
+      "age": {
+        "type": "String"
+      }
+    }
+  },
+  "sumPeriod": "Muddat: {from} se {to} tak",
+  "@sumPeriod": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "sumWeight": "Taaza tareen wazan: {weight} ({date})",
+  "@sumWeight": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sumSymptoms": "Alamaat",
+  "sumSymptomLine": "{symptom}: {first} se {last} tak ({count} entries)",
+  "@sumSymptomLine": {
+    "placeholders": {
+      "symptom": {
+        "type": "String"
+      },
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sumHighestTemp": "sab se zyada {temp}, {when}",
+  "@sumHighestTemp": {
+    "placeholders": {
+      "temp": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "sumFeedsPerDay": "Rozana feeds: {days}",
+  "@sumFeedsPerDay": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "sumWetPerDay": "Rozana geelay diapers: {days}",
+  "@sumWetPerDay": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "sumDirtyPerDay": "Rozana gandey diapers: {days}",
+  "@sumDirtyPerDay": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "sumUsually": "aam taur par taqreeban {count}",
+  "@sumUsually": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "sumTodaySoFar": "aaj ab tak {count}",
+  "@sumTodaySoFar": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sumMedicines": "Di gayi dawaiyan",
+  "sumMedicineLine": "{name} ({dose}): {count} khurakein, aakhri {when}",
+  "@sumMedicineLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "dose": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "sumEntries": "Tamam indrajaat",
+  "sumFooter": "Walidain ne Baby App mein record kiya."
 }
