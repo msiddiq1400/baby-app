@@ -7,7 +7,6 @@
   "cancelButton": "Cancel",
   "language": "Zabaan",
   "signOut": "Sign out",
-
   "signInTitle": "Khush aamdeed",
   "signInSubtitle": "Apne baby ki feeding, neend aur bohat kuch track karein",
   "nameLabel": "Aap ka naam",
@@ -20,18 +19,29 @@
   "switchToSignUp": "Naye hain? Account banayein",
   "verifyTitle": "Apna code likhein",
   "verifySubtitle": "Hum ne {email} par 6 digit ka code bheja hai",
-  "@verifySubtitle": {"placeholders": {"email": {"type": "String"}}},
+  "@verifySubtitle": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
   "codeLabel": "6 digit code",
   "verifyButton": "Confirm karein",
   "resendCode": "Naya code bhejein",
   "resendIn": "{seconds} second mein naya code bhejein",
-  "@resendIn": {"placeholders": {"seconds": {"type": "int"}}},
+  "@resendIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeSent": "Naya code bhej diya gaya hai",
   "invalidCode": "Yeh code ghalat hai ya expire ho gaya hai",
   "continueWithGoogle": "Google ke saath jaari rakhein",
   "orDivider": "ya",
   "switchToSignIn": "Pehle se account hai? Sign in karein",
-
   "addBabyTitle": "Apne baby ko add karein",
   "babyNameLabel": "Baby ka naam",
   "birthDateLabel": "Tareekh-e-paidaish",
@@ -40,31 +50,88 @@
   "sexMale": "Larka",
   "birthWeightLabel": "Paidaish ka wazan kg mein (optional)",
   "invalidWeight": "0.3 se 7 kg ke darmiyan wazan likhein",
-
   "ageMonths": "{count} mahine",
-  "@ageMonths": {"placeholders": {"count": {"type": "int"}}},
+  "@ageMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "ageDays": "{count} din",
-  "@ageDays": {"placeholders": {"count": {"type": "int"}}},
+  "@ageDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "durationHm": "{hours} ghante {minutes} minute",
-  "@durationHm": {"placeholders": {"hours": {"type": "int"}, "minutes": {"type": "int"}}},
+  "@durationHm": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "durationM": "{minutes} minute",
-  "@durationM": {"placeholders": {"minutes": {"type": "int"}}},
+  "@durationM": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "agoLabel": "{duration} pehle",
-  "@agoLabel": {"placeholders": {"duration": {"type": "String"}}},
-
+  "@agoLabel": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
   "feeds": "Feeding",
   "diapers": "Diapers",
   "sleep": "Neend",
   "bottleTotal": "Bottle se {ml} ml",
-  "@bottleTotal": {"placeholders": {"ml": {"type": "int"}}},
+  "@bottleTotal": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
+  },
   "lastFeed": "Aakhri: {ago}",
-  "@lastFeed": {"placeholders": {"ago": {"type": "String"}}},
+  "@lastFeed": {
+    "placeholders": {
+      "ago": {
+        "type": "String"
+      }
+    }
+  },
   "diaperCounts": "{wet} geelay · {dirty} gandey",
-  "@diaperCounts": {"placeholders": {"wet": {"type": "int"}, "dirty": {"type": "int"}}},
+  "@diaperCounts": {
+    "placeholders": {
+      "wet": {
+        "type": "int"
+      },
+      "dirty": {
+        "type": "int"
+      }
+    }
+  },
   "sleepingSince": "{time} se so raha hai",
-  "@sleepingSince": {"placeholders": {"time": {"type": "String"}}},
+  "@sleepingSince": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "sleptToday": "Aaj ki neend",
-
   "logFeed": "Feed",
   "logDiaper": "Diaper",
   "startSleep": "Neend",
@@ -86,7 +153,207 @@
   "sleepNap": "Nap",
   "sleepNight": "Raat ki neend",
   "sleepingNow": "so raha hai",
-
   "todayTimeline": "Aaj",
-  "nothingLoggedToday": "Aaj abhi tak kuch record nahi kiya"
+  "nothingLoggedToday": "Aaj abhi tak kuch record nahi kiya",
+  "tabToday": "Aaj",
+  "tabGrowth": "Growth",
+  "deleteButton": "Delete karein",
+  "deleteConfirmTitle": "Yeh entry delete karein?",
+  "editFeed": "Feed edit karein",
+  "editDiaper": "Diaper edit karein",
+  "editSleep": "Neend edit karein",
+  "sleepStartLabel": "So gaya",
+  "sleepEndLabel": "Jaag gaya",
+  "stillAsleep": "Abhi so raha hai",
+  "invalidSleepTimes": "Jaagne ka waqt sone ke baad hona chahiye",
+  "growthTitle": "Growth",
+  "addMeasurement": "Measurement add karein",
+  "editMeasurement": "Measurement edit karein",
+  "dateLabel": "Tareekh",
+  "weightKgLabel": "Wazan (kg)",
+  "lengthCmLabel": "Qad (cm)",
+  "headCmLabel": "Sar ka gher (cm)",
+  "enterOneMeasurement": "Kam az kam ek measurement likhein",
+  "invalidWeightKg": "0.3 se 40 kg ke darmiyan wazan likhein",
+  "invalidLengthCm": "20 se 130 cm ke darmiyan qad likhein",
+  "invalidHeadCm": "20 se 60 cm ke darmiyan likhein",
+  "metricWeight": "Wazan",
+  "metricLength": "Qad",
+  "metricHead": "Sar",
+  "percentileValue": "Percentile: {percentile}",
+  "@percentileValue": {
+    "placeholders": {
+      "percentile": {
+        "type": "String"
+      }
+    }
+  },
+  "changeSince": "{date} se ab tak {change}",
+  "@changeSince": {
+    "placeholders": {
+      "change": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "atBirth": "Paidaish ke waqt",
+  "noMeasurements": "Abhi koi measurement nahi. Agli dafa wazan karwane ke baad add karein.",
+  "chooseSexForChart": "WHO growth curves se muqabla karne ke liye chunein:",
+  "curvesLegend": "Grey lines: WHO Child Growth Standards, 3rd se 97th percentile tak. Aap ka baby: rangeen line.",
+  "percentileExplain": "Percentile aap ke baby ka muqabla usi umar aur jins ke doosre bachon se karta hai; 50 darmiyan hai. Kisi ek number se zyada ahem yeh hai ke line waqt ke saath hamwar rahe. Agar line do grey lines paar kare ya seedhi ho jaye to apne doctor se baat karein.",
+  "whoAgeLimit": "App mein WHO charts paidaish se 24 mahine tak hain.",
+  "tabHealth": "Sehat",
+  "vaccinesTitle": "Teekay",
+  "vaccineScheduleNote": "Pakistan EPI schedule (sarkari hifazati teekon ka program). Tareekhon ki tasdeeq hamesha apne vaccinator ya bachon ke doctor se karein.",
+  "visitAtBirth": "Paidaish par",
+  "visitWeeks": "{count} hafte",
+  "@visitWeeks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "visitMonths": "{count} mahine",
+  "@visitMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dueOn": "Tareekh: {date}",
+  "@dueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "statusDone": "Sab lag gaye",
+  "statusOverdue": "Der ho gayi",
+  "statusDueSoon": "Jald",
+  "statusUpcoming": "Aane wale",
+  "givenOn": "{date} ko laga",
+  "@givenOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "markGiven": "Lag gaya",
+  "markVisitGiven": "Sab lag gaye",
+  "recordVaccination": "Teeka record karein",
+  "editVaccination": "Teeka edit karein",
+  "dateGivenLabel": "Lagne ki tareekh",
+  "batchLabel": "Batch number (optional)",
+  "clinicLabel": "Clinic ya doctor (optional)",
+  "notesLabel": "Notes (optional)",
+  "nextVisit": "Agla: {visit}, {date}",
+  "@nextVisit": {
+    "placeholders": {
+      "visit": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "allVaccinesDone": "Schedule ke tamam teekay record hain.",
+  "catchUpNote": "Koi teeka reh gaya? Zyada tar teekay baad mein bhi lag sakte hain aur aam taur par shuru se dobara lagwane ki zaroorat nahi hoti. Apne vaccinator ya bachon ke doctor se catch-up plan ke baare mein poochein.",
+  "vaccinesDueTomorrow": "{name} ke teekay kal lagne hain",
+  "@vaccinesDueTomorrow": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccinesDueToday": "{name} ke teekay aaj lagne hain",
+  "@vaccinesDueToday": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccinesOverdueReminder": "{name} ke teekon mein der ho gayi hai",
+  "@vaccinesOverdueReminder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "healthTitle": "Sehat",
+  "tabVaccines": "Teekay",
+  "tabMedicines": "Dawaiyan",
+  "addMedicine": "Dawa add karein",
+  "editMedicine": "Dawa edit karein",
+  "medicineNameLabel": "Dawa ka naam",
+  "prescribedDoseLabel": "Doctor ki batayi hui khurak (maslan 2.5 ml)",
+  "scheduleAtTimes": "Muqarrara auqaat par",
+  "scheduleAsNeeded": "Zaroorat ke waqt",
+  "doseTimesLabel": "Khurak ke auqaat",
+  "addTime": "Waqt add karein",
+  "presetOnce": "Din mein ek baar",
+  "presetTwice": "Din mein 2 baar",
+  "presetThrice": "Din mein 3 baar",
+  "presetEvery6h": "Har 6 ghante baad",
+  "chooseTimes": "Kam az kam ek waqt add karein",
+  "startDateLabel": "Shuru karne ki tareekh",
+  "durationDaysLabel": "Kitne din? (jaari rahe to khaali chhor dein)",
+  "invalidDays": "1 se 365 din ke darmiyan likhein",
+  "prescribedByLabel": "Tajweez karne wala doctor (optional)",
+  "medicineSafetyNote": "Dawa sirf doctor ki hidayat ke mutabiq dein. Yeh app nuskha save karti aur yaad dilati hai; yeh kabhi khurak ka hisaab nahi lagati na tajweez karti hai.",
+  "noMedicines": "Koi dawa add nahi.",
+  "finishedMedicines": "Mukammal",
+  "untilDate": "{date} tak",
+  "@untilDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "ongoing": "Jaari",
+  "doseGiven": "De di",
+  "doseSkipped": "Chhor di",
+  "doseMissed": "Reh gayi",
+  "markDoseGiven": "De di",
+  "skipDose": "Chhorein",
+  "undoDose": "Wapas",
+  "recordDoseNow": "Abhi khurak record karein",
+  "lastGiven": "Aakhri baar: {time}",
+  "@lastGiven": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "medicineReminderTitle": "{name} ki dawa ka waqt",
+  "@medicineReminderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "medicineReminderBody": "{medicine}: {dose}",
+  "@medicineReminderBody": {
+    "placeholders": {
+      "medicine": {
+        "type": "String"
+      },
+      "dose": {
+        "type": "String"
+      }
+    }
+  }
 }

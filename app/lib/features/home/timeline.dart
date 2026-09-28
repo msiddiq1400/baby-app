@@ -3,21 +3,32 @@ import 'package:flutter/material.dart';
 import '../../core/baby_age.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
+import 'log_sheets.dart';
 
 /// Today's feeds, diapers and sleeps in one list, newest first.
+/// Tapping an entry opens it for editing.
 class Timeline extends StatelessWidget {
-  const Timeline({super.key, required this.log, required this.now});
+  const Timeline({super.key, required this.baby, required this.log, required this.now});
 
+  final Baby baby;
   final TodayLog log;
   final DateTime now;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final entries = <(DateTime, IconData, String)>[
-      for (final f in log.feeds) (f.startedAt, Icons.local_drink_outlined, _feedText(l10n, f)),
-      for (final d in log.diapers) (d.occurredAt, Icons.baby_changing_station_outlined, _diaperText(l10n, d)),
-      for (final s in log.sleeps) (s.startedAt, Icons.bedtime_outlined, _sleepText(l10n, s)),
+    final entries = <(DateTime, IconData, String, VoidCallback)>[
+      for (final f in log.feeds)
+        (f.startedAt, Icons.local_drink_outlined, _feedText(l10n, f), () => showFeedSheet(context, baby, existing: f)),
+      for (final d in log.diapers)
+        (
+          d.occurredAt,
+          Icons.baby_changing_station_outlined,
+          _diaperText(l10n, d),
+          () => showDiaperSheet(context, baby, existing: d),
+        ),
+      for (final s in log.sleeps)
+        (s.startedAt, Icons.bedtime_outlined, _sleepText(l10n, s), () => showSleepSheet(context, baby, s)),
     ]..sort((a, b) => b.$1.compareTo(a.$1));
 
     if (entries.isEmpty) {
@@ -29,13 +40,14 @@ class Timeline extends StatelessWidget {
 
     return Column(
       children: [
-        for (final (time, icon, text) in entries)
+        for (final (time, icon, text, onTap) in entries)
           ListTile(
             dense: true,
             contentPadding: EdgeInsets.zero,
             leading: Icon(icon),
             title: Text(text),
             trailing: Text(TimeOfDay.fromDateTime(time).format(context)),
+            onTap: onTap,
           ),
       ],
     );

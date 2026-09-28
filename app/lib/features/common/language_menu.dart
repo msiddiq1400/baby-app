@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/providers.dart';
+import '../../core/reminders.dart';
 import '../../l10n/app_localizations.dart';
 import '../auth/google_auth.dart';
 
@@ -37,6 +38,7 @@ class LanguageMenu extends ConsumerWidget {
           const PopupMenuDivider(),
           PopupMenuItem(
             value: () async {
+              await Reminders.cancelAll();
               await GoogleAuth.signOut();
               await ref.read(supabaseProvider).auth.signOut();
             },

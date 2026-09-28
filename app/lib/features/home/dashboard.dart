@@ -38,7 +38,7 @@ class Dashboard extends ConsumerWidget {
       body: RefreshIndicator(
         onRefresh: () => ref.refresh(todayLogProvider(baby.id).future),
         child: switch (today) {
-          AsyncData(:final value) => _TodayView(log: value, now: now),
+          AsyncData(:final value) => _TodayView(baby: baby, log: value, now: now),
           AsyncError() => ListView(
               children: [
                 Padding(
@@ -56,8 +56,9 @@ class Dashboard extends ConsumerWidget {
 }
 
 class _TodayView extends StatelessWidget {
-  const _TodayView({required this.log, required this.now});
+  const _TodayView({required this.baby, required this.log, required this.now});
 
+  final Baby baby;
   final TodayLog log;
   final DateTime now;
 
@@ -100,7 +101,7 @@ class _TodayView extends StatelessWidget {
         const SizedBox(height: 16),
         Text(l10n.todayTimeline, style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
-        Timeline(log: log, now: now),
+        Timeline(baby: baby, log: log, now: now),
       ],
     );
   }

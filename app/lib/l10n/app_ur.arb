@@ -7,7 +7,6 @@
   "cancelButton": "منسوخ",
   "language": "زبان",
   "signOut": "سائن آؤٹ",
-
   "signInTitle": "خوش آمدید",
   "signInSubtitle": "اپنے بچے کی خوراک، نیند اور بہت کچھ ریکارڈ کریں",
   "nameLabel": "آپ کا نام",
@@ -20,18 +19,29 @@
   "switchToSignUp": "نئے ہیں؟ اکاؤنٹ بنائیں",
   "verifyTitle": "اپنا کوڈ درج کریں",
   "verifySubtitle": "ہم نے {email} پر 6 ہندسوں کا کوڈ بھیجا ہے",
-  "@verifySubtitle": {"placeholders": {"email": {"type": "String"}}},
+  "@verifySubtitle": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
   "codeLabel": "6 ہندسوں کا کوڈ",
   "verifyButton": "تصدیق کریں",
   "resendCode": "نیا کوڈ بھیجیں",
   "resendIn": "{seconds} سیکنڈ میں نیا کوڈ بھیجیں",
-  "@resendIn": {"placeholders": {"seconds": {"type": "int"}}},
+  "@resendIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeSent": "نیا کوڈ بھیج دیا گیا ہے",
   "invalidCode": "یہ کوڈ غلط ہے یا اس کی میعاد ختم ہو گئی ہے",
   "continueWithGoogle": "گوگل کے ساتھ جاری رکھیں",
   "orDivider": "یا",
   "switchToSignIn": "پہلے سے اکاؤنٹ ہے؟ سائن ان کریں",
-
   "addBabyTitle": "اپنے بچے کو شامل کریں",
   "babyNameLabel": "بچے کا نام",
   "birthDateLabel": "تاریخ پیدائش",
@@ -40,31 +50,88 @@
   "sexMale": "لڑکا",
   "birthWeightLabel": "پیدائش کا وزن کلو میں (اختیاری)",
   "invalidWeight": "0.3 سے 7 کلو کے درمیان وزن درج کریں",
-
   "ageMonths": "{count} ماہ",
-  "@ageMonths": {"placeholders": {"count": {"type": "int"}}},
+  "@ageMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "ageDays": "{count} دن",
-  "@ageDays": {"placeholders": {"count": {"type": "int"}}},
+  "@ageDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "durationHm": "{hours} گھنٹے {minutes} منٹ",
-  "@durationHm": {"placeholders": {"hours": {"type": "int"}, "minutes": {"type": "int"}}},
+  "@durationHm": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "durationM": "{minutes} منٹ",
-  "@durationM": {"placeholders": {"minutes": {"type": "int"}}},
+  "@durationM": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "agoLabel": "{duration} پہلے",
-  "@agoLabel": {"placeholders": {"duration": {"type": "String"}}},
-
+  "@agoLabel": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
   "feeds": "خوراک",
   "diapers": "ڈائپر",
   "sleep": "نیند",
   "bottleTotal": "بوتل سے {ml} ملی لیٹر",
-  "@bottleTotal": {"placeholders": {"ml": {"type": "int"}}},
+  "@bottleTotal": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
+  },
   "lastFeed": "آخری: {ago}",
-  "@lastFeed": {"placeholders": {"ago": {"type": "String"}}},
+  "@lastFeed": {
+    "placeholders": {
+      "ago": {
+        "type": "String"
+      }
+    }
+  },
   "diaperCounts": "{wet} گیلے · {dirty} گندے",
-  "@diaperCounts": {"placeholders": {"wet": {"type": "int"}, "dirty": {"type": "int"}}},
+  "@diaperCounts": {
+    "placeholders": {
+      "wet": {
+        "type": "int"
+      },
+      "dirty": {
+        "type": "int"
+      }
+    }
+  },
   "sleepingSince": "{time} سے سو رہا ہے",
-  "@sleepingSince": {"placeholders": {"time": {"type": "String"}}},
+  "@sleepingSince": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "sleptToday": "آج کی نیند",
-
   "logFeed": "خوراک",
   "logDiaper": "ڈائپر",
   "startSleep": "نیند",
@@ -86,7 +153,207 @@
   "sleepNap": "قیلولہ",
   "sleepNight": "رات کی نیند",
   "sleepingNow": "سو رہا ہے",
-
   "todayTimeline": "آج",
-  "nothingLoggedToday": "آج ابھی تک کچھ درج نہیں کیا گیا"
+  "nothingLoggedToday": "آج ابھی تک کچھ درج نہیں کیا گیا",
+  "tabToday": "آج",
+  "tabGrowth": "نشوونما",
+  "deleteButton": "حذف کریں",
+  "deleteConfirmTitle": "یہ اندراج حذف کریں؟",
+  "editFeed": "خوراک میں ترمیم",
+  "editDiaper": "ڈائپر میں ترمیم",
+  "editSleep": "نیند میں ترمیم",
+  "sleepStartLabel": "سو گیا",
+  "sleepEndLabel": "جاگ گیا",
+  "stillAsleep": "ابھی سو رہا ہے",
+  "invalidSleepTimes": "جاگنے کا وقت سونے کے بعد ہونا چاہیے",
+  "growthTitle": "نشوونما",
+  "addMeasurement": "پیمائش شامل کریں",
+  "editMeasurement": "پیمائش میں ترمیم",
+  "dateLabel": "تاریخ",
+  "weightKgLabel": "وزن (کلو)",
+  "lengthCmLabel": "قد (سینٹی میٹر)",
+  "headCmLabel": "سر کا گھیر (سینٹی میٹر)",
+  "enterOneMeasurement": "کم از کم ایک پیمائش درج کریں",
+  "invalidWeightKg": "0.3 سے 40 کلو کے درمیان وزن درج کریں",
+  "invalidLengthCm": "20 سے 130 سینٹی میٹر کے درمیان قد درج کریں",
+  "invalidHeadCm": "20 سے 60 سینٹی میٹر کے درمیان درج کریں",
+  "metricWeight": "وزن",
+  "metricLength": "قد",
+  "metricHead": "سر",
+  "percentileValue": "پرسنٹائل: {percentile}",
+  "@percentileValue": {
+    "placeholders": {
+      "percentile": {
+        "type": "String"
+      }
+    }
+  },
+  "changeSince": "{date} سے اب تک {change}",
+  "@changeSince": {
+    "placeholders": {
+      "change": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "atBirth": "پیدائش کے وقت",
+  "noMeasurements": "ابھی کوئی پیمائش نہیں۔ اگلی بار وزن کرانے کے بعد شامل کریں۔",
+  "chooseSexForChart": "WHO کے نشوونما چارٹ سے موازنے کے لیے منتخب کریں:",
+  "curvesLegend": "سرمئی لکیریں: WHO کے معیار، 3 سے 97 پرسنٹائل تک۔ آپ کا بچہ: رنگین لکیر۔",
+  "percentileExplain": "پرسنٹائل آپ کے بچے کا موازنہ اسی عمر اور جنس کے دوسرے بچوں سے کرتا ہے؛ 50 درمیان ہے۔ کسی ایک عدد سے زیادہ اہم یہ ہے کہ لکیر وقت کے ساتھ ہموار رہے۔ اگر لکیر دو سرمئی لکیریں پار کرے یا سیدھی ہو جائے تو اپنے ڈاکٹر سے بات کریں۔",
+  "whoAgeLimit": "ایپ میں WHO چارٹ پیدائش سے 24 ماہ تک ہیں۔",
+  "tabHealth": "صحت",
+  "vaccinesTitle": "ٹیکے",
+  "vaccineScheduleNote": "پاکستان EPI شیڈول (سرکاری حفاظتی ٹیکوں کا پروگرام)۔ تاریخوں کی تصدیق ہمیشہ اپنے ویکسینیٹر یا بچوں کے ڈاکٹر سے کریں۔",
+  "visitAtBirth": "پیدائش پر",
+  "visitWeeks": "{count} ہفتے",
+  "@visitWeeks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "visitMonths": "{count} ماہ",
+  "@visitMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dueOn": "مقررہ تاریخ: {date}",
+  "@dueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "statusDone": "سب لگ گئے",
+  "statusOverdue": "تاخیر",
+  "statusDueSoon": "جلد",
+  "statusUpcoming": "آنے والے",
+  "givenOn": "{date} کو لگا",
+  "@givenOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "markGiven": "لگ گیا",
+  "markVisitGiven": "سب لگ گئے",
+  "recordVaccination": "ٹیکہ درج کریں",
+  "editVaccination": "ٹیکے میں ترمیم",
+  "dateGivenLabel": "لگنے کی تاریخ",
+  "batchLabel": "بیچ نمبر (اختیاری)",
+  "clinicLabel": "کلینک یا ڈاکٹر (اختیاری)",
+  "notesLabel": "نوٹس (اختیاری)",
+  "nextVisit": "اگلا: {visit}، {date}",
+  "@nextVisit": {
+    "placeholders": {
+      "visit": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "allVaccinesDone": "شیڈول کے تمام ٹیکے درج ہیں۔",
+  "catchUpNote": "کوئی ٹیکہ رہ گیا؟ زیادہ تر ٹیکے بعد میں بھی لگ سکتے ہیں اور عام طور پر شروع سے دوبارہ لگوانے کی ضرورت نہیں ہوتی۔ اپنے ویکسینیٹر یا بچوں کے ڈاکٹر سے کیچ اپ پلان کے بارے میں پوچھیں۔",
+  "vaccinesDueTomorrow": "{name} کے ٹیکے کل لگنے ہیں",
+  "@vaccinesDueTomorrow": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccinesDueToday": "{name} کے ٹیکے آج لگنے ہیں",
+  "@vaccinesDueToday": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccinesOverdueReminder": "{name} کے ٹیکوں میں تاخیر ہو گئی ہے",
+  "@vaccinesOverdueReminder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "healthTitle": "صحت",
+  "tabVaccines": "ٹیکے",
+  "tabMedicines": "دوائیں",
+  "addMedicine": "دوا شامل کریں",
+  "editMedicine": "دوا میں ترمیم",
+  "medicineNameLabel": "دوا کا نام",
+  "prescribedDoseLabel": "ڈاکٹر کی بتائی ہوئی خوراک (مثلاً 2.5 ملی لیٹر)",
+  "scheduleAtTimes": "مقررہ اوقات پر",
+  "scheduleAsNeeded": "ضرورت کے وقت",
+  "doseTimesLabel": "خوراک کے اوقات",
+  "addTime": "وقت شامل کریں",
+  "presetOnce": "دن میں ایک بار",
+  "presetTwice": "دن میں 2 بار",
+  "presetThrice": "دن میں 3 بار",
+  "presetEvery6h": "ہر 6 گھنٹے بعد",
+  "chooseTimes": "کم از کم ایک وقت شامل کریں",
+  "startDateLabel": "شروع کرنے کی تاریخ",
+  "durationDaysLabel": "کتنے دن؟ (جاری رہے تو خالی چھوڑ دیں)",
+  "invalidDays": "1 سے 365 دن کے درمیان درج کریں",
+  "prescribedByLabel": "تجویز کرنے والا ڈاکٹر (اختیاری)",
+  "medicineSafetyNote": "دوا صرف ڈاکٹر کی ہدایت کے مطابق دیں۔ یہ ایپ نسخہ محفوظ کرتی اور یاد دلاتی ہے؛ یہ کبھی خوراک کا حساب نہیں لگاتی نہ تجویز کرتی ہے۔",
+  "noMedicines": "کوئی دوا شامل نہیں۔",
+  "finishedMedicines": "مکمل",
+  "untilDate": "{date} تک",
+  "@untilDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "ongoing": "جاری",
+  "doseGiven": "دے دی",
+  "doseSkipped": "چھوڑ دی",
+  "doseMissed": "رہ گئی",
+  "markDoseGiven": "دے دی",
+  "skipDose": "چھوڑیں",
+  "undoDose": "واپس",
+  "recordDoseNow": "ابھی خوراک درج کریں",
+  "lastGiven": "آخری بار: {time}",
+  "@lastGiven": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "medicineReminderTitle": "{name} کی دوا کا وقت",
+  "@medicineReminderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "medicineReminderBody": "{medicine}: {dose}",
+  "@medicineReminderBody": {
+    "placeholders": {
+      "medicine": {
+        "type": "String"
+      },
+      "dose": {
+        "type": "String"
+      }
+    }
+  }
 }

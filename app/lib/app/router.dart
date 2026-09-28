@@ -7,6 +7,9 @@ import 'package:go_router/go_router.dart';
 import '../core/providers.dart';
 import '../features/auth/sign_in_screen.dart';
 import '../features/auth/verify_code_screen.dart';
+import '../features/growth/growth_screen.dart';
+import '../features/health/health_screen.dart';
+import '../features/home/dashboard.dart';
 import '../features/home/home_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -24,7 +27,26 @@ final routerProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, shell) => BabyShell(shell: shell),
+        branches: [
+          StatefulShellBranch(routes: [
+            GoRoute(path: '/', builder: (context, state) => WithBaby(builder: (baby) => Dashboard(baby: baby))),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+              path: '/growth',
+              builder: (context, state) => WithBaby(builder: (baby) => GrowthScreen(baby: baby)),
+            ),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+              path: '/health',
+              builder: (context, state) => WithBaby(builder: (baby) => HealthScreen(baby: baby)),
+            ),
+          ]),
+        ],
+      ),
       GoRoute(path: '/sign-in', builder: (context, state) => const SignInScreen()),
       GoRoute(
         path: '/verify',

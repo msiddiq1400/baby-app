@@ -530,6 +530,570 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nothing logged yet today'**
   String get nothingLoggedToday;
+
+  /// No description provided for @tabToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get tabToday;
+
+  /// No description provided for @tabGrowth.
+  ///
+  /// In en, this message translates to:
+  /// **'Growth'**
+  String get tabGrowth;
+
+  /// No description provided for @deleteButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deleteButton;
+
+  /// No description provided for @deleteConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this entry?'**
+  String get deleteConfirmTitle;
+
+  /// No description provided for @editFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit feed'**
+  String get editFeed;
+
+  /// No description provided for @editDiaper.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit diaper'**
+  String get editDiaper;
+
+  /// No description provided for @editSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit sleep'**
+  String get editSleep;
+
+  /// No description provided for @sleepStartLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Fell asleep'**
+  String get sleepStartLabel;
+
+  /// No description provided for @sleepEndLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Woke up'**
+  String get sleepEndLabel;
+
+  /// No description provided for @stillAsleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Still asleep'**
+  String get stillAsleep;
+
+  /// No description provided for @invalidSleepTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Wake-up time must be after falling asleep'**
+  String get invalidSleepTimes;
+
+  /// No description provided for @growthTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Growth'**
+  String get growthTitle;
+
+  /// No description provided for @addMeasurement.
+  ///
+  /// In en, this message translates to:
+  /// **'Add measurement'**
+  String get addMeasurement;
+
+  /// No description provided for @editMeasurement.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit measurement'**
+  String get editMeasurement;
+
+  /// No description provided for @dateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get dateLabel;
+
+  /// No description provided for @weightKgLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight (kg)'**
+  String get weightKgLabel;
+
+  /// No description provided for @lengthCmLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Length (cm)'**
+  String get lengthCmLabel;
+
+  /// No description provided for @headCmLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Head circumference (cm)'**
+  String get headCmLabel;
+
+  /// No description provided for @enterOneMeasurement.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter at least one measurement'**
+  String get enterOneMeasurement;
+
+  /// No description provided for @invalidWeightKg.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a weight between 0.3 and 40 kg'**
+  String get invalidWeightKg;
+
+  /// No description provided for @invalidLengthCm.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a length between 20 and 130 cm'**
+  String get invalidLengthCm;
+
+  /// No description provided for @invalidHeadCm.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a size between 20 and 60 cm'**
+  String get invalidHeadCm;
+
+  /// No description provided for @metricWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get metricWeight;
+
+  /// No description provided for @metricLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Length'**
+  String get metricLength;
+
+  /// No description provided for @metricHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Head'**
+  String get metricHead;
+
+  /// No description provided for @percentileValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Percentile: {percentile}'**
+  String percentileValue(String percentile);
+
+  /// No description provided for @changeSince.
+  ///
+  /// In en, this message translates to:
+  /// **'{change} since {date}'**
+  String changeSince(String change, String date);
+
+  /// No description provided for @atBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'At birth'**
+  String get atBirth;
+
+  /// No description provided for @noMeasurements.
+  ///
+  /// In en, this message translates to:
+  /// **'No measurements yet. Add one after your next weigh-in.'**
+  String get noMeasurements;
+
+  /// No description provided for @chooseSexForChart.
+  ///
+  /// In en, this message translates to:
+  /// **'To compare with the WHO growth curves, choose:'**
+  String get chooseSexForChart;
+
+  /// No description provided for @curvesLegend.
+  ///
+  /// In en, this message translates to:
+  /// **'Grey lines: WHO Child Growth Standards, 3rd to 97th percentile. Your baby: coloured line.'**
+  String get curvesLegend;
+
+  /// No description provided for @percentileExplain.
+  ///
+  /// In en, this message translates to:
+  /// **'A percentile compares your baby with others of the same age and sex; the 50th is the middle. A steady curve over time matters more than any single number. Talk to your doctor if the line crosses two of the grey curves or flattens out.'**
+  String get percentileExplain;
+
+  /// No description provided for @whoAgeLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'WHO curves in the app cover birth to 24 months.'**
+  String get whoAgeLimit;
+
+  /// No description provided for @tabHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Health'**
+  String get tabHealth;
+
+  /// No description provided for @vaccinesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vaccinations'**
+  String get vaccinesTitle;
+
+  /// No description provided for @vaccineScheduleNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Pakistan EPI schedule (government vaccination programme). Always confirm dates with your vaccinator or pediatrician.'**
+  String get vaccineScheduleNote;
+
+  /// No description provided for @visitAtBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'At birth'**
+  String get visitAtBirth;
+
+  /// No description provided for @visitWeeks.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} weeks'**
+  String visitWeeks(int count);
+
+  /// No description provided for @visitMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} months'**
+  String visitMonths(int count);
+
+  /// No description provided for @dueOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Due {date}'**
+  String dueOn(String date);
+
+  /// No description provided for @statusDone.
+  ///
+  /// In en, this message translates to:
+  /// **'All given'**
+  String get statusDone;
+
+  /// No description provided for @statusOverdue.
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue'**
+  String get statusOverdue;
+
+  /// No description provided for @statusDueSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Due soon'**
+  String get statusDueSoon;
+
+  /// No description provided for @statusUpcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get statusUpcoming;
+
+  /// No description provided for @givenOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Given {date}'**
+  String givenOn(String date);
+
+  /// No description provided for @markGiven.
+  ///
+  /// In en, this message translates to:
+  /// **'Given'**
+  String get markGiven;
+
+  /// No description provided for @markVisitGiven.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as given'**
+  String get markVisitGiven;
+
+  /// No description provided for @recordVaccination.
+  ///
+  /// In en, this message translates to:
+  /// **'Record vaccination'**
+  String get recordVaccination;
+
+  /// No description provided for @editVaccination.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit vaccination'**
+  String get editVaccination;
+
+  /// No description provided for @dateGivenLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Date given'**
+  String get dateGivenLabel;
+
+  /// No description provided for @batchLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Batch number (optional)'**
+  String get batchLabel;
+
+  /// No description provided for @clinicLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinic or doctor (optional)'**
+  String get clinicLabel;
+
+  /// No description provided for @notesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes (optional)'**
+  String get notesLabel;
+
+  /// No description provided for @nextVisit.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: {visit}, {date}'**
+  String nextVisit(String visit, String date);
+
+  /// No description provided for @allVaccinesDone.
+  ///
+  /// In en, this message translates to:
+  /// **'All scheduled vaccines are recorded.'**
+  String get allVaccinesDone;
+
+  /// No description provided for @catchUpNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Missed a vaccine? Most can still be given late, and the series usually doesn\'t need to restart. Ask your vaccinator or pediatrician about a catch-up plan.'**
+  String get catchUpNote;
+
+  /// No description provided for @vaccinesDueTomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}\'s vaccines are due tomorrow'**
+  String vaccinesDueTomorrow(String name);
+
+  /// No description provided for @vaccinesDueToday.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}\'s vaccines are due today'**
+  String vaccinesDueToday(String name);
+
+  /// No description provided for @vaccinesOverdueReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}\'s vaccines are overdue'**
+  String vaccinesOverdueReminder(String name);
+
+  /// No description provided for @healthTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Health'**
+  String get healthTitle;
+
+  /// No description provided for @tabVaccines.
+  ///
+  /// In en, this message translates to:
+  /// **'Vaccines'**
+  String get tabVaccines;
+
+  /// No description provided for @tabMedicines.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicines'**
+  String get tabMedicines;
+
+  /// No description provided for @addMedicine.
+  ///
+  /// In en, this message translates to:
+  /// **'Add medicine'**
+  String get addMedicine;
+
+  /// No description provided for @editMedicine.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit medicine'**
+  String get editMedicine;
+
+  /// No description provided for @medicineNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicine name'**
+  String get medicineNameLabel;
+
+  /// No description provided for @prescribedDoseLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Dose prescribed by the doctor (e.g. 2.5 ml)'**
+  String get prescribedDoseLabel;
+
+  /// No description provided for @scheduleAtTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'At set times'**
+  String get scheduleAtTimes;
+
+  /// No description provided for @scheduleAsNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'When needed'**
+  String get scheduleAsNeeded;
+
+  /// No description provided for @doseTimesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Dose times'**
+  String get doseTimesLabel;
+
+  /// No description provided for @addTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Add time'**
+  String get addTime;
+
+  /// No description provided for @presetOnce.
+  ///
+  /// In en, this message translates to:
+  /// **'Once a day'**
+  String get presetOnce;
+
+  /// No description provided for @presetTwice.
+  ///
+  /// In en, this message translates to:
+  /// **'2 times a day'**
+  String get presetTwice;
+
+  /// No description provided for @presetThrice.
+  ///
+  /// In en, this message translates to:
+  /// **'3 times a day'**
+  String get presetThrice;
+
+  /// No description provided for @presetEvery6h.
+  ///
+  /// In en, this message translates to:
+  /// **'Every 6 hours'**
+  String get presetEvery6h;
+
+  /// No description provided for @chooseTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Add at least one time'**
+  String get chooseTimes;
+
+  /// No description provided for @startDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Start date'**
+  String get startDateLabel;
+
+  /// No description provided for @durationDaysLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'For how many days? (empty if ongoing)'**
+  String get durationDaysLabel;
+
+  /// No description provided for @invalidDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter between 1 and 365 days'**
+  String get invalidDays;
+
+  /// No description provided for @prescribedByLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Prescribed by (optional)'**
+  String get prescribedByLabel;
+
+  /// No description provided for @medicineSafetyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Give medicines only as your doctor prescribed. This app stores the prescription and reminds you; it never calculates or suggests a dose.'**
+  String get medicineSafetyNote;
+
+  /// No description provided for @noMedicines.
+  ///
+  /// In en, this message translates to:
+  /// **'No medicines added.'**
+  String get noMedicines;
+
+  /// No description provided for @finishedMedicines.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished'**
+  String get finishedMedicines;
+
+  /// No description provided for @untilDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Until {date}'**
+  String untilDate(String date);
+
+  /// No description provided for @ongoing.
+  ///
+  /// In en, this message translates to:
+  /// **'Ongoing'**
+  String get ongoing;
+
+  /// No description provided for @doseGiven.
+  ///
+  /// In en, this message translates to:
+  /// **'Given'**
+  String get doseGiven;
+
+  /// No description provided for @doseSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped'**
+  String get doseSkipped;
+
+  /// No description provided for @doseMissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Missed'**
+  String get doseMissed;
+
+  /// No description provided for @markDoseGiven.
+  ///
+  /// In en, this message translates to:
+  /// **'Given'**
+  String get markDoseGiven;
+
+  /// No description provided for @skipDose.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skipDose;
+
+  /// No description provided for @undoDose.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undoDose;
+
+  /// No description provided for @recordDoseNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Record a dose now'**
+  String get recordDoseNow;
+
+  /// No description provided for @lastGiven.
+  ///
+  /// In en, this message translates to:
+  /// **'Last given {time}'**
+  String lastGiven(String time);
+
+  /// No description provided for @medicineReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicine time for {name}'**
+  String medicineReminderTitle(String name);
+
+  /// No description provided for @medicineReminderBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{medicine}: {dose}'**
+  String medicineReminderBody(String medicine, String dose);
 }
 
 class _AppLocalizationsDelegate

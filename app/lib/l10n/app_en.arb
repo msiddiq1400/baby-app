@@ -7,7 +7,6 @@
   "cancelButton": "Cancel",
   "language": "Language",
   "signOut": "Sign out",
-
   "signInTitle": "Welcome",
   "signInSubtitle": "Track feeds, sleep and more for your baby",
   "nameLabel": "Your name",
@@ -20,18 +19,29 @@
   "switchToSignUp": "New here? Create an account",
   "verifyTitle": "Enter your code",
   "verifySubtitle": "We sent a 6-digit code to {email}",
-  "@verifySubtitle": {"placeholders": {"email": {"type": "String"}}},
+  "@verifySubtitle": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
   "codeLabel": "6-digit code",
   "verifyButton": "Confirm",
   "resendCode": "Send a new code",
   "resendIn": "Send a new code in {seconds}s",
-  "@resendIn": {"placeholders": {"seconds": {"type": "int"}}},
+  "@resendIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeSent": "A new code has been sent",
   "invalidCode": "That code is wrong or has expired",
   "continueWithGoogle": "Continue with Google",
   "orDivider": "or",
   "switchToSignIn": "Already have an account? Sign in",
-
   "addBabyTitle": "Add your baby",
   "babyNameLabel": "Baby's name",
   "birthDateLabel": "Date of birth",
@@ -40,31 +50,88 @@
   "sexMale": "Boy",
   "birthWeightLabel": "Birth weight in kg (optional)",
   "invalidWeight": "Enter a weight between 0.3 and 7 kg",
-
   "ageMonths": "{count, plural, =1{1 month} other{{count} months}}",
-  "@ageMonths": {"placeholders": {"count": {"type": "int"}}},
+  "@ageMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "ageDays": "{count, plural, =1{1 day} other{{count} days}}",
-  "@ageDays": {"placeholders": {"count": {"type": "int"}}},
+  "@ageDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "durationHm": "{hours}h {minutes}m",
-  "@durationHm": {"placeholders": {"hours": {"type": "int"}, "minutes": {"type": "int"}}},
+  "@durationHm": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "durationM": "{minutes}m",
-  "@durationM": {"placeholders": {"minutes": {"type": "int"}}},
+  "@durationM": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "agoLabel": "{duration} ago",
-  "@agoLabel": {"placeholders": {"duration": {"type": "String"}}},
-
+  "@agoLabel": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
   "feeds": "Feeds",
   "diapers": "Diapers",
   "sleep": "Sleep",
   "bottleTotal": "{ml} ml by bottle",
-  "@bottleTotal": {"placeholders": {"ml": {"type": "int"}}},
+  "@bottleTotal": {
+    "placeholders": {
+      "ml": {
+        "type": "int"
+      }
+    }
+  },
   "lastFeed": "Last: {ago}",
-  "@lastFeed": {"placeholders": {"ago": {"type": "String"}}},
+  "@lastFeed": {
+    "placeholders": {
+      "ago": {
+        "type": "String"
+      }
+    }
+  },
   "diaperCounts": "{wet} wet · {dirty} dirty",
-  "@diaperCounts": {"placeholders": {"wet": {"type": "int"}, "dirty": {"type": "int"}}},
+  "@diaperCounts": {
+    "placeholders": {
+      "wet": {
+        "type": "int"
+      },
+      "dirty": {
+        "type": "int"
+      }
+    }
+  },
   "sleepingSince": "Sleeping since {time}",
-  "@sleepingSince": {"placeholders": {"time": {"type": "String"}}},
+  "@sleepingSince": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "sleptToday": "Slept today",
-
   "logFeed": "Feed",
   "logDiaper": "Diaper",
   "startSleep": "Sleep",
@@ -86,7 +153,207 @@
   "sleepNap": "Nap",
   "sleepNight": "Night sleep",
   "sleepingNow": "sleeping",
-
   "todayTimeline": "Today",
-  "nothingLoggedToday": "Nothing logged yet today"
+  "nothingLoggedToday": "Nothing logged yet today",
+  "tabToday": "Today",
+  "tabGrowth": "Growth",
+  "deleteButton": "Delete",
+  "deleteConfirmTitle": "Delete this entry?",
+  "editFeed": "Edit feed",
+  "editDiaper": "Edit diaper",
+  "editSleep": "Edit sleep",
+  "sleepStartLabel": "Fell asleep",
+  "sleepEndLabel": "Woke up",
+  "stillAsleep": "Still asleep",
+  "invalidSleepTimes": "Wake-up time must be after falling asleep",
+  "growthTitle": "Growth",
+  "addMeasurement": "Add measurement",
+  "editMeasurement": "Edit measurement",
+  "dateLabel": "Date",
+  "weightKgLabel": "Weight (kg)",
+  "lengthCmLabel": "Length (cm)",
+  "headCmLabel": "Head circumference (cm)",
+  "enterOneMeasurement": "Enter at least one measurement",
+  "invalidWeightKg": "Enter a weight between 0.3 and 40 kg",
+  "invalidLengthCm": "Enter a length between 20 and 130 cm",
+  "invalidHeadCm": "Enter a size between 20 and 60 cm",
+  "metricWeight": "Weight",
+  "metricLength": "Length",
+  "metricHead": "Head",
+  "percentileValue": "Percentile: {percentile}",
+  "@percentileValue": {
+    "placeholders": {
+      "percentile": {
+        "type": "String"
+      }
+    }
+  },
+  "changeSince": "{change} since {date}",
+  "@changeSince": {
+    "placeholders": {
+      "change": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "atBirth": "At birth",
+  "noMeasurements": "No measurements yet. Add one after your next weigh-in.",
+  "chooseSexForChart": "To compare with the WHO growth curves, choose:",
+  "curvesLegend": "Grey lines: WHO Child Growth Standards, 3rd to 97th percentile. Your baby: coloured line.",
+  "percentileExplain": "A percentile compares your baby with others of the same age and sex; the 50th is the middle. A steady curve over time matters more than any single number. Talk to your doctor if the line crosses two of the grey curves or flattens out.",
+  "whoAgeLimit": "WHO curves in the app cover birth to 24 months.",
+  "tabHealth": "Health",
+  "vaccinesTitle": "Vaccinations",
+  "vaccineScheduleNote": "Pakistan EPI schedule (government vaccination programme). Always confirm dates with your vaccinator or pediatrician.",
+  "visitAtBirth": "At birth",
+  "visitWeeks": "{count} weeks",
+  "@visitWeeks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "visitMonths": "{count} months",
+  "@visitMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dueOn": "Due {date}",
+  "@dueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "statusDone": "All given",
+  "statusOverdue": "Overdue",
+  "statusDueSoon": "Due soon",
+  "statusUpcoming": "Upcoming",
+  "givenOn": "Given {date}",
+  "@givenOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "markGiven": "Given",
+  "markVisitGiven": "Mark all as given",
+  "recordVaccination": "Record vaccination",
+  "editVaccination": "Edit vaccination",
+  "dateGivenLabel": "Date given",
+  "batchLabel": "Batch number (optional)",
+  "clinicLabel": "Clinic or doctor (optional)",
+  "notesLabel": "Notes (optional)",
+  "nextVisit": "Next: {visit}, {date}",
+  "@nextVisit": {
+    "placeholders": {
+      "visit": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "allVaccinesDone": "All scheduled vaccines are recorded.",
+  "catchUpNote": "Missed a vaccine? Most can still be given late, and the series usually doesn't need to restart. Ask your vaccinator or pediatrician about a catch-up plan.",
+  "vaccinesDueTomorrow": "{name}'s vaccines are due tomorrow",
+  "@vaccinesDueTomorrow": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccinesDueToday": "{name}'s vaccines are due today",
+  "@vaccinesDueToday": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccinesOverdueReminder": "{name}'s vaccines are overdue",
+  "@vaccinesOverdueReminder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "healthTitle": "Health",
+  "tabVaccines": "Vaccines",
+  "tabMedicines": "Medicines",
+  "addMedicine": "Add medicine",
+  "editMedicine": "Edit medicine",
+  "medicineNameLabel": "Medicine name",
+  "prescribedDoseLabel": "Dose prescribed by the doctor (e.g. 2.5 ml)",
+  "scheduleAtTimes": "At set times",
+  "scheduleAsNeeded": "When needed",
+  "doseTimesLabel": "Dose times",
+  "addTime": "Add time",
+  "presetOnce": "Once a day",
+  "presetTwice": "2 times a day",
+  "presetThrice": "3 times a day",
+  "presetEvery6h": "Every 6 hours",
+  "chooseTimes": "Add at least one time",
+  "startDateLabel": "Start date",
+  "durationDaysLabel": "For how many days? (empty if ongoing)",
+  "invalidDays": "Enter between 1 and 365 days",
+  "prescribedByLabel": "Prescribed by (optional)",
+  "medicineSafetyNote": "Give medicines only as your doctor prescribed. This app stores the prescription and reminds you; it never calculates or suggests a dose.",
+  "noMedicines": "No medicines added.",
+  "finishedMedicines": "Finished",
+  "untilDate": "Until {date}",
+  "@untilDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "ongoing": "Ongoing",
+  "doseGiven": "Given",
+  "doseSkipped": "Skipped",
+  "doseMissed": "Missed",
+  "markDoseGiven": "Given",
+  "skipDose": "Skip",
+  "undoDose": "Undo",
+  "recordDoseNow": "Record a dose now",
+  "lastGiven": "Last given {time}",
+  "@lastGiven": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "medicineReminderTitle": "Medicine time for {name}",
+  "@medicineReminderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "medicineReminderBody": "{medicine}: {dose}",
+  "@medicineReminderBody": {
+    "placeholders": {
+      "medicine": {
+        "type": "String"
+      },
+      "dose": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import '../l10n/app_localizations.dart';
+import 'dates.dart';
 
 /// Whole calendar months and remaining days between [birth] and [today],
 /// e.g. born 8 April, today 28 September -> 5 months, 20 days.
@@ -10,16 +11,8 @@ import '../l10n/app_localizations.dart';
 
   var months = (t.year - b.year) * 12 + t.month - b.month;
   if (t.day < b.day) months--;
-  final anchor = _addMonths(b, months);
+  final anchor = addMonths(b, months);
   return (months: months, days: t.difference(anchor).inDays);
-}
-
-DateTime _addMonths(DateTime d, int months) {
-  final monthIndex = d.month - 1 + months;
-  final year = d.year + monthIndex ~/ 12;
-  final month = monthIndex % 12 + 1;
-  final lastDay = DateTime.utc(year, month + 1, 0).day;
-  return DateTime.utc(year, month, d.day > lastDay ? lastDay : d.day);
 }
 
 String formatBabyAge(AppLocalizations l10n, DateTime birth, DateTime today) {
