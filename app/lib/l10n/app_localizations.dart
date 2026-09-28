@@ -201,11 +201,53 @@ abstract class AppLocalizations {
   /// **'New here? Create an account'**
   String get switchToSignUp;
 
-  /// No description provided for @checkEmail.
+  /// No description provided for @verifyTitle.
   ///
   /// In en, this message translates to:
-  /// **'Account created. Check your email and tap the link to confirm — it opens the app and signs you in.'**
-  String get checkEmail;
+  /// **'Enter your code'**
+  String get verifyTitle;
+
+  /// No description provided for @verifySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a 6-digit code to {email}'**
+  String verifySubtitle(String email);
+
+  /// No description provided for @codeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'6-digit code'**
+  String get codeLabel;
+
+  /// No description provided for @verifyButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get verifyButton;
+
+  /// No description provided for @resendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a new code'**
+  String get resendCode;
+
+  /// No description provided for @resendIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a new code in {seconds}s'**
+  String resendIn(int seconds);
+
+  /// No description provided for @codeSent.
+  ///
+  /// In en, this message translates to:
+  /// **'A new code has been sent'**
+  String get codeSent;
+
+  /// No description provided for @invalidCode.
+  ///
+  /// In en, this message translates to:
+  /// **'That code is wrong or has expired'**
+  String get invalidCode;
 
   /// No description provided for @switchToSignIn.
   ///

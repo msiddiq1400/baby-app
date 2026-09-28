@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../core/providers.dart';
 import '../features/auth/sign_in_screen.dart';
+import '../features/auth/verify_code_screen.dart';
 import '../features/home/home_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -17,14 +18,18 @@ final routerProvider = Provider<GoRouter>((ref) {
     refreshListenable: authChanges,
     redirect: (context, state) {
       final signedIn = auth.currentSession != null;
-      final onSignIn = state.matchedLocation == '/sign-in';
-      if (!signedIn) return onSignIn ? null : '/sign-in';
-      if (onSignIn) return '/';
+      final onAuthPage = const {'/sign-in', '/verify'}.contains(state.matchedLocation);
+      if (!signedIn) return onAuthPage ? null : '/sign-in';
+      if (onAuthPage) return '/';
       return null;
     },
     routes: [
       GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
       GoRoute(path: '/sign-in', builder: (context, state) => const SignInScreen()),
+      GoRoute(
+        path: '/verify',
+        builder: (context, state) => VerifyCodeScreen(email: state.uri.queryParameters['email'] ?? ''),
+      ),
     ],
   );
 });

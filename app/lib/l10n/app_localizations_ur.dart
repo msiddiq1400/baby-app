@@ -61,8 +61,32 @@ class AppLocalizationsUr extends AppLocalizations {
   String get switchToSignUp => 'نئے ہیں؟ اکاؤنٹ بنائیں';
 
   @override
-  String get checkEmail =>
-      'اکاؤنٹ بن گیا۔ اپنی ای میل دیکھیں اور تصدیق کے لیے لنک پر ٹیپ کریں — یہ ایپ کھول کر آپ کو سائن ان کر دے گا۔';
+  String get verifyTitle => 'اپنا کوڈ درج کریں';
+
+  @override
+  String verifySubtitle(String email) {
+    return 'ہم نے $email پر 6 ہندسوں کا کوڈ بھیجا ہے';
+  }
+
+  @override
+  String get codeLabel => '6 ہندسوں کا کوڈ';
+
+  @override
+  String get verifyButton => 'تصدیق کریں';
+
+  @override
+  String get resendCode => 'نیا کوڈ بھیجیں';
+
+  @override
+  String resendIn(int seconds) {
+    return '$seconds سیکنڈ میں نیا کوڈ بھیجیں';
+  }
+
+  @override
+  String get codeSent => 'نیا کوڈ بھیج دیا گیا ہے';
+
+  @override
+  String get invalidCode => 'یہ کوڈ غلط ہے یا اس کی میعاد ختم ہو گئی ہے';
 
   @override
   String get switchToSignIn => 'پہلے سے اکاؤنٹ ہے؟ سائن ان کریں';
@@ -276,8 +300,32 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String get switchToSignUp => 'Naye hain? Account banayein';
 
   @override
-  String get checkEmail =>
-      'Account ban gaya. Apni email check karein aur confirm karne ke liye link par tap karein — yeh app khol kar aap ko sign in kar dega.';
+  String get verifyTitle => 'Apna code likhein';
+
+  @override
+  String verifySubtitle(String email) {
+    return 'Hum ne $email par 6 digit ka code bheja hai';
+  }
+
+  @override
+  String get codeLabel => '6 digit code';
+
+  @override
+  String get verifyButton => 'Confirm karein';
+
+  @override
+  String get resendCode => 'Naya code bhejein';
+
+  @override
+  String resendIn(int seconds) {
+    return '$seconds second mein naya code bhejein';
+  }
+
+  @override
+  String get codeSent => 'Naya code bhej diya gaya hai';
+
+  @override
+  String get invalidCode => 'Yeh code ghalat hai ya expire ho gaya hai';
 
   @override
   String get switchToSignIn => 'Pehle se account hai? Sign in karein';

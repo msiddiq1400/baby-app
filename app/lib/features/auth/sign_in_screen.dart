@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../core/config/env.dart';
 import '../../core/providers.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/language_menu.dart';
@@ -34,31 +34,39 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _busy = true);
     final auth = ref.read(supabaseProvider).auth;
+    final email = _email.text.trim();
     try {
       if (_isSignUp) {
         final response = await auth.signUp(
-          email: _email.text.trim(),
+          email: email,
           password: _password.text,
           data: {'full_name': _name.text.trim()},
-          emailRedirectTo: Env.authRedirectUrl,
         );
-        // No session means the email must be confirmed first. The link in
-        // the email opens the app and signs them in.
-        if (response.session == null && mounted) {
-          setState(() => _isSignUp = false);
-          _showMessage(AppLocalizations.of(context).checkEmail);
-        }
+        // No session means the email must be confirmed with the emailed code.
+        if (response.session == null) _goToVerify(email);
       } else {
-        await auth.signInWithPassword(email: _email.text.trim(), password: _password.text);
+        await auth.signInWithPassword(email: email, password: _password.text);
       }
-      // The router moves on by itself once the session changes.
+      // Once signed in, the router moves on by itself.
     } on AuthException catch (e) {
-      _showMessage(e.message);
+      if (e.code == 'email_not_confirmed') {
+        // Signed up earlier but never entered the code: send a fresh one.
+        await auth.resend(type: OtpType.signup, email: email);
+        _goToVerify(email);
+      } else {
+        _showMessage(e.message);
+      }
     } catch (_) {
       if (mounted) _showMessage(AppLocalizations.of(context).errorGeneric);
     } finally {
       if (mounted) setState(() => _busy = false);
     }
+  }
+
+  void _goToVerify(String email) {
+    if (!mounted) return;
+    setState(() => _isSignUp = false);
+    context.push(Uri(path: '/verify', queryParameters: {'email': email}).toString());
   }
 
   void _showMessage(String message) {

@@ -60,8 +60,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get switchToSignUp => 'New here? Create an account';
 
   @override
-  String get checkEmail =>
-      'Account created. Check your email and tap the link to confirm — it opens the app and signs you in.';
+  String get verifyTitle => 'Enter your code';
+
+  @override
+  String verifySubtitle(String email) {
+    return 'We sent a 6-digit code to $email';
+  }
+
+  @override
+  String get codeLabel => '6-digit code';
+
+  @override
+  String get verifyButton => 'Confirm';
+
+  @override
+  String get resendCode => 'Send a new code';
+
+  @override
+  String resendIn(int seconds) {
+    return 'Send a new code in ${seconds}s';
+  }
+
+  @override
+  String get codeSent => 'A new code has been sent';
+
+  @override
+  String get invalidCode => 'That code is wrong or has expired';
 
   @override
   String get switchToSignIn => 'Already have an account? Sign in';
