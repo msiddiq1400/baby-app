@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/baby_repository.dart';
 import '../../l10n/app_localizations.dart';
+import '../baby/add_baby_screen.dart';
+import 'dashboard.dart';
 
-class HomeScreen extends StatelessWidget {
+/// Shows the dashboard, or the add-baby form if there's no baby yet.
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.homeTitle)),
-      body: Center(child: Text(l10n.homeEmpty)),
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ref.watch(currentBabyProvider).when(
+          data: (baby) => baby == null ? const AddBabyScreen() : Dashboard(baby: baby),
+          loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
+          error: (_, _) => Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(AppLocalizations.of(context).errorGeneric),
+                  const SizedBox(height: 12),
+                  IconButton.filledTonal(
+                    onPressed: () => ref.invalidate(currentBabyProvider),
+                    icon: const Icon(Icons.refresh),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
   }
 }

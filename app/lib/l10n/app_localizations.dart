@@ -105,17 +105,371 @@ abstract class AppLocalizations {
   /// **'Baby App'**
   String get appTitle;
 
-  /// No description provided for @homeTitle.
+  /// No description provided for @errorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get errorGeneric;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get fieldRequired;
+
+  /// No description provided for @saveButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get saveButton;
+
+  /// No description provided for @cancelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelButton;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @signOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get signOut;
+
+  /// No description provided for @signInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get signInTitle;
+
+  /// No description provided for @signInSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Track feeds, sleep and more for your baby'**
+  String get signInSubtitle;
+
+  /// No description provided for @nameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get nameLabel;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailLabel;
+
+  /// No description provided for @passwordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordLabel;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email'**
+  String get invalidEmail;
+
+  /// No description provided for @passwordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordTooShort;
+
+  /// No description provided for @signInButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signInButton;
+
+  /// No description provided for @signUpButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get signUpButton;
+
+  /// No description provided for @switchToSignUp.
+  ///
+  /// In en, this message translates to:
+  /// **'New here? Create an account'**
+  String get switchToSignUp;
+
+  /// No description provided for @switchToSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Sign in'**
+  String get switchToSignIn;
+
+  /// No description provided for @addBabyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your baby'**
+  String get addBabyTitle;
+
+  /// No description provided for @babyNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Baby\'s name'**
+  String get babyNameLabel;
+
+  /// No description provided for @birthDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Date of birth'**
+  String get birthDateLabel;
+
+  /// No description provided for @sexLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sex (optional)'**
+  String get sexLabel;
+
+  /// No description provided for @sexFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'Girl'**
+  String get sexFemale;
+
+  /// No description provided for @sexMale.
+  ///
+  /// In en, this message translates to:
+  /// **'Boy'**
+  String get sexMale;
+
+  /// No description provided for @birthWeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth weight in kg (optional)'**
+  String get birthWeightLabel;
+
+  /// No description provided for @invalidWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a weight between 0.3 and 7 kg'**
+  String get invalidWeight;
+
+  /// No description provided for @ageMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 month} other{{count} months}}'**
+  String ageMonths(int count);
+
+  /// No description provided for @ageDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 day} other{{count} days}}'**
+  String ageDays(int count);
+
+  /// No description provided for @durationHm.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h {minutes}m'**
+  String durationHm(int hours, int minutes);
+
+  /// No description provided for @durationM.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes}m'**
+  String durationM(int minutes);
+
+  /// No description provided for @agoLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{duration} ago'**
+  String agoLabel(String duration);
+
+  /// No description provided for @feeds.
+  ///
+  /// In en, this message translates to:
+  /// **'Feeds'**
+  String get feeds;
+
+  /// No description provided for @diapers.
+  ///
+  /// In en, this message translates to:
+  /// **'Diapers'**
+  String get diapers;
+
+  /// No description provided for @sleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get sleep;
+
+  /// No description provided for @bottleTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'{ml} ml by bottle'**
+  String bottleTotal(int ml);
+
+  /// No description provided for @lastFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Last: {ago}'**
+  String lastFeed(String ago);
+
+  /// No description provided for @diaperCounts.
+  ///
+  /// In en, this message translates to:
+  /// **'{wet} wet · {dirty} dirty'**
+  String diaperCounts(int wet, int dirty);
+
+  /// No description provided for @sleepingSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleeping since {time}'**
+  String sleepingSince(String time);
+
+  /// No description provided for @sleptToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Slept today'**
+  String get sleptToday;
+
+  /// No description provided for @logFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Feed'**
+  String get logFeed;
+
+  /// No description provided for @logDiaper.
+  ///
+  /// In en, this message translates to:
+  /// **'Diaper'**
+  String get logDiaper;
+
+  /// No description provided for @startSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get startSleep;
+
+  /// No description provided for @endSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Woke up'**
+  String get endSleep;
+
+  /// No description provided for @feedTypeBreast.
+  ///
+  /// In en, this message translates to:
+  /// **'Breast'**
+  String get feedTypeBreast;
+
+  /// No description provided for @feedTypeBottleBreastMilk.
+  ///
+  /// In en, this message translates to:
+  /// **'Expressed milk'**
+  String get feedTypeBottleBreastMilk;
+
+  /// No description provided for @feedTypeFormula.
+  ///
+  /// In en, this message translates to:
+  /// **'Formula'**
+  String get feedTypeFormula;
+
+  /// No description provided for @sideLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Left'**
+  String get sideLeft;
+
+  /// No description provided for @sideRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Right'**
+  String get sideRight;
+
+  /// No description provided for @sideBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Both'**
+  String get sideBoth;
+
+  /// No description provided for @amountMl.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount (ml)'**
+  String get amountMl;
+
+  /// No description provided for @feedMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration in minutes (optional)'**
+  String get feedMinutes;
+
+  /// No description provided for @invalidAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an amount between 1 and 1000 ml'**
+  String get invalidAmount;
+
+  /// No description provided for @invalidMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter minutes between 1 and 180'**
+  String get invalidMinutes;
+
+  /// No description provided for @diaperWet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wet'**
+  String get diaperWet;
+
+  /// No description provided for @diaperDirty.
+  ///
+  /// In en, this message translates to:
+  /// **'Dirty'**
+  String get diaperDirty;
+
+  /// No description provided for @chooseDiaper.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose wet, dirty or both'**
+  String get chooseDiaper;
+
+  /// No description provided for @timeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get timeLabel;
+
+  /// No description provided for @sleepNap.
+  ///
+  /// In en, this message translates to:
+  /// **'Nap'**
+  String get sleepNap;
+
+  /// No description provided for @sleepNight.
+  ///
+  /// In en, this message translates to:
+  /// **'Night sleep'**
+  String get sleepNight;
+
+  /// No description provided for @sleepingNow.
+  ///
+  /// In en, this message translates to:
+  /// **'sleeping'**
+  String get sleepingNow;
+
+  /// No description provided for @todayTimeline.
   ///
   /// In en, this message translates to:
   /// **'Today'**
-  String get homeTitle;
+  String get todayTimeline;
 
-  /// No description provided for @homeEmpty.
+  /// No description provided for @nothingLoggedToday.
   ///
   /// In en, this message translates to:
-  /// **'No baby added yet'**
-  String get homeEmpty;
+  /// **'Nothing logged yet today'**
+  String get nothingLoggedToday;
 }
 
 class _AppLocalizationsDelegate

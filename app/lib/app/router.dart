@@ -1,9 +1,45 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/providers.dart';
+import '../features/auth/sign_in_screen.dart';
 import '../features/home/home_screen.dart';
 
-final router = GoRouter(
-  routes: [
-    GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
-  ],
-);
+final routerProvider = Provider<GoRouter>((ref) {
+  final auth = ref.watch(supabaseProvider).auth;
+  final authChanges = _StreamListenable(auth.onAuthStateChange);
+  ref.onDispose(authChanges.dispose);
+
+  return GoRouter(
+    refreshListenable: authChanges,
+    redirect: (context, state) {
+      final signedIn = auth.currentSession != null;
+      final onSignIn = state.matchedLocation == '/sign-in';
+      if (!signedIn) return onSignIn ? null : '/sign-in';
+      if (onSignIn) return '/';
+      return null;
+    },
+    routes: [
+      GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
+      GoRoute(path: '/sign-in', builder: (context, state) => const SignInScreen()),
+    ],
+  );
+});
+
+/// Re-runs the router's redirect whenever the stream emits.
+class _StreamListenable extends ChangeNotifier {
+  _StreamListenable(Stream<Object?> stream) {
+    _subscription = stream.listen((_) => notifyListeners());
+  }
+
+  late final StreamSubscription<Object?> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+}
