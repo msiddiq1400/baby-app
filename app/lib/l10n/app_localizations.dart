@@ -249,6 +249,18 @@ abstract class AppLocalizations {
   /// **'That code is wrong or has expired'**
   String get invalidCode;
 
+  /// No description provided for @continueWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get continueWithGoogle;
+
+  /// No description provided for @orDivider.
+  ///
+  /// In en, this message translates to:
+  /// **'or'**
+  String get orDivider;
+
   /// No description provided for @switchToSignIn.
   ///
   /// In en, this message translates to:

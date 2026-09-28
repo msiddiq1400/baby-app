@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/providers.dart';
 import '../../l10n/app_localizations.dart';
+import '../auth/google_auth.dart';
 
 /// App-bar menu for switching between English, Urdu and Roman Urdu,
 /// optionally with a sign-out entry.
@@ -35,7 +36,10 @@ class LanguageMenu extends ConsumerWidget {
         if (showSignOut) ...[
           const PopupMenuDivider(),
           PopupMenuItem(
-            value: () => ref.read(supabaseProvider).auth.signOut(),
+            value: () async {
+              await GoogleAuth.signOut();
+              await ref.read(supabaseProvider).auth.signOut();
+            },
             child: ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.logout),

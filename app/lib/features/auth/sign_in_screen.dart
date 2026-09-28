@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../core/providers.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/language_menu.dart';
+import 'google_auth.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
@@ -67,6 +68,20 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     if (!mounted) return;
     setState(() => _isSignUp = false);
     context.push(Uri(path: '/verify', queryParameters: {'email': email}).toString());
+  }
+
+  Future<void> _signInWithGoogle() async {
+    setState(() => _busy = true);
+    try {
+      await GoogleAuth.signIn(ref.read(supabaseProvider));
+      // Signed in (or picker closed); the router handles the rest.
+    } on AuthException catch (e) {
+      _showMessage(e.message);
+    } catch (_) {
+      if (mounted) _showMessage(AppLocalizations.of(context).errorGeneric);
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
   }
 
   void _showMessage(String message) {
@@ -134,6 +149,27 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     onPressed: _busy ? null : () => setState(() => _isSignUp = !_isSignUp),
                     child: Text(_isSignUp ? l10n.switchToSignIn : l10n.switchToSignUp),
                   ),
+                  if (GoogleAuth.isConfigured) ...[
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        const Expanded(child: Divider()),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(l10n.orDivider),
+                        ),
+                        const Expanded(child: Divider()),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    // Same button for sign-in and sign-up: a new Google user
+                    // gets an account automatically, already confirmed.
+                    OutlinedButton.icon(
+                      onPressed: _busy ? null : _signInWithGoogle,
+                      icon: const Icon(Icons.account_circle_outlined),
+                      label: Text(l10n.continueWithGoogle),
+                    ),
+                  ],
                 ],
               ),
             ),

@@ -88,6 +88,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invalidCode => 'That code is wrong or has expired';
 
   @override
+  String get continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get orDivider => 'or';
+
+  @override
   String get switchToSignIn => 'Already have an account? Sign in';
 
   @override

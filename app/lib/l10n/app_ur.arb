@@ -28,6 +28,8 @@
   "@resendIn": {"placeholders": {"seconds": {"type": "int"}}},
   "codeSent": "نیا کوڈ بھیج دیا گیا ہے",
   "invalidCode": "یہ کوڈ غلط ہے یا اس کی میعاد ختم ہو گئی ہے",
+  "continueWithGoogle": "گوگل کے ساتھ جاری رکھیں",
+  "orDivider": "یا",
   "switchToSignIn": "پہلے سے اکاؤنٹ ہے؟ سائن ان کریں",
 
   "addBabyTitle": "اپنے بچے کو شامل کریں",

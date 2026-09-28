@@ -28,6 +28,8 @@
   "@resendIn": {"placeholders": {"seconds": {"type": "int"}}},
   "codeSent": "A new code has been sent",
   "invalidCode": "That code is wrong or has expired",
+  "continueWithGoogle": "Continue with Google",
+  "orDivider": "or",
   "switchToSignIn": "Already have an account? Sign in",
 
   "addBabyTitle": "Add your baby",

@@ -7,6 +7,10 @@ abstract final class Env {
   static const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
   static const supabasePublishableKey = String.fromEnvironment('SUPABASE_PUBLISHABLE_KEY');
 
+  /// Google OAuth client IDs (public, not secrets). Empty hides Google sign-in.
+  static const googleWebClientId = String.fromEnvironment('GOOGLE_WEB_CLIENT_ID');
+  static const googleIosClientId = String.fromEnvironment('GOOGLE_IOS_CLIENT_ID');
+
   static void assertConfigured() {
     if (supabaseUrl.isEmpty || supabasePublishableKey.isEmpty) {
       throw StateError(

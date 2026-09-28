@@ -89,6 +89,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get invalidCode => 'یہ کوڈ غلط ہے یا اس کی میعاد ختم ہو گئی ہے';
 
   @override
+  String get continueWithGoogle => 'گوگل کے ساتھ جاری رکھیں';
+
+  @override
+  String get orDivider => 'یا';
+
+  @override
   String get switchToSignIn => 'پہلے سے اکاؤنٹ ہے؟ سائن ان کریں';
 
   @override
@@ -326,6 +332,12 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get invalidCode => 'Yeh code ghalat hai ya expire ho gaya hai';
+
+  @override
+  String get continueWithGoogle => 'Google ke saath jaari rakhein';
+
+  @override
+  String get orDivider => 'ya';
 
   @override
   String get switchToSignIn => 'Pehle se account hai? Sign in karein';

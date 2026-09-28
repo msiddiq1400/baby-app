@@ -28,6 +28,8 @@
   "@resendIn": {"placeholders": {"seconds": {"type": "int"}}},
   "codeSent": "Naya code bhej diya gaya hai",
   "invalidCode": "Yeh code ghalat hai ya expire ho gaya hai",
+  "continueWithGoogle": "Google ke saath jaari rakhein",
+  "orDivider": "ya",
   "switchToSignIn": "Pehle se account hai? Sign in karein",
 
   "addBabyTitle": "Apne baby ko add karein",
