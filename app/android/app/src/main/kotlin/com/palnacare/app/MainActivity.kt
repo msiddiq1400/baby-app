@@ -1,4 +1,4 @@
-package services.toolbox.palna
+package com.palnacare.app
 
 import io.flutter.embedding.android.FlutterActivity
 

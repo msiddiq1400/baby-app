@@ -97,6 +97,10 @@ class Feed {
     this.endedAt,
     this.side,
     this.amountMl,
+    this.leftSeconds,
+    this.rightSeconds,
+    this.timerSide,
+    this.timerStartedAt,
   });
 
   final String id;
@@ -106,6 +110,39 @@ class Feed {
   final BreastSide? side;
   final int? amountMl;
 
+  /// Time on each side, when known (timer, or entered per side).
+  final int? leftSeconds;
+  final int? rightSeconds;
+
+  /// Set while a breastfeeding timer is going: the side it's on. Only
+  /// [BreastSide.left] or [BreastSide.right].
+  final BreastSide? timerSide;
+
+  /// When [timerSide] started running; null while the timer is paused.
+  final DateTime? timerStartedAt;
+
+  bool get timerActive => timerSide != null;
+  bool get timerPaused => timerActive && timerStartedAt == null;
+
+  /// Seconds on [s] at [now], including the side that's running.
+  int secondsOn(BreastSide s, DateTime now) {
+    final banked = (s == BreastSide.left ? leftSeconds : rightSeconds) ?? 0;
+    final running = timerSide == s && timerStartedAt != null ? now.difference(timerStartedAt!).inSeconds : 0;
+    return banked + (running > 0 ? running : 0);
+  }
+
+  /// Total feeding time, if known: both sides, or else start to end.
+  Duration? duration(DateTime now) {
+    if (timerActive || leftSeconds != null || rightSeconds != null) {
+      return Duration(seconds: secondsOn(BreastSide.left, now) + secondsOn(BreastSide.right, now));
+    }
+    final end = endedAt;
+    return end != null && end.isAfter(startedAt) ? end.difference(startedAt) : null;
+  }
+
+  /// The timer's per-side seconds after banking the running side at [now].
+  (int left, int right) bankedAt(DateTime now) => (secondsOn(BreastSide.left, now), secondsOn(BreastSide.right, now));
+
   factory Feed.fromJson(Map<String, dynamic> json) => Feed(
         id: json['id'] as String,
         type: FeedType.fromDb(json['type'] as String),
@@ -113,8 +150,20 @@ class Feed {
         endedAt: _localOrNull(json['ended_at']),
         side: json['side'] == null ? null : BreastSide.values.byName(json['side'] as String),
         amountMl: json['amount_ml'] as int?,
+        leftSeconds: json['left_seconds'] as int?,
+        rightSeconds: json['right_seconds'] as int?,
+        timerSide: json['timer_side'] == null ? null : BreastSide.values.byName(json['timer_side'] as String),
+        timerStartedAt: _localOrNull(json['timer_started_at']),
       );
 }
+
+/// The side a breastfeed counts as, from the time on each side.
+BreastSide? sideFromSeconds(int left, int right) => switch ((left > 0, right > 0)) {
+      (true, true) => BreastSide.both,
+      (true, false) => BreastSide.left,
+      (false, true) => BreastSide.right,
+      _ => null,
+    };
 
 class Diaper {
   const Diaper({required this.id, required this.occurredAt, required this.isWet, required this.isDirty});

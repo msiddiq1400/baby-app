@@ -1226,6 +1226,214 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get helpSources =>
       'یہ NHS اور عالمی ادارہ صحت کی ہدایات پر مبنی ہے۔ یہ عمومی معلومات ہیں، تشخیص نہیں؛ فکر ہو تو ڈاکٹر سے رابطہ کریں۔';
+
+  @override
+  String get accountSection => 'اکاؤنٹ';
+
+  @override
+  String get deleteAccount => 'میرا اکاؤنٹ حذف کریں';
+
+  @override
+  String get deleteAccountBody =>
+      'اس سے آپ کا لاگ اِن ہمیشہ کے لیے حذف ہو جائے گا۔ جن خاندانوں میں صرف آپ ہیں، ان کے بچے اور تمام اندراجات بھی حذف ہو جائیں گے۔ جن خاندانوں میں دوسرے لوگ بھی ہیں، ان کے پاس سب کچھ رہے گا، اور اگر آپ مالک ہیں تو اگلا فرد مالک بن جائے گا۔ یہ واپس نہیں ہو سکتا۔';
+
+  @override
+  String get deleteAccountTypeHint => 'تصدیق کے لیے DELETE لکھیں';
+
+  @override
+  String get deleteAccountButton => 'ہمیشہ کے لیے حذف کریں';
+
+  @override
+  String get deleteAccountFailed =>
+      'اکاؤنٹ حذف نہیں ہو سکا۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔';
+
+  @override
+  String get startFeedTimer => 'ٹائمر شروع کریں';
+
+  @override
+  String lastSide(String side) {
+    return 'پچھلی بار: $side طرف';
+  }
+
+  @override
+  String get orEnterMinutes => 'یا منٹ لکھیں';
+
+  @override
+  String get leftMinutes => 'بائیں (منٹ)';
+
+  @override
+  String get rightMinutes => 'دائیں (منٹ)';
+
+  @override
+  String get feedTimerAlreadyRunning =>
+      'دودھ پلانے کا ٹائمر پہلے سے چل رہا ہے۔ یہ آج والی اسکرین کے اوپر ہے۔';
+
+  @override
+  String get feedingNowTitle => 'ابھی دودھ پی رہا ہے';
+
+  @override
+  String get feedingNow => 'ابھی جاری ہے';
+
+  @override
+  String get feedTimerPaused => 'رکا ہوا';
+
+  @override
+  String get feedTimerHelp =>
+      'طرف بدلنے کے لیے اسے دبائیں۔ روکنے کے لیے چلتی طرف کو دبائیں۔';
+
+  @override
+  String get finishFeed => 'ختم کریں';
+
+  @override
+  String get discardButton => 'ضائع کریں';
+
+  @override
+  String get discardFeedConfirm =>
+      'یہ خوراک ضائع کریں؟ ٹائمر اور اس کا وقت حذف ہو جائے گا۔';
+
+  @override
+  String get asleepNap => 'جھپکی لے رہا ہے';
+
+  @override
+  String get asleepNight => 'رات کی نیند';
+
+  @override
+  String feedingNotificationTitle(String name) {
+    return '$name دودھ پی رہا ہے';
+  }
+
+  @override
+  String sleepNotificationTitle(String name) {
+    return '$name سو رہا ہے';
+  }
+
+  @override
+  String get reportsTitle => 'رپورٹیں';
+
+  @override
+  String get seeReports => 'رپورٹیں اور رجحانات';
+
+  @override
+  String periodDays(int count) {
+    return '$count دن';
+  }
+
+  @override
+  String get feedsPerDay => 'روزانہ خوراکیں';
+
+  @override
+  String get timeBetweenFeeds => 'خوراکوں کا عام وقفہ';
+
+  @override
+  String get nursingPerDay => 'روزانہ ماں کا دودھ';
+
+  @override
+  String get perBreastfeed => 'فی بار ماں کا دودھ';
+
+  @override
+  String get sideSplit => 'بائیں / دائیں';
+
+  @override
+  String get bottlePerDay => 'روزانہ بوتل کا دودھ';
+
+  @override
+  String get perBottle => 'فی بوتل';
+
+  @override
+  String get sleepPerDay => 'روزانہ نیند';
+
+  @override
+  String get nightSleepPerDay => 'رات کی نیند';
+
+  @override
+  String get napsPerDay => 'روزانہ جھپکیاں';
+
+  @override
+  String get napTimePerDay => 'روزانہ جھپکی کا وقت';
+
+  @override
+  String get longestSleep => 'سب سے لمبی نیند';
+
+  @override
+  String get awakeBetweenSleeps => 'نیندوں کے درمیان جاگنا';
+
+  @override
+  String get usualBedtime => 'سونے کا عام وقت';
+
+  @override
+  String get usualWakeUp => 'جاگنے کا عام وقت';
+
+  @override
+  String get wetPerDay => 'روزانہ گیلے';
+
+  @override
+  String get dirtyPerDay => 'روزانہ گندے';
+
+  @override
+  String hoursShort(int hours) {
+    return '$hours گ';
+  }
+
+  @override
+  String hoursRange(int from, int to) {
+    return '$from سے $to گھنٹے';
+  }
+
+  @override
+  String typicalRange(String range) {
+    return 'اس عمر میں عام: $range';
+  }
+
+  @override
+  String get newbornFeedsGuide =>
+      'ماں کا دودھ پینے والے نومولود عموماً دن میں 8 سے 12 بار دودھ پیتے ہیں۔';
+
+  @override
+  String get wetGuide =>
+      'پانچویں دن سے، دن میں 6 یا زیادہ گیلے ڈائپر کافی دودھ کی نشانی ہیں۔';
+
+  @override
+  String get dirtyGuide =>
+      'پہلے 6 ہفتوں میں ماں کا دودھ پینے والے زیادہ تر بچوں کے دن میں 2 یا زیادہ گندے ڈائپر ہوتے ہیں۔';
+
+  @override
+  String get reportNotEnough =>
+      'ابھی کافی اندراجات نہیں۔ اندراج کرتے رہیں، یہ حصہ بھر جائے گا۔';
+
+  @override
+  String get reportAveragesNote =>
+      'اوسط میں صرف وہ پورے دن شامل ہیں جن میں آپ نے یہ اندراج کیا؛ آج ابھی شامل نہیں۔';
+
+  @override
+  String get reportSources =>
+      'عام حدود: نیشنل سلیپ فاؤنڈیشن (4 ماہ سے کم)، امریکن اکیڈمی آف سلیپ میڈیسن (4 ماہ اور زیادہ)، این ایچ ایس (خوراک اور ڈائپر)۔ نیند کے چارٹ پر ہلکی پٹی عام حد ہے۔ ہر بچہ مختلف ہوتا ہے؛ فکر ہو تو ڈاکٹر سے بات کریں۔';
+
+  @override
+  String get journalTitle => 'روزنامچہ';
+
+  @override
+  String get pastDays => 'پچھلے دن';
+
+  @override
+  String get yesterday => 'کل';
+
+  @override
+  String get pickDate => 'تاریخ چنیں';
+
+  @override
+  String get olderDay => 'پچھلا دن';
+
+  @override
+  String get newerDay => 'اگلا دن';
+
+  @override
+  String get onThisDay => 'اس دن';
+
+  @override
+  String get pumpingEntry => 'دودھ نکالا';
+
+  @override
+  String get nothingOnDay => 'اس دن کچھ درج نہیں کیا گیا۔';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -2454,4 +2662,212 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   @override
   String get helpSources =>
       'Yeh NHS aur aalmi idara-e-sehat ki hidayat par mabni hai. Yeh umoomi maloomat hain, tashkhees nahi; fikr ho to doctor se rabta karein.';
+
+  @override
+  String get accountSection => 'Account';
+
+  @override
+  String get deleteAccount => 'Mera account delete karein';
+
+  @override
+  String get deleteAccountBody =>
+      'Is se aap ka login hamesha ke liye delete ho jayega. Jin families mein sirf aap hain, un ke bachay aur saari entries bhi delete ho jayengi. Jin families mein doosre log bhi hain, un ke paas sab kuch rahega, aur agar aap owner hain to agla member owner ban jayega. Yeh wapas nahi ho sakta.';
+
+  @override
+  String get deleteAccountTypeHint => 'Confirm karne ke liye DELETE likhein';
+
+  @override
+  String get deleteAccountButton => 'Hamesha ke liye delete karein';
+
+  @override
+  String get deleteAccountFailed =>
+      'Account delete nahi ho saka. Internet check kar ke dobara koshish karein.';
+
+  @override
+  String get startFeedTimer => 'Timer shuru karein';
+
+  @override
+  String lastSide(String side) {
+    return 'Pichli dafa: $side side';
+  }
+
+  @override
+  String get orEnterMinutes => 'Ya minute likhein';
+
+  @override
+  String get leftMinutes => 'Left (minute)';
+
+  @override
+  String get rightMinutes => 'Right (minute)';
+
+  @override
+  String get feedTimerAlreadyRunning =>
+      'Feed ka timer pehle se chal raha hai. Yeh Aaj wali screen ke upar hai.';
+
+  @override
+  String get feedingNowTitle => 'Abhi doodh pee raha hai';
+
+  @override
+  String get feedingNow => 'abhi jaari hai';
+
+  @override
+  String get feedTimerPaused => 'Ruka hua';
+
+  @override
+  String get feedTimerHelp =>
+      'Side badalne ke liye usay dabayein. Rokne ke liye chalti side ko dabayein.';
+
+  @override
+  String get finishFeed => 'Khatam karein';
+
+  @override
+  String get discardButton => 'Discard karein';
+
+  @override
+  String get discardFeedConfirm =>
+      'Yeh feed discard karein? Timer aur us ka waqt delete ho jayega.';
+
+  @override
+  String get asleepNap => 'Nap le raha hai';
+
+  @override
+  String get asleepNight => 'Raat ki neend';
+
+  @override
+  String feedingNotificationTitle(String name) {
+    return '$name doodh pee raha hai';
+  }
+
+  @override
+  String sleepNotificationTitle(String name) {
+    return '$name so raha hai';
+  }
+
+  @override
+  String get reportsTitle => 'Reports';
+
+  @override
+  String get seeReports => 'Reports aur trends';
+
+  @override
+  String periodDays(int count) {
+    return '$count din';
+  }
+
+  @override
+  String get feedsPerDay => 'Roz ki feeds';
+
+  @override
+  String get timeBetweenFeeds => 'Feeds ke darmiyan aam waqfa';
+
+  @override
+  String get nursingPerDay => 'Roz breastfeeding';
+
+  @override
+  String get perBreastfeed => 'Har breastfeed';
+
+  @override
+  String get sideSplit => 'Left / right';
+
+  @override
+  String get bottlePerDay => 'Roz bottle ka doodh';
+
+  @override
+  String get perBottle => 'Har bottle';
+
+  @override
+  String get sleepPerDay => 'Roz ki neend';
+
+  @override
+  String get nightSleepPerDay => 'Raat ki neend';
+
+  @override
+  String get napsPerDay => 'Roz ki naps';
+
+  @override
+  String get napTimePerDay => 'Roz nap ka waqt';
+
+  @override
+  String get longestSleep => 'Sab se lambi neend';
+
+  @override
+  String get awakeBetweenSleeps => 'Neendon ke darmiyan jaagna';
+
+  @override
+  String get usualBedtime => 'Sone ka aam waqt';
+
+  @override
+  String get usualWakeUp => 'Jaagne ka aam waqt';
+
+  @override
+  String get wetPerDay => 'Roz geelay';
+
+  @override
+  String get dirtyPerDay => 'Roz gande';
+
+  @override
+  String hoursShort(int hours) {
+    return '${hours}h';
+  }
+
+  @override
+  String hoursRange(int from, int to) {
+    return '$from se $to ghante';
+  }
+
+  @override
+  String typicalRange(String range) {
+    return 'Is umar mein aam: $range';
+  }
+
+  @override
+  String get newbornFeedsGuide =>
+      'Breastfeed karne wale naumolood aam taur par din mein 8 se 12 baar doodh peete hain.';
+
+  @override
+  String get wetGuide =>
+      'Paanchwein din se, din mein 6 ya zyada geelay diaper kaafi doodh ki nishani hain.';
+
+  @override
+  String get dirtyGuide =>
+      'Pehle 6 hafton mein breastfeed karne wale zyada tar bachon ke din mein 2 ya zyada gande diaper hote hain.';
+
+  @override
+  String get reportNotEnough =>
+      'Abhi kaafi entries nahi. Entries karte rahein, yeh hissa bhar jayega.';
+
+  @override
+  String get reportAveragesNote =>
+      'Average mein sirf woh poore din shamil hain jin mein aap ne yeh entry ki; aaj abhi shamil nahi.';
+
+  @override
+  String get reportSources =>
+      'Aam hudood: National Sleep Foundation (4 maah se kam), American Academy of Sleep Medicine (4 maah aur zyada), NHS (feeds aur diapers). Neend ke chart par halki patti aam hadd hai. Har bacha mukhtalif hota hai; fikr ho to doctor se baat karein.';
+
+  @override
+  String get journalTitle => 'Journal';
+
+  @override
+  String get pastDays => 'Pichle din';
+
+  @override
+  String get yesterday => 'Kal';
+
+  @override
+  String get pickDate => 'Tareekh chunein';
+
+  @override
+  String get olderDay => 'Pichla din';
+
+  @override
+  String get newerDay => 'Agla din';
+
+  @override
+  String get onThisDay => 'Is din';
+
+  @override
+  String get pumpingEntry => 'Pumping';
+
+  @override
+  String get nothingOnDay => 'Is din kuch darj nahi kiya gaya.';
 }

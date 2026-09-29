@@ -6,6 +6,7 @@
 import 'package:baby_app/data/baby_repository.dart';
 import 'package:baby_app/data/family_repository.dart';
 import 'package:baby_app/data/growth_repository.dart';
+import 'package:baby_app/data/journal_repository.dart';
 import 'package:baby_app/data/medication_repository.dart';
 import 'package:baby_app/data/milk_repository.dart';
 import 'package:baby_app/data/models.dart';
@@ -19,10 +20,14 @@ import 'package:baby_app/features/growth/growth_screen.dart';
 import 'package:baby_app/features/health/health_screen.dart';
 import 'package:baby_app/features/home/dashboard.dart';
 import 'package:baby_app/features/milk/milk_screen.dart';
+import 'package:baby_app/features/journal/journal_screen.dart';
+import 'package:baby_app/features/reports/reports_screen.dart';
 import 'package:baby_app/features/settings/help_screen.dart';
 import 'package:baby_app/features/settings/settings_screen.dart';
+import 'package:baby_app/l10n/app_localizations.dart';
 import 'package:baby_app/features/solids/solids_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -97,6 +102,10 @@ final todayLog = TodayLog(
   ],
 );
 
+/// Set by a test to show a running feed timer or sleep on the Today screen.
+Feed? runningFeed;
+Sleep? runningSleep;
+
 final medication = Medication(
   id: 'm1',
   name: 'Paracetamol syrup',
@@ -113,7 +122,47 @@ final overrides = [
   settingProvider.overrideWith((ref, key) => Stream.value(null)),
   babiesProvider.overrideWith((ref) => Stream.value([baby])),
   currentBabyProvider.overrideWith((ref) => Stream.value(baby)),
-  todayLogProvider.overrideWith((ref, id) => Stream.value(todayLog)),
+  todayLogProvider.overrideWith(
+    (ref, id) => Stream.value(
+      runningSleep == null
+          ? todayLog
+          : TodayLog(
+              dayStart: todayLog.dayStart,
+              feeds: todayLog.feeds,
+              diapers: todayLog.diapers,
+              sleeps: [runningSleep!, ...todayLog.sleeps],
+            ),
+    ),
+  ),
+  feedTimerProvider.overrideWith((ref, id) => Stream.value(runningFeed)),
+  journalDayProvider.overrideWith(
+    (ref, key) => Stream.value(
+      JournalDay(
+        day: key.day,
+        log: TodayLog(dayStart: key.day, feeds: feeds.take(6).toList(), diapers: todayLog.diapers, sleeps: sleeps.take(3).toList()),
+        pumping: [PumpingSession(id: 'jp', startedAt: key.day.add(const Duration(hours: 9)), side: BreastSide.both, amountMl: 90)],
+        doses: [
+          (
+            dose: MedicationDose(id: 'jd', medicationId: 'm1', givenAt: key.day.add(const Duration(hours: 8)), skipped: false),
+            medicine: 'Paracetamol syrup',
+          ),
+        ],
+        symptoms: [SymptomLog(id: 'js', symptom: 'fever', occurredAt: key.day.add(const Duration(hours: 10)), temperatureC: 38.1, severity: 2)],
+        foodTries: [FoodTry(id: 'jf', foodId: 'egg', triedOn: key.day, reaction: 'mild', opinion: 'liked')],
+        growth: [GrowthMeasurement(id: 'jg', measuredOn: key.day, weightG: 7100, lengthMm: 655, headMm: 425)],
+        vaccinations: [Vaccination(id: 'jv', vaccineCode: 'BCG', givenOn: key.day)],
+        milestones: [MilestoneCheck(id: 'jm', milestoneId: '6m-laughs', achievedOn: key.day)],
+      ),
+    ),
+  ),
+  reportFeedsProvider.overrideWith((ref, p) => Stream.value(feeds)),
+  reportSleepsProvider.overrideWith((ref, p) => Stream.value(sleeps)),
+  reportDiapersProvider.overrideWith(
+    (ref, p) => Stream.value([
+      for (var d = 0; d < 7; d++)
+        for (var h = 0; h < 6; h++) Diaper(id: 'r$d$h', occurredAt: ago(days: d, hours: h * 3), isWet: true, isDirty: h == 2),
+    ]),
+  ),
   recentFeedsProvider.overrideWith((ref, id) => Stream.value(feeds)),
   recentSleepsProvider.overrideWith((ref, id) => Stream.value(sleeps)),
   vaccineScheduleProvider.overrideWith(
@@ -294,6 +343,9 @@ void main() {
     await initializeDateFormatting();
     await loadAppFonts();
   });
+  // A cached asset load from an earlier test belongs to that test's fake
+  // clock and never completes in the next one.
+  setUp(rootBundle.clear);
 
   final screens = <String, Widget Function()>{
     'Today': () => Dashboard(baby: baby),
@@ -303,6 +355,8 @@ void main() {
     'Health': () => HealthScreen(baby: baby),
     'Settings': () => const SettingsScreen(),
     'Help': () => const HelpScreen(),
+    'Reports': () => ReportsScreen(baby: baby),
+    'Journal': () => JournalScreen(baby: baby),
     'Edit baby': () => AddBabyScreen(existing: baby),
   };
 
@@ -346,6 +400,60 @@ void main() {
     }
     expect(tester.takeException(), isNull);
     expect(find.text('By 6 months'), findsOneWidget);
+  });
+
+  for (final locale in const [
+    Locale('en'),
+    Locale('ur'),
+    Locale.fromSubtags(languageCode: 'ur', scriptCode: 'Latn'),
+  ]) {
+    for (final paused in [false, true]) {
+      testWidgets('Today with a running feed timer and sleep ($locale, paused: $paused)', (tester) async {
+        runningFeed = Feed(
+          id: 'timer',
+          type: FeedType.breast,
+          startedAt: ago(minutes: 20),
+          leftSeconds: 480,
+          rightSeconds: 0,
+          timerSide: BreastSide.right,
+          timerStartedAt: paused ? null : ago(minutes: 5),
+        );
+        runningSleep = Sleep(id: 'zz', kind: SleepKind.nap, startedAt: ago(minutes: 40));
+        addTearDown(() => runningFeed = runningSleep = null);
+
+        await pumpScreen(tester, Dashboard(baby: baby), locale);
+        expect(tester.takeException(), isNull);
+        final l10n = lookupAppLocalizations(locale);
+        expect(find.text(paused ? l10n.feedTimerPaused : l10n.feedingNowTitle), findsOneWidget);
+        expect(find.text('08:00'), findsWidgets); // left side, banked (also the total when paused)
+        expect(find.text(l10n.finishFeed), findsOneWidget);
+        expect(find.text(l10n.asleepNap), findsOneWidget);
+      });
+    }
+  }
+
+  testWidgets('Journal shows every kind of entry and swipes to the day before', (tester) async {
+    await pumpScreen(tester, JournalScreen(baby: baby), const Locale('en'));
+    expect(tester.takeException(), isNull);
+    expect(find.text('Today'), findsOneWidget);
+    expect(find.text('On this day'), findsOneWidget);
+    // The list is long and built lazily; scroll to each entry (their order
+    // depends on the time of day the test runs).
+    final list = find.descendant(of: find.byType(ListView), matching: find.byType(Scrollable)).first;
+    for (final text in ['Weight 7.10 kg', 'Pumping · Both · 90 ml', 'Paracetamol syrup · Given']) {
+      await tester.scrollUntilVisible(find.textContaining(text), 200, scrollable: list);
+      expect(find.textContaining(text), findsOneWidget);
+    }
+    await tester.drag(list, const Offset(0, 3000));
+    await tester.pump();
+
+    await tester.fling(find.byType(PageView), const Offset(400, 0), 1000);
+    for (var i = 0; i < 10; i++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 20)));
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    expect(find.text('Yesterday'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('Today shows the at-a-glance insights', (tester) async {

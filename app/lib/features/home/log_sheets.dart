@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/numbers.dart';
+import '../../core/reminders.dart';
 import '../../data/models.dart';
 import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
@@ -35,9 +36,10 @@ class _FeedSheet extends ConsumerStatefulWidget {
 class _FeedSheetState extends ConsumerState<_FeedSheet> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _amount;
-  late final TextEditingController _minutes;
+  late final TextEditingController _left;
+  late final TextEditingController _right;
+  late final (int?, int?) _initialSeconds;
   late FeedType _type;
-  late BreastSide _side;
   late DateTime _time;
   var _busy = false;
 
@@ -46,18 +48,29 @@ class _FeedSheetState extends ConsumerState<_FeedSheet> {
     super.initState();
     final feed = widget.existing;
     _type = feed?.type ?? FeedType.breast;
-    _side = feed?.side ?? BreastSide.left;
     _time = feed?.endedAt ?? feed?.startedAt ?? DateTime.now();
     _amount = TextEditingController(text: feed?.amountMl?.toString() ?? '');
-    final minutes = feed?.endedAt?.difference(feed.startedAt).inMinutes;
-    _minutes = TextEditingController(text: minutes == null || minutes == 0 ? '' : '$minutes');
+    _initialSeconds = feed == null ? (null, null) : secondsPerSide(feed);
+    String minutes(int? seconds) => seconds == null || seconds == 0 ? '' : '${(seconds / 60).round()}';
+    _left = TextEditingController(text: minutes(_initialSeconds.$1));
+    _right = TextEditingController(text: minutes(_initialSeconds.$2));
   }
 
   @override
   void dispose() {
     _amount.dispose();
-    _minutes.dispose();
+    _left.dispose();
+    _right.dispose();
     super.dispose();
+  }
+
+  /// Seconds from a minutes field; an unchanged field keeps the exact
+  /// seconds a timer recorded.
+  int? _seconds(TextEditingController field, int? initial) {
+    final minutes = parseLocalizedInt(field.text);
+    if (minutes == null) return null;
+    if (initial != null && (initial / 60).round() == minutes) return initial;
+    return minutes * 60;
   }
 
   Future<void> _submit() async {
@@ -70,12 +83,30 @@ class _FeedSheetState extends ConsumerState<_FeedSheet> {
             existingId: widget.existing?.id,
             type: _type,
             at: _time,
-            side: isBreast ? _side : null,
             amountMl: isBreast ? null : parseLocalizedInt(_amount.text),
-            minutes: isBreast ? parseLocalizedInt(_minutes.text) : null,
+            leftSeconds: isBreast ? _seconds(_left, _initialSeconds.$1) : null,
+            rightSeconds: isBreast ? _seconds(_right, _initialSeconds.$2) : null,
           );
     });
     if (mounted) setState(() => _busy = false);
+  }
+
+  Future<void> _startTimer(BreastSide side) async {
+    setState(() => _busy = true);
+    await runAndClose(
+      context,
+      () => ref.read(trackingRepositoryProvider).startFeedTimer(widget.baby, side, at: DateTime.now()),
+      onDone: () {},
+    );
+    // The running timer is shown as a notification (Android).
+    await Reminders.requestPermission();
+  }
+
+  String? _validMinutes(String? v) {
+    final l10n = AppLocalizations.of(context);
+    if ((v ?? '').trim().isEmpty) return null;
+    final m = parseLocalizedInt(v!);
+    return m == null || m < 1 || m > 180 ? l10n.invalidMinutes : null;
   }
 
   @override
@@ -103,26 +134,32 @@ class _FeedSheetState extends ConsumerState<_FeedSheet> {
           ),
           const SizedBox(height: 16),
           if (isBreast) ...[
-            SegmentedButton<BreastSide>(
-              segments: [
-                ButtonSegment(value: BreastSide.left, label: Text(l10n.sideLeft)),
-                ButtonSegment(value: BreastSide.right, label: Text(l10n.sideRight)),
-                ButtonSegment(value: BreastSide.both, label: Text(l10n.sideBoth)),
+            if (existing == null) ...[
+              _TimerStart(baby: widget.baby, enabled: !_busy, onStart: _startTimer),
+              const SizedBox(height: 20),
+              Text(l10n.orEnterMinutes, style: Theme.of(context).textTheme.titleSmall),
+            ],
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: _left,
+                    decoration: InputDecoration(labelText: l10n.leftMinutes),
+                    keyboardType: TextInputType.number,
+                    validator: _validMinutes,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: TextFormField(
+                    controller: _right,
+                    decoration: InputDecoration(labelText: l10n.rightMinutes),
+                    keyboardType: TextInputType.number,
+                    validator: _validMinutes,
+                  ),
+                ),
               ],
-              selected: {_side},
-              showSelectedIcon: false,
-              onSelectionChanged: (s) => setState(() => _side = s.first),
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: _minutes,
-              decoration: InputDecoration(labelText: l10n.feedMinutes),
-              keyboardType: TextInputType.number,
-              validator: (v) {
-                if ((v ?? '').trim().isEmpty) return null;
-                final m = parseLocalizedInt(v!);
-                return m == null || m < 1 || m > 180 ? l10n.invalidMinutes : null;
-              },
             ),
           ] else
             TextFormField(
@@ -153,6 +190,83 @@ class _FeedSheetState extends ConsumerState<_FeedSheet> {
     );
   }
 }
+
+/// Time per side for an existing feed. Feeds logged before per-side times
+/// only have a side and a duration; "both" is split evenly.
+@visibleForTesting
+(int?, int?) secondsPerSide(Feed feed) {
+  if (feed.leftSeconds != null || feed.rightSeconds != null) return (feed.leftSeconds, feed.rightSeconds);
+  final total = feed.duration(DateTime.now())?.inSeconds;
+  if (total == null) return (null, null);
+  return switch (feed.side) {
+    BreastSide.left => (total, null),
+    BreastSide.right => (null, total),
+    BreastSide.both => ((total + 1) ~/ 2, total ~/ 2),
+    null => (null, null),
+  };
+}
+
+/// "Start a timer" with a button per side. The side after the last feed's
+/// side is highlighted, since mothers usually alternate.
+class _TimerStart extends ConsumerWidget {
+  const _TimerStart({required this.baby, required this.enabled, required this.onStart});
+
+  final Baby baby;
+  final bool enabled;
+  final void Function(BreastSide side) onStart;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    if (ref.watch(feedTimerProvider(baby.id)).value != null) {
+      return Card(
+        child: ListTile(leading: const Icon(Icons.timer_outlined), title: Text(l10n.feedTimerAlreadyRunning)),
+      );
+    }
+    final feeds = ref.watch(recentFeedsProvider(baby.id)).value ?? const <Feed>[];
+    final last = feeds.reversed.where((f) => f.type == FeedType.breast && f.side != null).firstOrNull?.side;
+    final suggested = switch (last) {
+      BreastSide.left => BreastSide.right,
+      BreastSide.right => BreastSide.left,
+      _ => null,
+    };
+
+    Widget button(BreastSide side, String label) {
+      final onPressed = enabled ? () => onStart(side) : null;
+      const icon = Icon(Icons.play_arrow_rounded);
+      final text = Padding(padding: const EdgeInsets.symmetric(vertical: 14), child: Text(label));
+      return Expanded(
+        child: suggested == null || side == suggested
+            ? FilledButton.icon(onPressed: onPressed, icon: icon, label: text)
+            : FilledButton.tonalIcon(onPressed: onPressed, icon: icon, label: text),
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(l10n.startFeedTimer, style: Theme.of(context).textTheme.titleSmall),
+        if (last != null) Text(l10n.lastSide(sideName(l10n, last)), style: Theme.of(context).textTheme.bodySmall),
+        const SizedBox(height: 8),
+        // Left is on the left in every language: it's the mother's side.
+        Row(
+          textDirection: TextDirection.ltr,
+          children: [
+            button(BreastSide.left, l10n.sideLeft),
+            const SizedBox(width: 12),
+            button(BreastSide.right, l10n.sideRight),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+String sideName(AppLocalizations l10n, BreastSide side) => switch (side) {
+      BreastSide.left => l10n.sideLeft,
+      BreastSide.right => l10n.sideRight,
+      BreastSide.both => l10n.sideBoth,
+    };
 
 class _DiaperSheet extends ConsumerStatefulWidget {
   const _DiaperSheet({required this.baby, this.existing});

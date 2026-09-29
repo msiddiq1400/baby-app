@@ -103,6 +103,48 @@ abstract final class Reminders {
   }
 }
 
+/// A running feeding or sleep timer, shown as an ongoing notification with a
+/// live clock so it's visible with the app closed. Android only: iPhones
+/// need a Live Activity for this (todo 37).
+abstract final class TimerNotifications {
+  static bool get _supported => !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
+
+  /// Shows or updates the timer [key]. With [runningSince] the clock counts
+  /// up from then; without it (paused) only [body] is shown.
+  static Future<void> show(String key, {required String title, required String body, DateTime? runningSince}) async {
+    if (!_supported) return;
+    await Reminders._ensureReady();
+    await Reminders._plugin.show(
+      id: notificationId('timer:$key'),
+      title: title,
+      body: body,
+      payload: 'timer:$key',
+      notificationDetails: NotificationDetails(
+        android: AndroidNotificationDetails(
+          'timers',
+          'Timers',
+          channelDescription: 'Feeding and sleep timers that are running',
+          importance: Importance.low,
+          priority: Priority.low,
+          ongoing: true,
+          autoCancel: false,
+          onlyAlertOnce: true,
+          silent: true,
+          showWhen: runningSince != null,
+          usesChronometer: runningSince != null,
+          when: runningSince?.millisecondsSinceEpoch,
+        ),
+      ),
+    );
+  }
+
+  static Future<void> cancel(String key) async {
+    if (!_supported) return;
+    await Reminders._ensureReady();
+    await Reminders._plugin.cancel(id: notificationId('timer:$key'));
+  }
+}
+
 /// Stable 31-bit id from a string (FNV-1a), so the same reminder always gets
 /// the same notification id across app restarts.
 @visibleForTesting

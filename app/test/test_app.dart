@@ -7,8 +7,8 @@ import 'dart:io';
 import 'package:baby_app/app/theme.dart';
 import 'package:baby_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:baby_app/app/localization_delegates.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> loadAppFonts() async {
   const families = {
@@ -43,14 +43,10 @@ Future<void> loadAppFonts() async {
 
 /// MaterialApp set up like the real app (theme per language, Roman Urdu LTR).
 Widget testApp({required Locale locale, required Widget home}) => MaterialApp(
+  debugShowCheckedModeBanner: false,
   locale: locale,
   theme: buildTheme(const Locale('en')),
-  localizationsDelegates: const [
-    AppLocalizations.delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ],
+  localizationsDelegates: appLocalizationsDelegates,
   supportedLocales: AppLocalizations.supportedLocales,
   builder: (context, child) {
     final l = Localizations.localeOf(context);

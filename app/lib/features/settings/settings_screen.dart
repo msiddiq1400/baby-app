@@ -8,6 +8,7 @@ import '../../data/family_repository.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
 import '../baby/add_baby_screen.dart';
+import 'delete_account_dialog.dart';
 import 'join_family_dialog.dart';
 
 /// Babies, family members and invites.
@@ -57,6 +58,13 @@ class SettingsScreen extends ConsumerWidget {
             leading: const Icon(Icons.group_add_outlined),
             title: Text(l10n.joinFamily),
             onTap: () => showJoinFamilyDialog(context),
+          ),
+          const Divider(height: 32),
+          _Header(l10n.accountSection),
+          ListTile(
+            leading: Icon(Icons.delete_forever_outlined, color: theme.colorScheme.error),
+            title: Text(l10n.deleteAccount, style: TextStyle(color: theme.colorScheme.error)),
+            onTap: () => showDeleteAccountDialog(context),
           ),
         ],
       ),

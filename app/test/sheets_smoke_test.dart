@@ -12,6 +12,7 @@ import 'package:baby_app/features/health/symptom_sheet.dart';
 import 'package:baby_app/features/health/vaccination_sheet.dart';
 import 'package:baby_app/features/home/log_sheets.dart';
 import 'package:baby_app/features/milk/milk_sheets.dart';
+import 'package:baby_app/features/settings/delete_account_dialog.dart';
 import 'package:baby_app/features/solids/food_sheets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -111,5 +112,47 @@ void main() {
         expect(find.byType(BottomSheet), findsOneWidget);
       });
     }
+  }
+
+  for (final locale in const [
+    Locale('en'),
+    Locale('ur'),
+    Locale.fromSubtags(languageCode: 'ur', scriptCode: 'Latn'),
+  ]) {
+    testWidgets('delete account needs DELETE typed ($locale)', (tester) async {
+      tester.view.physicalSize = const Size(1080, 2316);
+      tester.view.devicePixelRatio = 2.75;
+      addTearDown(tester.view.reset);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: overrides,
+          child: testApp(
+            locale: locale,
+            home: Scaffold(
+              body: Builder(
+                builder: (context) => TextButton(
+                  onPressed: () => showDeleteAccountDialog(context),
+                  child: const Text('open'),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+
+      FilledButton button() =>
+          tester.widget<FilledButton>(find.byType(FilledButton));
+      expect(button().onPressed, isNull);
+      await tester.enterText(find.byType(TextField), 'delet');
+      await tester.pump();
+      expect(button().onPressed, isNull);
+      await tester.enterText(find.byType(TextField), 'delete');
+      await tester.pump();
+      expect(button().onPressed, isNotNull);
+    });
   }
 }

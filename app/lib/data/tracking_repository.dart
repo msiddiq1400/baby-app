@@ -12,7 +12,8 @@ class TrackingRepository {
 
   final PowerSyncDatabase _db;
 
-  static const _feedColumns = 'id, type, side, started_at, ended_at, amount_ml';
+  static const _feedColumns =
+      'id, type, side, started_at, ended_at, amount_ml, left_seconds, right_seconds, timer_side, timer_started_at';
   static const _diaperColumns = 'id, occurred_at, is_wet, is_dirty';
 
   Future<TodayLog> today(String babyId) async {
@@ -66,6 +67,15 @@ class TrackingRepository {
       )
       .map((rows) => rows.map(Sleep.fromJson).toList());
 
+  /// Diapers since [from], oldest first, kept live (for reports).
+  Stream<List<Diaper>> watchDiapersSince(String babyId, DateTime from) => _db
+      .watch(
+        'SELECT $_diaperColumns FROM diapers WHERE baby_id = ? AND deleted_at IS NULL '
+        'AND julianday(occurred_at) >= julianday(?) ORDER BY julianday(occurred_at)',
+        parameters: [babyId, utcTimestamp(from)],
+      )
+      .map((rows) => rows.map(Diaper.fromJson).toList());
+
   /// Feeds and diapers since [from], e.g. for the doctor summary.
   Future<(List<Feed>, List<Diaper>)> feedsAndDiapersSince(String babyId, DateTime from) async {
     final since = utcTimestamp(from);
@@ -82,24 +92,86 @@ class TrackingRepository {
     return (feeds.map(Feed.fromJson).toList(), diapers.map(Diaper.fromJson).toList());
   }
 
-  /// Adds a feed, or updates [existingId] with the same fields.
+  /// Adds a feed, or updates [existingId] with the same fields. Breastfeeds
+  /// take the time on each side; bottles take [amountMl].
   Future<void> saveFeed(
     Baby baby, {
     String? existingId,
     required FeedType type,
     required DateTime at,
-    BreastSide? side,
     int? amountMl,
-    int? minutes,
+    int? leftSeconds,
+    int? rightSeconds,
   }) {
+    final total = (leftSeconds ?? 0) + (rightSeconds ?? 0);
     // "at" is when the feed ended; with a duration we work back to the start.
-    final startedAt = minutes == null ? at : at.subtract(Duration(minutes: minutes));
+    final startedAt = at.subtract(Duration(seconds: total));
+    final breast = type == FeedType.breast;
     return _save('feeds', baby, existingId, {
       'type': type.dbValue,
-      'side': side?.name,
-      'amount_ml': amountMl,
+      'side': breast ? sideFromSeconds(leftSeconds ?? 0, rightSeconds ?? 0)?.name : null,
+      'amount_ml': breast ? null : amountMl,
+      'left_seconds': breast ? leftSeconds : null,
+      'right_seconds': breast ? rightSeconds : null,
       'started_at': utcTimestamp(startedAt),
-      'ended_at': minutes == null ? null : utcTimestamp(at),
+      'ended_at': total == 0 ? null : utcTimestamp(at),
+      // Saving from the form always ends a timer.
+      'timer_side': null,
+      'timer_started_at': null,
+    });
+  }
+
+  /// The breastfeeding timer that is going for [babyId] (running or paused),
+  /// if any. Kept live, so a timer started on another phone shows up too.
+  Stream<Feed?> watchFeedTimer(String babyId) => _db
+      .watch(
+        'SELECT $_feedColumns FROM feeds WHERE baby_id = ? AND deleted_at IS NULL '
+        'AND timer_side IS NOT NULL ORDER BY julianday(started_at) DESC LIMIT 1',
+        parameters: [babyId],
+      )
+      .map((rows) => rows.isEmpty ? null : Feed.fromJson(rows.first));
+
+  /// Starts a breastfeed with the timer running on [side].
+  Future<void> startFeedTimer(Baby baby, BreastSide side, {required DateTime at}) => insertRow(_db, 'feeds', {
+        'family_id': baby.familyId,
+        'baby_id': baby.id,
+        'type': FeedType.breast.dbValue,
+        'started_at': utcTimestamp(at),
+        'left_seconds': 0,
+        'right_seconds': 0,
+        'timer_side': side.name,
+        'timer_started_at': utcTimestamp(at),
+      });
+
+  /// Moves the timer to [side] (running), banking the time on the other side.
+  Future<void> switchFeedSide(Feed feed, BreastSide side, {required DateTime at}) {
+    final (left, right) = feed.bankedAt(at);
+    return updateRow(_db, 'feeds', feed.id, {
+      'left_seconds': left,
+      'right_seconds': right,
+      'timer_side': side.name,
+      'timer_started_at': utcTimestamp(at),
+    });
+  }
+
+  Future<void> pauseFeedTimer(Feed feed, {required DateTime at}) {
+    final (left, right) = feed.bankedAt(at);
+    return updateRow(_db, 'feeds', feed.id, {'left_seconds': left, 'right_seconds': right, 'timer_started_at': null});
+  }
+
+  Future<void> resumeFeedTimer(Feed feed, {required DateTime at}) =>
+      updateRow(_db, 'feeds', feed.id, {'timer_started_at': utcTimestamp(at)});
+
+  /// Stops the timer and saves the feed as finished at [at].
+  Future<void> finishFeedTimer(Feed feed, {required DateTime at}) {
+    final (left, right) = feed.bankedAt(at);
+    return updateRow(_db, 'feeds', feed.id, {
+      'left_seconds': left,
+      'right_seconds': right,
+      'side': sideFromSeconds(left, right)?.name,
+      'ended_at': utcTimestamp(at),
+      'timer_side': null,
+      'timer_started_at': null,
     });
   }
 
@@ -154,6 +226,11 @@ final todayLogProvider = StreamProvider.family<TodayLog, String>(
   (ref, babyId) => ref.watch(trackingRepositoryProvider).watchToday(babyId),
 );
 
+/// The breastfeeding timer that's going, if any.
+final feedTimerProvider = StreamProvider.family<Feed?, String>(
+  (ref, babyId) => ref.watch(trackingRepositoryProvider).watchFeedTimer(babyId),
+);
+
 /// Last 3 days of feeds.
 final recentFeedsProvider = StreamProvider.family<List<Feed>, String>((ref, babyId) {
   final now = DateTime.now();
@@ -165,3 +242,24 @@ final recentSleepsProvider = StreamProvider.family<List<Sleep>, String>((ref, ba
   final now = DateTime.now();
   return ref.watch(trackingRepositoryProvider).watchSleepsSince(babyId, DateTime(now.year, now.month, now.day - 8));
 });
+
+/// A report period: the last [days] days for [babyId].
+typedef ReportPeriod = ({String babyId, int days});
+
+DateTime _periodStart(int days) {
+  final now = DateTime.now();
+  // One extra day: a sleep crossing into the first day, and the first gap.
+  return DateTime(now.year, now.month, now.day - days);
+}
+
+final reportFeedsProvider = StreamProvider.family<List<Feed>, ReportPeriod>(
+  (ref, p) => ref.watch(trackingRepositoryProvider).watchFeedsSince(p.babyId, _periodStart(p.days)),
+);
+
+final reportSleepsProvider = StreamProvider.family<List<Sleep>, ReportPeriod>(
+  (ref, p) => ref.watch(trackingRepositoryProvider).watchSleepsSince(p.babyId, _periodStart(p.days)),
+);
+
+final reportDiapersProvider = StreamProvider.family<List<Diaper>, ReportPeriod>(
+  (ref, p) => ref.watch(trackingRepositoryProvider).watchDiapersSince(p.babyId, _periodStart(p.days)),
+);

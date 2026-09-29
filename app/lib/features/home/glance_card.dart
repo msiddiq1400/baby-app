@@ -11,6 +11,7 @@ import '../../data/vaccine_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../health/medicine_plan.dart';
 import '../health/vaccine_plan.dart';
+import '../reports/reports_screen.dart';
 import 'insights.dart';
 
 /// "At a glance": hunger guide, sleep pattern, awake time, what's due in
@@ -121,6 +122,15 @@ class GlanceCard extends ConsumerWidget {
                 trailing: onTap == null ? null : const Icon(Icons.chevron_right),
                 onTap: onTap,
               ),
+            const Divider(indent: 16, endIndent: 16),
+            ListTile(
+              dense: true,
+              leading: Icon(Icons.insights_outlined, color: theme.colorScheme.primary),
+              title: Text(l10n.seeReports, style: TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.w700)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context, rootNavigator: true)
+                  .push(MaterialPageRoute<void>(builder: (_) => ReportsScreen(baby: baby))),
+            ),
           ],
         ),
       ),

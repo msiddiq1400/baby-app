@@ -36,20 +36,30 @@ BABY APP: THINGS ONLY YOU CAN DO
         listing "Palna: Mother & Baby Care"). Done in the app: the name under
         the icon (Android + iOS), in-app title, invite message, doctor
         summary footer, sign-up email template.
-[x] 9b. App id: "services.toolbox.palna" (your domain toolbox.services,
-        reversed, which is the standard format). Permanent after the first
-        store upload. Checked: no app named Palna in the App Store (US, PK,
-        UK, IN) or on Google Play. ("Lori" was dropped: Google Play already
-        has "Lori: Baby Diary & Rituals"; "Cradle" is used by 15+ baby apps.)
-[ ] 9d. Google Cloud > Google Auth Platform > Clients > Create client:
-        Android, package "services.toolbox.palna", SHA-1
-        C1:E4:48:3F:79:2C:0B:DA:BA:07:AD:81:2F:C1:49:31:7E:26:3E:AD
-        (needed for Google sign-in with the new app id). Then delete the old
-        Android clients for app.babyapp.baby_app / services.toolbox.lori.
+[x] 9b. App id: "com.palnacare.app" (changed 30 Sep from
+        services.toolbox.palna to match the palnacare.com domain). Permanent
+        after the first store upload. Checked: no app named Palna in the App
+        Store (US, PK, UK, IN) or on Google Play.
+[x] 9d. Google sign-in works with the new app id (30 Sep). Clients kept:
+        "Palna Android Debug" (com.palnacare.app, debug SHA-1) and
+        "Supabase" (web client: the app and Supabase both use its id; never
+        delete it). The old "Android debug" client can be deleted.
 [ ] 9c. Update the name where Claude can't:
         - [x] Supabase "Confirm signup" template and SMTP sender "Palna"
-        - [ ] Google Auth Platform > Branding: App name "Palna"
-          (shown when choosing a Google account)
+        - [ ] Google Auth Platform > Branding (shown when choosing a Google
+          account; also needed to publish, item 19):
+            App name: Palna
+            User support email: hello@palnacare.com (after 17a receiving)
+            App logo: d:\baby-app\app\assets\icon\icon.png
+            Home page: https://palnacare.com
+            Privacy policy: https://palnacare.com/privacy
+            Authorized domains: add palnacare.com
+        - [ ] Supabase > Authentication > URL Configuration > Site URL:
+          https://palnacare.com (it may still say localhost; it's where
+          email links would land)
+        - [ ] Optional, cosmetic (nobody else sees these): rename the
+          Supabase project "baby-app", the Google Cloud project "Baby App"
+          and the PowerSync instance to Palna. Don't change their ids/URLs.
 [x] 10. App icon: navy moon-cradle (a palna on rockers, sleeping baby,
         stars), plus the "modern classic" theme (navy / sand / rose on
         cream; Lora headings, Nunito text, Nastaliq for Urdu). Source:
@@ -65,8 +75,8 @@ BABY APP: THINGS ONLY YOU CAN DO
         existing "Baby App" Google Cloud project. Needed later for:
         - push notifications across phones (e.g. "Dad logged a feed")
         - Crashlytics crash reports
-        Then add an Android app (package app.babyapp.baby_app) and an iOS
-        app, download google-services.json + GoogleService-Info.plist,
+        Then add an Android app (package com.palnacare.app) and an
+        iOS app (bundle id com.palnacare.app), download google-services.json + GoogleService-Info.plist,
         and give them to Claude.
         NOTE: today's reminders (vaccines, medicines, milk) are local
         notifications and do NOT need Firebase.
@@ -91,7 +101,12 @@ BABY APP: THINGS ONLY YOU CAN DO
         Registration > Transfer Domains. Adds 1 year at cost (~$10.44);
         years already paid carry over. Same for toolbox.services if
         Cloudflare supports .services.
-[ ] 17c. Privacy-policy and delete-account pages at palnacare.com (item 25).
+[x] 17c. Website live at https://palnacare.com (30 Sep), hosted as a
+        Cloudflare Worker with static assets ("late-butterfly-bc9d"; can be
+        renamed to "palna" in its Settings). To update the site: open it in
+        Workers & Pages > New deployment > drag in d:\baby-app\website.
+        [ ] www.palnacare.com doesn't resolve yet: add it as a second custom
+            domain on the same Worker.
 [ ] 18. Supabase: upgrade the org to Pro ($25/mo) before launch (daily
         backups, no pausing).
 [ ] 19. Google Auth Platform > Audience: switch from "Testing" to
@@ -114,6 +129,72 @@ BABY APP: THINGS ONLY YOU CAN DO
 [ ] 30. Pakistan hospitals and clinics directory (plan section 12). Needs a
         trustworthy list (name, city, phone, children's emergency yes/no).
 
+--- MISSING FEATURES (compared with MyBaby, mybabyapp.io) --------------
+Claude can build 31-36 without anything from you; say which ones first.
+
+[ ] 31. Breastfeeding timer: BUILT (30 Sep), please test.
+        Feed > Breast > "Start a timer" > Left or Right (the side after the
+        last feed's side is highlighted). The Today screen then shows a
+        "Feeding now" card: tap the other side to switch, the running side
+        to pause; Finish saves it, Discard deletes it. It keeps running if
+        you close the app or restart the phone, shows as a notification
+        with a live clock (Android), and appears on the family's phones.
+        Manual entry now takes Left and Right minutes separately.
+        Database: migration 20260930000001_feed_timer.sql (applied).
+        TEST: start a timer, switch sides, close the app, reopen, finish;
+        check the timeline shows "Left 5 min + Right 4 min".
+[ ] 32. Sleep timer: BUILT, please test. "Sleep" on Today now shows an
+        "Asleep" card with a running clock and "Woke up", plus the same
+        notification.
+[ ] 33. Reports: BUILT (30 Sep), please test. Today > the chart icon at the
+        top, or "Reports and trends" at the bottom of "At a glance".
+        7 / 30 days: feeds, sleep (night + naps) and diapers per day as
+        bars, plus averages: feeds a day, time between feeds, breastfeeding
+        per day and per feed, left/right split, bottle ml, sleep a day,
+        naps, longest sleep, bedtime, wake-up, wet and dirty a day.
+        Still to do: a shareable PDF for the check-up.
+[ ] 34. Journal: BUILT (30 Sep), please test. Today > "Past days" (next to
+        the Today list). One page per day since birth: swipe right for the
+        day before (left in Urdu), use the arrows, or tap the date / the
+        calendar icon to jump. Each day shows its totals, then "On this day"
+        (vaccines, measurements, foods tried, milestones), then everything
+        with a time in order: feeds, diapers, sleep, pumping, medicine
+        doses, symptoms. Tap an entry to edit it.
+[ ] 35. Solids: more recipes up to 12 months, and "first vegetables"
+        wording (your notes), add comment such that first veges as fruits are sweets, better start with veges first so that kids dont deny them in future, add something like this.
+[ ] 36. Push notifications between phones ("Ali logged a feed"). Needs
+        Firebase (item 14).
+[ ] 37. Home-screen widget (Android) and Live Activity (iPhone) showing the
+        last feed / running timer. Needs 31 first; iPhone part needs
+        Codemagic (item 15).
+[ ] 38. Photos and memories (first smile, milestones with a photo). Needs
+        a decision: photos use Supabase Storage, which costs more and must
+        be covered in the privacy policy.
+[ ] 39. AI assistant (questions answered from the baby's own logs). Needs a
+        decision: which AI provider, cost per user, and medical-safety
+        rules; a pediatrician should approve the guardrails.
+[ ] 40. Website extras: articles/help centre, "compare apps" page, store
+        badges once the apps are live.
+[ ] 41. Illness episodes: group a sickness as "Day 1, Day 2..." with
+        temperatures, doses and a doctor's visit, and mark it recovered.
+[ ] 42. Typical ranges: BUILT for sleep a day (NSF under 4 months, AASM
+        after; shaded on the chart), feeds for newborns, wet and dirty
+        diapers (NHS). No "typical wake window" on purpose: there's no solid
+        source for it. Still to do: growth *rate* compared with WHO
+        velocity data. A pediatrician should check the wording (item 22).
+[ ] 44. "Forgot password?" on the sign-in screen (NOT built: today someone
+        who forgets their password is locked out, unless they use Google).
+        Claude builds it with a 6-digit code like sign-up; you then paste a
+        "Reset password" email template into Supabase (Claude will give it).
+[ ] 43. Dark mode (for night feeds) and food pictures/illustrations in the
+        solids list (needs images we are allowed to use).
+
+Where Palna is already ahead of MyBaby: Urdu and Roman Urdu, Pakistan EPI
+schedule, desi foods, works fully offline, emergency numbers and heat
+advice, breast-milk stash with use-by dates, a family (not just 2 parents).
+Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
+34 journal > 41 illness > 43 dark mode > 37 widgets > 36 push > 39 AI.
+
 --- CONTENT REVIEW (a pediatrician should check) ----------------------
 
 [ ] 21. Pakistan EPI vaccine schedule (app shows "confirm with your
@@ -125,20 +206,32 @@ BABY APP: THINGS ONLY YOU CAN DO
 
 --- STORE REQUIREMENTS -------------------------------------------------
 
-[ ] 27. In-app "Delete my account" (required by both stores). NOT built
-        yet, because it deletes data on the live database and needs your
-        review. Proposed design, ask Claude to build it:
-        - Migration: make created_by columns nullable with ON DELETE SET
-          NULL (so entries a caregiver made stay in a shared family).
-        - Function delete_my_account(): families where you're the only
-          member are deleted with all their data; families shared with
-          others hand ownership to the next member; then your login is
-          deleted.
-        - Settings > Delete my account, with a confirmation step.
+[ ] 27. In-app "Delete my account": BUILT (29 Sep), please test.
+        Settings > Account > Delete my account > type DELETE.
+        Migration 20260929000006_delete_account.sql is applied to the cloud.
+        TEST with a throwaway email account (not your main one): sign up,
+        add a baby, delete the account; check in Supabase > Authentication
+        that the user is gone and in Table Editor that the baby is gone.
+        Also test a shared family: the other member should keep the baby
+        and become owner.
+[ ] 27a. Decide: permanently purge soft-deleted entries after 30 days (a
+        daily pg_cron job). Today a deleted entry/baby is hidden everywhere
+        but stays in the database. Claude was not allowed to create a job
+        that deletes production data on its own; say "yes, add the purge
+        job" if you want it, and the privacy policy will mention it.
 
-[ ] 25. Privacy policy page and account-deletion page (both stores require
-        URLs). You've done similar pages for toolbox; Claude can draft
-        the text for a lawyer/you to finalise.
+[~] 25. Privacy policy and delete-account pages are LIVE (store URLs):
+          https://palnacare.com/privacy
+          https://palnacare.com/delete-account
+        Still: you or a lawyer should read them before the store launch.
+[x] 25b. Website redesign live (30 Sep): English / Urdu / Roman Urdu,
+        Light / Dark / Baby themes, animations, mobile menu, share image,
+        404 page, sitemap. Preview a look: palnacare.com/?lang=ur&theme=baby
+        When the apps are in the stores: swap "Coming soon" for the real
+        Google Play / App Store buttons (Claude can do it).
+[ ] 25a. Terms of service page (MyBaby has one; stores don't require it,
+        but it's where the "not medical advice" terms belong). Claude can
+        draft it.
 [ ] 26. Play Store health-app declaration and Data safety form.
 
 
@@ -226,9 +319,8 @@ G. QUALITY CHECKS ADDED
 
 
 
--- Direct Breast Feed and time based not ml
--- first veges not vegitable
--- more recipies till 12 months
+(Your notes about breastfeeding by time, "first veges" and more recipes
+are now items 31 and 35.)
 
 
 ====================================================================

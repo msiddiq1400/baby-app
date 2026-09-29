@@ -834,5 +834,118 @@
   "heatGuide": "• Keep babies out of direct sun, especially 11 am to 3 pm, and never leave them in a parked car.\n• Dress them in one light cotton layer; use shade and a fan.\n• Breastfeed more often. Babies under 6 months who only have breast milk don't need water; ask your doctor about extra water for formula-fed babies.\n• During load-shedding, move to the coolest room and wipe your baby with a cloth dampened in lukewarm (not cold or iced) water.",
   "dehydrationTitle": "Signs of dehydration: see a doctor today",
   "dehydrationSigns": "• fewer wet diapers than usual\n• few or no tears when crying, or a dry mouth\n• a sunken soft spot on the head, or sunken eyes\n• unusually drowsy or irritable",
-  "helpSources": "Based on NHS and WHO guidance. This is general information, not a diagnosis; if you're worried, contact a doctor."
+  "helpSources": "Based on NHS and WHO guidance. This is general information, not a diagnosis; if you're worried, contact a doctor.",
+  "accountSection": "Account",
+  "deleteAccount": "Delete my account",
+  "deleteAccountBody": "This permanently deletes your login. Babies and entries in families that only you belong to are deleted too. In families you share, the other members keep everything, and if you're the owner, the next member becomes the owner. This can't be undone.",
+  "deleteAccountTypeHint": "Type DELETE to confirm",
+  "deleteAccountButton": "Delete forever",
+  "deleteAccountFailed": "Couldn't delete your account. Check your internet connection and try again.",
+  "startFeedTimer": "Start a timer",
+  "lastSide": "Last feed: {side} side",
+  "@lastSide": {
+    "placeholders": {
+      "side": {
+        "type": "String"
+      }
+    }
+  },
+  "orEnterMinutes": "Or enter the minutes",
+  "leftMinutes": "Left (minutes)",
+  "rightMinutes": "Right (minutes)",
+  "feedTimerAlreadyRunning": "A feed timer is already running. You'll find it at the top of the Today screen.",
+  "feedingNowTitle": "Feeding now",
+  "feedingNow": "feeding now",
+  "feedTimerPaused": "Paused",
+  "feedTimerHelp": "Tap a side to switch. Tap the running side to pause.",
+  "finishFeed": "Finish",
+  "discardButton": "Discard",
+  "discardFeedConfirm": "Discard this feed? The timer and its times will be deleted.",
+  "asleepNap": "Napping",
+  "asleepNight": "Asleep for the night",
+  "feedingNotificationTitle": "{name} is feeding",
+  "@feedingNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sleepNotificationTitle": "{name} is asleep",
+  "@sleepNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reportsTitle": "Reports",
+  "seeReports": "Reports and trends",
+  "periodDays": "{count} days",
+  "@periodDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "feedsPerDay": "Feeds a day",
+  "timeBetweenFeeds": "Usual time between feeds",
+  "nursingPerDay": "Breastfeeding a day",
+  "perBreastfeed": "Per breastfeed",
+  "sideSplit": "Left / right",
+  "bottlePerDay": "Bottle milk a day",
+  "perBottle": "Per bottle",
+  "sleepPerDay": "Sleep a day",
+  "nightSleepPerDay": "Night sleep",
+  "napsPerDay": "Naps a day",
+  "napTimePerDay": "Nap time a day",
+  "longestSleep": "Longest sleep",
+  "awakeBetweenSleeps": "Awake between sleeps",
+  "usualBedtime": "Usual bedtime",
+  "usualWakeUp": "Usual wake-up",
+  "wetPerDay": "Wet a day",
+  "dirtyPerDay": "Dirty a day",
+  "hoursShort": "{hours}h",
+  "@hoursShort": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "hoursRange": "{from}–{to} hours",
+  "@hoursRange": {
+    "placeholders": {
+      "from": {
+        "type": "int"
+      },
+      "to": {
+        "type": "int"
+      }
+    }
+  },
+  "typicalRange": "Typical for this age: {range}",
+  "@typicalRange": {
+    "placeholders": {
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "newbornFeedsGuide": "Breastfed newborns usually feed 8 to 12 times a day.",
+  "wetGuide": "From day 5, 6 or more wet diapers a day is a sign of enough milk.",
+  "dirtyGuide": "In the first 6 weeks, most breastfed babies have 2 or more dirty diapers a day.",
+  "reportNotEnough": "Not enough entries yet. Keep logging and this fills in.",
+  "reportAveragesNote": "Averages count only full days on which you logged that kind of entry; today isn't included yet.",
+  "reportSources": "Typical ranges: National Sleep Foundation (under 4 months), American Academy of Sleep Medicine (4 months and older), NHS (feeds and diapers). The shaded band on the sleep chart is the typical range. Every baby is different; if you're worried, talk to your doctor.",
+  "journalTitle": "Journal",
+  "pastDays": "Past days",
+  "yesterday": "Yesterday",
+  "pickDate": "Choose a date",
+  "olderDay": "Day before",
+  "newerDay": "Next day",
+  "onThisDay": "On this day",
+  "pumpingEntry": "Pumping",
+  "nothingOnDay": "Nothing was logged on this day."
 }

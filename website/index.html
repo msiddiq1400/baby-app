@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n-title="meta.title">Palna: Mother &amp; Baby Care, made for Pakistan</title>
+  <meta name="description" data-i18n-attr="content:meta.desc" content="Palna is a baby tracker made for Pakistani families: feeds, sleep, diapers, growth, the EPI vaccine schedule, medicines and starting solids, in English, Urdu and Roman Urdu. Works offline and syncs across the whole family.">
+  <link rel="canonical" href="https://palnacare.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Palna">
+  <meta property="og:title" content="Palna: Mother &amp; Baby Care">
+  <meta property="og:description" content="Every feed, nap and vaccine, in your language. A baby tracker made for Pakistani families.">
+  <meta property="og:image" content="https://palnacare.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://palnacare.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#fbf7f0">
+  <link rel="icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <script>
+    // Theme and language before the first paint, so nothing flashes.
+    (function () {
+      var r = document.documentElement;
+      try {
+        var params = new URLSearchParams(location.search);
+        var pt = params.get('theme');
+        if (pt) localStorage.setItem('palna-theme', pt);
+        var t = pt || localStorage.getItem('palna-theme');
+        if (t && t !== 'system') r.dataset.theme = t;
+        var q = params.get('lang');
+        var l = q || localStorage.getItem('palna-lang') || (/^ur/i.test(navigator.language || '') ? 'ur' : 'en');
+        if (q) localStorage.setItem('palna-lang', q);
+        r.dataset.lang = l;
+        if (l !== 'en') r.classList.add('i18n-pending');
+        if (l === 'ur') { r.lang = 'ur'; r.dir = 'rtl'; } else if (l === 'roman') { r.lang = 'ur-Latn'; }
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Noto+Nastaliq+Urdu:wght@400;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js" defer></script>
+  <script src="site.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Toolbox Services",
+        "url": "https://palnacare.com/",
+        "logo": "https://palnacare.com/icon-192.png",
+        "email": "hello@palnacare.com"
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "Palna: Mother & Baby Care",
+        "alternateName": "پالنا",
+        "operatingSystem": "Android, iOS",
+        "applicationCategory": "HealthApplication",
+        "inLanguage": ["en", "ur"],
+        "description": "A baby tracker made for Pakistani families: feeds, sleep, diapers, growth, the EPI vaccine schedule, medicines and starting solids, in English, Urdu and Roman Urdu.",
+        "publisher": { "@type": "Organization", "name": "Toolbox Services" },
+        "url": "https://palnacare.com/"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="icon-192.png" alt="" width="38" height="38"><b>Palna</b></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#pakistan" data-i18n="nav.pk">Made for Pakistan</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#family" data-i18n="nav.family">Family</a>
+      <a href="#privacy" data-i18n="nav.privacy">Privacy</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+    <div class="controls">
+      <div class="menu">
+        <button class="chip" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language" data-i18n-attr="aria-label:ui.language">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>
+          <span data-lang-label>EN</span>
+        </button>
+        <ul role="menu">
+          <li><button type="button" role="menuitemradio" data-set-lang="en" lang="en">English</button></li>
+          <li><button type="button" role="menuitemradio" data-set-lang="ur" lang="ur" class="ur">اردو</button></li>
+          <li><button type="button" role="menuitemradio" data-set-lang="roman" lang="ur-Latn">Roman Urdu</button></li>
+        </ul>
+      </div>
+      <div class="menu">
+        <button class="chip square" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Theme" data-i18n-attr="aria-label:ui.theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true" data-theme-icon></svg>
+        </button>
+        <ul role="menu">
+          <li><button type="button" role="menuitemradio" data-set-theme="light"><span class="swatch" style="background:#fbf7f0"></span><span data-i18n="theme.light">Light</span></button></li>
+          <li><button type="button" role="menuitemradio" data-set-theme="dark"><span class="swatch" style="background:#1b2230"></span><span data-i18n="theme.dark">Dark</span></button></li>
+          <li><button type="button" role="menuitemradio" data-set-theme="baby"><span class="swatch" style="background:linear-gradient(135deg,#f6c3d6 50%,#bfe8dc 50%)"></span><span data-i18n="theme.baby">Baby</span></button></li>
+          <li><button type="button" role="menuitemradio" data-set-theme="system"><span class="swatch" style="background:linear-gradient(135deg,#fbf7f0 50%,#1b2230 50%)"></span><span data-i18n="theme.system">Same as device</span></button></li>
+        </ul>
+      </div>
+      <a class="btn get" href="#get" data-i18n="cta.get">Get Palna</a>
+      <button class="chip square burger" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menu" data-i18n-attr="aria-label:nav.menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="sky" aria-hidden="true">
+      <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="star" viewBox="0 0 24 24" style="top:12%;inset-inline-start:46%;animation-delay:-1s"><path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z"/></svg>
+      <svg class="star" viewBox="0 0 24 24" style="top:26%;inset-inline-end:14%;animation-delay:-2.6s;width:10px;height:10px"><path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z"/></svg>
+      <svg class="star" viewBox="0 0 24 24" style="top:6%;inset-inline-start:22%;animation-delay:-3.4s;width:9px;height:9px"><path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z"/></svg>
+      <svg class="star" viewBox="0 0 24 24" style="top:70%;inset-inline-end:4%;animation-delay:-0.4s"><path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z"/></svg>
+      <svg class="star" viewBox="0 0 24 24" style="top:88%;inset-inline-start:40%;animation-delay:-2s;width:11px;height:11px"><path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z"/></svg>
+      <svg class="star" viewBox="0 0 24 24" style="top:48%;inset-inline-start:52%;animation-delay:-3.9s;width:8px;height:8px"><path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z"/></svg>
+    </div>
+    <div class="wrap">
+      <div>
+        <span class="eyebrow reveal" data-i18n="hero.eyebrow">Made for Pakistani families</span>
+        <h1 class="reveal" style="--d:1" data-i18n-html="hero.title">Every feed, nap and vaccine. <em>In your language.</em></h1>
+        <p class="lead reveal" style="--d:3" data-i18n="hero.lead">Palna remembers the last feed, the next vaccine and tonight's medicine, so you don't have to. Log in one tap, share with the whole family, and keep going when the internet or the electricity doesn't.</p>
+        <div class="stores reveal" style="--d:4" id="get">
+          <a class="store" href="#faq" aria-label="Google Play, coming soon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 2.8v18.4c0 .4.4.6.7.4L20.4 12.9c.3-.2.3-.6 0-.8L4.7 2.4c-.3-.2-.7 0-.7.4z"/></svg>
+            <div><small data-i18n="store.soon">Coming soon</small><span>Google Play</span></div>
+          </a>
+          <a class="store" href="#faq" aria-label="App Store, coming soon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8s2 .8 3.3.8c1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.8-1.1-2.8-4.2zM13.9 5.1c.7-.8 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></svg>
+            <div><small data-i18n="store.soon">Coming soon</small><span>App Store</span></div>
+          </a>
+        </div>
+        <p class="fine reveal" style="--d:5" data-i18n="hero.fine">Palna gives general information from the WHO, NHS, CDC and Pakistan's EPI. It is not a medical device and doesn't replace your doctor. In an emergency, call Rescue 1122 or Edhi 115.</p>
+      </div>
+      <div class="phones reveal" style="--d:2" aria-hidden="true">
+        <div class="phone back"><img data-shot="timer" src="img/timer_en.webp" alt="" width="540" height="1158"></div>
+        <div class="phone front"><img data-shot="today" src="img/today_en.webp" alt="" width="540" height="1158" fetchpriority="high"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Numbers -->
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><b data-count="3">3</b><span data-i18n="stat.langs">languages</span></div>
+      <div class="stat"><b data-count="19">19</b><span data-i18n="stat.epi">EPI vaccine doses</span></div>
+      <div class="stat"><b data-count="36">36</b><span data-i18n="stat.foods">desi foods to start solids</span></div>
+      <div class="stat"><b data-count="86">86</b><span data-i18n="stat.miles">milestones to celebrate</span></div>
+    </div>
+  </div>
+
+  <!-- Made for Pakistan -->
+  <section class="band" id="pakistan">
+    <div class="wrap">
+      <p class="kicker reveal" data-i18n="pk.kicker">Made for Pakistan</p>
+      <h2 class="title reveal" data-i18n="pk.title">Not a foreign app translated later. Built here, for families here.</h2>
+      <p class="sub reveal" data-i18n="pk.sub">Most baby apps assume a US vaccine schedule, American food and a steady connection. Palna starts from how babies are raised in Pakistan.</p>
+      <div class="grid">
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 7 8M11 5c0 3-3 7-7 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/></svg></div>
+          <h3 data-i18n="pk.c1.t">English, Urdu or Roman Urdu</h3>
+          <p data-i18n="pk.c1.p">Every screen in proper Nastaliq Urdu, right to left, or in Roman Urdu for WhatsApp-style reading. Each family member picks their own.</p>
+        </div>
+        <div class="card reveal" style="--d:1">
+          <div class="icon rose"><svg viewBox="0 0 24 24"><path d="M18 2l4 4M17 7l3-3M19 9l-8 8-4 1 1-4 8-8zM7 18l-4 4"/></svg></div>
+          <h3 data-i18n="pk.c2.t">Pakistan's EPI schedule</h3>
+          <p data-i18n="pk.c2.p">BCG at birth through Measles-Rubella and Typhoid at 9 months, with due dates worked out from your baby's birthday and reminders the day before.</p>
+        </div>
+        <div class="card reveal" style="--d:2">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 11h18a9 9 0 0 1-18 0zM7 7c0-2 2-2 2-4M12 7c0-2 2-2 2-4M17 7c0-2 2-2 2-4"/></svg></div>
+          <h3 data-i18n="pk.c3.t">Khichdi, daliya and suji</h3>
+          <p data-i18n="pk.c3.p">A starting-solids guide with the foods you actually cook: daal, lauki, chikoo, qeema and dahi, with how to prepare each for your baby's age.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+          <h3 data-i18n="pk.c4.t">Works in load-shedding</h3>
+          <p data-i18n="pk.c4.p">Everything is saved on your phone first. No signal, no electricity, no problem: it syncs to the family when you're back online.</p>
+        </div>
+        <div class="card reveal" style="--d:1">
+          <div class="icon rose"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
+          <h3 data-i18n="pk.c5.t">1122 and Edhi, one tap away</h3>
+          <p data-i18n="pk.c5.p">Warning signs that need help now, and tap-to-call Rescue 1122, Edhi 115 and Chhipa 1020, so nobody has to search in a panic.</p>
+        </div>
+        <div class="card reveal" style="--d:2">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div>
+          <h3 data-i18n="pk.c6.t">Heat and summer advice</h3>
+          <p data-i18n="pk.c6.p">Keeping babies cool in 45° heat, when a breastfed baby doesn't need water, and the signs of dehydration to watch for.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshot gallery -->
+  <section id="features">
+    <div class="wrap">
+      <div class="gallery-head">
+        <div class="reveal">
+          <p class="kicker" data-i18n="gal.kicker">See the app</p>
+          <h2 class="title" data-i18n="gal.title">Real screens. Swipe through.</h2>
+        </div>
+        <div class="arrows reveal">
+          <button type="button" data-scroll="-1" aria-label="Previous" data-i18n-attr="aria-label:gal.prev"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" data-scroll="1" aria-label="Next" data-i18n-attr="aria-label:gal.next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="gallery reveal" tabindex="0" aria-label="App screenshots">
+        <figure class="shot">
+          <div class="frame"><h3 data-i18n="g.today.t">Everything at a glance.</h3><div class="phone"><img data-shot="today" src="img/today_en.webp" alt="Today screen: feeds, diapers and sleep, and when the next feed may be" loading="lazy" width="540" height="1158"></div></div>
+          <p data-i18n="g.today.p">When the next feed may be, how long since the last nap, and today's totals.</p>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><h3 data-i18n="g.timer.t">Left, right, and on the clock.</h3><div class="phone"><img data-shot="timer" src="img/timer_en.webp" alt="Breastfeeding timer with a clock for each side" loading="lazy" width="540" height="1158"></div></div>
+          <p data-i18n="g.timer.p">A breastfeeding timer per side that keeps running with the app closed, and syncs to the family.</p>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><h3 data-i18n="g.journal.t">Every day, on the record.</h3><div class="phone"><img data-shot="journal" src="img/journal_en.webp" alt="Journal: one day with its totals and every entry in order" loading="lazy" width="540" height="1158"></div></div>
+          <p data-i18n="g.journal.p">Swipe back through any day since birth: feeds, sleep, medicines, foods and measurements.</p>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><h3 data-i18n="g.reports.t">Know if they're getting enough.</h3><div class="phone"><img data-shot="reports" src="img/reports_en.webp" alt="Feeding report: feeds a day, time between feeds, breastfeeding time and bottle milk" loading="lazy" width="540" height="1158"></div></div>
+          <p data-i18n="g.reports.p">7 and 30-day reports for feeds, sleep and diapers, with typical ranges for your baby's age.</p>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><h3 data-i18n="g.reports2.t">Sleep, compared with what's typical.</h3><div class="phone"><img data-shot="reports2" src="img/reports2_en.webp" alt="Sleep report with the typical range for the baby's age shaded" loading="lazy" width="540" height="1158"></div></div>
+          <p data-i18n="g.reports2.p">Night and nap sleep per day against the range sleep experts give for this age.</p>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><h3 data-i18n="g.milk.t">Stored milk, used in time.</h3><div class="phone"><img data-shot="milk" src="img/milk_en.webp" alt="Breast milk screen: fridge and freezer stash with use-by dates" loading="lazy" width="540" height="1158"></div></div>
+          <p data-i18n="g.milk.p">Pumping log and a fridge and freezer stash with use-by dates, for working mothers.</p>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><h3 data-i18n="g.solids.t">Start solids, the desi way.</h3><div class="phone"><img data-shot="solids" src="img/solids_en.webp" alt="Starting solids: readiness guide, allergen tracker and food list" loading="lazy" width="540" height="1158"></div></div>
+          <p data-i18n="g.solids.p">Is my baby ready, the important rules, and each allergen from not yet to introduced.</p>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><h3 data-i18n="g.growth.t">See the trend, not one weigh-in.</h3><div class="phone"><img data-shot="growth" src="img/growth_en.webp" alt="Growth chart with WHO percentile curves" loading="lazy" width="540" height="1158"></div></div>
+          <p data-i18n="g.growth.p">WHO growth charts for weight, length and head, with the percentile explained simply.</p>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><h3 data-i18n="g.vaccines.t">Never miss a vaccine.</h3><div class="phone"><img data-shot="vaccines" src="img/vaccines_en.webp" alt="Vaccines: Pakistan EPI visits with given and upcoming doses" loading="lazy" width="540" height="1158"></div></div>
+          <p data-i18n="g.vaccines.p">Every EPI visit with its due date, what was given where, and reminders before each one.</p>
+        </figure>
+        <figure class="shot">
+          <div class="frame"><h3 data-i18n="g.milestones.t">Celebrate every milestone.</h3><div class="phone"><img data-shot="milestones" src="img/milestones_en.webp" alt="Milestones checklist for 2 to 18 months" loading="lazy" width="540" height="1158"></div></div>
+          <p data-i18n="g.milestones.p">CDC checklists from 2 to 18 months, worded to reassure, with ways to help at each age.</p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="band">
+    <div class="wrap center">
+      <p class="kicker reveal" data-i18n="steps.kicker">Two minutes to start</p>
+      <h2 class="title reveal" data-i18n="steps.title">Set up before the next feed.</h2>
+      <div class="steps">
+        <div class="step reveal"><h3 data-i18n="s1.t">Add your baby</h3><p data-i18n="s1.p">Name and birthday. The vaccine plan, growth charts and milestones set themselves up.</p></div>
+        <div class="step reveal" style="--d:1"><h3 data-i18n="s2.t">Log with one tap</h3><p data-i18n="s2.p">Feed, diaper, sleep: one tap from the home screen, with the time already filled in.</p></div>
+        <div class="step reveal" style="--d:2"><h3 data-i18n="s3.t">Invite the family</h3><p data-i18n="s3.p">Send a code on WhatsApp. Abbu, Nani or the nanny see the same baby, live.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep dives -->
+  <section>
+    <div class="wrap">
+      <div class="split">
+        <div class="reveal">
+          <p class="kicker" data-i18n="feed.kicker">Feeding</p>
+          <h2 class="title" data-i18n="feed.title">Every feed, timed to the side.</h2>
+          <p class="sub" data-i18n="feed.sub">Breast, expressed milk or formula: every feed in a tap. Palna learns your baby's rhythm and gives a gentle guide to when the next feed may be.</p>
+          <ul class="ticks">
+            <li data-i18n="feed.1">A left and right breastfeeding timer that keeps running when the app is closed</li>
+            <li data-i18n="feed.2">Suggests which side to start on, and ml for bottles</li>
+            <li data-i18n="feed.3">Fridge and freezer milk stash with use-by reminders</li>
+            <li data-i18n="feed.4">Wet and dirty diapers counted for the day</li>
+          </ul>
+        </div>
+        <div class="phone reveal" style="--d:1"><img data-shot="timer" src="img/timer_en.webp" alt="Breastfeeding timer with a clock for each side" loading="lazy" width="540" height="1158"></div>
+      </div>
+      <div class="split flip">
+        <div class="reveal">
+          <p class="kicker" data-i18n="health.kicker">Health</p>
+          <h2 class="title" data-i18n="health.title">Never miss a dose. Ready for the doctor.</h2>
+          <p class="sub" data-i18n="health.sub">Medicines with dose times and reminders, symptoms with temperatures, and a one-page summary to show the doctor at the check-up.</p>
+          <ul class="ticks">
+            <li data-i18n="health.1">Pakistan EPI vaccines with due dates and reminders</li>
+            <li data-i18n="health.2">Medicine doses: given, skipped or missed</li>
+            <li data-i18n="health.3">Fever warning for babies under 3 months</li>
+          </ul>
+        </div>
+        <div class="phone reveal" style="--d:1"><img data-shot="vaccines" src="img/vaccines_en.webp" alt="Vaccines screen" loading="lazy" width="540" height="1158"></div>
+      </div>
+      <div class="split">
+        <div class="reveal">
+          <p class="kicker" data-i18n="growth.kicker">Growth</p>
+          <h2 class="title" data-i18n="growth.title">Growth charts that make sense.</h2>
+          <p class="sub" data-i18n="growth.sub">The same WHO standards your paediatrician uses, with the percentile explained in plain words, not just a number.</p>
+          <ul class="ticks">
+            <li data-i18n="growth.1">Weight, length and head size from birth to 2 years</li>
+            <li data-i18n="growth.2">Change since the last weigh-in</li>
+            <li data-i18n="growth.3">When to talk to the doctor, clearly stated</li>
+          </ul>
+        </div>
+        <div class="phone reveal" style="--d:1"><img data-shot="growth" src="img/growth_en.webp" alt="Growth chart" loading="lazy" width="540" height="1158"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Family -->
+  <section class="band" id="family">
+    <div class="wrap center">
+      <p class="kicker reveal" data-i18n="fam.kicker">Family sharing</p>
+      <h2 class="title reveal" data-i18n="fam.title">One baby. The whole family on the same page.</h2>
+      <p class="sub reveal" data-i18n="fam.sub">In Pakistan a baby is raised by a family, not just two parents. Anyone you invite sees the same log, in their own language, and nobody asks "did she eat?" again.</p>
+      <div class="family reveal" aria-hidden="true">
+        <div class="person"><div class="avatar" style="background:var(--g1a)">A</div><b data-i18n="fam.ammi">Ammi</b><br><small data-i18n="lang.english">English</small></div>
+        <div class="person"><div class="avatar" style="background:var(--g2a)">A</div><b data-i18n="fam.abbu">Abbu</b><br><small data-i18n="lang.roman">Roman Urdu</small></div>
+        <div class="person"><div class="avatar" style="background:var(--g3a)">N</div><b data-i18n="fam.nani">Nani</b><br><small data-i18n="lang.urdu">Urdu</small></div>
+        <div class="person"><div class="avatar" style="background:var(--g1b)">D</div><b data-i18n="fam.dadi">Dadi</b><br><small data-i18n="lang.urdu">Urdu</small></div>
+      </div>
+      <div class="links reveal" aria-hidden="true"><svg viewBox="0 0 420 30" preserveAspectRatio="none"><path d="M10 15 C 80 -5, 130 35, 210 15 S 340 -5, 410 15"/></svg></div>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section id="privacy">
+    <div class="wrap">
+      <div class="promise reveal">
+        <div>
+          <p class="kicker" data-i18n="priv.kicker">Privacy</p>
+          <h2 class="title" data-i18n="priv.title">Your baby's data is your family's. Full stop.</h2>
+          <p data-i18n-html="priv.link">Read the full <a href="privacy/index.html">privacy policy</a>.</p>
+        </div>
+        <ul>
+          <li><b data-i18n="priv.1.b">Only your family can see it</b><span data-i18n="priv.1.s">Access is checked on the server for every request.</span></li>
+          <li><b data-i18n="priv.2.b">No ads, no selling, no trackers</b><span data-i18n="priv.2.s">No analytics or advertising tools in the app.</span></li>
+          <li><b data-i18n="priv.3.b">Delete everything, any time</b><span data-i18n-html="priv.3.s">One button in Settings. <a href="delete-account/index.html">How it works</a>.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="band" id="faq">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker reveal" data-i18n="faq.kicker">Questions</p>
+        <h2 class="title reveal" data-i18n="faq.title">Frequently asked</h2>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary data-i18n="faq.1.q">When can I download Palna?</summary>
+          <p data-i18n-html="faq.1.a">Palna is in final testing and coming to Google Play and the App Store soon. Email <a href="mailto:hello@palnacare.com?subject=Tell%20me%20when%20Palna%20launches">hello@palnacare.com</a> and we'll tell you the day it launches.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.2.q">Does it work without internet?</summary>
+          <p data-i18n="faq.2.a">Yes. Everything you log is saved on your phone first, so Palna works in load-shedding, on a weak signal or with no data at all. It syncs with your family when you're back online.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.3.q">Can the whole family use it?</summary>
+          <p data-i18n="faq.3.a">Yes. The parent who adds the baby can invite others with a 6-letter code (it works once and expires in 7 days). Everyone sees the same baby, and each person can choose English, Urdu or Roman Urdu.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.4.q">Twins or more than one child?</summary>
+          <p data-i18n="faq.4.a">Add as many babies as you like and switch between them from the home screen.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.5.q">Is the vaccine schedule official?</summary>
+          <p data-i18n="faq.5.a">It follows Pakistan's Expanded Programme on Immunization (EPI). Schedules change and can differ by province, so always confirm dates with your vaccinator or child specialist.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.6.q">Is Palna medical advice?</summary>
+          <p data-i18n="faq.6.a">No. Palna shows general guidance from the WHO, NHS, CDC and Pakistan's EPI and helps you keep records. It doesn't diagnose anything. If you're worried, contact a doctor; in an emergency call Rescue 1122 or Edhi 115.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.7.q">Who can see my baby's information?</summary>
+          <p data-i18n-html="faq.7.a">Only you and the family members you invite. We don't sell data or show ads. See the <a href="privacy/index.html">privacy policy</a>.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.8.q">How do I delete my account?</summary>
+          <p data-i18n-html="faq.8.a">In the app: Settings, then Delete my account. Or email us. Details are on the <a href="delete-account/index.html">delete your account</a> page.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to action -->
+  <section>
+    <div class="wrap">
+      <div class="cta reveal">
+        <img src="icon-192.png" alt="" width="84" height="84">
+        <h2 class="title" style="margin-inline:auto" data-i18n="cta.title">Stop keeping it all in your head.</h2>
+        <p style="font-size:1.15rem;margin:0" data-i18n="cta.sub">Palna: Mother &amp; Baby Care</p>
+        <div class="stores">
+          <a class="store" href="mailto:hello@palnacare.com?subject=Tell%20me%20when%20Palna%20launches">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+            <div><small data-i18n="cta.small">Get told on launch day</small><span data-i18n="cta.btn">Email me</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div class="about">
+        <a class="brand" href="index.html"><img src="icon-192.png" alt="" width="38" height="38"><b>Palna</b></a>
+        <p data-i18n="foot.about">A baby tracker for feeds, sleep, diapers, growth, vaccines and medicines, made for Pakistani families, in English, Urdu and Roman Urdu.</p>
+      </div>
+      <div>
+        <h4 data-i18n="foot.features">Features</h4>
+        <ul>
+          <li><a href="#features" data-i18n="f.feeds">Feeds, sleep &amp; diapers</a></li>
+          <li><a href="#features" data-i18n="f.timer">Breastfeeding timer</a></li>
+          <li><a href="#features" data-i18n="f.reports">Reports &amp; journal</a></li>
+          <li><a href="#features" data-i18n="f.milk">Breast milk stash</a></li>
+          <li><a href="#features" data-i18n="f.solids">Starting solids</a></li>
+          <li><a href="#features" data-i18n="f.growth">Growth charts</a></li>
+          <li><a href="#features" data-i18n="f.vaccines">EPI vaccines</a></li>
+          <li><a href="#features" data-i18n="f.milestones">Milestones</a></li>
+          <li><a href="#family" data-i18n="f.family">Family sharing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="foot.palna">Palna</h4>
+        <ul>
+          <li><a href="#pakistan" data-i18n="nav.pk">Made for Pakistan</a></li>
+          <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+          <li><a href="mailto:hello@palnacare.com" data-i18n="f.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="foot.legal">Legal</h4>
+        <ul>
+          <li><a href="privacy/index.html" data-i18n="f.privacy">Privacy policy</a></li>
+          <li><a href="delete-account/index.html" data-i18n="f.delete">Delete your account</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span data-i18n="foot.copy">© 2026 Toolbox Services. Palna is not a medical device.</span>
+      <span data-i18n="foot.emergency">Emergency: Rescue 1122 · Edhi 115</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

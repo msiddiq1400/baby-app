@@ -1256,4 +1256,212 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get helpSources =>
       'Based on NHS and WHO guidance. This is general information, not a diagnosis; if you\'re worried, contact a doctor.';
+
+  @override
+  String get accountSection => 'Account';
+
+  @override
+  String get deleteAccount => 'Delete my account';
+
+  @override
+  String get deleteAccountBody =>
+      'This permanently deletes your login. Babies and entries in families that only you belong to are deleted too. In families you share, the other members keep everything, and if you\'re the owner, the next member becomes the owner. This can\'t be undone.';
+
+  @override
+  String get deleteAccountTypeHint => 'Type DELETE to confirm';
+
+  @override
+  String get deleteAccountButton => 'Delete forever';
+
+  @override
+  String get deleteAccountFailed =>
+      'Couldn\'t delete your account. Check your internet connection and try again.';
+
+  @override
+  String get startFeedTimer => 'Start a timer';
+
+  @override
+  String lastSide(String side) {
+    return 'Last feed: $side side';
+  }
+
+  @override
+  String get orEnterMinutes => 'Or enter the minutes';
+
+  @override
+  String get leftMinutes => 'Left (minutes)';
+
+  @override
+  String get rightMinutes => 'Right (minutes)';
+
+  @override
+  String get feedTimerAlreadyRunning =>
+      'A feed timer is already running. You\'ll find it at the top of the Today screen.';
+
+  @override
+  String get feedingNowTitle => 'Feeding now';
+
+  @override
+  String get feedingNow => 'feeding now';
+
+  @override
+  String get feedTimerPaused => 'Paused';
+
+  @override
+  String get feedTimerHelp =>
+      'Tap a side to switch. Tap the running side to pause.';
+
+  @override
+  String get finishFeed => 'Finish';
+
+  @override
+  String get discardButton => 'Discard';
+
+  @override
+  String get discardFeedConfirm =>
+      'Discard this feed? The timer and its times will be deleted.';
+
+  @override
+  String get asleepNap => 'Napping';
+
+  @override
+  String get asleepNight => 'Asleep for the night';
+
+  @override
+  String feedingNotificationTitle(String name) {
+    return '$name is feeding';
+  }
+
+  @override
+  String sleepNotificationTitle(String name) {
+    return '$name is asleep';
+  }
+
+  @override
+  String get reportsTitle => 'Reports';
+
+  @override
+  String get seeReports => 'Reports and trends';
+
+  @override
+  String periodDays(int count) {
+    return '$count days';
+  }
+
+  @override
+  String get feedsPerDay => 'Feeds a day';
+
+  @override
+  String get timeBetweenFeeds => 'Usual time between feeds';
+
+  @override
+  String get nursingPerDay => 'Breastfeeding a day';
+
+  @override
+  String get perBreastfeed => 'Per breastfeed';
+
+  @override
+  String get sideSplit => 'Left / right';
+
+  @override
+  String get bottlePerDay => 'Bottle milk a day';
+
+  @override
+  String get perBottle => 'Per bottle';
+
+  @override
+  String get sleepPerDay => 'Sleep a day';
+
+  @override
+  String get nightSleepPerDay => 'Night sleep';
+
+  @override
+  String get napsPerDay => 'Naps a day';
+
+  @override
+  String get napTimePerDay => 'Nap time a day';
+
+  @override
+  String get longestSleep => 'Longest sleep';
+
+  @override
+  String get awakeBetweenSleeps => 'Awake between sleeps';
+
+  @override
+  String get usualBedtime => 'Usual bedtime';
+
+  @override
+  String get usualWakeUp => 'Usual wake-up';
+
+  @override
+  String get wetPerDay => 'Wet a day';
+
+  @override
+  String get dirtyPerDay => 'Dirty a day';
+
+  @override
+  String hoursShort(int hours) {
+    return '${hours}h';
+  }
+
+  @override
+  String hoursRange(int from, int to) {
+    return '$from–$to hours';
+  }
+
+  @override
+  String typicalRange(String range) {
+    return 'Typical for this age: $range';
+  }
+
+  @override
+  String get newbornFeedsGuide =>
+      'Breastfed newborns usually feed 8 to 12 times a day.';
+
+  @override
+  String get wetGuide =>
+      'From day 5, 6 or more wet diapers a day is a sign of enough milk.';
+
+  @override
+  String get dirtyGuide =>
+      'In the first 6 weeks, most breastfed babies have 2 or more dirty diapers a day.';
+
+  @override
+  String get reportNotEnough =>
+      'Not enough entries yet. Keep logging and this fills in.';
+
+  @override
+  String get reportAveragesNote =>
+      'Averages count only full days on which you logged that kind of entry; today isn\'t included yet.';
+
+  @override
+  String get reportSources =>
+      'Typical ranges: National Sleep Foundation (under 4 months), American Academy of Sleep Medicine (4 months and older), NHS (feeds and diapers). The shaded band on the sleep chart is the typical range. Every baby is different; if you\'re worried, talk to your doctor.';
+
+  @override
+  String get journalTitle => 'Journal';
+
+  @override
+  String get pastDays => 'Past days';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get pickDate => 'Choose a date';
+
+  @override
+  String get olderDay => 'Day before';
+
+  @override
+  String get newerDay => 'Next day';
+
+  @override
+  String get onThisDay => 'On this day';
+
+  @override
+  String get pumpingEntry => 'Pumping';
+
+  @override
+  String get nothingOnDay => 'Nothing was logged on this day.';
 }

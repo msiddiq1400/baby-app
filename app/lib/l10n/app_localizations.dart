@@ -2234,6 +2234,372 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Based on NHS and WHO guidance. This is general information, not a diagnosis; if you\'re worried, contact a doctor.'**
   String get helpSources;
+
+  /// No description provided for @accountSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get accountSection;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete my account'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This permanently deletes your login. Babies and entries in families that only you belong to are deleted too. In families you share, the other members keep everything, and if you\'re the owner, the next member becomes the owner. This can\'t be undone.'**
+  String get deleteAccountBody;
+
+  /// No description provided for @deleteAccountTypeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type DELETE to confirm'**
+  String get deleteAccountTypeHint;
+
+  /// No description provided for @deleteAccountButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete forever'**
+  String get deleteAccountButton;
+
+  /// No description provided for @deleteAccountFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t delete your account. Check your internet connection and try again.'**
+  String get deleteAccountFailed;
+
+  /// No description provided for @startFeedTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a timer'**
+  String get startFeedTimer;
+
+  /// No description provided for @lastSide.
+  ///
+  /// In en, this message translates to:
+  /// **'Last feed: {side} side'**
+  String lastSide(String side);
+
+  /// No description provided for @orEnterMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Or enter the minutes'**
+  String get orEnterMinutes;
+
+  /// No description provided for @leftMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Left (minutes)'**
+  String get leftMinutes;
+
+  /// No description provided for @rightMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Right (minutes)'**
+  String get rightMinutes;
+
+  /// No description provided for @feedTimerAlreadyRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'A feed timer is already running. You\'ll find it at the top of the Today screen.'**
+  String get feedTimerAlreadyRunning;
+
+  /// No description provided for @feedingNowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Feeding now'**
+  String get feedingNowTitle;
+
+  /// No description provided for @feedingNow.
+  ///
+  /// In en, this message translates to:
+  /// **'feeding now'**
+  String get feedingNow;
+
+  /// No description provided for @feedTimerPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get feedTimerPaused;
+
+  /// No description provided for @feedTimerHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a side to switch. Tap the running side to pause.'**
+  String get feedTimerHelp;
+
+  /// No description provided for @finishFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finishFeed;
+
+  /// No description provided for @discardButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get discardButton;
+
+  /// No description provided for @discardFeedConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard this feed? The timer and its times will be deleted.'**
+  String get discardFeedConfirm;
+
+  /// No description provided for @asleepNap.
+  ///
+  /// In en, this message translates to:
+  /// **'Napping'**
+  String get asleepNap;
+
+  /// No description provided for @asleepNight.
+  ///
+  /// In en, this message translates to:
+  /// **'Asleep for the night'**
+  String get asleepNight;
+
+  /// No description provided for @feedingNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is feeding'**
+  String feedingNotificationTitle(String name);
+
+  /// No description provided for @sleepNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is asleep'**
+  String sleepNotificationTitle(String name);
+
+  /// No description provided for @reportsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get reportsTitle;
+
+  /// No description provided for @seeReports.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports and trends'**
+  String get seeReports;
+
+  /// No description provided for @periodDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days'**
+  String periodDays(int count);
+
+  /// No description provided for @feedsPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Feeds a day'**
+  String get feedsPerDay;
+
+  /// No description provided for @timeBetweenFeeds.
+  ///
+  /// In en, this message translates to:
+  /// **'Usual time between feeds'**
+  String get timeBetweenFeeds;
+
+  /// No description provided for @nursingPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Breastfeeding a day'**
+  String get nursingPerDay;
+
+  /// No description provided for @perBreastfeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Per breastfeed'**
+  String get perBreastfeed;
+
+  /// No description provided for @sideSplit.
+  ///
+  /// In en, this message translates to:
+  /// **'Left / right'**
+  String get sideSplit;
+
+  /// No description provided for @bottlePerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Bottle milk a day'**
+  String get bottlePerDay;
+
+  /// No description provided for @perBottle.
+  ///
+  /// In en, this message translates to:
+  /// **'Per bottle'**
+  String get perBottle;
+
+  /// No description provided for @sleepPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep a day'**
+  String get sleepPerDay;
+
+  /// No description provided for @nightSleepPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Night sleep'**
+  String get nightSleepPerDay;
+
+  /// No description provided for @napsPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Naps a day'**
+  String get napsPerDay;
+
+  /// No description provided for @napTimePerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Nap time a day'**
+  String get napTimePerDay;
+
+  /// No description provided for @longestSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Longest sleep'**
+  String get longestSleep;
+
+  /// No description provided for @awakeBetweenSleeps.
+  ///
+  /// In en, this message translates to:
+  /// **'Awake between sleeps'**
+  String get awakeBetweenSleeps;
+
+  /// No description provided for @usualBedtime.
+  ///
+  /// In en, this message translates to:
+  /// **'Usual bedtime'**
+  String get usualBedtime;
+
+  /// No description provided for @usualWakeUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Usual wake-up'**
+  String get usualWakeUp;
+
+  /// No description provided for @wetPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Wet a day'**
+  String get wetPerDay;
+
+  /// No description provided for @dirtyPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Dirty a day'**
+  String get dirtyPerDay;
+
+  /// No description provided for @hoursShort.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h'**
+  String hoursShort(int hours);
+
+  /// No description provided for @hoursRange.
+  ///
+  /// In en, this message translates to:
+  /// **'{from}–{to} hours'**
+  String hoursRange(int from, int to);
+
+  /// No description provided for @typicalRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Typical for this age: {range}'**
+  String typicalRange(String range);
+
+  /// No description provided for @newbornFeedsGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Breastfed newborns usually feed 8 to 12 times a day.'**
+  String get newbornFeedsGuide;
+
+  /// No description provided for @wetGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'From day 5, 6 or more wet diapers a day is a sign of enough milk.'**
+  String get wetGuide;
+
+  /// No description provided for @dirtyGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'In the first 6 weeks, most breastfed babies have 2 or more dirty diapers a day.'**
+  String get dirtyGuide;
+
+  /// No description provided for @reportNotEnough.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough entries yet. Keep logging and this fills in.'**
+  String get reportNotEnough;
+
+  /// No description provided for @reportAveragesNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Averages count only full days on which you logged that kind of entry; today isn\'t included yet.'**
+  String get reportAveragesNote;
+
+  /// No description provided for @reportSources.
+  ///
+  /// In en, this message translates to:
+  /// **'Typical ranges: National Sleep Foundation (under 4 months), American Academy of Sleep Medicine (4 months and older), NHS (feeds and diapers). The shaded band on the sleep chart is the typical range. Every baby is different; if you\'re worried, talk to your doctor.'**
+  String get reportSources;
+
+  /// No description provided for @journalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Journal'**
+  String get journalTitle;
+
+  /// No description provided for @pastDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Past days'**
+  String get pastDays;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// No description provided for @pickDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a date'**
+  String get pickDate;
+
+  /// No description provided for @olderDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day before'**
+  String get olderDay;
+
+  /// No description provided for @newerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Next day'**
+  String get newerDay;
+
+  /// No description provided for @onThisDay.
+  ///
+  /// In en, this message translates to:
+  /// **'On this day'**
+  String get onThisDay;
+
+  /// No description provided for @pumpingEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Pumping'**
+  String get pumpingEntry;
+
+  /// No description provided for @nothingOnDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing was logged on this day.'**
+  String get nothingOnDay;
 }
 
 class _AppLocalizationsDelegate

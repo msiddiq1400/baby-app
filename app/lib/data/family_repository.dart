@@ -50,6 +50,11 @@ class FamilyRepository {
   /// Removes someone (owners), or leaves the family (anyone, themselves).
   Future<void> removeMember(String familyId, String userId) =>
       _supabase.from('family_members').delete().eq('family_id', familyId).eq('user_id', userId);
+
+  /// Deletes the signed-in user's login, and every family only they belong
+  /// to. Shared families keep their data (see delete_my_account in the
+  /// migrations). The caller must sign out afterwards.
+  Future<void> deleteMyAccount() => _supabase.rpc<dynamic>('delete_my_account');
 }
 
 class InvalidInviteException implements Exception {
