@@ -87,14 +87,12 @@ BABY APP: THINGS ONLY YOU CAN DO
 [x] 17. Domain palnacare.com bought at Namecheap (29 Sep 2026). DNS now runs
         on Cloudflare (active). Delete the 8 old Namecheap records in
         Cloudflare > DNS if not done yet.
-[ ] 17a. Email for palnacare.com:
-        - [x] Sending: done (29 Sep). Codes come from no-reply@palnacare.com
-          via Resend, 6 digits, English only. If not done yet: add DMARC in
-          Cloudflare (TXT, name _dmarc, content "v=DMARC1; p=none;") and
-          delete babyapp.toolbox.services in Resend.
-        - [ ] Receiving: Cloudflare > Email Routing > hello@palnacare.com
-          forwarding to your Gmail (support address for the stores and
-          the privacy policy).
+[x] 17a. Email for palnacare.com (30 Sep):
+        - Sending: sign-up codes from no-reply@palnacare.com via Resend.
+        - Receiving: hello@palnacare.com forwards to your Gmail (Cloudflare
+          Email Routing). SPF, DMARC and MX checked. Gmail filter for
+          to:hello@palnacare.com set to "Never send to Spam".
+        - Optional: delete the old babyapp.toolbox.services domain in Resend.
 [ ] 17b. From 28 Nov 2026 (60 days after purchase, an ICANN rule): transfer
         the registration from Namecheap to Cloudflare. Namecheap: turn off
         Registrar Lock, get the Auth/EPP code > Cloudflare > Domain
@@ -107,8 +105,16 @@ BABY APP: THINGS ONLY YOU CAN DO
         Workers & Pages > New deployment > drag in d:\baby-app\website.
         [ ] www.palnacare.com doesn't resolve yet: add it as a second custom
             domain on the same Worker.
-[ ] 18. Supabase: upgrade the org to Pro ($25/mo) before launch (daily
-        backups, no pausing).
+[ ] 18. Supabase: stay on the FREE plan at launch (decided 30 Sep).
+        - Claude sets up a nightly database backup (keeps 30 days) before
+          launch, since the free plan has no backups. Where to run it:
+          GitHub Actions (free) or your VPS; Claude will ask what's needed
+          (e.g. the database connection string as a GitHub secret).
+        - Free plan limits: 500 MB database, 50,000 monthly users, pauses
+          after ~1 week with no activity (unpause in the dashboard).
+        - Upgrade to Pro ($25/mo: daily backups, no pausing, support) or
+          move to your own server once there are a few hundred active
+          families or some income.
 [ ] 19. Google Auth Platform > Audience: switch from "Testing" to
         "In production" before launch (otherwise only test users can use
         Google sign-in).
@@ -229,9 +235,13 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
         404 page, sitemap. Preview a look: palnacare.com/?lang=ur&theme=baby
         When the apps are in the stores: swap "Coming soon" for the real
         Google Play / App Store buttons (Claude can do it).
-[ ] 25a. Terms of service page (MyBaby has one; stores don't require it,
-        but it's where the "not medical advice" terms belong). Claude can
-        draft it.
+[~] 25a. Terms of use page DRAFTED (30 Sep): website/terms, linked from every
+        page footer and the privacy policy. After re-deploying:
+        - Google Auth Platform > Branding > Terms of service link:
+          https://palnacare.com/terms
+        - You or a lawyer should read it. It deliberately has no "governing
+          law" clause yet: add the country where Toolbox Services is (or will
+          be) registered once that's decided (item 11).
 [ ] 26. Play Store health-app declaration and Data safety form.
 
 
