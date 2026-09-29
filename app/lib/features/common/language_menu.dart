@@ -6,6 +6,8 @@ import '../../core/reminders.dart';
 import '../../data/local_db.dart';
 import '../../l10n/app_localizations.dart';
 import '../auth/google_auth.dart';
+import '../settings/help_screen.dart';
+import '../settings/settings_screen.dart';
 
 /// App-bar menu for switching between English, Urdu and Roman Urdu,
 /// optionally with a sign-out entry.
@@ -37,6 +39,24 @@ class LanguageMenu extends ConsumerWidget {
           ),
         if (showSignOut) ...[
           const PopupMenuDivider(),
+          PopupMenuItem(
+            value: () => Navigator.of(context, rootNavigator: true)
+                .push(MaterialPageRoute<void>(builder: (_) => const HelpScreen())),
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Icons.emergency_outlined, color: Theme.of(context).colorScheme.error),
+              title: Text(l10n.helpTitle),
+            ),
+          ),
+          PopupMenuItem(
+            value: () => Navigator.of(context, rootNavigator: true)
+                .push(MaterialPageRoute<void>(builder: (_) => const SettingsScreen())),
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.settings_outlined),
+              title: Text(l10n.settingsTitle),
+            ),
+          ),
           PopupMenuItem(
             value: () async {
               if (!await _confirmSignOut(context, ref)) return;

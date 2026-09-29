@@ -10,6 +10,7 @@ import '../common/language_menu.dart';
 import 'growth_chart.dart';
 import 'growth_points.dart';
 import 'growth_sheet.dart';
+import 'milestones_view.dart';
 
 class GrowthScreen extends ConsumerStatefulWidget {
   const GrowthScreen({super.key, required this.baby});
@@ -20,8 +21,15 @@ class GrowthScreen extends ConsumerStatefulWidget {
   ConsumerState<GrowthScreen> createState() => _GrowthScreenState();
 }
 
-class _GrowthScreenState extends ConsumerState<GrowthScreen> {
+class _GrowthScreenState extends ConsumerState<GrowthScreen> with SingleTickerProviderStateMixin {
   var _metric = GrowthMetric.weight;
+  late final _tabs = TabController(length: 2, vsync: this)..addListener(() => setState(() {}));
+
+  @override
+  void dispose() {
+    _tabs.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,32 +39,45 @@ class _GrowthScreenState extends ConsumerState<GrowthScreen> {
     final who = ref.watch(whoGrowthProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.growthTitle), actions: const [LanguageMenu(showSignOut: true)]),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => showGrowthSheet(context, baby),
-        icon: const Icon(Icons.add),
-        label: Text(l10n.addMeasurement),
+      appBar: AppBar(
+        title: Text(l10n.growthTitle),
+        actions: const [LanguageMenu(showSignOut: true)],
+        bottom: TabBar(controller: _tabs, tabs: [Tab(text: l10n.tabCharts), Tab(text: l10n.tabMilestones)]),
       ),
-      body: RefreshIndicator(
-        onRefresh: () => ref.refresh(growthMeasurementsProvider(baby.id).future),
-        child: switch ((measurements, who)) {
-          (AsyncData(value: final list), AsyncData(value: final who)) => _GrowthBody(
-              baby: baby,
-              measurements: list,
-              who: who,
-              metric: _metric,
-              onMetricChanged: (m) => setState(() => _metric = m),
-            ),
-          (AsyncError(), _) || (_, AsyncError()) => ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(32),
-                  child: Text(l10n.errorGeneric, textAlign: TextAlign.center),
+      // Adding measurements belongs to the charts tab only.
+      floatingActionButton: _tabs.index == 0
+          ? FloatingActionButton.extended(
+              onPressed: () => showGrowthSheet(context, baby),
+              icon: const Icon(Icons.add),
+              label: Text(l10n.addMeasurement),
+            )
+          : null,
+      body: TabBarView(
+        controller: _tabs,
+        children: [
+          RefreshIndicator(
+            onRefresh: () => ref.refresh(growthMeasurementsProvider(baby.id).future),
+            child: switch ((measurements, who)) {
+              (AsyncData(value: final list), AsyncData(value: final who)) => _GrowthBody(
+                  baby: baby,
+                  measurements: list,
+                  who: who,
+                  metric: _metric,
+                  onMetricChanged: (m) => setState(() => _metric = m),
                 ),
-              ],
-            ),
-          _ => const Center(child: CircularProgressIndicator()),
-        },
+              (AsyncError(), _) || (_, AsyncError()) => ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(32),
+                      child: Text(l10n.errorGeneric, textAlign: TextAlign.center),
+                    ),
+                  ],
+                ),
+              _ => const Center(child: CircularProgressIndicator()),
+            },
+          ),
+          MilestonesView(baby: baby),
+        ],
       ),
     );
   }

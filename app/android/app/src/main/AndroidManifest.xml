@@ -2,7 +2,7 @@
     <!-- Reminders (vaccines, medicines) are restored after the phone restarts. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
-        android:label="baby_app"
+        android:label="Palna"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -25,13 +25,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-            <!-- Sign-in links from emails: app.babyapp://login-callback -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="app.babyapp" android:host="login-callback"/>
             </intent-filter>
         </activity>
         <!-- Shows scheduled reminders (flutter_local_notifications). -->
@@ -59,6 +52,11 @@
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
+        </intent>
+        <!-- Emergency numbers open the phone dialer (Android 11+ package visibility). -->
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
         </intent>
     </queries>
 </manifest>

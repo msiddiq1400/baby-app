@@ -49,13 +49,18 @@ abstract final class Reminders {
   /// Asks to show notifications (Android 13+ and iOS). Safe to call often:
   /// the system only asks once.
   static Future<void> requestPermission() async {
-    await _ensureReady();
-    await _plugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestNotificationsPermission();
-    await _plugin
-        .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(alert: true, badge: true, sound: true);
+    try {
+      await _ensureReady();
+      await _plugin
+          .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+          ?.requestNotificationsPermission();
+      await _plugin
+          .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(alert: true, badge: true, sound: true);
+    } catch (e) {
+      // Never let a permission prompt break the screen that asked for it.
+      debugPrint('Reminders: permission request failed: $e');
+    }
   }
 
   /// Removes every reminder, e.g. on sign-out.

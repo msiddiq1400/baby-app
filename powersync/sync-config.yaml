@@ -39,6 +39,10 @@ streams:
         AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
       - SELECT * FROM milk_stash WHERE deleted_at IS NULL
         AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM food_tries WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
+      - SELECT * FROM milestone_checks WHERE deleted_at IS NULL
+        AND family_id IN (SELECT family_id FROM family_members WHERE user_id = auth.user_id())
 
   # Reference data for everyone. PowerSync needs a single "id" column.
   vaccine_schedule:

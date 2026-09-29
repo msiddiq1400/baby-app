@@ -5,8 +5,12 @@
 -- The replication role PowerSync logs in with is created by hand in the SQL
 -- editor, because it has a password that must not be in the repo.
 
+-- family_members is needed by the sync rules to decide which families each
+-- phone gets. (On the hosted project it was added to the publication during
+-- PowerSync setup; it's listed here so fresh setups match.)
 create publication powersync for table
   public.families,
+  public.family_members,
   public.family_members,
   public.babies,
   public.feeds,

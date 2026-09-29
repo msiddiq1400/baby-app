@@ -1,6 +1,6 @@
 {
   "@@locale": "ur",
-  "appTitle": "بے بی ایپ",
+  "appTitle": "پالنا",
   "errorGeneric": "کچھ غلط ہو گیا۔ دوبارہ کوشش کریں۔",
   "fieldRequired": "ضروری ہے",
   "saveButton": "محفوظ کریں",
@@ -603,11 +603,236 @@
     }
   },
   "sumEntries": "تمام اندراجات",
-  "sumFooter": "والدین نے بے بی ایپ میں درج کیا۔",
+  "sumFooter": "والدین نے پالنا میں درج کیا۔",
   "firstSyncLoading": "آپ کے خاندان کا ڈیٹا لوڈ ہو رہا ہے…",
   "firstSyncNeedsInternet": "پہلی بار اس کے لیے انٹرنیٹ ضروری ہے۔ اس کے بعد ایپ انٹرنیٹ کے بغیر بھی چلتی ہے۔",
   "offlineBanner": "آف لائن: تبدیلیاں محفوظ ہیں اور انٹرنیٹ آنے پر سنک ہو جائیں گی۔",
   "unsyncedSignOutTitle": "کچھ تبدیلیاں ابھی سنک نہیں ہوئیں",
   "unsyncedSignOutBody": "اگر آپ ابھی سائن آؤٹ کریں تو آف لائن کیے گئے اندراجات ضائع ہو جائیں گے۔ انہیں محفوظ رکھنے کے لیے پہلے انٹرنیٹ سے جڑیں۔",
-  "signOutAnyway": "پھر بھی سائن آؤٹ کریں"
+  "signOutAnyway": "پھر بھی سائن آؤٹ کریں",
+  "editBabyTitle": "بچے کی معلومات میں ترمیم",
+  "birthLengthLabel": "پیدائش کے وقت قد سینٹی میٹر میں (اختیاری)",
+  "birthHeadLabel": "پیدائش کے وقت سر کا گھیر سینٹی میٹر میں (اختیاری)",
+  "invalidBirthLength": "20 سے 70 سینٹی میٹر کے درمیان قد درج کریں",
+  "invalidBirthHead": "20 سے 50 سینٹی میٹر کے درمیان درج کریں",
+  "settingsTitle": "ترتیبات",
+  "babiesSection": "بچے",
+  "addAnotherBaby": "ایک اور بچہ شامل کریں",
+  "familySection": "خاندان اور دیکھ بھال کرنے والے",
+  "familyOffline": "خاندان کے افراد دیکھنے اور مدعو کرنے کے لیے انٹرنیٹ سے جڑیں۔",
+  "ownerLabel": "مالک",
+  "caregiverLabel": "دیکھ بھال کرنے والا",
+  "youLabel": "آپ",
+  "inviteCaregiver": "دیکھ بھال کرنے والے کو مدعو کریں",
+  "inviteCodeTitle": "دعوتی کوڈ",
+  "inviteCodeHelp": "ان سے کہیں کہ ایپ انسٹال کریں، اکاؤنٹ بنائیں اور یہ کوڈ درج کریں۔ یہ ایک بار کام کرتا ہے اور 7 دن میں ختم ہو جاتا ہے۔",
+  "inviteShareText": "پالنا میں {name} کے خاندان میں شامل ہونے کے لیے یہ کوڈ استعمال کریں: {code} (7 دن کے لیے)",
+  "@inviteShareText": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "joinFamily": "کوڈ سے خاندان میں شامل ہوں",
+  "joinFamilyPrompt": "خاندان میں شامل ہو رہے ہیں؟ دعوتی کوڈ درج کریں",
+  "inviteCodeLabel": "6 حروف کا کوڈ",
+  "joinButton": "شامل ہوں",
+  "joinedFamily": "آپ خاندان میں شامل ہو گئے۔ ان کا ڈیٹا ابھی نظر آئے گا۔",
+  "invalidInvite": "یہ کوڈ غلط ہے، استعمال ہو چکا ہے یا ختم ہو گیا ہے۔",
+  "removeMember": "ہٹائیں",
+  "leaveFamily": "خاندان چھوڑیں",
+  "removeMemberConfirm": "{name} کو خاندان سے ہٹائیں؟",
+  "@removeMemberConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveFamilyConfirm": "یہ خاندان چھوڑیں؟ آپ کو اس کے بچے نظر آنا بند ہو جائیں گے۔",
+  "switchBaby": "بچہ بدلیں",
+  "atAGlance": "ایک نظر میں",
+  "hungerEstimate": "عام طور پر تقریباً ہر {interval} بعد دودھ پیتا ہے، اس لیے اگلی خوراک تقریباً {time} کے قریب ہو سکتی ہے۔",
+  "@hungerEstimate": {
+    "placeholders": {
+      "interval": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "hungerDisclaimer": "یہ حالیہ خوراکوں سے ایک اندازہ ہے؛ ہمیشہ بچے کی بھوک کے اشاروں پر عمل کریں۔",
+  "sleepUsual": "عام طور پر دن میں تقریباً {usual} سوتا ہے۔ آج اب تک: {today}۔",
+  "@sleepUsual": {
+    "placeholders": {
+      "usual": {
+        "type": "String"
+      },
+      "today": {
+        "type": "String"
+      }
+    }
+  },
+  "awakeFor": "{duration} سے جاگ رہا ہے",
+  "@awakeFor": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "usuallyAwake": "عام طور پر نیندوں کے درمیان تقریباً {duration}",
+  "@usuallyAwake": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccinesOverdueLine": "ٹیکوں میں تاخیر: {visit}",
+  "@vaccinesOverdueLine": {
+    "placeholders": {
+      "visit": {
+        "type": "String"
+      }
+    }
+  },
+  "medsTodayLine": "آج کی دوائیں: {total} میں سے {given} خوراکیں درج",
+  "@medsTodayLine": {
+    "placeholders": {
+      "given": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tabSolids": "ٹھوس غذا",
+  "solidsTitle": "ٹھوس غذا کا آغاز",
+  "solidsTooYoung": "زیادہ تر بچے تقریباً 6 ماہ پر ٹھوس غذا شروع کرتے ہیں۔ تب تک آپ پہلے سے پڑھ سکتے ہیں۔",
+  "readinessTitle": "کیا میرا بچہ تیار ہے؟",
+  "texturesTitle": "غذا کی ساخت کیسے بدلتی ہے",
+  "foodRulesTitle": "اہم اصول",
+  "allergensTitle": "الرجی والی غذائیں",
+  "allergenNotYet": "ابھی نہیں",
+  "allergenIntroduced": "شروع ہو گئی",
+  "allergenReaction": "ردِعمل",
+  "reactionSignsTitle": "الرجی ردِعمل کی نشانیاں",
+  "beliefsTitle": "عام باتیں بمقابلہ ثبوت",
+  "beliefLabel": "اکثر کہا جاتا ہے",
+  "evidenceLabel": "ثبوت کیا کہتے ہیں",
+  "foodsTitle": "غذائیں",
+  "searchFoods": "غذا تلاش کریں",
+  "categoryAll": "سب",
+  "categoryFruit": "پھل",
+  "categoryVegetable": "سبزیاں",
+  "categoryGrain": "اناج",
+  "categoryLegume": "دالیں",
+  "categoryProtein": "گوشت، مچھلی اور انڈا",
+  "categoryDairy": "دودھ سے بنی چیزیں",
+  "categoryNut": "میوے اور بیج",
+  "categoryOther": "ابھی نہیں",
+  "fromMonths": "{count} ماہ سے",
+  "@fromMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chokingRisk": "گلے میں پھنسنے کا خطرہ: بتائے گئے طریقے سے تیار کریں",
+  "allergenLabel": "الرجی والی غذا: {name}",
+  "@allergenLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "logTry": "آزمائش درج کریں",
+  "editTry": "آزمائش میں ترمیم",
+  "notTried": "ابھی نہیں آزمایا",
+  "triedTimes": "{count} بار آزمایا",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "opinionLabel": "کیا پسند آیا؟",
+  "opinionLiked": "پسند آیا",
+  "opinionNeutral": "ٹھیک",
+  "opinionDisliked": "پسند نہیں آیا",
+  "reactionLabel": "کوئی ردِعمل؟",
+  "reactionNone": "کوئی نہیں",
+  "reactionMild": "ہلکا",
+  "reactionSevere": "شدید",
+  "reactionWarning": "ردِعمل ہوا تھا: دوبارہ دینے سے پہلے ڈاکٹر سے بات کریں۔",
+  "severeReactionNow": "اگر بچے کو سانس لینے میں مشکل ہو، زبان یا گلے میں سوجن ہو، یا وہ ڈھیلا یا زرد پڑ جائے تو ابھی 1122 یا 115 پر کال کریں۔",
+  "sourcesLabel": "ماخذ: {sources}",
+  "@sourcesLabel": {
+    "placeholders": {
+      "sources": {
+        "type": "String"
+      }
+    }
+  },
+  "tabCharts": "چارٹ",
+  "tabMilestones": "سنگِ میل",
+  "byMonths": "{count} ماہ تک",
+  "@byMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "areaSocial": "سماجی و جذباتی",
+  "areaLanguage": "زبان اور بات چیت",
+  "areaCognitive": "سیکھنا اور سوچنا",
+  "areaMovement": "حرکت",
+  "waysToHelp": "مدد کے طریقے",
+  "actEarlyTitle": "ڈاکٹر سے کب بات کریں",
+  "milestonesProgress": "{total} میں سے {done}",
+  "@milestonesProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "reachedOn": "{date} کو",
+  "@reachedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "helpTitle": "ایمرجنسی اور مدد",
+  "emergencyNumbers": "ایمرجنسی نمبر (پاکستان)",
+  "emergencyNumbersNote": "کال کرنے کے لیے ٹیپ کریں۔ سہولیات ہر شہر میں مختلف ہیں؛ قریبی بچوں کے ہسپتال کا نمبر بھی محفوظ رکھیں۔",
+  "numRescue": "ریسکیو 1122: ایمبولینس اور ایمرجنسی",
+  "numEdhi": "ایدھی ایمبولینس",
+  "numChhipa": "چھیپا ایمبولینس (کراچی)",
+  "numPolice": "پولیس",
+  "numFire": "فائر بریگیڈ",
+  "callEmergencyWhen": "فوراً مدد کے لیے کال کریں اگر آپ کا بچہ",
+  "emergencySigns": "• سانس لینے میں مشکل ہو یا سانس رک رک کر آئے\n• ڈھیلا، بہت غنودہ ہو یا مشکل سے جاگے\n• جلد، ہونٹ یا زبان نیلی، سرمئی، زرد یا دھبے دار ہو، یا جسم ٹھنڈا لگے\n• دورہ (جھٹکے) پڑے\n• کسی غذا یا دوا کے بعد زبان یا گلے میں سوجن ہو",
+  "heatTitle": "گرمی اور لوڈ شیڈنگ",
+  "heatGuide": "• بچوں کو دھوپ سے بچائیں، خاص طور پر صبح 11 سے دوپہر 3 بجے تک، اور کبھی کھڑی گاڑی میں اکیلا نہ چھوڑیں۔\n• ایک ہلکا سوتی کپڑا پہنائیں؛ سایہ اور پنکھا استعمال کریں۔\n• زیادہ بار دودھ پلائیں۔ صرف ماں کا دودھ پینے والے 6 ماہ سے کم بچوں کو پانی کی ضرورت نہیں؛ فارمولا پینے والے بچوں کے لیے اضافی پانی کا ڈاکٹر سے پوچھیں۔\n• لوڈ شیڈنگ میں سب سے ٹھنڈے کمرے میں جائیں اور بچے کو نیم گرم (ٹھنڈے یا برف والے نہیں) پانی میں بھیگے کپڑے سے پونچھیں۔",
+  "dehydrationTitle": "پانی کی کمی کی نشانیاں: آج ہی ڈاکٹر کو دکھائیں",
+  "dehydrationSigns": "• معمول سے کم گیلے ڈائپر\n• روتے وقت آنسو کم یا بالکل نہ ہوں، یا منہ خشک ہو\n• سر کا نرم حصہ (تالو) یا آنکھیں دھنسی ہوئی ہوں\n• غیر معمولی طور پر غنودہ یا چڑچڑا ہو",
+  "helpSources": "یہ NHS اور عالمی ادارہ صحت کی ہدایات پر مبنی ہے۔ یہ عمومی معلومات ہیں، تشخیص نہیں؛ فکر ہو تو ڈاکٹر سے رابطہ کریں۔"
 }

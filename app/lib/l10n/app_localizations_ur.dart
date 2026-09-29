@@ -9,7 +9,7 @@ class AppLocalizationsUr extends AppLocalizations {
   AppLocalizationsUr([String locale = 'ur']) : super(locale);
 
   @override
-  String get appTitle => 'بے بی ایپ';
+  String get appTitle => 'پالنا';
 
   @override
   String get errorGeneric => 'کچھ غلط ہو گیا۔ دوبارہ کوشش کریں۔';
@@ -841,7 +841,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get sumEntries => 'تمام اندراجات';
 
   @override
-  String get sumFooter => 'والدین نے بے بی ایپ میں درج کیا۔';
+  String get sumFooter => 'والدین نے پالنا میں درج کیا۔';
 
   @override
   String get firstSyncLoading => 'آپ کے خاندان کا ڈیٹا لوڈ ہو رہا ہے…';
@@ -863,6 +863,369 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get signOutAnyway => 'پھر بھی سائن آؤٹ کریں';
+
+  @override
+  String get editBabyTitle => 'بچے کی معلومات میں ترمیم';
+
+  @override
+  String get birthLengthLabel => 'پیدائش کے وقت قد سینٹی میٹر میں (اختیاری)';
+
+  @override
+  String get birthHeadLabel =>
+      'پیدائش کے وقت سر کا گھیر سینٹی میٹر میں (اختیاری)';
+
+  @override
+  String get invalidBirthLength => '20 سے 70 سینٹی میٹر کے درمیان قد درج کریں';
+
+  @override
+  String get invalidBirthHead => '20 سے 50 سینٹی میٹر کے درمیان درج کریں';
+
+  @override
+  String get settingsTitle => 'ترتیبات';
+
+  @override
+  String get babiesSection => 'بچے';
+
+  @override
+  String get addAnotherBaby => 'ایک اور بچہ شامل کریں';
+
+  @override
+  String get familySection => 'خاندان اور دیکھ بھال کرنے والے';
+
+  @override
+  String get familyOffline =>
+      'خاندان کے افراد دیکھنے اور مدعو کرنے کے لیے انٹرنیٹ سے جڑیں۔';
+
+  @override
+  String get ownerLabel => 'مالک';
+
+  @override
+  String get caregiverLabel => 'دیکھ بھال کرنے والا';
+
+  @override
+  String get youLabel => 'آپ';
+
+  @override
+  String get inviteCaregiver => 'دیکھ بھال کرنے والے کو مدعو کریں';
+
+  @override
+  String get inviteCodeTitle => 'دعوتی کوڈ';
+
+  @override
+  String get inviteCodeHelp =>
+      'ان سے کہیں کہ ایپ انسٹال کریں، اکاؤنٹ بنائیں اور یہ کوڈ درج کریں۔ یہ ایک بار کام کرتا ہے اور 7 دن میں ختم ہو جاتا ہے۔';
+
+  @override
+  String inviteShareText(String name, String code) {
+    return 'پالنا میں $name کے خاندان میں شامل ہونے کے لیے یہ کوڈ استعمال کریں: $code (7 دن کے لیے)';
+  }
+
+  @override
+  String get joinFamily => 'کوڈ سے خاندان میں شامل ہوں';
+
+  @override
+  String get joinFamilyPrompt =>
+      'خاندان میں شامل ہو رہے ہیں؟ دعوتی کوڈ درج کریں';
+
+  @override
+  String get inviteCodeLabel => '6 حروف کا کوڈ';
+
+  @override
+  String get joinButton => 'شامل ہوں';
+
+  @override
+  String get joinedFamily =>
+      'آپ خاندان میں شامل ہو گئے۔ ان کا ڈیٹا ابھی نظر آئے گا۔';
+
+  @override
+  String get invalidInvite =>
+      'یہ کوڈ غلط ہے، استعمال ہو چکا ہے یا ختم ہو گیا ہے۔';
+
+  @override
+  String get removeMember => 'ہٹائیں';
+
+  @override
+  String get leaveFamily => 'خاندان چھوڑیں';
+
+  @override
+  String removeMemberConfirm(String name) {
+    return '$name کو خاندان سے ہٹائیں؟';
+  }
+
+  @override
+  String get leaveFamilyConfirm =>
+      'یہ خاندان چھوڑیں؟ آپ کو اس کے بچے نظر آنا بند ہو جائیں گے۔';
+
+  @override
+  String get switchBaby => 'بچہ بدلیں';
+
+  @override
+  String get atAGlance => 'ایک نظر میں';
+
+  @override
+  String hungerEstimate(String interval, String time) {
+    return 'عام طور پر تقریباً ہر $interval بعد دودھ پیتا ہے، اس لیے اگلی خوراک تقریباً $time کے قریب ہو سکتی ہے۔';
+  }
+
+  @override
+  String get hungerDisclaimer =>
+      'یہ حالیہ خوراکوں سے ایک اندازہ ہے؛ ہمیشہ بچے کی بھوک کے اشاروں پر عمل کریں۔';
+
+  @override
+  String sleepUsual(String usual, String today) {
+    return 'عام طور پر دن میں تقریباً $usual سوتا ہے۔ آج اب تک: $today۔';
+  }
+
+  @override
+  String awakeFor(String duration) {
+    return '$duration سے جاگ رہا ہے';
+  }
+
+  @override
+  String usuallyAwake(String duration) {
+    return 'عام طور پر نیندوں کے درمیان تقریباً $duration';
+  }
+
+  @override
+  String vaccinesOverdueLine(String visit) {
+    return 'ٹیکوں میں تاخیر: $visit';
+  }
+
+  @override
+  String medsTodayLine(int given, int total) {
+    return 'آج کی دوائیں: $total میں سے $given خوراکیں درج';
+  }
+
+  @override
+  String get tabSolids => 'ٹھوس غذا';
+
+  @override
+  String get solidsTitle => 'ٹھوس غذا کا آغاز';
+
+  @override
+  String get solidsTooYoung =>
+      'زیادہ تر بچے تقریباً 6 ماہ پر ٹھوس غذا شروع کرتے ہیں۔ تب تک آپ پہلے سے پڑھ سکتے ہیں۔';
+
+  @override
+  String get readinessTitle => 'کیا میرا بچہ تیار ہے؟';
+
+  @override
+  String get texturesTitle => 'غذا کی ساخت کیسے بدلتی ہے';
+
+  @override
+  String get foodRulesTitle => 'اہم اصول';
+
+  @override
+  String get allergensTitle => 'الرجی والی غذائیں';
+
+  @override
+  String get allergenNotYet => 'ابھی نہیں';
+
+  @override
+  String get allergenIntroduced => 'شروع ہو گئی';
+
+  @override
+  String get allergenReaction => 'ردِعمل';
+
+  @override
+  String get reactionSignsTitle => 'الرجی ردِعمل کی نشانیاں';
+
+  @override
+  String get beliefsTitle => 'عام باتیں بمقابلہ ثبوت';
+
+  @override
+  String get beliefLabel => 'اکثر کہا جاتا ہے';
+
+  @override
+  String get evidenceLabel => 'ثبوت کیا کہتے ہیں';
+
+  @override
+  String get foodsTitle => 'غذائیں';
+
+  @override
+  String get searchFoods => 'غذا تلاش کریں';
+
+  @override
+  String get categoryAll => 'سب';
+
+  @override
+  String get categoryFruit => 'پھل';
+
+  @override
+  String get categoryVegetable => 'سبزیاں';
+
+  @override
+  String get categoryGrain => 'اناج';
+
+  @override
+  String get categoryLegume => 'دالیں';
+
+  @override
+  String get categoryProtein => 'گوشت، مچھلی اور انڈا';
+
+  @override
+  String get categoryDairy => 'دودھ سے بنی چیزیں';
+
+  @override
+  String get categoryNut => 'میوے اور بیج';
+
+  @override
+  String get categoryOther => 'ابھی نہیں';
+
+  @override
+  String fromMonths(int count) {
+    return '$count ماہ سے';
+  }
+
+  @override
+  String get chokingRisk =>
+      'گلے میں پھنسنے کا خطرہ: بتائے گئے طریقے سے تیار کریں';
+
+  @override
+  String allergenLabel(String name) {
+    return 'الرجی والی غذا: $name';
+  }
+
+  @override
+  String get logTry => 'آزمائش درج کریں';
+
+  @override
+  String get editTry => 'آزمائش میں ترمیم';
+
+  @override
+  String get notTried => 'ابھی نہیں آزمایا';
+
+  @override
+  String triedTimes(int count) {
+    return '$count بار آزمایا';
+  }
+
+  @override
+  String get opinionLabel => 'کیا پسند آیا؟';
+
+  @override
+  String get opinionLiked => 'پسند آیا';
+
+  @override
+  String get opinionNeutral => 'ٹھیک';
+
+  @override
+  String get opinionDisliked => 'پسند نہیں آیا';
+
+  @override
+  String get reactionLabel => 'کوئی ردِعمل؟';
+
+  @override
+  String get reactionNone => 'کوئی نہیں';
+
+  @override
+  String get reactionMild => 'ہلکا';
+
+  @override
+  String get reactionSevere => 'شدید';
+
+  @override
+  String get reactionWarning =>
+      'ردِعمل ہوا تھا: دوبارہ دینے سے پہلے ڈاکٹر سے بات کریں۔';
+
+  @override
+  String get severeReactionNow =>
+      'اگر بچے کو سانس لینے میں مشکل ہو، زبان یا گلے میں سوجن ہو، یا وہ ڈھیلا یا زرد پڑ جائے تو ابھی 1122 یا 115 پر کال کریں۔';
+
+  @override
+  String sourcesLabel(String sources) {
+    return 'ماخذ: $sources';
+  }
+
+  @override
+  String get tabCharts => 'چارٹ';
+
+  @override
+  String get tabMilestones => 'سنگِ میل';
+
+  @override
+  String byMonths(int count) {
+    return '$count ماہ تک';
+  }
+
+  @override
+  String get areaSocial => 'سماجی و جذباتی';
+
+  @override
+  String get areaLanguage => 'زبان اور بات چیت';
+
+  @override
+  String get areaCognitive => 'سیکھنا اور سوچنا';
+
+  @override
+  String get areaMovement => 'حرکت';
+
+  @override
+  String get waysToHelp => 'مدد کے طریقے';
+
+  @override
+  String get actEarlyTitle => 'ڈاکٹر سے کب بات کریں';
+
+  @override
+  String milestonesProgress(int done, int total) {
+    return '$total میں سے $done';
+  }
+
+  @override
+  String reachedOn(String date) {
+    return '$date کو';
+  }
+
+  @override
+  String get helpTitle => 'ایمرجنسی اور مدد';
+
+  @override
+  String get emergencyNumbers => 'ایمرجنسی نمبر (پاکستان)';
+
+  @override
+  String get emergencyNumbersNote =>
+      'کال کرنے کے لیے ٹیپ کریں۔ سہولیات ہر شہر میں مختلف ہیں؛ قریبی بچوں کے ہسپتال کا نمبر بھی محفوظ رکھیں۔';
+
+  @override
+  String get numRescue => 'ریسکیو 1122: ایمبولینس اور ایمرجنسی';
+
+  @override
+  String get numEdhi => 'ایدھی ایمبولینس';
+
+  @override
+  String get numChhipa => 'چھیپا ایمبولینس (کراچی)';
+
+  @override
+  String get numPolice => 'پولیس';
+
+  @override
+  String get numFire => 'فائر بریگیڈ';
+
+  @override
+  String get callEmergencyWhen => 'فوراً مدد کے لیے کال کریں اگر آپ کا بچہ';
+
+  @override
+  String get emergencySigns =>
+      '• سانس لینے میں مشکل ہو یا سانس رک رک کر آئے\n• ڈھیلا، بہت غنودہ ہو یا مشکل سے جاگے\n• جلد، ہونٹ یا زبان نیلی، سرمئی، زرد یا دھبے دار ہو، یا جسم ٹھنڈا لگے\n• دورہ (جھٹکے) پڑے\n• کسی غذا یا دوا کے بعد زبان یا گلے میں سوجن ہو';
+
+  @override
+  String get heatTitle => 'گرمی اور لوڈ شیڈنگ';
+
+  @override
+  String get heatGuide =>
+      '• بچوں کو دھوپ سے بچائیں، خاص طور پر صبح 11 سے دوپہر 3 بجے تک، اور کبھی کھڑی گاڑی میں اکیلا نہ چھوڑیں۔\n• ایک ہلکا سوتی کپڑا پہنائیں؛ سایہ اور پنکھا استعمال کریں۔\n• زیادہ بار دودھ پلائیں۔ صرف ماں کا دودھ پینے والے 6 ماہ سے کم بچوں کو پانی کی ضرورت نہیں؛ فارمولا پینے والے بچوں کے لیے اضافی پانی کا ڈاکٹر سے پوچھیں۔\n• لوڈ شیڈنگ میں سب سے ٹھنڈے کمرے میں جائیں اور بچے کو نیم گرم (ٹھنڈے یا برف والے نہیں) پانی میں بھیگے کپڑے سے پونچھیں۔';
+
+  @override
+  String get dehydrationTitle =>
+      'پانی کی کمی کی نشانیاں: آج ہی ڈاکٹر کو دکھائیں';
+
+  @override
+  String get dehydrationSigns =>
+      '• معمول سے کم گیلے ڈائپر\n• روتے وقت آنسو کم یا بالکل نہ ہوں، یا منہ خشک ہو\n• سر کا نرم حصہ (تالو) یا آنکھیں دھنسی ہوئی ہوں\n• غیر معمولی طور پر غنودہ یا چڑچڑا ہو';
+
+  @override
+  String get helpSources =>
+      'یہ NHS اور عالمی ادارہ صحت کی ہدایات پر مبنی ہے۔ یہ عمومی معلومات ہیں، تشخیص نہیں؛ فکر ہو تو ڈاکٹر سے رابطہ کریں۔';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -870,7 +1233,7 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   AppLocalizationsUrLatn() : super('ur_Latn');
 
   @override
-  String get appTitle => 'Baby App';
+  String get appTitle => 'Palna';
 
   @override
   String get errorGeneric => 'Kuch ghalat ho gaya. Dobara koshish karein.';
@@ -1705,7 +2068,7 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String get sumEntries => 'Tamam indrajaat';
 
   @override
-  String get sumFooter => 'Walidain ne Baby App mein record kiya.';
+  String get sumFooter => 'Walidain ne Palna mein record kiya.';
 
   @override
   String get firstSyncLoading => 'Aap ki family ka data load ho raha hai…';
@@ -1727,4 +2090,368 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get signOutAnyway => 'Phir bhi sign out karein';
+
+  @override
+  String get editBabyTitle => 'Baby edit karein';
+
+  @override
+  String get birthLengthLabel => 'Paidaish ke waqt qad cm mein (optional)';
+
+  @override
+  String get birthHeadLabel =>
+      'Paidaish ke waqt sar ka gher cm mein (optional)';
+
+  @override
+  String get invalidBirthLength => '20 se 70 cm ke darmiyan qad likhein';
+
+  @override
+  String get invalidBirthHead => '20 se 50 cm ke darmiyan likhein';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get babiesSection => 'Bachay';
+
+  @override
+  String get addAnotherBaby => 'Ek aur baby add karein';
+
+  @override
+  String get familySection => 'Family aur dekh bhaal karne wale';
+
+  @override
+  String get familyOffline =>
+      'Family members dekhne aur invite karne ke liye internet se judein.';
+
+  @override
+  String get ownerLabel => 'Owner';
+
+  @override
+  String get caregiverLabel => 'Caregiver';
+
+  @override
+  String get youLabel => 'Aap';
+
+  @override
+  String get inviteCaregiver => 'Caregiver ko invite karein';
+
+  @override
+  String get inviteCodeTitle => 'Invite code';
+
+  @override
+  String get inviteCodeHelp =>
+      'Un se kahein ke app install karein, account banayein aur yeh code likhein. Yeh ek baar kaam karta hai aur 7 din mein khatam ho jata hai.';
+
+  @override
+  String inviteShareText(String name, String code) {
+    return 'Palna mein $name ki family join karne ke liye yeh code use karein: $code (7 din ke liye)';
+  }
+
+  @override
+  String get joinFamily => 'Code se family join karein';
+
+  @override
+  String get joinFamilyPrompt =>
+      'Family join kar rahe hain? Invite code likhein';
+
+  @override
+  String get inviteCodeLabel => '6 characters ka code';
+
+  @override
+  String get joinButton => 'Join karein';
+
+  @override
+  String get joinedFamily =>
+      'Aap family mein shamil ho gaye. Un ka data abhi nazar aayega.';
+
+  @override
+  String get invalidInvite =>
+      'Yeh code ghalat hai, use ho chuka hai ya expire ho gaya hai.';
+
+  @override
+  String get removeMember => 'Hatayein';
+
+  @override
+  String get leaveFamily => 'Family chhorein';
+
+  @override
+  String removeMemberConfirm(String name) {
+    return '$name ko family se hatayein?';
+  }
+
+  @override
+  String get leaveFamilyConfirm =>
+      'Yeh family chhorein? Aap ko is ke bachay nazar aana band ho jayenge.';
+
+  @override
+  String get switchBaby => 'Baby badlein';
+
+  @override
+  String get atAGlance => 'Ek nazar mein';
+
+  @override
+  String hungerEstimate(String interval, String time) {
+    return 'Aam taur par taqreeban har $interval baad doodh peeta hai, is liye agli feed taqreeban $time ke qareeb ho sakti hai.';
+  }
+
+  @override
+  String get hungerDisclaimer =>
+      'Yeh haaliya feeds se ek andaaza hai; hamesha baby ki bhook ke isharon par amal karein.';
+
+  @override
+  String sleepUsual(String usual, String today) {
+    return 'Aam taur par din mein taqreeban $usual sota hai. Aaj ab tak: $today.';
+  }
+
+  @override
+  String awakeFor(String duration) {
+    return '$duration se jaag raha hai';
+  }
+
+  @override
+  String usuallyAwake(String duration) {
+    return 'aam taur par neendon ke darmiyan taqreeban $duration';
+  }
+
+  @override
+  String vaccinesOverdueLine(String visit) {
+    return 'Teekon mein der: $visit';
+  }
+
+  @override
+  String medsTodayLine(int given, int total) {
+    return 'Aaj ki dawaiyan: $total mein se $given khurakein record';
+  }
+
+  @override
+  String get tabSolids => 'Thos ghiza';
+
+  @override
+  String get solidsTitle => 'Thos ghiza ka aaghaz';
+
+  @override
+  String get solidsTooYoung =>
+      'Zyada tar bachay taqreeban 6 mahine par thos ghiza shuru karte hain. Tab tak aap pehle se parh sakte hain.';
+
+  @override
+  String get readinessTitle => 'Kya mera bacha tayyar hai?';
+
+  @override
+  String get texturesTitle => 'Ghiza ki saakht kaise badalti hai';
+
+  @override
+  String get foodRulesTitle => 'Ahem usool';
+
+  @override
+  String get allergensTitle => 'Allergy wali ghizayein';
+
+  @override
+  String get allergenNotYet => 'Abhi nahi';
+
+  @override
+  String get allergenIntroduced => 'Shuru ho gayi';
+
+  @override
+  String get allergenReaction => 'Rad-e-amal';
+
+  @override
+  String get reactionSignsTitle => 'Allergy rad-e-amal ki nishaniyan';
+
+  @override
+  String get beliefsTitle => 'Aam baatein bamuqabla saboot';
+
+  @override
+  String get beliefLabel => 'Aksar kaha jata hai';
+
+  @override
+  String get evidenceLabel => 'Saboot kya kehte hain';
+
+  @override
+  String get foodsTitle => 'Ghizayein';
+
+  @override
+  String get searchFoods => 'Ghiza talash karein';
+
+  @override
+  String get categoryAll => 'Sab';
+
+  @override
+  String get categoryFruit => 'Phal';
+
+  @override
+  String get categoryVegetable => 'Sabziyan';
+
+  @override
+  String get categoryGrain => 'Anaaj';
+
+  @override
+  String get categoryLegume => 'Daalein';
+
+  @override
+  String get categoryProtein => 'Gosht, machli aur anda';
+
+  @override
+  String get categoryDairy => 'Doodh se bani cheezein';
+
+  @override
+  String get categoryNut => 'Mewe aur beej';
+
+  @override
+  String get categoryOther => 'Abhi nahi';
+
+  @override
+  String fromMonths(int count) {
+    return '$count mahine se';
+  }
+
+  @override
+  String get chokingRisk =>
+      'Gale mein phansne ka khatra: bataye gaye tareeqe se tayyar karein';
+
+  @override
+  String allergenLabel(String name) {
+    return 'Allergy wali ghiza: $name';
+  }
+
+  @override
+  String get logTry => 'Try record karein';
+
+  @override
+  String get editTry => 'Try edit karein';
+
+  @override
+  String get notTried => 'Abhi nahi aazmaya';
+
+  @override
+  String triedTimes(int count) {
+    return '$count baar aazmaya';
+  }
+
+  @override
+  String get opinionLabel => 'Kya pasand aaya?';
+
+  @override
+  String get opinionLiked => 'Pasand aaya';
+
+  @override
+  String get opinionNeutral => 'Theek';
+
+  @override
+  String get opinionDisliked => 'Pasand nahi aaya';
+
+  @override
+  String get reactionLabel => 'Koi rad-e-amal?';
+
+  @override
+  String get reactionNone => 'Koi nahi';
+
+  @override
+  String get reactionMild => 'Halka';
+
+  @override
+  String get reactionSevere => 'Shadeed';
+
+  @override
+  String get reactionWarning =>
+      'Rad-e-amal hua tha: dobara dene se pehle doctor se baat karein.';
+
+  @override
+  String get severeReactionNow =>
+      'Agar bache ko saans lene mein mushkil ho, zabaan ya gale mein soojan ho, ya woh dheela ya zard par jaye to abhi 1122 ya 115 par call karein.';
+
+  @override
+  String sourcesLabel(String sources) {
+    return 'Maakhaz: $sources';
+  }
+
+  @override
+  String get tabCharts => 'Charts';
+
+  @override
+  String get tabMilestones => 'Milestones';
+
+  @override
+  String byMonths(int count) {
+    return '$count mahine tak';
+  }
+
+  @override
+  String get areaSocial => 'Samaji o jazbati';
+
+  @override
+  String get areaLanguage => 'Zabaan aur baat cheet';
+
+  @override
+  String get areaCognitive => 'Seekhna aur sochna';
+
+  @override
+  String get areaMovement => 'Harkat';
+
+  @override
+  String get waysToHelp => 'Madad ke tareeqe';
+
+  @override
+  String get actEarlyTitle => 'Doctor se kab baat karein';
+
+  @override
+  String milestonesProgress(int done, int total) {
+    return '$total mein se $done';
+  }
+
+  @override
+  String reachedOn(String date) {
+    return '$date ko';
+  }
+
+  @override
+  String get helpTitle => 'Emergency aur madad';
+
+  @override
+  String get emergencyNumbers => 'Emergency numbers (Pakistan)';
+
+  @override
+  String get emergencyNumbersNote =>
+      'Call karne ke liye tap karein. Sahooliyat har shehar mein mukhtalif hain; qareebi bachon ke hospital ka number bhi save rakhein.';
+
+  @override
+  String get numRescue => 'Rescue 1122: ambulance aur emergency';
+
+  @override
+  String get numEdhi => 'Edhi ambulance';
+
+  @override
+  String get numChhipa => 'Chhipa ambulance (Karachi)';
+
+  @override
+  String get numPolice => 'Police';
+
+  @override
+  String get numFire => 'Fire brigade';
+
+  @override
+  String get callEmergencyWhen =>
+      'Foran madad ke liye call karein agar aap ka bacha';
+
+  @override
+  String get emergencySigns =>
+      '• saans lene mein mushkil ho ya saans ruk ruk kar aaye\n• dheela, bohat ghunooda ho ya mushkil se jaage\n• jild, hont ya zabaan neeli, surmai, zard ya dhabbe daar ho, ya jism thanda lage\n• daura (jhatke) pare\n• kisi ghiza ya dawa ke baad zabaan ya gale mein soojan ho';
+
+  @override
+  String get heatTitle => 'Garmi aur load-shedding';
+
+  @override
+  String get heatGuide =>
+      '• Bachon ko dhoop se bachayein, khaas taur par subah 11 se dopahar 3 baje tak, aur kabhi khari gaari mein akela na chhorein.\n• Ek halka sooti kapra pehnayein; saya aur pankha istemal karein.\n• Zyada baar doodh pilayein. Sirf maa ka doodh peene wale 6 mahine se kam bachon ko paani ki zaroorat nahi; formula peene wale bachon ke liye izafi paani ka doctor se poochein.\n• Load-shedding mein sab se thande kamre mein jaayein aur bache ko neem garam (thande ya barf wale nahi) paani mein bheege kapre se ponchhein.';
+
+  @override
+  String get dehydrationTitle =>
+      'Paani ki kami ki nishaniyan: aaj hi doctor ko dikhayein';
+
+  @override
+  String get dehydrationSigns =>
+      '• maamool se kam geelay diapers\n• rote waqt aansu kam ya bilkul na hon, ya munh khushk ho\n• sar ka naram hissa (taalu) ya aankhein dhansi hui hon\n• ghair mamooli taur par ghunooda ya chirchira ho';
+
+  @override
+  String get helpSources =>
+      'Yeh NHS aur aalmi idara-e-sehat ki hidayat par mabni hai. Yeh umoomi maloomat hain, tashkhees nahi; fikr ho to doctor se rabta karein.';
 }

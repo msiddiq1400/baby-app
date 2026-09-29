@@ -1,4 +1,4 @@
-package app.babyapp.baby_app
+package services.toolbox.palna
 
 import io.flutter.embedding.android.FlutterActivity
 

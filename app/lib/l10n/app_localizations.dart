@@ -102,7 +102,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'Baby App'**
+  /// **'Palna'**
   String get appTitle;
 
   /// No description provided for @errorGeneric.
@@ -1566,7 +1566,7 @@ abstract class AppLocalizations {
   /// No description provided for @sumFooter.
   ///
   /// In en, this message translates to:
-  /// **'Recorded by the parent in Baby App.'**
+  /// **'Recorded by the parent in Palna.'**
   String get sumFooter;
 
   /// No description provided for @firstSyncLoading.
@@ -1604,6 +1604,636 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign out anyway'**
   String get signOutAnyway;
+
+  /// No description provided for @editBabyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit baby'**
+  String get editBabyTitle;
+
+  /// No description provided for @birthLengthLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth length in cm (optional)'**
+  String get birthLengthLabel;
+
+  /// No description provided for @birthHeadLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth head circumference in cm (optional)'**
+  String get birthHeadLabel;
+
+  /// No description provided for @invalidBirthLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a length between 20 and 70 cm'**
+  String get invalidBirthLength;
+
+  /// No description provided for @invalidBirthHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a size between 20 and 50 cm'**
+  String get invalidBirthHead;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// No description provided for @babiesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Babies'**
+  String get babiesSection;
+
+  /// No description provided for @addAnotherBaby.
+  ///
+  /// In en, this message translates to:
+  /// **'Add another baby'**
+  String get addAnotherBaby;
+
+  /// No description provided for @familySection.
+  ///
+  /// In en, this message translates to:
+  /// **'Family & caregivers'**
+  String get familySection;
+
+  /// No description provided for @familyOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect to the internet to see and invite family members.'**
+  String get familyOffline;
+
+  /// No description provided for @ownerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner'**
+  String get ownerLabel;
+
+  /// No description provided for @caregiverLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Caregiver'**
+  String get caregiverLabel;
+
+  /// No description provided for @youLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get youLabel;
+
+  /// No description provided for @inviteCaregiver.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite a caregiver'**
+  String get inviteCaregiver;
+
+  /// No description provided for @inviteCodeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite code'**
+  String get inviteCodeTitle;
+
+  /// No description provided for @inviteCodeHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask them to install the app, create an account and enter this code. It works once and expires in 7 days.'**
+  String get inviteCodeHelp;
+
+  /// No description provided for @inviteShareText.
+  ///
+  /// In en, this message translates to:
+  /// **'Join {name}\'s family on Palna with this code: {code} (valid for 7 days)'**
+  String inviteShareText(String name, String code);
+
+  /// No description provided for @joinFamily.
+  ///
+  /// In en, this message translates to:
+  /// **'Join a family with a code'**
+  String get joinFamily;
+
+  /// No description provided for @joinFamilyPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Joining a family? Enter the invite code'**
+  String get joinFamilyPrompt;
+
+  /// No description provided for @inviteCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'6-character code'**
+  String get inviteCodeLabel;
+
+  /// No description provided for @joinButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get joinButton;
+
+  /// No description provided for @joinedFamily.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve joined the family. Their data will appear in a moment.'**
+  String get joinedFamily;
+
+  /// No description provided for @invalidInvite.
+  ///
+  /// In en, this message translates to:
+  /// **'That code is wrong, already used, or expired.'**
+  String get invalidInvite;
+
+  /// No description provided for @removeMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get removeMember;
+
+  /// No description provided for @leaveFamily.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave family'**
+  String get leaveFamily;
+
+  /// No description provided for @removeMemberConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {name} from the family?'**
+  String removeMemberConfirm(String name);
+
+  /// No description provided for @leaveFamilyConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave this family? You\'ll stop seeing its babies.'**
+  String get leaveFamilyConfirm;
+
+  /// No description provided for @switchBaby.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch baby'**
+  String get switchBaby;
+
+  /// No description provided for @atAGlance.
+  ///
+  /// In en, this message translates to:
+  /// **'At a glance'**
+  String get atAGlance;
+
+  /// No description provided for @hungerEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Usually feeds about every {interval}, so the next feed may be around {time}.'**
+  String hungerEstimate(String interval, String time);
+
+  /// No description provided for @hungerDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'A rough guide from recent feeds; always follow your baby\'s hunger cues.'**
+  String get hungerDisclaimer;
+
+  /// No description provided for @sleepUsual.
+  ///
+  /// In en, this message translates to:
+  /// **'Usually sleeps about {usual} a day. Today so far: {today}.'**
+  String sleepUsual(String usual, String today);
+
+  /// No description provided for @awakeFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Awake for {duration}'**
+  String awakeFor(String duration);
+
+  /// No description provided for @usuallyAwake.
+  ///
+  /// In en, this message translates to:
+  /// **'usually about {duration} between sleeps'**
+  String usuallyAwake(String duration);
+
+  /// No description provided for @vaccinesOverdueLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Vaccines overdue: {visit}'**
+  String vaccinesOverdueLine(String visit);
+
+  /// No description provided for @medsTodayLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicines today: {given} of {total} doses recorded'**
+  String medsTodayLine(int given, int total);
+
+  /// No description provided for @tabSolids.
+  ///
+  /// In en, this message translates to:
+  /// **'Solids'**
+  String get tabSolids;
+
+  /// No description provided for @solidsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting solids'**
+  String get solidsTitle;
+
+  /// No description provided for @solidsTooYoung.
+  ///
+  /// In en, this message translates to:
+  /// **'Most babies start solids around 6 months. You can read ahead in the meantime.'**
+  String get solidsTooYoung;
+
+  /// No description provided for @readinessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Is my baby ready?'**
+  String get readinessTitle;
+
+  /// No description provided for @texturesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How textures change'**
+  String get texturesTitle;
+
+  /// No description provided for @foodRulesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Important rules'**
+  String get foodRulesTitle;
+
+  /// No description provided for @allergensTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Allergens'**
+  String get allergensTitle;
+
+  /// No description provided for @allergenNotYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet'**
+  String get allergenNotYet;
+
+  /// No description provided for @allergenIntroduced.
+  ///
+  /// In en, this message translates to:
+  /// **'Introduced'**
+  String get allergenIntroduced;
+
+  /// No description provided for @allergenReaction.
+  ///
+  /// In en, this message translates to:
+  /// **'Reaction'**
+  String get allergenReaction;
+
+  /// No description provided for @reactionSignsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Signs of an allergic reaction'**
+  String get reactionSignsTitle;
+
+  /// No description provided for @beliefsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Common beliefs vs evidence'**
+  String get beliefsTitle;
+
+  /// No description provided for @beliefLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Often said'**
+  String get beliefLabel;
+
+  /// No description provided for @evidenceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What the evidence says'**
+  String get evidenceLabel;
+
+  /// No description provided for @foodsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Foods'**
+  String get foodsTitle;
+
+  /// No description provided for @searchFoods.
+  ///
+  /// In en, this message translates to:
+  /// **'Search foods'**
+  String get searchFoods;
+
+  /// No description provided for @categoryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get categoryAll;
+
+  /// No description provided for @categoryFruit.
+  ///
+  /// In en, this message translates to:
+  /// **'Fruit'**
+  String get categoryFruit;
+
+  /// No description provided for @categoryVegetable.
+  ///
+  /// In en, this message translates to:
+  /// **'Vegetables'**
+  String get categoryVegetable;
+
+  /// No description provided for @categoryGrain.
+  ///
+  /// In en, this message translates to:
+  /// **'Grains'**
+  String get categoryGrain;
+
+  /// No description provided for @categoryLegume.
+  ///
+  /// In en, this message translates to:
+  /// **'Daal & beans'**
+  String get categoryLegume;
+
+  /// No description provided for @categoryProtein.
+  ///
+  /// In en, this message translates to:
+  /// **'Meat, fish & egg'**
+  String get categoryProtein;
+
+  /// No description provided for @categoryDairy.
+  ///
+  /// In en, this message translates to:
+  /// **'Dairy'**
+  String get categoryDairy;
+
+  /// No description provided for @categoryNut.
+  ///
+  /// In en, this message translates to:
+  /// **'Nuts & seeds'**
+  String get categoryNut;
+
+  /// No description provided for @categoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet'**
+  String get categoryOther;
+
+  /// No description provided for @fromMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'From {count} months'**
+  String fromMonths(int count);
+
+  /// No description provided for @chokingRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'Choking risk: prepare as described'**
+  String get chokingRisk;
+
+  /// No description provided for @allergenLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Allergen: {name}'**
+  String allergenLabel(String name);
+
+  /// No description provided for @logTry.
+  ///
+  /// In en, this message translates to:
+  /// **'Log a try'**
+  String get logTry;
+
+  /// No description provided for @editTry.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit try'**
+  String get editTry;
+
+  /// No description provided for @notTried.
+  ///
+  /// In en, this message translates to:
+  /// **'Not tried yet'**
+  String get notTried;
+
+  /// No description provided for @triedTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Tried once} other{Tried {count} times}}'**
+  String triedTimes(int count);
+
+  /// No description provided for @opinionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Did they like it?'**
+  String get opinionLabel;
+
+  /// No description provided for @opinionLiked.
+  ///
+  /// In en, this message translates to:
+  /// **'Liked'**
+  String get opinionLiked;
+
+  /// No description provided for @opinionNeutral.
+  ///
+  /// In en, this message translates to:
+  /// **'Okay'**
+  String get opinionNeutral;
+
+  /// No description provided for @opinionDisliked.
+  ///
+  /// In en, this message translates to:
+  /// **'Disliked'**
+  String get opinionDisliked;
+
+  /// No description provided for @reactionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Any reaction?'**
+  String get reactionLabel;
+
+  /// No description provided for @reactionNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get reactionNone;
+
+  /// No description provided for @reactionMild.
+  ///
+  /// In en, this message translates to:
+  /// **'Mild'**
+  String get reactionMild;
+
+  /// No description provided for @reactionSevere.
+  ///
+  /// In en, this message translates to:
+  /// **'Severe'**
+  String get reactionSevere;
+
+  /// No description provided for @reactionWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Had a reaction: talk to your doctor before giving this again.'**
+  String get reactionWarning;
+
+  /// No description provided for @severeReactionNow.
+  ///
+  /// In en, this message translates to:
+  /// **'If your baby has trouble breathing, swelling of the tongue or throat, or becomes floppy or pale, call 1122 or 115 now.'**
+  String get severeReactionNow;
+
+  /// No description provided for @sourcesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sources: {sources}'**
+  String sourcesLabel(String sources);
+
+  /// No description provided for @tabCharts.
+  ///
+  /// In en, this message translates to:
+  /// **'Charts'**
+  String get tabCharts;
+
+  /// No description provided for @tabMilestones.
+  ///
+  /// In en, this message translates to:
+  /// **'Milestones'**
+  String get tabMilestones;
+
+  /// No description provided for @byMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'By {count} months'**
+  String byMonths(int count);
+
+  /// No description provided for @areaSocial.
+  ///
+  /// In en, this message translates to:
+  /// **'Social & emotional'**
+  String get areaSocial;
+
+  /// No description provided for @areaLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language & communication'**
+  String get areaLanguage;
+
+  /// No description provided for @areaCognitive.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning & thinking'**
+  String get areaCognitive;
+
+  /// No description provided for @areaMovement.
+  ///
+  /// In en, this message translates to:
+  /// **'Movement'**
+  String get areaMovement;
+
+  /// No description provided for @waysToHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Ways to help'**
+  String get waysToHelp;
+
+  /// No description provided for @actEarlyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'When to talk to the doctor'**
+  String get actEarlyTitle;
+
+  /// No description provided for @milestonesProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{done} of {total}'**
+  String milestonesProgress(int done, int total);
+
+  /// No description provided for @reachedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Reached {date}'**
+  String reachedOn(String date);
+
+  /// No description provided for @helpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency & help'**
+  String get helpTitle;
+
+  /// No description provided for @emergencyNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency numbers (Pakistan)'**
+  String get emergencyNumbers;
+
+  /// No description provided for @emergencyNumbersNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to call. Services differ by city; save your nearest children\'s hospital too.'**
+  String get emergencyNumbersNote;
+
+  /// No description provided for @numRescue.
+  ///
+  /// In en, this message translates to:
+  /// **'Rescue 1122: ambulance and emergencies'**
+  String get numRescue;
+
+  /// No description provided for @numEdhi.
+  ///
+  /// In en, this message translates to:
+  /// **'Edhi ambulance'**
+  String get numEdhi;
+
+  /// No description provided for @numChhipa.
+  ///
+  /// In en, this message translates to:
+  /// **'Chhipa ambulance (Karachi)'**
+  String get numChhipa;
+
+  /// No description provided for @numPolice.
+  ///
+  /// In en, this message translates to:
+  /// **'Police'**
+  String get numPolice;
+
+  /// No description provided for @numFire.
+  ///
+  /// In en, this message translates to:
+  /// **'Fire brigade'**
+  String get numFire;
+
+  /// No description provided for @callEmergencyWhen.
+  ///
+  /// In en, this message translates to:
+  /// **'Call for help straight away if your baby'**
+  String get callEmergencyWhen;
+
+  /// No description provided for @emergencySigns.
+  ///
+  /// In en, this message translates to:
+  /// **'• has difficulty breathing, or long pauses in breathing\n• is floppy, very drowsy or hard to wake\n• has blue, grey, pale or blotchy skin, lips or tongue, or feels cold\n• has a fit (seizure)\n• has swelling of the tongue or throat after a food or medicine'**
+  String get emergencySigns;
+
+  /// No description provided for @heatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hot weather and load-shedding'**
+  String get heatTitle;
+
+  /// No description provided for @heatGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'• Keep babies out of direct sun, especially 11 am to 3 pm, and never leave them in a parked car.\n• Dress them in one light cotton layer; use shade and a fan.\n• Breastfeed more often. Babies under 6 months who only have breast milk don\'t need water; ask your doctor about extra water for formula-fed babies.\n• During load-shedding, move to the coolest room and wipe your baby with a cloth dampened in lukewarm (not cold or iced) water.'**
+  String get heatGuide;
+
+  /// No description provided for @dehydrationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Signs of dehydration: see a doctor today'**
+  String get dehydrationTitle;
+
+  /// No description provided for @dehydrationSigns.
+  ///
+  /// In en, this message translates to:
+  /// **'• fewer wet diapers than usual\n• few or no tears when crying, or a dry mouth\n• a sunken soft spot on the head, or sunken eyes\n• unusually drowsy or irritable'**
+  String get dehydrationSigns;
+
+  /// No description provided for @helpSources.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on NHS and WHO guidance. This is general information, not a diagnosis; if you\'re worried, contact a doctor.'**
+  String get helpSources;
 }
 
 class _AppLocalizationsDelegate

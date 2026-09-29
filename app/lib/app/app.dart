@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/providers.dart';
 import '../l10n/app_localizations.dart';
 import 'router.dart';
+import 'theme.dart';
 
 class BabyApp extends ConsumerWidget {
   const BabyApp({super.key});
@@ -13,7 +14,7 @@ class BabyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-      theme: ThemeData(colorSchemeSeed: const Color(0xFF6BA3BE)),
+      theme: buildTheme(const Locale('en')),
       locale: ref.watch(localeProvider),
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -26,10 +27,13 @@ class BabyApp extends ConsumerWidget {
       // written in Latin script, so force left-to-right for it.
       builder: (context, child) {
         final locale = Localizations.localeOf(context);
+        // Urdu script gets the Nastaliq font; English and Roman Urdu the
+        // Latin fonts.
+        Widget themed = Theme(data: buildTheme(locale), child: child!);
         if (locale.languageCode == 'ur' && locale.scriptCode == 'Latn') {
-          return Directionality(textDirection: TextDirection.ltr, child: child!);
+          themed = Directionality(textDirection: TextDirection.ltr, child: themed);
         }
-        return child!;
+        return themed;
       },
       routerConfig: ref.watch(routerProvider),
     );

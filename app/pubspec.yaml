@@ -24,14 +24,51 @@ dependencies:
   sqlite_async: ^0.14.5
   supabase_flutter: ^2.17.2
   timezone: ^0.11.1
+  url_launcher: ^6.3.2
   uuid: ^4.6.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
 flutter:
   uses-material-design: true
   generate: true
   assets:
     - assets/who_growth.json
+    - assets/foods.json
+    - assets/milestones.json
+
+  # Bundled so text looks right offline. Licences: assets/fonts/OFL-*.txt
+  fonts:
+    - family: Lora
+      fonts:
+        - asset: assets/fonts/Lora-Regular.ttf
+        - asset: assets/fonts/Lora-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Lora-Bold.ttf
+          weight: 700
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Nunito-Bold.ttf
+          weight: 700
+    - family: NotoNastaliqUrdu
+      fonts:
+        - asset: assets/fonts/NotoNastaliqUrdu-Regular.ttf
+        - asset: assets/fonts/NotoNastaliqUrdu-Bold.ttf
+          weight: 700
+
+# App icon: regenerate with `dart run flutter_launcher_icons` after changing
+# the images (made by tool/icon/make_icon.py).
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/icon/icon.png
+  adaptive_icon_background: assets/icon/icon_background.png
+  adaptive_icon_foreground: assets/icon/icon_foreground.png
+  adaptive_icon_monochrome: assets/icon/icon_monochrome.png
+  remove_alpha_ios: true

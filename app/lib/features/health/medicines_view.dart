@@ -210,19 +210,38 @@ class _SlotRow extends StatelessWidget {
       SlotState.due || SlotState.upcoming => ('', theme.colorScheme.onSurface),
     };
 
+    // Time and state stack on the left, so the buttons always fit beside
+    // them, even for "Missed" in Urdu on a narrow phone.
+    const compact = VisualDensity.compact;
     return Row(
       children: [
-        SizedBox(
-          width: 88,
-          child: Text(TimeOfDay.fromDateTime(slot.at).format(context), style: theme.textTheme.titleSmall),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(TimeOfDay.fromDateTime(slot.at).format(context), style: theme.textTheme.titleSmall),
+              if (label.isNotEmpty)
+                Text(label, style: theme.textTheme.labelMedium?.copyWith(color: color), overflow: TextOverflow.ellipsis),
+            ],
+          ),
         ),
-        if (label.isNotEmpty) Text(label, style: theme.textTheme.labelLarge?.copyWith(color: color)),
-        const Spacer(),
         if (slot.record case final record?)
-          TextButton(onPressed: () => onUndo(record), child: Text(l10n.undoDose))
+          TextButton(
+            style: TextButton.styleFrom(visualDensity: compact),
+            onPressed: () => onUndo(record),
+            child: Text(l10n.undoDose),
+          )
         else if (state != SlotState.upcoming) ...[
-          TextButton(onPressed: () => onRecord(skipped: true), child: Text(l10n.skipDose)),
-          FilledButton(onPressed: () => onRecord(skipped: false), child: Text(l10n.markDoseGiven)),
+          TextButton(
+            style: TextButton.styleFrom(visualDensity: compact),
+            onPressed: () => onRecord(skipped: true),
+            child: Text(l10n.skipDose),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(visualDensity: compact),
+            onPressed: () => onRecord(skipped: false),
+            child: Text(l10n.markDoseGiven),
+          ),
         ],
       ],
     );

@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appTitle": "Baby App",
+  "appTitle": "Palna",
   "errorGeneric": "Something went wrong. Please try again.",
   "fieldRequired": "Required",
   "saveButton": "Save",
@@ -603,11 +603,236 @@
     }
   },
   "sumEntries": "All entries",
-  "sumFooter": "Recorded by the parent in Baby App.",
+  "sumFooter": "Recorded by the parent in Palna.",
   "firstSyncLoading": "Loading your family's data…",
   "firstSyncNeedsInternet": "The first time, this needs an internet connection. After that the app works offline.",
   "offlineBanner": "Offline: changes are saved and will sync when you're back online.",
   "unsyncedSignOutTitle": "Some changes haven't synced yet",
   "unsyncedSignOutBody": "If you sign out now, entries made while offline will be lost. Connect to the internet first to keep them.",
-  "signOutAnyway": "Sign out anyway"
+  "signOutAnyway": "Sign out anyway",
+  "editBabyTitle": "Edit baby",
+  "birthLengthLabel": "Birth length in cm (optional)",
+  "birthHeadLabel": "Birth head circumference in cm (optional)",
+  "invalidBirthLength": "Enter a length between 20 and 70 cm",
+  "invalidBirthHead": "Enter a size between 20 and 50 cm",
+  "settingsTitle": "Settings",
+  "babiesSection": "Babies",
+  "addAnotherBaby": "Add another baby",
+  "familySection": "Family & caregivers",
+  "familyOffline": "Connect to the internet to see and invite family members.",
+  "ownerLabel": "Owner",
+  "caregiverLabel": "Caregiver",
+  "youLabel": "You",
+  "inviteCaregiver": "Invite a caregiver",
+  "inviteCodeTitle": "Invite code",
+  "inviteCodeHelp": "Ask them to install the app, create an account and enter this code. It works once and expires in 7 days.",
+  "inviteShareText": "Join {name}'s family on Palna with this code: {code} (valid for 7 days)",
+  "@inviteShareText": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "joinFamily": "Join a family with a code",
+  "joinFamilyPrompt": "Joining a family? Enter the invite code",
+  "inviteCodeLabel": "6-character code",
+  "joinButton": "Join",
+  "joinedFamily": "You've joined the family. Their data will appear in a moment.",
+  "invalidInvite": "That code is wrong, already used, or expired.",
+  "removeMember": "Remove",
+  "leaveFamily": "Leave family",
+  "removeMemberConfirm": "Remove {name} from the family?",
+  "@removeMemberConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveFamilyConfirm": "Leave this family? You'll stop seeing its babies.",
+  "switchBaby": "Switch baby",
+  "atAGlance": "At a glance",
+  "hungerEstimate": "Usually feeds about every {interval}, so the next feed may be around {time}.",
+  "@hungerEstimate": {
+    "placeholders": {
+      "interval": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "hungerDisclaimer": "A rough guide from recent feeds; always follow your baby's hunger cues.",
+  "sleepUsual": "Usually sleeps about {usual} a day. Today so far: {today}.",
+  "@sleepUsual": {
+    "placeholders": {
+      "usual": {
+        "type": "String"
+      },
+      "today": {
+        "type": "String"
+      }
+    }
+  },
+  "awakeFor": "Awake for {duration}",
+  "@awakeFor": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "usuallyAwake": "usually about {duration} between sleeps",
+  "@usuallyAwake": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccinesOverdueLine": "Vaccines overdue: {visit}",
+  "@vaccinesOverdueLine": {
+    "placeholders": {
+      "visit": {
+        "type": "String"
+      }
+    }
+  },
+  "medsTodayLine": "Medicines today: {given} of {total} doses recorded",
+  "@medsTodayLine": {
+    "placeholders": {
+      "given": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tabSolids": "Solids",
+  "solidsTitle": "Starting solids",
+  "solidsTooYoung": "Most babies start solids around 6 months. You can read ahead in the meantime.",
+  "readinessTitle": "Is my baby ready?",
+  "texturesTitle": "How textures change",
+  "foodRulesTitle": "Important rules",
+  "allergensTitle": "Allergens",
+  "allergenNotYet": "Not yet",
+  "allergenIntroduced": "Introduced",
+  "allergenReaction": "Reaction",
+  "reactionSignsTitle": "Signs of an allergic reaction",
+  "beliefsTitle": "Common beliefs vs evidence",
+  "beliefLabel": "Often said",
+  "evidenceLabel": "What the evidence says",
+  "foodsTitle": "Foods",
+  "searchFoods": "Search foods",
+  "categoryAll": "All",
+  "categoryFruit": "Fruit",
+  "categoryVegetable": "Vegetables",
+  "categoryGrain": "Grains",
+  "categoryLegume": "Daal & beans",
+  "categoryProtein": "Meat, fish & egg",
+  "categoryDairy": "Dairy",
+  "categoryNut": "Nuts & seeds",
+  "categoryOther": "Not yet",
+  "fromMonths": "From {count} months",
+  "@fromMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chokingRisk": "Choking risk: prepare as described",
+  "allergenLabel": "Allergen: {name}",
+  "@allergenLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "logTry": "Log a try",
+  "editTry": "Edit try",
+  "notTried": "Not tried yet",
+  "triedTimes": "{count, plural, =1{Tried once} other{Tried {count} times}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "opinionLabel": "Did they like it?",
+  "opinionLiked": "Liked",
+  "opinionNeutral": "Okay",
+  "opinionDisliked": "Disliked",
+  "reactionLabel": "Any reaction?",
+  "reactionNone": "None",
+  "reactionMild": "Mild",
+  "reactionSevere": "Severe",
+  "reactionWarning": "Had a reaction: talk to your doctor before giving this again.",
+  "severeReactionNow": "If your baby has trouble breathing, swelling of the tongue or throat, or becomes floppy or pale, call 1122 or 115 now.",
+  "sourcesLabel": "Sources: {sources}",
+  "@sourcesLabel": {
+    "placeholders": {
+      "sources": {
+        "type": "String"
+      }
+    }
+  },
+  "tabCharts": "Charts",
+  "tabMilestones": "Milestones",
+  "byMonths": "By {count} months",
+  "@byMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "areaSocial": "Social & emotional",
+  "areaLanguage": "Language & communication",
+  "areaCognitive": "Learning & thinking",
+  "areaMovement": "Movement",
+  "waysToHelp": "Ways to help",
+  "actEarlyTitle": "When to talk to the doctor",
+  "milestonesProgress": "{done} of {total}",
+  "@milestonesProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "reachedOn": "Reached {date}",
+  "@reachedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "helpTitle": "Emergency & help",
+  "emergencyNumbers": "Emergency numbers (Pakistan)",
+  "emergencyNumbersNote": "Tap to call. Services differ by city; save your nearest children's hospital too.",
+  "numRescue": "Rescue 1122: ambulance and emergencies",
+  "numEdhi": "Edhi ambulance",
+  "numChhipa": "Chhipa ambulance (Karachi)",
+  "numPolice": "Police",
+  "numFire": "Fire brigade",
+  "callEmergencyWhen": "Call for help straight away if your baby",
+  "emergencySigns": "• has difficulty breathing, or long pauses in breathing\n• is floppy, very drowsy or hard to wake\n• has blue, grey, pale or blotchy skin, lips or tongue, or feels cold\n• has a fit (seizure)\n• has swelling of the tongue or throat after a food or medicine",
+  "heatTitle": "Hot weather and load-shedding",
+  "heatGuide": "• Keep babies out of direct sun, especially 11 am to 3 pm, and never leave them in a parked car.\n• Dress them in one light cotton layer; use shade and a fan.\n• Breastfeed more often. Babies under 6 months who only have breast milk don't need water; ask your doctor about extra water for formula-fed babies.\n• During load-shedding, move to the coolest room and wipe your baby with a cloth dampened in lukewarm (not cold or iced) water.",
+  "dehydrationTitle": "Signs of dehydration: see a doctor today",
+  "dehydrationSigns": "• fewer wet diapers than usual\n• few or no tears when crying, or a dry mouth\n• a sunken soft spot on the head, or sunken eyes\n• unusually drowsy or irritable",
+  "helpSources": "Based on NHS and WHO guidance. This is general information, not a diagnosis; if you're worried, contact a doctor."
 }

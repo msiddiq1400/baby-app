@@ -1,0 +1,791 @@
+{
+ "foods": [
+  {
+   "id": "banana",
+   "category": "fruit",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Banana",
+    "ur": "کیلا",
+    "ur_Latn": "Kela"
+   },
+   "prep": {
+    "en": "Mash ripe banana with a fork. From about 9 months, offer soft finger-sized pieces.",
+    "ur": "پکا ہوا کیلا کانٹے سے مسل کر دیں۔ تقریباً 9 ماہ سے نرم، انگلی جتنے ٹکڑے دیں۔",
+    "ur_Latn": "Pakka kela kaante se masal kar dein. Taqreeban 9 mahine se naram, ungli jitne tukre dein."
+   }
+  },
+  {
+   "id": "apple",
+   "category": "fruit",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": true,
+   "name": {
+    "en": "Apple",
+    "ur": "سیب",
+    "ur_Latn": "Saib"
+   },
+   "prep": {
+    "en": "Cook until soft, then mash or purée. Don't give raw hard pieces (choking risk); grate it finely instead.",
+    "ur": "نرم ہونے تک پکائیں، پھر مسل لیں یا پیوری بنائیں۔ کچے سخت ٹکڑے نہ دیں (گلے میں پھنسنے کا خطرہ)؛ اس کے بجائے باریک کدوکش کریں۔",
+    "ur_Latn": "Naram hone tak pakayein, phir masal lein ya puree banayein. Kachay sakht tukre na dein (gale mein phansne ka khatra); is ke bajaye bareek kaddukash karein."
+   }
+  },
+  {
+   "id": "pear",
+   "category": "fruit",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Pear",
+    "ur": "ناشپاتی",
+    "ur_Latn": "Nashpati"
+   },
+   "prep": {
+    "en": "Mash very ripe, soft pears; cook firmer pears first.",
+    "ur": "بہت پکی اور نرم ناشپاتی مسل کر دیں؛ سخت ناشپاتی پہلے پکا لیں۔",
+    "ur_Latn": "Bohat pakki aur naram nashpati masal kar dein; sakht nashpati pehle paka lein."
+   }
+  },
+  {
+   "id": "mango",
+   "category": "fruit",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Mango",
+    "ur": "آم",
+    "ur_Latn": "Aam"
+   },
+   "prep": {
+    "en": "Mash ripe mango, or give a large peeled strip to hold and suck. Remove the stone.",
+    "ur": "پکا آم مسل کر دیں، یا چھلا ہوا بڑا ٹکڑا پکڑنے اور چوسنے کے لیے دیں۔ گٹھلی نکال دیں۔",
+    "ur_Latn": "Pakka aam masal kar dein, ya chhila hua bara tukra pakarne aur choosne ke liye dein. Guthli nikal dein."
+   }
+  },
+  {
+   "id": "papaya",
+   "category": "fruit",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Papaya",
+    "ur": "پپیتا",
+    "ur_Latn": "Papita"
+   },
+   "prep": {
+    "en": "Remove the skin and seeds, then mash ripe papaya.",
+    "ur": "چھلکا اور بیج نکال کر پکا پپیتا مسل کر دیں۔",
+    "ur_Latn": "Chhilka aur beej nikal kar pakka papita masal kar dein."
+   }
+  },
+  {
+   "id": "chikoo",
+   "category": "fruit",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": true,
+   "name": {
+    "en": "Chikoo (sapodilla)",
+    "ur": "چیکو",
+    "ur_Latn": "Chikoo"
+   },
+   "prep": {
+    "en": "Remove the skin and the hard black seeds, then mash.",
+    "ur": "چھلکا اور سخت کالے بیج نکال کر مسل لیں۔",
+    "ur_Latn": "Chhilka aur sakht kaale beej nikal kar masal lein."
+   }
+  },
+  {
+   "id": "grapes",
+   "category": "fruit",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": true,
+   "name": {
+    "en": "Grapes",
+    "ur": "انگور",
+    "ur_Latn": "Angoor"
+   },
+   "prep": {
+    "en": "Always cut into quarters lengthways and remove seeds. Never give whole grapes.",
+    "ur": "ہمیشہ لمبائی میں چار ٹکڑے کریں اور بیج نکال دیں۔ ثابت انگور کبھی نہ دیں۔",
+    "ur_Latn": "Hamesha lambai mein chaar tukre karein aur beej nikal dein. Saabit angoor kabhi na dein."
+   }
+  },
+  {
+   "id": "watermelon",
+   "category": "fruit",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Watermelon",
+    "ur": "تربوز",
+    "ur_Latn": "Tarbooz"
+   },
+   "prep": {
+    "en": "Remove all seeds and offer soft pieces or mash.",
+    "ur": "سارے بیج نکال کر نرم ٹکڑے دیں یا مسل لیں۔",
+    "ur_Latn": "Saare beej nikal kar naram tukre dein ya masal lein."
+   }
+  },
+  {
+   "id": "carrot",
+   "category": "vegetable",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": true,
+   "name": {
+    "en": "Carrot",
+    "ur": "گاجر",
+    "ur_Latn": "Gajar"
+   },
+   "prep": {
+    "en": "Steam or boil until very soft, then mash or offer soft cooked sticks. Never raw pieces.",
+    "ur": "بھاپ یا ابال کر بہت نرم کریں، پھر مسل لیں یا نرم پکی ہوئی ڈنڈیاں دیں۔ کچے ٹکڑے کبھی نہ دیں۔",
+    "ur_Latn": "Bhaap ya ubaal kar bohat naram karein, phir masal lein ya naram paki hui dandiyan dein. Kachay tukre kabhi na dein."
+   }
+  },
+  {
+   "id": "potato",
+   "category": "vegetable",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Potato",
+    "ur": "آلو",
+    "ur_Latn": "Aloo"
+   },
+   "prep": {
+    "en": "Boil and mash with a little breast milk or formula. No salt.",
+    "ur": "ابال کر تھوڑے ماں کے دودھ یا فارمولا کے ساتھ مسل لیں۔ نمک نہ ڈالیں۔",
+    "ur_Latn": "Ubaal kar thore maa ke doodh ya formula ke saath masal lein. Namak na daalein."
+   }
+  },
+  {
+   "id": "sweet_potato",
+   "category": "vegetable",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Sweet potato",
+    "ur": "شکر قندی",
+    "ur_Latn": "Shakarkandi"
+   },
+   "prep": {
+    "en": "Boil or bake until soft; mash, or offer soft wedges.",
+    "ur": "ابال کر یا بیک کر کے نرم کریں؛ مسل لیں یا نرم ٹکڑے دیں۔",
+    "ur_Latn": "Ubaal kar ya bake kar ke naram karein; masal lein ya naram tukre dein."
+   }
+  },
+  {
+   "id": "pumpkin",
+   "category": "vegetable",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Pumpkin",
+    "ur": "کدو",
+    "ur_Latn": "Kaddu"
+   },
+   "prep": {
+    "en": "Cook until soft and mash.",
+    "ur": "نرم ہونے تک پکا کر مسل لیں۔",
+    "ur_Latn": "Naram hone tak paka kar masal lein."
+   }
+  },
+  {
+   "id": "bottle_gourd",
+   "category": "vegetable",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Bottle gourd (lauki)",
+    "ur": "لوکی / گھیا",
+    "ur_Latn": "Lauki / Ghiya"
+   },
+   "prep": {
+    "en": "Peel, remove the seeds, cook until soft and mash. Its mild taste makes it a good early food.",
+    "ur": "چھیل کر بیج نکالیں، نرم ہونے تک پکا کر مسل لیں۔ ہلکا ذائقہ ہونے کی وجہ سے شروع میں اچھی غذا ہے۔",
+    "ur_Latn": "Chheel kar beej nikalein, naram hone tak paka kar masal lein. Halka zaiqa hone ki wajah se shuru mein achhi ghiza hai."
+   }
+  },
+  {
+   "id": "spinach",
+   "category": "vegetable",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Spinach",
+    "ur": "پالک",
+    "ur_Latn": "Palak"
+   },
+   "prep": {
+    "en": "Cook and blend finely, or mix into daal or khichdi.",
+    "ur": "پکا کر باریک پیس لیں، یا دال یا کھچڑی میں ملا دیں۔",
+    "ur_Latn": "Paka kar bareek pees lein, ya daal ya khichri mein mila dein."
+   }
+  },
+  {
+   "id": "cauliflower",
+   "category": "vegetable",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Cauliflower / broccoli",
+    "ur": "گوبھی / بروکلی",
+    "ur_Latn": "Gobhi / Broccoli"
+   },
+   "prep": {
+    "en": "Steam the florets until soft; mash, or give them as soft finger food.",
+    "ur": "پھولوں کو بھاپ میں نرم کریں؛ مسل لیں یا نرم ٹکڑوں کی صورت میں ہاتھ میں پکڑنے کو دیں۔",
+    "ur_Latn": "Phoolon ko bhaap mein naram karein; masal lein ya naram tukron ki soorat mein haath mein pakarne ko dein."
+   }
+  },
+  {
+   "id": "peas",
+   "category": "vegetable",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": true,
+   "name": {
+    "en": "Peas",
+    "ur": "مٹر",
+    "ur_Latn": "Matar"
+   },
+   "prep": {
+    "en": "Cook and mash, or flatten each pea. Whole round peas can choke young babies.",
+    "ur": "پکا کر مسل لیں یا ہر دانہ دبا کر چپٹا کر دیں۔ ثابت گول دانے چھوٹے بچوں کے گلے میں پھنس سکتے ہیں۔",
+    "ur_Latn": "Paka kar masal lein ya har daana daba kar chapta kar dein. Saabit gol daane chhote bachon ke gale mein phans sakte hain."
+   }
+  },
+  {
+   "id": "rice",
+   "category": "grain",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Rice",
+    "ur": "چاول",
+    "ur_Latn": "Chawal"
+   },
+   "prep": {
+    "en": "Cook soft and mash, or make khichdi. No added sugar or salt.",
+    "ur": "نرم پکا کر مسل لیں یا کھچڑی بنائیں۔ چینی یا نمک نہ ڈالیں۔",
+    "ur_Latn": "Naram paka kar masal lein ya khichri banayein. Cheeni ya namak na daalein."
+   }
+  },
+  {
+   "id": "khichdi",
+   "category": "grain",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Khichdi (rice + moong daal)",
+    "ur": "کھچڑی (چاول + مونگ دال)",
+    "ur_Latn": "Khichri (chawal + moong daal)"
+   },
+   "prep": {
+    "en": "Cook rice and moong daal very soft with vegetables; mash for younger babies. No salt.",
+    "ur": "چاول اور مونگ دال سبزیوں کے ساتھ بہت نرم پکائیں؛ چھوٹے بچوں کے لیے مسل لیں۔ نمک نہ ڈالیں۔",
+    "ur_Latn": "Chawal aur moong daal sabziyon ke saath bohat naram pakayein; chhote bachon ke liye masal lein. Namak na daalein."
+   }
+  },
+  {
+   "id": "daliya",
+   "category": "grain",
+   "fromMonths": 6,
+   "allergen": "wheat",
+   "choking": false,
+   "name": {
+    "en": "Daliya (broken wheat)",
+    "ur": "دلیہ",
+    "ur_Latn": "Daliya"
+   },
+   "prep": {
+    "en": "Cook with water or breast milk until very soft. No sugar; sweeten with mashed fruit if needed.",
+    "ur": "پانی یا ماں کے دودھ میں بہت نرم پکائیں۔ چینی نہ ڈالیں؛ ضرورت ہو تو مسلا ہوا پھل ملا دیں۔",
+    "ur_Latn": "Paani ya maa ke doodh mein bohat naram pakayein. Cheeni na daalein; zaroorat ho to masla hua phal mila dein."
+   }
+  },
+  {
+   "id": "suji",
+   "category": "grain",
+   "fromMonths": 6,
+   "allergen": "wheat",
+   "choking": false,
+   "name": {
+    "en": "Suji (semolina)",
+    "ur": "سوجی",
+    "ur_Latn": "Suji"
+   },
+   "prep": {
+    "en": "Cook into a smooth porridge. No added sugar; sweeten with mashed fruit instead.",
+    "ur": "ہموار دلیہ کی طرح پکائیں۔ چینی نہ ڈالیں؛ اس کے بجائے مسلا ہوا پھل ملائیں۔",
+    "ur_Latn": "Hamwar daliye ki tarah pakayein. Cheeni na daalein; is ke bajaye masla hua phal milayein."
+   }
+  },
+  {
+   "id": "oats",
+   "category": "grain",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Oats",
+    "ur": "جئی",
+    "ur_Latn": "Jai (oats)"
+   },
+   "prep": {
+    "en": "Cook until soft; blend for younger babies.",
+    "ur": "نرم ہونے تک پکائیں؛ چھوٹے بچوں کے لیے پیس لیں۔",
+    "ur_Latn": "Naram hone tak pakayein; chhote bachon ke liye pees lein."
+   }
+  },
+  {
+   "id": "roti",
+   "category": "grain",
+   "fromMonths": 6,
+   "allergen": "wheat",
+   "choking": false,
+   "name": {
+    "en": "Roti",
+    "ur": "روٹی",
+    "ur_Latn": "Roti"
+   },
+   "prep": {
+    "en": "Soak small pieces of soft roti in daal or milk. From about 9 months, offer soft strips to hold.",
+    "ur": "نرم روٹی کے چھوٹے ٹکڑے دال یا دودھ میں بھگو کر دیں۔ تقریباً 9 ماہ سے نرم پٹیاں پکڑنے کو دیں۔",
+    "ur_Latn": "Naram roti ke chhote tukre daal ya doodh mein bhigo kar dein. Taqreeban 9 mahine se naram pattiyan pakarne ko dein."
+   }
+  },
+  {
+   "id": "moong_daal",
+   "category": "legume",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Moong daal",
+    "ur": "مونگ کی دال",
+    "ur_Latn": "Moong ki daal"
+   },
+   "prep": {
+    "en": "Cook until very soft and mash. A good early source of protein and iron. No salt.",
+    "ur": "بہت نرم پکا کر مسل لیں۔ پروٹین اور آئرن کا اچھا ذریعہ ہے۔ نمک نہ ڈالیں۔",
+    "ur_Latn": "Bohat naram paka kar masal lein. Protein aur iron ka achha zariya hai. Namak na daalein."
+   }
+  },
+  {
+   "id": "masoor_daal",
+   "category": "legume",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Masoor daal",
+    "ur": "مسور کی دال",
+    "ur_Latn": "Masoor ki daal"
+   },
+   "prep": {
+    "en": "Cook until very soft and mash; mix with rice or vegetables. No salt.",
+    "ur": "بہت نرم پکا کر مسل لیں؛ چاول یا سبزی کے ساتھ ملائیں۔ نمک نہ ڈالیں۔",
+    "ur_Latn": "Bohat naram paka kar masal lein; chawal ya sabzi ke saath milayein. Namak na daalein."
+   }
+  },
+  {
+   "id": "chickpeas",
+   "category": "legume",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": true,
+   "name": {
+    "en": "Chickpeas (chanay)",
+    "ur": "چنے",
+    "ur_Latn": "Chanay"
+   },
+   "prep": {
+    "en": "Cook well and mash or flatten. Never give them whole.",
+    "ur": "اچھی طرح پکا کر مسل لیں یا دبا کر چپٹا کر دیں۔ ثابت کبھی نہ دیں۔",
+    "ur_Latn": "Achhi tarah paka kar masal lein ya daba kar chapta kar dein. Saabit kabhi na dein."
+   }
+  },
+  {
+   "id": "chicken",
+   "category": "protein",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Chicken",
+    "ur": "مرغی",
+    "ur_Latn": "Murghi"
+   },
+   "prep": {
+    "en": "Cook thoroughly, then mince, shred finely or blend with some cooking water. Remove all bones.",
+    "ur": "اچھی طرح پکائیں، پھر قیمہ کریں، باریک ریشے کریں یا یخنی کے ساتھ پیس لیں۔ تمام ہڈیاں نکال دیں۔",
+    "ur_Latn": "Achhi tarah pakayein, phir qeema karein, bareek reshay karein ya yakhni ke saath pees lein. Tamam haddiyan nikal dein."
+   }
+  },
+  {
+   "id": "qeema",
+   "category": "protein",
+   "fromMonths": 6,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Qeema (minced meat)",
+    "ur": "قیمہ",
+    "ur_Latn": "Qeema"
+   },
+   "prep": {
+    "en": "Cook minced mutton or beef thoroughly and mash with vegetables. A good source of iron.",
+    "ur": "بکرے یا گائے کا قیمہ اچھی طرح پکا کر سبزیوں کے ساتھ مسل لیں۔ آئرن کا اچھا ذریعہ ہے۔",
+    "ur_Latn": "Bakre ya gaaye ka qeema achhi tarah paka kar sabziyon ke saath masal lein. Iron ka achha zariya hai."
+   }
+  },
+  {
+   "id": "egg",
+   "category": "protein",
+   "fromMonths": 6,
+   "allergen": "egg",
+   "choking": false,
+   "name": {
+    "en": "Egg",
+    "ur": "انڈا",
+    "ur_Latn": "Anda"
+   },
+   "prep": {
+    "en": "Cook until both the white and the yolk are solid. Mash hard-boiled egg, or give strips of omelette.",
+    "ur": "سفیدی اور زردی دونوں پوری طرح پکنے تک پکائیں۔ ابلا ہوا انڈا مسل لیں یا آملیٹ کی پٹیاں دیں۔",
+    "ur_Latn": "Safedi aur zardi dono poori tarah pakne tak pakayein. Ubla hua anda masal lein ya omelette ki pattiyan dein."
+   }
+  },
+  {
+   "id": "fish",
+   "category": "protein",
+   "fromMonths": 6,
+   "allergen": "fish",
+   "choking": true,
+   "name": {
+    "en": "Fish",
+    "ur": "مچھلی",
+    "ur_Latn": "Machli"
+   },
+   "prep": {
+    "en": "Cook thoroughly and remove every bone; flake and mash. Avoid shark, swordfish and marlin.",
+    "ur": "اچھی طرح پکائیں اور ہر کانٹا نکال دیں؛ ٹکڑے کر کے مسل لیں۔ شارک، سورڈ فش اور مارلن نہ دیں۔",
+    "ur_Latn": "Achhi tarah pakayein aur har kaanta nikal dein; tukre kar ke masal lein. Shark, swordfish aur marlin na dein."
+   }
+  },
+  {
+   "id": "yogurt",
+   "category": "dairy",
+   "fromMonths": 6,
+   "allergen": "milk",
+   "choking": false,
+   "name": {
+    "en": "Yogurt (dahi)",
+    "ur": "دہی",
+    "ur_Latn": "Dahi"
+   },
+   "prep": {
+    "en": "Plain, full-fat yogurt with no added sugar.",
+    "ur": "سادہ، پوری چکنائی والا دہی، بغیر چینی کے۔",
+    "ur_Latn": "Saada, poori chiknai wala dahi, baghair cheeni ke."
+   }
+  },
+  {
+   "id": "paneer",
+   "category": "dairy",
+   "fromMonths": 6,
+   "allergen": "milk",
+   "choking": false,
+   "name": {
+    "en": "Paneer / cheese",
+    "ur": "پنیر",
+    "ur_Latn": "Paneer"
+   },
+   "prep": {
+    "en": "Pasteurised, full-fat paneer or cheese, grated or in soft small pieces.",
+    "ur": "پیسچرائزڈ، پوری چکنائی والا پنیر، کدوکش کر کے یا نرم چھوٹے ٹکڑوں میں۔",
+    "ur_Latn": "Pasteurized, poori chiknai wala paneer, kaddukash kar ke ya naram chhote tukron mein."
+   }
+  },
+  {
+   "id": "cows_milk",
+   "category": "dairy",
+   "fromMonths": 6,
+   "allergen": "milk",
+   "choking": false,
+   "name": {
+    "en": "Cow's milk (in cooking)",
+    "ur": "گائے کا دودھ (کھانے میں)",
+    "ur_Latn": "Gaaye ka doodh (khane mein)"
+   },
+   "prep": {
+    "en": "Fine in cooking, for example in daliya, from about 6 months, but not as the main drink until 12 months.",
+    "ur": "تقریباً 6 ماہ سے کھانے میں (مثلاً دلیے میں) ٹھیک ہے، لیکن 12 ماہ تک اسے اہم مشروب کے طور پر نہ دیں۔",
+    "ur_Latn": "Taqreeban 6 mahine se khane mein (maslan daliye mein) theek hai, lekin 12 mahine tak isay ahem mashroob ke taur par na dein."
+   }
+  },
+  {
+   "id": "peanut",
+   "category": "nut",
+   "fromMonths": 6,
+   "allergen": "peanut",
+   "choking": true,
+   "name": {
+    "en": "Peanut (smooth paste)",
+    "ur": "مونگ پھلی (ہموار پیسٹ)",
+    "ur_Latn": "Moongphali (hamwar paste)"
+   },
+   "prep": {
+    "en": "Smooth peanut butter thinned with water or stirred into porridge. Never whole or chopped peanuts: no whole nuts before 5 years.",
+    "ur": "ہموار پینٹ بٹر پانی سے پتلا کر کے یا دلیے میں ملا کر دیں۔ ثابت یا کٹی مونگ پھلی کبھی نہیں: 5 سال سے پہلے ثابت میوے نہ دیں۔",
+    "ur_Latn": "Hamwar peanut butter paani se patla kar ke ya daliye mein mila kar dein. Saabit ya kati moongphali kabhi nahi: 5 saal se pehle saabit mewe na dein."
+   }
+  },
+  {
+   "id": "almond",
+   "category": "nut",
+   "fromMonths": 6,
+   "allergen": "tree_nut",
+   "choking": true,
+   "name": {
+    "en": "Almonds and other nuts (ground)",
+    "ur": "بادام اور دیگر میوے (پسے ہوئے)",
+    "ur_Latn": "Badam aur deegar mewe (pise hue)"
+   },
+   "prep": {
+    "en": "Finely ground into porridge, or as a smooth nut butter. Never whole or chopped nuts.",
+    "ur": "باریک پیس کر دلیے میں ملائیں، یا ہموار نٹ بٹر کی صورت میں۔ ثابت یا کٹے میوے کبھی نہ دیں۔",
+    "ur_Latn": "Bareek pees kar daliye mein milayein, ya hamwar nut butter ki soorat mein. Saabit ya kate mewe kabhi na dein."
+   }
+  },
+  {
+   "id": "sesame",
+   "category": "nut",
+   "fromMonths": 6,
+   "allergen": "sesame",
+   "choking": false,
+   "name": {
+    "en": "Sesame (til)",
+    "ur": "تل",
+    "ur_Latn": "Til"
+   },
+   "prep": {
+    "en": "Smooth tahini (sesame paste) stirred into food.",
+    "ur": "ہموار تاہینی (تل کا پیسٹ) کھانے میں ملا کر دیں۔",
+    "ur_Latn": "Hamwar tahini (til ka paste) khane mein mila kar dein."
+   }
+  },
+  {
+   "id": "honey",
+   "category": "other",
+   "fromMonths": 12,
+   "allergen": null,
+   "choking": false,
+   "name": {
+    "en": "Honey (not before 1 year)",
+    "ur": "شہد (1 سال سے پہلے نہیں)",
+    "ur_Latn": "Shehad (1 saal se pehle nahi)"
+   },
+   "prep": {
+    "en": "Don't give honey before 12 months, not even a little in ghutti: it can contain bacteria that cause infant botulism, a serious illness.",
+    "ur": "12 ماہ سے پہلے شہد نہ دیں، گھٹی میں تھوڑا سا بھی نہیں: اس میں ایسے جراثیم ہو سکتے ہیں جو بچوں میں بوٹولزم نامی سنگین بیماری کا سبب بنتے ہیں۔",
+    "ur_Latn": "12 mahine se pehle shehad na dein, ghutti mein thora sa bhi nahi: is mein aise jaraseem ho sakte hain jo bachon mein botulism naami sangeen beemari ka sabab bante hain."
+   }
+  }
+ ],
+ "allergens": {
+  "egg": {
+   "en": "Egg",
+   "ur": "انڈا",
+   "ur_Latn": "Anda"
+  },
+  "milk": {
+   "en": "Milk",
+   "ur": "دودھ",
+   "ur_Latn": "Doodh"
+  },
+  "peanut": {
+   "en": "Peanut",
+   "ur": "مونگ پھلی",
+   "ur_Latn": "Moongphali"
+  },
+  "tree_nut": {
+   "en": "Tree nuts",
+   "ur": "میوے",
+   "ur_Latn": "Mewe"
+  },
+  "sesame": {
+   "en": "Sesame",
+   "ur": "تل",
+   "ur_Latn": "Til"
+  },
+  "wheat": {
+   "en": "Wheat",
+   "ur": "گندم",
+   "ur_Latn": "Gandum"
+  },
+  "fish": {
+   "en": "Fish",
+   "ur": "مچھلی",
+   "ur_Latn": "Machli"
+  }
+ },
+ "guides": {
+  "readiness": {
+   "en": "Most babies are ready around 6 months, when they can do all three: stay sitting with a steady head; look at food, pick it up and put it in their mouth; and swallow food rather than push it back out. Chewing fists, waking at night or wanting extra milk are normal and are not signs of readiness.",
+   "ur": "زیادہ تر بچے تقریباً 6 ماہ پر تیار ہوتے ہیں، جب وہ یہ تینوں کام کر سکیں: سر سنبھال کر بیٹھے رہنا؛ کھانا دیکھ کر اٹھانا اور منہ میں ڈالنا؛ اور کھانا باہر دھکیلنے کے بجائے نگلنا۔ مٹھیاں چبانا، رات کو جاگنا یا زیادہ دودھ مانگنا عام بات ہے اور تیاری کی نشانیاں نہیں۔",
+   "ur_Latn": "Zyada tar bachay taqreeban 6 mahine par tayyar hote hain, jab woh yeh teenon kaam kar sakein: sar sambhal kar baithe rehna; khana dekh kar uthana aur munh mein daalna; aur khana bahar dhakelne ke bajaye nigalna. Mutthiyan chabana, raat ko jaagna ya zyada doodh maangna aam baat hai aur tayyari ki nishaniyan nahi."
+  },
+  "stages": [
+   {
+    "months": "6",
+    "text": {
+     "en": "Around 6 months: smooth or mashed foods, or soft finger foods. Start with a few spoons once a day; milk is still the main food.",
+     "ur": "تقریباً 6 ماہ: ہموار یا مسلا ہوا کھانا، یا نرم ٹکڑے۔ دن میں ایک بار چند چمچ سے شروع کریں؛ دودھ اب بھی اصل غذا ہے۔",
+     "ur_Latn": "Taqreeban 6 mahine: hamwar ya masla hua khana, ya naram tukre. Din mein ek baar chand chamach se shuru karein; doodh ab bhi asal ghiza hai."
+    }
+   },
+   {
+    "months": "7-9",
+    "text": {
+     "en": "7 to 9 months: mashed, lumpy and finger foods, building up to 3 meals a day. Include iron-rich foods such as meat, fish, eggs and daal.",
+     "ur": "7 سے 9 ماہ: مسلا ہوا، دانے دار اور ہاتھ میں پکڑنے والا کھانا، آہستہ آہستہ دن میں 3 کھانوں تک۔ آئرن والی غذائیں شامل کریں جیسے گوشت، مچھلی، انڈا اور دال۔",
+     "ur_Latn": "7 se 9 mahine: masla hua, daane daar aur haath mein pakarne wala khana, aahista aahista din mein 3 khanon tak. Iron wali ghizayein shamil karein jaise gosht, machli, anda aur daal."
+    }
+   },
+   {
+    "months": "10-12",
+    "text": {
+     "en": "10 to 12 months: 3 meals a day with chopped family food and a wider range of finger foods, still without added salt or sugar.",
+     "ur": "10 سے 12 ماہ: دن میں 3 کھانے، گھر کا کٹا ہوا کھانا اور مختلف ہاتھ میں پکڑنے والی غذائیں، اب بھی نمک یا چینی کے بغیر۔",
+     "ur_Latn": "10 se 12 mahine: din mein 3 khane, ghar ka kata hua khana aur mukhtalif haath mein pakarne wali ghizayein, ab bhi namak ya cheeni ke baghair."
+    }
+   }
+  ],
+  "rules": [
+   {
+    "en": "No added salt or sugar before 12 months (so no namkeen snacks, biscuits or sweet drinks).",
+    "ur": "12 ماہ سے پہلے نمک یا چینی نہ ڈالیں (یعنی نمکین، بسکٹ یا میٹھے مشروبات نہیں)۔",
+    "ur_Latn": "12 mahine se pehle namak ya cheeni na daalein (yani namkeen, biscuit ya meethe mashroobat nahi)."
+   },
+   {
+    "en": "No honey before 12 months.",
+    "ur": "12 ماہ سے پہلے شہد نہیں۔",
+    "ur_Latn": "12 mahine se pehle shehad nahi."
+   },
+   {
+    "en": "No whole nuts before 5 years; use smooth nut butters or finely ground nuts.",
+    "ur": "5 سال سے پہلے ثابت میوے نہیں؛ ہموار نٹ بٹر یا باریک پسے میوے استعمال کریں۔",
+    "ur_Latn": "5 saal se pehle saabit mewe nahi; hamwar nut butter ya bareek pise mewe istemal karein."
+   },
+   {
+    "en": "Cut small round foods (grapes, cherry tomatoes) into quarters, and remove seeds, stones and bones.",
+    "ur": "چھوٹی گول چیزیں (انگور، چھوٹے ٹماٹر) چار ٹکڑوں میں کاٹیں، اور بیج، گٹھلیاں اور ہڈیاں نکال دیں۔",
+    "ur_Latn": "Chhoti gol cheezein (angoor, chhote tamatar) chaar tukron mein kaatein, aur beej, guthliyan aur haddiyan nikal dein."
+   },
+   {
+    "en": "Breast milk or formula stays the main drink until 12 months. Offer sips of water in an open cup with meals from 6 months.",
+    "ur": "12 ماہ تک ماں کا دودھ یا فارمولا ہی اصل مشروب ہے۔ 6 ماہ سے کھانے کے ساتھ کھلے کپ میں پانی کے گھونٹ دیں۔",
+    "ur_Latn": "12 mahine tak maa ka doodh ya formula hi asal mashroob hai. 6 mahine se khane ke saath khule cup mein paani ke ghoont dein."
+   },
+   {
+    "en": "Always stay with your baby while they eat, sitting upright. Gagging is normal while learning; choking is silent, so watch closely.",
+    "ur": "کھاتے وقت ہمیشہ بچے کے ساتھ رہیں اور اسے سیدھا بٹھائیں۔ سیکھتے ہوئے ابکائی آنا عام ہے؛ گلا بند ہونا خاموش ہوتا ہے، اس لیے دھیان سے دیکھیں۔",
+    "ur_Latn": "Khate waqt hamesha bache ke saath rahein aur usay seedha bithayein. Seekhte hue abkai aana aam hai; gala band hona khamosh hota hai, is liye dhiyan se dekhein."
+   }
+  ],
+  "allergenAdvice": {
+   "en": "Common allergens (egg, milk, peanut, nuts, sesame, wheat, fish) can be given from around 6 months: one new one at a time, in a small amount, so you can spot any reaction. Once your baby has had one without a problem, keep it in their diet regularly.",
+   "ur": "عام الرجی والی غذائیں (انڈا، دودھ، مونگ پھلی، میوے، تل، گندم، مچھلی) تقریباً 6 ماہ سے دی جا سکتی ہیں: ایک وقت میں ایک نئی، تھوڑی مقدار میں، تاکہ کوئی ردِعمل پہچانا جا سکے۔ اگر بچے کو کوئی مسئلہ نہ ہو تو اسے باقاعدگی سے کھانے میں شامل رکھیں۔",
+   "ur_Latn": "Aam allergy wali ghizayein (anda, doodh, moongphali, mewe, til, gandum, machli) taqreeban 6 mahine se di ja sakti hain: ek waqt mein ek nayi, thori miqdar mein, taake koi rad-e-amal pehchana ja sake. Agar bache ko koi masla na ho to isay baqaidgi se khane mein shamil rakhein."
+  },
+  "reactionSigns": {
+   "en": "Possible allergic reaction: rash or hives, itching, swelling of the lips, face or eyes, vomiting, or diarrhoea soon after eating. Stop that food and talk to your doctor. EMERGENCY, call 1122 / 115 straight away: difficulty breathing, wheezing, swelling of the tongue or throat, or the baby becoming floppy, pale or unresponsive.",
+   "ur": "ممکنہ الرجی ردِعمل: دانے یا چھپاکی، خارش، ہونٹوں، چہرے یا آنکھوں پر سوجن، کھانے کے فوراً بعد الٹی یا دست۔ وہ غذا روک دیں اور ڈاکٹر سے بات کریں۔ ایمرجنسی، فوراً 1122 / 115 پر کال کریں: سانس لینے میں مشکل، سیٹی جیسی آواز، زبان یا گلے میں سوجن، یا بچہ ڈھیلا، زرد یا بے سدھ ہو جائے۔",
+   "ur_Latn": "Mumkina allergy rad-e-amal: daane ya chhapaki, kharish, honton, chehre ya aankhon par soojan, khane ke foran baad ulti ya dast. Woh ghiza rok dein aur doctor se baat karein. EMERGENCY, foran 1122 / 115 par call karein: saans lene mein mushkil, seeti jaisi awaaz, zabaan ya gale mein soojan, ya bacha dheela, zard ya be-sudh ho jaye."
+  },
+  "myths": [
+   {
+    "belief": {
+     "en": "Give ghutti with honey to newborns.",
+     "ur": "نوزائیدہ کو شہد والی گھٹی دیں۔",
+     "ur_Latn": "Nauzaida ko shehad wali ghutti dein."
+    },
+    "evidence": {
+     "en": "Honey is not safe before 12 months because of the risk of infant botulism. Newborns need only breast milk (or formula).",
+     "ur": "بوٹولزم کے خطرے کی وجہ سے 12 ماہ سے پہلے شہد محفوظ نہیں۔ نوزائیدہ کو صرف ماں کا دودھ (یا فارمولا) چاہیے۔",
+     "ur_Latn": "Botulism ke khatre ki wajah se 12 mahine se pehle shehad mehfooz nahi. Nauzaida ko sirf maa ka doodh (ya formula) chahiye."
+    }
+   },
+   {
+    "belief": {
+     "en": "Babies need extra water in the heat, even under 6 months.",
+     "ur": "گرمی میں 6 ماہ سے کم بچوں کو بھی اضافی پانی چاہیے۔",
+     "ur_Latn": "Garmi mein 6 mahine se kam bachon ko bhi izafi paani chahiye."
+    },
+    "evidence": {
+     "en": "WHO: babies under 6 months who are exclusively breastfed don't need water, even in hot weather. Breastfeed more often instead. Formula-fed babies may need a little cooled boiled water; ask your doctor.",
+     "ur": "عالمی ادارہ صحت: صرف ماں کا دودھ پینے والے 6 ماہ سے کم بچوں کو گرمی میں بھی پانی کی ضرورت نہیں۔ اس کے بجائے زیادہ بار دودھ پلائیں۔ فارمولا پینے والے بچوں کو تھوڑا ابلا ہوا ٹھنڈا پانی دینا پڑ سکتا ہے؛ ڈاکٹر سے پوچھیں۔",
+     "ur_Latn": "Aalmi idara-e-sehat: sirf maa ka doodh peene wale 6 mahine se kam bachon ko garmi mein bhi paani ki zaroorat nahi. Is ke bajaye zyada baar doodh pilayein. Formula peene wale bachon ko thora ubla hua thanda paani dena par sakta hai; doctor se poochein."
+    }
+   },
+   {
+    "belief": {
+     "en": "A little chai is fine for babies.",
+     "ur": "بچوں کے لیے تھوڑی سی چائے ٹھیک ہے۔",
+     "ur_Latn": "Bachon ke liye thori si chai theek hai."
+    },
+    "evidence": {
+     "en": "Tea isn't suitable for babies or young children: it contains caffeine and reduces how much iron they absorb from food.",
+     "ur": "چائے بچوں کے لیے مناسب نہیں: اس میں کیفین ہوتی ہے اور یہ کھانے سے آئرن جذب ہونے کو کم کرتی ہے۔",
+     "ur_Latn": "Chai bachon ke liye munasib nahi: is mein caffeine hoti hai aur yeh khane se iron jazb hone ko kam karti hai."
+    }
+   },
+   {
+    "belief": {
+     "en": "Starting cereal early helps babies sleep through the night.",
+     "ur": "جلدی دلیہ شروع کرنے سے بچہ رات بھر سوتا ہے۔",
+     "ur_Latn": "Jaldi daliya shuru karne se bacha raat bhar sota hai."
+    },
+    "evidence": {
+     "en": "There's no good evidence for this. Solids are recommended from around 6 months, when your baby shows the signs of readiness.",
+     "ur": "اس کا کوئی ٹھوس ثبوت نہیں۔ ٹھوس غذا تقریباً 6 ماہ سے تجویز کی جاتی ہے، جب بچے میں تیاری کی نشانیاں ہوں۔",
+     "ur_Latn": "Is ka koi thos saboot nahi. Thos ghiza taqreeban 6 mahine se tajweez ki jati hai, jab bache mein tayyari ki nishaniyan hon."
+    }
+   },
+   {
+    "belief": {
+     "en": "Wait until later to give eggs or peanuts, to prevent allergy.",
+     "ur": "الرجی سے بچنے کے لیے انڈا یا مونگ پھلی دیر سے دیں۔",
+     "ur_Latn": "Allergy se bachne ke liye anda ya moongphali der se dein."
+    },
+    "evidence": {
+     "en": "Delaying doesn't prevent allergy. Allergenic foods can be introduced from around 6 months, one at a time. If your baby already has eczema or a food allergy, ask your doctor first.",
+     "ur": "دیر کرنے سے الرجی نہیں رکتی۔ الرجی والی غذائیں تقریباً 6 ماہ سے، ایک ایک کر کے دی جا سکتی ہیں۔ اگر بچے کو پہلے سے ایگزیما یا کسی غذا سے الرجی ہو تو پہلے ڈاکٹر سے پوچھیں۔",
+     "ur_Latn": "Der karne se allergy nahi rukti. Allergy wali ghizayein taqreeban 6 mahine se, ek ek kar ke di ja sakti hain. Agar bache ko pehle se eczema ya kisi ghiza se allergy ho to pehle doctor se poochein."
+    }
+   }
+  ],
+  "sources": "NHS (Your baby's first solid foods; Foods to avoid giving babies and young children), WHO infant and young child feeding guidance."
+ }
+}

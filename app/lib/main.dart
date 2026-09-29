@@ -14,7 +14,25 @@ import 'data/supabase_connector.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Env.assertConfigured();
+  // Started without --dart-define-from-file: say so on screen instead of
+  // hanging on the splash logo.
+  try {
+    Env.assertConfigured();
+  } on StateError catch (e) {
+    runApp(
+      MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Text(e.message),
+            ),
+          ),
+        ),
+      ),
+    );
+    return;
+  }
   // Date formats for every language, also outside widgets (reminder texts).
   await initializeDateFormatting();
   await Supabase.initialize(
@@ -23,13 +41,21 @@ Future<void> main() async {
   );
 
   final db = await _openDatabase();
-  runApp(ProviderScope(overrides: [powerSyncProvider.overrideWithValue(db)], child: const BabyApp()));
+  runApp(
+    ProviderScope(
+      overrides: [powerSyncProvider.overrideWithValue(db)],
+      child: const BabyApp(),
+    ),
+  );
 }
 
 /// Opens the database on the phone and keeps it syncing while signed in.
 Future<PowerSyncDatabase> _openDatabase() async {
   final dir = await getApplicationSupportDirectory();
-  final db = PowerSyncDatabase(schema: localSchema, path: '${dir.path}/baby_app.db');
+  final db = PowerSyncDatabase(
+    schema: localSchema,
+    path: '${dir.path}/baby_app.db',
+  );
   await db.initialize();
 
   final auth = Supabase.instance.client.auth;

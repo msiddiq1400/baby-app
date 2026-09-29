@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Baby App';
+  String get appTitle => 'Palna';
 
   @override
   String get errorGeneric => 'Something went wrong. Please try again.';
@@ -870,7 +870,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sumEntries => 'All entries';
 
   @override
-  String get sumFooter => 'Recorded by the parent in Baby App.';
+  String get sumFooter => 'Recorded by the parent in Palna.';
 
   @override
   String get firstSyncLoading => 'Loading your family\'s data…';
@@ -892,4 +892,368 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signOutAnyway => 'Sign out anyway';
+
+  @override
+  String get editBabyTitle => 'Edit baby';
+
+  @override
+  String get birthLengthLabel => 'Birth length in cm (optional)';
+
+  @override
+  String get birthHeadLabel => 'Birth head circumference in cm (optional)';
+
+  @override
+  String get invalidBirthLength => 'Enter a length between 20 and 70 cm';
+
+  @override
+  String get invalidBirthHead => 'Enter a size between 20 and 50 cm';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get babiesSection => 'Babies';
+
+  @override
+  String get addAnotherBaby => 'Add another baby';
+
+  @override
+  String get familySection => 'Family & caregivers';
+
+  @override
+  String get familyOffline =>
+      'Connect to the internet to see and invite family members.';
+
+  @override
+  String get ownerLabel => 'Owner';
+
+  @override
+  String get caregiverLabel => 'Caregiver';
+
+  @override
+  String get youLabel => 'You';
+
+  @override
+  String get inviteCaregiver => 'Invite a caregiver';
+
+  @override
+  String get inviteCodeTitle => 'Invite code';
+
+  @override
+  String get inviteCodeHelp =>
+      'Ask them to install the app, create an account and enter this code. It works once and expires in 7 days.';
+
+  @override
+  String inviteShareText(String name, String code) {
+    return 'Join $name\'s family on Palna with this code: $code (valid for 7 days)';
+  }
+
+  @override
+  String get joinFamily => 'Join a family with a code';
+
+  @override
+  String get joinFamilyPrompt => 'Joining a family? Enter the invite code';
+
+  @override
+  String get inviteCodeLabel => '6-character code';
+
+  @override
+  String get joinButton => 'Join';
+
+  @override
+  String get joinedFamily =>
+      'You\'ve joined the family. Their data will appear in a moment.';
+
+  @override
+  String get invalidInvite => 'That code is wrong, already used, or expired.';
+
+  @override
+  String get removeMember => 'Remove';
+
+  @override
+  String get leaveFamily => 'Leave family';
+
+  @override
+  String removeMemberConfirm(String name) {
+    return 'Remove $name from the family?';
+  }
+
+  @override
+  String get leaveFamilyConfirm =>
+      'Leave this family? You\'ll stop seeing its babies.';
+
+  @override
+  String get switchBaby => 'Switch baby';
+
+  @override
+  String get atAGlance => 'At a glance';
+
+  @override
+  String hungerEstimate(String interval, String time) {
+    return 'Usually feeds about every $interval, so the next feed may be around $time.';
+  }
+
+  @override
+  String get hungerDisclaimer =>
+      'A rough guide from recent feeds; always follow your baby\'s hunger cues.';
+
+  @override
+  String sleepUsual(String usual, String today) {
+    return 'Usually sleeps about $usual a day. Today so far: $today.';
+  }
+
+  @override
+  String awakeFor(String duration) {
+    return 'Awake for $duration';
+  }
+
+  @override
+  String usuallyAwake(String duration) {
+    return 'usually about $duration between sleeps';
+  }
+
+  @override
+  String vaccinesOverdueLine(String visit) {
+    return 'Vaccines overdue: $visit';
+  }
+
+  @override
+  String medsTodayLine(int given, int total) {
+    return 'Medicines today: $given of $total doses recorded';
+  }
+
+  @override
+  String get tabSolids => 'Solids';
+
+  @override
+  String get solidsTitle => 'Starting solids';
+
+  @override
+  String get solidsTooYoung =>
+      'Most babies start solids around 6 months. You can read ahead in the meantime.';
+
+  @override
+  String get readinessTitle => 'Is my baby ready?';
+
+  @override
+  String get texturesTitle => 'How textures change';
+
+  @override
+  String get foodRulesTitle => 'Important rules';
+
+  @override
+  String get allergensTitle => 'Allergens';
+
+  @override
+  String get allergenNotYet => 'Not yet';
+
+  @override
+  String get allergenIntroduced => 'Introduced';
+
+  @override
+  String get allergenReaction => 'Reaction';
+
+  @override
+  String get reactionSignsTitle => 'Signs of an allergic reaction';
+
+  @override
+  String get beliefsTitle => 'Common beliefs vs evidence';
+
+  @override
+  String get beliefLabel => 'Often said';
+
+  @override
+  String get evidenceLabel => 'What the evidence says';
+
+  @override
+  String get foodsTitle => 'Foods';
+
+  @override
+  String get searchFoods => 'Search foods';
+
+  @override
+  String get categoryAll => 'All';
+
+  @override
+  String get categoryFruit => 'Fruit';
+
+  @override
+  String get categoryVegetable => 'Vegetables';
+
+  @override
+  String get categoryGrain => 'Grains';
+
+  @override
+  String get categoryLegume => 'Daal & beans';
+
+  @override
+  String get categoryProtein => 'Meat, fish & egg';
+
+  @override
+  String get categoryDairy => 'Dairy';
+
+  @override
+  String get categoryNut => 'Nuts & seeds';
+
+  @override
+  String get categoryOther => 'Not yet';
+
+  @override
+  String fromMonths(int count) {
+    return 'From $count months';
+  }
+
+  @override
+  String get chokingRisk => 'Choking risk: prepare as described';
+
+  @override
+  String allergenLabel(String name) {
+    return 'Allergen: $name';
+  }
+
+  @override
+  String get logTry => 'Log a try';
+
+  @override
+  String get editTry => 'Edit try';
+
+  @override
+  String get notTried => 'Not tried yet';
+
+  @override
+  String triedTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Tried $count times',
+      one: 'Tried once',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get opinionLabel => 'Did they like it?';
+
+  @override
+  String get opinionLiked => 'Liked';
+
+  @override
+  String get opinionNeutral => 'Okay';
+
+  @override
+  String get opinionDisliked => 'Disliked';
+
+  @override
+  String get reactionLabel => 'Any reaction?';
+
+  @override
+  String get reactionNone => 'None';
+
+  @override
+  String get reactionMild => 'Mild';
+
+  @override
+  String get reactionSevere => 'Severe';
+
+  @override
+  String get reactionWarning =>
+      'Had a reaction: talk to your doctor before giving this again.';
+
+  @override
+  String get severeReactionNow =>
+      'If your baby has trouble breathing, swelling of the tongue or throat, or becomes floppy or pale, call 1122 or 115 now.';
+
+  @override
+  String sourcesLabel(String sources) {
+    return 'Sources: $sources';
+  }
+
+  @override
+  String get tabCharts => 'Charts';
+
+  @override
+  String get tabMilestones => 'Milestones';
+
+  @override
+  String byMonths(int count) {
+    return 'By $count months';
+  }
+
+  @override
+  String get areaSocial => 'Social & emotional';
+
+  @override
+  String get areaLanguage => 'Language & communication';
+
+  @override
+  String get areaCognitive => 'Learning & thinking';
+
+  @override
+  String get areaMovement => 'Movement';
+
+  @override
+  String get waysToHelp => 'Ways to help';
+
+  @override
+  String get actEarlyTitle => 'When to talk to the doctor';
+
+  @override
+  String milestonesProgress(int done, int total) {
+    return '$done of $total';
+  }
+
+  @override
+  String reachedOn(String date) {
+    return 'Reached $date';
+  }
+
+  @override
+  String get helpTitle => 'Emergency & help';
+
+  @override
+  String get emergencyNumbers => 'Emergency numbers (Pakistan)';
+
+  @override
+  String get emergencyNumbersNote =>
+      'Tap to call. Services differ by city; save your nearest children\'s hospital too.';
+
+  @override
+  String get numRescue => 'Rescue 1122: ambulance and emergencies';
+
+  @override
+  String get numEdhi => 'Edhi ambulance';
+
+  @override
+  String get numChhipa => 'Chhipa ambulance (Karachi)';
+
+  @override
+  String get numPolice => 'Police';
+
+  @override
+  String get numFire => 'Fire brigade';
+
+  @override
+  String get callEmergencyWhen => 'Call for help straight away if your baby';
+
+  @override
+  String get emergencySigns =>
+      '• has difficulty breathing, or long pauses in breathing\n• is floppy, very drowsy or hard to wake\n• has blue, grey, pale or blotchy skin, lips or tongue, or feels cold\n• has a fit (seizure)\n• has swelling of the tongue or throat after a food or medicine';
+
+  @override
+  String get heatTitle => 'Hot weather and load-shedding';
+
+  @override
+  String get heatGuide =>
+      '• Keep babies out of direct sun, especially 11 am to 3 pm, and never leave them in a parked car.\n• Dress them in one light cotton layer; use shade and a fan.\n• Breastfeed more often. Babies under 6 months who only have breast milk don\'t need water; ask your doctor about extra water for formula-fed babies.\n• During load-shedding, move to the coolest room and wipe your baby with a cloth dampened in lukewarm (not cold or iced) water.';
+
+  @override
+  String get dehydrationTitle => 'Signs of dehydration: see a doctor today';
+
+  @override
+  String get dehydrationSigns =>
+      '• fewer wet diapers than usual\n• few or no tears when crying, or a dry mouth\n• a sunken soft spot on the head, or sunken eyes\n• unusually drowsy or irritable';
+
+  @override
+  String get helpSources =>
+      'Based on NHS and WHO guidance. This is general information, not a diagnosis; if you\'re worried, contact a doctor.';
 }

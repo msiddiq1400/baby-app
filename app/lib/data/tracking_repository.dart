@@ -48,6 +48,24 @@ class TrackingRepository {
   Stream<TodayLog> watchToday(String babyId) =>
       watchTables(_db, const ['feeds', 'diapers', 'sleeps'], () => today(babyId));
 
+  /// Feeds since [from], oldest first, kept live (for the hunger guide).
+  Stream<List<Feed>> watchFeedsSince(String babyId, DateTime from) => _db
+      .watch(
+        'SELECT $_feedColumns FROM feeds WHERE baby_id = ? AND deleted_at IS NULL '
+        'AND julianday(started_at) >= julianday(?) ORDER BY julianday(started_at)',
+        parameters: [babyId, utcTimestamp(from)],
+      )
+      .map((rows) => rows.map(Feed.fromJson).toList());
+
+  /// Sleeps overlapping the time since [from], kept live (for sleep insights).
+  Stream<List<Sleep>> watchSleepsSince(String babyId, DateTime from) => _db
+      .watch(
+        'SELECT id, kind, started_at, ended_at FROM sleeps WHERE baby_id = ? AND deleted_at IS NULL '
+        'AND (ended_at IS NULL OR julianday(ended_at) >= julianday(?)) ORDER BY julianday(started_at)',
+        parameters: [babyId, utcTimestamp(from)],
+      )
+      .map((rows) => rows.map(Sleep.fromJson).toList());
+
   /// Feeds and diapers since [from], e.g. for the doctor summary.
   Future<(List<Feed>, List<Diaper>)> feedsAndDiapersSince(String babyId, DateTime from) async {
     final since = utcTimestamp(from);
@@ -135,3 +153,15 @@ final trackingRepositoryProvider = Provider((ref) => TrackingRepository(ref.watc
 final todayLogProvider = StreamProvider.family<TodayLog, String>(
   (ref, babyId) => ref.watch(trackingRepositoryProvider).watchToday(babyId),
 );
+
+/// Last 3 days of feeds.
+final recentFeedsProvider = StreamProvider.family<List<Feed>, String>((ref, babyId) {
+  final now = DateTime.now();
+  return ref.watch(trackingRepositoryProvider).watchFeedsSince(babyId, DateTime(now.year, now.month, now.day - 3));
+});
+
+/// Last 8 days of sleep (7 full days for "usual", plus today).
+final recentSleepsProvider = StreamProvider.family<List<Sleep>, String>((ref, babyId) {
+  final now = DateTime.now();
+  return ref.watch(trackingRepositoryProvider).watchSleepsSince(babyId, DateTime(now.year, now.month, now.day - 8));
+});

@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
+import '../../core/numbers.dart';
 import '../../data/baby_repository.dart';
+import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/language_menu.dart';
+import '../common/sheet.dart';
+import '../settings/join_family_dialog.dart';
 
+/// Adds a baby, or edits [existing]. Shown by itself on first run (when
+/// there's no baby yet) and pushed from Settings afterwards.
 class AddBabyScreen extends ConsumerStatefulWidget {
-  const AddBabyScreen({super.key});
+  const AddBabyScreen({super.key, this.existing, this.familyId});
+
+  final Baby? existing;
+
+  /// Family for a new baby; defaults to the user's (first) family.
+  final String? familyId;
 
   @override
   ConsumerState<AddBabyScreen> createState() => _AddBabyScreenState();
@@ -15,16 +25,21 @@ class AddBabyScreen extends ConsumerStatefulWidget {
 
 class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _name = TextEditingController();
-  final _weight = TextEditingController();
-  DateTime? _birthDate;
-  String? _sex;
+  late final _name = TextEditingController(text: widget.existing?.name ?? '');
+  late final _weight = TextEditingController(text: _format(widget.existing?.birthWeightG, 1000));
+  late final _length = TextEditingController(text: _format(widget.existing?.birthLengthMm, 10));
+  late final _head = TextEditingController(text: _format(widget.existing?.birthHeadMm, 10));
+  late DateTime? _birthDate = widget.existing?.birthDate;
+  late String? _sex = widget.existing?.sex;
   var _busy = false;
+
+  static String _format(int? value, int divisor) => value == null ? '' : '${value / divisor}';
 
   @override
   void dispose() {
-    _name.dispose();
-    _weight.dispose();
+    for (final c in [_name, _weight, _length, _head]) {
+      c.dispose();
+    }
     super.dispose();
   }
 
@@ -39,18 +54,48 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
     if (picked != null) setState(() => _birthDate = picked);
   }
 
+  int? _scaled(TextEditingController c, int factor) {
+    final n = parseLocalizedNumber(c.text);
+    return n == null ? null : (n * factor).round();
+  }
+
+  /// Validator for an optional decimal field within [min]..[max].
+  FormFieldValidator<String> _range(double min, double max, String message) => (v) {
+        if ((v ?? '').trim().isEmpty) return null;
+        final n = parseLocalizedNumber(v!);
+        return n == null || n < min || n > max ? message : null;
+      };
+
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _busy = true);
+    final repo = ref.read(babyRepositoryProvider);
     try {
-      final kg = double.tryParse(_weight.text.trim().replaceAll(',', '.'));
-      await ref.read(babyRepositoryProvider).addBaby(
-            name: _name.text.trim(),
-            birthDate: _birthDate!,
-            sex: _sex,
-            birthWeightG: kg == null ? null : (kg * 1000).round(),
-          );
-      ref.invalidate(currentBabyProvider);
+      final existing = widget.existing;
+      if (existing == null) {
+        final id = await repo.addBaby(
+          name: _name.text.trim(),
+          birthDate: _birthDate!,
+          familyId: widget.familyId,
+          sex: _sex,
+          birthWeightG: _scaled(_weight, 1000),
+          birthLengthMm: _scaled(_length, 10),
+          birthHeadMm: _scaled(_head, 10),
+        );
+        await selectBaby(ref, id);
+      } else {
+        await repo.updateBaby(
+          existing.id,
+          name: _name.text.trim(),
+          birthDate: _birthDate!,
+          sex: _sex,
+          birthWeightG: _scaled(_weight, 1000),
+          birthLengthMm: _scaled(_length, 10),
+          birthHeadMm: _scaled(_head, 10),
+        );
+      }
+      // Pushed from Settings: go back. First run: the shell swaps this out.
+      if (mounted && Navigator.of(context).canPop()) Navigator.of(context).pop();
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context)
@@ -63,14 +108,14 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final dateText = _birthDate == null
-        ? ''
-        : DateFormat.yMMMd(Localizations.localeOf(context).toLanguageTag()).format(_birthDate!);
+    final existing = widget.existing;
+    final dateText = _birthDate == null ? '' : MaterialLocalizations.of(context).formatMediumDate(_birthDate!);
+    const decimal = TextInputType.numberWithOptions(decimal: true);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.addBabyTitle),
-        actions: const [LanguageMenu(showSignOut: true)],
+        title: Text(existing == null ? l10n.addBabyTitle : l10n.editBabyTitle),
+        actions: [if (!Navigator.of(context).canPop()) const LanguageMenu(showSignOut: true)],
       ),
       body: SafeArea(
         child: Form(
@@ -78,6 +123,16 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
           child: ListView(
             padding: const EdgeInsets.all(24),
             children: [
+              // First run: a caregiver who was invited should join instead
+              // of creating a second profile for the same baby.
+              if (existing == null && !Navigator.of(context).canPop()) ...[
+                OutlinedButton.icon(
+                  onPressed: () => showJoinFamilyDialog(context),
+                  icon: const Icon(Icons.group_add_outlined),
+                  label: Text(l10n.joinFamilyPrompt),
+                ),
+                const SizedBox(height: 24),
+              ],
               TextFormField(
                 controller: _name,
                 decoration: InputDecoration(labelText: l10n.babyNameLabel),
@@ -113,13 +168,22 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
               TextFormField(
                 controller: _weight,
                 decoration: InputDecoration(labelText: l10n.birthWeightLabel),
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                validator: (v) {
-                  final text = (v ?? '').trim();
-                  if (text.isEmpty) return null;
-                  final kg = double.tryParse(text.replaceAll(',', '.'));
-                  return kg == null || kg < 0.3 || kg > 7 ? l10n.invalidWeight : null;
-                },
+                keyboardType: decimal,
+                validator: _range(0.3, 7, l10n.invalidWeight),
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                controller: _length,
+                decoration: InputDecoration(labelText: l10n.birthLengthLabel),
+                keyboardType: decimal,
+                validator: _range(20, 70, l10n.invalidBirthLength),
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                controller: _head,
+                decoration: InputDecoration(labelText: l10n.birthHeadLabel),
+                keyboardType: decimal,
+                validator: _range(20, 50, l10n.invalidBirthHead),
               ),
               const SizedBox(height: 32),
               FilledButton(
@@ -128,6 +192,14 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
                     ? const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))
                     : Text(l10n.saveButton),
               ),
+              if (existing != null)
+                DeleteButton(
+                  enabled: !_busy,
+                  onConfirmed: () async {
+                    await ref.read(babyRepositoryProvider).delete(existing.id);
+                    if (context.mounted) Navigator.of(context).pop();
+                  },
+                ),
             ],
           ),
         ),

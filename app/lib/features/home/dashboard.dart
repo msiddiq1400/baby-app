@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/baby_age.dart';
 import '../../core/providers.dart';
+import '../../data/baby_repository.dart';
 import '../../data/models.dart';
 import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/language_menu.dart';
+import 'glance_card.dart';
 import 'log_sheets.dart';
 import 'timeline.dart';
 
@@ -23,15 +25,24 @@ class Dashboard extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(baby.name),
-            Text(
-              formatBabyAge(l10n, baby.birthDate, now),
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
+        title: InkWell(
+          onTap: () => _showBabySwitcher(context, ref),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(child: Text(baby.name, overflow: TextOverflow.ellipsis)),
+                  if ((ref.watch(babiesProvider).value?.length ?? 0) > 1) const Icon(Icons.arrow_drop_down),
+                ],
+              ),
+              Text(
+                formatBabyAge(l10n, baby.birthDate, now),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
+          ),
         ),
         actions: const [LanguageMenu(showSignOut: true)],
       ),
@@ -55,6 +66,35 @@ class Dashboard extends ConsumerWidget {
   }
 }
 
+/// Lists the babies to switch between (only when there's more than one).
+void _showBabySwitcher(BuildContext context, WidgetRef ref) {
+  final babies = ref.read(babiesProvider).value ?? const [];
+  if (babies.length < 2) return;
+  final l10n = AppLocalizations.of(context);
+  showModalBottomSheet<void>(
+    context: context,
+    showDragHandle: true,
+    builder: (context) => SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(l10n.switchBaby, style: Theme.of(context).textTheme.titleMedium),
+          for (final b in babies)
+            ListTile(
+              leading: const Icon(Icons.child_care),
+              title: Text(b.name),
+              subtitle: Text(formatBabyAge(l10n, b.birthDate, DateTime.now())),
+              onTap: () {
+                selectBaby(ref, b.id);
+                Navigator.pop(context);
+              },
+            ),
+        ],
+      ),
+    ),
+  );
+}
+
 class _TodayView extends StatelessWidget {
   const _TodayView({required this.baby, required this.log, required this.now});
 
@@ -71,6 +111,7 @@ class _TodayView extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        GlanceCard(baby: baby, now: now),
         _SummaryCard(
           icon: Icons.local_drink_outlined,
           title: l10n.feeds,
@@ -123,7 +164,16 @@ class _SummaryCard extends StatelessWidget {
         leading: Icon(icon, size: 32, color: theme.colorScheme.primary),
         title: Text(title),
         subtitle: details.isEmpty ? null : Text(details.join('\n')),
-        trailing: Text(value, style: theme.textTheme.headlineSmall),
+        // Long values (e.g. "13 گھنٹے 20 منٹ" in Urdu) shrink to fit rather
+        // than squeezing out the title.
+        trailing: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 140),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: AlignmentDirectional.centerEnd,
+            child: Text(value, style: theme.textTheme.headlineSmall),
+          ),
+        ),
       ),
     );
   }

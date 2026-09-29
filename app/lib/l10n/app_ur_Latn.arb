@@ -1,6 +1,6 @@
 {
   "@@locale": "ur_Latn",
-  "appTitle": "Baby App",
+  "appTitle": "Palna",
   "errorGeneric": "Kuch ghalat ho gaya. Dobara koshish karein.",
   "fieldRequired": "Zaroori hai",
   "saveButton": "Save karein",
@@ -603,11 +603,236 @@
     }
   },
   "sumEntries": "Tamam indrajaat",
-  "sumFooter": "Walidain ne Baby App mein record kiya.",
+  "sumFooter": "Walidain ne Palna mein record kiya.",
   "firstSyncLoading": "Aap ki family ka data load ho raha hai…",
   "firstSyncNeedsInternet": "Pehli baar is ke liye internet zaroori hai. Us ke baad app internet ke baghair bhi chalti hai.",
   "offlineBanner": "Offline: tabdeeliyan save hain aur internet aane par sync ho jayengi.",
   "unsyncedSignOutTitle": "Kuch tabdeeliyan abhi sync nahi hui",
   "unsyncedSignOutBody": "Agar aap abhi sign out karein to offline kiye gaye indrajaat zaaya ho jayenge. Unhein mehfooz rakhne ke liye pehle internet se judein.",
-  "signOutAnyway": "Phir bhi sign out karein"
+  "signOutAnyway": "Phir bhi sign out karein",
+  "editBabyTitle": "Baby edit karein",
+  "birthLengthLabel": "Paidaish ke waqt qad cm mein (optional)",
+  "birthHeadLabel": "Paidaish ke waqt sar ka gher cm mein (optional)",
+  "invalidBirthLength": "20 se 70 cm ke darmiyan qad likhein",
+  "invalidBirthHead": "20 se 50 cm ke darmiyan likhein",
+  "settingsTitle": "Settings",
+  "babiesSection": "Bachay",
+  "addAnotherBaby": "Ek aur baby add karein",
+  "familySection": "Family aur dekh bhaal karne wale",
+  "familyOffline": "Family members dekhne aur invite karne ke liye internet se judein.",
+  "ownerLabel": "Owner",
+  "caregiverLabel": "Caregiver",
+  "youLabel": "Aap",
+  "inviteCaregiver": "Caregiver ko invite karein",
+  "inviteCodeTitle": "Invite code",
+  "inviteCodeHelp": "Un se kahein ke app install karein, account banayein aur yeh code likhein. Yeh ek baar kaam karta hai aur 7 din mein khatam ho jata hai.",
+  "inviteShareText": "Palna mein {name} ki family join karne ke liye yeh code use karein: {code} (7 din ke liye)",
+  "@inviteShareText": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "joinFamily": "Code se family join karein",
+  "joinFamilyPrompt": "Family join kar rahe hain? Invite code likhein",
+  "inviteCodeLabel": "6 characters ka code",
+  "joinButton": "Join karein",
+  "joinedFamily": "Aap family mein shamil ho gaye. Un ka data abhi nazar aayega.",
+  "invalidInvite": "Yeh code ghalat hai, use ho chuka hai ya expire ho gaya hai.",
+  "removeMember": "Hatayein",
+  "leaveFamily": "Family chhorein",
+  "removeMemberConfirm": "{name} ko family se hatayein?",
+  "@removeMemberConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveFamilyConfirm": "Yeh family chhorein? Aap ko is ke bachay nazar aana band ho jayenge.",
+  "switchBaby": "Baby badlein",
+  "atAGlance": "Ek nazar mein",
+  "hungerEstimate": "Aam taur par taqreeban har {interval} baad doodh peeta hai, is liye agli feed taqreeban {time} ke qareeb ho sakti hai.",
+  "@hungerEstimate": {
+    "placeholders": {
+      "interval": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "hungerDisclaimer": "Yeh haaliya feeds se ek andaaza hai; hamesha baby ki bhook ke isharon par amal karein.",
+  "sleepUsual": "Aam taur par din mein taqreeban {usual} sota hai. Aaj ab tak: {today}.",
+  "@sleepUsual": {
+    "placeholders": {
+      "usual": {
+        "type": "String"
+      },
+      "today": {
+        "type": "String"
+      }
+    }
+  },
+  "awakeFor": "{duration} se jaag raha hai",
+  "@awakeFor": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "usuallyAwake": "aam taur par neendon ke darmiyan taqreeban {duration}",
+  "@usuallyAwake": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccinesOverdueLine": "Teekon mein der: {visit}",
+  "@vaccinesOverdueLine": {
+    "placeholders": {
+      "visit": {
+        "type": "String"
+      }
+    }
+  },
+  "medsTodayLine": "Aaj ki dawaiyan: {total} mein se {given} khurakein record",
+  "@medsTodayLine": {
+    "placeholders": {
+      "given": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tabSolids": "Thos ghiza",
+  "solidsTitle": "Thos ghiza ka aaghaz",
+  "solidsTooYoung": "Zyada tar bachay taqreeban 6 mahine par thos ghiza shuru karte hain. Tab tak aap pehle se parh sakte hain.",
+  "readinessTitle": "Kya mera bacha tayyar hai?",
+  "texturesTitle": "Ghiza ki saakht kaise badalti hai",
+  "foodRulesTitle": "Ahem usool",
+  "allergensTitle": "Allergy wali ghizayein",
+  "allergenNotYet": "Abhi nahi",
+  "allergenIntroduced": "Shuru ho gayi",
+  "allergenReaction": "Rad-e-amal",
+  "reactionSignsTitle": "Allergy rad-e-amal ki nishaniyan",
+  "beliefsTitle": "Aam baatein bamuqabla saboot",
+  "beliefLabel": "Aksar kaha jata hai",
+  "evidenceLabel": "Saboot kya kehte hain",
+  "foodsTitle": "Ghizayein",
+  "searchFoods": "Ghiza talash karein",
+  "categoryAll": "Sab",
+  "categoryFruit": "Phal",
+  "categoryVegetable": "Sabziyan",
+  "categoryGrain": "Anaaj",
+  "categoryLegume": "Daalein",
+  "categoryProtein": "Gosht, machli aur anda",
+  "categoryDairy": "Doodh se bani cheezein",
+  "categoryNut": "Mewe aur beej",
+  "categoryOther": "Abhi nahi",
+  "fromMonths": "{count} mahine se",
+  "@fromMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chokingRisk": "Gale mein phansne ka khatra: bataye gaye tareeqe se tayyar karein",
+  "allergenLabel": "Allergy wali ghiza: {name}",
+  "@allergenLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "logTry": "Try record karein",
+  "editTry": "Try edit karein",
+  "notTried": "Abhi nahi aazmaya",
+  "triedTimes": "{count} baar aazmaya",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "opinionLabel": "Kya pasand aaya?",
+  "opinionLiked": "Pasand aaya",
+  "opinionNeutral": "Theek",
+  "opinionDisliked": "Pasand nahi aaya",
+  "reactionLabel": "Koi rad-e-amal?",
+  "reactionNone": "Koi nahi",
+  "reactionMild": "Halka",
+  "reactionSevere": "Shadeed",
+  "reactionWarning": "Rad-e-amal hua tha: dobara dene se pehle doctor se baat karein.",
+  "severeReactionNow": "Agar bache ko saans lene mein mushkil ho, zabaan ya gale mein soojan ho, ya woh dheela ya zard par jaye to abhi 1122 ya 115 par call karein.",
+  "sourcesLabel": "Maakhaz: {sources}",
+  "@sourcesLabel": {
+    "placeholders": {
+      "sources": {
+        "type": "String"
+      }
+    }
+  },
+  "tabCharts": "Charts",
+  "tabMilestones": "Milestones",
+  "byMonths": "{count} mahine tak",
+  "@byMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "areaSocial": "Samaji o jazbati",
+  "areaLanguage": "Zabaan aur baat cheet",
+  "areaCognitive": "Seekhna aur sochna",
+  "areaMovement": "Harkat",
+  "waysToHelp": "Madad ke tareeqe",
+  "actEarlyTitle": "Doctor se kab baat karein",
+  "milestonesProgress": "{total} mein se {done}",
+  "@milestonesProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "reachedOn": "{date} ko",
+  "@reachedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "helpTitle": "Emergency aur madad",
+  "emergencyNumbers": "Emergency numbers (Pakistan)",
+  "emergencyNumbersNote": "Call karne ke liye tap karein. Sahooliyat har shehar mein mukhtalif hain; qareebi bachon ke hospital ka number bhi save rakhein.",
+  "numRescue": "Rescue 1122: ambulance aur emergency",
+  "numEdhi": "Edhi ambulance",
+  "numChhipa": "Chhipa ambulance (Karachi)",
+  "numPolice": "Police",
+  "numFire": "Fire brigade",
+  "callEmergencyWhen": "Foran madad ke liye call karein agar aap ka bacha",
+  "emergencySigns": "• saans lene mein mushkil ho ya saans ruk ruk kar aaye\n• dheela, bohat ghunooda ho ya mushkil se jaage\n• jild, hont ya zabaan neeli, surmai, zard ya dhabbe daar ho, ya jism thanda lage\n• daura (jhatke) pare\n• kisi ghiza ya dawa ke baad zabaan ya gale mein soojan ho",
+  "heatTitle": "Garmi aur load-shedding",
+  "heatGuide": "• Bachon ko dhoop se bachayein, khaas taur par subah 11 se dopahar 3 baje tak, aur kabhi khari gaari mein akela na chhorein.\n• Ek halka sooti kapra pehnayein; saya aur pankha istemal karein.\n• Zyada baar doodh pilayein. Sirf maa ka doodh peene wale 6 mahine se kam bachon ko paani ki zaroorat nahi; formula peene wale bachon ke liye izafi paani ka doctor se poochein.\n• Load-shedding mein sab se thande kamre mein jaayein aur bache ko neem garam (thande ya barf wale nahi) paani mein bheege kapre se ponchhein.",
+  "dehydrationTitle": "Paani ki kami ki nishaniyan: aaj hi doctor ko dikhayein",
+  "dehydrationSigns": "• maamool se kam geelay diapers\n• rote waqt aansu kam ya bilkul na hon, ya munh khushk ho\n• sar ka naram hissa (taalu) ya aankhein dhansi hui hon\n• ghair mamooli taur par ghunooda ya chirchira ho",
+  "helpSources": "Yeh NHS aur aalmi idara-e-sehat ki hidayat par mabni hai. Yeh umoomi maloomat hain, tashkhees nahi; fikr ho to doctor se rabta karein."
 }

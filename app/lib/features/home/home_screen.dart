@@ -56,6 +56,11 @@ class BabyShell extends ConsumerWidget {
                         label: l10n.tabMilk,
                       ),
                       NavigationDestination(
+                        icon: const Icon(Icons.restaurant_outlined),
+                        selectedIcon: const Icon(Icons.restaurant),
+                        label: l10n.tabSolids,
+                      ),
+                      NavigationDestination(
                         icon: const Icon(Icons.show_chart),
                         label: l10n.tabGrowth,
                       ),

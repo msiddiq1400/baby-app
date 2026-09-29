@@ -128,6 +128,26 @@ const localSchema = Schema([
     Column.text('notes'),
     Column.text('deleted_at'),
   ]),
+  Table('food_tries', [
+    Column.text('family_id'),
+    Column.text('baby_id'),
+    Column.text('food_id'),
+    Column.text('tried_on'),
+    Column.text('opinion'),
+    Column.text('reaction'),
+    Column.text('notes'),
+    Column.text('deleted_at'),
+  ]),
+  Table('milestone_checks', [
+    Column.text('family_id'),
+    Column.text('baby_id'),
+    Column.text('milestone_id'),
+    Column.text('achieved_on'),
+    Column.text('notes'),
+    Column.text('deleted_at'),
+  ]),
+  // Settings for this phone only (never uploaded); id is the setting name.
+  Table.localOnly('app_settings', [Column.text('value')]),
   // Reference data, read-only on the phone.
   Table('vaccine_schedule', [
     Column.text('country_code'),

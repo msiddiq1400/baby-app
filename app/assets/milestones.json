@@ -1,0 +1,980 @@
+{
+ "ages": [
+  {
+   "months": 2,
+   "milestones": [
+    {
+     "id": "2m-calms",
+     "area": "social",
+     "text": {
+      "en": "Calms down when spoken to or picked up",
+      "ur": "بات کرنے یا اٹھانے پر پرسکون ہو جاتا ہے",
+      "ur_Latn": "Baat karne ya uthane par pursukoon ho jata hai"
+     }
+    },
+    {
+     "id": "2m-face",
+     "area": "social",
+     "text": {
+      "en": "Looks at your face",
+      "ur": "آپ کے چہرے کو دیکھتا ہے",
+      "ur_Latn": "Aap ke chehre ko dekhta hai"
+     }
+    },
+    {
+     "id": "2m-happy",
+     "area": "social",
+     "text": {
+      "en": "Seems happy to see you when you walk up",
+      "ur": "آپ کے پاس آنے پر خوش لگتا ہے",
+      "ur_Latn": "Aap ke paas aane par khush lagta hai"
+     }
+    },
+    {
+     "id": "2m-smiles",
+     "area": "social",
+     "text": {
+      "en": "Smiles when you talk to or smile at them",
+      "ur": "آپ کے بات کرنے یا مسکرانے پر مسکراتا ہے",
+      "ur_Latn": "Aap ke baat karne ya muskurane par muskurata hai"
+     }
+    },
+    {
+     "id": "2m-sounds",
+     "area": "language",
+     "text": {
+      "en": "Makes sounds other than crying",
+      "ur": "رونے کے علاوہ آوازیں نکالتا ہے",
+      "ur_Latn": "Rone ke ilawa awazein nikalta hai"
+     }
+    },
+    {
+     "id": "2m-loud",
+     "area": "language",
+     "text": {
+      "en": "Reacts to loud sounds",
+      "ur": "تیز آوازوں پر ردِعمل دیتا ہے",
+      "ur_Latn": "Tez awazon par rad-e-amal deta hai"
+     }
+    },
+    {
+     "id": "2m-watches",
+     "area": "cognitive",
+     "text": {
+      "en": "Watches you as you move",
+      "ur": "آپ کو چلتے پھرتے دیکھتا ہے",
+      "ur_Latn": "Aap ko chalte phirte dekhta hai"
+     }
+    },
+    {
+     "id": "2m-toy",
+     "area": "cognitive",
+     "text": {
+      "en": "Looks at a toy for several seconds",
+      "ur": "کھلونے کو کئی سیکنڈ تک دیکھتا ہے",
+      "ur_Latn": "Khilone ko kai second tak dekhta hai"
+     }
+    },
+    {
+     "id": "2m-head",
+     "area": "movement",
+     "text": {
+      "en": "Holds head up when on tummy",
+      "ur": "پیٹ کے بل لیٹ کر سر اٹھاتا ہے",
+      "ur_Latn": "Pait ke bal lait kar sar uthata hai"
+     }
+    },
+    {
+     "id": "2m-limbs",
+     "area": "movement",
+     "text": {
+      "en": "Moves both arms and both legs",
+      "ur": "دونوں بازو اور دونوں ٹانگیں ہلاتا ہے",
+      "ur_Latn": "Dono baazu aur dono tangein hilata hai"
+     }
+    },
+    {
+     "id": "2m-hands",
+     "area": "movement",
+     "text": {
+      "en": "Opens hands briefly",
+      "ur": "کچھ دیر کے لیے مٹھیاں کھولتا ہے",
+      "ur_Latn": "Kuch der ke liye mutthiyan kholta hai"
+     }
+    }
+   ],
+   "tips": [
+    {
+     "en": "Tummy time: lay your baby on their tummy while awake and watched, with a toy at eye level.",
+     "ur": "پیٹ کے بل وقت: جاگتے ہوئے اور نگرانی میں بچے کو پیٹ کے بل لٹائیں، آنکھوں کی سطح پر کھلونا رکھیں۔",
+     "ur_Latn": "Pait ke bal waqt: jaagte hue aur nigrani mein bache ko pait ke bal litayein, aankhon ki satah par khilona rakhein."
+    },
+    {
+     "en": "Talk, read and sing to your baby; copy their sounds.",
+     "ur": "بچے سے باتیں کریں، پڑھ کر سنائیں اور گائیں؛ اس کی آوازوں کی نقل کریں۔",
+     "ur_Latn": "Bache se baatein karein, parh kar sunayein aur gaayein; us ki awazon ki naqal karein."
+    },
+    {
+     "en": "Respond with smiles and excitement when your baby makes sounds.",
+     "ur": "بچہ آواز نکالے تو مسکرا کر اور خوشی سے جواب دیں۔",
+     "ur_Latn": "Bacha awaz nikale to muskura kar aur khushi se jawab dein."
+    },
+    {
+     "en": "Never shake a baby. If you feel upset, put them down safely and take a break.",
+     "ur": "بچے کو کبھی نہ جھنجھوڑیں۔ غصہ آئے تو اسے محفوظ جگہ لٹا کر کچھ دیر وقفہ لیں۔",
+     "ur_Latn": "Bache ko kabhi na jhanjhorein. Ghussa aaye to usay mehfooz jagah lita kar kuch der waqfa lein."
+    }
+   ]
+  },
+  {
+   "months": 4,
+   "milestones": [
+    {
+     "id": "4m-smiles",
+     "area": "social",
+     "text": {
+      "en": "Smiles on their own to get your attention",
+      "ur": "آپ کی توجہ کے لیے خود مسکراتا ہے",
+      "ur_Latn": "Aap ki tawajjo ke liye khud muskurata hai"
+     }
+    },
+    {
+     "id": "4m-chuckles",
+     "area": "social",
+     "text": {
+      "en": "Chuckles when you try to make them laugh",
+      "ur": "ہنسانے پر ہلکا سا کھلکھلاتا ہے",
+      "ur_Latn": "Hansane par halka sa khilkhilata hai"
+     }
+    },
+    {
+     "id": "4m-attention",
+     "area": "social",
+     "text": {
+      "en": "Looks at you, moves or makes sounds to get your attention",
+      "ur": "توجہ کے لیے آپ کو دیکھتا، ہلتا یا آواز نکالتا ہے",
+      "ur_Latn": "Tawajjo ke liye aap ko dekhta, hilta ya awaz nikalta hai"
+     }
+    },
+    {
+     "id": "4m-coos",
+     "area": "language",
+     "text": {
+      "en": "Coos (\"oooo\", \"aahh\")",
+      "ur": "غوں غاں کرتا ہے (\"اووو\"، \"آآہ\")",
+      "ur_Latn": "Ghoon ghaan karta hai (\"oooo\", \"aahh\")"
+     }
+    },
+    {
+     "id": "4m-back",
+     "area": "language",
+     "text": {
+      "en": "Makes sounds back when you talk",
+      "ur": "آپ کے بولنے پر جواب میں آوازیں نکالتا ہے",
+      "ur_Latn": "Aap ke bolne par jawab mein awazein nikalta hai"
+     }
+    },
+    {
+     "id": "4m-turns",
+     "area": "language",
+     "text": {
+      "en": "Turns head towards the sound of your voice",
+      "ur": "آپ کی آواز کی طرف سر گھماتا ہے",
+      "ur_Latn": "Aap ki awaz ki taraf sar ghumata hai"
+     }
+    },
+    {
+     "id": "4m-mouth",
+     "area": "cognitive",
+     "text": {
+      "en": "If hungry, opens mouth when they see breast or bottle",
+      "ur": "بھوک ہو تو دودھ یا بوتل دیکھ کر منہ کھولتا ہے",
+      "ur_Latn": "Bhook ho to doodh ya bottle dekh kar munh kholta hai"
+     }
+    },
+    {
+     "id": "4m-hands",
+     "area": "cognitive",
+     "text": {
+      "en": "Looks at their hands with interest",
+      "ur": "دلچسپی سے اپنے ہاتھوں کو دیکھتا ہے",
+      "ur_Latn": "Dilchaspi se apne haathon ko dekhta hai"
+     }
+    },
+    {
+     "id": "4m-head",
+     "area": "movement",
+     "text": {
+      "en": "Holds head steady without support when held",
+      "ur": "اٹھانے پر بغیر سہارے سر سیدھا رکھتا ہے",
+      "ur_Latn": "Uthane par baghair sahare sar seedha rakhta hai"
+     }
+    },
+    {
+     "id": "4m-holds",
+     "area": "movement",
+     "text": {
+      "en": "Holds a toy when you put it in their hand",
+      "ur": "ہاتھ میں دیا گیا کھلونا پکڑتا ہے",
+      "ur_Latn": "Haath mein diya gaya khilona pakarta hai"
+     }
+    },
+    {
+     "id": "4m-swings",
+     "area": "movement",
+     "text": {
+      "en": "Swings an arm at toys",
+      "ur": "کھلونوں کی طرف بازو مارتا ہے",
+      "ur_Latn": "Khilonon ki taraf baazu maarta hai"
+     }
+    },
+    {
+     "id": "4m-mouthhands",
+     "area": "movement",
+     "text": {
+      "en": "Brings hands to mouth",
+      "ur": "ہاتھ منہ تک لاتا ہے",
+      "ur_Latn": "Haath munh tak laata hai"
+     }
+    },
+    {
+     "id": "4m-pushes",
+     "area": "movement",
+     "text": {
+      "en": "Pushes up onto elbows or forearms when on tummy",
+      "ur": "پیٹ کے بل کہنیوں پر زور دے کر اوپر اٹھتا ہے",
+      "ur_Latn": "Pait ke bal kohniyon par zor de kar upar uthta hai"
+     }
+    }
+   ],
+   "tips": [
+    {
+     "en": "Give safe toys to reach for, kick and put in the mouth, like rattles.",
+     "ur": "پکڑنے، لات مارنے اور منہ میں ڈالنے کے لیے محفوظ کھلونے دیں، جیسے جھنجھنا۔",
+     "ur_Latn": "Pakarne, laat maarne aur munh mein daalne ke liye mehfooz khilone dein, jaise jhunjhuna."
+    },
+    {
+     "en": "Take turns \"talking\": answer each sound your baby makes.",
+     "ur": "باری باری \"بات\" کریں: بچے کی ہر آواز کا جواب دیں۔",
+     "ur_Latn": "Baari baari \"baat\" karein: bache ki har awaz ka jawab dein."
+    },
+    {
+     "en": "Limit time in car seats and bouncers; give floor time every day.",
+     "ur": "کار سیٹ اور جھولے میں کم وقت رکھیں؛ روزانہ فرش پر کھیلنے کا وقت دیں۔",
+     "ur_Latn": "Car seat aur jhoole mein kam waqt rakhein; rozana farsh par khelne ka waqt dein."
+    },
+    {
+     "en": "No screens except video calls with family.",
+     "ur": "خاندان کے ساتھ ویڈیو کال کے علاوہ کوئی اسکرین نہیں۔",
+     "ur_Latn": "Family ke saath video call ke ilawa koi screen nahi."
+    }
+   ]
+  },
+  {
+   "months": 6,
+   "milestones": [
+    {
+     "id": "6m-knows",
+     "area": "social",
+     "text": {
+      "en": "Knows familiar people",
+      "ur": "جانے پہچانے لوگوں کو پہچانتا ہے",
+      "ur_Latn": "Jaane pehchane logon ko pehchanta hai"
+     }
+    },
+    {
+     "id": "6m-mirror",
+     "area": "social",
+     "text": {
+      "en": "Likes to look at self in a mirror",
+      "ur": "آئینے میں خود کو دیکھنا پسند کرتا ہے",
+      "ur_Latn": "Aaine mein khud ko dekhna pasand karta hai"
+     }
+    },
+    {
+     "id": "6m-laughs",
+     "area": "social",
+     "text": {
+      "en": "Laughs",
+      "ur": "ہنستا ہے",
+      "ur_Latn": "Hansta hai"
+     }
+    },
+    {
+     "id": "6m-turns",
+     "area": "language",
+     "text": {
+      "en": "Takes turns making sounds with you",
+      "ur": "آپ کے ساتھ باری باری آوازیں نکالتا ہے",
+      "ur_Latn": "Aap ke saath baari baari awazein nikalta hai"
+     }
+    },
+    {
+     "id": "6m-raspberries",
+     "area": "language",
+     "text": {
+      "en": "Blows \"raspberries\"",
+      "ur": "ہونٹوں سے پھرر کی آواز نکالتا ہے",
+      "ur_Latn": "Honton se phurr ki awaz nikalta hai"
+     }
+    },
+    {
+     "id": "6m-squeals",
+     "area": "language",
+     "text": {
+      "en": "Makes squealing noises",
+      "ur": "چیخ نما خوشی کی آوازیں نکالتا ہے",
+      "ur_Latn": "Cheekh numa khushi ki awazein nikalta hai"
+     }
+    },
+    {
+     "id": "6m-mouth",
+     "area": "cognitive",
+     "text": {
+      "en": "Puts things in mouth to explore them",
+      "ur": "چیزوں کو جاننے کے لیے منہ میں ڈالتا ہے",
+      "ur_Latn": "Cheezon ko jaanne ke liye munh mein daalta hai"
+     }
+    },
+    {
+     "id": "6m-reaches",
+     "area": "cognitive",
+     "text": {
+      "en": "Reaches to grab a toy they want",
+      "ur": "پسند کا کھلونا پکڑنے کے لیے ہاتھ بڑھاتا ہے",
+      "ur_Latn": "Pasand ka khilona pakarne ke liye haath barhata hai"
+     }
+    },
+    {
+     "id": "6m-lips",
+     "area": "cognitive",
+     "text": {
+      "en": "Closes lips to show they don't want more food",
+      "ur": "مزید کھانا نہ چاہے تو ہونٹ بند کر لیتا ہے",
+      "ur_Latn": "Mazeed khana na chahe to hont band kar leta hai"
+     }
+    },
+    {
+     "id": "6m-rolls",
+     "area": "movement",
+     "text": {
+      "en": "Rolls from tummy to back",
+      "ur": "پیٹ سے کمر کے بل پلٹتا ہے",
+      "ur_Latn": "Pait se kamar ke bal palat-ta hai"
+     }
+    },
+    {
+     "id": "6m-straight",
+     "area": "movement",
+     "text": {
+      "en": "Pushes up with straight arms when on tummy",
+      "ur": "پیٹ کے بل سیدھے بازوؤں پر اوپر اٹھتا ہے",
+      "ur_Latn": "Pait ke bal seedhe baazuon par upar uthta hai"
+     }
+    },
+    {
+     "id": "6m-leans",
+     "area": "movement",
+     "text": {
+      "en": "Leans on hands to support themselves when sitting",
+      "ur": "بیٹھتے وقت ہاتھوں کے سہارے ٹکتا ہے",
+      "ur_Latn": "Baithte waqt haathon ke sahare tikta hai"
+     }
+    }
+   ],
+   "tips": [
+    {
+     "en": "Put toys just out of reach to encourage rolling and reaching.",
+     "ur": "کھلونے تھوڑا دور رکھیں تاکہ بچہ پلٹنے اور ہاتھ بڑھانے کی کوشش کرے۔",
+     "ur_Latn": "Khilone thora door rakhein taake bacha palatne aur haath barhane ki koshish kare."
+    },
+    {
+     "en": "Name the things you see together, and read picture books every day.",
+     "ur": "جو چیزیں مل کر دیکھیں ان کے نام بتائیں، اور روزانہ تصویروں والی کتاب پڑھیں۔",
+     "ur_Latn": "Jo cheezein mil kar dekhein un ke naam batayein, aur rozana tasveeron wali kitab parhein."
+    },
+    {
+     "en": "Hold your baby sitting up, supported, so they practise balance.",
+     "ur": "بچے کو سہارا دے کر بٹھائیں تاکہ وہ توازن سیکھے۔",
+     "ur_Latn": "Bache ko sahara de kar bithayein taake woh tawazun seekhe."
+    },
+    {
+     "en": "Ask your doctor about starting solids and avoiding choking hazards.",
+     "ur": "ٹھوس غذا شروع کرنے اور گلے میں پھنسنے والی چیزوں کے بارے میں ڈاکٹر سے پوچھیں۔",
+     "ur_Latn": "Thos ghiza shuru karne aur gale mein phansne wali cheezon ke baare mein doctor se poochein."
+    }
+   ]
+  },
+  {
+   "months": 9,
+   "milestones": [
+    {
+     "id": "9m-strangers",
+     "area": "social",
+     "text": {
+      "en": "Is shy, clingy or fearful around strangers",
+      "ur": "اجنبیوں کے سامنے شرماتا، چمٹتا یا ڈرتا ہے",
+      "ur_Latn": "Ajnabiyon ke saamne sharmata, chimat-ta ya darta hai"
+     }
+    },
+    {
+     "id": "9m-faces",
+     "area": "social",
+     "text": {
+      "en": "Shows several facial expressions (happy, sad, angry, surprised)",
+      "ur": "چہرے سے کئی جذبات دکھاتا ہے (خوشی، اداسی، غصہ، حیرت)",
+      "ur_Latn": "Chehre se kai jazbaat dikhata hai (khushi, udaasi, ghussa, hairat)"
+     }
+    },
+    {
+     "id": "9m-name",
+     "area": "social",
+     "text": {
+      "en": "Looks when you call their name",
+      "ur": "نام پکارنے پر دیکھتا ہے",
+      "ur_Latn": "Naam pukarne par dekhta hai"
+     }
+    },
+    {
+     "id": "9m-leave",
+     "area": "social",
+     "text": {
+      "en": "Reacts when you leave (looks, reaches for you or cries)",
+      "ur": "آپ کے جانے پر ردِعمل دیتا ہے (دیکھتا، ہاتھ بڑھاتا یا روتا ہے)",
+      "ur_Latn": "Aap ke jaane par rad-e-amal deta hai (dekhta, haath barhata ya rota hai)"
+     }
+    },
+    {
+     "id": "9m-peekaboo",
+     "area": "social",
+     "text": {
+      "en": "Smiles or laughs at peek-a-boo",
+      "ur": "چھپن چھپائی (پیک-اے-بو) پر مسکراتا یا ہنستا ہے",
+      "ur_Latn": "Chhupan chhupai (peek-a-boo) par muskurata ya hansta hai"
+     }
+    },
+    {
+     "id": "9m-babbles",
+     "area": "language",
+     "text": {
+      "en": "Makes lots of different sounds like \"mamamama\" and \"babababa\"",
+      "ur": "\"ماماما\" اور \"بابابا\" جیسی مختلف آوازیں نکالتا ہے",
+      "ur_Latn": "\"mamama\" aur \"bababa\" jaisi mukhtalif awazein nikalta hai"
+     }
+    },
+    {
+     "id": "9m-arms",
+     "area": "language",
+     "text": {
+      "en": "Lifts arms up to be picked up",
+      "ur": "اٹھانے کے لیے بازو اوپر کرتا ہے",
+      "ur_Latn": "Uthane ke liye baazu upar karta hai"
+     }
+    },
+    {
+     "id": "9m-looks",
+     "area": "cognitive",
+     "text": {
+      "en": "Looks for things dropped out of sight",
+      "ur": "نظر سے گری ہوئی چیز کو ڈھونڈتا ہے",
+      "ur_Latn": "Nazar se giri hui cheez ko dhoondta hai"
+     }
+    },
+    {
+     "id": "9m-bangs",
+     "area": "cognitive",
+     "text": {
+      "en": "Bangs two things together",
+      "ur": "دو چیزیں آپس میں ٹکراتا ہے",
+      "ur_Latn": "Do cheezein aapas mein takrata hai"
+     }
+    },
+    {
+     "id": "9m-sits-up",
+     "area": "movement",
+     "text": {
+      "en": "Gets to a sitting position by themselves",
+      "ur": "خود بخود بیٹھ جاتا ہے",
+      "ur_Latn": "Khud ba khud baith jata hai"
+     }
+    },
+    {
+     "id": "9m-hands",
+     "area": "movement",
+     "text": {
+      "en": "Moves things from one hand to the other",
+      "ur": "چیز ایک ہاتھ سے دوسرے ہاتھ میں لیتا ہے",
+      "ur_Latn": "Cheez ek haath se doosre haath mein leta hai"
+     }
+    },
+    {
+     "id": "9m-rakes",
+     "area": "movement",
+     "text": {
+      "en": "Uses fingers to \"rake\" food towards themselves",
+      "ur": "انگلیوں سے کھانا اپنی طرف کھینچتا ہے",
+      "ur_Latn": "Ungliyon se khana apni taraf kheenchta hai"
+     }
+    },
+    {
+     "id": "9m-sits",
+     "area": "movement",
+     "text": {
+      "en": "Sits without support",
+      "ur": "بغیر سہارے بیٹھتا ہے",
+      "ur_Latn": "Baghair sahare baithta hai"
+     }
+    }
+   ],
+   "tips": [
+    {
+     "en": "Play peek-a-boo and hiding games with a cloth.",
+     "ur": "کپڑے سے چھپن چھپائی کے کھیل کھیلیں۔",
+     "ur_Latn": "Kapre se chhupan chhupai ke khel khelein."
+    },
+    {
+     "en": "Repeat your baby's sounds and turn them into simple words.",
+     "ur": "بچے کی آوازیں دہرائیں اور انہیں آسان الفاظ بنائیں۔",
+     "ur_Latn": "Bache ki awazein dohrayein aur unhein aasaan alfaaz banayein."
+    },
+    {
+     "en": "Offer different food textures and let them try feeding themselves.",
+     "ur": "مختلف ساخت کے کھانے دیں اور خود کھانے کی کوشش کرنے دیں۔",
+     "ur_Latn": "Mukhtalif saakht ke khane dein aur khud khane ki koshish karne dein."
+    },
+    {
+     "en": "Baby-proof the home: medicines, cleaning products and small objects out of reach.",
+     "ur": "گھر محفوظ بنائیں: دوائیں، صفائی کی چیزیں اور چھوٹی اشیاء پہنچ سے دور رکھیں۔",
+     "ur_Latn": "Ghar mehfooz banayein: dawaiyan, safai ki cheezein aur chhoti ashya pahunch se door rakhein."
+    }
+   ]
+  },
+  {
+   "months": 12,
+   "milestones": [
+    {
+     "id": "12m-games",
+     "area": "social",
+     "text": {
+      "en": "Plays games with you, like pat-a-cake",
+      "ur": "آپ کے ساتھ کھیل کھیلتا ہے، جیسے تالیاں بجانا",
+      "ur_Latn": "Aap ke saath khel khelta hai, jaise taaliyan bajana"
+     }
+    },
+    {
+     "id": "12m-bye",
+     "area": "language",
+     "text": {
+      "en": "Waves \"bye-bye\"",
+      "ur": "ہاتھ ہلا کر \"بائے بائے\" کرتا ہے",
+      "ur_Latn": "Haath hila kar \"bye bye\" karta hai"
+     }
+    },
+    {
+     "id": "12m-mama",
+     "area": "language",
+     "text": {
+      "en": "Calls a parent \"mama\", \"dada\" or another special name",
+      "ur": "ماں باپ کو \"ماما\"، \"بابا\" یا کسی خاص نام سے پکارتا ہے",
+      "ur_Latn": "Maa baap ko \"mama\", \"baba\" ya kisi khaas naam se pukarta hai"
+     }
+    },
+    {
+     "id": "12m-no",
+     "area": "language",
+     "text": {
+      "en": "Understands \"no\" (pauses or stops)",
+      "ur": "\"نہیں\" سمجھتا ہے (رک جاتا ہے)",
+      "ur_Latn": "\"Nahi\" samajhta hai (ruk jata hai)"
+     }
+    },
+    {
+     "id": "12m-container",
+     "area": "cognitive",
+     "text": {
+      "en": "Puts something in a container, like a block in a cup",
+      "ur": "چیز برتن میں ڈالتا ہے، جیسے بلاک کپ میں",
+      "ur_Latn": "Cheez bartan mein daalta hai, jaise block cup mein"
+     }
+    },
+    {
+     "id": "12m-hidden",
+     "area": "cognitive",
+     "text": {
+      "en": "Looks for things they see you hide",
+      "ur": "جو چیز آپ چھپائیں اسے ڈھونڈتا ہے",
+      "ur_Latn": "Jo cheez aap chhupayein usay dhoondta hai"
+     }
+    },
+    {
+     "id": "12m-pulls",
+     "area": "movement",
+     "text": {
+      "en": "Pulls up to stand",
+      "ur": "سہارا لے کر کھڑا ہوتا ہے",
+      "ur_Latn": "Sahara le kar khara hota hai"
+     }
+    },
+    {
+     "id": "12m-cruises",
+     "area": "movement",
+     "text": {
+      "en": "Walks holding on to furniture",
+      "ur": "فرنیچر پکڑ کر چلتا ہے",
+      "ur_Latn": "Furniture pakar kar chalta hai"
+     }
+    },
+    {
+     "id": "12m-cup",
+     "area": "movement",
+     "text": {
+      "en": "Drinks from an open cup as you hold it",
+      "ur": "آپ کے پکڑے ہوئے کھلے کپ سے پیتا ہے",
+      "ur_Latn": "Aap ke pakre hue khule cup se peeta hai"
+     }
+    },
+    {
+     "id": "12m-pincer",
+     "area": "movement",
+     "text": {
+      "en": "Picks things up between thumb and pointer finger",
+      "ur": "انگوٹھے اور شہادت کی انگلی سے چیزیں اٹھاتا ہے",
+      "ur_Latn": "Angoothe aur shahadat ki ungli se cheezein uthata hai"
+     }
+    }
+   ],
+   "tips": [
+    {
+     "en": "Describe what you're doing during the day, and answer when your baby points.",
+     "ur": "دن بھر جو کر رہے ہیں بتائیں، اور بچہ اشارہ کرے تو جواب دیں۔",
+     "ur_Latn": "Din bhar jo kar rahe hain batayein, aur bacha ishara kare to jawab dein."
+    },
+    {
+     "en": "Save \"no\" for danger; otherwise redirect to something else.",
+     "ur": "\"نہیں\" صرف خطرے کے لیے رکھیں؛ ورنہ توجہ کسی اور چیز کی طرف موڑیں۔",
+     "ur_Latn": "\"Nahi\" sirf khatre ke liye rakhein; warna tawajjo kisi aur cheez ki taraf morein."
+    },
+    {
+     "en": "Offer water or milk in an open cup; avoid juice and sweet drinks.",
+     "ur": "کھلے کپ میں پانی یا دودھ دیں؛ جوس اور میٹھے مشروبات سے پرہیز کریں۔",
+     "ur_Latn": "Khule cup mein paani ya doodh dein; juice aur meethe mashroobat se parhez karein."
+    },
+    {
+     "en": "Let your baby practise walking holding your hands or furniture.",
+     "ur": "بچے کو آپ کے ہاتھ یا فرنیچر پکڑ کر چلنے کی مشق کرنے دیں۔",
+     "ur_Latn": "Bache ko aap ke haath ya furniture pakar kar chalne ki mashq karne dein."
+    }
+   ]
+  },
+  {
+   "months": 15,
+   "milestones": [
+    {
+     "id": "15m-copies",
+     "area": "social",
+     "text": {
+      "en": "Copies other children while playing",
+      "ur": "کھیلتے ہوئے دوسرے بچوں کی نقل کرتا ہے",
+      "ur_Latn": "Khelte hue doosre bachon ki naqal karta hai"
+     }
+    },
+    {
+     "id": "15m-shows",
+     "area": "social",
+     "text": {
+      "en": "Shows you an object they like",
+      "ur": "پسند کی چیز آپ کو دکھاتا ہے",
+      "ur_Latn": "Pasand ki cheez aap ko dikhata hai"
+     }
+    },
+    {
+     "id": "15m-claps",
+     "area": "social",
+     "text": {
+      "en": "Claps when excited",
+      "ur": "خوش ہو کر تالیاں بجاتا ہے",
+      "ur_Latn": "Khush ho kar taaliyan bajata hai"
+     }
+    },
+    {
+     "id": "15m-hugs",
+     "area": "social",
+     "text": {
+      "en": "Shows you affection (hugs, cuddles or kisses)",
+      "ur": "پیار دکھاتا ہے (گلے لگانا، چپکنا یا چومنا)",
+      "ur_Latn": "Pyaar dikhata hai (gale lagana, chipakna ya choomna)"
+     }
+    },
+    {
+     "id": "15m-words",
+     "area": "language",
+     "text": {
+      "en": "Tries to say one or two words besides \"mama\" or \"dada\"",
+      "ur": "\"ماما\" یا \"بابا\" کے علاوہ ایک دو لفظ بولنے کی کوشش کرتا ہے",
+      "ur_Latn": "\"Mama\" ya \"baba\" ke ilawa ek do lafz bolne ki koshish karta hai"
+     }
+    },
+    {
+     "id": "15m-named",
+     "area": "language",
+     "text": {
+      "en": "Looks at a familiar object when you name it",
+      "ur": "جانی پہچانی چیز کا نام لیں تو اسے دیکھتا ہے",
+      "ur_Latn": "Jaani pehchani cheez ka naam lein to usay dekhta hai"
+     }
+    },
+    {
+     "id": "15m-directions",
+     "area": "language",
+     "text": {
+      "en": "Follows directions given with a gesture and words",
+      "ur": "اشارے اور الفاظ کے ساتھ دی گئی ہدایت مانتا ہے",
+      "ur_Latn": "Isharay aur alfaaz ke saath di gayi hidayat maanta hai"
+     }
+    },
+    {
+     "id": "15m-points",
+     "area": "language",
+     "text": {
+      "en": "Points to ask for something or to get help",
+      "ur": "کچھ مانگنے یا مدد کے لیے اشارہ کرتا ہے",
+      "ur_Latn": "Kuch maangne ya madad ke liye ishara karta hai"
+     }
+    },
+    {
+     "id": "15m-uses",
+     "area": "cognitive",
+     "text": {
+      "en": "Tries to use things the right way, like a phone, cup or book",
+      "ur": "چیزوں کو صحیح طریقے سے استعمال کرنے کی کوشش کرتا ہے، جیسے فون، کپ یا کتاب",
+      "ur_Latn": "Cheezon ko sahih tareeqe se istemal karne ki koshish karta hai, jaise phone, cup ya kitab"
+     }
+    },
+    {
+     "id": "15m-stacks",
+     "area": "cognitive",
+     "text": {
+      "en": "Stacks at least two small objects",
+      "ur": "کم از کم دو چھوٹی چیزیں اوپر تلے رکھتا ہے",
+      "ur_Latn": "Kam az kam do chhoti cheezein upar tale rakhta hai"
+     }
+    },
+    {
+     "id": "15m-steps",
+     "area": "movement",
+     "text": {
+      "en": "Takes a few steps on their own",
+      "ur": "خود چند قدم چلتا ہے",
+      "ur_Latn": "Khud chand qadam chalta hai"
+     }
+    },
+    {
+     "id": "15m-feeds",
+     "area": "movement",
+     "text": {
+      "en": "Uses fingers to feed themselves some food",
+      "ur": "انگلیوں سے خود کچھ کھانا کھاتا ہے",
+      "ur_Latn": "Ungliyon se khud kuch khana khata hai"
+     }
+    }
+   ],
+   "tips": [
+    {
+     "en": "Repeat and expand your child's words: \"ba\" becomes \"Yes, a big ball!\".",
+     "ur": "بچے کے الفاظ دہرائیں اور بڑھائیں: \"با\" کو \"ہاں، بڑی گیند!\" بنائیں۔",
+     "ur_Latn": "Bache ke alfaaz dohrayein aur barhayein: \"ba\" ko \"Haan, bari gaind!\" banayein."
+    },
+    {
+     "en": "Sing songs with actions and name feelings (\"you're sad\").",
+     "ur": "حرکات والے گیت گائیں اور جذبات کے نام بتائیں (\"تم اداس ہو\")۔",
+     "ur_Latn": "Harkaat wale geet gaayein aur jazbaat ke naam batayein (\"tum udaas ho\")."
+    },
+    {
+     "en": "Expect tantrums: they're a normal part of this age.",
+     "ur": "ضد اور غصے کی توقع رکھیں: یہ اس عمر میں عام ہیں۔",
+     "ur_Latn": "Zid aur ghusse ki tawaqqo rakhein: yeh is umar mein aam hain."
+    },
+    {
+     "en": "Practise drinking from an open cup and using a spoon.",
+     "ur": "کھلے کپ سے پینے اور چمچ استعمال کرنے کی مشق کروائیں۔",
+     "ur_Latn": "Khule cup se peene aur chamach istemal karne ki mashq karwayein."
+    }
+   ]
+  },
+  {
+   "months": 18,
+   "milestones": [
+    {
+     "id": "18m-explores",
+     "area": "social",
+     "text": {
+      "en": "Moves away from you but looks to make sure you're close by",
+      "ur": "آپ سے دور جاتا ہے لیکن دیکھتا رہتا ہے کہ آپ پاس ہیں",
+      "ur_Latn": "Aap se door jata hai lekin dekhta rehta hai ke aap paas hain"
+     }
+    },
+    {
+     "id": "18m-points",
+     "area": "social",
+     "text": {
+      "en": "Points to show you something interesting",
+      "ur": "دلچسپ چیز دکھانے کے لیے اشارہ کرتا ہے",
+      "ur_Latn": "Dilchasp cheez dikhane ke liye ishara karta hai"
+     }
+    },
+    {
+     "id": "18m-wash",
+     "area": "social",
+     "text": {
+      "en": "Puts hands out for you to wash them",
+      "ur": "ہاتھ دھلوانے کے لیے آگے کرتا ہے",
+      "ur_Latn": "Haath dhulwane ke liye aage karta hai"
+     }
+    },
+    {
+     "id": "18m-book",
+     "area": "social",
+     "text": {
+      "en": "Looks at a few pages in a book with you",
+      "ur": "آپ کے ساتھ کتاب کے چند صفحے دیکھتا ہے",
+      "ur_Latn": "Aap ke saath kitab ke chand safhe dekhta hai"
+     }
+    },
+    {
+     "id": "18m-dress",
+     "area": "social",
+     "text": {
+      "en": "Helps you dress them (pushes arm through sleeve, lifts foot)",
+      "ur": "کپڑے پہنانے میں مدد کرتا ہے (آستین میں بازو ڈالتا، پاؤں اٹھاتا ہے)",
+      "ur_Latn": "Kapre pehnane mein madad karta hai (aasteen mein baazu daalta, paaon uthata hai)"
+     }
+    },
+    {
+     "id": "18m-words",
+     "area": "language",
+     "text": {
+      "en": "Tries to say three or more words besides \"mama\" or \"dada\"",
+      "ur": "\"ماما\" یا \"بابا\" کے علاوہ تین یا زیادہ لفظ بولنے کی کوشش کرتا ہے",
+      "ur_Latn": "\"Mama\" ya \"baba\" ke ilawa teen ya zyada lafz bolne ki koshish karta hai"
+     }
+    },
+    {
+     "id": "18m-directions",
+     "area": "language",
+     "text": {
+      "en": "Follows one-step directions without gestures",
+      "ur": "بغیر اشارے کے ایک قدم کی ہدایت مانتا ہے",
+      "ur_Latn": "Baghair isharay ke ek qadam ki hidayat maanta hai"
+     }
+    },
+    {
+     "id": "18m-chores",
+     "area": "cognitive",
+     "text": {
+      "en": "Copies you doing chores, like sweeping",
+      "ur": "گھر کے کام میں آپ کی نقل کرتا ہے، جیسے جھاڑو دینا",
+      "ur_Latn": "Ghar ke kaam mein aap ki naqal karta hai, jaise jharoo dena"
+     }
+    },
+    {
+     "id": "18m-plays",
+     "area": "cognitive",
+     "text": {
+      "en": "Plays with toys in a simple way, like pushing a toy car",
+      "ur": "کھلونوں سے سادہ انداز میں کھیلتا ہے، جیسے گاڑی دھکیلنا",
+      "ur_Latn": "Khilonon se saada andaaz mein khelta hai, jaise gaari dhakelna"
+     }
+    },
+    {
+     "id": "18m-walks",
+     "area": "movement",
+     "text": {
+      "en": "Walks without holding on to anyone or anything",
+      "ur": "بغیر کسی سہارے کے چلتا ہے",
+      "ur_Latn": "Baghair kisi sahare ke chalta hai"
+     }
+    },
+    {
+     "id": "18m-scribbles",
+     "area": "movement",
+     "text": {
+      "en": "Scribbles",
+      "ur": "لکیریں کھینچتا ہے",
+      "ur_Latn": "Lakeerein kheenchta hai"
+     }
+    },
+    {
+     "id": "18m-cup",
+     "area": "movement",
+     "text": {
+      "en": "Drinks from an open cup, maybe spilling sometimes",
+      "ur": "کھلے کپ سے پیتا ہے، کبھی کبھار گرا دیتا ہے",
+      "ur_Latn": "Khule cup se peeta hai, kabhi kabhar gira deta hai"
+     }
+    },
+    {
+     "id": "18m-feeds",
+     "area": "movement",
+     "text": {
+      "en": "Feeds themselves with fingers",
+      "ur": "انگلیوں سے خود کھاتا ہے",
+      "ur_Latn": "Ungliyon se khud khata hai"
+     }
+    },
+    {
+     "id": "18m-spoon",
+     "area": "movement",
+     "text": {
+      "en": "Tries to use a spoon",
+      "ur": "چمچ استعمال کرنے کی کوشش کرتا ہے",
+      "ur_Latn": "Chamach istemal karne ki koshish karta hai"
+     }
+    },
+    {
+     "id": "18m-climbs",
+     "area": "movement",
+     "text": {
+      "en": "Climbs on and off a couch or chair without help",
+      "ur": "بغیر مدد صوفے یا کرسی پر چڑھتا اترتا ہے",
+      "ur_Latn": "Baghair madad sofe ya kursi par charhta utarta hai"
+     }
+    }
+   ],
+   "tips": [
+    {
+     "en": "Offer simple choices between two things (\"banana or apple?\").",
+     "ur": "دو چیزوں میں سے سادہ انتخاب دیں (\"کیلا یا سیب؟\")۔",
+     "ur_Latn": "Do cheezon mein se saada intikhab dein (\"kela ya saib?\")."
+    },
+    {
+     "en": "Name body parts and everyday things; ask simple questions.",
+     "ur": "جسم کے حصوں اور روزمرہ چیزوں کے نام بتائیں؛ سادہ سوال پوچھیں۔",
+     "ur_Latn": "Jism ke hisson aur rozmarra cheezon ke naam batayein; saada sawal poochein."
+    },
+    {
+     "en": "Stay calm during tantrums; give a safe, quiet place to calm down.",
+     "ur": "ضد کے وقت پرسکون رہیں؛ پرسکون ہونے کے لیے محفوظ خاموش جگہ دیں۔",
+     "ur_Latn": "Zid ke waqt pursukoon rahein; pursukoon hone ke liye mehfooz khamosh jagah dein."
+    },
+    {
+     "en": "Play with push toys, balls and simple pretend play (dolls, pots).",
+     "ur": "دھکیلنے والے کھلونوں، گیند اور سادہ فرضی کھیل (گڑیا، برتن) سے کھیلیں۔",
+     "ur_Latn": "Dhakelne wale khilonon, gaind aur saada farzi khel (gurya, bartan) se khelein."
+    }
+   ]
+  }
+ ],
+ "guide": {
+  "intro": {
+   "en": "These checklists (CDC, 2022) show what most babies, 75% or more, can do by each age. Every baby develops at their own pace, and missing one item doesn't by itself mean something is wrong.",
+   "ur": "یہ فہرستیں (CDC، 2022) بتاتی ہیں کہ زیادہ تر بچے، 75% یا اس سے زیادہ، ہر عمر تک کیا کر سکتے ہیں۔ ہر بچہ اپنی رفتار سے بڑھتا ہے، اور کسی ایک چیز کا نہ ہونا بذاتِ خود کسی مسئلے کی علامت نہیں۔",
+   "ur_Latn": "Yeh fehristein (CDC, 2022) batati hain ke zyada tar bachay, 75% ya is se zyada, har umar tak kya kar sakte hain. Har bacha apni raftaar se barhta hai, aur kisi ek cheez ka na hona bazat-e-khud kisi masle ki alamat nahi."
+  },
+  "actEarly": {
+   "en": "Talk to your doctor if your baby isn't doing several things on the list for their age, has lost skills they used to have, or if you're worried for any reason. You know your baby best, and acting early helps.",
+   "ur": "اگر آپ کا بچہ اپنی عمر کی فہرست کی کئی چیزیں نہیں کر رہا، پہلے سیکھی ہوئی مہارتیں کھو دے، یا آپ کو کسی بھی وجہ سے فکر ہو تو ڈاکٹر سے بات کریں۔ آپ اپنے بچے کو سب سے بہتر جانتے ہیں، اور جلدی قدم اٹھانا مددگار ہوتا ہے۔",
+   "ur_Latn": "Agar aap ka bacha apni umar ki fehrist ki kai cheezein nahi kar raha, pehle seekhi hui maharatein kho de, ya aap ko kisi bhi wajah se fikr ho to doctor se baat karein. Aap apne bache ko sab se behtar jaante hain, aur jaldi qadam uthana madadgaar hota hai."
+  },
+  "source": "CDC Learn the Signs. Act Early. milestone checklists (2022)."
+ }
+}

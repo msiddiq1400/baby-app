@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../data/settings_repository.dart';
+
 final supabaseProvider = Provider<SupabaseClient>((ref) => Supabase.instance.client);
 
 final authStateProvider = StreamProvider<AuthState>(
@@ -23,12 +25,25 @@ final nowProvider = StreamProvider<DateTime>((ref) async* {
   yield* Stream.periodic(const Duration(minutes: 1), (_) => DateTime.now());
 });
 
-/// Language chosen in the app; null follows the phone's language.
+/// Language chosen in the app, saved on the phone; null follows the phone's
+/// language.
 class LocaleNotifier extends Notifier<Locale?> {
   @override
-  Locale? build() => null;
+  Locale? build() => _decode(ref.watch(settingProvider(SettingKeys.locale)).value);
 
-  void set(Locale? locale) => state = locale;
+  Future<void> set(Locale? locale) async {
+    state = locale;
+    await ref.read(settingsRepositoryProvider).set(SettingKeys.locale, _encode(locale));
+  }
+
+  static String? _encode(Locale? l) => l == null ? null : [l.languageCode, ?l.scriptCode].join('_');
+
+  static Locale? _decode(String? v) => switch (v) {
+        'en' => const Locale('en'),
+        'ur' => const Locale('ur'),
+        'ur_Latn' => const Locale.fromSubtags(languageCode: 'ur', scriptCode: 'Latn'),
+        _ => null,
+      };
 }
 
 final localeProvider = NotifierProvider<LocaleNotifier, Locale?>(LocaleNotifier.new);
