@@ -11,3 +11,6 @@ supabase/.env
 
 # Local notes with credentials
 /cred.txt
+
+# Personal files that are not part of the app (company logos etc.)
+stuff/
