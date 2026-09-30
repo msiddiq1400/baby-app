@@ -8,6 +8,7 @@ import '../../data/solids_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/language_menu.dart';
 import 'food_sheets.dart';
+import 'recipes_screen.dart';
 
 /// Solids tab: readiness and safety guides, the allergen tracker, and the
 /// food list with what the baby has tried.
@@ -45,7 +46,10 @@ class _SolidsScreenState extends ConsumerState<SolidsScreen> {
     final theme = Theme.of(context);
     final baby = widget.baby;
     final ageMonths = babyAge(baby.birthDate, DateTime.now()).months;
-    final categories = {for (final f in guide.foods) f.category}.toList();
+    // Vegetables first: the advice is to start with them, before fruit.
+    int rank(String category) => category == 'vegetable' ? 0 : 1;
+    final categories = {for (final f in guide.foods) f.category}.toList()
+      ..sort((a, b) => rank(a).compareTo(rank(b)));
     final query = _query.trim().toLowerCase();
     final foods = [
       for (final f in guide.foods)
@@ -54,7 +58,7 @@ class _SolidsScreenState extends ConsumerState<SolidsScreen> {
                 f.name.of(l10n).toLowerCase().contains(query) ||
                 f.name.english.toLowerCase().contains(query)))
           f,
-    ];
+    ]..sort((a, b) => rank(a.category).compareTo(rank(b.category)));
 
     Widget guideTile(IconData icon, String title, List<Widget> children, {Color? color}) => Card(
           color: color,
@@ -76,6 +80,7 @@ class _SolidsScreenState extends ConsumerState<SolidsScreen> {
             child: ListTile(leading: const Icon(Icons.info_outline), title: Text(l10n.solidsTooYoung)),
           ),
         guideTile(Icons.checklist, l10n.readinessTitle, [Text(guide.readiness.of(l10n))]),
+        if (guide.vegFirst case final v?) guideTile(Icons.eco_outlined, l10n.vegFirstTitle, [Text(v.of(l10n))]),
         guideTile(Icons.layers_outlined, l10n.texturesTitle, [
           for (final s in guide.stages) Padding(padding: const EdgeInsets.only(bottom: 8), child: Text(s.of(l10n))),
         ]),
@@ -102,6 +107,19 @@ class _SolidsScreenState extends ConsumerState<SolidsScreen> {
               ),
             ),
         ]),
+        if (guide.recipes.isNotEmpty)
+          Card(
+            color: theme.colorScheme.secondaryContainer,
+            child: ListTile(
+              leading: const Icon(Icons.menu_book_outlined),
+              title: Text(l10n.recipesTitle),
+              subtitle: Text(l10n.recipesSubtitle(guide.recipes.length)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.of(context, rootNavigator: true).push(
+                MaterialPageRoute<void>(builder: (_) => RecipesScreen(baby: baby, guide: guide)),
+              ),
+            ),
+          ),
         const SizedBox(height: 12),
         Text(l10n.allergensTitle, style: theme.textTheme.titleMedium),
         const SizedBox(height: 4),

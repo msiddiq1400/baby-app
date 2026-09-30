@@ -1,0 +1,146 @@
+"""Home-style Pakistani recipes for babies, 6 to 12 months (added to
+foods.json by make_foods.py).
+
+Rules followed in every recipe (NHS "Your baby's first solid foods",
+"Foods to avoid giving babies and young children"; WHO complementary
+feeding): no added salt, sugar or honey; no stock cubes; cow's milk only
+in cooking before 12 months; eggs cooked until firm; fish without bones;
+food cooled and checked before serving. Needs pediatrician review (todo 23).
+"""
+
+
+def T(en, ur, rl):
+    return {"en": en, "ur": ur, "ur_Latn": rl}
+
+
+def recipe(id, months, name, ingredients, steps, allergens=(), foods=()):
+    return {"id": id, "fromMonths": months, "name": name, "ingredients": list(ingredients),
+            "steps": list(steps), "allergens": list(allergens), "foods": list(foods)}
+
+
+RECIPES = [
+    # ── From 6 months: smooth, one or two foods at a time ────────────────
+    recipe("lauki_puree", 6, T("Lauki purée", "لوکی کی پیوری", "Lauki ki puree"),
+           [T("1 small piece of lauki (bottle gourd), peeled", "لوکی کا ایک چھوٹا ٹکڑا، چھلا ہوا", "Lauki ka ek chhota tukra, chhila hua")],
+           [T("Remove the seeds and cut into small cubes.", "بیج نکال کر چھوٹے ٹکڑے کاٹ لیں۔", "Beej nikal kar chhote tukre kaat lein."),
+            T("Steam or boil in a little water until very soft (about 10 minutes).", "تھوڑے پانی میں بھاپ یا ابال کر بہت نرم کر لیں (تقریباً 10 منٹ)۔", "Thore paani mein bhaap ya ubaal kar bohat naram kar lein (taqreeban 10 minute)."),
+            T("Mash or blend until smooth, adding a little of the cooking water or breast milk.", "کانٹے یا بلینڈر سے ملائم کر لیں، ضرورت ہو تو پکانے کا پانی یا ماں کا دودھ ملائیں۔", "Kaante ya blender se mulayam kar lein, zaroorat ho to pakane ka paani ya maa ka doodh milayein.")],
+           foods=["bottle_gourd"]),
+    recipe("carrot_potato", 6, T("Carrot and potato mash", "گاجر اور آلو کا بھرتا", "Gajar aur aloo ka bharta"),
+           [T("1 small carrot", "ایک چھوٹی گاجر", "Ek chhoti gajar"),
+            T("1 small potato", "ایک چھوٹا آلو", "Ek chhota aloo")],
+           [T("Peel and cut both into small pieces.", "دونوں چھیل کر چھوٹے ٹکڑے کر لیں۔", "Dono chheel kar chhote tukre kar lein."),
+            T("Boil until very soft, about 15 minutes.", "بہت نرم ہونے تک ابالیں، تقریباً 15 منٹ۔", "Bohat naram hone tak ubaalein, taqreeban 15 minute."),
+            T("Mash smooth with a little breast milk, formula or cooking water. No salt or butter.", "تھوڑے ماں کے دودھ، فارمولا یا پکانے کے پانی کے ساتھ ملائم مسل لیں۔ نمک یا مکھن نہ ڈالیں۔", "Thore maa ke doodh, formula ya pakane ke paani ke saath mulayam masal lein. Namak ya makkhan na daalein.")],
+           foods=["carrot", "potato"]),
+    recipe("rice_moong_smooth", 6, T("Smooth rice and moong daal", "چاول اور مونگ کی ملائم کھچڑی", "Chawal aur moong ki mulayam khichdi"),
+           [T("1 tablespoon rice", "ایک کھانے کا چمچ چاول", "Ek khane ka chamach chawal"),
+            T("1 tablespoon yellow moong daal", "ایک کھانے کا چمچ پیلی مونگ کی دال", "Ek khane ka chamach peeli moong ki daal"),
+            T("1 cup water", "ایک کپ پانی", "Ek cup paani")],
+           [T("Wash the rice and daal well and soak for 20 minutes.", "چاول اور دال اچھی طرح دھو کر 20 منٹ بھگو دیں۔", "Chawal aur daal achhi tarah dho kar 20 minute bhigo dein."),
+            T("Cook in the water until completely soft (a pressure cooker takes 3 to 4 whistles).", "پانی میں مکمل نرم ہونے تک پکائیں (پریشر ککر میں 3 سے 4 سیٹیاں)۔", "Paani mein mukammal naram hone tak pakayein (pressure cooker mein 3 se 4 seetiyan)."),
+            T("Blend or mash until smooth. Add a pinch of haldi if you like, but no salt.", "ملائم ہونے تک بلینڈ کریں یا مسلیں۔ چاہیں تو چٹکی بھر ہلدی، مگر نمک نہیں۔", "Mulayam hone tak blend karein ya maslein. Chahein to chutki bhar haldi, magar namak nahi.")],
+           foods=["rice", "moong_daal"]),
+    recipe("suji_kheer", 6, T("Suji kheer without sugar", "بغیر چینی کی سوجی کی کھیر", "Baghair cheeni ki suji ki kheer"),
+           [T("1 tablespoon suji (semolina)", "ایک کھانے کا چمچ سوجی", "Ek khane ka chamach suji"),
+            T("Half a cup of breast milk or formula (or cow's milk, in cooking only)", "آدھا کپ ماں کا دودھ یا فارمولا (یا گائے کا دودھ، صرف پکانے میں)", "Aadha cup maa ka doodh ya formula (ya gaye ka doodh, sirf pakane mein)"),
+            T("A little mashed banana or pear to sweeten", "مٹھاس کے لیے تھوڑا مسلا ہوا کیلا یا ناشپاتی", "Mithaas ke liye thora masla hua kela ya nashpati")],
+           [T("Dry-roast the suji in a pan for 2 minutes, stirring.", "سوجی کو پین میں 2 منٹ ہلاتے ہوئے بھون لیں۔", "Suji ko pan mein 2 minute hilate hue bhoon lein."),
+            T("Add the milk slowly, stirring so there are no lumps, and cook until soft.", "دودھ آہستہ آہستہ ڈالیں، گٹھلیاں نہ بنیں اس لیے ہلاتے رہیں، اور نرم ہونے تک پکائیں۔", "Doodh aahista aahista daalein, guthliyan na banein is liye hilate rahein, aur naram hone tak pakayein."),
+            T("Cool, then stir in the fruit instead of sugar.", "ٹھنڈا کر کے چینی کی جگہ پھل ملا دیں۔", "Thanda kar ke cheeni ki jagah phal mila dein.")],
+           allergens=["wheat", "milk"], foods=["suji"]),
+    recipe("banana_oats", 6, T("Banana and oats", "کیلا اور جئی", "Kela aur jai"),
+           [T("2 tablespoons oats", "دو کھانے کے چمچ جئی (اوٹس)", "Do khane ke chamach oats"),
+            T("Half a ripe banana", "آدھا پکا کیلا", "Aadha pakka kela"),
+            T("Breast milk, formula or water", "ماں کا دودھ، فارمولا یا پانی", "Maa ka doodh, formula ya paani")],
+           [T("Cook the oats in water until soft, or grind them first for a smoother texture.", "جئی کو پانی میں نرم ہونے تک پکائیں، یا زیادہ ملائم کے لیے پہلے پیس لیں۔", "Oats ko paani mein naram hone tak pakayein, ya zyada mulayam ke liye pehle pees lein."),
+            T("Mash in the banana and thin with a little milk.", "کیلا مسل کر ملائیں اور تھوڑے دودھ سے پتلا کر لیں۔", "Kela masal kar milayein aur thore doodh se patla kar lein.")],
+           foods=["oats", "banana"]),
+
+    # ── From 7 months: mashed and lumpy, more mixed meals ───────────────
+    recipe("veg_khichdi", 7, T("Vegetable khichdi", "سبزیوں والی کھچڑی", "Sabziyon wali khichdi"),
+           [T("2 tablespoons rice and 1 tablespoon moong or masoor daal", "دو کھانے کے چمچ چاول اور ایک چمچ مونگ یا مسور کی دال", "Do khane ke chamach chawal aur ek chamach moong ya masoor ki daal"),
+            T("A handful of chopped vegetables: carrot, lauki, peas, spinach", "مٹھی بھر کٹی سبزیاں: گاجر، لوکی، مٹر، پالک", "Mutthi bhar kati sabziyan: gajar, lauki, matar, palak"),
+            T("Half a teaspoon of ghee, a pinch of haldi and zeera", "آدھا چائے کا چمچ گھی، چٹکی بھر ہلدی اور زیرہ", "Aadha chaye ka chamach ghee, chutki bhar haldi aur zeera")],
+           [T("Warm the ghee, add zeera for a few seconds, then the washed rice, daal and vegetables.", "گھی گرم کر کے چند سیکنڈ زیرہ ڈالیں، پھر دھلے چاول، دال اور سبزیاں۔", "Ghee garam kar ke chand second zeera daalein, phir dhule chawal, daal aur sabziyan."),
+            T("Add haldi and plenty of water; cook until everything is very soft.", "ہلدی اور کافی پانی ڈال کر سب کچھ بہت نرم ہونے تک پکائیں۔", "Haldi aur kaafi paani daal kar sab kuch bohat naram hone tak pakayein."),
+            T("Mash roughly, leaving small soft lumps so your baby learns to chew. No salt.", "ہلکا سا مسلیں اور چھوٹی نرم گٹھلیاں رہنے دیں تاکہ بچہ چبانا سیکھے۔ نمک نہیں۔", "Halka sa maslein aur chhoti naram guthliyan rehne dein taake bacha chabana seekhe. Namak nahi.")],
+           foods=["khichdi", "peas", "spinach"]),
+    recipe("daliya_fruit", 7, T("Daliya with fruit", "پھل والا دلیہ", "Phal wala daliya"),
+           [T("2 tablespoons daliya (broken wheat)", "دو کھانے کے چمچ دلیہ", "Do khane ke chamach daliya"),
+            T("Breast milk, formula, or cow's milk in cooking", "ماں کا دودھ، فارمولا، یا پکانے میں گائے کا دودھ", "Maa ka doodh, formula, ya pakane mein gaye ka doodh"),
+            T("Mashed apple, pear, mango or chikoo", "مسلا ہوا سیب، ناشپاتی، آم یا چیکو", "Masla hua saib, nashpati, aam ya chikoo")],
+           [T("Roast the daliya lightly, then cook in water until soft (a pressure cooker helps).", "دلیہ ہلکا سا بھون کر پانی میں نرم ہونے تک پکائیں (پریشر ککر سے آسانی ہوتی ہے)۔", "Daliya halka sa bhoon kar paani mein naram hone tak pakayein (pressure cooker se aasani hoti hai)."),
+            T("Stir in a little milk and cook for 2 more minutes.", "تھوڑا دودھ ملا کر 2 منٹ اور پکائیں۔", "Thora doodh mila kar 2 minute aur pakayein."),
+            T("Cool and mix in the fruit. No sugar or honey.", "ٹھنڈا کر کے پھل ملا دیں۔ چینی یا شہد نہیں۔", "Thanda kar ke phal mila dein. Cheeni ya shehad nahi.")],
+           allergens=["wheat", "milk"], foods=["daliya"]),
+    recipe("egg_scramble", 7, T("Soft scrambled egg", "نرم انڈا بھرجی", "Naram anda bhurji"),
+           [T("1 egg", "ایک انڈا", "Ek anda"),
+            T("A few drops of oil or a little ghee", "چند قطرے تیل یا تھوڑا سا گھی", "Chand qatre tel ya thora sa ghee"),
+            T("Optional: finely chopped tomato or spinach", "اختیاری: باریک کٹا ٹماٹر یا پالک", "Ikhtiyari: bareek kata tamatar ya palak")],
+           [T("Beat the egg well (with the vegetables if using).", "انڈا اچھی طرح پھینٹیں (سبزی ہو تو ساتھ ملائیں)۔", "Anda achhi tarah phentein (sabzi ho to saath milayein)."),
+            T("Cook on low heat, stirring, until completely set with no runny parts.", "ہلکی آنچ پر ہلاتے ہوئے پکائیں، یہاں تک کہ بالکل پک جائے اور کچا حصہ نہ رہے۔", "Halki aanch par hilate hue pakayein, yahan tak ke bilkul pak jaye aur kacha hissa na rahe."),
+            T("Break into small soft pieces. Offer egg early and regularly, and watch for a reaction.", "چھوٹے نرم ٹکڑے کر لیں۔ انڈا جلدی اور باقاعدگی سے دیں، اور ردِ عمل پر نظر رکھیں۔", "Chhote naram tukre kar lein. Anda jaldi aur baqaidgi se dein, aur radd-e-amal par nazar rakhein.")],
+           allergens=["egg"], foods=["egg"]),
+    recipe("chicken_veg_mash", 7, T("Chicken and vegetable mash", "چکن اور سبزی کا بھرتا", "Chicken aur sabzi ka bharta"),
+           [T("A small piece of boneless chicken", "بغیر ہڈی چکن کا چھوٹا ٹکڑا", "Baghair haddi chicken ka chhota tukra"),
+            T("1 small potato and a few pieces of carrot or pumpkin", "ایک چھوٹا آلو اور گاجر یا کدو کے چند ٹکڑے", "Ek chhota aloo aur gajar ya kaddu ke chand tukre")],
+           [T("Boil the chicken with the vegetables in water (a simple yakhni) until the chicken is fully cooked and soft.", "چکن اور سبزیاں پانی میں ابالیں (سادہ یخنی) یہاں تک کہ چکن اچھی طرح پک کر نرم ہو جائے۔", "Chicken aur sabziyan paani mein ubaalein (saada yakhni) yahan tak ke chicken achhi tarah pak kar naram ho jaye."),
+            T("Shred the chicken very finely and mash with the vegetables and a little yakhni.", "چکن کو بہت باریک ریشہ کر کے سبزیوں اور تھوڑی یخنی کے ساتھ مسل لیں۔", "Chicken ko bohat bareek resha kar ke sabziyon aur thori yakhni ke saath masal lein."),
+            T("No salt or stock cubes. Meat gives iron, which babies need from 6 months.", "نمک یا اسٹاک کیوب نہیں۔ گوشت سے آئرن ملتا ہے جس کی بچے کو 6 ماہ سے ضرورت ہوتی ہے۔", "Namak ya stock cube nahi. Gosht se iron milta hai jis ki bachay ko 6 mahine se zaroorat hoti hai.")],
+           foods=["chicken", "potato"]),
+    recipe("masoor_rice", 7, T("Masoor daal with rice", "مسور کی دال چاول", "Masoor ki daal chawal"),
+           [T("2 tablespoons red masoor daal", "دو کھانے کے چمچ لال مسور کی دال", "Do khane ke chamach laal masoor ki daal"),
+            T("2 tablespoons soft-cooked rice", "دو کھانے کے چمچ نرم پکے چاول", "Do khane ke chamach naram pakay chawal"),
+            T("A little ghee, a pinch of haldi", "تھوڑا سا گھی، چٹکی بھر ہلدی", "Thora sa ghee, chutki bhar haldi")],
+           [T("Cook the daal with haldi and water until it falls apart.", "دال کو ہلدی اور پانی کے ساتھ گل جانے تک پکائیں۔", "Daal ko haldi aur paani ke saath gal jane tak pakayein."),
+            T("Add the ghee and mix with the rice, mashing to the texture your baby manages.", "گھی ڈال کر چاولوں میں ملائیں اور بچے کی عادت کے مطابق مسلیں۔", "Ghee daal kar chawalon mein milayein aur bachay ki aadat ke mutabiq maslein."),
+            T("No salt, chilli or tarka spices.", "نمک، مرچ یا تڑکے کے مصالحے نہیں۔", "Namak, mirch ya tarke ke masale nahi.")],
+           foods=["masoor_daal", "rice"]),
+
+    # ── From 10 months: soft finger food and family-style meals ─────────
+    recipe("roti_daal", 10, T("Roti soaked in daal", "دال میں بھیگی روٹی", "Daal mein bheegi roti"),
+           [T("Half a soft roti (no salt in the dough)", "آدھی نرم روٹی (آٹے میں نمک نہیں)", "Aadhi naram roti (aate mein namak nahi)"),
+            T("A few spoons of the family's daal, taken out before salt and chilli", "گھر کی دال کے چند چمچ، نمک مرچ ڈالنے سے پہلے نکالے ہوئے", "Ghar ki daal ke chand chamach, namak mirch daalne se pehle nikale hue")],
+           [T("Tear the roti into small pieces.", "روٹی کے چھوٹے ٹکڑے کر لیں۔", "Roti ke chhote tukre kar lein."),
+            T("Soak them in warm daal for a few minutes until soft.", "گرم دال میں چند منٹ بھگو دیں تاکہ نرم ہو جائیں۔", "Garam daal mein chand minute bhigo dein taake naram ho jayein."),
+            T("Let your baby pick up pieces themselves, or feed with a spoon.", "بچے کو خود ٹکڑے اٹھانے دیں، یا چمچ سے کھلائیں۔", "Bachay ko khud tukre uthane dein, ya chamach se khilayein.")],
+           allergens=["wheat"], foods=["roti", "moong_daal"]),
+    recipe("veg_pulao", 10, T("Soft vegetable pulao", "نرم سبزی پلاؤ", "Naram sabzi pulao"),
+           [T("Quarter cup of rice", "چوتھائی کپ چاول", "Chauthai cup chawal"),
+            T("Peas, carrot and potato, finely chopped", "مٹر، گاجر اور آلو، باریک کٹے ہوئے", "Matar, gajar aur aloo, bareek kate hue"),
+            T("A little ghee, a small piece of cinnamon (removed before serving)", "تھوڑا سا گھی، دار چینی کا چھوٹا ٹکڑا (کھلانے سے پہلے نکال دیں)", "Thora sa ghee, daar cheeni ka chhota tukra (khilane se pehle nikal dein)")],
+           [T("Fry the vegetables in the ghee for a minute, then add the washed rice and cinnamon.", "سبزیاں گھی میں ایک منٹ بھونیں، پھر دھلے چاول اور دار چینی ڈالیں۔", "Sabziyan ghee mein ek minute bhoonein, phir dhule chawal aur daar cheeni daalein."),
+            T("Add a little more water than usual so the rice cooks soft.", "عام سے تھوڑا زیادہ پانی ڈالیں تاکہ چاول نرم پکیں۔", "Aam se thora zyada paani daalein taake chawal naram pakein."),
+            T("Remove the cinnamon, check the peas are soft, and squash any hard pieces. No salt.", "دار چینی نکال دیں، دیکھ لیں کہ مٹر نرم ہیں، اور سخت ٹکڑے دبا دیں۔ نمک نہیں۔", "Daar cheeni nikal dein, dekh lein ke matar naram hain, aur sakht tukre daba dein. Namak nahi.")],
+           foods=["rice", "peas", "carrot"]),
+    recipe("qeema_aloo", 10, T("Mild qeema aloo", "ہلکا قیمہ آلو", "Halka qeema aloo"),
+           [T("2 tablespoons fine mutton or beef qeema", "دو کھانے کے چمچ باریک مٹن یا بیف قیمہ", "Do khane ke chamach bareek mutton ya beef qeema"),
+            T("1 small potato, diced small", "ایک چھوٹا آلو، چھوٹے ٹکڑوں میں", "Ek chhota aloo, chhote tukron mein"),
+            T("Half a tomato, a little onion, a pinch of haldi", "آدھا ٹماٹر، تھوڑی پیاز، چٹکی بھر ہلدی", "Aadha tamatar, thori pyaz, chutki bhar haldi")],
+           [T("Soften the onion and tomato in a little oil, add the qeema and haldi, and cook until browned all through.", "پیاز اور ٹماٹر تھوڑے تیل میں نرم کریں، قیمہ اور ہلدی ڈال کر اچھی طرح پکائیں کہ کہیں گلابی نہ رہے۔", "Pyaz aur tamatar thore tel mein naram karein, qeema aur haldi daal kar achhi tarah pakayein ke kahin gulabi na rahe."),
+            T("Add the potato and water; cover and cook until the potato is very soft.", "آلو اور پانی ڈال کر ڈھک دیں اور آلو بہت نرم ہونے تک پکائیں۔", "Aloo aur paani daal kar dhak dein aur aloo bohat naram hone tak pakayein."),
+            T("Mash lightly. No salt, chilli or garam masala for babies.", "ہلکا سا مسل لیں۔ بچوں کے لیے نمک، مرچ یا گرم مصالحہ نہیں۔", "Halka sa masal lein. Bachon ke liye namak, mirch ya garam masala nahi.")],
+           foods=["qeema", "potato"]),
+    recipe("fish_potato", 10, T("Fish and potato", "مچھلی اور آلو", "Machhli aur aloo"),
+           [T("A small piece of boneless white fish (e.g. rohu or surmai fillet)", "بغیر کانٹے والی سفید مچھلی کا چھوٹا ٹکڑا (مثلاً روہو یا سرمئی فلے)", "Baghair kaante wali safed machhli ka chhota tukra (maslan rohu ya surmai fillet)"),
+            T("1 small boiled potato", "ایک چھوٹا ابلا آلو", "Ek chhota ubla aloo")],
+           [T("Steam or boil the fish until it flakes easily.", "مچھلی کو بھاپ یا ابال کر اتنا پکائیں کہ آسانی سے ٹوٹ جائے۔", "Machhli ko bhaap ya ubaal kar itna pakayein ke aasani se toot jaye."),
+            T("Check carefully with your fingers for any bones.", "انگلیوں سے احتیاط سے دیکھ لیں کہ کوئی کانٹا نہ ہو۔", "Ungliyon se ehtiyaat se dekh lein ke koi kaanta na ho."),
+            T("Flake and mix with the mashed potato.", "ریشے کر کے مسلے آلو میں ملا دیں۔", "Reshe kar ke masle aloo mein mila dein.")],
+           allergens=["fish"], foods=["fish", "potato"]),
+    recipe("paneer_peas", 10, T("Paneer and peas", "پنیر اور مٹر", "Paneer aur matar"),
+           [T("2 tablespoons crumbled fresh paneer", "دو کھانے کے چمچ چورا کیا تازہ پنیر", "Do khane ke chamach chura kiya taaza paneer"),
+            T("2 tablespoons peas", "دو کھانے کے چمچ مٹر", "Do khane ke chamach matar"),
+            T("Half a tomato, a pinch of haldi", "آدھا ٹماٹر، چٹکی بھر ہلدی", "Aadha tamatar, chutki bhar haldi")],
+           [T("Cook the peas and tomato with a little water and haldi until the peas are soft.", "مٹر اور ٹماٹر کو تھوڑے پانی اور ہلدی کے ساتھ مٹر نرم ہونے تک پکائیں۔", "Matar aur tamatar ko thore paani aur haldi ke saath matar naram hone tak pakayein."),
+            T("Squash the peas, then stir in the paneer and warm through.", "مٹر دبا دیں، پھر پنیر ملا کر گرم کر لیں۔", "Matar daba dein, phir paneer mila kar garam kar lein."),
+            T("Serve with soft rice or roti. Paneer is a milk food, so watch for a reaction the first time.", "نرم چاول یا روٹی کے ساتھ دیں۔ پنیر دودھ سے بنتا ہے، اس لیے پہلی بار ردِ عمل پر نظر رکھیں۔", "Naram chawal ya roti ke saath dein. Paneer doodh se banta hai, is liye pehli baar radd-e-amal par nazar rakhein.")],
+           allergens=["milk"], foods=["paneer", "peas"]),
+]
+
+VEG_FIRST = T(
+    "Start with vegetables. For the first week or two, offer single vegetables, especially less sweet ones such as lauki, spinach, cauliflower and peas, before moving on to fruit. Babies are born liking sweet tastes; starting with vegetables helps them accept other flavours. It can take 10 or more tries before a baby accepts a new food, so keep offering it.",
+    "سبزیوں سے شروع کریں۔ پہلے ایک دو ہفتے ایک ایک سبزی دیں، خاص طور پر کم میٹھی جیسے لوکی، پالک، گوبھی اور مٹر، پھر پھلوں کی طرف جائیں۔ بچے پیدائشی طور پر میٹھا پسند کرتے ہیں؛ سبزیوں سے شروعات انہیں دوسرے ذائقے قبول کرنے میں مدد دیتی ہے۔ نئی غذا قبول کرنے میں 10 یا زیادہ بار لگ سکتی ہیں، اس لیے دیتے رہیں۔",
+    "Sabziyon se shuru karein. Pehle ek do hafte ek ek sabzi dein, khaas taur par kam meethi jaise lauki, palak, gobhi aur matar, phir phalon ki taraf jayein. Bachay paidaishi taur par meetha pasand karte hain; sabziyon se shuruaat unhein doosre zaiqe qubool karne mein madad deti hai. Nayi ghiza qubool karne mein 10 ya zyada baar lag sakti hain, is liye dete rahein.",
+)

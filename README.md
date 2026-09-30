@@ -11,8 +11,11 @@ app/                 Flutter app
   assets/            WHO growth tables, solids guide, milestone checklists (JSON)
   tool/content/      Scripts that generate the solids and milestone JSON (edit these, not the JSON)
   test/              Unit tests, content checks, and screen/form smoke tests (EN, UR, Roman Urdu)
-supabase/            Database migrations (the schema) and local Supabase config
+supabase/            Database migrations (the schema), email templates, local Supabase config
 powersync/           Sync rules: which rows each phone downloads
+website/             palnacare.com (plain HTML, hosted on Cloudflare); screenshots come from
+                     app/tool/screenshots (flutter test tool/screenshots --update-goldens)
+.github/workflows/   Nightly encrypted database backup
 ```
 
 ## How data flows
@@ -31,6 +34,10 @@ Screens ─► repositories ─► database on the phone (SQLite, PowerSync)
 - Deletions are soft (`deleted_at`) so they reach other caregivers' phones.
 - Sign-in, family invites and the member list talk to Supabase directly and need internet.
 - Reminders (vaccines, medicines, stored milk) are local notifications scheduled on the phone.
+- Running timers (breastfeeding, sleep) live in the feed and sleep rows, so they survive restarts
+  and show on every family phone; Android also shows an ongoing notification and a home-screen
+  widget (`android/.../PalnaWidgetProvider.kt`, fed by `home_widget_sync.dart`).
+- Illnesses group symptoms, doses and doctor's visits by time range (they don't own them).
 
 ## Running the app
 
@@ -71,7 +78,9 @@ ship an app update pointing at the new URLs.
 
 - Growth charts: WHO Child Growth Standards (via the CDC data files).
 - Vaccines: Pakistan EPI schedule (marked for pediatrician review).
-- Solids: NHS weaning guidance and WHO infant feeding guidance.
+- Solids and recipes: NHS weaning guidance and WHO infant feeding guidance.
+- Typical ranges in Reports: National Sleep Foundation (sleep under 4 months), American Academy
+  of Sleep Medicine (4 months+), NHS (newborn feeds, wet and dirty diapers).
 - Milestones: CDC "Learn the Signs. Act Early." checklists (2022).
 - Milk storage: CDC; power-cut guidance: USDA FSIS.
 

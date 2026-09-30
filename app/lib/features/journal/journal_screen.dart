@@ -11,6 +11,7 @@ import '../../data/vaccine_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../growth/growth_sheet.dart';
 import '../health/doctor_summary.dart';
+import '../health/illness_sheets.dart';
 import '../health/symptom_sheet.dart';
 import '../health/vaccination_sheet.dart';
 import '../health/vaccine_plan.dart';
@@ -285,10 +286,17 @@ class _DayContent extends ConsumerWidget {
           Icons.thermostat_outlined,
           [
             symptomName(l10n, s.symptom),
-            if (s.temperatureC != null) formatTemperature(s.temperatureC!),
+            if (s.temperatureC != null) displayTemperature(s.temperatureC!),
             if (s.severity != null) severityName(l10n, s.severity!),
           ].join(' · '),
           () => showSymptomSheet(context, baby, existing: s),
+        ),
+      for (final v in journal.visits)
+        _Entry(
+          v.visitedAt,
+          Icons.local_hospital_outlined,
+          [l10n.doctorVisit, if (v.doctor != null) v.doctor!, if (v.diagnosis != null) v.diagnosis!].join(' · '),
+          () => showDoctorVisitSheet(context, baby, existing: v),
         ),
     ]..sort((a, b) => a.time!.compareTo(b.time!));
 

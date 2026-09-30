@@ -30,6 +30,12 @@ String severityName(AppLocalizations l10n, int severity) => switch (severity) {
 String formatTemperature(double celsius) =>
     '${celsius.toStringAsFixed(1)}°C (${(celsius * 9 / 5 + 32).toStringAsFixed(1)}°F)';
 
+/// [formatTemperature] for the screen: kept left-to-right inside Urdu text
+/// (Unicode isolate marks U+2066 ... U+2069), where it would otherwise be
+/// jumbled. The doctor summary text uses the plain version.
+String displayTemperature(double celsius) =>
+    '${String.fromCharCode(0x2066)}${formatTemperature(celsius)}${String.fromCharCode(0x2069)}';
+
 /// One symptom across the period: when first and last noted, how often,
 /// and the highest temperature if any was recorded.
 class SymptomSpan {

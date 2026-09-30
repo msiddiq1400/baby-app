@@ -45,6 +45,23 @@ void main() {
     }
     expect(guide.food('honey')!.fromMonths, 12);
     expectAllTranslated(json, 'foods');
+
+    // Recipes: each age stage covered, and every food and allergen exists.
+    expect(guide.recipes.length, greaterThanOrEqualTo(15));
+    expect({for (final r in guide.recipes) r.fromMonths}, containsAll([6, 7, 10]));
+    expect(guide.recipes.map((r) => r.id).toSet().length, guide.recipes.length);
+    for (final r in guide.recipes) {
+      for (final f in r.foods) {
+        expect(guide.food(f), isNotNull, reason: '${r.id}: $f');
+        // A recipe never uses a food before the age it's allowed.
+        expect(guide.food(f)!.fromMonths, lessThanOrEqualTo(r.fromMonths), reason: '${r.id}: $f');
+      }
+      for (final a in r.allergens) {
+        expect(guide.allergens, contains(a), reason: '${r.id}: $a');
+      }
+      expect(r.steps, isNotEmpty);
+    }
+    expect(guide.vegFirst, isNotNull);
   });
 
   test('milestone guide parses, ids are unique, ages ascend', () {

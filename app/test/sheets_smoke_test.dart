@@ -5,13 +5,16 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:baby_app/data/content.dart';
+import 'package:baby_app/data/illness_repository.dart';
 import 'package:baby_app/data/models.dart';
 import 'package:baby_app/features/growth/growth_sheet.dart';
+import 'package:baby_app/features/health/illness_sheets.dart';
 import 'package:baby_app/features/health/medicine_sheet.dart';
 import 'package:baby_app/features/health/symptom_sheet.dart';
 import 'package:baby_app/features/health/vaccination_sheet.dart';
 import 'package:baby_app/features/home/log_sheets.dart';
 import 'package:baby_app/features/milk/milk_sheets.dart';
+import 'package:baby_app/features/settings/change_password_dialog.dart';
 import 'package:baby_app/features/settings/delete_account_dialog.dart';
 import 'package:baby_app/features/solids/food_sheets.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +79,13 @@ void main() {
     'stored milk': (c) => showAddMilkSheet(c, baby),
     'food': (c) => showFoodSheet(c, baby, guide, egg),
     'food try': (c) => showTrySheet(c, baby, egg),
+    'new illness': (c) => showIllnessSheet(c, baby),
+    'edit illness': (c) => showIllnessSheet(
+      c,
+      baby,
+      existing: Illness(id: 'i', name: 'Cold', startedAt: now.subtract(const Duration(days: 3)), recoveredAt: now),
+    ),
+    'doctor visit': (c) => showDoctorVisitSheet(c, baby),
   };
 
   for (final locale in const [Locale('en'), Locale('ur')]) {
@@ -155,4 +165,31 @@ void main() {
       expect(button().onPressed, isNotNull);
     });
   }
+
+  testWidgets('change password needs matching passwords', (tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: overrides,
+        child: testApp(
+          locale: const Locale('en'),
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => TextButton(
+                onPressed: () => showChangePasswordDialog(context),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    await tester.enterText(find.byType(TextFormField).at(0), 'secret123');
+    await tester.enterText(find.byType(TextFormField).at(1), 'secret124');
+    await tester.tap(find.text('Save'));
+    await tester.pump();
+    expect(find.text("The passwords don't match"), findsOneWidget);
+  });
 }

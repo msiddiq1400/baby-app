@@ -15,6 +15,8 @@ class BabyApp extends ConsumerWidget {
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       theme: buildTheme(const Locale('en')),
+      darkTheme: buildTheme(const Locale('en'), brightness: Brightness.dark),
+      themeMode: ref.watch(themeModeProvider),
       locale: ref.watch(localeProvider),
       localizationsDelegates: appLocalizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -24,7 +26,9 @@ class BabyApp extends ConsumerWidget {
         final locale = Localizations.localeOf(context);
         // Urdu script gets the Nastaliq font; English and Roman Urdu the
         // Latin fonts.
-        Widget themed = Theme(data: buildTheme(locale), child: child!);
+        // Theme.of already reflects light or dark (themeMode above).
+        final brightness = Theme.of(context).brightness;
+        Widget themed = Theme(data: buildTheme(locale, brightness: brightness), child: child!);
         if (locale.languageCode == 'ur' && locale.scriptCode == 'Latn') {
           themed = Directionality(textDirection: TextDirection.ltr, child: themed);
         }

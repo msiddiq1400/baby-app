@@ -4,7 +4,11 @@ Sources: NHS "Your baby's first solid foods" and "Foods to avoid giving
 babies and young children"; WHO infant and young child feeding guidance.
 """
 import json
+import os
 import sys
+
+sys.path.insert(0, os.path.dirname(__file__))
+from recipes import RECIPES, VEG_FIRST  # noqa: E402
 
 OUT = sys.argv[1]
 
@@ -184,6 +188,7 @@ allergens = {
 }
 
 guides = {
+    "vegFirst": VEG_FIRST,
     "readiness": T(
         "Most babies are ready around 6 months, when they can do all three: stay sitting with a steady head; look at food, pick it up and put it in their mouth; and swallow food rather than push it back out. Chewing fists, waking at night or wanting extra milk are normal and are not signs of readiness.",
         "زیادہ تر بچے تقریباً 6 ماہ پر تیار ہوتے ہیں، جب وہ یہ تینوں کام کر سکیں: سر سنبھال کر بیٹھے رہنا؛ کھانا دیکھ کر اٹھانا اور منہ میں ڈالنا؛ اور کھانا باہر دھکیلنے کے بجائے نگلنا۔ مٹھیاں چبانا، رات کو جاگنا یا زیادہ دودھ مانگنا عام بات ہے اور تیاری کی نشانیاں نہیں۔",
@@ -254,5 +259,5 @@ guides = {
 }
 
 with open(OUT, "w", encoding="utf-8") as f:
-    json.dump({"foods": foods, "allergens": allergens, "guides": guides}, f, ensure_ascii=False, indent=1)
-print(len(foods), "foods written to", OUT)
+    json.dump({"foods": foods, "allergens": allergens, "guides": guides, "recipes": RECIPES}, f, ensure_ascii=False, indent=1)
+print(len(foods), "foods and", len(RECIPES), "recipes written to", OUT)

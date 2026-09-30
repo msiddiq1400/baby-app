@@ -9,6 +9,7 @@ import '../../l10n/app_localizations.dart';
 import '../baby/add_baby_screen.dart';
 import '../health/health_reminders.dart';
 import '../milk/milk_reminders.dart';
+import 'home_widget_sync.dart';
 import 'live_timers.dart';
 
 /// Wraps the tabs: shows the add-baby form until there is a baby, then
@@ -26,6 +27,7 @@ class BabyShell extends ConsumerWidget {
     ref.listen(medicineRemindersProvider, (_, _) {});
     ref.listen(milkRemindersProvider, (_, _) {});
     ref.listen(timerNotificationsProvider, (_, _) {});
+    ref.listen(homeWidgetSyncProvider, (_, _) {});
 
     // Until the first download after signing in has finished, "no baby"
     // might just mean "not synced yet": don't offer to add one.

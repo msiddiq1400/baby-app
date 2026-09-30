@@ -138,7 +138,19 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     onFieldSubmitted: (_) => _submit(),
                     validator: (v) => (v ?? '').length < 6 ? l10n.passwordTooShort : null,
                   ),
-                  const SizedBox(height: 24),
+                  if (!_isSignUp)
+                    Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: TextButton(
+                        onPressed: _busy
+                            ? null
+                            : () => context.push(
+                                  Uri(path: '/reset', queryParameters: {'email': _email.text.trim()}).toString(),
+                                ),
+                        child: Text(l10n.forgotPassword),
+                      ),
+                    ),
+                  const SizedBox(height: 16),
                   FilledButton(
                     onPressed: _busy ? null : _submit,
                     child: _busy

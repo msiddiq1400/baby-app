@@ -64,6 +64,8 @@ class FoodGuide {
     required this.reactionSigns,
     required this.myths,
     required this.sources,
+    this.vegFirst,
+    this.recipes = const [],
   });
 
   final List<Food> foods;
@@ -77,6 +79,11 @@ class FoodGuide {
   final LocalText reactionSigns;
   final List<({LocalText belief, LocalText evidence})> myths;
   final String sources;
+
+  /// "Start with vegetables" advice.
+  final LocalText? vegFirst;
+
+  final List<Recipe> recipes;
 
   Food? food(String id) => foods.where((f) => f.id == id).firstOrNull;
 
@@ -97,8 +104,45 @@ class FoodGuide {
           (belief: LocalText.fromJson((m as Map)['belief']), evidence: LocalText.fromJson(m['evidence'])),
       ],
       sources: g['sources'] as String,
+      vegFirst: g['vegFirst'] == null ? null : LocalText.fromJson(g['vegFirst']),
+      recipes: [for (final r in (json['recipes'] as List?) ?? const []) Recipe.fromJson(r as Map<String, dynamic>)],
     );
   }
+}
+
+/// A home-style recipe for babies from [fromMonths].
+class Recipe {
+  const Recipe({
+    required this.id,
+    required this.fromMonths,
+    required this.name,
+    required this.ingredients,
+    required this.steps,
+    this.allergens = const [],
+    this.foods = const [],
+  });
+
+  final String id;
+  final int fromMonths;
+  final LocalText name;
+  final List<LocalText> ingredients;
+  final List<LocalText> steps;
+
+  /// Allergen group ids (see [FoodGuide.allergens]).
+  final List<String> allergens;
+
+  /// Food ids used (see [FoodGuide.foods]).
+  final List<String> foods;
+
+  factory Recipe.fromJson(Map<String, dynamic> json) => Recipe(
+        id: json['id'] as String,
+        fromMonths: json['fromMonths'] as int,
+        name: LocalText.fromJson(json['name']),
+        ingredients: [for (final i in json['ingredients'] as List) LocalText.fromJson(i)],
+        steps: [for (final s in json['steps'] as List) LocalText.fromJson(s)],
+        allergens: [for (final a in (json['allergens'] as List?) ?? const []) a as String],
+        foods: [for (final f in (json['foods'] as List?) ?? const []) f as String],
+      );
 }
 
 class Milestone {

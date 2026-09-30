@@ -1,0 +1,75 @@
+# Nightly backup of the Supabase database (the free plan has no backups).
+#
+# Saves the schema and all data, encrypts them with BACKUP_PASSPHRASE (the
+# files hold families' health records, so they're never stored readable),
+# and keeps each night's copy for 30 days as a workflow artifact.
+#
+# Needs two repository secrets (GitHub > Settings > Secrets and variables >
+# Actions > New repository secret):
+#   SUPABASE_DB_URL     Supabase > Project Settings > Database > Connection
+#                       string > "Session pooler" URI, with the password filled in
+#   BACKUP_PASSPHRASE   a long password you keep in your password manager;
+#                       without it the backups can't be opened
+#
+# Restore (on your PC, with GnuPG installed):
+#   gpg --decrypt data.sql.gpg > data.sql     (asks for BACKUP_PASSPHRASE)
+#   then load schema.sql and data.sql into a database with psql.
+
+name: Database backup
+
+on:
+  schedule:
+    - cron: "30 21 * * *" # 02:30 in Pakistan
+  workflow_dispatch: {} # "Run workflow" button, for testing
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check the secrets are set
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          if [ -z "$DB_URL" ] || [ -z "$PASSPHRASE" ]; then
+            echo "::error::Add the SUPABASE_DB_URL and BACKUP_PASSPHRASE repository secrets first."
+            exit 1
+          fi
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Dump schema and data
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          mkdir backup
+          supabase db dump --db-url "$DB_URL" -f backup/schema.sql
+          supabase db dump --db-url "$DB_URL" --data-only -f backup/data.sql
+          # The sign-in accounts live in the auth schema.
+          supabase db dump --db-url "$DB_URL" --data-only --schema auth -f backup/auth_data.sql
+          ls -la backup
+
+      - name: Encrypt
+        env:
+          PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          cd backup
+          for f in *.sql; do
+            gpg --batch --yes --pinentry-mode loopback --passphrase "$PASSPHRASE" \
+              --symmetric --cipher-algo AES256 -o "$f.gpg" "$f"
+            shred -u "$f"
+          done
+          ls -la
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: palna-db-${{ github.run_id }}
+          path: backup/*.gpg
+          retention-days: 30
+          if-no-files-found: error

@@ -12,6 +12,7 @@ import 'package:baby_app/core/providers.dart';
 import 'package:baby_app/data/baby_repository.dart';
 import 'package:baby_app/data/family_repository.dart';
 import 'package:baby_app/data/growth_repository.dart';
+import 'package:baby_app/data/illness_repository.dart';
 import 'package:baby_app/data/journal_repository.dart';
 import 'package:baby_app/data/medication_repository.dart';
 import 'package:baby_app/data/milk_repository.dart';
@@ -23,6 +24,7 @@ import 'package:baby_app/data/tracking_repository.dart';
 import 'package:baby_app/data/vaccine_repository.dart';
 import 'package:baby_app/features/growth/growth_screen.dart';
 import 'package:baby_app/features/health/health_screen.dart';
+import 'package:baby_app/features/health/illness_screen.dart';
 import 'package:baby_app/features/home/dashboard.dart';
 import 'package:baby_app/features/journal/journal_screen.dart';
 import 'package:baby_app/features/milk/milk_screen.dart';
@@ -215,6 +217,31 @@ final overrides = [
     ]),
   ),
   recentSymptomsProvider.overrideWith((ref, id) => Stream.value(const <SymptomLog>[])),
+  illnessesProvider.overrideWith(
+    (ref, id) => Stream.value([Illness(id: 'ill', name: 'Cold', startedAt: at(2, 19, 30))]),
+  ),
+  illnessEpisodeProvider.overrideWith(
+    (ref, key) => Stream.value(
+      IllnessEpisode(
+        illness: Illness(id: 'ill', name: 'Cold', startedAt: at(2, 19, 30)),
+        symptoms: [
+          SymptomLog(id: 'a', symptom: 'runny_nose', occurredAt: at(2, 19, 30), severity: 1),
+          SymptomLog(id: 'b', symptom: 'fever', occurredAt: at(2, 22, 10), temperatureC: 38.4, severity: 2),
+          SymptomLog(id: 'c', symptom: 'fever', occurredAt: at(1, 7, 40), temperatureC: 38.9, severity: 2),
+          SymptomLog(id: 'd', symptom: 'cough', occurredAt: at(1, 13), notes: 'Worse when lying down'),
+          SymptomLog(id: 'e', symptom: 'fever', occurredAt: at(0, 8, 15), temperatureC: 37.8, severity: 1),
+        ],
+        doses: [
+          (dose: MedicationDose(id: 'p1', medicationId: 'm2', givenAt: at(1, 8), skipped: false), medicine: 'Paracetamol syrup 2.5 ml'),
+          (dose: MedicationDose(id: 'p2', medicationId: 'm2', givenAt: at(1, 14), skipped: false), medicine: 'Paracetamol syrup 2.5 ml'),
+          (dose: MedicationDose(id: 'p3', medicationId: 'm2', givenAt: at(0, 8, 30), skipped: false), medicine: 'Paracetamol syrup 2.5 ml'),
+        ],
+        visits: [
+          DoctorVisit(id: 'v', visitedAt: at(1, 11), doctor: 'Dr Amina, Civil Hospital', diagnosis: 'Viral cold', advice: 'Fluids, keep feeding, paracetamol if above 38°C'),
+        ],
+      ),
+    ),
+  ),
   foodTriesProvider.overrideWith(
     (ref, id) => Stream.value([
       FoodTry(id: 't1', foodId: 'banana', triedOn: at(4, 12), opinion: 'liked', reaction: 'none'),
@@ -294,13 +321,17 @@ void main() {
     'vaccines': (4, HealthScreen(baby: baby), null),
     'reports': (0, ReportsScreen(baby: baby), null),
     'journal': (0, JournalScreen(baby: baby), null),
+    'illness': (4, IllnessScreen(baby: baby, illnessId: 'ill'), null),
     'reports2': (0, ReportsScreen(baby: baby), 'scroll'),
   };
 
-  for (final (locale, tag) in const [
-    (Locale('en'), 'en'),
-    (Locale('ur'), 'ur'),
-    (Locale.fromSubtags(languageCode: 'ur', scriptCode: 'Latn'), 'roman'),
+  for (final (locale, tag, brightness) in const [
+    (Locale('en'), 'en', Brightness.light),
+    (Locale('ur'), 'ur', Brightness.light),
+    (Locale.fromSubtags(languageCode: 'ur', scriptCode: 'Latn'), 'roman', Brightness.light),
+    (Locale('en'), 'en_dark', Brightness.dark),
+    (Locale('ur'), 'ur_dark', Brightness.dark),
+    (Locale.fromSubtags(languageCode: 'ur', scriptCode: 'Latn'), 'roman_dark', Brightness.dark),
   ]) {
     for (final MapEntry(key: name, value: (tab, screen, inner)) in shots.entries) {
       testWidgets('screenshot $name $tag', (tester) async {
@@ -332,7 +363,7 @@ void main() {
                   ),
                 ),
               ],
-              child: testApp(locale: locale, home: _Shell(index: tab, child: screen)),
+              child: testApp(locale: locale, brightness: brightness, home: _Shell(index: tab, child: screen)),
             ),
           ),
         );

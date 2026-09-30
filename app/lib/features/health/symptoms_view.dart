@@ -6,6 +6,7 @@ import '../../data/symptom_repository.dart';
 import '../../l10n/app_localizations.dart';
 import 'doctor_summary.dart';
 import 'doctor_summary_screen.dart';
+import 'illness_screen.dart';
 import 'symptom_sheet.dart';
 
 /// Symptoms tab: the last 14 days by day, and the summary for the doctor.
@@ -52,6 +53,8 @@ class _SymptomList extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        IllnessSection(baby: baby),
+        const SizedBox(height: 16),
         Row(
           children: [
             Expanded(
@@ -91,7 +94,7 @@ class _SymptomList extends StatelessWidget {
             title: Text(
               [
                 symptomName(l10n, log.symptom),
-                if (log.temperatureC case final t?) formatTemperature(t),
+                if (log.temperatureC case final t?) displayTemperature(t),
                 if (log.severity case final s?) severityName(l10n, s),
               ].join(' · '),
             ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart' show ThemeMode;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -47,3 +48,20 @@ class LocaleNotifier extends Notifier<Locale?> {
 }
 
 final localeProvider = NotifierProvider<LocaleNotifier, Locale?>(LocaleNotifier.new);
+
+/// Light, dark or the phone's setting (the default), saved on the phone.
+class ThemeModeNotifier extends Notifier<ThemeMode> {
+  @override
+  ThemeMode build() => switch (ref.watch(settingProvider(SettingKeys.themeMode)).value) {
+        'light' => ThemeMode.light,
+        'dark' => ThemeMode.dark,
+        _ => ThemeMode.system,
+      };
+
+  Future<void> set(ThemeMode mode) async {
+    state = mode;
+    await ref.read(settingsRepositoryProvider).set(SettingKeys.themeMode, mode == ThemeMode.system ? null : mode.name);
+  }
+}
+
+final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(ThemeModeNotifier.new);

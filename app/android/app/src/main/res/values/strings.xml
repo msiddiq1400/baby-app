@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="palna_widget_description">Time since the last feed, sleep and the next vaccine</string>
+</resources>

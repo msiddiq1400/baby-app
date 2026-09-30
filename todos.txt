@@ -4,6 +4,24 @@ BABY APP: THINGS ONLY YOU CAN DO
 
 --- WHEN YOU WAKE UP -------------------------------------------------
 
+[ ] M1. !! BEFORE opening the new app: PowerSync dashboard > Sync Streams >
+        replace everything with d:\baby-app\powersync\sync-config.yaml >
+        Validate > Deploy. (Two new tables tonight: illnesses and
+        doctor_visits. Without this, illnesses you add upload but then
+        vanish from the phone.)
+[ ] M2. Supabase > Authentication > Emails > "Reset Password": subject
+        "Reset your Palna password", body = d:\baby-app\supabase\templates\recovery.html
+        (so "Forgot password?" emails a 6-digit code, not a link).
+[ ] M3. Re-deploy the website (Cloudflare > Workers & Pages > your Worker >
+        New deployment > drag in d:\baby-app\website). New: illness and
+        dark-mode slides, a "small things" section, screenshots that turn
+        dark with the site's dark theme, and privacy/delete pages updated
+        for illnesses, the widget and 30-day encrypted backups.
+        (The backups line is only true once you switch backups on, item 18.)
+[ ] M4. Test what was built overnight (list under "WHAT CHANGED ON 30 SEP
+        NIGHT" at the bottom), then tell Claude to commit.
+
+
 [x] 0. !! FIRST, before opening the new app: PowerSync dashboard > Sync
        Streams > replace everything with the current contents of
        d:\baby-app\powersync\sync-config.yaml > Validate > Deploy.
@@ -44,9 +62,9 @@ BABY APP: THINGS ONLY YOU CAN DO
         "Palna Android Debug" (com.palnacare.app, debug SHA-1) and
         "Supabase" (web client: the app and Supabase both use its id; never
         delete it). The old "Android debug" client can be deleted.
-[ ] 9c. Update the name where Claude can't:
+[x] 9c. Update the name where Claude can't:
         - [x] Supabase "Confirm signup" template and SMTP sender "Palna"
-        - [ ] Google Auth Platform > Branding (shown when choosing a Google
+        - [x] Google Auth Platform > Branding (shown when choosing a Google
           account; also needed to publish, item 19):
             App name: Palna
             User support email: hello@palnacare.com (after 17a receiving)
@@ -54,9 +72,9 @@ BABY APP: THINGS ONLY YOU CAN DO
             Home page: https://palnacare.com
             Privacy policy: https://palnacare.com/privacy
             Authorized domains: add palnacare.com
-        - [ ] Supabase > Authentication > URL Configuration > Site URL:
-          https://palnacare.com (it may still say localhost; it's where
-          email links would land)
+        - [x] Supabase > Authentication > URL Configuration > Site URL:
+          https://palnacare.com (done 30 Sep; the old app.babyapp:// redirect
+          was removed, nothing in the app uses email links)
         - [ ] Optional, cosmetic (nobody else sees these): rename the
           Supabase project "baby-app", the Google Cloud project "Baby App"
           and the PowerSync instance to Palna. Don't change their ids/URLs.
@@ -103,18 +121,24 @@ BABY APP: THINGS ONLY YOU CAN DO
         Cloudflare Worker with static assets ("late-butterfly-bc9d"; can be
         renamed to "palna" in its Settings). To update the site: open it in
         Workers & Pages > New deployment > drag in d:\baby-app\website.
-        [ ] www.palnacare.com doesn't resolve yet: add it as a second custom
-            domain on the same Worker.
+        [x] www.palnacare.com added as a second custom domain (30 Sep).
 [ ] 18. Supabase: stay on the FREE plan at launch (decided 30 Sep).
-        - Claude sets up a nightly database backup (keeps 30 days) before
-          launch, since the free plan has no backups. Where to run it:
-          GitHub Actions (free) or your VPS; Claude will ask what's needed
-          (e.g. the database connection string as a GitHub secret).
-        - Free plan limits: 500 MB database, 50,000 monthly users, pauses
-          after ~1 week with no activity (unpause in the dashboard).
-        - Upgrade to Pro ($25/mo: daily backups, no pausing, support) or
-          move to your own server once there are a few hundred active
-          families or some income.
+        Nightly backup WRITTEN (30 Sep night): .github/workflows/db-backup.yml.
+        Every night at 02:30 PKT it saves the schema, all data and the
+        sign-in accounts, ENCRYPTS them (they hold health records) and keeps
+        30 days of copies in GitHub (Actions > Database backup > artifacts).
+        To switch it on, after committing and pushing:
+        - GitHub repo > Settings > Secrets and variables > Actions > New
+          repository secret:
+            SUPABASE_DB_URL = Supabase > Project Settings > Database >
+              Connection string > "Session pooler" URI (put the database
+              password in it)
+            BACKUP_PASSPHRASE = a long new password; save it in your
+              password manager: without it the backups can't be opened
+        - Actions > Database backup > Run workflow, to test it once.
+        Free plan limits: 500 MB database, 50,000 monthly users, pauses
+        after ~1 week with no activity. Upgrade to Pro ($25/mo) or move to
+        your own server once there are a few hundred active families.
 [ ] 19. Google Auth Platform > Audience: switch from "Testing" to
         "In production" before launch (otherwise only test users can use
         Google sign-in).
@@ -158,7 +182,9 @@ Claude can build 31-36 without anything from you; say which ones first.
         bars, plus averages: feeds a day, time between feeds, breastfeeding
         per day and per feed, left/right split, bottle ml, sleep a day,
         naps, longest sleep, bedtime, wake-up, wet and dirty a day.
-        Still to do: a shareable PDF for the check-up.
+        PDF for the check-up: BUILT (30 Sep night). Health > Symptoms >
+        Doctor summary > "PDF": a one-page A4 summary (English, for the
+        doctor) to share on WhatsApp or print.
 [ ] 34. Journal: BUILT (30 Sep), please test. Today > "Past days" (next to
         the Today list). One page per day since birth: swipe right for the
         day before (left in Urdu), use the arrows, or tap the date / the
@@ -166,13 +192,29 @@ Claude can build 31-36 without anything from you; say which ones first.
         (vaccines, measurements, foods tried, milestones), then everything
         with a time in order: feeds, diapers, sleep, pumping, medicine
         doses, symptoms. Tap an entry to edit it.
-[ ] 35. Solids: more recipes up to 12 months, and "first vegetables"
-        wording (your notes), add comment such that first veges as fruits are sweets, better start with veges first so that kids dont deny them in future, add something like this.
+[ ] 35. Solids: BUILT (30 Sep night), please test.
+        - "Start with vegetables" guide (NHS "veg first"), and vegetables
+          now come first in the food list. I read your note "first veges
+          not vegitable" as this advice; tell me if you meant something else.
+        - Solids > "Recipes for babies": 15 home-style recipes in 3
+          languages: from 6 months (lauki puree, carrot and potato, smooth
+          khichdi, suji kheer without sugar, banana oats), 7 months (veg
+          khichdi, daliya, egg, chicken yakhni mash, masoor daal chawal),
+          10 months (roti in daal, soft pulao, mild qeema aloo, fish and
+          potato, paneer and peas). Each shows allergens, ingredients, steps
+          and "Log a try" for its foods. Content: app/tool/content/recipes.py
+          (a pediatrician should check it with item 23).
 [ ] 36. Push notifications between phones ("Ali logged a feed"). Needs
         Firebase (item 14).
-[ ] 37. Home-screen widget (Android) and Live Activity (iPhone) showing the
-        last feed / running timer. Needs 31 first; iPhone part needs
-        Codemagic (item 15).
+[ ] 37. Home-screen widget (Android): BUILT (30 Sep night), please test.
+        Long-press the phone's home screen > Widgets > Palna > drag it out.
+        Shows the baby's name, time since the last feed (a live clock that
+        keeps counting with the app closed) and what it was, "Feeding now"
+        while a timer runs, asleep/awake with a clock, and the next vaccines
+        when due within 30 days. Tap it to open Palna. It refreshes whenever
+        something is logged in the app.
+        Still open: the iPhone version (a WidgetKit extension, needs a Mac
+        or Codemagic, item 15) and Live Activities for the timer.
 [ ] 38. Photos and memories (first smile, milestones with a photo). Needs
         a decision: photos use Supabase Storage, which costs more and must
         be covered in the privacy policy.
@@ -181,19 +223,28 @@ Claude can build 31-36 without anything from you; say which ones first.
         rules; a pediatrician should approve the guardrails.
 [ ] 40. Website extras: articles/help centre, "compare apps" page, store
         badges once the apps are live.
-[ ] 41. Illness episodes: group a sickness as "Day 1, Day 2..." with
-        temperatures, doses and a doctor's visit, and mark it recovered.
+[ ] 41. Illness tracking: BUILT (30 Sep night), please test after M1.
+        Health > Symptoms > "Baby unwell? Start tracking an illness" (name
+        like Cold, Fever... optional). A card shows "Day 3 · Cold", symptoms
+        so far, last temperature, doses today, and buttons: Log symptom,
+        Doctor's visit, Recovered. Tap it for the day-by-day page (symptoms,
+        temperatures, doses, visits). Past illnesses are listed below.
+        Doctor's visits also show in the journal.
+        Database: migration 20260930000003_illnesses.sql (applied).
 [ ] 42. Typical ranges: BUILT for sleep a day (NSF under 4 months, AASM
         after; shaded on the chart), feeds for newborns, wet and dirty
         diapers (NHS). No "typical wake window" on purpose: there's no solid
         source for it. Still to do: growth *rate* compared with WHO
         velocity data. A pediatrician should check the wording (item 22).
-[ ] 44. "Forgot password?" on the sign-in screen (NOT built: today someone
-        who forgets their password is locked out, unless they use Google).
-        Claude builds it with a 6-digit code like sign-up; you then paste a
-        "Reset password" email template into Supabase (Claude will give it).
-[ ] 43. Dark mode (for night feeds) and food pictures/illustrations in the
-        solids list (needs images we are allowed to use).
+[ ] 44. "Forgot password?": BUILT (30 Sep night), please test after M2.
+        Sign-in screen > "Forgot password?" > email > 6-digit code + new
+        password > signed in. Also Settings > Account > "Change password"
+        (only shown to email-and-password users, not Google-only ones).
+[ ] 43. Dark mode: BUILT (30 Sep night), please test. Settings >
+        Appearance > Phone / Light / Dark (default follows the phone).
+        Dark uses deep navy with warm sand buttons, easy on the eyes at
+        night feeds. Still open: food pictures in the solids list (needs
+        images we're allowed to use).
 
 Where Palna is already ahead of MyBaby: Urdu and Roman Urdu, Pakistan EPI
 schedule, desi foods, works fully offline, emergency numbers and heat
@@ -220,11 +271,13 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
         that the user is gone and in Table Editor that the baby is gone.
         Also test a shared family: the other member should keep the baby
         and become owner.
-[ ] 27a. Decide: permanently purge soft-deleted entries after 30 days (a
-        daily pg_cron job). Today a deleted entry/baby is hidden everywhere
-        but stays in the database. Claude was not allowed to create a job
-        that deletes production data on its own; say "yes, add the purge
-        job" if you want it, and the privacy policy will mention it.
+[ ] 27a. Purge deleted entries after 30 days: you said YES (30 Sep), but
+        Claude's safety check blocked creating a job that deletes live data,
+        even with your approval. Options: (a) allow it once in Claude Code's
+        permission settings and ask again, or (b) ask Claude for the SQL and
+        run it yourself in Supabase > SQL Editor. Until then, deleted
+        entries stay hidden in the database (the privacy pages don't claim
+        otherwise).
 
 [~] 25. Privacy policy and delete-account pages are LIVE (store URLs):
           https://palnacare.com/privacy
@@ -239,10 +292,59 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
         page footer and the privacy policy. After re-deploying:
         - Google Auth Platform > Branding > Terms of service link:
           https://palnacare.com/terms
+        - [x] Added to Google branding (30 Sep).
         - You or a lawyer should read it. It deliberately has no "governing
           law" clause yet: add the country where Toolbox Services is (or will
           be) registered once that's decided (item 11).
 [ ] 26. Play Store health-app declaration and Data safety form.
+
+
+====================================================================
+WHAT CHANGED ON 30 SEP NIGHT (to test; nothing is committed)
+====================================================================
+Do M1 and M2 at the top first. Then press F5 (or flutter run).
+
+1. FORGOT PASSWORD (item 44)
+   Sign out > Sign in screen > "Forgot password?" > email > "Send code" >
+   enter the 6-digit code and a new password > you're signed in.
+   Settings > Account > "Change password" (email accounts only).
+
+2. ILLNESS TRACKING (item 41)
+   Health > Symptoms > "Baby unwell? Start tracking an illness" > e.g.
+   "Cold" > Save. Log a symptom with a temperature, add a doctor's visit,
+   tap the card for the day-by-day page, then "Recovered". Past illnesses
+   are listed under the button. Visits also appear in the journal.
+
+3. DARK MODE (item 43)
+   Settings > Appearance > Dark (or Phone to follow the phone). Check the
+   Today tab with a feed timer running, Reports and the forms.
+
+4. RECIPES AND "VEGETABLES FIRST" (item 35)
+   Solids > "Start with vegetables" guide; vegetables now come first in
+   the food list. Solids > "Recipes for babies": 15 recipes by age, each
+   with allergens, ingredients, steps and "Log a try".
+
+5. PDF FOR THE DOCTOR (item 33)
+   Health > Symptoms > Doctor summary > "PDF" > share to WhatsApp or save.
+
+6. HOME-SCREEN WIDGET, Android (item 37)
+   Long-press the home screen > Widgets > Palna > place it. Log a feed or
+   start a sleep in the app and check the widget updates; its clocks keep
+   counting with the app closed. Tap it to open Palna.
+
+7. SMALLER FIXES
+   - Temperatures read correctly in Urdu (e.g. 38.9°C (102.0°F)).
+   - New database tables: illnesses, doctor_visits (migration applied).
+   - Nightly encrypted backup workflow written (item 18, needs secrets).
+   - 168 automated checks, all passing, including every new screen in
+     English, Urdu and Roman Urdu, and the main screens in dark mode.
+
+NOT DONE TONIGHT, and why
+   - 27a purge job: blocked by Claude's safety check (see 27a).
+   - 42 growth rate vs WHO velocity: needs the WHO growth-velocity tables
+     added as data first; Claude can do it when you want it.
+   - iPhone widget / Live Activities: needs a Mac or Codemagic (item 15).
+   - 36 push, 38 photos, 39 AI, 28-30: need your decisions or content.
 
 
 ====================================================================

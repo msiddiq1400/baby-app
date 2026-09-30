@@ -3,9 +3,14 @@
 // layout overflow while building, so broken screens are caught without a
 // phone.
 
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:baby_app/data/baby_repository.dart';
+import 'package:baby_app/data/content.dart';
 import 'package:baby_app/data/family_repository.dart';
 import 'package:baby_app/data/growth_repository.dart';
+import 'package:baby_app/data/illness_repository.dart';
 import 'package:baby_app/data/journal_repository.dart';
 import 'package:baby_app/data/medication_repository.dart';
 import 'package:baby_app/data/milk_repository.dart';
@@ -15,16 +20,21 @@ import 'package:baby_app/data/solids_repository.dart';
 import 'package:baby_app/data/symptom_repository.dart';
 import 'package:baby_app/data/tracking_repository.dart';
 import 'package:baby_app/data/vaccine_repository.dart';
+import 'package:baby_app/features/auth/reset_password_screen.dart';
+import 'package:baby_app/features/auth/sign_in_screen.dart';
 import 'package:baby_app/features/baby/add_baby_screen.dart';
 import 'package:baby_app/features/growth/growth_screen.dart';
 import 'package:baby_app/features/health/health_screen.dart';
+import 'package:baby_app/features/health/illness_screen.dart';
 import 'package:baby_app/features/home/dashboard.dart';
 import 'package:baby_app/features/milk/milk_screen.dart';
 import 'package:baby_app/features/journal/journal_screen.dart';
 import 'package:baby_app/features/reports/reports_screen.dart';
+import 'package:baby_app/features/settings/change_password_dialog.dart';
 import 'package:baby_app/features/settings/help_screen.dart';
 import 'package:baby_app/features/settings/settings_screen.dart';
 import 'package:baby_app/l10n/app_localizations.dart';
+import 'package:baby_app/features/solids/recipes_screen.dart';
 import 'package:baby_app/features/solids/solids_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -135,6 +145,34 @@ final overrides = [
     ),
   ),
   feedTimerProvider.overrideWith((ref, id) => Stream.value(runningFeed)),
+  canChangePasswordProvider.overrideWithValue(true),
+  illnessesProvider.overrideWith(
+    (ref, id) => Stream.value([
+      Illness(id: 'ill', name: 'Cold', startedAt: ago(days: 2, hours: 3)),
+      Illness(id: 'old', name: 'Tummy bug', startedAt: ago(days: 40), recoveredAt: ago(days: 36)),
+    ]),
+  ),
+  illnessEpisodeProvider.overrideWith(
+    (ref, key) => Stream.value(
+      IllnessEpisode(
+        illness: Illness(id: key.illnessId, name: 'Cold', startedAt: ago(days: 2, hours: 3)),
+        symptoms: [
+          SymptomLog(id: 'x1', symptom: 'fever', occurredAt: ago(days: 2), temperatureC: 38.6, severity: 2),
+          SymptomLog(id: 'x2', symptom: 'cough', occurredAt: ago(days: 1), notes: 'worse at night'),
+          SymptomLog(id: 'x3', symptom: 'fever', occurredAt: ago(hours: 2), temperatureC: 37.9),
+        ],
+        doses: [
+          (
+            dose: MedicationDose(id: 'y1', medicationId: 'm1', givenAt: ago(hours: 1), skipped: false),
+            medicine: 'Paracetamol syrup',
+          ),
+        ],
+        visits: [
+          DoctorVisit(id: 'v1', visitedAt: ago(days: 1, hours: 2), doctor: 'Dr Amina', diagnosis: 'Viral cold', advice: 'Fluids, rest'),
+        ],
+      ),
+    ),
+  ),
   journalDayProvider.overrideWith(
     (ref, key) => Stream.value(
       JournalDay(
@@ -316,8 +354,9 @@ final overrides = [
 Future<void> pumpScreen(
   WidgetTester tester,
   Widget screen,
-  Locale locale,
-) async {
+  Locale locale, {
+  Brightness brightness = Brightness.light,
+}) async {
   tester.view.physicalSize = const Size(1080, 2316); // the test phone
   tester.view.devicePixelRatio = 2.75;
   addTearDown(tester.view.reset);
@@ -325,7 +364,7 @@ Future<void> pumpScreen(
   await tester.pumpWidget(
     ProviderScope(
       overrides: overrides,
-      child: testApp(locale: locale, home: screen),
+      child: testApp(locale: locale, home: screen, brightness: brightness),
     ),
   );
   // Let streams, futures and asset loads settle (no pumpAndSettle: the
@@ -357,6 +396,9 @@ void main() {
     'Help': () => const HelpScreen(),
     'Reports': () => ReportsScreen(baby: baby),
     'Journal': () => JournalScreen(baby: baby),
+    'Illness': () => IllnessScreen(baby: baby, illnessId: 'ill'),
+    'Sign in': () => const SignInScreen(),
+    'Reset password': () => const ResetPasswordScreen(email: 'sana@example.com'),
     'Edit baby': () => AddBabyScreen(existing: baby),
   };
 
@@ -374,11 +416,37 @@ void main() {
     }
   }
 
+  for (final locale in const [Locale('en'), Locale('ur')]) {
+    for (final name in ['Today', 'Health', 'Reports', 'Settings', 'Journal', 'Illness']) {
+      testWidgets('$name builds in dark mode ($locale)', (tester) async {
+        await pumpScreen(tester, screens[name]!(), locale, brightness: Brightness.dark);
+        expect(tester.takeException(), isNull);
+        expect(Theme.of(tester.element(find.byType(Scaffold).first)).brightness, Brightness.dark);
+      });
+    }
+  }
+
+  for (final locale in const [
+    Locale('en'),
+    Locale('ur'),
+    Locale.fromSubtags(languageCode: 'ur', scriptCode: 'Latn'),
+  ]) {
+    testWidgets('Recipes build and open ($locale)', (tester) async {
+      final guide = FoodGuide.fromJson(
+        jsonDecode(File('assets/foods.json').readAsStringSync()) as Map<String, dynamic>,
+      );
+      await pumpScreen(tester, RecipesScreen(baby: baby, guide: guide), locale);
+      await tester.tap(find.byType(ExpansionTile).first);
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(tester.takeException(), isNull);
+    });
+  }
+
   testWidgets('Health inner tabs (medicines, symptoms) build', (tester) async {
     await pumpScreen(tester, HealthScreen(baby: baby), const Locale('en'));
     for (final (tab, expected) in [
       ('Medicines', 'Paracetamol'),
-      ('Symptoms', 'Fever'),
+      ('Symptoms', '· Cold'),
     ]) {
       await tester.tap(find.text(tab));
       for (var i = 0; i < 5; i++) {

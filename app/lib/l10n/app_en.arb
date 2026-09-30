@@ -947,5 +947,150 @@
   "newerDay": "Next day",
   "onThisDay": "On this day",
   "pumpingEntry": "Pumping",
-  "nothingOnDay": "Nothing was logged on this day."
+  "nothingOnDay": "Nothing was logged on this day.",
+  "forgotPassword": "Forgot password?",
+  "resetTitle": "Reset your password",
+  "resetHelp": "Enter your email and we'll send you a 6-digit code.",
+  "resetCodeSentHelp": "If there's an account for this email, a code is on its way. Enter it with your new password.",
+  "sendCodeButton": "Send code",
+  "setPasswordButton": "Save new password",
+  "newPasswordLabel": "New password",
+  "repeatPasswordLabel": "Repeat new password",
+  "passwordsDontMatch": "The passwords don't match",
+  "passwordChanged": "Your password has been changed.",
+  "passwordNotChanged": "You're signed in, but the new password wasn't saved. Try again from Settings.",
+  "changePassword": "Change password",
+  "illnessCold": "Cold",
+  "illnessFever": "Fever",
+  "illnessCough": "Cough",
+  "illnessTummy": "Tummy bug",
+  "illnessEar": "Ear infection",
+  "illnessRash": "Rash",
+  "illnessUnnamed": "Unwell",
+  "startIllness": "Start tracking an illness",
+  "startIllnessButton": "Baby unwell? Start tracking an illness",
+  "startIllnessHelp": "Symptoms, temperatures, medicine doses and doctor's visits from now on are shown together, day by day, until you mark the baby recovered.",
+  "editIllness": "Edit illness",
+  "illnessNameLabel": "What is it? (optional)",
+  "illnessStartedLabel": "Started",
+  "recoveredLabel": "Recovered",
+  "recoveredOnLabel": "Recovered on",
+  "markRecovered": "Recovered",
+  "stillUnwell": "Still unwell",
+  "doctorVisit": "Doctor's visit",
+  "doctorLabel": "Doctor or clinic (optional)",
+  "diagnosisLabel": "What the doctor said (optional)",
+  "adviceLabel": "Advice and medicines (optional)",
+  "nothingThisDay": "Nothing logged this day.",
+  "illnessDay": "Day {day}",
+  "@illnessDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "illnessLasted": "{days, plural, =1{1 day} other{{days} days}}",
+  "@illnessLasted": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "illnessStartedOn": "Started {date}",
+  "@illnessStartedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "lastTemperature": "Last temperature: {temp} at {time}",
+  "@lastTemperature": {
+    "placeholders": {
+      "temp": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "highestTemperature": "Highest temperature: {temp}",
+  "@highestTemperature": {
+    "placeholders": {
+      "temp": {
+        "type": "String"
+      }
+    }
+  },
+  "dosesToday": "{count, plural, =1{1 medicine dose today} other{{count} medicine doses today}}",
+  "@dosesToday": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "doctorVisitsCount": "{count, plural, =1{1 doctor's visit} other{{count} doctor's visits}}",
+  "@doctorVisitsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "appearanceSection": "Appearance",
+  "themeSystem": "Phone",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "vegFirstTitle": "Start with vegetables",
+  "recipesTitle": "Recipes for babies",
+  "recipesSubtitle": "{count} home-style recipes, 6 to 12 months",
+  "@recipesSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recipesRules": "For babies: no salt, sugar, honey or stock cubes. Cook eggs until firm, take out every fish bone, and let food cool before serving. Take your baby's portion out before adding salt and chilli for the family.",
+  "recipesFromMonths": "From {months} months",
+  "@recipesFromMonths": {
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
+  "recipesNotYet": "Not yet for your baby",
+  "recipeContains": "Contains: {allergens}",
+  "@recipeContains": {
+    "placeholders": {
+      "allergens": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeIngredients": "You need",
+  "recipeSteps": "How to make it",
+  "recipeLogTry": "Log a try:",
+  "recipesSource": "Based on NHS and WHO guidance for starting solids. A general guide, not medical advice; ask your doctor if your baby has allergies or eczema.",
+  "pdfButton": "PDF",
+  "widgetLastFeed": "Last feed",
+  "widgetAsleep": "Asleep",
+  "widgetAwake": "Awake",
+  "widgetEmpty": "Tap to open Palna",
+  "widgetNextVaccine": "Next vaccines ({when}): {date}",
+  "@widgetNextVaccine": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  }
 }

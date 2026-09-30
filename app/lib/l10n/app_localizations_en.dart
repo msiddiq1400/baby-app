@@ -1464,4 +1464,236 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nothingOnDay => 'Nothing was logged on this day.';
+
+  @override
+  String get forgotPassword => 'Forgot password?';
+
+  @override
+  String get resetTitle => 'Reset your password';
+
+  @override
+  String get resetHelp =>
+      'Enter your email and we\'ll send you a 6-digit code.';
+
+  @override
+  String get resetCodeSentHelp =>
+      'If there\'s an account for this email, a code is on its way. Enter it with your new password.';
+
+  @override
+  String get sendCodeButton => 'Send code';
+
+  @override
+  String get setPasswordButton => 'Save new password';
+
+  @override
+  String get newPasswordLabel => 'New password';
+
+  @override
+  String get repeatPasswordLabel => 'Repeat new password';
+
+  @override
+  String get passwordsDontMatch => 'The passwords don\'t match';
+
+  @override
+  String get passwordChanged => 'Your password has been changed.';
+
+  @override
+  String get passwordNotChanged =>
+      'You\'re signed in, but the new password wasn\'t saved. Try again from Settings.';
+
+  @override
+  String get changePassword => 'Change password';
+
+  @override
+  String get illnessCold => 'Cold';
+
+  @override
+  String get illnessFever => 'Fever';
+
+  @override
+  String get illnessCough => 'Cough';
+
+  @override
+  String get illnessTummy => 'Tummy bug';
+
+  @override
+  String get illnessEar => 'Ear infection';
+
+  @override
+  String get illnessRash => 'Rash';
+
+  @override
+  String get illnessUnnamed => 'Unwell';
+
+  @override
+  String get startIllness => 'Start tracking an illness';
+
+  @override
+  String get startIllnessButton => 'Baby unwell? Start tracking an illness';
+
+  @override
+  String get startIllnessHelp =>
+      'Symptoms, temperatures, medicine doses and doctor\'s visits from now on are shown together, day by day, until you mark the baby recovered.';
+
+  @override
+  String get editIllness => 'Edit illness';
+
+  @override
+  String get illnessNameLabel => 'What is it? (optional)';
+
+  @override
+  String get illnessStartedLabel => 'Started';
+
+  @override
+  String get recoveredLabel => 'Recovered';
+
+  @override
+  String get recoveredOnLabel => 'Recovered on';
+
+  @override
+  String get markRecovered => 'Recovered';
+
+  @override
+  String get stillUnwell => 'Still unwell';
+
+  @override
+  String get doctorVisit => 'Doctor\'s visit';
+
+  @override
+  String get doctorLabel => 'Doctor or clinic (optional)';
+
+  @override
+  String get diagnosisLabel => 'What the doctor said (optional)';
+
+  @override
+  String get adviceLabel => 'Advice and medicines (optional)';
+
+  @override
+  String get nothingThisDay => 'Nothing logged this day.';
+
+  @override
+  String illnessDay(int day) {
+    return 'Day $day';
+  }
+
+  @override
+  String illnessLasted(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days',
+      one: '1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String illnessStartedOn(String date) {
+    return 'Started $date';
+  }
+
+  @override
+  String lastTemperature(String temp, String time) {
+    return 'Last temperature: $temp at $time';
+  }
+
+  @override
+  String highestTemperature(String temp) {
+    return 'Highest temperature: $temp';
+  }
+
+  @override
+  String dosesToday(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count medicine doses today',
+      one: '1 medicine dose today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String doctorVisitsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count doctor\'s visits',
+      one: '1 doctor\'s visit',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get appearanceSection => 'Appearance';
+
+  @override
+  String get themeSystem => 'Phone';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get vegFirstTitle => 'Start with vegetables';
+
+  @override
+  String get recipesTitle => 'Recipes for babies';
+
+  @override
+  String recipesSubtitle(int count) {
+    return '$count home-style recipes, 6 to 12 months';
+  }
+
+  @override
+  String get recipesRules =>
+      'For babies: no salt, sugar, honey or stock cubes. Cook eggs until firm, take out every fish bone, and let food cool before serving. Take your baby\'s portion out before adding salt and chilli for the family.';
+
+  @override
+  String recipesFromMonths(int months) {
+    return 'From $months months';
+  }
+
+  @override
+  String get recipesNotYet => 'Not yet for your baby';
+
+  @override
+  String recipeContains(String allergens) {
+    return 'Contains: $allergens';
+  }
+
+  @override
+  String get recipeIngredients => 'You need';
+
+  @override
+  String get recipeSteps => 'How to make it';
+
+  @override
+  String get recipeLogTry => 'Log a try:';
+
+  @override
+  String get recipesSource =>
+      'Based on NHS and WHO guidance for starting solids. A general guide, not medical advice; ask your doctor if your baby has allergies or eczema.';
+
+  @override
+  String get pdfButton => 'PDF';
+
+  @override
+  String get widgetLastFeed => 'Last feed';
+
+  @override
+  String get widgetAsleep => 'Asleep';
+
+  @override
+  String get widgetAwake => 'Awake';
+
+  @override
+  String get widgetEmpty => 'Tap to open Palna';
+
+  @override
+  String widgetNextVaccine(String when, String date) {
+    return 'Next vaccines ($when): $date';
+  }
 }

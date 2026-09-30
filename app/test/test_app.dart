@@ -42,7 +42,7 @@ Future<void> loadAppFonts() async {
 }
 
 /// MaterialApp set up like the real app (theme per language, Roman Urdu LTR).
-Widget testApp({required Locale locale, required Widget home}) => MaterialApp(
+Widget testApp({required Locale locale, required Widget home, Brightness brightness = Brightness.light}) => MaterialApp(
   debugShowCheckedModeBanner: false,
   locale: locale,
   theme: buildTheme(const Locale('en')),
@@ -50,7 +50,7 @@ Widget testApp({required Locale locale, required Widget home}) => MaterialApp(
   supportedLocales: AppLocalizations.supportedLocales,
   builder: (context, child) {
     final l = Localizations.localeOf(context);
-    Widget themed = Theme(data: buildTheme(l), child: child!);
+    Widget themed = Theme(data: buildTheme(l, brightness: brightness), child: child!);
     if (l.languageCode == 'ur' && l.scriptCode == 'Latn') {
       themed = Directionality(textDirection: TextDirection.ltr, child: themed);
     }

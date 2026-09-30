@@ -1,0 +1,12 @@
+<!-- Password reset email. Used by local Supabase (config.toml) and
+     pasted into the hosted project: Authentication > Emails > Reset Password. -->
+<div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; color: #222;">
+  <h2 style="margin-bottom: 8px;">Reset your password</h2>
+  <p>Your Palna code is:</p>
+  <p style="font-size: 32px; font-weight: bold; letter-spacing: 8px; margin: 16px 0;">{{ .Token }}</p>
+  <p>Enter this code in the app, with your new password. It expires in 1 hour.</p>
+
+  <p style="color: #777; font-size: 13px; margin-top: 24px;">
+    If you didn't ask to reset your password, you can ignore this email. Your password stays the same.
+  </p>
+</div>

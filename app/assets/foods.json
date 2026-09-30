@@ -651,6 +651,11 @@
   }
  },
  "guides": {
+  "vegFirst": {
+   "en": "Start with vegetables. For the first week or two, offer single vegetables, especially less sweet ones such as lauki, spinach, cauliflower and peas, before moving on to fruit. Babies are born liking sweet tastes; starting with vegetables helps them accept other flavours. It can take 10 or more tries before a baby accepts a new food, so keep offering it.",
+   "ur": "سبزیوں سے شروع کریں۔ پہلے ایک دو ہفتے ایک ایک سبزی دیں، خاص طور پر کم میٹھی جیسے لوکی، پالک، گوبھی اور مٹر، پھر پھلوں کی طرف جائیں۔ بچے پیدائشی طور پر میٹھا پسند کرتے ہیں؛ سبزیوں سے شروعات انہیں دوسرے ذائقے قبول کرنے میں مدد دیتی ہے۔ نئی غذا قبول کرنے میں 10 یا زیادہ بار لگ سکتی ہیں، اس لیے دیتے رہیں۔",
+   "ur_Latn": "Sabziyon se shuru karein. Pehle ek do hafte ek ek sabzi dein, khaas taur par kam meethi jaise lauki, palak, gobhi aur matar, phir phalon ki taraf jayein. Bachay paidaishi taur par meetha pasand karte hain; sabziyon se shuruaat unhein doosre zaiqe qubool karne mein madad deti hai. Nayi ghiza qubool karne mein 10 ya zyada baar lag sakti hain, is liye dete rahein."
+  },
   "readiness": {
    "en": "Most babies are ready around 6 months, when they can do all three: stay sitting with a steady head; look at food, pick it up and put it in their mouth; and swallow food rather than push it back out. Chewing fists, waking at night or wanting extra milk are normal and are not signs of readiness.",
    "ur": "زیادہ تر بچے تقریباً 6 ماہ پر تیار ہوتے ہیں، جب وہ یہ تینوں کام کر سکیں: سر سنبھال کر بیٹھے رہنا؛ کھانا دیکھ کر اٹھانا اور منہ میں ڈالنا؛ اور کھانا باہر دھکیلنے کے بجائے نگلنا۔ مٹھیاں چبانا، رات کو جاگنا یا زیادہ دودھ مانگنا عام بات ہے اور تیاری کی نشانیاں نہیں۔",
@@ -787,5 +792,704 @@
    }
   ],
   "sources": "NHS (Your baby's first solid foods; Foods to avoid giving babies and young children), WHO infant and young child feeding guidance."
- }
+ },
+ "recipes": [
+  {
+   "id": "lauki_puree",
+   "fromMonths": 6,
+   "name": {
+    "en": "Lauki purée",
+    "ur": "لوکی کی پیوری",
+    "ur_Latn": "Lauki ki puree"
+   },
+   "ingredients": [
+    {
+     "en": "1 small piece of lauki (bottle gourd), peeled",
+     "ur": "لوکی کا ایک چھوٹا ٹکڑا، چھلا ہوا",
+     "ur_Latn": "Lauki ka ek chhota tukra, chhila hua"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Remove the seeds and cut into small cubes.",
+     "ur": "بیج نکال کر چھوٹے ٹکڑے کاٹ لیں۔",
+     "ur_Latn": "Beej nikal kar chhote tukre kaat lein."
+    },
+    {
+     "en": "Steam or boil in a little water until very soft (about 10 minutes).",
+     "ur": "تھوڑے پانی میں بھاپ یا ابال کر بہت نرم کر لیں (تقریباً 10 منٹ)۔",
+     "ur_Latn": "Thore paani mein bhaap ya ubaal kar bohat naram kar lein (taqreeban 10 minute)."
+    },
+    {
+     "en": "Mash or blend until smooth, adding a little of the cooking water or breast milk.",
+     "ur": "کانٹے یا بلینڈر سے ملائم کر لیں، ضرورت ہو تو پکانے کا پانی یا ماں کا دودھ ملائیں۔",
+     "ur_Latn": "Kaante ya blender se mulayam kar lein, zaroorat ho to pakane ka paani ya maa ka doodh milayein."
+    }
+   ],
+   "allergens": [],
+   "foods": [
+    "bottle_gourd"
+   ]
+  },
+  {
+   "id": "carrot_potato",
+   "fromMonths": 6,
+   "name": {
+    "en": "Carrot and potato mash",
+    "ur": "گاجر اور آلو کا بھرتا",
+    "ur_Latn": "Gajar aur aloo ka bharta"
+   },
+   "ingredients": [
+    {
+     "en": "1 small carrot",
+     "ur": "ایک چھوٹی گاجر",
+     "ur_Latn": "Ek chhoti gajar"
+    },
+    {
+     "en": "1 small potato",
+     "ur": "ایک چھوٹا آلو",
+     "ur_Latn": "Ek chhota aloo"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Peel and cut both into small pieces.",
+     "ur": "دونوں چھیل کر چھوٹے ٹکڑے کر لیں۔",
+     "ur_Latn": "Dono chheel kar chhote tukre kar lein."
+    },
+    {
+     "en": "Boil until very soft, about 15 minutes.",
+     "ur": "بہت نرم ہونے تک ابالیں، تقریباً 15 منٹ۔",
+     "ur_Latn": "Bohat naram hone tak ubaalein, taqreeban 15 minute."
+    },
+    {
+     "en": "Mash smooth with a little breast milk, formula or cooking water. No salt or butter.",
+     "ur": "تھوڑے ماں کے دودھ، فارمولا یا پکانے کے پانی کے ساتھ ملائم مسل لیں۔ نمک یا مکھن نہ ڈالیں۔",
+     "ur_Latn": "Thore maa ke doodh, formula ya pakane ke paani ke saath mulayam masal lein. Namak ya makkhan na daalein."
+    }
+   ],
+   "allergens": [],
+   "foods": [
+    "carrot",
+    "potato"
+   ]
+  },
+  {
+   "id": "rice_moong_smooth",
+   "fromMonths": 6,
+   "name": {
+    "en": "Smooth rice and moong daal",
+    "ur": "چاول اور مونگ کی ملائم کھچڑی",
+    "ur_Latn": "Chawal aur moong ki mulayam khichdi"
+   },
+   "ingredients": [
+    {
+     "en": "1 tablespoon rice",
+     "ur": "ایک کھانے کا چمچ چاول",
+     "ur_Latn": "Ek khane ka chamach chawal"
+    },
+    {
+     "en": "1 tablespoon yellow moong daal",
+     "ur": "ایک کھانے کا چمچ پیلی مونگ کی دال",
+     "ur_Latn": "Ek khane ka chamach peeli moong ki daal"
+    },
+    {
+     "en": "1 cup water",
+     "ur": "ایک کپ پانی",
+     "ur_Latn": "Ek cup paani"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Wash the rice and daal well and soak for 20 minutes.",
+     "ur": "چاول اور دال اچھی طرح دھو کر 20 منٹ بھگو دیں۔",
+     "ur_Latn": "Chawal aur daal achhi tarah dho kar 20 minute bhigo dein."
+    },
+    {
+     "en": "Cook in the water until completely soft (a pressure cooker takes 3 to 4 whistles).",
+     "ur": "پانی میں مکمل نرم ہونے تک پکائیں (پریشر ککر میں 3 سے 4 سیٹیاں)۔",
+     "ur_Latn": "Paani mein mukammal naram hone tak pakayein (pressure cooker mein 3 se 4 seetiyan)."
+    },
+    {
+     "en": "Blend or mash until smooth. Add a pinch of haldi if you like, but no salt.",
+     "ur": "ملائم ہونے تک بلینڈ کریں یا مسلیں۔ چاہیں تو چٹکی بھر ہلدی، مگر نمک نہیں۔",
+     "ur_Latn": "Mulayam hone tak blend karein ya maslein. Chahein to chutki bhar haldi, magar namak nahi."
+    }
+   ],
+   "allergens": [],
+   "foods": [
+    "rice",
+    "moong_daal"
+   ]
+  },
+  {
+   "id": "suji_kheer",
+   "fromMonths": 6,
+   "name": {
+    "en": "Suji kheer without sugar",
+    "ur": "بغیر چینی کی سوجی کی کھیر",
+    "ur_Latn": "Baghair cheeni ki suji ki kheer"
+   },
+   "ingredients": [
+    {
+     "en": "1 tablespoon suji (semolina)",
+     "ur": "ایک کھانے کا چمچ سوجی",
+     "ur_Latn": "Ek khane ka chamach suji"
+    },
+    {
+     "en": "Half a cup of breast milk or formula (or cow's milk, in cooking only)",
+     "ur": "آدھا کپ ماں کا دودھ یا فارمولا (یا گائے کا دودھ، صرف پکانے میں)",
+     "ur_Latn": "Aadha cup maa ka doodh ya formula (ya gaye ka doodh, sirf pakane mein)"
+    },
+    {
+     "en": "A little mashed banana or pear to sweeten",
+     "ur": "مٹھاس کے لیے تھوڑا مسلا ہوا کیلا یا ناشپاتی",
+     "ur_Latn": "Mithaas ke liye thora masla hua kela ya nashpati"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Dry-roast the suji in a pan for 2 minutes, stirring.",
+     "ur": "سوجی کو پین میں 2 منٹ ہلاتے ہوئے بھون لیں۔",
+     "ur_Latn": "Suji ko pan mein 2 minute hilate hue bhoon lein."
+    },
+    {
+     "en": "Add the milk slowly, stirring so there are no lumps, and cook until soft.",
+     "ur": "دودھ آہستہ آہستہ ڈالیں، گٹھلیاں نہ بنیں اس لیے ہلاتے رہیں، اور نرم ہونے تک پکائیں۔",
+     "ur_Latn": "Doodh aahista aahista daalein, guthliyan na banein is liye hilate rahein, aur naram hone tak pakayein."
+    },
+    {
+     "en": "Cool, then stir in the fruit instead of sugar.",
+     "ur": "ٹھنڈا کر کے چینی کی جگہ پھل ملا دیں۔",
+     "ur_Latn": "Thanda kar ke cheeni ki jagah phal mila dein."
+    }
+   ],
+   "allergens": [
+    "wheat",
+    "milk"
+   ],
+   "foods": [
+    "suji"
+   ]
+  },
+  {
+   "id": "banana_oats",
+   "fromMonths": 6,
+   "name": {
+    "en": "Banana and oats",
+    "ur": "کیلا اور جئی",
+    "ur_Latn": "Kela aur jai"
+   },
+   "ingredients": [
+    {
+     "en": "2 tablespoons oats",
+     "ur": "دو کھانے کے چمچ جئی (اوٹس)",
+     "ur_Latn": "Do khane ke chamach oats"
+    },
+    {
+     "en": "Half a ripe banana",
+     "ur": "آدھا پکا کیلا",
+     "ur_Latn": "Aadha pakka kela"
+    },
+    {
+     "en": "Breast milk, formula or water",
+     "ur": "ماں کا دودھ، فارمولا یا پانی",
+     "ur_Latn": "Maa ka doodh, formula ya paani"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Cook the oats in water until soft, or grind them first for a smoother texture.",
+     "ur": "جئی کو پانی میں نرم ہونے تک پکائیں، یا زیادہ ملائم کے لیے پہلے پیس لیں۔",
+     "ur_Latn": "Oats ko paani mein naram hone tak pakayein, ya zyada mulayam ke liye pehle pees lein."
+    },
+    {
+     "en": "Mash in the banana and thin with a little milk.",
+     "ur": "کیلا مسل کر ملائیں اور تھوڑے دودھ سے پتلا کر لیں۔",
+     "ur_Latn": "Kela masal kar milayein aur thore doodh se patla kar lein."
+    }
+   ],
+   "allergens": [],
+   "foods": [
+    "oats",
+    "banana"
+   ]
+  },
+  {
+   "id": "veg_khichdi",
+   "fromMonths": 7,
+   "name": {
+    "en": "Vegetable khichdi",
+    "ur": "سبزیوں والی کھچڑی",
+    "ur_Latn": "Sabziyon wali khichdi"
+   },
+   "ingredients": [
+    {
+     "en": "2 tablespoons rice and 1 tablespoon moong or masoor daal",
+     "ur": "دو کھانے کے چمچ چاول اور ایک چمچ مونگ یا مسور کی دال",
+     "ur_Latn": "Do khane ke chamach chawal aur ek chamach moong ya masoor ki daal"
+    },
+    {
+     "en": "A handful of chopped vegetables: carrot, lauki, peas, spinach",
+     "ur": "مٹھی بھر کٹی سبزیاں: گاجر، لوکی، مٹر، پالک",
+     "ur_Latn": "Mutthi bhar kati sabziyan: gajar, lauki, matar, palak"
+    },
+    {
+     "en": "Half a teaspoon of ghee, a pinch of haldi and zeera",
+     "ur": "آدھا چائے کا چمچ گھی، چٹکی بھر ہلدی اور زیرہ",
+     "ur_Latn": "Aadha chaye ka chamach ghee, chutki bhar haldi aur zeera"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Warm the ghee, add zeera for a few seconds, then the washed rice, daal and vegetables.",
+     "ur": "گھی گرم کر کے چند سیکنڈ زیرہ ڈالیں، پھر دھلے چاول، دال اور سبزیاں۔",
+     "ur_Latn": "Ghee garam kar ke chand second zeera daalein, phir dhule chawal, daal aur sabziyan."
+    },
+    {
+     "en": "Add haldi and plenty of water; cook until everything is very soft.",
+     "ur": "ہلدی اور کافی پانی ڈال کر سب کچھ بہت نرم ہونے تک پکائیں۔",
+     "ur_Latn": "Haldi aur kaafi paani daal kar sab kuch bohat naram hone tak pakayein."
+    },
+    {
+     "en": "Mash roughly, leaving small soft lumps so your baby learns to chew. No salt.",
+     "ur": "ہلکا سا مسلیں اور چھوٹی نرم گٹھلیاں رہنے دیں تاکہ بچہ چبانا سیکھے۔ نمک نہیں۔",
+     "ur_Latn": "Halka sa maslein aur chhoti naram guthliyan rehne dein taake bacha chabana seekhe. Namak nahi."
+    }
+   ],
+   "allergens": [],
+   "foods": [
+    "khichdi",
+    "peas",
+    "spinach"
+   ]
+  },
+  {
+   "id": "daliya_fruit",
+   "fromMonths": 7,
+   "name": {
+    "en": "Daliya with fruit",
+    "ur": "پھل والا دلیہ",
+    "ur_Latn": "Phal wala daliya"
+   },
+   "ingredients": [
+    {
+     "en": "2 tablespoons daliya (broken wheat)",
+     "ur": "دو کھانے کے چمچ دلیہ",
+     "ur_Latn": "Do khane ke chamach daliya"
+    },
+    {
+     "en": "Breast milk, formula, or cow's milk in cooking",
+     "ur": "ماں کا دودھ، فارمولا، یا پکانے میں گائے کا دودھ",
+     "ur_Latn": "Maa ka doodh, formula, ya pakane mein gaye ka doodh"
+    },
+    {
+     "en": "Mashed apple, pear, mango or chikoo",
+     "ur": "مسلا ہوا سیب، ناشپاتی، آم یا چیکو",
+     "ur_Latn": "Masla hua saib, nashpati, aam ya chikoo"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Roast the daliya lightly, then cook in water until soft (a pressure cooker helps).",
+     "ur": "دلیہ ہلکا سا بھون کر پانی میں نرم ہونے تک پکائیں (پریشر ککر سے آسانی ہوتی ہے)۔",
+     "ur_Latn": "Daliya halka sa bhoon kar paani mein naram hone tak pakayein (pressure cooker se aasani hoti hai)."
+    },
+    {
+     "en": "Stir in a little milk and cook for 2 more minutes.",
+     "ur": "تھوڑا دودھ ملا کر 2 منٹ اور پکائیں۔",
+     "ur_Latn": "Thora doodh mila kar 2 minute aur pakayein."
+    },
+    {
+     "en": "Cool and mix in the fruit. No sugar or honey.",
+     "ur": "ٹھنڈا کر کے پھل ملا دیں۔ چینی یا شہد نہیں۔",
+     "ur_Latn": "Thanda kar ke phal mila dein. Cheeni ya shehad nahi."
+    }
+   ],
+   "allergens": [
+    "wheat",
+    "milk"
+   ],
+   "foods": [
+    "daliya"
+   ]
+  },
+  {
+   "id": "egg_scramble",
+   "fromMonths": 7,
+   "name": {
+    "en": "Soft scrambled egg",
+    "ur": "نرم انڈا بھرجی",
+    "ur_Latn": "Naram anda bhurji"
+   },
+   "ingredients": [
+    {
+     "en": "1 egg",
+     "ur": "ایک انڈا",
+     "ur_Latn": "Ek anda"
+    },
+    {
+     "en": "A few drops of oil or a little ghee",
+     "ur": "چند قطرے تیل یا تھوڑا سا گھی",
+     "ur_Latn": "Chand qatre tel ya thora sa ghee"
+    },
+    {
+     "en": "Optional: finely chopped tomato or spinach",
+     "ur": "اختیاری: باریک کٹا ٹماٹر یا پالک",
+     "ur_Latn": "Ikhtiyari: bareek kata tamatar ya palak"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Beat the egg well (with the vegetables if using).",
+     "ur": "انڈا اچھی طرح پھینٹیں (سبزی ہو تو ساتھ ملائیں)۔",
+     "ur_Latn": "Anda achhi tarah phentein (sabzi ho to saath milayein)."
+    },
+    {
+     "en": "Cook on low heat, stirring, until completely set with no runny parts.",
+     "ur": "ہلکی آنچ پر ہلاتے ہوئے پکائیں، یہاں تک کہ بالکل پک جائے اور کچا حصہ نہ رہے۔",
+     "ur_Latn": "Halki aanch par hilate hue pakayein, yahan tak ke bilkul pak jaye aur kacha hissa na rahe."
+    },
+    {
+     "en": "Break into small soft pieces. Offer egg early and regularly, and watch for a reaction.",
+     "ur": "چھوٹے نرم ٹکڑے کر لیں۔ انڈا جلدی اور باقاعدگی سے دیں، اور ردِ عمل پر نظر رکھیں۔",
+     "ur_Latn": "Chhote naram tukre kar lein. Anda jaldi aur baqaidgi se dein, aur radd-e-amal par nazar rakhein."
+    }
+   ],
+   "allergens": [
+    "egg"
+   ],
+   "foods": [
+    "egg"
+   ]
+  },
+  {
+   "id": "chicken_veg_mash",
+   "fromMonths": 7,
+   "name": {
+    "en": "Chicken and vegetable mash",
+    "ur": "چکن اور سبزی کا بھرتا",
+    "ur_Latn": "Chicken aur sabzi ka bharta"
+   },
+   "ingredients": [
+    {
+     "en": "A small piece of boneless chicken",
+     "ur": "بغیر ہڈی چکن کا چھوٹا ٹکڑا",
+     "ur_Latn": "Baghair haddi chicken ka chhota tukra"
+    },
+    {
+     "en": "1 small potato and a few pieces of carrot or pumpkin",
+     "ur": "ایک چھوٹا آلو اور گاجر یا کدو کے چند ٹکڑے",
+     "ur_Latn": "Ek chhota aloo aur gajar ya kaddu ke chand tukre"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Boil the chicken with the vegetables in water (a simple yakhni) until the chicken is fully cooked and soft.",
+     "ur": "چکن اور سبزیاں پانی میں ابالیں (سادہ یخنی) یہاں تک کہ چکن اچھی طرح پک کر نرم ہو جائے۔",
+     "ur_Latn": "Chicken aur sabziyan paani mein ubaalein (saada yakhni) yahan tak ke chicken achhi tarah pak kar naram ho jaye."
+    },
+    {
+     "en": "Shred the chicken very finely and mash with the vegetables and a little yakhni.",
+     "ur": "چکن کو بہت باریک ریشہ کر کے سبزیوں اور تھوڑی یخنی کے ساتھ مسل لیں۔",
+     "ur_Latn": "Chicken ko bohat bareek resha kar ke sabziyon aur thori yakhni ke saath masal lein."
+    },
+    {
+     "en": "No salt or stock cubes. Meat gives iron, which babies need from 6 months.",
+     "ur": "نمک یا اسٹاک کیوب نہیں۔ گوشت سے آئرن ملتا ہے جس کی بچے کو 6 ماہ سے ضرورت ہوتی ہے۔",
+     "ur_Latn": "Namak ya stock cube nahi. Gosht se iron milta hai jis ki bachay ko 6 mahine se zaroorat hoti hai."
+    }
+   ],
+   "allergens": [],
+   "foods": [
+    "chicken",
+    "potato"
+   ]
+  },
+  {
+   "id": "masoor_rice",
+   "fromMonths": 7,
+   "name": {
+    "en": "Masoor daal with rice",
+    "ur": "مسور کی دال چاول",
+    "ur_Latn": "Masoor ki daal chawal"
+   },
+   "ingredients": [
+    {
+     "en": "2 tablespoons red masoor daal",
+     "ur": "دو کھانے کے چمچ لال مسور کی دال",
+     "ur_Latn": "Do khane ke chamach laal masoor ki daal"
+    },
+    {
+     "en": "2 tablespoons soft-cooked rice",
+     "ur": "دو کھانے کے چمچ نرم پکے چاول",
+     "ur_Latn": "Do khane ke chamach naram pakay chawal"
+    },
+    {
+     "en": "A little ghee, a pinch of haldi",
+     "ur": "تھوڑا سا گھی، چٹکی بھر ہلدی",
+     "ur_Latn": "Thora sa ghee, chutki bhar haldi"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Cook the daal with haldi and water until it falls apart.",
+     "ur": "دال کو ہلدی اور پانی کے ساتھ گل جانے تک پکائیں۔",
+     "ur_Latn": "Daal ko haldi aur paani ke saath gal jane tak pakayein."
+    },
+    {
+     "en": "Add the ghee and mix with the rice, mashing to the texture your baby manages.",
+     "ur": "گھی ڈال کر چاولوں میں ملائیں اور بچے کی عادت کے مطابق مسلیں۔",
+     "ur_Latn": "Ghee daal kar chawalon mein milayein aur bachay ki aadat ke mutabiq maslein."
+    },
+    {
+     "en": "No salt, chilli or tarka spices.",
+     "ur": "نمک، مرچ یا تڑکے کے مصالحے نہیں۔",
+     "ur_Latn": "Namak, mirch ya tarke ke masale nahi."
+    }
+   ],
+   "allergens": [],
+   "foods": [
+    "masoor_daal",
+    "rice"
+   ]
+  },
+  {
+   "id": "roti_daal",
+   "fromMonths": 10,
+   "name": {
+    "en": "Roti soaked in daal",
+    "ur": "دال میں بھیگی روٹی",
+    "ur_Latn": "Daal mein bheegi roti"
+   },
+   "ingredients": [
+    {
+     "en": "Half a soft roti (no salt in the dough)",
+     "ur": "آدھی نرم روٹی (آٹے میں نمک نہیں)",
+     "ur_Latn": "Aadhi naram roti (aate mein namak nahi)"
+    },
+    {
+     "en": "A few spoons of the family's daal, taken out before salt and chilli",
+     "ur": "گھر کی دال کے چند چمچ، نمک مرچ ڈالنے سے پہلے نکالے ہوئے",
+     "ur_Latn": "Ghar ki daal ke chand chamach, namak mirch daalne se pehle nikale hue"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Tear the roti into small pieces.",
+     "ur": "روٹی کے چھوٹے ٹکڑے کر لیں۔",
+     "ur_Latn": "Roti ke chhote tukre kar lein."
+    },
+    {
+     "en": "Soak them in warm daal for a few minutes until soft.",
+     "ur": "گرم دال میں چند منٹ بھگو دیں تاکہ نرم ہو جائیں۔",
+     "ur_Latn": "Garam daal mein chand minute bhigo dein taake naram ho jayein."
+    },
+    {
+     "en": "Let your baby pick up pieces themselves, or feed with a spoon.",
+     "ur": "بچے کو خود ٹکڑے اٹھانے دیں، یا چمچ سے کھلائیں۔",
+     "ur_Latn": "Bachay ko khud tukre uthane dein, ya chamach se khilayein."
+    }
+   ],
+   "allergens": [
+    "wheat"
+   ],
+   "foods": [
+    "roti",
+    "moong_daal"
+   ]
+  },
+  {
+   "id": "veg_pulao",
+   "fromMonths": 10,
+   "name": {
+    "en": "Soft vegetable pulao",
+    "ur": "نرم سبزی پلاؤ",
+    "ur_Latn": "Naram sabzi pulao"
+   },
+   "ingredients": [
+    {
+     "en": "Quarter cup of rice",
+     "ur": "چوتھائی کپ چاول",
+     "ur_Latn": "Chauthai cup chawal"
+    },
+    {
+     "en": "Peas, carrot and potato, finely chopped",
+     "ur": "مٹر، گاجر اور آلو، باریک کٹے ہوئے",
+     "ur_Latn": "Matar, gajar aur aloo, bareek kate hue"
+    },
+    {
+     "en": "A little ghee, a small piece of cinnamon (removed before serving)",
+     "ur": "تھوڑا سا گھی، دار چینی کا چھوٹا ٹکڑا (کھلانے سے پہلے نکال دیں)",
+     "ur_Latn": "Thora sa ghee, daar cheeni ka chhota tukra (khilane se pehle nikal dein)"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Fry the vegetables in the ghee for a minute, then add the washed rice and cinnamon.",
+     "ur": "سبزیاں گھی میں ایک منٹ بھونیں، پھر دھلے چاول اور دار چینی ڈالیں۔",
+     "ur_Latn": "Sabziyan ghee mein ek minute bhoonein, phir dhule chawal aur daar cheeni daalein."
+    },
+    {
+     "en": "Add a little more water than usual so the rice cooks soft.",
+     "ur": "عام سے تھوڑا زیادہ پانی ڈالیں تاکہ چاول نرم پکیں۔",
+     "ur_Latn": "Aam se thora zyada paani daalein taake chawal naram pakein."
+    },
+    {
+     "en": "Remove the cinnamon, check the peas are soft, and squash any hard pieces. No salt.",
+     "ur": "دار چینی نکال دیں، دیکھ لیں کہ مٹر نرم ہیں، اور سخت ٹکڑے دبا دیں۔ نمک نہیں۔",
+     "ur_Latn": "Daar cheeni nikal dein, dekh lein ke matar naram hain, aur sakht tukre daba dein. Namak nahi."
+    }
+   ],
+   "allergens": [],
+   "foods": [
+    "rice",
+    "peas",
+    "carrot"
+   ]
+  },
+  {
+   "id": "qeema_aloo",
+   "fromMonths": 10,
+   "name": {
+    "en": "Mild qeema aloo",
+    "ur": "ہلکا قیمہ آلو",
+    "ur_Latn": "Halka qeema aloo"
+   },
+   "ingredients": [
+    {
+     "en": "2 tablespoons fine mutton or beef qeema",
+     "ur": "دو کھانے کے چمچ باریک مٹن یا بیف قیمہ",
+     "ur_Latn": "Do khane ke chamach bareek mutton ya beef qeema"
+    },
+    {
+     "en": "1 small potato, diced small",
+     "ur": "ایک چھوٹا آلو، چھوٹے ٹکڑوں میں",
+     "ur_Latn": "Ek chhota aloo, chhote tukron mein"
+    },
+    {
+     "en": "Half a tomato, a little onion, a pinch of haldi",
+     "ur": "آدھا ٹماٹر، تھوڑی پیاز، چٹکی بھر ہلدی",
+     "ur_Latn": "Aadha tamatar, thori pyaz, chutki bhar haldi"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Soften the onion and tomato in a little oil, add the qeema and haldi, and cook until browned all through.",
+     "ur": "پیاز اور ٹماٹر تھوڑے تیل میں نرم کریں، قیمہ اور ہلدی ڈال کر اچھی طرح پکائیں کہ کہیں گلابی نہ رہے۔",
+     "ur_Latn": "Pyaz aur tamatar thore tel mein naram karein, qeema aur haldi daal kar achhi tarah pakayein ke kahin gulabi na rahe."
+    },
+    {
+     "en": "Add the potato and water; cover and cook until the potato is very soft.",
+     "ur": "آلو اور پانی ڈال کر ڈھک دیں اور آلو بہت نرم ہونے تک پکائیں۔",
+     "ur_Latn": "Aloo aur paani daal kar dhak dein aur aloo bohat naram hone tak pakayein."
+    },
+    {
+     "en": "Mash lightly. No salt, chilli or garam masala for babies.",
+     "ur": "ہلکا سا مسل لیں۔ بچوں کے لیے نمک، مرچ یا گرم مصالحہ نہیں۔",
+     "ur_Latn": "Halka sa masal lein. Bachon ke liye namak, mirch ya garam masala nahi."
+    }
+   ],
+   "allergens": [],
+   "foods": [
+    "qeema",
+    "potato"
+   ]
+  },
+  {
+   "id": "fish_potato",
+   "fromMonths": 10,
+   "name": {
+    "en": "Fish and potato",
+    "ur": "مچھلی اور آلو",
+    "ur_Latn": "Machhli aur aloo"
+   },
+   "ingredients": [
+    {
+     "en": "A small piece of boneless white fish (e.g. rohu or surmai fillet)",
+     "ur": "بغیر کانٹے والی سفید مچھلی کا چھوٹا ٹکڑا (مثلاً روہو یا سرمئی فلے)",
+     "ur_Latn": "Baghair kaante wali safed machhli ka chhota tukra (maslan rohu ya surmai fillet)"
+    },
+    {
+     "en": "1 small boiled potato",
+     "ur": "ایک چھوٹا ابلا آلو",
+     "ur_Latn": "Ek chhota ubla aloo"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Steam or boil the fish until it flakes easily.",
+     "ur": "مچھلی کو بھاپ یا ابال کر اتنا پکائیں کہ آسانی سے ٹوٹ جائے۔",
+     "ur_Latn": "Machhli ko bhaap ya ubaal kar itna pakayein ke aasani se toot jaye."
+    },
+    {
+     "en": "Check carefully with your fingers for any bones.",
+     "ur": "انگلیوں سے احتیاط سے دیکھ لیں کہ کوئی کانٹا نہ ہو۔",
+     "ur_Latn": "Ungliyon se ehtiyaat se dekh lein ke koi kaanta na ho."
+    },
+    {
+     "en": "Flake and mix with the mashed potato.",
+     "ur": "ریشے کر کے مسلے آلو میں ملا دیں۔",
+     "ur_Latn": "Reshe kar ke masle aloo mein mila dein."
+    }
+   ],
+   "allergens": [
+    "fish"
+   ],
+   "foods": [
+    "fish",
+    "potato"
+   ]
+  },
+  {
+   "id": "paneer_peas",
+   "fromMonths": 10,
+   "name": {
+    "en": "Paneer and peas",
+    "ur": "پنیر اور مٹر",
+    "ur_Latn": "Paneer aur matar"
+   },
+   "ingredients": [
+    {
+     "en": "2 tablespoons crumbled fresh paneer",
+     "ur": "دو کھانے کے چمچ چورا کیا تازہ پنیر",
+     "ur_Latn": "Do khane ke chamach chura kiya taaza paneer"
+    },
+    {
+     "en": "2 tablespoons peas",
+     "ur": "دو کھانے کے چمچ مٹر",
+     "ur_Latn": "Do khane ke chamach matar"
+    },
+    {
+     "en": "Half a tomato, a pinch of haldi",
+     "ur": "آدھا ٹماٹر، چٹکی بھر ہلدی",
+     "ur_Latn": "Aadha tamatar, chutki bhar haldi"
+    }
+   ],
+   "steps": [
+    {
+     "en": "Cook the peas and tomato with a little water and haldi until the peas are soft.",
+     "ur": "مٹر اور ٹماٹر کو تھوڑے پانی اور ہلدی کے ساتھ مٹر نرم ہونے تک پکائیں۔",
+     "ur_Latn": "Matar aur tamatar ko thore paani aur haldi ke saath matar naram hone tak pakayein."
+    },
+    {
+     "en": "Squash the peas, then stir in the paneer and warm through.",
+     "ur": "مٹر دبا دیں، پھر پنیر ملا کر گرم کر لیں۔",
+     "ur_Latn": "Matar daba dein, phir paneer mila kar garam kar lein."
+    },
+    {
+     "en": "Serve with soft rice or roti. Paneer is a milk food, so watch for a reaction the first time.",
+     "ur": "نرم چاول یا روٹی کے ساتھ دیں۔ پنیر دودھ سے بنتا ہے، اس لیے پہلی بار ردِ عمل پر نظر رکھیں۔",
+     "ur_Latn": "Naram chawal ya roti ke saath dein. Paneer doodh se banta hai, is liye pehli baar radd-e-amal par nazar rakhein."
+    }
+   ],
+   "allergens": [
+    "milk"
+   ],
+   "foods": [
+    "paneer",
+    "peas"
+   ]
+  }
+ ]
 }

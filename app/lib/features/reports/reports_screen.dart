@@ -67,6 +67,7 @@ class _Report extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
+    final navy = PalnaColors.chartNavy(theme.brightness);
     final now = DateTime.now();
     final ageDays = now.difference(baby.birthDate).inDays;
     final stats = dailyStats(feeds: feeds, diapers: diapers, sleeps: sleeps, days: days, now: now);
@@ -98,7 +99,7 @@ class _Report extends StatelessWidget {
           empty: !stats.any((d) => d.feeds > 0),
           chart: _DailyBars(
             days: stats,
-            segments: (d) => [(d.feeds.toDouble(), PalnaColors.navy)],
+            segments: (d) => [(d.feeds.toDouble(), navy)],
             axisLabel: (v) => v.round().toString(),
           ),
           tiles: [
@@ -117,11 +118,11 @@ class _Report extends StatelessWidget {
           icon: Icons.bedtime_outlined,
           title: l10n.sleep,
           empty: !stats.any((d) => d.sleep > Duration.zero),
-          legend: [(l10n.sleepNight, PalnaColors.navy), (l10n.sleepNap, PalnaColors.sand)],
+          legend: [(l10n.sleepNight, navy), (l10n.sleepNap, PalnaColors.sand)],
           chart: _DailyBars(
             days: stats,
             segments: (d) => [
-              (d.night.inMinutes / 60, PalnaColors.navy),
+              (d.night.inMinutes / 60, navy),
               (d.naps.inMinutes / 60, PalnaColors.sand),
             ],
             axisLabel: (v) => l10n.hoursShort(v.round()),
@@ -147,12 +148,12 @@ class _Report extends StatelessWidget {
           icon: Icons.baby_changing_station_outlined,
           title: l10n.diapers,
           empty: !stats.any((d) => d.diapers > 0),
-          legend: [(l10n.diaperWet, PalnaColors.navy), (l10n.diaperDirty, PalnaColors.rose)],
+          legend: [(l10n.diaperWet, navy), (l10n.diaperDirty, PalnaColors.rose)],
           chart: _DailyBars(
             days: stats,
             // A diaper that's both wet and dirty counts once in the bar.
             segments: (d) => [
-              ((d.diapers - d.dirty).toDouble(), PalnaColors.navy),
+              ((d.diapers - d.dirty).toDouble(), navy),
               (d.dirty.toDouble(), PalnaColors.rose),
             ],
             axisLabel: (v) => v.round().toString(),

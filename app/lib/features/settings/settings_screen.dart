@@ -8,6 +8,8 @@ import '../../data/family_repository.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
 import '../baby/add_baby_screen.dart';
+import '../../core/providers.dart';
+import 'change_password_dialog.dart';
 import 'delete_account_dialog.dart';
 import 'join_family_dialog.dart';
 
@@ -60,7 +62,28 @@ class SettingsScreen extends ConsumerWidget {
             onTap: () => showJoinFamilyDialog(context),
           ),
           const Divider(height: 32),
+          _Header(l10n.appearanceSection),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: SegmentedButton<ThemeMode>(
+              segments: [
+                ButtonSegment(value: ThemeMode.system, icon: const Icon(Icons.phone_android), label: Text(l10n.themeSystem)),
+                ButtonSegment(value: ThemeMode.light, icon: const Icon(Icons.light_mode_outlined), label: Text(l10n.themeLight)),
+                ButtonSegment(value: ThemeMode.dark, icon: const Icon(Icons.dark_mode_outlined), label: Text(l10n.themeDark)),
+              ],
+              selected: {ref.watch(themeModeProvider)},
+              showSelectedIcon: false,
+              onSelectionChanged: (s) => ref.read(themeModeProvider.notifier).set(s.first),
+            ),
+          ),
+          const Divider(height: 32),
           _Header(l10n.accountSection),
+          if (ref.watch(canChangePasswordProvider))
+            ListTile(
+              leading: const Icon(Icons.password_outlined),
+              title: Text(l10n.changePassword),
+              onTap: () => showChangePasswordDialog(context),
+            ),
           ListTile(
             leading: Icon(Icons.delete_forever_outlined, color: theme.colorScheme.error),
             title: Text(l10n.deleteAccount, style: TextStyle(color: theme.colorScheme.error)),

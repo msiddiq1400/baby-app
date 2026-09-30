@@ -36,4 +36,5 @@ final settingProvider = StreamProvider.family<String?, String>(
 abstract final class SettingKeys {
   static const locale = 'locale';
   static const babyId = 'baby_id';
+  static const themeMode = 'theme_mode';
 }

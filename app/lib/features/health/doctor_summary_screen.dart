@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart' show DateFormat;
 import 'package:share_plus/share_plus.dart';
 
 import '../../data/growth_repository.dart';
@@ -10,6 +11,7 @@ import '../../data/symptom_repository.dart';
 import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
 import 'doctor_summary.dart';
+import 'summary_pdf.dart';
 
 /// Everything the summary needs for a period starting at `from` (the key is
 /// (baby id, from)). Feeds and diapers include the 7 days before, for "usually".
@@ -54,6 +56,34 @@ class _DoctorSummaryScreenState extends ConsumerState<DoctorSummaryScreen> {
   /// null = since the earliest symptom in the last 14 days.
   int? _days;
   var _english = true;
+  var _makingPdf = false;
+
+  /// Shares the summary as a PDF. The PDF is always in English (for the
+  /// doctor; the PDF library can't lay out Nastaliq Urdu).
+  Future<void> _sharePdf(DoctorSummaryInput input) async {
+    final l10n = AppLocalizations.of(context);
+    setState(() => _makingPdf = true);
+    try {
+      final en = lookupAppLocalizations(const Locale('en'));
+      final bytes = await buildSummaryPdf(
+        buildDoctorSummary(input, en),
+        fonts: await SummaryPdfFonts.load(),
+        generatedOn: DateFormat('d MMM yyyy, h:mm a', 'en').format(DateTime.now()),
+      );
+      final name = 'Palna summary - ${widget.baby.name}.pdf';
+      await SharePlus.instance.share(
+        ShareParams(
+          files: [XFile.fromData(bytes, mimeType: 'application/pdf', name: name)],
+          fileNameOverrides: [name],
+          subject: en.sumTitle(widget.baby.name),
+        ),
+      );
+    } catch (_) {
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.errorGeneric)));
+    } finally {
+      if (mounted) setState(() => _makingPdf = false);
+    }
+  }
 
   DateTime get _from {
     final now = DateTime.now();
@@ -124,18 +154,26 @@ class _DoctorSummaryScreenState extends ConsumerState<DoctorSummaryScreen> {
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
           child: Row(
             children: [
+              IconButton.outlined(
+                tooltip: l10n.copyButton,
+                onPressed: text == null
+                    ? null
+                    : () async {
+                        await Clipboard.setData(ClipboardData(text: text));
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.copied)));
+                        }
+                      },
+                icon: const Icon(Icons.copy),
+              ),
+              const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: text == null
-                      ? null
-                      : () async {
-                          await Clipboard.setData(ClipboardData(text: text));
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.copied)));
-                          }
-                        },
-                  icon: const Icon(Icons.copy),
-                  label: Text(l10n.copyButton),
+                  onPressed: text == null || _makingPdf ? null : () => _sharePdf(data.value!(widget.baby)),
+                  icon: _makingPdf
+                      ? const SizedBox.square(dimension: 16, child: CircularProgressIndicator(strokeWidth: 2))
+                      : const Icon(Icons.picture_as_pdf_outlined),
+                  label: Text(l10n.pdfButton),
                 ),
               ),
               const SizedBox(width: 8),

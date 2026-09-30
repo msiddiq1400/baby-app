@@ -1434,6 +1434,221 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get nothingOnDay => 'اس دن کچھ درج نہیں کیا گیا۔';
+
+  @override
+  String get forgotPassword => 'پاس ورڈ بھول گئے؟';
+
+  @override
+  String get resetTitle => 'نیا پاس ورڈ بنائیں';
+
+  @override
+  String get resetHelp =>
+      'اپنا ای میل لکھیں، ہم آپ کو 6 ہندسوں کا کوڈ بھیجیں گے۔';
+
+  @override
+  String get resetCodeSentHelp =>
+      'اگر اس ای میل کا اکاؤنٹ ہے تو کوڈ بھیج دیا گیا ہے۔ اسے نئے پاس ورڈ کے ساتھ لکھیں۔';
+
+  @override
+  String get sendCodeButton => 'کوڈ بھیجیں';
+
+  @override
+  String get setPasswordButton => 'نیا پاس ورڈ محفوظ کریں';
+
+  @override
+  String get newPasswordLabel => 'نیا پاس ورڈ';
+
+  @override
+  String get repeatPasswordLabel => 'نیا پاس ورڈ دوبارہ';
+
+  @override
+  String get passwordsDontMatch => 'پاس ورڈ ایک جیسے نہیں';
+
+  @override
+  String get passwordChanged => 'آپ کا پاس ورڈ بدل دیا گیا ہے۔';
+
+  @override
+  String get passwordNotChanged =>
+      'آپ سائن اِن ہیں، لیکن نیا پاس ورڈ محفوظ نہیں ہوا۔ سیٹنگز سے دوبارہ کوشش کریں۔';
+
+  @override
+  String get changePassword => 'پاس ورڈ بدلیں';
+
+  @override
+  String get illnessCold => 'نزلہ زکام';
+
+  @override
+  String get illnessFever => 'بخار';
+
+  @override
+  String get illnessCough => 'کھانسی';
+
+  @override
+  String get illnessTummy => 'پیٹ کی خرابی';
+
+  @override
+  String get illnessEar => 'کان کا انفیکشن';
+
+  @override
+  String get illnessRash => 'دانے';
+
+  @override
+  String get illnessUnnamed => 'طبیعت خراب';
+
+  @override
+  String get startIllness => 'بیماری کا ریکارڈ شروع کریں';
+
+  @override
+  String get startIllnessButton =>
+      'بچے کی طبیعت خراب ہے؟ بیماری کا ریکارڈ شروع کریں';
+
+  @override
+  String get startIllnessHelp =>
+      'اب سے علامات، بخار، دوا کی خوراکیں اور ڈاکٹر کے پاس جانا دن بہ دن ایک جگہ نظر آئیں گے، جب تک آپ بچے کو ٹھیک نہ لکھ دیں۔';
+
+  @override
+  String get editIllness => 'بیماری میں ترمیم';
+
+  @override
+  String get illnessNameLabel => 'کیا مسئلہ ہے؟ (اختیاری)';
+
+  @override
+  String get illnessStartedLabel => 'کب شروع ہوئی';
+
+  @override
+  String get recoveredLabel => 'ٹھیک ہو گیا';
+
+  @override
+  String get recoveredOnLabel => 'ٹھیک ہونے کی تاریخ';
+
+  @override
+  String get markRecovered => 'ٹھیک ہو گیا';
+
+  @override
+  String get stillUnwell => 'ابھی بھی بیمار';
+
+  @override
+  String get doctorVisit => 'ڈاکٹر کے پاس';
+
+  @override
+  String get doctorLabel => 'ڈاکٹر یا کلینک (اختیاری)';
+
+  @override
+  String get diagnosisLabel => 'ڈاکٹر نے کیا بتایا (اختیاری)';
+
+  @override
+  String get adviceLabel => 'مشورہ اور دوائیں (اختیاری)';
+
+  @override
+  String get nothingThisDay => 'اس دن کچھ درج نہیں۔';
+
+  @override
+  String illnessDay(int day) {
+    return 'دن $day';
+  }
+
+  @override
+  String illnessLasted(int days) {
+    return '$days دن';
+  }
+
+  @override
+  String illnessStartedOn(String date) {
+    return 'شروع: $date';
+  }
+
+  @override
+  String lastTemperature(String temp, String time) {
+    return 'آخری بخار: $temp، $time بجے';
+  }
+
+  @override
+  String highestTemperature(String temp) {
+    return 'سب سے زیادہ بخار: $temp';
+  }
+
+  @override
+  String dosesToday(int count) {
+    return 'آج دوا کی $count خوراکیں';
+  }
+
+  @override
+  String doctorVisitsCount(int count) {
+    return 'ڈاکٹر کے پاس $count بار';
+  }
+
+  @override
+  String get appearanceSection => 'ظاہری شکل';
+
+  @override
+  String get themeSystem => 'فون';
+
+  @override
+  String get themeLight => 'روشن';
+
+  @override
+  String get themeDark => 'گہرا';
+
+  @override
+  String get vegFirstTitle => 'سبزیوں سے شروع کریں';
+
+  @override
+  String get recipesTitle => 'بچوں کی ترکیبیں';
+
+  @override
+  String recipesSubtitle(int count) {
+    return '6 سے 12 ماہ کے لیے $count گھریلو ترکیبیں';
+  }
+
+  @override
+  String get recipesRules =>
+      'بچوں کے لیے: نمک، چینی، شہد یا اسٹاک کیوب نہیں۔ انڈا اچھی طرح پکائیں، مچھلی کا ہر کانٹا نکالیں، اور کھانا ٹھنڈا کر کے دیں۔ گھر والوں کے لیے نمک مرچ ڈالنے سے پہلے بچے کا حصہ نکال لیں۔';
+
+  @override
+  String recipesFromMonths(int months) {
+    return '$months ماہ سے';
+  }
+
+  @override
+  String get recipesNotYet => 'ابھی آپ کے بچے کے لیے نہیں';
+
+  @override
+  String recipeContains(String allergens) {
+    return 'شامل ہے: $allergens';
+  }
+
+  @override
+  String get recipeIngredients => 'اجزا';
+
+  @override
+  String get recipeSteps => 'بنانے کا طریقہ';
+
+  @override
+  String get recipeLogTry => 'کھلانے کا اندراج کریں:';
+
+  @override
+  String get recipesSource =>
+      'ٹھوس غذا شروع کرنے کے بارے میں NHS اور WHO کی رہنمائی پر مبنی۔ یہ عمومی رہنمائی ہے، طبی مشورہ نہیں؛ اگر بچے کو الرجی یا ایگزیما ہو تو ڈاکٹر سے پوچھیں۔';
+
+  @override
+  String get pdfButton => 'پی ڈی ایف';
+
+  @override
+  String get widgetLastFeed => 'آخری خوراک';
+
+  @override
+  String get widgetAsleep => 'سو رہا ہے';
+
+  @override
+  String get widgetAwake => 'جاگ رہا ہے';
+
+  @override
+  String get widgetEmpty => 'پالنا کھولنے کے لیے ٹیپ کریں';
+
+  @override
+  String widgetNextVaccine(String when, String date) {
+    return 'اگلے ٹیکے ($when): $date';
+  }
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -2870,4 +3085,219 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get nothingOnDay => 'Is din kuch darj nahi kiya gaya.';
+
+  @override
+  String get forgotPassword => 'Password bhool gaye?';
+
+  @override
+  String get resetTitle => 'Naya password banayein';
+
+  @override
+  String get resetHelp =>
+      'Apna email likhein, hum aap ko 6 hindson ka code bhejenge.';
+
+  @override
+  String get resetCodeSentHelp =>
+      'Agar is email ka account hai to code bhej diya gaya hai. Usay naye password ke saath likhein.';
+
+  @override
+  String get sendCodeButton => 'Code bhejein';
+
+  @override
+  String get setPasswordButton => 'Naya password save karein';
+
+  @override
+  String get newPasswordLabel => 'Naya password';
+
+  @override
+  String get repeatPasswordLabel => 'Naya password dobara';
+
+  @override
+  String get passwordsDontMatch => 'Passwords ek jaise nahi';
+
+  @override
+  String get passwordChanged => 'Aap ka password badal diya gaya hai.';
+
+  @override
+  String get passwordNotChanged =>
+      'Aap sign in hain, lekin naya password save nahi hua. Settings se dobara koshish karein.';
+
+  @override
+  String get changePassword => 'Password badlein';
+
+  @override
+  String get illnessCold => 'Nazla zukaam';
+
+  @override
+  String get illnessFever => 'Bukhar';
+
+  @override
+  String get illnessCough => 'Khansi';
+
+  @override
+  String get illnessTummy => 'Pait ki kharabi';
+
+  @override
+  String get illnessEar => 'Kaan ka infection';
+
+  @override
+  String get illnessRash => 'Daane';
+
+  @override
+  String get illnessUnnamed => 'Tabiyat kharab';
+
+  @override
+  String get startIllness => 'Bimari ka record shuru karein';
+
+  @override
+  String get startIllnessButton =>
+      'Bachay ki tabiyat kharab hai? Bimari ka record shuru karein';
+
+  @override
+  String get startIllnessHelp =>
+      'Ab se alamaat, bukhar, dawa ki doses aur doctor ke paas jana din ba din ek jagah nazar aayenge, jab tak aap bachay ko theek na likh dein.';
+
+  @override
+  String get editIllness => 'Bimari edit karein';
+
+  @override
+  String get illnessNameLabel => 'Kya masla hai? (optional)';
+
+  @override
+  String get illnessStartedLabel => 'Kab shuru hui';
+
+  @override
+  String get recoveredLabel => 'Theek ho gaya';
+
+  @override
+  String get recoveredOnLabel => 'Theek hone ki tareekh';
+
+  @override
+  String get markRecovered => 'Theek ho gaya';
+
+  @override
+  String get stillUnwell => 'Abhi bhi bemaar';
+
+  @override
+  String get doctorVisit => 'Doctor ke paas';
+
+  @override
+  String get doctorLabel => 'Doctor ya clinic (optional)';
+
+  @override
+  String get diagnosisLabel => 'Doctor ne kya bataya (optional)';
+
+  @override
+  String get adviceLabel => 'Mashwara aur dawaiyan (optional)';
+
+  @override
+  String get nothingThisDay => 'Is din kuch darj nahi.';
+
+  @override
+  String illnessDay(int day) {
+    return 'Din $day';
+  }
+
+  @override
+  String illnessLasted(int days) {
+    return '$days din';
+  }
+
+  @override
+  String illnessStartedOn(String date) {
+    return 'Shuru: $date';
+  }
+
+  @override
+  String lastTemperature(String temp, String time) {
+    return 'Aakhri temperature: $temp, $time';
+  }
+
+  @override
+  String highestTemperature(String temp) {
+    return 'Sab se zyada temperature: $temp';
+  }
+
+  @override
+  String dosesToday(int count) {
+    return 'Aaj dawa ki $count doses';
+  }
+
+  @override
+  String doctorVisitsCount(int count) {
+    return 'Doctor ke paas $count baar';
+  }
+
+  @override
+  String get appearanceSection => 'Appearance';
+
+  @override
+  String get themeSystem => 'Phone';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get vegFirstTitle => 'Sabziyon se shuru karein';
+
+  @override
+  String get recipesTitle => 'Bachon ki tarkeebein';
+
+  @override
+  String recipesSubtitle(int count) {
+    return '6 se 12 mahine ke liye $count gharelu tarkeebein';
+  }
+
+  @override
+  String get recipesRules =>
+      'Bachon ke liye: namak, cheeni, shehad ya stock cube nahi. Anda achhi tarah pakayein, machli ka har kaanta nikalein, aur khana thanda kar ke dein. Ghar walon ke liye namak mirch daalne se pehle bachay ka hissa nikaal lein.';
+
+  @override
+  String recipesFromMonths(int months) {
+    return '$months mahine se';
+  }
+
+  @override
+  String get recipesNotYet => 'Abhi aap ke bachay ke liye nahi';
+
+  @override
+  String recipeContains(String allergens) {
+    return 'Shamil hai: $allergens';
+  }
+
+  @override
+  String get recipeIngredients => 'Ajza';
+
+  @override
+  String get recipeSteps => 'Banane ka tareeqa';
+
+  @override
+  String get recipeLogTry => 'Khilane ka indraaj karein:';
+
+  @override
+  String get recipesSource =>
+      'Solids shuru karne ke baare mein NHS aur WHO ki rehnumai par mabni. Yeh aam rehnumai hai, medical mashwara nahi; agar bachay ko allergy ya eczema ho to doctor se poochein.';
+
+  @override
+  String get pdfButton => 'PDF';
+
+  @override
+  String get widgetLastFeed => 'Aakhri feed';
+
+  @override
+  String get widgetAsleep => 'So raha hai';
+
+  @override
+  String get widgetAwake => 'Jaag raha hai';
+
+  @override
+  String get widgetEmpty => 'Palna kholne ke liye tap karein';
+
+  @override
+  String widgetNextVaccine(String when, String date) {
+    return 'Agle teekay ($when): $date';
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:powersync/powersync.dart';
 
 import '../core/dates.dart';
+import 'illness_repository.dart';
 import 'local_db.dart';
 import 'models.dart';
 import 'solids_repository.dart';
@@ -21,6 +22,7 @@ class JournalDay {
     this.growth = const [],
     this.vaccinations = const [],
     this.milestones = const [],
+    this.visits = const [],
   });
 
   final DateTime day;
@@ -37,6 +39,8 @@ class JournalDay {
   final List<Vaccination> vaccinations;
   final List<MilestoneCheck> milestones;
 
+  final List<DoctorVisit> visits;
+
   bool get isEmpty =>
       log.feeds.isEmpty &&
       log.diapers.isEmpty &&
@@ -47,7 +51,8 @@ class JournalDay {
       foodTries.isEmpty &&
       growth.isEmpty &&
       vaccinations.isEmpty &&
-      milestones.isEmpty;
+      milestones.isEmpty &&
+      visits.isEmpty;
 }
 
 class JournalRepository {
@@ -67,6 +72,7 @@ class JournalRepository {
     'growth_measurements',
     'vaccinations',
     'milestone_checks',
+    'doctor_visits',
   ];
 
   Future<JournalDay> load(String babyId, DateTime day) async {
@@ -116,6 +122,7 @@ class JournalRepository {
       'given_on',
     );
     final milestones = await onDate('milestone_checks', 'id, milestone_id, achieved_on', 'achieved_on');
+    final visits = await inRange('doctor_visits', 'id, visited_at, doctor, diagnosis, advice', 'visited_at');
 
     return JournalDay(
       day: start,
@@ -139,6 +146,7 @@ class JournalRepository {
             achievedOn: DateTime.parse(m['achieved_on'] as String),
           ),
       ],
+      visits: visits.map(DoctorVisit.fromJson).toList(),
     );
   }
 

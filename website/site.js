@@ -34,6 +34,7 @@
     else root.dataset.theme = theme;
     store('palna-theme', theme === 'system' ? null : theme);
     paintTheme();
+    refreshShots();
   }
   function paintTheme() {
     var meta = document.querySelector('meta[name="theme-color"]');
@@ -45,7 +46,10 @@
       b.setAttribute('aria-checked', String(b.dataset.setTheme === currentTheme()));
     });
   }
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paintTheme);
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+    paintTheme();
+    refreshShots();
+  });
 
   // ── Language ───────────────────────────────────────────────────────
   var LANGS = { en: 'EN', ur: 'اردو', roman: 'Roman' };
@@ -86,11 +90,25 @@
       document.title = lang === 'en' ? title.dataset.en : t(lang, title.dataset.i18nTitle, title.dataset.en);
     }
 
-    // Screenshots in the same language (the hero's back phone shows the other script).
-    var shotLang = lang;
+    refreshShots();
+
+    document.querySelectorAll('[data-lang-label]').forEach(function (el) {
+      el.textContent = LANGS[lang];
+    });
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.setAttribute('aria-checked', String(b.dataset.setLang === lang));
+    });
+    root.classList.remove('i18n-pending');
+  }
+
+  // Screenshots in the page's language, and dark ones on a dark page
+  // (data-dark="always" shows the dark version in every theme).
+  function refreshShots() {
+    var lang = root.dataset.lang || 'en';
+    var darkSite = effectiveTheme() === 'dark';
     document.querySelectorAll('img[data-shot]').forEach(function (img) {
-      var l = img.dataset.alt === 'other' ? (lang === 'ur' ? 'en' : 'ur') : shotLang;
-      var src = 'img/' + img.dataset.shot + '_' + l + '.webp';
+      var dark = img.dataset.dark === 'always' || darkSite;
+      var src = 'img/' + img.dataset.shot + (dark ? '-dark' : '') + '_' + lang + '.webp';
       if (img.getAttribute('src') === src) return;
       img.classList.add('swapping');
       var next = new Image();
@@ -100,14 +118,6 @@
       };
       next.src = src;
     });
-
-    document.querySelectorAll('[data-lang-label]').forEach(function (el) {
-      el.textContent = LANGS[lang];
-    });
-    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
-      b.setAttribute('aria-checked', String(b.dataset.setLang === lang));
-    });
-    root.classList.remove('i18n-pending');
   }
 
   // ── Menus (language, theme, mobile nav) ────────────────────────────

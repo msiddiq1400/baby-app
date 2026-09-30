@@ -2600,6 +2600,378 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nothing was logged on this day.'**
   String get nothingOnDay;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get forgotPassword;
+
+  /// No description provided for @resetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset your password'**
+  String get resetTitle;
+
+  /// No description provided for @resetHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email and we\'ll send you a 6-digit code.'**
+  String get resetHelp;
+
+  /// No description provided for @resetCodeSentHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'If there\'s an account for this email, a code is on its way. Enter it with your new password.'**
+  String get resetCodeSentHelp;
+
+  /// No description provided for @sendCodeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Send code'**
+  String get sendCodeButton;
+
+  /// No description provided for @setPasswordButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save new password'**
+  String get setPasswordButton;
+
+  /// No description provided for @newPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get newPasswordLabel;
+
+  /// No description provided for @repeatPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat new password'**
+  String get repeatPasswordLabel;
+
+  /// No description provided for @passwordsDontMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'The passwords don\'t match'**
+  String get passwordsDontMatch;
+
+  /// No description provided for @passwordChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'Your password has been changed.'**
+  String get passwordChanged;
+
+  /// No description provided for @passwordNotChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re signed in, but the new password wasn\'t saved. Try again from Settings.'**
+  String get passwordNotChanged;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get changePassword;
+
+  /// No description provided for @illnessCold.
+  ///
+  /// In en, this message translates to:
+  /// **'Cold'**
+  String get illnessCold;
+
+  /// No description provided for @illnessFever.
+  ///
+  /// In en, this message translates to:
+  /// **'Fever'**
+  String get illnessFever;
+
+  /// No description provided for @illnessCough.
+  ///
+  /// In en, this message translates to:
+  /// **'Cough'**
+  String get illnessCough;
+
+  /// No description provided for @illnessTummy.
+  ///
+  /// In en, this message translates to:
+  /// **'Tummy bug'**
+  String get illnessTummy;
+
+  /// No description provided for @illnessEar.
+  ///
+  /// In en, this message translates to:
+  /// **'Ear infection'**
+  String get illnessEar;
+
+  /// No description provided for @illnessRash.
+  ///
+  /// In en, this message translates to:
+  /// **'Rash'**
+  String get illnessRash;
+
+  /// No description provided for @illnessUnnamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unwell'**
+  String get illnessUnnamed;
+
+  /// No description provided for @startIllness.
+  ///
+  /// In en, this message translates to:
+  /// **'Start tracking an illness'**
+  String get startIllness;
+
+  /// No description provided for @startIllnessButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Baby unwell? Start tracking an illness'**
+  String get startIllnessButton;
+
+  /// No description provided for @startIllnessHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms, temperatures, medicine doses and doctor\'s visits from now on are shown together, day by day, until you mark the baby recovered.'**
+  String get startIllnessHelp;
+
+  /// No description provided for @editIllness.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit illness'**
+  String get editIllness;
+
+  /// No description provided for @illnessNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What is it? (optional)'**
+  String get illnessNameLabel;
+
+  /// No description provided for @illnessStartedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Started'**
+  String get illnessStartedLabel;
+
+  /// No description provided for @recoveredLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovered'**
+  String get recoveredLabel;
+
+  /// No description provided for @recoveredOnLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovered on'**
+  String get recoveredOnLabel;
+
+  /// No description provided for @markRecovered.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovered'**
+  String get markRecovered;
+
+  /// No description provided for @stillUnwell.
+  ///
+  /// In en, this message translates to:
+  /// **'Still unwell'**
+  String get stillUnwell;
+
+  /// No description provided for @doctorVisit.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor\'s visit'**
+  String get doctorVisit;
+
+  /// No description provided for @doctorLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor or clinic (optional)'**
+  String get doctorLabel;
+
+  /// No description provided for @diagnosisLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What the doctor said (optional)'**
+  String get diagnosisLabel;
+
+  /// No description provided for @adviceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Advice and medicines (optional)'**
+  String get adviceLabel;
+
+  /// No description provided for @nothingThisDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing logged this day.'**
+  String get nothingThisDay;
+
+  /// No description provided for @illnessDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day}'**
+  String illnessDay(int day);
+
+  /// No description provided for @illnessLasted.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{1 day} other{{days} days}}'**
+  String illnessLasted(int days);
+
+  /// No description provided for @illnessStartedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Started {date}'**
+  String illnessStartedOn(String date);
+
+  /// No description provided for @lastTemperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Last temperature: {temp} at {time}'**
+  String lastTemperature(String temp, String time);
+
+  /// No description provided for @highestTemperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Highest temperature: {temp}'**
+  String highestTemperature(String temp);
+
+  /// No description provided for @dosesToday.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 medicine dose today} other{{count} medicine doses today}}'**
+  String dosesToday(int count);
+
+  /// No description provided for @doctorVisitsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 doctor\'s visit} other{{count} doctor\'s visits}}'**
+  String doctorVisitsCount(int count);
+
+  /// No description provided for @appearanceSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get appearanceSection;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get themeSystem;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// No description provided for @vegFirstTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with vegetables'**
+  String get vegFirstTitle;
+
+  /// No description provided for @recipesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipes for babies'**
+  String get recipesTitle;
+
+  /// No description provided for @recipesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} home-style recipes, 6 to 12 months'**
+  String recipesSubtitle(int count);
+
+  /// No description provided for @recipesRules.
+  ///
+  /// In en, this message translates to:
+  /// **'For babies: no salt, sugar, honey or stock cubes. Cook eggs until firm, take out every fish bone, and let food cool before serving. Take your baby\'s portion out before adding salt and chilli for the family.'**
+  String get recipesRules;
+
+  /// No description provided for @recipesFromMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'From {months} months'**
+  String recipesFromMonths(int months);
+
+  /// No description provided for @recipesNotYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet for your baby'**
+  String get recipesNotYet;
+
+  /// No description provided for @recipeContains.
+  ///
+  /// In en, this message translates to:
+  /// **'Contains: {allergens}'**
+  String recipeContains(String allergens);
+
+  /// No description provided for @recipeIngredients.
+  ///
+  /// In en, this message translates to:
+  /// **'You need'**
+  String get recipeIngredients;
+
+  /// No description provided for @recipeSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'How to make it'**
+  String get recipeSteps;
+
+  /// No description provided for @recipeLogTry.
+  ///
+  /// In en, this message translates to:
+  /// **'Log a try:'**
+  String get recipeLogTry;
+
+  /// No description provided for @recipesSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on NHS and WHO guidance for starting solids. A general guide, not medical advice; ask your doctor if your baby has allergies or eczema.'**
+  String get recipesSource;
+
+  /// No description provided for @pdfButton.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF'**
+  String get pdfButton;
+
+  /// No description provided for @widgetLastFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Last feed'**
+  String get widgetLastFeed;
+
+  /// No description provided for @widgetAsleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Asleep'**
+  String get widgetAsleep;
+
+  /// No description provided for @widgetAwake.
+  ///
+  /// In en, this message translates to:
+  /// **'Awake'**
+  String get widgetAwake;
+
+  /// No description provided for @widgetEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to open Palna'**
+  String get widgetEmpty;
+
+  /// No description provided for @widgetNextVaccine.
+  ///
+  /// In en, this message translates to:
+  /// **'Next vaccines ({when}): {date}'**
+  String widgetNextVaccine(String when, String date);
 }
 
 class _AppLocalizationsDelegate
