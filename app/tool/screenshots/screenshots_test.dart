@@ -11,6 +11,11 @@
 // App Store size (6.9" iPhone, 1320 x 2868), into out/iphone/:
 //
 //   flutter test tool/screenshots --update-goldens --dart-define=SHOT_DEVICE=iphone
+//
+// Google Play size (9:16, 1080 x 1920; Play rejects taller phones), into
+// out/play/:
+//
+//   flutter test tool/screenshots --update-goldens --dart-define=SHOT_DEVICE=play
 
 import 'dart:io';
 import 'dart:ui' as ui;
@@ -309,10 +314,12 @@ Future<void> _settle(WidgetTester tester) async {
   }
 }
 
-const _iphone = String.fromEnvironment('SHOT_DEVICE') == 'iphone';
+const _device = String.fromEnvironment('SHOT_DEVICE');
+const _iphone = _device == 'iphone';
+const _play = _device == 'play';
 
-/// Golden files are saved at logical size; the App Store needs the real
-/// pixels (1320 x 2868), so capture at the view's pixel ratio instead.
+/// Golden files are saved at logical size; the stores need the real pixels
+/// (1320 x 2868, 1080 x 1920), so capture at the view's pixel ratio instead.
 Future<void> _savePixels(WidgetTester tester, String path) async {
   final boundary = tester.renderObject<RenderRepaintBoundary>(find.byKey(_root));
   final bytes = await tester.runAsync(() async {
@@ -359,8 +366,12 @@ void main() {
   ]) {
     for (final MapEntry(key: name, value: (tab, screen, inner)) in shots.entries) {
       testWidgets('screenshot $name $tag', (tester) async {
-        tester.view.physicalSize = _iphone ? const Size(1320, 2868) : const Size(1080, 2316);
-        tester.view.devicePixelRatio = _iphone ? 3 : 2.75;
+        tester.view.physicalSize = _iphone
+            ? const Size(1320, 2868)
+            : _play
+                ? const Size(1080, 1920)
+                : const Size(1080, 2316);
+        tester.view.devicePixelRatio = _iphone ? 3 : (_play ? 2.625 : 2.75);
         addTearDown(tester.view.reset);
         await tester.pumpWidget(
           RepaintBoundary(
@@ -401,8 +412,8 @@ void main() {
           await tester.tap(find.text(l10n.tabMilestones));
           await _settle(tester);
         }
-        if (_iphone) {
-          await _savePixels(tester, 'tool/screenshots/out/iphone/${name}_$tag.png');
+        if (_iphone || _play) {
+          await _savePixels(tester, 'tool/screenshots/out/$_device/${name}_$tag.png');
         } else {
           await expectLater(find.byKey(_root), matchesGoldenFile('out/${name}_$tag.png'));
         }
