@@ -1274,6 +1274,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteAccountButton => 'Delete forever';
 
   @override
+  String appVersion(String version, String build) {
+    return 'Version $version (build $build)';
+  }
+
+  @override
   String get deleteAccountFailed =>
       'Couldn\'t delete your account. Check your internet connection and try again.';
 

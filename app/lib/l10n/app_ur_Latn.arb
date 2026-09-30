@@ -840,6 +840,7 @@
   "deleteAccountBody": "Is se aap ka login hamesha ke liye delete ho jayega. Jin families mein sirf aap hain, un ke bachay aur saari entries bhi delete ho jayengi. Jin families mein doosre log bhi hain, un ke paas sab kuch rahega, aur agar aap owner hain to agla member owner ban jayega. Yeh wapas nahi ho sakta.",
   "deleteAccountTypeHint": "Confirm karne ke liye DELETE likhein",
   "deleteAccountButton": "Hamesha ke liye delete karein",
+  "appVersion": "Version {version} (build {build})",
   "deleteAccountFailed": "Account delete nahi ho saka. Internet check kar ke dobara koshish karein.",
   "startFeedTimer": "Timer shuru karein",
   "lastSide": "Pichli dafa: {side} side",

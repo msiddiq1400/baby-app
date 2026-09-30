@@ -1,6 +1,12 @@
 # Codemagic builds the iPhone app on its Macs (there is no Mac here) and
-# uploads it to TestFlight. Start it by hand: Codemagic > baby-app >
-# Start new build > "iPhone to TestFlight".
+# uploads it to TestFlight, and builds the Android app for Google Play. Start
+# them by hand: Codemagic > baby-app > Start new build > "iPhone to
+# TestFlight" or "Android to Google Play".
+#
+# Versioning: the version name (1.0.0) comes from app/pubspec.yaml; raise it
+# there for each store release. The build number is set here: the store's
+# latest build + 1, or pubspec's +N if that is higher. So every upload gets a
+# new number and nothing needs bumping by hand for Codemagic builds.
 #
 # Needs, in Codemagic > Team settings:
 #   - Integrations > Developer Portal: the App Store Connect API key, named
@@ -8,7 +14,13 @@
 #   - Environment variables, group "palna_prod": SUPABASE_URL,
 #     SUPABASE_PUBLISHABLE_KEY, POWERSYNC_URL, GOOGLE_WEB_CLIENT_ID,
 #     GOOGLE_IOS_CLIENT_ID (the same values as app/env/prod.json), and
-#     CERTIFICATE_PRIVATE_KEY (the signing key in stuff/, kept secret).
+#     CERTIFICATE_PRIVATE_KEY (the signing key in stuff/, kept secret), and
+#     GCLOUD_SERVICE_ACCOUNT_CREDENTIALS (JSON key of a Google Cloud service
+#     account invited in Play Console > Users and permissions, with release
+#     rights for Palna).
+#   - Code signing identities > Android keystores: stuff/palna-upload.jks
+#     (with its passwords and alias from app/android/key.properties),
+#     reference name "palna_upload".
 workflows:
   ios-testflight:
     name: iPhone to TestFlight
@@ -27,7 +39,8 @@ workflows:
         BUNDLE_ID: com.palnacare.app
         APP_STORE_APP_ID: 6817859227
     scripts:
-      - name: Write env/prod.json
+      - &write_env
+        name: Write env/prod.json
         script: |
           mkdir -p env
           jq -n \
@@ -51,8 +64,11 @@ workflows:
       - name: Build the app
         script: |
           LATEST=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APP_ID" 2>/dev/null || echo 0)
+          PUBSPEC=$(sed -n 's/^version: .*+//p' pubspec.yaml)
+          BUILD=$(( LATEST + 1 > PUBSPEC ? LATEST + 1 : PUBSPEC ))
+          echo "Build number $BUILD"
           flutter build ipa --release \
-            --build-number=$((LATEST + 1)) \
+            --build-number=$BUILD \
             --dart-define-from-file=env/prod.json \
             --export-options-plist=/Users/builder/export_options.plist
     artifacts:
@@ -65,3 +81,49 @@ workflows:
         # (and add beta_groups) once TestFlight > Test Information is filled in
         # and there is an external group with a public link.
         submit_to_testflight: false
+
+  android-play:
+    name: Android to Google Play
+    instance_type: linux_x2
+    max_build_duration: 60
+    working_directory: app
+    environment:
+      flutter: 3.44.9
+      groups:
+        - palna_prod
+      android_signing:
+        - palna_upload
+      vars:
+        PACKAGE_NAME: com.palnacare.app
+    scripts:
+      - *write_env
+      - name: Signing key
+        # android/app/build.gradle.kts signs release builds with this.
+        script: |
+          cat > android/key.properties <<EOF
+          storeFile=$CM_KEYSTORE_PATH
+          storePassword=$CM_KEYSTORE_PASSWORD
+          keyAlias=$CM_KEY_ALIAS
+          keyPassword=$CM_KEY_PASSWORD
+          EOF
+      - name: Get packages
+        script: flutter pub get
+      - name: Build the app bundle
+        script: |
+          LATEST=$(google-play get-latest-build-number --package-name "$PACKAGE_NAME" 2>/dev/null || echo 0)
+          PUBSPEC=$(sed -n 's/^version: .*+//p' pubspec.yaml)
+          BUILD=$(( LATEST + 1 > PUBSPEC ? LATEST + 1 : PUBSPEC ))
+          echo "Build number $BUILD"
+          flutter build appbundle --release \
+            --build-number=$BUILD \
+            --dart-define-from-file=env/prod.json
+    artifacts:
+      - build/app/outputs/bundle/release/*.aab
+    publishing:
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        # Play only accepts drafts until the app's first release is out;
+        # roll the draft out in Play Console. Set false after that so internal
+        # testers get each build straight away.
+        submit_as_draft: true

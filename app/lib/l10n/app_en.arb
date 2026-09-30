@@ -840,6 +840,17 @@
   "deleteAccountBody": "This permanently deletes your login. Babies and entries in families that only you belong to are deleted too. In families you share, the other members keep everything, and if you're the owner, the next member becomes the owner. This can't be undone.",
   "deleteAccountTypeHint": "Type DELETE to confirm",
   "deleteAccountButton": "Delete forever",
+  "appVersion": "Version {version} (build {build})",
+  "@appVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "build": {
+        "type": "String"
+      }
+    }
+  },
   "deleteAccountFailed": "Couldn't delete your account. Check your internet connection and try again.",
   "startFeedTimer": "Start a timer",
   "lastSide": "Last feed: {side} side",

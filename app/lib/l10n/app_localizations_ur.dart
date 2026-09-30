@@ -1244,6 +1244,11 @@ class AppLocalizationsUr extends AppLocalizations {
   String get deleteAccountButton => 'ہمیشہ کے لیے حذف کریں';
 
   @override
+  String appVersion(String version, String build) {
+    return 'ورژن $version (بلڈ $build)';
+  }
+
+  @override
   String get deleteAccountFailed =>
       'اکاؤنٹ حذف نہیں ہو سکا۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔';
 
@@ -2896,6 +2901,11 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get deleteAccountButton => 'Hamesha ke liye delete karein';
+
+  @override
+  String appVersion(String version, String build) {
+    return 'Version $version (build $build)';
+  }
 
   @override
   String get deleteAccountFailed =>

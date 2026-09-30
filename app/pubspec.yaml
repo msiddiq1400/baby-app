@@ -1,6 +1,10 @@
 name: baby_app
 description: "A new Flutter project."
 publish_to: 'none'
+# name+build. Raise the name (1.0.0 -> 1.0.1 / 1.1.0) for each store release;
+# both stores reject a new release with a name that is already live. Codemagic
+# sets the build number itself (last store build + 1, or this one if higher),
+# so only raise +N by hand for an .aab uploaded from this PC.
 version: 1.0.0+1
 
 environment:
@@ -20,6 +24,7 @@ dependencies:
   google_sign_in: ^7.2.0
   home_widget: ^0.10.0
   intl: ^0.20.2
+  package_info_plus: ^10.2.1
   path_provider: ^2.1.6
   pdf: ^3.13.1
   powersync: ^2.4.0

@@ -2265,6 +2265,12 @@ abstract class AppLocalizations {
   /// **'Delete forever'**
   String get deleteAccountButton;
 
+  /// No description provided for @appVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version} (build {build})'**
+  String appVersion(String version, String build);
+
   /// No description provided for @deleteAccountFailed.
   ///
   /// In en, this message translates to:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../core/baby_age.dart';
@@ -12,6 +13,16 @@ import '../../core/providers.dart';
 import 'change_password_dialog.dart';
 import 'delete_account_dialog.dart';
 import 'join_family_dialog.dart';
+
+/// Version and build number of the installed app, so a tester can tell which
+/// build they have. Null where the platform can't say (tests).
+final _packageInfoProvider = FutureProvider<PackageInfo?>((ref) async {
+  try {
+    return await PackageInfo.fromPlatform();
+  } catch (_) {
+    return null;
+  }
+});
 
 /// Babies, family members and invites.
 class SettingsScreen extends ConsumerWidget {
@@ -89,6 +100,15 @@ class SettingsScreen extends ConsumerWidget {
             title: Text(l10n.deleteAccount, style: TextStyle(color: theme.colorScheme.error)),
             onTap: () => showDeleteAccountDialog(context),
           ),
+          if (ref.watch(_packageInfoProvider).value case final info?)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+              child: Text(
+                l10n.appVersion(info.version, info.buildNumber),
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+              ),
+            ),
         ],
       ),
     );
