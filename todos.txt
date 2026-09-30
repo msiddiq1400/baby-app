@@ -4,20 +4,26 @@ BABY APP: THINGS ONLY YOU CAN DO
 
 --- WHEN YOU WAKE UP -------------------------------------------------
 
-[ ] M1. !! BEFORE opening the new app: PowerSync dashboard > Sync Streams >
+[x] M1. !! BEFORE opening the new app: PowerSync dashboard > Sync Streams >
         replace everything with d:\baby-app\powersync\sync-config.yaml >
         Validate > Deploy. (Two new tables tonight: illnesses and
         doctor_visits. Without this, illnesses you add upload but then
         vanish from the phone.)
-[ ] M2. Supabase > Authentication > Emails > "Reset Password": subject
+[x] M2. Supabase > Authentication > Emails > "Reset Password": subject
         "Reset your Palna password", body = d:\baby-app\supabase\templates\recovery.html
         (so "Forgot password?" emails a 6-digit code, not a link).
-[ ] M3. Re-deploy the website (Cloudflare > Workers & Pages > your Worker >
+[x] M3. Re-deploy the website (Cloudflare > Workers & Pages > your Worker >
         New deployment > drag in d:\baby-app\website). New: illness and
         dark-mode slides, a "small things" section, screenshots that turn
         dark with the site's dark theme, and privacy/delete pages updated
         for illnesses, the widget and 30-day encrypted backups.
         (The backups line is only true once you switch backups on, item 18.)
+[ ] M5. Website auto-deploy: Cloudflare > your Worker > Settings > Build >
+        connect GitHub repo baby-app, branch main, build command empty,
+        deploy command "npx wrangler deploy". Uses wrangler.jsonc in the
+        repo root, so it only works once that file is committed and pushed.
+        After that, every push to main updates palnacare.com, and there's
+        no more dragging the folder in.
 [ ] M4. Test what was built overnight (list under "WHAT CHANGED ON 30 SEP
         NIGHT" at the bottom), then tell Claude to commit.
 
