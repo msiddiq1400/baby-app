@@ -2972,6 +2972,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next vaccines ({when}): {date}'**
   String widgetNextVaccine(String when, String date);
+
+  /// No description provided for @continueWithApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get continueWithApple;
 }
 
 class _AppLocalizationsDelegate

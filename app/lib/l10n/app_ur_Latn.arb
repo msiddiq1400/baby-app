@@ -957,5 +957,6 @@
   "widgetAsleep": "So raha hai",
   "widgetAwake": "Jaag raha hai",
   "widgetEmpty": "Palna kholne ke liye tap karein",
-  "widgetNextVaccine": "Agle teekay ({when}): {date}"
+  "widgetNextVaccine": "Agle teekay ({when}): {date}",
+  "continueWithApple": "Apple ke saath jaari rakhein"
 }

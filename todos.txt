@@ -184,10 +184,18 @@ BABY APP: THINGS ONLY YOU CAN DO
 [ ] 19. Google Auth Platform > Audience: switch from "Testing" to
         "In production" before launch (otherwise only test users can use
         Google sign-in).
-[ ] 20. Release signing: when Claude sets up release builds, add the
-        release key's SHA-1 and the Play App Signing SHA-1 to the Google
-        Android OAuth client (Google sign-in fails in store builds
-        without it).
+[~] 20. Android release signing: SET UP (1 Oct). Upload key
+        stuff/palna-upload.jks + android/key.properties (both git-ignored;
+        password in stuff/palna-upload-key.properties). BACK UP all three in
+        your password manager: without them you can't update the app on Play.
+        Upload key SHA-1: 3E:C5:56:74:13:79:64:56:7D:6C:B2:0C:3C:5B:05:05:F6:4C:6E:A8
+        - [x] Google Cloud Android client "Palna Android Release" created
+          (1 Oct) with that SHA-1 (id 254198007439-0jvj...o29l). Nothing to
+          put in the app: Google matches it by package name + SHA-1.
+        - After the first Play upload: Play Console > Test and release >
+          App integrity > App signing key SHA-1 > one more Android client.
+        Builds: stuff/Palna-1.0.0.apk (share with Android testers) and
+        app/build/app/outputs/bundle/release/app-release.aab (for Play).
 
 --- NOT BUILT YET (from the plan) --------------------------------------
 
@@ -339,6 +347,25 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
           law" clause yet: add the country where Toolbox Services is (or will
           be) registered once that's decided (item 11).
 [ ] 26. Play Store health-app declaration and Data safety form.
+[ ] 45. Sign in with Apple: BUILT (1 Oct), iPhone only (required by Apple
+        because Palna offers Google sign-in). Supabase Apple provider
+        enabled with Client ID com.palnacare.app (1 Oct; no secret key, so
+        nothing expires every 6 months). Test on the next iPhone build. Apple shares the name only on the first sign-in; the
+        app saves it as the family display name.
+        Later (Apple asks for it, rarely checked): when an Apple user
+        deletes their account, also revoke their Apple token. Needs a
+        "Sign in with Apple" key from developer.apple.com and a small
+        server function; Claude can build it.
+[ ] 46. App Store listing: DRAFTED in store/app-store.md (name, subtitle,
+        description, keywords, review notes, App Privacy answers, age
+        rating). Screenshots at App Store size: app/tool/screenshots/out/
+        iphone/. Still: create the reviewer account review@palnacare.com
+        in Supabase (steps in that file) with a sample baby.
+[x] 47. Launch prep (1 Oct): version 1.0.0; iPhone only (no iPad
+        screenshots needed), portrait; iOS 15 minimum; reminders show while
+        the app is open on iPhone; a proper one-colour Android notification
+        icon; privacy policy mentions Sign in with Apple; terms now say the
+        laws of Pakistan apply.
 
 
 ====================================================================

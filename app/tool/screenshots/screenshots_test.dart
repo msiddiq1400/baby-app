@@ -7,6 +7,13 @@
 // Output: tool/screenshots/out/<screen>_<locale>.png at the test phone's
 // resolution (1080 x 2316). Not part of the normal test run. The data is a
 // believable day for a 5-month-old.
+//
+// App Store size (6.9" iPhone, 1320 x 2868), into out/iphone/:
+//
+//   flutter test tool/screenshots --update-goldens --dart-define=SHOT_DEVICE=iphone
+
+import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:baby_app/core/providers.dart';
 import 'package:baby_app/data/baby_repository.dart';
@@ -32,6 +39,7 @@ import 'package:baby_app/features/reports/reports_screen.dart';
 import 'package:baby_app/features/solids/solids_screen.dart';
 import 'package:baby_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -301,6 +309,22 @@ Future<void> _settle(WidgetTester tester) async {
   }
 }
 
+const _iphone = String.fromEnvironment('SHOT_DEVICE') == 'iphone';
+
+/// Golden files are saved at logical size; the App Store needs the real
+/// pixels (1320 x 2868), so capture at the view's pixel ratio instead.
+Future<void> _savePixels(WidgetTester tester, String path) async {
+  final boundary = tester.renderObject<RenderRepaintBoundary>(find.byKey(_root));
+  final bytes = await tester.runAsync(() async {
+    final image = await boundary.toImage(pixelRatio: tester.view.devicePixelRatio);
+    final data = await image.toByteData(format: ui.ImageByteFormat.png);
+    return data!.buffer.asUint8List();
+  });
+  File(path)
+    ..createSync(recursive: true)
+    ..writeAsBytesSync(bytes!);
+}
+
 void main() {
   setUpAll(() async {
     await initializeDateFormatting();
@@ -335,8 +359,8 @@ void main() {
   ]) {
     for (final MapEntry(key: name, value: (tab, screen, inner)) in shots.entries) {
       testWidgets('screenshot $name $tag', (tester) async {
-        tester.view.physicalSize = const Size(1080, 2316);
-        tester.view.devicePixelRatio = 2.75;
+        tester.view.physicalSize = _iphone ? const Size(1320, 2868) : const Size(1080, 2316);
+        tester.view.devicePixelRatio = _iphone ? 3 : 2.75;
         addTearDown(tester.view.reset);
         await tester.pumpWidget(
           RepaintBoundary(
@@ -377,7 +401,11 @@ void main() {
           await tester.tap(find.text(l10n.tabMilestones));
           await _settle(tester);
         }
-        await expectLater(find.byKey(_root), matchesGoldenFile('out/${name}_$tag.png'));
+        if (_iphone) {
+          await _savePixels(tester, 'tool/screenshots/out/iphone/${name}_$tag.png');
+        } else {
+          await expectLater(find.byKey(_root), matchesGoldenFile('out/${name}_$tag.png'));
+        }
       });
     }
   }

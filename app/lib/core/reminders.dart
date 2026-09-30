@@ -33,7 +33,8 @@ abstract final class Reminders {
     }
     await _plugin.initialize(
       settings: const InitializationSettings(
-        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+        // One-colour moon (res/drawable/ic_notification.xml, kept by res/raw/keep.xml).
+        android: AndroidInitializationSettings('@drawable/ic_notification'),
         // Permission is asked for explicitly (see requestPermission), not at startup.
         iOS: DarwinInitializationSettings(
           requestAlertPermission: false,

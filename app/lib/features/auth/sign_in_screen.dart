@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/providers.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/language_menu.dart';
+import 'apple_auth.dart';
 import 'google_auth.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
@@ -70,10 +72,14 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     context.push(Uri(path: '/verify', queryParameters: {'email': email}).toString());
   }
 
-  Future<void> _signInWithGoogle() async {
+  Future<void> _signInWithGoogle() => _signInWith(GoogleAuth.signIn);
+
+  Future<void> _signInWithApple() => _signInWith(AppleAuth.signIn);
+
+  Future<void> _signInWith(Future<bool> Function(SupabaseClient db) signIn) async {
     setState(() => _busy = true);
     try {
-      await GoogleAuth.signIn(ref.read(supabaseProvider));
+      await signIn(ref.read(supabaseProvider));
       // Signed in (or picker closed); the router handles the rest.
     } on AuthException catch (e) {
       _showMessage(e.message);
@@ -161,7 +167,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     onPressed: _busy ? null : () => setState(() => _isSignUp = !_isSignUp),
                     child: Text(_isSignUp ? l10n.switchToSignIn : l10n.switchToSignUp),
                   ),
-                  if (GoogleAuth.isConfigured) ...[
+                  if (GoogleAuth.isConfigured || AppleAuth.isAvailable) ...[
                     const SizedBox(height: 16),
                     Row(
                       children: [
@@ -174,13 +180,26 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    // Same button for sign-in and sign-up: a new Google user
-                    // gets an account automatically, already confirmed.
-                    OutlinedButton.icon(
-                      onPressed: _busy ? null : _signInWithGoogle,
-                      icon: const Icon(Icons.account_circle_outlined),
-                      label: Text(l10n.continueWithGoogle),
-                    ),
+                    // Same buttons for sign-in and sign-up: a new Apple or
+                    // Google user gets an account automatically, already confirmed.
+                    if (AppleAuth.isAvailable) ...[
+                      SignInWithAppleButton(
+                        onPressed: _busy ? null : _signInWithApple,
+                        text: l10n.continueWithApple,
+                        height: 48,
+                        borderRadius: const BorderRadius.all(Radius.circular(24)),
+                        style: theme.brightness == Brightness.dark
+                            ? SignInWithAppleButtonStyle.white
+                            : SignInWithAppleButtonStyle.black,
+                      ),
+                      const SizedBox(height: 12),
+                    ],
+                    if (GoogleAuth.isConfigured)
+                      OutlinedButton.icon(
+                        onPressed: _busy ? null : _signInWithGoogle,
+                        icon: const Icon(Icons.account_circle_outlined),
+                        label: Text(l10n.continueWithGoogle),
+                      ),
                   ],
                 ],
               ),

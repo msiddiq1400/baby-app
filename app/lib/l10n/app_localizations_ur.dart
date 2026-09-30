@@ -1649,6 +1649,9 @@ class AppLocalizationsUr extends AppLocalizations {
   String widgetNextVaccine(String when, String date) {
     return 'اگلے ٹیکے ($when): $date';
   }
+
+  @override
+  String get continueWithApple => 'ایپل کے ساتھ جاری رکھیں';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -3300,4 +3303,7 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String widgetNextVaccine(String when, String date) {
     return 'Agle teekay ($when): $date';
   }
+
+  @override
+  String get continueWithApple => 'Apple ke saath jaari rakhein';
 }

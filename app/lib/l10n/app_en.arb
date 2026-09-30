@@ -1092,5 +1092,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "continueWithApple": "Continue with Apple"
 }

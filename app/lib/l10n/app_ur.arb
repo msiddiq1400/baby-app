@@ -957,5 +957,6 @@
   "widgetAsleep": "سو رہا ہے",
   "widgetAwake": "جاگ رہا ہے",
   "widgetEmpty": "پالنا کھولنے کے لیے ٹیپ کریں",
-  "widgetNextVaccine": "اگلے ٹیکے ({when}): {date}"
+  "widgetNextVaccine": "اگلے ٹیکے ({when}): {date}",
+  "continueWithApple": "ایپل کے ساتھ جاری رکھیں"
 }

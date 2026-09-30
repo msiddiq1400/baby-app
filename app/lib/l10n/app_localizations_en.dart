@@ -1696,4 +1696,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String widgetNextVaccine(String when, String date) {
     return 'Next vaccines ($when): $date';
   }
+
+  @override
+  String get continueWithApple => 'Continue with Apple';
 }

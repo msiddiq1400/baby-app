@@ -36,6 +36,7 @@ import 'package:baby_app/features/settings/settings_screen.dart';
 import 'package:baby_app/l10n/app_localizations.dart';
 import 'package:baby_app/features/solids/recipes_screen.dart';
 import 'package:baby_app/features/solids/solids_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -425,6 +426,29 @@ void main() {
       });
     }
   }
+
+  for (final (locale, label) in const [
+    (Locale('en'), 'Continue with Apple'),
+    (Locale('ur'), 'ایپل کے ساتھ جاری رکھیں'),
+  ]) {
+    for (final brightness in Brightness.values) {
+      testWidgets('Sign in shows Sign in with Apple on iPhone ($locale, ${brightness.name})', (tester) async {
+        debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+        try {
+          await pumpScreen(tester, const SignInScreen(), locale, brightness: brightness);
+          expect(tester.takeException(), isNull);
+          expect(find.text(label), findsOneWidget);
+        } finally {
+          debugDefaultTargetPlatformOverride = null;
+        }
+      });
+    }
+  }
+
+  testWidgets('Sign in has no Apple button on Android', (tester) async {
+    await pumpScreen(tester, const SignInScreen(), const Locale('en'));
+    expect(find.text('Continue with Apple'), findsNothing);
+  });
 
   for (final locale in const [
     Locale('en'),
