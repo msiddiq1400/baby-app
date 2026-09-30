@@ -91,9 +91,30 @@ BABY APP: THINGS ONLY YOU CAN DO
 
 --- ACCOUNTS / SERVICES ----------------------------------------------
 
+[ ] 10a. Register the company: "Toolbox Services (SMC-Private) Limited"
+        (decided 30 Sep; the SECP name search showed nothing named
+        "Toolbox"; closest is "Tools Services (Pvt) Ltd").
+        Backup names: Toolbox Digital Services, Nestbyte Technologies.
+        SECP eServices: name reservation, then SMC incorporation. You are
+        the only member and director; a nominee and an alternate nominee
+        (CNICs and consent forms); registered office (home is fine);
+        capital e.g. PKR 100,000; business: software development, IT
+        services, mobile apps and web services. Then check the tax number
+        with the FBR, open a company bank account, and optionally register
+        with PSEB. One company publishes Palna and API Toolbox.
+        Logo: option 3, "Braces" (chosen 30 Sep):
+        stuff/company-logo-options/3-braces-*. Already on the
+        toolbox.services site (d:\work\toolbox, not committed yet).
 [ ] 11. D-U-N-S number (free, dnb.com). Needs a registered business
         (e.g. SECP). Takes 1-4 weeks.
 [ ] 12. Apple Developer Program as an organization ($99/yr).
+        [x] Enrolled as an INDIVIDUAL for now (approved 1 Oct 2026, renews
+            1 Oct 2027), Team ID W7AS897FPN, so family can test on
+            TestFlight. Once the company has its D-U-N-S number, ask Apple
+            Developer Support to migrate it to an organization.
+        [x] App ID com.palnacare.app registered (Sign In with Apple, Push).
+        [x] App Store Connect app created (1 Oct): "Palna - Mother & Baby
+            Care", SKU palna-ios, App Store ID (Apple ID) 6817859227.
 [ ] 13. Google Play Console as an organization ($25 once).
 [ ] 14. Firebase project (console.firebase.google.com), add it to the
         existing "Baby App" Google Cloud project. Needed later for:
@@ -104,10 +125,25 @@ BABY APP: THINGS ONLY YOU CAN DO
         and give them to Claude.
         NOTE: today's reminders (vaccines, medicines, milk) are local
         notifications and do NOT need Firebase.
-[ ] 15. Codemagic account (sign in with GitHub) to build the iPhone app,
-        since there is no Mac. Needs item 12 first.
-[ ] 16. For iPhone Google sign-in: Google Cloud > Clients > create an iOS
-        client (bundle id from item 9), send Claude the iOS client id.
+[~] 15. Codemagic (iPhone builds, no Mac needed): account created and
+        repo connected (1 Oct). Build file: codemagic.yaml (workflow
+        "iPhone to TestFlight"). Still to do in Codemagic:
+        - Team/Personal settings > Integrations > Developer Portal: add the
+          App Store Connect API key (Issuer ID, Key ID, .p8), name it
+          exactly "Palna App Store Connect".
+        - App > Environment variables, group "palna_prod" (all Secret):
+          SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, POWERSYNC_URL,
+          GOOGLE_WEB_CLIENT_ID, GOOGLE_IOS_CLIENT_ID (from
+          app/env/prod.json) and CERTIFICATE_PRIVATE_KEY (the whole file
+          stuff/codemagic_cert_key, git-ignored; keep a copy in your
+          password manager).
+        - Commit + push codemagic.yaml, then "Switch to YAML configuration"
+          and start the build.
+[x] 16. iPhone Google sign-in: iOS client "Palna iOS" created (1 Oct), id
+        254198007439-tqm4...iupc; added to app/env/prod.json
+        (GOOGLE_IOS_CLIENT_ID) and to ios/Runner/Info.plist (URL scheme).
+        Supabase Google provider: iOS client id added after the web one,
+        "Skip nonce checks" on (1 Oct). Test once the iPhone build exists.
 [x] 17. Domain palnacare.com bought at Namecheap (29 Sep 2026). DNS now runs
         on Cloudflare (active). Delete the 8 old Namecheap records in
         Cloudflare > DNS if not done yet.

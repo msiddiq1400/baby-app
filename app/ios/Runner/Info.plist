@@ -14,10 +14,21 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<!-- Google sign-in returns to the app on this scheme: the iOS client id
+	     ("Palna iOS" in Google Cloud), reversed. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.254198007439-tqm4tehqqaupdefn27pduphvpsi6iupc</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleName</key>
-	<string>baby_app</string>
+	<string>Palna</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -26,6 +37,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<!-- Only standard HTTPS encryption, so TestFlight doesn't ask the export
+	     compliance question on every build. -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>
