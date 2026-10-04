@@ -4,7 +4,7 @@ BABY APP: THINGS ONLY YOU CAN DO
 
 --- WHEN YOU WAKE UP (1 OCT NIGHT) -----------------------------------
 
-[ ] N1. !! FIRST, before running the new app build: apply the database
+[x] N1. !! FIRST, before running the new app build: apply the database
         change (baby's country + vaccines by name + 5 new schedules):
           cd d:\baby-app
           npx supabase db push --dry-run     (should list 20261001000001_countries)
@@ -13,11 +13,11 @@ BABY APP: THINGS ONLY YOU CAN DO
         new babies or vaccines (they wait in the queue, nothing is lost).
         The same push also adds monthly photos (20261001000002_photos: the
         photos table, the private "photos" storage bucket and its rules).
-[ ] N1b. !! PowerSync dashboard > Sync Streams > replace everything with
+[x] N1b. !! PowerSync dashboard > Sync Streams > replace everything with
         d:\baby-app\powersync\sync-config.yaml > Validate > Deploy (new
         table: photos). Without it, photos upload but then vanish from the
         phone, and family members never see them.
-[ ] N2. Test on the phone (list under "WHAT CHANGED ON 1 OCT NIGHT"), then
+[x] N2. Test on the phone (list under "WHAT CHANGED ON 1 OCT NIGHT"), then
         tell Claude to commit, or commit yourself.
 [ ] N3. Delete entries for good after 30 days (item 27a): Supabase > SQL
         Editor > paste d:\baby-app\supabase\snippets\purge_deleted_entries.sql
