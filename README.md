@@ -77,7 +77,15 @@ ship an app update pointing at the new URLs.
 ## Content sources
 
 - Growth charts: WHO Child Growth Standards (via the CDC data files).
-- Vaccines: Pakistan EPI schedule (marked for pediatrician review).
+- Vaccines: each baby has a country (`babies.country_code`, picked when adding the baby); its
+  schedule comes from `vaccine_schedule` (Pakistan EPI, UK, US, Canada, UAE, Saudi Arabia; all marked
+  unverified until a clinician reviews them). New countries are just rows in that table, synced to
+  phones without an app update. Any country can also record vaccines by name
+  (`vaccine_code = 'OTHER'`). Emergency numbers per country: `app/lib/core/emergency.dart`.
+- Monthly photos: rows in `photos` (one per baby per month of age, enforced by a unique index;
+  the free limit), files in the private Storage bucket `photos` at `<family_id>/<photo_id>.jpg`.
+  PowerSync's attachment queue (`app/lib/data/photo_repository.dart`, started in `main.dart`)
+  keeps them on the phone, uploads offline-made photos later and downloads family members' ones.
 - Solids and recipes: NHS weaning guidance and WHO infant feeding guidance.
 - Typical ranges in Reports: National Sleep Foundation (sleep under 4 months), American Academy
   of Sleep Medicine (4 months+), NHS (newborn feeds, wet and dirty diapers).

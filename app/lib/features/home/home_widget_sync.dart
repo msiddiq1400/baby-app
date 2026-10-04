@@ -88,7 +88,7 @@ final homeWidgetSyncProvider = FutureProvider<void>((ref) async {
   final now = DateTime.now();
   var values = widgetValues(l10n: l10n, now: now);
   if (baby != null) {
-    final schedule = await ref.watch(vaccineScheduleProvider.future);
+    final schedule = await ref.watch(vaccineScheduleProvider(baby.countryCode).future);
     final given = await ref.watch(vaccinationsProvider(baby.id).future);
     final next = planVisits(baby.birthDate, schedule, given)
         .where((v) => v.status(now) != VisitStatus.done && v.dueDate.difference(now).inDays <= 30)

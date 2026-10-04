@@ -31,7 +31,7 @@ class GlanceCard extends ConsumerWidget {
 
     final feeds = ref.watch(recentFeedsProvider(baby.id)).value ?? const [];
     final sleeps = ref.watch(recentSleepsProvider(baby.id)).value ?? const [];
-    final schedule = ref.watch(vaccineScheduleProvider).value ?? const [];
+    final schedule = ref.watch(vaccineScheduleProvider(baby.countryCode)).value ?? const [];
     final given = ref.watch(vaccinationsProvider(baby.id)).value ?? const [];
     final medications = ref.watch(medicationsProvider(baby.id)).value ?? const [];
     final doses = ref.watch(recentDosesProvider(baby.id)).value ?? const [];

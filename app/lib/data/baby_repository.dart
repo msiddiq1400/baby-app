@@ -23,6 +23,7 @@ class BabyRepository {
   Future<String> addBaby({
     required String name,
     required DateTime birthDate,
+    required String countryCode,
     String? familyId,
     String? sex,
     int? birthWeightG,
@@ -40,6 +41,7 @@ class BabyRepository {
         'birth_weight_g': birthWeightG,
         'birth_length_mm': birthLengthMm,
         'birth_head_mm': birthHeadMm,
+        'country_code': countryCode,
         'created_at': utcTimestamp(DateTime.now()),
       });
     });
@@ -49,6 +51,7 @@ class BabyRepository {
     String id, {
     required String name,
     required DateTime birthDate,
+    required String countryCode,
     String? sex,
     int? birthWeightG,
     int? birthLengthMm,
@@ -61,6 +64,7 @@ class BabyRepository {
       'birth_weight_g': birthWeightG,
       'birth_length_mm': birthLengthMm,
       'birth_head_mm': birthHeadMm,
+      'country_code': countryCode,
     });
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/weight_velocity.dart';
 import '../../core/who_growth.dart';
 import '../../data/baby_repository.dart';
 import '../../data/growth_repository.dart';
@@ -11,6 +12,7 @@ import 'growth_chart.dart';
 import 'growth_points.dart';
 import 'growth_sheet.dart';
 import 'milestones_view.dart';
+import 'photos_view.dart';
 
 class GrowthScreen extends ConsumerStatefulWidget {
   const GrowthScreen({super.key, required this.baby});
@@ -23,7 +25,7 @@ class GrowthScreen extends ConsumerStatefulWidget {
 
 class _GrowthScreenState extends ConsumerState<GrowthScreen> with SingleTickerProviderStateMixin {
   var _metric = GrowthMetric.weight;
-  late final _tabs = TabController(length: 2, vsync: this)..addListener(() => setState(() {}));
+  late final _tabs = TabController(length: 3, vsync: this)..addListener(() => setState(() {}));
 
   @override
   void dispose() {
@@ -42,7 +44,10 @@ class _GrowthScreenState extends ConsumerState<GrowthScreen> with SingleTickerPr
       appBar: AppBar(
         title: Text(l10n.growthTitle),
         actions: const [LanguageMenu(showSignOut: true)],
-        bottom: TabBar(controller: _tabs, tabs: [Tab(text: l10n.tabCharts), Tab(text: l10n.tabMilestones)]),
+        bottom: TabBar(
+          controller: _tabs,
+          tabs: [Tab(text: l10n.tabCharts), Tab(text: l10n.tabMilestones), Tab(text: l10n.tabPhotos)],
+        ),
       ),
       // Adding measurements belongs to the charts tab only.
       floatingActionButton: _tabs.index == 0
@@ -77,6 +82,7 @@ class _GrowthScreenState extends ConsumerState<GrowthScreen> with SingleTickerPr
             },
           ),
           MilestonesView(baby: baby),
+          PhotosView(baby: baby),
         ],
       ),
     );
@@ -122,6 +128,7 @@ class _GrowthBody extends ConsumerWidget {
         const SizedBox(height: 12),
         if (baby.sex == null) _ChooseSex(baby: baby),
         _LatestCard(baby: baby, who: who, metric: metric, points: points),
+        if (metric == GrowthMetric.weight) _WeightGainCard(baby: baby, measurements: measurements),
         const SizedBox(height: 8),
         GrowthChart(who: who, sex: baby.sex, metric: metric, points: points, ageNowMonths: ageNow),
         const SizedBox(height: 8),
@@ -152,6 +159,49 @@ class _GrowthBody extends ConsumerWidget {
 }
 
 /// Latest value, its WHO percentile, and the change since the one before.
+/// Weight gained over about the last month against the WHO velocity
+/// standard; hidden until there are two weights 3 to 6 weeks apart.
+class _WeightGainCard extends ConsumerWidget {
+  const _WeightGainCard({required this.baby, required this.measurements});
+
+  final Baby baby;
+  final List<GrowthMeasurement> measurements;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final check = ref.watch(weightVelocityProvider).value?.check(baby, measurements);
+    if (check == null) return const SizedBox.shrink();
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final (note, color) = switch (check.band) {
+      GainBand.slow => (l10n.weightGainSlow, theme.colorScheme.tertiaryContainer),
+      GainBand.fast => (l10n.weightGainFast, null),
+      GainBand.usual => (l10n.weightGainUsual, null),
+    };
+
+    return Card(
+      color: color,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.weightGainTitle, style: theme.textTheme.titleMedium),
+            const SizedBox(height: 4),
+            Text(l10n.weightGainSummary(check.gainPerMonthG.toString(), check.daysApart)),
+            Text(
+              l10n.weightGainRange(check.p5.toString(), check.p95.toString(), check.p50.toString()),
+              style: theme.textTheme.bodySmall,
+            ),
+            const SizedBox(height: 8),
+            Text(note),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _LatestCard extends StatelessWidget {
   const _LatestCard({required this.baby, required this.who, required this.metric, required this.points});
 

@@ -656,7 +656,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get storageGuide =>
-      'تازہ پمپ کیا ہوا دودھ (CDC کی ہدایات):\n• کمرہ، 25°C یا اس سے کم: 4 گھنٹے تک\n• برف کے پیک والا کولر بیگ: 24 گھنٹے تک\n• فریج: 4 دن تک\n• فریزر: 6 ماہ کے اندر بہتر، 12 ماہ تک\n\nپگھلا ہوا دودھ: فریج میں 24 گھنٹے کے اندر، یا گرم کرنے کے بعد 2 گھنٹے کے اندر استعمال کریں۔ پگھلا ہوا دودھ کبھی دوبارہ فریز نہ کریں۔\nپلانے کے بعد بچا ہوا دودھ: 2 گھنٹے کے اندر استعمال کریں، پھر ضائع کر دیں۔\n\nپاکستان کی گرمیوں میں کمرے اکثر 25°C سے زیادہ گرم ہوتے ہیں، اس لیے پمپ کرنے کے فوراً بعد دودھ فریج یا برف والے کولر میں رکھیں۔';
+      'تازہ پمپ کیا ہوا دودھ (CDC کی ہدایات):\n• کمرہ، 25°C یا اس سے کم: 4 گھنٹے تک\n• برف کے پیک والا کولر بیگ: 24 گھنٹے تک\n• فریج: 4 دن تک\n• فریزر: 6 ماہ کے اندر بہتر، 12 ماہ تک\n\nپگھلا ہوا دودھ: فریج میں 24 گھنٹے کے اندر، یا گرم کرنے کے بعد 2 گھنٹے کے اندر استعمال کریں۔ پگھلا ہوا دودھ کبھی دوبارہ فریز نہ کریں۔\nپلانے کے بعد بچا ہوا دودھ: 2 گھنٹے کے اندر استعمال کریں، پھر ضائع کر دیں۔\n\nگرمیوں میں کمرے اکثر 25°C سے زیادہ گرم ہوتے ہیں، اس لیے پمپ کرنے کے فوراً بعد دودھ فریج یا برف والے کولر میں رکھیں۔';
 
   @override
   String get loadSheddingTitle => 'لوڈ شیڈنگ کے دوران';
@@ -1129,8 +1129,9 @@ class AppLocalizationsUr extends AppLocalizations {
       'ردِعمل ہوا تھا: دوبارہ دینے سے پہلے ڈاکٹر سے بات کریں۔';
 
   @override
-  String get severeReactionNow =>
-      'اگر بچے کو سانس لینے میں مشکل ہو، زبان یا گلے میں سوجن ہو، یا وہ ڈھیلا یا زرد پڑ جائے تو ابھی 1122 یا 115 پر کال کریں۔';
+  String severeReactionNow(String number) {
+    return 'اگر بچے کو سانس لینے میں مشکل ہو، زبان یا گلے میں سوجن ہو، یا وہ ڈھیلا یا زرد پڑ جائے تو ابھی $number پر کال کریں۔';
+  }
 
   @override
   String sourcesLabel(String sources) {
@@ -1178,9 +1179,6 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get helpTitle => 'ایمرجنسی اور مدد';
-
-  @override
-  String get emergencyNumbers => 'ایمرجنسی نمبر (پاکستان)';
 
   @override
   String get emergencyNumbersNote =>
@@ -1657,6 +1655,150 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get continueWithApple => 'ایپل کے ساتھ جاری رکھیں';
+
+  @override
+  String get searchCountry => 'ملک تلاش کریں';
+
+  @override
+  String get allCountries => 'تمام ممالک';
+
+  @override
+  String get countryLabel => 'بچہ کس ملک میں رہتا ہے';
+
+  @override
+  String get countryHelp => 'ویکسین شیڈول اور ایمرجنسی نمبروں کے لیے۔';
+
+  @override
+  String get vaccineNameLabel => 'ویکسین کا نام';
+
+  @override
+  String get vaccineNameHint => 'مثلاً ٹائیفائیڈ، چکن پاکس، فلو';
+
+  @override
+  String vaccineScheduleNoteCountry(String country) {
+    return '$country کا قومی شیڈول۔ تاریخوں کی تصدیق ہمیشہ اپنے ڈاکٹر یا نرس سے کریں؛ یہ علاقے اور ویکسین کے برانڈ کے لحاظ سے مختلف ہو سکتی ہیں۔';
+  }
+
+  @override
+  String get vaccineScheduleNoteCanada =>
+      'کینیڈا کا قومی شیڈول۔ ہر صوبے کا اپنا شیڈول ہوتا ہے، اس لیے اپنے صوبے کے شیڈول اور ڈاکٹر کے مشورے پر عمل کریں۔';
+
+  @override
+  String noScheduleTitle(String country) {
+    return '$country کا ویکسین شیڈول ابھی ایپ میں نہیں ہے';
+  }
+
+  @override
+  String get noScheduleBody =>
+      'بچے کو لگنے والی ہر ویکسین نیچے شامل کریں، اور وہ شیڈول اپنائیں جو آپ کا ڈاکٹر یا ہیلتھ سینٹر بتائے۔';
+
+  @override
+  String get otherVaccines => 'دیگر ویکسینز';
+
+  @override
+  String get otherVaccinesHelp =>
+      'اس شیڈول سے باہر کی ویکسینز، جیسے پرائیویٹ یا سفر کی ویکسینز، یہاں شامل کی جا سکتی ہیں۔';
+
+  @override
+  String get addOtherVaccine => 'ویکسین شامل کریں';
+
+  @override
+  String get numAll => 'ایمبولینس، فائر بریگیڈ اور پولیس';
+
+  @override
+  String get numAmbulance => 'ایمبولینس';
+
+  @override
+  String get numNhs111 => 'NHS 111: فوری طبی مشورہ';
+
+  @override
+  String get numPoison => 'زہر کنٹرول (Poison Control)';
+
+  @override
+  String get numNurseLine => 'نرس سے مشورہ (زیادہ تر صوبوں میں)';
+
+  @override
+  String get numUnified => 'متحدہ ایمرجنسی نمبر';
+
+  @override
+  String emergencyNumbersIn(String country) {
+    return 'ایمرجنسی نمبر ($country)';
+  }
+
+  @override
+  String get noEmergencyNumbers =>
+      'اس ملک کے نمبر ابھی ہمارے پاس نہیں ہیں۔ اپنا مقامی ایمرجنسی نمبر اور قریبی بچوں کے ہسپتال کا نمبر فون میں محفوظ کر لیں۔';
+
+  @override
+  String get localEmergencyNumber => 'اپنے مقامی ایمرجنسی نمبر';
+
+  @override
+  String get weightGainTitle => 'پچھلے ایک مہینے میں وزن میں اضافہ';
+
+  @override
+  String weightGainSummary(String gain, int days) {
+    return 'تقریباً $gain گرام ماہانہ (دو وزنوں سے جو $days دن کے فرق سے لیے گئے)۔';
+  }
+
+  @override
+  String weightGainRange(String low, String high, String median) {
+    return 'اس عمر میں عام (WHO): $low سے $high گرام ماہانہ؛ درمیانی $median گرام۔';
+  }
+
+  @override
+  String get weightGainUsual => 'اس عمر کے بچوں کے لیے عام حد کے اندر۔';
+
+  @override
+  String get weightGainSlow =>
+      'اس عمر کے زیادہ تر بچوں سے کم۔ صرف ایک ریڈنگ سے کوئی تشخیص نہیں ہوتی؛ اگلے چیک اپ پر ڈاکٹر کو بتائیں، اور اگر بچہ ٹھیک سے دودھ نہیں پی رہا، پیشاب والے ڈائپر کم ہیں یا طبیعت خراب لگے تو جلد ڈاکٹر کو دکھائیں۔';
+
+  @override
+  String get weightGainFast =>
+      'اس عمر کے زیادہ تر بچوں سے زیادہ۔ عام طور پر اس میں پریشانی کی بات نہیں؛ ڈاکٹر پورے گروتھ چارٹ کے ساتھ اسے دیکھ سکتے ہیں۔';
+
+  @override
+  String get tabPhotos => 'تصاویر';
+
+  @override
+  String photosIntro(String name) {
+    return 'ہر مہینے کی ایک تصویر: $name کو بڑا ہوتے دیکھیں۔ تصویر شامل کرنے کے لیے مہینے پر ٹیپ کریں۔';
+  }
+
+  @override
+  String get photoNewborn => 'نومولود';
+
+  @override
+  String photoMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مہینے',
+      one: '1 مہینہ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get addPhoto => 'تصویر شامل کریں';
+
+  @override
+  String get takePhoto => 'تصویر کھینچیں';
+
+  @override
+  String get chooseFromGallery => 'گیلری سے چنیں';
+
+  @override
+  String get photoCaptionLabel => 'عنوان (اختیاری)';
+
+  @override
+  String get editCaption => 'عنوان بدلیں';
+
+  @override
+  String get replacePhoto => 'تبدیل کریں';
+
+  @override
+  String get photoMonthTaken =>
+      'اس مہینے کی تصویر پہلے سے موجود ہے۔ اسے کھول کر تبدیل کریں دبائیں۔';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -2314,7 +2456,7 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get storageGuide =>
-      'Taaza pump kiya hua doodh (CDC ki hidayat):\n• Kamra, 25°C ya kam: 4 ghante tak\n• Barf ke pack wala cooler bag: 24 ghante tak\n• Fridge: 4 din tak\n• Freezer: 6 mahine ke andar behtar, 12 mahine tak\n\nPighla hua doodh: fridge mein 24 ghante ke andar, ya garam karne ke baad 2 ghante ke andar istemal karein. Pighla hua doodh kabhi dobara freeze na karein.\nPilane ke baad bacha hua doodh: 2 ghante ke andar istemal karein, phir zaaya kar dein.\n\nPakistan ki garmiyon mein kamre aksar 25°C se zyada garam hote hain, is liye pump karne ke foran baad doodh fridge ya barf wale cooler mein rakhein.';
+      'Taaza pump kiya hua doodh (CDC ki hidayat):\n• Kamra, 25°C ya kam: 4 ghante tak\n• Barf ke pack wala cooler bag: 24 ghante tak\n• Fridge: 4 din tak\n• Freezer: 6 mahine ke andar behtar, 12 mahine tak\n\nPighla hua doodh: fridge mein 24 ghante ke andar, ya garam karne ke baad 2 ghante ke andar istemal karein. Pighla hua doodh kabhi dobara freeze na karein.\nPilane ke baad bacha hua doodh: 2 ghante ke andar istemal karein, phir zaaya kar dein.\n\nGarmiyon mein kamre aksar 25°C se zyada garam hote hain, is liye pump karne ke foran baad doodh fridge ya barf wale cooler mein rakhein.';
 
   @override
   String get loadSheddingTitle => 'Load-shedding ke dauran';
@@ -2787,8 +2929,9 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
       'Rad-e-amal hua tha: dobara dene se pehle doctor se baat karein.';
 
   @override
-  String get severeReactionNow =>
-      'Agar bache ko saans lene mein mushkil ho, zabaan ya gale mein soojan ho, ya woh dheela ya zard par jaye to abhi 1122 ya 115 par call karein.';
+  String severeReactionNow(String number) {
+    return 'Agar bache ko saans lene mein mushkil ho, zabaan ya gale mein soojan ho, ya woh dheela ya zard par jaye to abhi $number par call karein.';
+  }
 
   @override
   String sourcesLabel(String sources) {
@@ -2836,9 +2979,6 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get helpTitle => 'Emergency aur madad';
-
-  @override
-  String get emergencyNumbers => 'Emergency numbers (Pakistan)';
 
   @override
   String get emergencyNumbersNote =>
@@ -3316,4 +3456,148 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get continueWithApple => 'Apple ke saath jaari rakhein';
+
+  @override
+  String get searchCountry => 'Mulk talaash karein';
+
+  @override
+  String get allCountries => 'Tamam mumalik';
+
+  @override
+  String get countryLabel => 'Bacha kis mulk mein rehta hai';
+
+  @override
+  String get countryHelp => 'Vaccine schedule aur emergency numbers ke liye.';
+
+  @override
+  String get vaccineNameLabel => 'Vaccine ka naam';
+
+  @override
+  String get vaccineNameHint => 'Maslan Typhoid, Chickenpox, Flu';
+
+  @override
+  String vaccineScheduleNoteCountry(String country) {
+    return '$country ka qaumi schedule. Tareekhon ki tasdeeq hamesha apne doctor ya nurse se karein; yeh ilaqe aur vaccine brand ke hisaab se mukhtalif ho sakti hain.';
+  }
+
+  @override
+  String get vaccineScheduleNoteCanada =>
+      'Canada ka qaumi schedule. Har province ka apna schedule hota hai, is liye apne province ke schedule aur doctor ke mashware par amal karein.';
+
+  @override
+  String noScheduleTitle(String country) {
+    return '$country ka vaccine schedule abhi app mein nahi hai';
+  }
+
+  @override
+  String get noScheduleBody =>
+      'Bache ko lagne wali har vaccine neeche shamil karein, aur woh schedule apnayein jo aap ka doctor ya health centre bataye.';
+
+  @override
+  String get otherVaccines => 'Doosri vaccines';
+
+  @override
+  String get otherVaccinesHelp =>
+      'Is schedule se bahar ki vaccines, jaise private ya safar ki vaccines, yahan shamil ki ja sakti hain.';
+
+  @override
+  String get addOtherVaccine => 'Vaccine shamil karein';
+
+  @override
+  String get numAll => 'Ambulance, fire brigade aur police';
+
+  @override
+  String get numAmbulance => 'Ambulance';
+
+  @override
+  String get numNhs111 => 'NHS 111: fori tibbi mashwara';
+
+  @override
+  String get numPoison => 'Poison Control';
+
+  @override
+  String get numNurseLine => 'Nurse se mashwara (zyada tar provinces mein)';
+
+  @override
+  String get numUnified => 'Muttahida emergency number';
+
+  @override
+  String emergencyNumbersIn(String country) {
+    return 'Emergency numbers ($country)';
+  }
+
+  @override
+  String get noEmergencyNumbers =>
+      'Is mulk ke numbers abhi hamare paas nahi hain. Apna maqami emergency number aur qareebi bachon ke hospital ka number phone mein save kar lein.';
+
+  @override
+  String get localEmergencyNumber => 'apne maqami emergency number';
+
+  @override
+  String get weightGainTitle => 'Pichle ek mahine mein wazan mein izafa';
+
+  @override
+  String weightGainSummary(String gain, int days) {
+    return 'Taqreeban $gain gram mahana (do wazan jo $days din ke farq se liye gaye).';
+  }
+
+  @override
+  String weightGainRange(String low, String high, String median) {
+    return 'Is umar mein aam (WHO): $low se $high gram mahana; darmiyani $median gram.';
+  }
+
+  @override
+  String get weightGainUsual => 'Is umar ke bachon ke liye aam hadd ke andar.';
+
+  @override
+  String get weightGainSlow =>
+      'Is umar ke zyada tar bachon se kam. Sirf ek reading se koi tashkhees nahi hoti; agle check-up par doctor ko batayein, aur agar bacha theek se doodh nahi pee raha, peshab wale diaper kam hain ya tabiyat kharab lage to jald doctor ko dikhayein.';
+
+  @override
+  String get weightGainFast =>
+      'Is umar ke zyada tar bachon se zyada. Aam taur par is mein pareshani ki baat nahi; doctor poore growth chart ke saath ise dekh sakte hain.';
+
+  @override
+  String get tabPhotos => 'Tasveerein';
+
+  @override
+  String photosIntro(String name) {
+    return 'Har mahine ki ek tasveer: $name ko bara hote dekhein. Tasveer shamil karne ke liye mahine par tap karein.';
+  }
+
+  @override
+  String get photoNewborn => 'Newborn';
+
+  @override
+  String photoMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count mahine',
+      one: '1 mahina',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get addPhoto => 'Tasveer shamil karein';
+
+  @override
+  String get takePhoto => 'Tasveer khenchein';
+
+  @override
+  String get chooseFromGallery => 'Gallery se chunein';
+
+  @override
+  String get photoCaptionLabel => 'Unwan (ikhtiyari)';
+
+  @override
+  String get editCaption => 'Unwan badlein';
+
+  @override
+  String get replacePhoto => 'Tabdeel karein';
+
+  @override
+  String get photoMonthTaken =>
+      'Is mahine ki tasveer pehle se mojood hai. Use khol kar Tabdeel karein dabayein.';
 }

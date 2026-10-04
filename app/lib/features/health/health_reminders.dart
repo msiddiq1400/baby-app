@@ -15,7 +15,7 @@ final vaccineRemindersProvider = FutureProvider<void>((ref) async {
   final baby = await ref.watch(currentBabyProvider.future);
   if (baby == null) return Reminders.replaceGroup('vaccines', []);
 
-  final schedule = await ref.watch(vaccineScheduleProvider.future);
+  final schedule = await ref.watch(vaccineScheduleProvider(baby.countryCode).future);
   final given = await ref.watch(vaccinationsProvider(baby.id).future);
   final l10n = appL10n(ref.watch(localeProvider));
   final visits = planVisits(baby.birthDate, schedule, given);

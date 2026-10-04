@@ -41,6 +41,10 @@
 	     compliance question on every build. -->
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Palna uses the camera only when you take a monthly photo of your baby.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Palna opens your photos only when you choose a monthly photo of your baby.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>

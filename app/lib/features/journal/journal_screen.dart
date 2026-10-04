@@ -204,12 +204,19 @@ class _DayContent extends ConsumerWidget {
 
     final foods = ref.watch(foodGuideProvider).value;
     final milestones = ref.watch(milestoneGuideProvider).value;
-    final schedule = ref.watch(vaccineScheduleProvider).value ?? const <VaccineDose>[];
+    final schedule = ref.watch(vaccineScheduleProvider(baby.countryCode)).value ?? const <VaccineDose>[];
     final log = journal.log;
 
     final dated = <_Entry>[
       for (final v in journal.vaccinations)
-        if (schedule.where((s) => s.code == v.vaccineCode).firstOrNull case final dose)
+        if (v.isOther)
+          _Entry(
+            null,
+            Icons.vaccines_outlined,
+            v.vaccineName ?? v.vaccineCode,
+            () => showEditOtherVaccineSheet(context, baby, v),
+          )
+        else if (schedule.where((s) => s.code == v.vaccineCode).firstOrNull case final dose)
           _Entry(
             null,
             Icons.vaccines_outlined,

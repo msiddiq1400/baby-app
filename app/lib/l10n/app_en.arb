@@ -414,7 +414,7 @@
   "noStoredMilk": "No stored milk.",
   "noRefreeze": "Don't refreeze",
   "storageGuideTitle": "How long milk keeps",
-  "storageGuide": "Freshly pumped milk (CDC guidance):\n• Room, 25°C or cooler: up to 4 hours\n• Cooler bag with ice packs: up to 24 hours\n• Fridge: up to 4 days\n• Freezer: best within 6 months, up to 12 months\n\nThawed milk: use within 24 hours in the fridge, or within 2 hours once warmed. Never refreeze thawed milk.\nLeftover milk after a feed: use within 2 hours, then throw away.\n\nIn Pakistani summers rooms are often hotter than 25°C, so put milk in the fridge or a cooler with ice right after pumping.",
+  "storageGuide": "Freshly pumped milk (CDC guidance):\n• Room, 25°C or cooler: up to 4 hours\n• Cooler bag with ice packs: up to 24 hours\n• Fridge: up to 4 days\n• Freezer: best within 6 months, up to 12 months\n\nThawed milk: use within 24 hours in the fridge, or within 2 hours once warmed. Never refreeze thawed milk.\nLeftover milk after a feed: use within 2 hours, then throw away.\n\nIn hot weather rooms are often hotter than 25°C, so put milk in the fridge or a cooler with ice right after pumping.",
   "loadSheddingTitle": "During load-shedding",
   "loadSheddingGuide": "• Keep the fridge and freezer closed. A closed fridge stays cold for about 4 hours; a full freezer for about 48 hours (24 if half full).\n• For longer outages, move milk to a cooler bag with ice or frozen gel packs. Keep a few packs frozen for this.\n• If frozen milk has thawed, don't refreeze it: keep it cold and use it within 24 hours.",
   "milkExpiresTitle": "Stored milk expires soon",
@@ -776,7 +776,14 @@
   "reactionMild": "Mild",
   "reactionSevere": "Severe",
   "reactionWarning": "Had a reaction: talk to your doctor before giving this again.",
-  "severeReactionNow": "If your baby has trouble breathing, swelling of the tongue or throat, or becomes floppy or pale, call 1122 or 115 now.",
+  "severeReactionNow": "If your baby has trouble breathing, swelling of the tongue or throat, or becomes floppy or pale, call {number} now.",
+  "@severeReactionNow": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "sourcesLabel": "Sources: {sources}",
   "@sourcesLabel": {
     "placeholders": {
@@ -821,7 +828,6 @@
     }
   },
   "helpTitle": "Emergency & help",
-  "emergencyNumbers": "Emergency numbers (Pakistan)",
   "emergencyNumbersNote": "Tap to call. Services differ by city; save your nearest children's hospital too.",
   "numRescue": "Rescue 1122: ambulance and emergencies",
   "numEdhi": "Edhi ambulance",
@@ -1104,5 +1110,102 @@
       }
     }
   },
-  "continueWithApple": "Continue with Apple"
+  "continueWithApple": "Continue with Apple",
+  "searchCountry": "Search countries",
+  "allCountries": "All countries",
+  "countryLabel": "Country where the baby lives",
+  "countryHelp": "Used for the vaccine schedule and emergency numbers.",
+  "vaccineNameLabel": "Vaccine name",
+  "vaccineNameHint": "e.g. Typhoid, Chickenpox, Flu",
+  "vaccineScheduleNoteCountry": "National schedule for {country}. Always confirm dates with your doctor or nurse; they can differ by region and vaccine brand.",
+  "@vaccineScheduleNoteCountry": {
+    "placeholders": {
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccineScheduleNoteCanada": "Canada's national schedule. Each province has its own, so follow your province's schedule and your doctor's advice.",
+  "noScheduleTitle": "No built-in vaccine schedule for {country} yet",
+  "@noScheduleTitle": {
+    "placeholders": {
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "noScheduleBody": "Add each vaccine your baby gets below, and follow the schedule your doctor or health centre gives you.",
+  "otherVaccines": "Other vaccines",
+  "otherVaccinesHelp": "Vaccines outside this schedule, such as private or travel vaccines, can be added here.",
+  "addOtherVaccine": "Add a vaccine",
+  "numAll": "Ambulance, fire and police",
+  "numAmbulance": "Ambulance",
+  "numNhs111": "NHS 111: urgent medical advice",
+  "numPoison": "Poison Control",
+  "numNurseLine": "Nurse advice line (most provinces)",
+  "numUnified": "Unified emergency number",
+  "emergencyNumbersIn": "Emergency numbers ({country})",
+  "@emergencyNumbersIn": {
+    "placeholders": {
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "noEmergencyNumbers": "We don't have the numbers for this country yet. Save your local emergency number and your nearest children's hospital in your phone.",
+  "localEmergencyNumber": "your local emergency number",
+  "weightGainTitle": "Weight gain over the last month",
+  "weightGainSummary": "About {gain} g a month (from two weights {days} days apart).",
+  "@weightGainSummary": {
+    "placeholders": {
+      "gain": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "weightGainRange": "Usual at this age (WHO): {low} to {high} g a month; the middle is {median} g.",
+  "@weightGainRange": {
+    "placeholders": {
+      "low": {
+        "type": "String"
+      },
+      "high": {
+        "type": "String"
+      },
+      "median": {
+        "type": "String"
+      }
+    }
+  },
+  "weightGainUsual": "Within the usual range for babies this age.",
+  "weightGainSlow": "Slower than most babies this age. One reading on its own isn't a diagnosis; mention it at the next check-up, and see a doctor sooner if your baby is feeding poorly, has few wet diapers or seems unwell.",
+  "weightGainFast": "Faster than most babies this age. This is usually nothing to worry about; your doctor can look at it with the whole growth chart.",
+  "tabPhotos": "Photos",
+  "photosIntro": "One photo for each month: watch {name} grow. Tap a month to add its photo.",
+  "@photosIntro": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "photoNewborn": "Newborn",
+  "photoMonths": "{count, plural, =1{1 month} other{{count} months}}",
+  "@photoMonths": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "addPhoto": "Add photo",
+  "takePhoto": "Take a photo",
+  "chooseFromGallery": "Choose from gallery",
+  "photoCaptionLabel": "Caption (optional)",
+  "editCaption": "Edit caption",
+  "replacePhoto": "Replace",
+  "photoMonthTaken": "This month already has a photo. Open it and tap Replace."
 }

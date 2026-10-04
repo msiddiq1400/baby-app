@@ -1,3 +1,4 @@
+import 'package:powersync/attachments/attachments.dart';
 import 'package:powersync/powersync.dart';
 
 // Tables in the database on the phone. PowerSync keeps them in step with
@@ -8,7 +9,7 @@ import 'package:powersync/powersync.dart';
 // compare them with julianday() in SQL, since the server and the phone format
 // them slightly differently. Booleans are 0/1 integers; arrays are JSON text.
 
-const localSchema = Schema([
+final localSchema = Schema([
   Table('families', [Column.text('name')]),
   Table('babies', [
     Column.text('family_id'),
@@ -18,6 +19,7 @@ const localSchema = Schema([
     Column.integer('birth_weight_g'),
     Column.integer('birth_length_mm'),
     Column.integer('birth_head_mm'),
+    Column.text('country_code'),
     Column.text('created_at'),
     Column.text('deleted_at'),
   ]),
@@ -102,6 +104,7 @@ const localSchema = Schema([
     Column.text('family_id'),
     Column.text('baby_id'),
     Column.text('vaccine_code'),
+    Column.text('vaccine_name'),
     Column.text('given_on'),
     Column.text('batch_number'),
     Column.text('clinic'),
@@ -168,6 +171,19 @@ const localSchema = Schema([
     Column.text('notes'),
     Column.text('deleted_at'),
   ]),
+  // Monthly photos; the picture is a file handled by the attachment queue
+  // (data/photo_repository.dart), keyed by the photo's id.
+  Table('photos', [
+    Column.text('family_id'),
+    Column.text('baby_id'),
+    Column.integer('age_month'),
+    Column.text('caption'),
+    Column.text('created_at'),
+    Column.text('deleted_at'),
+  ]),
+  // Upload / download state of each photo file (this phone only).
+  // ignore: experimental_member_use
+  AttachmentsQueueTable(),
   // Settings for this phone only (never uploaded); id is the setting name.
   Table.localOnly('app_settings', [Column.text('value')]),
   // Reference data, read-only on the phone.

@@ -31,6 +31,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 >
 > MADE FOR PAKISTAN
 > • Pakistan's EPI vaccine schedule, with reminders before each visit
+> • Living abroad? Vaccine schedules for the UK, US, Canada, UAE and Saudi Arabia too, and emergency numbers for your country
 > • Desi first foods and 15 recipes for babies, from lauki purée at 6 months to qeema aloo at 10
 > • Emergency numbers and advice for hot weather
 > • Full Urdu and Roman Urdu, not just English
@@ -110,10 +111,12 @@ Data collected, all **linked to the user**, all **not used for tracking**, purpo
 | Contact Info | Name | Shown to family members who share a baby |
 | Contact Info | Email Address | Sign-in and sign-up codes |
 | Health & Fitness | Health | Baby's growth, feeds, sleep, vaccines, medicines, symptoms, illnesses |
+| Location | Coarse Location | No: the baby's country is chosen by the parent, not read from the phone, so it is not "location" in Apple's sense |
 | User Content | Other User Content | Notes, milestones, foods tried |
+| User Content | Photos or Videos | Monthly baby photos the parent chooses to add (shared only with their family) |
 | Identifiers | User ID | The account ID that keeps each family's data separate |
 
-Not collected: location, contacts, photos, browsing, purchases, usage data, diagnostics, advertising data.
+Not collected: location, contacts, browsing, purchases, usage data, diagnostics, advertising data.
 
 ## Age rating
 

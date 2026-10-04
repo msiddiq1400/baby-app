@@ -1260,7 +1260,7 @@ abstract class AppLocalizations {
   /// No description provided for @storageGuide.
   ///
   /// In en, this message translates to:
-  /// **'Freshly pumped milk (CDC guidance):\n• Room, 25°C or cooler: up to 4 hours\n• Cooler bag with ice packs: up to 24 hours\n• Fridge: up to 4 days\n• Freezer: best within 6 months, up to 12 months\n\nThawed milk: use within 24 hours in the fridge, or within 2 hours once warmed. Never refreeze thawed milk.\nLeftover milk after a feed: use within 2 hours, then throw away.\n\nIn Pakistani summers rooms are often hotter than 25°C, so put milk in the fridge or a cooler with ice right after pumping.'**
+  /// **'Freshly pumped milk (CDC guidance):\n• Room, 25°C or cooler: up to 4 hours\n• Cooler bag with ice packs: up to 24 hours\n• Fridge: up to 4 days\n• Freezer: best within 6 months, up to 12 months\n\nThawed milk: use within 24 hours in the fridge, or within 2 hours once warmed. Never refreeze thawed milk.\nLeftover milk after a feed: use within 2 hours, then throw away.\n\nIn hot weather rooms are often hotter than 25°C, so put milk in the fridge or a cooler with ice right after pumping.'**
   String get storageGuide;
 
   /// No description provided for @loadSheddingTitle.
@@ -2070,8 +2070,8 @@ abstract class AppLocalizations {
   /// No description provided for @severeReactionNow.
   ///
   /// In en, this message translates to:
-  /// **'If your baby has trouble breathing, swelling of the tongue or throat, or becomes floppy or pale, call 1122 or 115 now.'**
-  String get severeReactionNow;
+  /// **'If your baby has trouble breathing, swelling of the tongue or throat, or becomes floppy or pale, call {number} now.'**
+  String severeReactionNow(String number);
 
   /// No description provided for @sourcesLabel.
   ///
@@ -2150,12 +2150,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Emergency & help'**
   String get helpTitle;
-
-  /// No description provided for @emergencyNumbers.
-  ///
-  /// In en, this message translates to:
-  /// **'Emergency numbers (Pakistan)'**
-  String get emergencyNumbers;
 
   /// No description provided for @emergencyNumbersNote.
   ///
@@ -2984,6 +2978,240 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue with Apple'**
   String get continueWithApple;
+
+  /// No description provided for @searchCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Search countries'**
+  String get searchCountry;
+
+  /// No description provided for @allCountries.
+  ///
+  /// In en, this message translates to:
+  /// **'All countries'**
+  String get allCountries;
+
+  /// No description provided for @countryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Country where the baby lives'**
+  String get countryLabel;
+
+  /// No description provided for @countryHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Used for the vaccine schedule and emergency numbers.'**
+  String get countryHelp;
+
+  /// No description provided for @vaccineNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Vaccine name'**
+  String get vaccineNameLabel;
+
+  /// No description provided for @vaccineNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Typhoid, Chickenpox, Flu'**
+  String get vaccineNameHint;
+
+  /// No description provided for @vaccineScheduleNoteCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'National schedule for {country}. Always confirm dates with your doctor or nurse; they can differ by region and vaccine brand.'**
+  String vaccineScheduleNoteCountry(String country);
+
+  /// No description provided for @vaccineScheduleNoteCanada.
+  ///
+  /// In en, this message translates to:
+  /// **'Canada\'s national schedule. Each province has its own, so follow your province\'s schedule and your doctor\'s advice.'**
+  String get vaccineScheduleNoteCanada;
+
+  /// No description provided for @noScheduleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No built-in vaccine schedule for {country} yet'**
+  String noScheduleTitle(String country);
+
+  /// No description provided for @noScheduleBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add each vaccine your baby gets below, and follow the schedule your doctor or health centre gives you.'**
+  String get noScheduleBody;
+
+  /// No description provided for @otherVaccines.
+  ///
+  /// In en, this message translates to:
+  /// **'Other vaccines'**
+  String get otherVaccines;
+
+  /// No description provided for @otherVaccinesHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Vaccines outside this schedule, such as private or travel vaccines, can be added here.'**
+  String get otherVaccinesHelp;
+
+  /// No description provided for @addOtherVaccine.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a vaccine'**
+  String get addOtherVaccine;
+
+  /// No description provided for @numAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Ambulance, fire and police'**
+  String get numAll;
+
+  /// No description provided for @numAmbulance.
+  ///
+  /// In en, this message translates to:
+  /// **'Ambulance'**
+  String get numAmbulance;
+
+  /// No description provided for @numNhs111.
+  ///
+  /// In en, this message translates to:
+  /// **'NHS 111: urgent medical advice'**
+  String get numNhs111;
+
+  /// No description provided for @numPoison.
+  ///
+  /// In en, this message translates to:
+  /// **'Poison Control'**
+  String get numPoison;
+
+  /// No description provided for @numNurseLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Nurse advice line (most provinces)'**
+  String get numNurseLine;
+
+  /// No description provided for @numUnified.
+  ///
+  /// In en, this message translates to:
+  /// **'Unified emergency number'**
+  String get numUnified;
+
+  /// No description provided for @emergencyNumbersIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency numbers ({country})'**
+  String emergencyNumbersIn(String country);
+
+  /// No description provided for @noEmergencyNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'We don\'t have the numbers for this country yet. Save your local emergency number and your nearest children\'s hospital in your phone.'**
+  String get noEmergencyNumbers;
+
+  /// No description provided for @localEmergencyNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'your local emergency number'**
+  String get localEmergencyNumber;
+
+  /// No description provided for @weightGainTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight gain over the last month'**
+  String get weightGainTitle;
+
+  /// No description provided for @weightGainSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'About {gain} g a month (from two weights {days} days apart).'**
+  String weightGainSummary(String gain, int days);
+
+  /// No description provided for @weightGainRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Usual at this age (WHO): {low} to {high} g a month; the middle is {median} g.'**
+  String weightGainRange(String low, String high, String median);
+
+  /// No description provided for @weightGainUsual.
+  ///
+  /// In en, this message translates to:
+  /// **'Within the usual range for babies this age.'**
+  String get weightGainUsual;
+
+  /// No description provided for @weightGainSlow.
+  ///
+  /// In en, this message translates to:
+  /// **'Slower than most babies this age. One reading on its own isn\'t a diagnosis; mention it at the next check-up, and see a doctor sooner if your baby is feeding poorly, has few wet diapers or seems unwell.'**
+  String get weightGainSlow;
+
+  /// No description provided for @weightGainFast.
+  ///
+  /// In en, this message translates to:
+  /// **'Faster than most babies this age. This is usually nothing to worry about; your doctor can look at it with the whole growth chart.'**
+  String get weightGainFast;
+
+  /// No description provided for @tabPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get tabPhotos;
+
+  /// No description provided for @photosIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'One photo for each month: watch {name} grow. Tap a month to add its photo.'**
+  String photosIntro(String name);
+
+  /// No description provided for @photoNewborn.
+  ///
+  /// In en, this message translates to:
+  /// **'Newborn'**
+  String get photoNewborn;
+
+  /// No description provided for @photoMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 month} other{{count} months}}'**
+  String photoMonths(int count);
+
+  /// No description provided for @addPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Add photo'**
+  String get addPhoto;
+
+  /// No description provided for @takePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a photo'**
+  String get takePhoto;
+
+  /// No description provided for @chooseFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get chooseFromGallery;
+
+  /// No description provided for @photoCaptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Caption (optional)'**
+  String get photoCaptionLabel;
+
+  /// No description provided for @editCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit caption'**
+  String get editCaption;
+
+  /// No description provided for @replacePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace'**
+  String get replacePhoto;
+
+  /// No description provided for @photoMonthTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'This month already has a photo. Open it and tap Replace.'**
+  String get photoMonthTaken;
 }
 
 class _AppLocalizationsDelegate

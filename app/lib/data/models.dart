@@ -27,6 +27,7 @@ class Baby {
     this.birthWeightG,
     this.birthLengthMm,
     this.birthHeadMm,
+    this.countryCode = 'PK',
   });
 
   final String id;
@@ -34,13 +35,18 @@ class Baby {
   final String name;
   final DateTime birthDate;
 
+  /// Where the baby lives (ISO code, e.g. 'PK', 'GB'): picks the vaccine
+  /// schedule and emergency numbers. Older rows without one are in Pakistan.
+  final String countryCode;
+
   /// 'female', 'male' or null (not given).
   final String? sex;
   final int? birthWeightG;
   final int? birthLengthMm;
   final int? birthHeadMm;
 
-  static const columns = 'id, family_id, name, birth_date, sex, birth_weight_g, birth_length_mm, birth_head_mm';
+  static const columns =
+      'id, family_id, name, birth_date, sex, birth_weight_g, birth_length_mm, birth_head_mm, country_code';
 
   factory Baby.fromJson(Map<String, dynamic> json) => Baby(
         id: json['id'] as String,
@@ -51,6 +57,7 @@ class Baby {
         birthWeightG: json['birth_weight_g'] as int?,
         birthLengthMm: json['birth_length_mm'] as int?,
         birthHeadMm: json['birth_head_mm'] as int?,
+        countryCode: (json['country_code'] as String?) ?? 'PK',
       );
 }
 
@@ -267,21 +274,30 @@ class Vaccination {
     required this.id,
     required this.vaccineCode,
     required this.givenOn,
+    this.vaccineName,
     this.batchNumber,
     this.clinic,
     this.notes,
   });
 
+  /// [vaccineCode] of a vaccine the parent added by name ([vaccineName]),
+  /// e.g. one outside the national schedule or in a country without one.
+  static const otherCode = 'OTHER';
+
   final String id;
   final String vaccineCode;
+  final String? vaccineName;
   final DateTime givenOn;
   final String? batchNumber;
   final String? clinic;
   final String? notes;
 
+  bool get isOther => vaccineCode == otherCode;
+
   factory Vaccination.fromJson(Map<String, dynamic> json) => Vaccination(
         id: json['id'] as String,
         vaccineCode: json['vaccine_code'] as String,
+        vaccineName: json['vaccine_name'] as String?,
         givenOn: DateTime.parse(json['given_on'] as String),
         batchNumber: json['batch_number'] as String?,
         clinic: json['clinic'] as String?,

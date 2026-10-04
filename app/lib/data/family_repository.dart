@@ -54,7 +54,27 @@ class FamilyRepository {
   /// Deletes the signed-in user's login, and every family only they belong
   /// to. Shared families keep their data (see delete_my_account in the
   /// migrations). The caller must sign out afterwards.
-  Future<void> deleteMyAccount() => _supabase.rpc<dynamic>('delete_my_account');
+  Future<void> deleteMyAccount() async {
+    await _deleteSoloFamilyPhotos();
+    await _supabase.rpc<dynamic>('delete_my_account');
+  }
+
+  /// Photo files are in Storage, which the database function can't reach:
+  /// delete the ones of families that are about to go (only this user in
+  /// them) first.
+  Future<void> _deleteSoloFamilyPhotos() async {
+    final me = _supabase.auth.currentUser?.id;
+    if (me == null) return;
+    final mine = await _supabase.from('family_members').select('family_id').eq('user_id', me);
+    for (final row in mine) {
+      final familyId = row['family_id'] as String;
+      final members = await _supabase.from('family_members').select('user_id').eq('family_id', familyId);
+      if (members.length != 1) continue;
+      final photos = await _supabase.from('photos').select('id').eq('family_id', familyId);
+      if (photos.isEmpty) continue;
+      await _supabase.storage.from('photos').remove([for (final p in photos) '$familyId/${p['id']}.jpg']);
+    }
+  }
 }
 
 class InvalidInviteException implements Exception {

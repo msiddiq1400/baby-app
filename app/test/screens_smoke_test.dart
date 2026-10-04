@@ -14,6 +14,7 @@ import 'package:baby_app/data/illness_repository.dart';
 import 'package:baby_app/data/journal_repository.dart';
 import 'package:baby_app/data/medication_repository.dart';
 import 'package:baby_app/data/milk_repository.dart';
+import 'package:baby_app/data/photo_repository.dart';
 import 'package:baby_app/data/models.dart';
 import 'package:baby_app/data/settings_repository.dart';
 import 'package:baby_app/data/solids_repository.dart';
@@ -205,7 +206,7 @@ final overrides = [
   recentFeedsProvider.overrideWith((ref, id) => Stream.value(feeds)),
   recentSleepsProvider.overrideWith((ref, id) => Stream.value(sleeps)),
   vaccineScheduleProvider.overrideWith(
-    (ref) => Stream.value([
+    (ref, country) => Stream.value([
       const VaccineDose(
         code: 'BCG',
         name: 'BCG',
@@ -262,6 +263,8 @@ final overrides = [
         lengthMm: 590,
         headMm: 395,
       ),
+      // A month before the latest, so the weight-gain card shows.
+      GrowthMeasurement(id: 'g15', measuredOn: ago(days: 40), weightG: 6700),
       GrowthMeasurement(
         id: 'g2',
         measuredOn: ago(days: 10),
@@ -343,6 +346,12 @@ final overrides = [
         achievedOn: ago(days: 3),
       ),
     }),
+  ),
+  photosProvider.overrideWith(
+    (ref, id) => Stream.value(const [
+      Photo(id: 'p1', ageMonth: 0, caption: 'First day home'),
+      Photo(id: 'p2', ageMonth: 2),
+    ]),
   ),
   familyMembersProvider.overrideWith(
     (ref, id) async => const [
@@ -480,6 +489,26 @@ void main() {
       expect(find.textContaining(expected), findsWidgets, reason: tab);
     }
   });
+
+  testWidgets('Growth shows weight gain against WHO', (tester) async {
+    await pumpScreen(tester, GrowthScreen(baby: baby), const Locale('en'));
+    expect(tester.takeException(), isNull);
+    expect(find.text('Weight gain over the last month'), findsOneWidget);
+    expect(find.text('Within the usual range for babies this age.'), findsOneWidget);
+  });
+
+  for (final locale in const [Locale('en'), Locale('ur')]) {
+    testWidgets('Growth photos tab builds ($locale)', (tester) async {
+      await pumpScreen(tester, GrowthScreen(baby: baby), locale);
+      await tester.tap(find.text(lookupAppLocalizations(locale).tabPhotos));
+      for (var i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 200));
+      }
+      expect(tester.takeException(), isNull);
+      // The baby is 5 months: newborn to 5 months, two with photos.
+      expect(find.text(lookupAppLocalizations(locale).addPhoto), findsNWidgets(4));
+    });
+  }
 
   testWidgets('Growth milestones tab builds', (tester) async {
     await pumpScreen(tester, GrowthScreen(baby: baby), const Locale('en'));

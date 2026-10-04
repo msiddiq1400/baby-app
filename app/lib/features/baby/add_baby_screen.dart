@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/numbers.dart';
 import '../../data/baby_repository.dart';
 import '../../data/models.dart';
+import '../../data/photo_repository.dart';
 import '../../l10n/app_localizations.dart';
+import '../common/country_picker.dart';
 import '../common/language_menu.dart';
 import '../common/sheet.dart';
 import '../settings/join_family_dialog.dart';
@@ -31,6 +33,10 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
   late final _head = TextEditingController(text: _format(widget.existing?.birthHeadMm, 10));
   late DateTime? _birthDate = widget.existing?.birthDate;
   late String? _sex = widget.existing?.sex;
+
+  /// Required for a new baby: picks the vaccine schedule and emergency
+  /// numbers, so it's never guessed (many phones in Pakistan are set to US).
+  late String? _country = widget.existing?.countryCode;
   var _busy = false;
 
   static String _format(int? value, int divisor) => value == null ? '' : '${value / divisor}';
@@ -54,6 +60,11 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
     if (picked != null) setState(() => _birthDate = picked);
   }
 
+  Future<void> _pickCountry() async {
+    final picked = await showCountryPicker(context, selected: _country);
+    if (picked != null) setState(() => _country = picked);
+  }
+
   int? _scaled(TextEditingController c, int factor) {
     final n = parseLocalizedNumber(c.text);
     return n == null ? null : (n * factor).round();
@@ -61,10 +72,10 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
 
   /// Validator for an optional decimal field within [min]..[max].
   FormFieldValidator<String> _range(double min, double max, String message) => (v) {
-        if ((v ?? '').trim().isEmpty) return null;
-        final n = parseLocalizedNumber(v!);
-        return n == null || n < min || n > max ? message : null;
-      };
+    if ((v ?? '').trim().isEmpty) return null;
+    final n = parseLocalizedNumber(v!);
+    return n == null || n < min || n > max ? message : null;
+  };
 
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
@@ -76,6 +87,7 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
         final id = await repo.addBaby(
           name: _name.text.trim(),
           birthDate: _birthDate!,
+          countryCode: _country!,
           familyId: widget.familyId,
           sex: _sex,
           birthWeightG: _scaled(_weight, 1000),
@@ -88,6 +100,7 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
           existing.id,
           name: _name.text.trim(),
           birthDate: _birthDate!,
+          countryCode: _country!,
           sex: _sex,
           birthWeightG: _scaled(_weight, 1000),
           birthLengthMm: _scaled(_length, 10),
@@ -98,8 +111,7 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
       if (mounted && Navigator.of(context).canPop()) Navigator.of(context).pop();
     } catch (_) {
       if (mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).errorGeneric)));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).errorGeneric)));
         setState(() => _busy = false);
       }
     }
@@ -110,6 +122,7 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
     final l10n = AppLocalizations.of(context);
     final existing = widget.existing;
     final dateText = _birthDate == null ? '' : MaterialLocalizations.of(context).formatMediumDate(_birthDate!);
+    final countryText = _country == null ? '' : countryLabel(context, _country!);
     const decimal = TextInputType.numberWithOptions(decimal: true);
 
     return Scaffold(
@@ -151,6 +164,20 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
                   suffixIcon: const Icon(Icons.calendar_today),
                 ),
                 validator: (_) => _birthDate == null ? l10n.fieldRequired : null,
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                key: ValueKey('country-$countryText'),
+                initialValue: countryText,
+                readOnly: true,
+                onTap: _pickCountry,
+                decoration: InputDecoration(
+                  labelText: l10n.countryLabel,
+                  helperText: l10n.countryHelp,
+                  helperMaxLines: 3,
+                  suffixIcon: const Icon(Icons.public),
+                ),
+                validator: (_) => _country == null ? l10n.fieldRequired : null,
               ),
               const SizedBox(height: 20),
               Text(l10n.sexLabel, style: Theme.of(context).textTheme.bodyMedium),
@@ -196,6 +223,8 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
                 DeleteButton(
                   enabled: !_busy,
                   onConfirmed: () async {
+                    // Photo files live in Storage, not the database: remove them too.
+                    await ref.read(photoRepositoryProvider).deleteAllFor(existing);
                     await ref.read(babyRepositoryProvider).delete(existing.id);
                     if (context.mounted) Navigator.of(context).pop();
                   },

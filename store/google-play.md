@@ -42,7 +42,9 @@ Package name: `com.palnacare.app` (permanent).
 
 Collects data: Yes. Encrypted in transit: Yes. Accounts: username/password and OAuth.
 Delete account URL: https://palnacare.com/delete-account/
-Partial data deletion: No (entries deleted in the app are only marked deleted on the server).
+Partial data deletion: No for now. Switch to **Yes** with URL
+https://palnacare.com/delete-account/#some-data once `supabase/snippets/purge_deleted_entries.sql`
+has been run and the website redeployed (todos.txt, 1 Oct night).
 
 Every type: collected, **not shared**, not ephemeral.
 
@@ -51,9 +53,10 @@ Every type: collected, **not shared**, not ephemeral.
 | Personal info > Name | Required | App functionality, Account management |
 | Personal info > Email address | Required | App functionality, Account management |
 | Personal info > User IDs | Required | App functionality, Account management |
-| Personal info > Other info (baby's birth date, sex) | Required | App functionality |
+| Personal info > Other info (baby's birth date, sex, country) | Required | App functionality |
 | Health and fitness > Health info | Required | App functionality |
 | App activity > Other user-generated content | Optional | App functionality |
+| Photos and videos > Photos | Optional | App functionality |
 
 ## When paid plans arrive
 

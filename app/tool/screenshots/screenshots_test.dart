@@ -28,6 +28,7 @@ import 'package:baby_app/data/illness_repository.dart';
 import 'package:baby_app/data/journal_repository.dart';
 import 'package:baby_app/data/medication_repository.dart';
 import 'package:baby_app/data/milk_repository.dart';
+import 'package:baby_app/data/photo_repository.dart';
 import 'package:baby_app/data/models.dart';
 import 'package:baby_app/data/settings_repository.dart';
 import 'package:baby_app/data/solids_repository.dart';
@@ -197,7 +198,8 @@ final overrides = [
     ),
   ),
   recentSleepsProvider.overrideWith((ref, id) => Stream.value(sleeps)),
-  vaccineScheduleProvider.overrideWith((ref) => Stream.value(schedule)),
+  photosProvider.overrideWith((ref, id) => Stream.value(const <Photo>[])),
+  vaccineScheduleProvider.overrideWith((ref, country) => Stream.value(schedule)),
   vaccinationsProvider.overrideWith((ref, id) => Stream.value(vaccinations)),
   medicationsProvider.overrideWith((ref, id) => Stream.value([vitaminD])),
   recentDosesProvider.overrideWith(

@@ -6,6 +6,7 @@ import '../../data/content.dart';
 import '../../data/models.dart';
 import '../../data/solids_repository.dart';
 import '../../l10n/app_localizations.dart';
+import '../common/country_picker.dart';
 import '../common/language_menu.dart';
 import 'food_sheets.dart';
 import 'recipes_screen.dart';
@@ -90,7 +91,7 @@ class _SolidsScreenState extends ConsumerState<SolidsScreen> {
         guideTile(
           Icons.health_and_safety_outlined,
           l10n.reactionSignsTitle,
-          [Text(guide.reactionSigns.of(l10n))],
+          [Text(guide.reactionSigns.of(l10n).replaceAll('{emergency}', emergencyNumberText(context, baby.countryCode)))],
           color: theme.colorScheme.errorContainer.withValues(alpha: 0.5),
         ),
         guideTile(Icons.fact_check_outlined, l10n.beliefsTitle, [

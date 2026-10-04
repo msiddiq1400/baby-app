@@ -673,7 +673,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get storageGuide =>
-      'Freshly pumped milk (CDC guidance):\n• Room, 25°C or cooler: up to 4 hours\n• Cooler bag with ice packs: up to 24 hours\n• Fridge: up to 4 days\n• Freezer: best within 6 months, up to 12 months\n\nThawed milk: use within 24 hours in the fridge, or within 2 hours once warmed. Never refreeze thawed milk.\nLeftover milk after a feed: use within 2 hours, then throw away.\n\nIn Pakistani summers rooms are often hotter than 25°C, so put milk in the fridge or a cooler with ice right after pumping.';
+      'Freshly pumped milk (CDC guidance):\n• Room, 25°C or cooler: up to 4 hours\n• Cooler bag with ice packs: up to 24 hours\n• Fridge: up to 4 days\n• Freezer: best within 6 months, up to 12 months\n\nThawed milk: use within 24 hours in the fridge, or within 2 hours once warmed. Never refreeze thawed milk.\nLeftover milk after a feed: use within 2 hours, then throw away.\n\nIn hot weather rooms are often hotter than 25°C, so put milk in the fridge or a cooler with ice right after pumping.';
 
   @override
   String get loadSheddingTitle => 'During load-shedding';
@@ -1160,8 +1160,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Had a reaction: talk to your doctor before giving this again.';
 
   @override
-  String get severeReactionNow =>
-      'If your baby has trouble breathing, swelling of the tongue or throat, or becomes floppy or pale, call 1122 or 115 now.';
+  String severeReactionNow(String number) {
+    return 'If your baby has trouble breathing, swelling of the tongue or throat, or becomes floppy or pale, call $number now.';
+  }
 
   @override
   String sourcesLabel(String sources) {
@@ -1209,9 +1210,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpTitle => 'Emergency & help';
-
-  @override
-  String get emergencyNumbers => 'Emergency numbers (Pakistan)';
 
   @override
   String get emergencyNumbersNote =>
@@ -1704,4 +1702,149 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get continueWithApple => 'Continue with Apple';
+
+  @override
+  String get searchCountry => 'Search countries';
+
+  @override
+  String get allCountries => 'All countries';
+
+  @override
+  String get countryLabel => 'Country where the baby lives';
+
+  @override
+  String get countryHelp =>
+      'Used for the vaccine schedule and emergency numbers.';
+
+  @override
+  String get vaccineNameLabel => 'Vaccine name';
+
+  @override
+  String get vaccineNameHint => 'e.g. Typhoid, Chickenpox, Flu';
+
+  @override
+  String vaccineScheduleNoteCountry(String country) {
+    return 'National schedule for $country. Always confirm dates with your doctor or nurse; they can differ by region and vaccine brand.';
+  }
+
+  @override
+  String get vaccineScheduleNoteCanada =>
+      'Canada\'s national schedule. Each province has its own, so follow your province\'s schedule and your doctor\'s advice.';
+
+  @override
+  String noScheduleTitle(String country) {
+    return 'No built-in vaccine schedule for $country yet';
+  }
+
+  @override
+  String get noScheduleBody =>
+      'Add each vaccine your baby gets below, and follow the schedule your doctor or health centre gives you.';
+
+  @override
+  String get otherVaccines => 'Other vaccines';
+
+  @override
+  String get otherVaccinesHelp =>
+      'Vaccines outside this schedule, such as private or travel vaccines, can be added here.';
+
+  @override
+  String get addOtherVaccine => 'Add a vaccine';
+
+  @override
+  String get numAll => 'Ambulance, fire and police';
+
+  @override
+  String get numAmbulance => 'Ambulance';
+
+  @override
+  String get numNhs111 => 'NHS 111: urgent medical advice';
+
+  @override
+  String get numPoison => 'Poison Control';
+
+  @override
+  String get numNurseLine => 'Nurse advice line (most provinces)';
+
+  @override
+  String get numUnified => 'Unified emergency number';
+
+  @override
+  String emergencyNumbersIn(String country) {
+    return 'Emergency numbers ($country)';
+  }
+
+  @override
+  String get noEmergencyNumbers =>
+      'We don\'t have the numbers for this country yet. Save your local emergency number and your nearest children\'s hospital in your phone.';
+
+  @override
+  String get localEmergencyNumber => 'your local emergency number';
+
+  @override
+  String get weightGainTitle => 'Weight gain over the last month';
+
+  @override
+  String weightGainSummary(String gain, int days) {
+    return 'About $gain g a month (from two weights $days days apart).';
+  }
+
+  @override
+  String weightGainRange(String low, String high, String median) {
+    return 'Usual at this age (WHO): $low to $high g a month; the middle is $median g.';
+  }
+
+  @override
+  String get weightGainUsual => 'Within the usual range for babies this age.';
+
+  @override
+  String get weightGainSlow =>
+      'Slower than most babies this age. One reading on its own isn\'t a diagnosis; mention it at the next check-up, and see a doctor sooner if your baby is feeding poorly, has few wet diapers or seems unwell.';
+
+  @override
+  String get weightGainFast =>
+      'Faster than most babies this age. This is usually nothing to worry about; your doctor can look at it with the whole growth chart.';
+
+  @override
+  String get tabPhotos => 'Photos';
+
+  @override
+  String photosIntro(String name) {
+    return 'One photo for each month: watch $name grow. Tap a month to add its photo.';
+  }
+
+  @override
+  String get photoNewborn => 'Newborn';
+
+  @override
+  String photoMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count months',
+      one: '1 month',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get addPhoto => 'Add photo';
+
+  @override
+  String get takePhoto => 'Take a photo';
+
+  @override
+  String get chooseFromGallery => 'Choose from gallery';
+
+  @override
+  String get photoCaptionLabel => 'Caption (optional)';
+
+  @override
+  String get editCaption => 'Edit caption';
+
+  @override
+  String get replacePhoto => 'Replace';
+
+  @override
+  String get photoMonthTaken =>
+      'This month already has a photo. Open it and tap Replace.';
 }

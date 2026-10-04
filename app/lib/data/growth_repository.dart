@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:powersync/powersync.dart';
 
 import '../core/dates.dart';
+import '../core/weight_velocity.dart';
 import '../core/who_growth.dart';
 import 'local_db.dart';
 import 'models.dart';
@@ -51,3 +52,5 @@ final growthMeasurementsProvider = StreamProvider.family<List<GrowthMeasurement>
 );
 
 final whoGrowthProvider = FutureProvider<WhoGrowth>((ref) => WhoGrowth.load());
+
+final weightVelocityProvider = FutureProvider<WeightVelocity>((ref) => WeightVelocity.load());

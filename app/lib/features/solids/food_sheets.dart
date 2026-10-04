@@ -5,6 +5,7 @@ import '../../data/content.dart';
 import '../../data/models.dart';
 import '../../data/solids_repository.dart';
 import '../../l10n/app_localizations.dart';
+import '../common/country_picker.dart';
 import '../common/sheet.dart';
 
 IconData categoryIcon(String category) => switch (category) {
@@ -232,7 +233,7 @@ class _TrySheetState extends ConsumerState<_TrySheet> {
             margin: const EdgeInsets.only(top: 8),
             child: ListTile(
               leading: Icon(Icons.local_hospital, color: theme.colorScheme.onErrorContainer),
-              title: Text(l10n.severeReactionNow, style: TextStyle(color: theme.colorScheme.onErrorContainer)),
+              title: Text(l10n.severeReactionNow(emergencyNumberText(context, widget.baby.countryCode)), style: TextStyle(color: theme.colorScheme.onErrorContainer)),
             ),
           ),
         const SizedBox(height: 12),

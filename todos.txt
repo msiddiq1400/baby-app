@@ -2,6 +2,71 @@ BABY APP: THINGS ONLY YOU CAN DO
 (Claude keeps this list up to date. Most urgent first.)
 ====================================================================
 
+--- WHEN YOU WAKE UP (1 OCT NIGHT) -----------------------------------
+
+[ ] N1. !! FIRST, before running the new app build: apply the database
+        change (baby's country + vaccines by name + 5 new schedules):
+          cd d:\baby-app
+          npx supabase db push --dry-run     (should list 20261001000001_countries)
+          npx supabase db push
+        Until it's applied, a phone running the new build can't upload
+        new babies or vaccines (they wait in the queue, nothing is lost).
+        The same push also adds monthly photos (20261001000002_photos: the
+        photos table, the private "photos" storage bucket and its rules).
+[ ] N1b. !! PowerSync dashboard > Sync Streams > replace everything with
+        d:\baby-app\powersync\sync-config.yaml > Validate > Deploy (new
+        table: photos). Without it, photos upload but then vanish from the
+        phone, and family members never see them.
+[ ] N2. Test on the phone (list under "WHAT CHANGED ON 1 OCT NIGHT"), then
+        tell Claude to commit, or commit yourself.
+[ ] N3. Delete entries for good after 30 days (item 27a): Supabase > SQL
+        Editor > paste d:\baby-app\supabase\snippets\purge_deleted_entries.sql
+        > Run. THEN re-deploy the website (the delete-account page now has a
+        "Delete some of your data" section that promises this), THEN Play
+        Console > App content > Data safety > "delete some data without
+        deleting the account" > Yes, URL
+        https://palnacare.com/delete-account/#some-data
+        Don't deploy the website before running the SQL.
+[ ] N4. Demo account for Google/Apple review: run
+        d:\baby-app\supabase\snippets\review_account.sql (set the password
+        first), sign in once on the phone, and put the same email/password
+        in Play Console > App access and App Store Connect > App Review.
+[ ] N5. Store text: the description gained a line for families abroad
+        ("Living abroad? Vaccine schedules for the UK, US, Canada, UAE and
+        Saudi Arabia too..."). Paste the updated description from
+        store/app-store.md into Play Console > Main store listing (and App
+        Store Connect when you get there).
+[ ] N7. Photos in the store forms (after testing photos):
+        - Play Console > App content > Data safety > Data types > Photos and
+          videos > Photos: collected, NOT shared, not ephemeral, OPTIONAL
+          ("users can choose"), purpose App functionality.
+        - App Store Connect (when filling App Privacy): User Content >
+          Photos or Videos, linked to the user, not tracking.
+        - Re-deploy the website: the privacy policy and delete-account page
+          now mention photos (do N3's SQL first, as that page also promises
+          the 30-day clean-up).
+[ ] N6. Testers: invite message in English / Urdu / Roman Urdu is in
+        store/tester-invite.md. Send it once the closed test is approved;
+        12+ testers must stay opted in for 14 days in a row.
+
+QUESTIONS FOR YOU (answer any time; nothing is blocked on them)
+  Q1. Existing babies were set to Pakistan automatically. Fine, or should
+      the app ask every family once "Which country does <baby> live in?"
+  Q2. Canada: the app uses the NATIONAL schedule (Canadian Immunization
+      Guide). Provinces differ a lot (Ontario: no infant Hep B, chickenpox
+      at 15 months, MMRV at 4-6 years). Keep national + the "follow your
+      province" note, or ask for the province and add Ontario's version?
+  Q3. UK: the schedule is for babies born from 1 Jan 2025 (MMRV, 18-month
+      visit). Older UK children (born 2022-2024) had a slightly different
+      one. Worth adding by birth date, or leave as is (new babies are the
+      main users)?
+  Q4. Add the country schedules and emergency numbers to the website
+      (features + FAQ, 3 languages)? Claude can do it.
+  Q5. RSV antibody at birth (UAE for babies born Sep-Mar, US/Canada by
+      season) and yearly flu were left out of all schedules as "not
+      routine for every baby". Show them as optional reminders later?
+
+
 --- WHEN YOU WAKE UP -------------------------------------------------
 
 [x] M1. !! BEFORE opening the new app: PowerSync dashboard > Sync Streams >
@@ -116,6 +181,23 @@ BABY APP: THINGS ONLY YOU CAN DO
         [x] App Store Connect app created (1 Oct): "Palna - Mother & Baby
             Care", SKU palna-ios, App Store ID (Apple ID) 6817859227.
 [ ] 13. Google Play Console as an organization ($25 once).
+        1 Oct: Palna was REJECTED on the personal Play account ("Violation of
+        Play Console Requirements"): apps with Medical features must come
+        from an organization account. Palna's health declaration truthfully
+        includes Medical ones (medicine doses and reminders, symptoms and
+        illnesses, EPI vaccines, emergency numbers, fever guidance). Don't
+        untick them to get through: Google calls a false declaration a
+        policy violation and can close the account.
+        Plan: company (10a) > D-U-N-S (11) > then FIRST try converting the
+        existing account: Play Console > Developer account > About you >
+        Change account type > Organization (new organization payments
+        profile with the D-U-N-S number; same email, no fee mentioned).
+        Only if that isn't offered: a new organization account ($25) on a
+        DIFFERENT Google account (e.g. apps@palnacare.com), then transfer
+        the app to it (package com.palnacare.app, listing and testers move
+        with it) > resubmit.
+        Until then: Android testers install stuff/Palna-1.0.0.apk (or
+        Firebase App Distribution once item 14 is done).
 [ ] 14. Firebase project (console.firebase.google.com), add it to the
         existing "Baby App" Google Cloud project. Needed later for:
         - push notifications across phones (e.g. "Dad logged a feed")
@@ -265,9 +347,33 @@ Claude can build 31-36 without anything from you; say which ones first.
         something is logged in the app.
         Still open: the iPhone version (a WidgetKit extension, needs a Mac
         or Codemagic, item 15) and Live Activities for the timer.
-[ ] 38. Photos and memories (first smile, milestones with a photo). Needs
-        a decision: photos use Supabase Storage, which costs more and must
-        be covered in the privacy policy.
+[ ] 38. Photos and memories (first smile, milestones with a photo).
+        BUILT with the free limit (1 Oct night), please test after N1/N1b:
+        Growth > Photos: one tile per month of age (Newborn, 1 month...),
+        newest first. Tap an empty month > camera or gallery > caption >
+        Save. Tap a photo: full screen, share, edit caption, replace,
+        delete. Works offline: the photo is saved on the phone and uploads
+        when online; family members' phones download it.
+        TEST: add a photo, check it appears on a second family member's
+        phone; delete it and check Supabase > Storage > photos is empty.
+        DECIDED (1 Oct): Free plan = 1 photo per baby per month (a "monthly
+        photo", like a month-by-month album); Pro = more photos (the number
+        to decide with the pricing, item on paid plans). Build it with the
+        paid plans, or earlier with only the free limit.
+        Plan when building:
+        - Supabase Storage, private bucket, one folder per family; only
+          family members can read (storage policies like the tables).
+        - Shrink on the phone before upload (e.g. 1600 px, ~300 KB JPEG) to
+          keep storage low; photos also saved on the phone for offline.
+        - Limit checked on the SERVER too (a trigger/policy), not only in
+          the app, so it can't be bypassed.
+        - Delete photos when an entry, a baby or the account is deleted,
+          and in the 30-day purge (27a).
+        - Update before release: privacy policy, delete-account page, Play
+          Data safety ("Photos: collected"), App Store privacy ("Photos").
+        - Costs: Supabase free plan has 1 GB storage; at ~300 KB that's
+          ~3,000 photos in total, so Pro ($25/mo, 100 GB) is needed soon
+          after launch if photos are popular.
 [ ] 39. AI assistant (questions answered from the baby's own logs). Needs a
         decision: which AI provider, cost per user, and medical-safety
         rules; a pediatrician should approve the guardrails.
@@ -286,6 +392,7 @@ Claude can build 31-36 without anything from you; say which ones first.
         diapers (NHS). No "typical wake window" on purpose: there's no solid
         source for it. Still to do: growth *rate* compared with WHO
         velocity data. A pediatrician should check the wording (item 22).
+        Growth RATE vs WHO velocity: BUILT (1 Oct night), see above.
 [ ] 44. "Forgot password?": BUILT (30 Sep night), please test after M2.
         Sign-in screen > "Forgot password?" > email > 6-digit code + new
         password > signed in. Also Settings > Account > "Change password"
@@ -304,8 +411,12 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
 
 --- CONTENT REVIEW (a pediatrician should check) ----------------------
 
-[ ] 21. Pakistan EPI vaccine schedule (app shows "confirm with your
-        vaccinator"). After review, Claude can mark it verified.
+[ ] 21. Vaccine schedules (app shows "confirm with your doctor"): Pakistan
+        EPI, and since 1 Oct the UK, US, Canada, UAE and Saudi Arabia (sources
+        in supabase/migrations/20261001000001_countries.sql). After review,
+        Claude can mark them verified. Watch the US one: a court appeal on
+        6 Oct 2026 could bring back the Jan 2026 CDC schedule (Hep B birth
+        dose, rotavirus and Hep A would stop being routine for everyone).
 [ ] 22. Under-3-months fever warning text, medicine safety note.
 [ ] 23. Solids guide and milestones content (added overnight, see below).
 [ ] 24. Urdu and Roman Urdu wording: a native speaker should read through
@@ -321,7 +432,8 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
         that the user is gone and in Table Editor that the baby is gone.
         Also test a shared family: the other member should keep the baby
         and become owner.
-[ ] 27a. Purge deleted entries after 30 days: you said YES (30 Sep), but
+[ ] 27a. Purge deleted entries after 30 days: SQL READY (1 Oct night), run it
+        yourself: see N3 at the top. Background: you said YES (30 Sep), but
         Claude's safety check blocked creating a job that deletes live data,
         even with your approval. Options: (a) allow it once in Claude Code's
         permission settings and ask again, or (b) ask Claude for the SQL and
@@ -346,7 +458,8 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
         - You or a lawyer should read it. It deliberately has no "governing
           law" clause yet: add the country where Toolbox Services is (or will
           be) registered once that's decided (item 11).
-[ ] 26. Play Store health-app declaration and Data safety form.
+[x] 26. Play Store health-app declaration and Data safety form: filled in
+        (1 Oct). All answers are in store/google-play.md.
 [ ] 45. Sign in with Apple: BUILT (1 Oct), iPhone only (required by Apple
         because Palna offers Google sign-in). Supabase Apple provider
         enabled with Client ID com.palnacare.app (1 Oct; no secret key, so
@@ -366,6 +479,80 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
         the app is open on iPhone; a proper one-colour Android notification
         icon; privacy policy mentions Sign in with Apple; terms now say the
         laws of Pakistan apply.
+
+
+====================================================================
+WHAT CHANGED ON 1 OCT NIGHT (to test; nothing is committed)
+====================================================================
+Do N1 at the top first. Then press F5 (or flutter run).
+
+1. COUNTRY FOR EACH BABY
+   - Adding a baby now REQUIRES "Country where the baby lives" (no guess
+     from the phone: many phones in Pakistan are set to English (US)).
+     Pakistan and UK / US / Canada / UAE / Saudi Arabia are at the top,
+     then every country, with search (English or Urdu names).
+   - Existing babies are Pakistan. Change it: Settings > Babies > pencil.
+   TEST: add a baby with United Kingdom; edit an existing baby's country.
+
+2. VACCINES FOLLOW THE COUNTRY
+   - Health > Vaccines shows that country's schedule: Pakistan EPI, UK
+     (NHS/UKHSA 2026), US (CDC), Canada (national guide), UAE (MOHAP/DHA
+     2026), Saudi Arabia (MOH). Other countries: "No built-in vaccine
+     schedule for <country> yet" and NEVER Pakistan's schedule.
+   - New "Other vaccines" section for every country: "Add a vaccine" by
+     name (private typhoid, chickenpox, travel vaccines...). They show in
+     the journal too. Reminders, the Today card and the widget use the
+     baby's country.
+   - Sources, dates and caveats per country: the comments at the top of
+     supabase/migrations/20261001000001_countries.sql. All marked
+     unverified, like Pakistan's (content review item 21).
+   TEST: switch a baby to United Kingdom > Vaccines (8-week visit first);
+   to Japan > the "no schedule" card; add "Typhoid" with "Add a vaccine".
+
+3. EMERGENCY NUMBERS FOLLOW THE COUNTRY
+   - Menu > Emergency & help: Pakistan 1122/115/1020/15/16; UK 999 + NHS
+     111; US 911 + Poison Control; Canada 911 + 811; UAE 998/999/997;
+     Saudi 997/911/998/999; EU countries 112; plus Australia, NZ, India,
+     Bangladesh, Qatar, Kuwait, Oman, Bahrain, Malaysia, Turkiye. Other
+     countries: a note to save the local number. The hot-weather and
+     load-shedding card only shows for Pakistan, India and Bangladesh.
+   - Solids: "call 1122 / 115" in the allergy warnings now uses the
+     baby's country's number.
+
+4. WEIGHT GAIN vs WHO (item 42)
+   Growth > Weight: with two weights 3 to 6 weeks apart (the birth weight
+   counts), a card shows "About 650 g a month", the usual range for that
+   age (WHO growth velocity, 5th-95th percentile) and "within the usual
+   range" / "slower than most" (gently, with when to see a doctor) /
+   "faster than most". Birth to 12 months (where WHO's table ends).
+   Data: app/assets/who_weight_velocity.json, copied from WHO's tables.
+   A pediatrician should check the wording (item 22).
+
+5. SMALLER THINGS
+   - Settings shows "Version 1.0.0 (build N)" at the bottom.
+   - Codemagic: build numbers set automatically for iPhone AND a new
+     "Android to Google Play" workflow (setup steps at the top of
+     codemagic.yaml: upload the keystore, add a Play service account).
+   - Screenshot tool: SHOT_DEVICE=play makes 1080 x 1920 Play screenshots.
+   - store/google-play.md: every Play Console answer, for next time.
+   - Privacy policy: mentions the baby's country.
+   - 193 automated checks, all passing (new: countries, emergency numbers,
+     the vaccines/help screens per country, the country field, weight gain,
+     the photos tab).
+
+6. MONTHLY PHOTOS (item 38, free limit: 1 per baby per month)
+   Growth > Photos (third tab). See item 38 for what to test. The limit
+   is also enforced by the database, so it can't be bypassed. Deleting a
+   photo, a baby or your account deletes the picture from storage too.
+   Photos are shrunk on the phone to 1600 px JPEG (~200-400 KB) first.
+   iPhone asks for camera / photo access the first time (texts added).
+
+NOT DONE, and why
+   - Purge job (27a): written, but you run it (N3); Claude doesn't run
+     jobs that delete live data.
+   - Nothing else from the list can move without you: push (Firebase,
+     item 14), photos (38), AI (39), iPhone widget (needs a Mac/Codemagic),
+     "Is this normal?" / shopping / hospitals (28-30) need content.
 
 
 ====================================================================

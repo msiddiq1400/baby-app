@@ -118,7 +118,7 @@ class JournalRepository {
     final growth = await onDate('growth_measurements', 'id, measured_on, weight_g, length_mm, head_mm', 'measured_on');
     final vaccinations = await onDate(
       'vaccinations',
-      'id, vaccine_code, given_on, batch_number, clinic, notes',
+      'id, vaccine_code, vaccine_name, given_on, batch_number, clinic, notes',
       'given_on',
     );
     final milestones = await onDate('milestone_checks', 'id, milestone_id, achieved_on', 'achieved_on');

@@ -725,9 +725,9 @@
    "ur_Latn": "Aam allergy wali ghizayein (anda, doodh, moongphali, mewe, til, gandum, machli) taqreeban 6 mahine se di ja sakti hain: ek waqt mein ek nayi, thori miqdar mein, taake koi rad-e-amal pehchana ja sake. Agar bache ko koi masla na ho to isay baqaidgi se khane mein shamil rakhein."
   },
   "reactionSigns": {
-   "en": "Possible allergic reaction: rash or hives, itching, swelling of the lips, face or eyes, vomiting, or diarrhoea soon after eating. Stop that food and talk to your doctor. EMERGENCY, call 1122 / 115 straight away: difficulty breathing, wheezing, swelling of the tongue or throat, or the baby becoming floppy, pale or unresponsive.",
-   "ur": "ممکنہ الرجی ردِعمل: دانے یا چھپاکی، خارش، ہونٹوں، چہرے یا آنکھوں پر سوجن، کھانے کے فوراً بعد الٹی یا دست۔ وہ غذا روک دیں اور ڈاکٹر سے بات کریں۔ ایمرجنسی، فوراً 1122 / 115 پر کال کریں: سانس لینے میں مشکل، سیٹی جیسی آواز، زبان یا گلے میں سوجن، یا بچہ ڈھیلا، زرد یا بے سدھ ہو جائے۔",
-   "ur_Latn": "Mumkina allergy rad-e-amal: daane ya chhapaki, kharish, honton, chehre ya aankhon par soojan, khane ke foran baad ulti ya dast. Woh ghiza rok dein aur doctor se baat karein. EMERGENCY, foran 1122 / 115 par call karein: saans lene mein mushkil, seeti jaisi awaaz, zabaan ya gale mein soojan, ya bacha dheela, zard ya be-sudh ho jaye."
+   "en": "Possible allergic reaction: rash or hives, itching, swelling of the lips, face or eyes, vomiting, or diarrhoea soon after eating. Stop that food and talk to your doctor. EMERGENCY, call {emergency} straight away: difficulty breathing, wheezing, swelling of the tongue or throat, or the baby becoming floppy, pale or unresponsive.",
+   "ur": "ممکنہ الرجی ردِعمل: دانے یا چھپاکی، خارش، ہونٹوں، چہرے یا آنکھوں پر سوجن، کھانے کے فوراً بعد الٹی یا دست۔ وہ غذا روک دیں اور ڈاکٹر سے بات کریں۔ ایمرجنسی، فوراً {emergency} پر کال کریں: سانس لینے میں مشکل، سیٹی جیسی آواز، زبان یا گلے میں سوجن، یا بچہ ڈھیلا، زرد یا بے سدھ ہو جائے۔",
+   "ur_Latn": "Mumkina allergy rad-e-amal: daane ya chhapaki, kharish, honton, chehre ya aankhon par soojan, khane ke foran baad ulti ya dast. Woh ghiza rok dein aur doctor se baat karein. EMERGENCY, foran {emergency} par call karein: saans lene mein mushkil, seeti jaisi awaaz, zabaan ya gale mein soojan, ya bacha dheela, zard ya be-sudh ho jaye."
   },
   "myths": [
    {
