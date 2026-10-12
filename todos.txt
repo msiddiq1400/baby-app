@@ -19,7 +19,7 @@ BABY APP: THINGS ONLY YOU CAN DO
         phone, and family members never see them.
 [x] N2. Test on the phone (list under "WHAT CHANGED ON 1 OCT NIGHT"), then
         tell Claude to commit, or commit yourself.
-[ ] N3. Delete entries for good after 30 days (item 27a): Supabase > SQL
+[~] N3. (SQL RUN 5 Oct; website + Play form still to do.) Delete entries for good after 30 days (item 27a): Supabase > SQL
         Editor > paste d:\baby-app\supabase\snippets\purge_deleted_entries.sql
         > Run. THEN re-deploy the website (the delete-account page now has a
         "Delete some of your data" section that promises this), THEN Play
@@ -156,7 +156,20 @@ QUESTIONS FOR YOU (answer any time; nothing is blocked on them)
 
 --- ACCOUNTS / SERVICES ----------------------------------------------
 
-[ ] 10a. Register the company: "Toolbox Services (SMC-Private) Limited"
+[x] 10a. REGISTERED (9 Oct 2026): TOOLBOX SERVICES (SMC-PRIVATE) LIMITED,
+        CUIN 0360341, NTN K372077-8 (RTO Peshawar, income tax active, not
+        registered for sales tax). Documents in business/ (git-ignored).
+        Letterhead and stamps made 13 Oct: business/letterhead, business/stamp.
+        STILL TO DO for the company:
+        - SECP: Form 1 has only a "correspondence address"; the registered
+          office box is empty. Notify the registered office on SECP LEAP
+          within 30 days of incorporation (by 8 Nov 2026). Confirm in LEAP.
+        - Company bank account (take the letterhead, stamps, certificate,
+          Form 1, MOA/AOA, NTN, CNIC); deposit the paid-up capital
+          (PKR 1,000,000) and ask your consultant about the SECP filing
+          that confirms it.
+        - PSEB registration as a software house.
+        Was: Register the company: "Toolbox Services (SMC-Private) Limited"
         (decided 30 Sep; the SECP name search showed nothing named
         "Toolbox"; closest is "Tools Services (Pvt) Ltd").
         Backup names: Toolbox Digital Services, Nestbyte Technologies.
@@ -432,7 +445,7 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
         that the user is gone and in Table Editor that the baby is gone.
         Also test a shared family: the other member should keep the baby
         and become owner.
-[ ] 27a. Purge deleted entries after 30 days: SQL READY (1 Oct night), run it
+[x] 27a. Purge deleted entries after 30 days: SQL RUN (5 Oct), nightly at 03:00 PKT. Was: run it
         yourself: see N3 at the top. Background: you said YES (30 Sep), but
         Claude's safety check blocked creating a job that deletes live data,
         even with your approval. Options: (a) allow it once in Claude Code's
