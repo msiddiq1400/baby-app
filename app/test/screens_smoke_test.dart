@@ -595,6 +595,7 @@ void main() {
     // Help and Settings are buttons, not hidden in a language menu.
     expect(find.byTooltip('Emergency & help'), findsOneWidget);
     expect(find.byTooltip('Settings'), findsOneWidget);
+    expect(find.byTooltip('Journal'), findsOneWidget); // the full journal
     // Small labelled buttons on each card.
     expect(find.text('Past feed'), findsOneWidget);
     expect(find.text('Past sleep'), findsOneWidget);

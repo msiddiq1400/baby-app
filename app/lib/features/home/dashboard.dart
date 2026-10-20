@@ -47,7 +47,17 @@ class Dashboard extends ConsumerWidget {
             ],
           ),
         ),
-        actions: const [MainActions()],
+        actions: [
+          // The full journal: every kind of entry, day by day. (Each card's
+          // "Past days" shows only its own kind.)
+          IconButton(
+            icon: const Icon(Icons.menu_book_outlined),
+            tooltip: l10n.journalTitle,
+            onPressed: () => Navigator.of(context, rootNavigator: true)
+                .push(MaterialPageRoute<void>(builder: (_) => JournalScreen(baby: baby))),
+          ),
+          const MainActions(),
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: () => ref.refresh(todayLogProvider(baby.id).future),

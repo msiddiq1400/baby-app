@@ -86,7 +86,7 @@ QUESTIONS FOR YOU (answer any time; nothing is blocked on them)
         dark with the site's dark theme, and privacy/delete pages updated
         for illnesses, the widget and 30-day encrypted backups.
         (The backups line is only true once you switch backups on, item 18.)
-[ ] M5. Website auto-deploy: Cloudflare > your Worker > Settings > Build >
+[x] M5. (WORKING: a push to main went live in ~40 s on 21 Oct.) Website auto-deploy: Cloudflare > your Worker > Settings > Build >
         connect GitHub repo baby-app, branch main, build command empty,
         deploy command "npx wrangler deploy". Uses wrangler.jsonc in the
         repo root, so it only works once that file is committed and pushed.
@@ -512,6 +512,13 @@ feed/sleep/diaper reports mixed together; nothing is committed)
   logged), plus a "Night feeds (10 pm-6 am)" figure. Sleep: "Sleep
   pattern" (24-hour sleep log) and "Longest sleep each day". Diapers:
   "When diapers happen" (wet / dirty times).
+- Journal button (book icon) in Today's top bar opens the full journal
+  (every kind of entry, day by day). NOT committed yet.
+- Website updated and live (21 Oct): new screenshots everywhere, a sleep
+  pattern frame, text for buttons on every screen and past entries.
+  Still old: store listing text ("One tap to log" in store/app-store.md
+  and the Play listing) and the store screenshots (tool/screenshots
+  with SHOT_DEVICE=iphone / play).
 - Sleep button no longer starts a sleep straight away: it opens a form
   (start time, nap or night, "Still asleep" on) and starts on Save. While
   asleep it says "Woke up" and opens the form with the wake time = now.
