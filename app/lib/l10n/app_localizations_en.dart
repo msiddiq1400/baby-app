@@ -238,9 +238,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get diaperDirty => 'Dirty';
 
   @override
-  String get chooseDiaper => 'Choose wet, dirty or both';
-
-  @override
   String get timeLabel => 'Time';
 
   @override
@@ -880,10 +877,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'The first time, this needs an internet connection. After that the app works offline.';
 
   @override
-  String get offlineBanner =>
-      'Offline: changes are saved and will sync when you\'re back online.';
-
-  @override
   String get unsyncedSignOutTitle => 'Some changes haven\'t synced yet';
 
   @override
@@ -986,40 +979,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get switchBaby => 'Switch baby';
 
   @override
-  String get atAGlance => 'At a glance';
-
-  @override
-  String hungerEstimate(String interval, String time) {
-    return 'Usually feeds about every $interval, so the next feed may be around $time.';
-  }
-
-  @override
-  String get hungerDisclaimer =>
-      'A rough guide from recent feeds; always follow your baby\'s hunger cues.';
-
-  @override
-  String sleepUsual(String usual, String today) {
-    return 'Usually sleeps about $usual a day. Today so far: $today.';
-  }
-
-  @override
   String awakeFor(String duration) {
     return 'Awake for $duration';
-  }
-
-  @override
-  String usuallyAwake(String duration) {
-    return 'usually about $duration between sleeps';
-  }
-
-  @override
-  String vaccinesOverdueLine(String visit) {
-    return 'Vaccines overdue: $visit';
-  }
-
-  @override
-  String medsTodayLine(int given, int total) {
-    return 'Medicines today: $given of $total doses recorded';
   }
 
   @override
@@ -1342,9 +1303,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reportsTitle => 'Reports';
-
-  @override
-  String get seeReports => 'Reports and trends';
 
   @override
   String periodDays(int count) {
@@ -1847,4 +1805,41 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get photoMonthTaken =>
       'This month already has a photo. Open it and tap Replace.';
+
+  @override
+  String get diaperBoth => 'Both';
+
+  @override
+  String get diaperTapToSave => 'Tap one to save.';
+
+  @override
+  String get addPastSleep => 'Add a past sleep';
+
+  @override
+  String sleepUsualShort(String usual) {
+    return 'Usually about $usual a day';
+  }
+
+  @override
+  String get addPastFeed => 'Add a past feed';
+
+  @override
+  String get addPastDiaper => 'Add a past diaper';
+
+  @override
+  String nextFeedAround(String time) {
+    return 'Next feed may be around $time';
+  }
+
+  @override
+  String get pastFeedShort => 'Past feed';
+
+  @override
+  String get pastSleepShort => 'Past sleep';
+
+  @override
+  String get pastDiaperShort => 'Past diaper';
+
+  @override
+  String get startSleepTitle => 'Start a sleep';
 }

@@ -227,9 +227,6 @@ class AppLocalizationsUr extends AppLocalizations {
   String get diaperDirty => 'گندا';
 
   @override
-  String get chooseDiaper => 'گیلا، گندا یا دونوں منتخب کریں';
-
-  @override
   String get timeLabel => 'وقت';
 
   @override
@@ -851,10 +848,6 @@ class AppLocalizationsUr extends AppLocalizations {
       'پہلی بار اس کے لیے انٹرنیٹ ضروری ہے۔ اس کے بعد ایپ انٹرنیٹ کے بغیر بھی چلتی ہے۔';
 
   @override
-  String get offlineBanner =>
-      'آف لائن: تبدیلیاں محفوظ ہیں اور انٹرنیٹ آنے پر سنک ہو جائیں گی۔';
-
-  @override
   String get unsyncedSignOutTitle => 'کچھ تبدیلیاں ابھی سنک نہیں ہوئیں';
 
   @override
@@ -960,40 +953,8 @@ class AppLocalizationsUr extends AppLocalizations {
   String get switchBaby => 'بچہ بدلیں';
 
   @override
-  String get atAGlance => 'ایک نظر میں';
-
-  @override
-  String hungerEstimate(String interval, String time) {
-    return 'عام طور پر تقریباً ہر $interval بعد دودھ پیتا ہے، اس لیے اگلی خوراک تقریباً $time کے قریب ہو سکتی ہے۔';
-  }
-
-  @override
-  String get hungerDisclaimer =>
-      'یہ حالیہ خوراکوں سے ایک اندازہ ہے؛ ہمیشہ بچے کی بھوک کے اشاروں پر عمل کریں۔';
-
-  @override
-  String sleepUsual(String usual, String today) {
-    return 'عام طور پر دن میں تقریباً $usual سوتا ہے۔ آج اب تک: $today۔';
-  }
-
-  @override
   String awakeFor(String duration) {
     return '$duration سے جاگ رہا ہے';
-  }
-
-  @override
-  String usuallyAwake(String duration) {
-    return 'عام طور پر نیندوں کے درمیان تقریباً $duration';
-  }
-
-  @override
-  String vaccinesOverdueLine(String visit) {
-    return 'ٹیکوں میں تاخیر: $visit';
-  }
-
-  @override
-  String medsTodayLine(int given, int total) {
-    return 'آج کی دوائیں: $total میں سے $given خوراکیں درج';
   }
 
   @override
@@ -1312,9 +1273,6 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get reportsTitle => 'رپورٹیں';
-
-  @override
-  String get seeReports => 'رپورٹیں اور رجحانات';
 
   @override
   String periodDays(int count) {
@@ -1799,6 +1757,43 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get photoMonthTaken =>
       'اس مہینے کی تصویر پہلے سے موجود ہے۔ اسے کھول کر تبدیل کریں دبائیں۔';
+
+  @override
+  String get diaperBoth => 'دونوں';
+
+  @override
+  String get diaperTapToSave => 'محفوظ کرنے کے لیے ایک دبائیں۔';
+
+  @override
+  String get addPastSleep => 'پچھلی نیند درج کریں';
+
+  @override
+  String sleepUsualShort(String usual) {
+    return 'عام طور پر دن میں تقریباً $usual';
+  }
+
+  @override
+  String get addPastFeed => 'پچھلی خوراک درج کریں';
+
+  @override
+  String get addPastDiaper => 'پچھلا ڈائپر درج کریں';
+
+  @override
+  String nextFeedAround(String time) {
+    return 'اگلی خوراک شاید تقریباً $time پر';
+  }
+
+  @override
+  String get pastFeedShort => 'پچھلی خوراک';
+
+  @override
+  String get pastSleepShort => 'پچھلی نیند';
+
+  @override
+  String get pastDiaperShort => 'پچھلا ڈائپر';
+
+  @override
+  String get startSleepTitle => 'نیند شروع کریں';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -2023,9 +2018,6 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get diaperDirty => 'Ganda';
-
-  @override
-  String get chooseDiaper => 'Geela, ganda ya dono chunein';
 
   @override
   String get timeLabel => 'Waqt';
@@ -2651,10 +2643,6 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
       'Pehli baar is ke liye internet zaroori hai. Us ke baad app internet ke baghair bhi chalti hai.';
 
   @override
-  String get offlineBanner =>
-      'Offline: tabdeeliyan save hain aur internet aane par sync ho jayengi.';
-
-  @override
   String get unsyncedSignOutTitle => 'Kuch tabdeeliyan abhi sync nahi hui';
 
   @override
@@ -2760,40 +2748,8 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String get switchBaby => 'Baby badlein';
 
   @override
-  String get atAGlance => 'Ek nazar mein';
-
-  @override
-  String hungerEstimate(String interval, String time) {
-    return 'Aam taur par taqreeban har $interval baad doodh peeta hai, is liye agli feed taqreeban $time ke qareeb ho sakti hai.';
-  }
-
-  @override
-  String get hungerDisclaimer =>
-      'Yeh haaliya feeds se ek andaaza hai; hamesha baby ki bhook ke isharon par amal karein.';
-
-  @override
-  String sleepUsual(String usual, String today) {
-    return 'Aam taur par din mein taqreeban $usual sota hai. Aaj ab tak: $today.';
-  }
-
-  @override
   String awakeFor(String duration) {
     return '$duration se jaag raha hai';
-  }
-
-  @override
-  String usuallyAwake(String duration) {
-    return 'aam taur par neendon ke darmiyan taqreeban $duration';
-  }
-
-  @override
-  String vaccinesOverdueLine(String visit) {
-    return 'Teekon mein der: $visit';
-  }
-
-  @override
-  String medsTodayLine(int given, int total) {
-    return 'Aaj ki dawaiyan: $total mein se $given khurakein record';
   }
 
   @override
@@ -3113,9 +3069,6 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get reportsTitle => 'Reports';
-
-  @override
-  String get seeReports => 'Reports aur trends';
 
   @override
   String periodDays(int count) {
@@ -3600,4 +3553,41 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   @override
   String get photoMonthTaken =>
       'Is mahine ki tasveer pehle se mojood hai. Use khol kar Tabdeel karein dabayein.';
+
+  @override
+  String get diaperBoth => 'Dono';
+
+  @override
+  String get diaperTapToSave => 'Save karne ke liye ek dabayein.';
+
+  @override
+  String get addPastSleep => 'Pichli neend darj karein';
+
+  @override
+  String sleepUsualShort(String usual) {
+    return 'Aam taur par din mein taqreeban $usual';
+  }
+
+  @override
+  String get addPastFeed => 'Pichli feed darj karein';
+
+  @override
+  String get addPastDiaper => 'Pichla diaper darj karein';
+
+  @override
+  String nextFeedAround(String time) {
+    return 'Agli feed shayad taqreeban $time par';
+  }
+
+  @override
+  String get pastFeedShort => 'Pichli feed';
+
+  @override
+  String get pastSleepShort => 'Pichli neend';
+
+  @override
+  String get pastDiaperShort => 'Pichla diaper';
+
+  @override
+  String get startSleepTitle => 'Neend shuru karein';
 }

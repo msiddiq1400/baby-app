@@ -148,7 +148,6 @@
   "invalidMinutes": "Enter minutes between 1 and 180",
   "diaperWet": "Wet",
   "diaperDirty": "Dirty",
-  "chooseDiaper": "Choose wet, dirty or both",
   "timeLabel": "Time",
   "sleepNap": "Nap",
   "sleepNight": "Night sleep",
@@ -606,7 +605,6 @@
   "sumFooter": "Recorded by the parent in Palna.",
   "firstSyncLoading": "Loading your family's data…",
   "firstSyncNeedsInternet": "The first time, this needs an internet connection. After that the app works offline.",
-  "offlineBanner": "Offline: changes are saved and will sync when you're back online.",
   "unsyncedSignOutTitle": "Some changes haven't synced yet",
   "unsyncedSignOutBody": "If you sign out now, entries made while offline will be lost. Connect to the internet first to keep them.",
   "signOutAnyway": "Sign out anyway",
@@ -655,62 +653,11 @@
   },
   "leaveFamilyConfirm": "Leave this family? You'll stop seeing its babies.",
   "switchBaby": "Switch baby",
-  "atAGlance": "At a glance",
-  "hungerEstimate": "Usually feeds about every {interval}, so the next feed may be around {time}.",
-  "@hungerEstimate": {
-    "placeholders": {
-      "interval": {
-        "type": "String"
-      },
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "hungerDisclaimer": "A rough guide from recent feeds; always follow your baby's hunger cues.",
-  "sleepUsual": "Usually sleeps about {usual} a day. Today so far: {today}.",
-  "@sleepUsual": {
-    "placeholders": {
-      "usual": {
-        "type": "String"
-      },
-      "today": {
-        "type": "String"
-      }
-    }
-  },
   "awakeFor": "Awake for {duration}",
   "@awakeFor": {
     "placeholders": {
       "duration": {
         "type": "String"
-      }
-    }
-  },
-  "usuallyAwake": "usually about {duration} between sleeps",
-  "@usuallyAwake": {
-    "placeholders": {
-      "duration": {
-        "type": "String"
-      }
-    }
-  },
-  "vaccinesOverdueLine": "Vaccines overdue: {visit}",
-  "@vaccinesOverdueLine": {
-    "placeholders": {
-      "visit": {
-        "type": "String"
-      }
-    }
-  },
-  "medsTodayLine": "Medicines today: {given} of {total} doses recorded",
-  "@medsTodayLine": {
-    "placeholders": {
-      "given": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
       }
     }
   },
@@ -897,7 +844,6 @@
     }
   },
   "reportsTitle": "Reports",
-  "seeReports": "Reports and trends",
   "periodDays": "{count} days",
   "@periodDays": {
     "placeholders": {
@@ -1207,5 +1153,30 @@
   "photoCaptionLabel": "Caption (optional)",
   "editCaption": "Edit caption",
   "replacePhoto": "Replace",
-  "photoMonthTaken": "This month already has a photo. Open it and tap Replace."
+  "photoMonthTaken": "This month already has a photo. Open it and tap Replace.",
+  "diaperBoth": "Both",
+  "diaperTapToSave": "Tap one to save.",
+  "addPastSleep": "Add a past sleep",
+  "sleepUsualShort": "Usually about {usual} a day",
+  "@sleepUsualShort": {
+    "placeholders": {
+      "usual": {
+        "type": "String"
+      }
+    }
+  },
+  "addPastFeed": "Add a past feed",
+  "addPastDiaper": "Add a past diaper",
+  "nextFeedAround": "Next feed may be around {time}",
+  "@nextFeedAround": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "pastFeedShort": "Past feed",
+  "pastSleepShort": "Past sleep",
+  "pastDiaperShort": "Past diaper",
+  "startSleepTitle": "Start a sleep"
 }

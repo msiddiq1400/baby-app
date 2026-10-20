@@ -7,6 +7,7 @@ import '../../core/l10n_lookup.dart';
 import '../../data/content.dart';
 import '../../data/journal_repository.dart';
 import '../../data/models.dart';
+import '../../data/tracking_repository.dart' show TrackedTable;
 import '../../data/vaccine_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../growth/growth_sheet.dart';
@@ -24,10 +25,13 @@ import '../solids/food_sheets.dart';
 /// Every day since birth, one page each: swipe (or use the arrows or the
 /// calendar) to go back in time. Today is the first page.
 class JournalScreen extends StatefulWidget {
-  const JournalScreen({super.key, required this.baby, this.initialDay});
+  const JournalScreen({super.key, required this.baby, this.initialDay, this.only});
 
   final Baby baby;
   final DateTime? initialDay;
+
+  /// Show only feeds, sleep or diapers (opened from that card on Today).
+  final TrackedTable? only;
 
   @override
   State<JournalScreen> createState() => _JournalScreenState();
@@ -90,7 +94,12 @@ class _JournalScreenState extends State<JournalScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.journalTitle),
+        title: Text(switch (widget.only) {
+          null => l10n.journalTitle,
+          TrackedTable.feeds => l10n.feeds,
+          TrackedTable.sleeps => l10n.sleep,
+          TrackedTable.diapers => l10n.diapers,
+        }),
         actions: [
           IconButton(icon: const Icon(Icons.calendar_month_outlined), tooltip: l10n.pickDate, onPressed: _pickDate),
         ],
@@ -141,7 +150,7 @@ class _JournalScreenState extends State<JournalScreen> {
               reverse: true,
               itemCount: _pageCount,
               onPageChanged: (p) => setState(() => _page = p),
-              itemBuilder: (context, page) => JournalDayView(baby: widget.baby, day: _dayAt(page)),
+              itemBuilder: (context, page) => JournalDayView(baby: widget.baby, day: _dayAt(page), only: widget.only),
             ),
           ),
         ],
@@ -153,17 +162,18 @@ class _JournalScreenState extends State<JournalScreen> {
 /// One day: totals, the things with a date only (vaccines, measurements,
 /// foods, milestones), then everything with a time, in order.
 class JournalDayView extends ConsumerWidget {
-  const JournalDayView({super.key, required this.baby, required this.day});
+  const JournalDayView({super.key, required this.baby, required this.day, this.only});
 
   final Baby baby;
   final DateTime day;
+  final TrackedTable? only;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final journal = ref.watch(journalDayProvider((babyId: baby.id, day: day)));
     return switch (journal) {
-      AsyncData(:final value) => _DayContent(baby: baby, journal: value),
+      AsyncData(:final value) => _DayContent(baby: baby, journal: value, only: only),
       AsyncError() => Center(child: Text(l10n.errorGeneric)),
       _ => const Center(child: CircularProgressIndicator()),
     };
@@ -181,10 +191,11 @@ class _Entry {
 }
 
 class _DayContent extends ConsumerWidget {
-  const _DayContent({required this.baby, required this.journal});
+  const _DayContent({required this.baby, required this.journal, this.only});
 
   final Baby baby;
   final JournalDay journal;
+  final TrackedTable? only;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -196,18 +207,26 @@ class _DayContent extends ConsumerWidget {
     // For a past day, "now" is the end of that day (for sleeps still going).
     final now = isToday ? realNow : DateTime(d.year, d.month, d.day, 23, 59, 59);
 
-    if (journal.isEmpty) {
+    final log = journal.log;
+    final nothingToShow = switch (only) {
+      null => journal.isEmpty,
+      TrackedTable.feeds => log.feeds.isEmpty,
+      TrackedTable.sleeps => log.sleeps.isEmpty,
+      TrackedTable.diapers => log.diapers.isEmpty,
+    };
+    if (nothingToShow) {
       return Center(
         child: Padding(padding: const EdgeInsets.all(32), child: Text(l10n.nothingOnDay, textAlign: TextAlign.center)),
       );
     }
+    bool show(TrackedTable kind) => only == null || only == kind;
 
     final foods = ref.watch(foodGuideProvider).value;
     final milestones = ref.watch(milestoneGuideProvider).value;
     final schedule = ref.watch(vaccineScheduleProvider(baby.countryCode)).value ?? const <VaccineDose>[];
-    final log = journal.log;
 
-    final dated = <_Entry>[
+    // With a filter, only that kind's entries; without, the whole day.
+    final dated = only != null ? const <_Entry>[] : <_Entry>[
       for (final v in journal.vaccinations)
         if (v.isOther)
           _Entry(
@@ -263,58 +282,68 @@ class _DayContent extends ConsumerWidget {
     ];
 
     final timed = <_Entry>[
-      for (final f in log.feeds)
-        _Entry(f.startedAt, Icons.local_drink_outlined, feedEntryText(l10n, f, now), () => showFeedSheet(context, baby, existing: f)),
-      for (final x in log.diapers)
-        _Entry(x.occurredAt, Icons.baby_changing_station_outlined, diaperEntryText(l10n, x),
-            () => showDiaperSheet(context, baby, existing: x)),
-      for (final s in log.sleeps)
-        _Entry(s.startedAt, Icons.bedtime_outlined, sleepEntryText(l10n, s), () => showSleepSheet(context, baby, s)),
-      for (final p in journal.pumping)
-        _Entry(
-          p.startedAt,
-          Icons.water_drop_outlined,
-          [
-            l10n.pumpingEntry,
-            if (p.side != null) sideName(l10n, p.side!),
-            if (p.amountMl != null) '${p.amountMl} ml',
-          ].join(' · '),
-          () => showPumpingSheet(context, baby, existing: p),
-        ),
-      for (final (:dose, :medicine) in journal.doses)
-        _Entry(
-          dose.givenAt,
-          Icons.medication_outlined,
-          '$medicine · ${dose.skipped ? l10n.doseSkipped : l10n.doseGiven}',
-        ),
-      for (final s in journal.symptoms)
-        _Entry(
-          s.occurredAt,
-          Icons.thermostat_outlined,
-          [
-            symptomName(l10n, s.symptom),
-            if (s.temperatureC != null) displayTemperature(s.temperatureC!),
-            if (s.severity != null) severityName(l10n, s.severity!),
-          ].join(' · '),
-          () => showSymptomSheet(context, baby, existing: s),
-        ),
-      for (final v in journal.visits)
-        _Entry(
-          v.visitedAt,
-          Icons.local_hospital_outlined,
-          [l10n.doctorVisit, if (v.doctor != null) v.doctor!, if (v.diagnosis != null) v.diagnosis!].join(' · '),
-          () => showDoctorVisitSheet(context, baby, existing: v),
-        ),
+      if (show(TrackedTable.feeds))
+        for (final f in log.feeds)
+          _Entry(f.startedAt, Icons.local_drink_outlined, feedEntryText(l10n, f, now), () => showFeedSheet(context, baby, existing: f)),
+      if (show(TrackedTable.diapers))
+        for (final x in log.diapers)
+          _Entry(x.occurredAt, Icons.baby_changing_station_outlined, diaperEntryText(l10n, x),
+              () => showDiaperSheet(context, baby, existing: x)),
+      if (show(TrackedTable.sleeps))
+        for (final s in log.sleeps)
+          _Entry(s.startedAt, Icons.bedtime_outlined, sleepEntryText(l10n, s), () => showSleepSheet(context, baby, existing: s)),
+      if (only == null)
+        for (final p in journal.pumping)
+          _Entry(
+            p.startedAt,
+            Icons.water_drop_outlined,
+            [
+              l10n.pumpingEntry,
+              if (p.side != null) sideName(l10n, p.side!),
+              if (p.amountMl != null) '${p.amountMl} ml',
+            ].join(' · '),
+            () => showPumpingSheet(context, baby, existing: p),
+          ),
+      if (only == null)
+        for (final (:dose, :medicine) in journal.doses)
+          _Entry(
+            dose.givenAt,
+            Icons.medication_outlined,
+            '$medicine · ${dose.skipped ? l10n.doseSkipped : l10n.doseGiven}',
+          ),
+      if (only == null)
+        for (final s in journal.symptoms)
+          _Entry(
+            s.occurredAt,
+            Icons.thermostat_outlined,
+            [
+              symptomName(l10n, s.symptom),
+              if (s.temperatureC != null) displayTemperature(s.temperatureC!),
+              if (s.severity != null) severityName(l10n, s.severity!),
+            ].join(' · '),
+            () => showSymptomSheet(context, baby, existing: s),
+          ),
+      if (only == null)
+        for (final v in journal.visits)
+          _Entry(
+            v.visitedAt,
+            Icons.local_hospital_outlined,
+            [l10n.doctorVisit, if (v.doctor != null) v.doctor!, if (v.diagnosis != null) v.diagnosis!].join(' · '),
+            () => showDoctorVisitSheet(context, baby, existing: v),
+          ),
     ]..sort((a, b) => a.time!.compareTo(b.time!));
 
     final stats = dailyStats(feeds: log.feeds, diapers: log.diapers, sleeps: log.sleeps, days: 1, now: now).single;
     final totals = [
-      if (stats.feeds > 0) (Icons.local_drink_outlined, '${stats.feeds} ${l10n.feeds}'),
-      if (stats.bottleMl > 0) (Icons.local_drink, '${stats.bottleMl} ml'),
-      if (stats.nursingSeconds > 0)
-        (Icons.timer_outlined, formatDuration(l10n, Duration(seconds: stats.nursingSeconds))),
-      if (stats.diapers > 0) (Icons.baby_changing_station_outlined, l10n.diaperCounts(stats.wet, stats.dirty)),
-      if (stats.sleep > Duration.zero) (Icons.bedtime_outlined, formatDuration(l10n, stats.sleep)),
+      if (show(TrackedTable.feeds)) ...[
+        if (stats.feeds > 0) (Icons.local_drink_outlined, '${stats.feeds} ${l10n.feeds}'),
+        if (stats.bottleMl > 0) (Icons.local_drink, '${stats.bottleMl} ml'),
+        if (stats.nursingSeconds > 0)
+          (Icons.timer_outlined, formatDuration(l10n, Duration(seconds: stats.nursingSeconds))),
+      ],
+      if (show(TrackedTable.diapers) && stats.diapers > 0)
+        (Icons.baby_changing_station_outlined, l10n.diaperCounts(stats.wet, stats.dirty)),
+      if (show(TrackedTable.sleeps) && stats.sleep > Duration.zero) (Icons.bedtime_outlined, formatDuration(l10n, stats.sleep)),
     ];
 
     Widget tile(_Entry e) => ListTile(

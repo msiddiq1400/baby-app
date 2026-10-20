@@ -19,7 +19,7 @@ BABY APP: THINGS ONLY YOU CAN DO
         phone, and family members never see them.
 [x] N2. Test on the phone (list under "WHAT CHANGED ON 1 OCT NIGHT"), then
         tell Claude to commit, or commit yourself.
-[~] N3. (SQL RUN 5 Oct; website + Play form still to do.) Delete entries for good after 30 days (item 27a): Supabase > SQL
+[~] N3. (SQL RUN 5 Oct; website DEPLOYED, checked 20 Oct; only the Play form still to do.) Delete entries for good after 30 days (item 27a): Supabase > SQL
         Editor > paste d:\baby-app\supabase\snippets\purge_deleted_entries.sql
         > Run. THEN re-deploy the website (the delete-account page now has a
         "Delete some of your data" section that promises this), THEN Play
@@ -42,12 +42,15 @@ BABY APP: THINGS ONLY YOU CAN DO
           ("users can choose"), purpose App functionality.
         - App Store Connect (when filling App Privacy): User Content >
           Photos or Videos, linked to the user, not tracking.
-        - Re-deploy the website: the privacy policy and delete-account page
-          now mention photos (do N3's SQL first, as that page also promises
-          the 30-day clean-up).
+        - [x] Website re-deployed (checked live 20 Oct): privacy policy and
+          delete-account page mention photos.
 [ ] N6. Testers: invite message in English / Urdu / Roman Urdu is in
         store/tester-invite.md. Send it once the closed test is approved;
         12+ testers must stay opted in for 14 days in a row.
+
+[ ] N8. Test the layout changes from tester feedback (list under "WHAT
+        CHANGED ON 20 OCT" below), then tell Claude to commit. No database
+        or PowerSync change needed.
 
 QUESTIONS FOR YOU (answer any time; nothing is blocked on them)
   Q1. Existing babies were set to Pakistan automatically. Fine, or should
@@ -493,6 +496,50 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
         icon; privacy policy mentions Sign in with Apple; terms now say the
         laws of Pakistan apply.
 
+
+====================================================================
+WHAT CHANGED ON 20 OCT (tester feedback: duplicates, too many taps,
+feed/sleep/diaper reports mixed together; nothing is committed)
+====================================================================
+- Feed / Diaper / Sleep buttons now sit above the tabs on EVERY tab, not
+  just Today.
+- Diaper: tap Diaper, then Wet / Dirty / Both. That saves it (no Save
+  button). Change the time first if needed.
+- Feed: the form starts as the same kind as the last feed, with the last
+  bottle amount filled in, so a repeat bottle is Feed > Save.
+- Sleep button no longer starts a sleep straight away: it opens a form
+  (start time, nap or night, "Still asleep" on) and starts on Save. While
+  asleep it says "Woke up" and opens the form with the wake time = now.
+- Today's Feeds / Sleep / Diapers cards are compact: title, today's
+  number, then two small icon buttons: add a past entry (clock with +)
+  and past days of that kind only (history clock). Long-press shows the
+  name. Tapping the card opens its report tab. "Past days" is no longer
+  next to "Today".
+- The feed, diaper and sleep forms have a day button next to the time
+  (Today, Yesterday or any date since birth) for entries from earlier days.
+- Reports: tabs for Feeds | Sleep | Diapers, each on its own page. Open
+  them by tapping the Feeds, Sleep or Diapers card on Today. The duplicate
+  chart icon at the top and the "Reports and trends" link are gone.
+- Today: the hunger guide is in the Feeds card; usual sleep and awake time
+  are in the Sleep card. "At a glance" is gone (it only repeated what the
+  Health tab shows).
+- No offline bar any more (offline works the same; entries upload later).
+- The help button is a red SOS badge (the old icon looked like Settings).
+- Top bar: the red Emergency & help button and Settings are always
+  visible (the old 3-dot menu was labelled "Language"). Language and Sign
+  out moved into Settings.
+- Screenshot tool: shows the new buttons; reports2 is now the Sleep tab.
+  Re-run it before the next store/website screenshot update.
+
+Not done yet (from the same review; ask Claude when wanted):
+- One icon per topic everywhere (feeds use a cup, Milk a drop; the chart
+  icon means Growth in the tabs).
+- Journal: show past days only (today is already on Today) and add
+  All / Feeds / Sleep / Diapers filters.
+- Merge Milk and Solids into one "Feeding" tab (4 tabs instead of 5).
+- Show the baby's name on every tab (with two babies, health entries
+  could go to the wrong one).
+- Move "Doctor summary" from Health > Symptoms to the top of Health.
 
 ====================================================================
 WHAT CHANGED ON 1 OCT NIGHT (to test; nothing is committed)

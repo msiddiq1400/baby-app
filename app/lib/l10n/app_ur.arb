@@ -148,7 +148,6 @@
   "invalidMinutes": "1 سے 180 منٹ کے درمیان درج کریں",
   "diaperWet": "گیلا",
   "diaperDirty": "گندا",
-  "chooseDiaper": "گیلا، گندا یا دونوں منتخب کریں",
   "timeLabel": "وقت",
   "sleepNap": "قیلولہ",
   "sleepNight": "رات کی نیند",
@@ -606,7 +605,6 @@
   "sumFooter": "والدین نے پالنا میں درج کیا۔",
   "firstSyncLoading": "آپ کے خاندان کا ڈیٹا لوڈ ہو رہا ہے…",
   "firstSyncNeedsInternet": "پہلی بار اس کے لیے انٹرنیٹ ضروری ہے۔ اس کے بعد ایپ انٹرنیٹ کے بغیر بھی چلتی ہے۔",
-  "offlineBanner": "آف لائن: تبدیلیاں محفوظ ہیں اور انٹرنیٹ آنے پر سنک ہو جائیں گی۔",
   "unsyncedSignOutTitle": "کچھ تبدیلیاں ابھی سنک نہیں ہوئیں",
   "unsyncedSignOutBody": "اگر آپ ابھی سائن آؤٹ کریں تو آف لائن کیے گئے اندراجات ضائع ہو جائیں گے۔ انہیں محفوظ رکھنے کے لیے پہلے انٹرنیٹ سے جڑیں۔",
   "signOutAnyway": "پھر بھی سائن آؤٹ کریں",
@@ -655,62 +653,11 @@
   },
   "leaveFamilyConfirm": "یہ خاندان چھوڑیں؟ آپ کو اس کے بچے نظر آنا بند ہو جائیں گے۔",
   "switchBaby": "بچہ بدلیں",
-  "atAGlance": "ایک نظر میں",
-  "hungerEstimate": "عام طور پر تقریباً ہر {interval} بعد دودھ پیتا ہے، اس لیے اگلی خوراک تقریباً {time} کے قریب ہو سکتی ہے۔",
-  "@hungerEstimate": {
-    "placeholders": {
-      "interval": {
-        "type": "String"
-      },
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "hungerDisclaimer": "یہ حالیہ خوراکوں سے ایک اندازہ ہے؛ ہمیشہ بچے کی بھوک کے اشاروں پر عمل کریں۔",
-  "sleepUsual": "عام طور پر دن میں تقریباً {usual} سوتا ہے۔ آج اب تک: {today}۔",
-  "@sleepUsual": {
-    "placeholders": {
-      "usual": {
-        "type": "String"
-      },
-      "today": {
-        "type": "String"
-      }
-    }
-  },
   "awakeFor": "{duration} سے جاگ رہا ہے",
   "@awakeFor": {
     "placeholders": {
       "duration": {
         "type": "String"
-      }
-    }
-  },
-  "usuallyAwake": "عام طور پر نیندوں کے درمیان تقریباً {duration}",
-  "@usuallyAwake": {
-    "placeholders": {
-      "duration": {
-        "type": "String"
-      }
-    }
-  },
-  "vaccinesOverdueLine": "ٹیکوں میں تاخیر: {visit}",
-  "@vaccinesOverdueLine": {
-    "placeholders": {
-      "visit": {
-        "type": "String"
-      }
-    }
-  },
-  "medsTodayLine": "آج کی دوائیں: {total} میں سے {given} خوراکیں درج",
-  "@medsTodayLine": {
-    "placeholders": {
-      "given": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
       }
     }
   },
@@ -859,7 +806,6 @@
   "feedingNotificationTitle": "{name} دودھ پی رہا ہے",
   "sleepNotificationTitle": "{name} سو رہا ہے",
   "reportsTitle": "رپورٹیں",
-  "seeReports": "رپورٹیں اور رجحانات",
   "periodDays": "{count} دن",
   "feedsPerDay": "روزانہ خوراکیں",
   "timeBetweenFeeds": "خوراکوں کا عام وقفہ",
@@ -997,5 +943,16 @@
   "photoCaptionLabel": "عنوان (اختیاری)",
   "editCaption": "عنوان بدلیں",
   "replacePhoto": "تبدیل کریں",
-  "photoMonthTaken": "اس مہینے کی تصویر پہلے سے موجود ہے۔ اسے کھول کر تبدیل کریں دبائیں۔"
+  "photoMonthTaken": "اس مہینے کی تصویر پہلے سے موجود ہے۔ اسے کھول کر تبدیل کریں دبائیں۔",
+  "diaperBoth": "دونوں",
+  "diaperTapToSave": "محفوظ کرنے کے لیے ایک دبائیں۔",
+  "addPastSleep": "پچھلی نیند درج کریں",
+  "sleepUsualShort": "عام طور پر دن میں تقریباً {usual}",
+  "addPastFeed": "پچھلی خوراک درج کریں",
+  "addPastDiaper": "پچھلا ڈائپر درج کریں",
+  "nextFeedAround": "اگلی خوراک شاید تقریباً {time} پر",
+  "pastFeedShort": "پچھلی خوراک",
+  "pastSleepShort": "پچھلی نیند",
+  "pastDiaperShort": "پچھلا ڈائپر",
+  "startSleepTitle": "نیند شروع کریں"
 }

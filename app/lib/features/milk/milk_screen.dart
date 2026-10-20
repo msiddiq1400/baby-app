@@ -22,7 +22,7 @@ class MilkScreen extends ConsumerWidget {
     final pumping = ref.watch(pumpingTodayProvider(baby.id));
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.milkTitle), actions: const [LanguageMenu(showSignOut: true)]),
+      appBar: AppBar(title: Text(l10n.milkTitle), actions: const [MainActions()]),
       body: RefreshIndicator(
         onRefresh: () => Future.wait([
           ref.refresh(milkBagsProvider(baby.id).future),

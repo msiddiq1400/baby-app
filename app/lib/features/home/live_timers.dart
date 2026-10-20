@@ -243,7 +243,7 @@ class SleepTimerCard extends ConsumerWidget {
       color: scheme.secondaryContainer,
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: () => showSleepSheet(context, baby, sleep),
+        onTap: () => showSleepSheet(context, baby, existing: sleep),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(

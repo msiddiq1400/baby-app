@@ -203,20 +203,23 @@ class TrackingRepository {
     await insertRow(_db, table, {'family_id': baby.familyId, 'baby_id': baby.id, ...fields});
   }
 
-  Future<void> startSleep(Baby baby, {required DateTime at}) async {
-    // Sleep starting between 7 pm and 6 am counts as night sleep.
-    final kind = at.hour >= 19 || at.hour < 6 ? SleepKind.night : SleepKind.nap;
-    await insertRow(_db, 'sleeps', {
-      'family_id': baby.familyId,
-      'baby_id': baby.id,
-      'kind': kind.name,
-      'started_at': utcTimestamp(at),
-    });
-  }
+  /// Adds a sleep: one still going (no [endedAt]; the sleep timer shows it)
+  /// or one that's already over.
+  Future<void> addSleep(Baby baby, {required SleepKind kind, required DateTime startedAt, DateTime? endedAt}) =>
+      insertRow(_db, 'sleeps', {
+        'family_id': baby.familyId,
+        'baby_id': baby.id,
+        'kind': kind.name,
+        'started_at': utcTimestamp(startedAt),
+        if (endedAt != null) 'ended_at': utcTimestamp(endedAt),
+      });
 
   Future<void> endSleep(String sleepId, {required DateTime at}) =>
       updateRow(_db, 'sleeps', sleepId, {'ended_at': utcTimestamp(at)});
 }
+
+/// Sleep starting between 7 pm and 6 am counts as night sleep.
+SleepKind sleepKindAt(DateTime start) => start.hour >= 19 || start.hour < 6 ? SleepKind.night : SleepKind.nap;
 
 enum TrackedTable { feeds, diapers, sleeps }
 

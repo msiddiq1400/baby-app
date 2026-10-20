@@ -28,7 +28,7 @@ class Timeline extends StatelessWidget {
           () => showDiaperSheet(context, baby, existing: d),
         ),
       for (final s in log.sleeps)
-        (s.startedAt, Icons.bedtime_outlined, sleepEntryText(l10n, s), () => showSleepSheet(context, baby, s)),
+        (s.startedAt, Icons.bedtime_outlined, sleepEntryText(l10n, s), () => showSleepSheet(context, baby, existing: s)),
     ]..sort((a, b) => b.$1.compareTo(a.$1));
 
     if (entries.isEmpty) {

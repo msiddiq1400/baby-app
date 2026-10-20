@@ -13,6 +13,7 @@ import 'package:baby_app/features/health/medicine_sheet.dart';
 import 'package:baby_app/features/health/symptom_sheet.dart';
 import 'package:baby_app/features/health/vaccination_sheet.dart';
 import 'package:baby_app/features/home/log_sheets.dart';
+import 'package:baby_app/features/home/quick_log_bar.dart';
 import 'package:baby_app/features/milk/milk_sheets.dart';
 import 'package:baby_app/features/settings/change_password_dialog.dart';
 import 'package:baby_app/features/settings/delete_account_dialog.dart';
@@ -24,6 +25,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'test_app.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'screens_smoke_test.dart' as screens show recentFeeds;
 import 'screens_smoke_test.dart' show baby, medication, overrides;
 
 void main() {
@@ -60,10 +62,19 @@ void main() {
       ),
     ),
     'new diaper': (c) => showDiaperSheet(c, baby),
+    'past feed': (c) => showFeedSheet(c, baby, past: true),
+    'past diaper': (c) => showDiaperSheet(c, baby, past: true),
+    'edit diaper': (c) => showDiaperSheet(
+      c,
+      baby,
+      existing: Diaper(id: 'd', occurredAt: now, isWet: true, isDirty: true),
+    ),
+    'new past sleep': (c) => showSleepSheet(c, baby, past: true),
+    'start sleep': (c) => showSleepSheet(c, baby),
     'edit sleep': (c) => showSleepSheet(
       c,
       baby,
-      Sleep(
+      existing: Sleep(
         id: 's',
         kind: SleepKind.nap,
         startedAt: now.subtract(const Duration(hours: 1)),
@@ -191,5 +202,91 @@ void main() {
     await tester.tap(find.text('Save'));
     await tester.pump();
     expect(find.text("The passwords don't match"), findsOneWidget);
+  });
+
+  Future<void> openSheet(WidgetTester tester, Future<void> Function(BuildContext) open) async {
+    tester.view.physicalSize = const Size(1080, 2316);
+    tester.view.devicePixelRatio = 2.75;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: overrides,
+        child: testApp(
+          locale: const Locale('en'),
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => TextButton(onPressed: () => open(context), child: const Text('open')),
+            ),
+          ),
+        ),
+      ),
+    );
+    // Let the recent feeds load before the form reads them.
+    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 20)));
+    await tester.pump();
+    await tester.tap(find.text('open'));
+    for (var i = 0; i < 6; i++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 20)));
+      await tester.pump(const Duration(milliseconds: 150));
+    }
+  }
+
+  testWidgets('a new feed starts as the last feed, with its bottle amount', (tester) async {
+    screens.recentFeeds = [
+      Feed(id: 'a', type: FeedType.breast, startedAt: now.subtract(const Duration(hours: 5)), side: BreastSide.left),
+      Feed(id: 'b', type: FeedType.bottleFormula, startedAt: now.subtract(const Duration(hours: 2)), amountMl: 150),
+    ];
+    addTearDown(() => screens.recentFeeds = null);
+
+    await openSheet(tester, (c) => showFeedSheet(c, baby));
+    expect(tester.takeException(), isNull);
+    final types = tester.widget<SegmentedButton<FeedType>>(find.byType(SegmentedButton<FeedType>));
+    expect(types.selected, {FeedType.bottleFormula});
+    expect(find.widgetWithText(TextFormField, '150'), findsOneWidget);
+  });
+
+  testWidgets('a new diaper is one tap: Wet, Dirty or Both, no Save button', (tester) async {
+    await openSheet(tester, (c) => showDiaperSheet(c, baby));
+    expect(tester.takeException(), isNull);
+    for (final label in ['Wet', 'Dirty', 'Both']) {
+      expect(find.widgetWithText(FilledButton, label), findsOneWidget, reason: label);
+    }
+    expect(find.text('Save'), findsNothing);
+  });
+
+  testWidgets('a past feed has no timer and can go back to an earlier day', (tester) async {
+    await openSheet(tester, (c) => showFeedSheet(c, baby, past: true));
+    expect(tester.takeException(), isNull);
+    expect(find.text('Add a past feed'), findsOneWidget);
+    expect(find.text('Start a timer'), findsNothing);
+    expect(find.widgetWithText(OutlinedButton, 'Today'), findsOneWidget);
+  });
+
+  testWidgets('the Sleep button opens the form; nothing starts until Save', (tester) async {
+    tester.view.physicalSize = const Size(1080, 2316);
+    tester.view.devicePixelRatio = 2.75;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: overrides,
+        child: testApp(
+          locale: const Locale('en'),
+          home: Scaffold(body: const SizedBox(), bottomNavigationBar: QuickLogBar(baby: baby)),
+        ),
+      ),
+    );
+    for (var i = 0; i < 3; i++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 20)));
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    await tester.tap(find.widgetWithText(FilledButton, 'Sleep'));
+    for (var i = 0; i < 6; i++) {
+      await tester.pump(const Duration(milliseconds: 150));
+    }
+    expect(tester.takeException(), isNull);
+    expect(find.text('Start a sleep'), findsOneWidget);
+    expect(find.text('Save'), findsOneWidget);
+    final stillAsleep = tester.widget<SwitchListTile>(find.widgetWithText(SwitchListTile, 'Still asleep'));
+    expect(stillAsleep.value, isTrue);
   });
 }

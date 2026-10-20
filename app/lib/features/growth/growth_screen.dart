@@ -43,7 +43,7 @@ class _GrowthScreenState extends ConsumerState<GrowthScreen> with SingleTickerPr
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.growthTitle),
-        actions: const [LanguageMenu(showSignOut: true)],
+        actions: const [MainActions()],
         bottom: TabBar(
           controller: _tabs,
           tabs: [Tab(text: l10n.tabCharts), Tab(text: l10n.tabMilestones), Tab(text: l10n.tabPhotos)],

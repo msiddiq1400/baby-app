@@ -130,6 +130,8 @@ Future<void> addPhoto(BuildContext context, WidgetRef ref, Baby baby, int ageMon
     context: context,
     showDragHandle: true,
     builder: (context) => SafeArea(
+      // Clear of the phone's navigation buttons.
+      minimum: const EdgeInsets.only(bottom: 30),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

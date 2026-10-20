@@ -39,6 +39,7 @@ import 'package:baby_app/features/growth/growth_screen.dart';
 import 'package:baby_app/features/health/health_screen.dart';
 import 'package:baby_app/features/health/illness_screen.dart';
 import 'package:baby_app/features/home/dashboard.dart';
+import 'package:baby_app/features/home/quick_log_bar.dart';
 import 'package:baby_app/features/journal/journal_screen.dart';
 import 'package:baby_app/features/milk/milk_screen.dart';
 import 'package:baby_app/features/reports/reports_screen.dart';
@@ -288,9 +289,14 @@ class _Shell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    // Like the app: Feed / Diaper / Sleep above the tabs on every screen.
     return Scaffold(
       body: child,
-      bottomNavigationBar: NavigationBar(
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          QuickLogBar(baby: baby),
+          NavigationBar(
         selectedIndex: index,
         destinations: [
           NavigationDestination(icon: const Icon(Icons.today_outlined), selectedIcon: const Icon(Icons.today), label: l10n.tabToday),
@@ -298,6 +304,8 @@ class _Shell extends StatelessWidget {
           NavigationDestination(icon: const Icon(Icons.restaurant_outlined), selectedIcon: const Icon(Icons.restaurant), label: l10n.tabSolids),
           NavigationDestination(icon: const Icon(Icons.show_chart), label: l10n.tabGrowth),
           NavigationDestination(icon: const Icon(Icons.vaccines_outlined), selectedIcon: const Icon(Icons.vaccines), label: l10n.tabHealth),
+        ],
+          ),
         ],
       ),
     );
@@ -355,7 +363,8 @@ void main() {
     'reports': (0, ReportsScreen(baby: baby), null),
     'journal': (0, JournalScreen(baby: baby), null),
     'illness': (4, IllnessScreen(baby: baby, illnessId: 'ill'), null),
-    'reports2': (0, ReportsScreen(baby: baby), 'scroll'),
+    // The sleep tab (the website's "Sleep, compared with what's typical").
+    'reports2': (0, ReportsScreen(baby: baby, initialTab: ReportTab.sleep), null),
   };
 
   for (final (locale, tag, brightness) in const [

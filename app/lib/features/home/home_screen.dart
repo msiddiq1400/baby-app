@@ -11,6 +11,7 @@ import '../health/health_reminders.dart';
 import '../milk/milk_reminders.dart';
 import 'home_widget_sync.dart';
 import 'live_timers.dart';
+import 'quick_log_bar.dart';
 
 /// Wraps the tabs: shows the add-baby form until there is a baby, then
 /// the bottom navigation with the current tab.
@@ -33,45 +34,48 @@ class BabyShell extends ConsumerWidget {
     // might just mean "not synced yet": don't offer to add one.
     final status = ref.watch(syncStatusProvider).value;
     if (status?.hasSynced != true) return const _FirstSync();
-    final offline = !status!.connected && !status.connecting;
 
     return ref.watch(currentBabyProvider).when(
           data: (baby) => baby == null
               ? const AddBabyScreen()
               : Scaffold(
-                  body: Column(
+                  // Offline works the same as online (entries upload later),
+                  // so there's no offline notice.
+                  body: shell,
+                  // Feed / Diaper / Sleep sit above the tabs on every screen.
+                  bottomNavigationBar: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Expanded(child: shell),
-                      if (offline) const _OfflineBanner(),
-                    ],
-                  ),
-                  bottomNavigationBar: NavigationBar(
-                    selectedIndex: shell.currentIndex,
-                    onDestinationSelected: (i) => shell.goBranch(i, initialLocation: i == shell.currentIndex),
-                    destinations: [
-                      NavigationDestination(
-                        icon: const Icon(Icons.today_outlined),
-                        selectedIcon: const Icon(Icons.today),
-                        label: l10n.tabToday,
-                      ),
-                      NavigationDestination(
-                        icon: const Icon(Icons.water_drop_outlined),
-                        selectedIcon: const Icon(Icons.water_drop),
-                        label: l10n.tabMilk,
-                      ),
-                      NavigationDestination(
-                        icon: const Icon(Icons.restaurant_outlined),
-                        selectedIcon: const Icon(Icons.restaurant),
-                        label: l10n.tabSolids,
-                      ),
-                      NavigationDestination(
-                        icon: const Icon(Icons.show_chart),
-                        label: l10n.tabGrowth,
-                      ),
-                      NavigationDestination(
-                        icon: const Icon(Icons.vaccines_outlined),
-                        selectedIcon: const Icon(Icons.vaccines),
-                        label: l10n.tabHealth,
+                      QuickLogBar(baby: baby),
+                      NavigationBar(
+                        selectedIndex: shell.currentIndex,
+                        onDestinationSelected: (i) => shell.goBranch(i, initialLocation: i == shell.currentIndex),
+                        destinations: [
+                          NavigationDestination(
+                            icon: const Icon(Icons.today_outlined),
+                            selectedIcon: const Icon(Icons.today),
+                            label: l10n.tabToday,
+                          ),
+                          NavigationDestination(
+                            icon: const Icon(Icons.water_drop_outlined),
+                            selectedIcon: const Icon(Icons.water_drop),
+                            label: l10n.tabMilk,
+                          ),
+                          NavigationDestination(
+                            icon: const Icon(Icons.restaurant_outlined),
+                            selectedIcon: const Icon(Icons.restaurant),
+                            label: l10n.tabSolids,
+                          ),
+                          NavigationDestination(
+                            icon: const Icon(Icons.show_chart),
+                            label: l10n.tabGrowth,
+                          ),
+                          NavigationDestination(
+                            icon: const Icon(Icons.vaccines_outlined),
+                            selectedIcon: const Icon(Icons.vaccines),
+                            label: l10n.tabHealth,
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -116,33 +120,6 @@ class _FirstSync extends StatelessWidget {
               Text(l10n.firstSyncNeedsInternet, textAlign: TextAlign.center),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _OfflineBanner extends StatelessWidget {
-  const _OfflineBanner();
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-    return Material(
-      color: colors.surfaceContainerHighest,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-        child: Row(
-          children: [
-            Icon(Icons.cloud_off, size: 18, color: colors.onSurfaceVariant),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                AppLocalizations.of(context).offlineBanner,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ),
-          ],
         ),
       ),
     );

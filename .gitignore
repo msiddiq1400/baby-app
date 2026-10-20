@@ -15,3 +15,6 @@ business/
 
 # Personal files that are not part of the app (company logos etc.)
 stuff/
+
+# Private notes, marketing and social plans (not committed)
+/extras/

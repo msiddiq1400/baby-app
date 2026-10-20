@@ -33,7 +33,7 @@ class _SolidsScreenState extends ConsumerState<SolidsScreen> {
     final tries = ref.watch(foodTriesProvider(widget.baby.id)).value ?? const [];
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.solidsTitle), actions: const [LanguageMenu(showSignOut: true)]),
+      appBar: AppBar(title: Text(l10n.solidsTitle), actions: const [MainActions()]),
       body: switch (guide) {
         AsyncData(value: final guide) => _body(context, guide, tries),
         AsyncError() => Center(child: Text(l10n.errorGeneric)),

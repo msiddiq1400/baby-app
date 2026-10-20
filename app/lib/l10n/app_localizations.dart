@@ -489,12 +489,6 @@ abstract class AppLocalizations {
   /// **'Dirty'**
   String get diaperDirty;
 
-  /// No description provided for @chooseDiaper.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose wet, dirty or both'**
-  String get chooseDiaper;
-
   /// No description provided for @timeLabel.
   ///
   /// In en, this message translates to:
@@ -1581,12 +1575,6 @@ abstract class AppLocalizations {
   /// **'The first time, this needs an internet connection. After that the app works offline.'**
   String get firstSyncNeedsInternet;
 
-  /// No description provided for @offlineBanner.
-  ///
-  /// In en, this message translates to:
-  /// **'Offline: changes are saved and will sync when you\'re back online.'**
-  String get offlineBanner;
-
   /// No description provided for @unsyncedSignOutTitle.
   ///
   /// In en, this message translates to:
@@ -1773,53 +1761,11 @@ abstract class AppLocalizations {
   /// **'Switch baby'**
   String get switchBaby;
 
-  /// No description provided for @atAGlance.
-  ///
-  /// In en, this message translates to:
-  /// **'At a glance'**
-  String get atAGlance;
-
-  /// No description provided for @hungerEstimate.
-  ///
-  /// In en, this message translates to:
-  /// **'Usually feeds about every {interval}, so the next feed may be around {time}.'**
-  String hungerEstimate(String interval, String time);
-
-  /// No description provided for @hungerDisclaimer.
-  ///
-  /// In en, this message translates to:
-  /// **'A rough guide from recent feeds; always follow your baby\'s hunger cues.'**
-  String get hungerDisclaimer;
-
-  /// No description provided for @sleepUsual.
-  ///
-  /// In en, this message translates to:
-  /// **'Usually sleeps about {usual} a day. Today so far: {today}.'**
-  String sleepUsual(String usual, String today);
-
   /// No description provided for @awakeFor.
   ///
   /// In en, this message translates to:
   /// **'Awake for {duration}'**
   String awakeFor(String duration);
-
-  /// No description provided for @usuallyAwake.
-  ///
-  /// In en, this message translates to:
-  /// **'usually about {duration} between sleeps'**
-  String usuallyAwake(String duration);
-
-  /// No description provided for @vaccinesOverdueLine.
-  ///
-  /// In en, this message translates to:
-  /// **'Vaccines overdue: {visit}'**
-  String vaccinesOverdueLine(String visit);
-
-  /// No description provided for @medsTodayLine.
-  ///
-  /// In en, this message translates to:
-  /// **'Medicines today: {given} of {total} doses recorded'**
-  String medsTodayLine(int given, int total);
 
   /// No description provided for @tabSolids.
   ///
@@ -2378,12 +2324,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reports'**
   String get reportsTitle;
-
-  /// No description provided for @seeReports.
-  ///
-  /// In en, this message translates to:
-  /// **'Reports and trends'**
-  String get seeReports;
 
   /// No description provided for @periodDays.
   ///
@@ -3212,6 +3152,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This month already has a photo. Open it and tap Replace.'**
   String get photoMonthTaken;
+
+  /// No description provided for @diaperBoth.
+  ///
+  /// In en, this message translates to:
+  /// **'Both'**
+  String get diaperBoth;
+
+  /// No description provided for @diaperTapToSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap one to save.'**
+  String get diaperTapToSave;
+
+  /// No description provided for @addPastSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a past sleep'**
+  String get addPastSleep;
+
+  /// No description provided for @sleepUsualShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Usually about {usual} a day'**
+  String sleepUsualShort(String usual);
+
+  /// No description provided for @addPastFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a past feed'**
+  String get addPastFeed;
+
+  /// No description provided for @addPastDiaper.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a past diaper'**
+  String get addPastDiaper;
+
+  /// No description provided for @nextFeedAround.
+  ///
+  /// In en, this message translates to:
+  /// **'Next feed may be around {time}'**
+  String nextFeedAround(String time);
+
+  /// No description provided for @pastFeedShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Past feed'**
+  String get pastFeedShort;
+
+  /// No description provided for @pastSleepShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Past sleep'**
+  String get pastSleepShort;
+
+  /// No description provided for @pastDiaperShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Past diaper'**
+  String get pastDiaperShort;
+
+  /// No description provided for @startSleepTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a sleep'**
+  String get startSleepTitle;
 }
 
 class _AppLocalizationsDelegate

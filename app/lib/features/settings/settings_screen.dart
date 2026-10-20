@@ -10,6 +10,7 @@ import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
 import '../baby/add_baby_screen.dart';
 import '../../core/providers.dart';
+import '../common/language_menu.dart';
 import 'change_password_dialog.dart';
 import 'delete_account_dialog.dart';
 import 'join_family_dialog.dart';
@@ -24,7 +25,7 @@ final _packageInfoProvider = FutureProvider<PackageInfo?>((ref) async {
   }
 });
 
-/// Babies, family members and invites.
+/// Babies, family members and invites, language, appearance and account.
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
@@ -73,6 +74,17 @@ class SettingsScreen extends ConsumerWidget {
             onTap: () => showJoinFamilyDialog(context),
           ),
           const Divider(height: 32),
+          _Header(l10n.language),
+          for (final (locale, label) in appLanguages)
+            ListTile(
+              leading: Icon(
+                locale == Localizations.localeOf(context) ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                color: theme.colorScheme.primary,
+              ),
+              title: Text(label),
+              onTap: () => ref.read(localeProvider.notifier).set(locale),
+            ),
+          const Divider(height: 32),
           _Header(l10n.appearanceSection),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -95,6 +107,16 @@ class SettingsScreen extends ConsumerWidget {
               title: Text(l10n.changePassword),
               onTap: () => showChangePasswordDialog(context),
             ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: Text(l10n.signOut),
+            // Close Settings first; the router then shows the sign-in screen.
+            onTap: () => signOut(
+              context,
+              ref,
+              beforeSignOut: () => Navigator.of(context, rootNavigator: true).popUntil((r) => r.isFirst),
+            ),
+          ),
           ListTile(
             leading: Icon(Icons.delete_forever_outlined, color: theme.colorScheme.error),
             title: Text(l10n.deleteAccount, style: TextStyle(color: theme.colorScheme.error)),

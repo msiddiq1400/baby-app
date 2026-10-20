@@ -11,13 +11,16 @@ import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
 import 'report_stats.dart';
 
-/// Feeding, sleep and diapers over the last 7 or 30 days: a bar per day and
-/// the averages, with typical ranges for the baby's age where a trusted
-/// source gives one.
+enum ReportTab { feeds, sleep, diapers }
+
+/// Feeding, sleep and diapers over the last 7 or 30 days, each on its own
+/// tab: a bar per day and the averages, with typical ranges for the baby's
+/// age where a trusted source gives one.
 class ReportsScreen extends ConsumerStatefulWidget {
-  const ReportsScreen({super.key, required this.baby});
+  const ReportsScreen({super.key, required this.baby, this.initialTab = ReportTab.feeds});
 
   final Baby baby;
+  final ReportTab initialTab;
 
   @override
   ConsumerState<ReportsScreen> createState() => _ReportsScreenState();
@@ -34,14 +37,27 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen> {
     final sleeps = ref.watch(reportSleepsProvider(period));
     final diapers = ref.watch(reportDiapersProvider(period));
 
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.reportsTitle)),
-      body: switch ((feeds, sleeps, diapers)) {
-        (AsyncData(value: final f), AsyncData(value: final s), AsyncData(value: final d)) =>
-          _Report(baby: widget.baby, days: _days, feeds: f, sleeps: s, diapers: d, onDays: (d) => setState(() => _days = d)),
-        (AsyncError(), _, _) || (_, AsyncError(), _) || (_, _, AsyncError()) => Center(child: Text(l10n.errorGeneric)),
-        _ => const Center(child: CircularProgressIndicator()),
-      },
+    return DefaultTabController(
+      length: ReportTab.values.length,
+      initialIndex: widget.initialTab.index,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(l10n.reportsTitle),
+          bottom: TabBar(
+            tabs: [
+              Tab(icon: const Icon(Icons.local_drink_outlined), text: l10n.feeds),
+              Tab(icon: const Icon(Icons.bedtime_outlined), text: l10n.sleep),
+              Tab(icon: const Icon(Icons.baby_changing_station_outlined), text: l10n.diapers),
+            ],
+          ),
+        ),
+        body: switch ((feeds, sleeps, diapers)) {
+          (AsyncData(value: final f), AsyncData(value: final s), AsyncData(value: final d)) =>
+            _Report(baby: widget.baby, days: _days, feeds: f, sleeps: s, diapers: d, onDays: (d) => setState(() => _days = d)),
+          (AsyncError(), _, _) || (_, AsyncError(), _) || (_, _, AsyncError()) => Center(child: Text(l10n.errorGeneric)),
+          _ => const Center(child: CircularProgressIndicator()),
+        },
+      ),
     );
   }
 }
@@ -78,24 +94,33 @@ class _Report extends StatelessWidget {
         TimeOfDay(hour: (minutes ~/ 60) % 24, minute: minutes % 60).format(context);
     final sleepRange = typicalSleepHours(ageDays);
 
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+    // One tab per kind of entry, each with the period switch and the notes.
+    Widget page(_Section section) => ListView(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+          children: [
+            Center(
+              child: SegmentedButton<int>(
+                segments: [
+                  ButtonSegment(value: 7, label: Text(l10n.periodDays(7))),
+                  ButtonSegment(value: 30, label: Text(l10n.periodDays(30))),
+                ],
+                selected: {days},
+                showSelectedIcon: false,
+                onSelectionChanged: (s) => onDays(s.first),
+              ),
+            ),
+            const SizedBox(height: 16),
+            section,
+            const SizedBox(height: 8),
+            Text(l10n.reportAveragesNote, style: theme.textTheme.bodySmall),
+            const SizedBox(height: 8),
+            Text(l10n.reportSources, style: theme.textTheme.bodySmall),
+          ],
+        );
+
+    return TabBarView(
       children: [
-        Center(
-          child: SegmentedButton<int>(
-            segments: [
-              ButtonSegment(value: 7, label: Text(l10n.periodDays(7))),
-              ButtonSegment(value: 30, label: Text(l10n.periodDays(30))),
-            ],
-            selected: {days},
-            showSelectedIcon: false,
-            onSelectionChanged: (s) => onDays(s.first),
-          ),
-        ),
-        const SizedBox(height: 16),
-        _Section(
-          icon: Icons.local_drink_outlined,
-          title: l10n.feeds,
+        page(_Section(
           empty: !stats.any((d) => d.feeds > 0),
           chart: _DailyBars(
             days: stats,
@@ -113,10 +138,8 @@ class _Report extends StatelessWidget {
             if (sum.bottleMlPerDay case final v?) _Tile(l10n.bottlePerDay, '${v.round()} ml'),
             if (sum.mlPerBottle case final v?) _Tile(l10n.perBottle, '${v.round()} ml'),
           ],
-        ),
-        _Section(
-          icon: Icons.bedtime_outlined,
-          title: l10n.sleep,
+        )),
+        page(_Section(
           empty: !stats.any((d) => d.sleep > Duration.zero),
           legend: [(l10n.sleepNight, navy), (l10n.sleepNap, PalnaColors.sand)],
           chart: _DailyBars(
@@ -143,10 +166,8 @@ class _Report extends StatelessWidget {
             if (sum.bedtime case final v?) _Tile(l10n.usualBedtime, clock(v)),
             if (sum.wakeUp case final v?) _Tile(l10n.usualWakeUp, clock(v)),
           ],
-        ),
-        _Section(
-          icon: Icons.baby_changing_station_outlined,
-          title: l10n.diapers,
+        )),
+        page(_Section(
           empty: !stats.any((d) => d.diapers > 0),
           legend: [(l10n.diaperWet, navy), (l10n.diaperDirty, PalnaColors.rose)],
           chart: _DailyBars(
@@ -163,11 +184,7 @@ class _Report extends StatelessWidget {
             if (sum.dirtyPerDay case final v?)
               _Tile(l10n.dirtyPerDay, _number(v), showDirtyGuide(ageDays) ? l10n.dirtyGuide : null),
           ],
-        ),
-        const SizedBox(height: 8),
-        Text(l10n.reportAveragesNote, style: theme.textTheme.bodySmall),
-        const SizedBox(height: 8),
-        Text(l10n.reportSources, style: theme.textTheme.bodySmall),
+        )),
       ],
     );
   }
@@ -192,16 +209,12 @@ class _Tile {
 
 class _Section extends StatelessWidget {
   const _Section({
-    required this.icon,
-    required this.title,
     required this.empty,
     required this.chart,
     required this.tiles,
     this.legend = const [],
   });
 
-  final IconData icon;
-  final String title;
   final bool empty;
   final Widget chart;
   final List<_Tile> tiles;
@@ -218,20 +231,21 @@ class _Section extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              children: [
-                Icon(icon, color: theme.colorScheme.primary),
-                const SizedBox(width: 8),
-                Expanded(child: Text(title, style: theme.textTheme.titleMedium)),
-                for (final (label, color) in legend) ...[
-                  const SizedBox(width: 10),
-                  Container(width: 10, height: 10, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
-                  const SizedBox(width: 4),
-                  Text(label, style: theme.textTheme.bodySmall),
+            // The tab already names the section; the card only needs the key.
+            if (legend.isNotEmpty) ...[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  for (final (label, color) in legend) ...[
+                    const SizedBox(width: 10),
+                    Container(width: 10, height: 10, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+                    const SizedBox(width: 4),
+                    Text(label, style: theme.textTheme.bodySmall),
+                  ],
                 ],
-              ],
-            ),
-            const SizedBox(height: 12),
+              ),
+              const SizedBox(height: 12),
+            ],
             if (empty)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),

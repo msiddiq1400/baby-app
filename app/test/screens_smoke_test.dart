@@ -118,6 +118,9 @@ final todayLog = TodayLog(
 Feed? runningFeed;
 Sleep? runningSleep;
 
+/// Set by a test to replace the recent feeds (oldest first).
+List<Feed>? recentFeeds;
+
 final medication = Medication(
   id: 'm1',
   name: 'Paracetamol syrup',
@@ -203,7 +206,8 @@ final overrides = [
         for (var h = 0; h < 6; h++) Diaper(id: 'r$d$h', occurredAt: ago(days: d, hours: h * 3), isWet: true, isDirty: h == 2),
     ]),
   ),
-  recentFeedsProvider.overrideWith((ref, id) => Stream.value(feeds)),
+  // Oldest first, like the database returns them.
+  recentFeedsProvider.overrideWith((ref, id) => Stream.value(recentFeeds ?? feeds.reversed.toList())),
   recentSleepsProvider.overrideWith((ref, id) => Stream.value(sleeps)),
   vaccineScheduleProvider.overrideWith(
     (ref, country) => Stream.value([
@@ -577,10 +581,72 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('Today shows the at-a-glance insights', (tester) async {
+  testWidgets('Today shows patterns in the cards, and no "At a glance" (Health has that)', (tester) async {
     await pumpScreen(tester, Dashboard(baby: baby), const Locale('en'));
-    expect(find.text('At a glance'), findsOneWidget);
-    expect(find.textContaining('Usually feeds about every'), findsOneWidget);
-    expect(find.textContaining('Medicines today: 1 of 12'), findsOneWidget);
+    expect(find.text('At a glance'), findsNothing);
+    expect(find.textContaining('Next feed may be around'), findsOneWidget);
+    expect(find.textContaining('Usually about'), findsOneWidget);
+  });
+
+  testWidgets('Today has one way into reports: the cards (no duplicate links)', (tester) async {
+    await pumpScreen(tester, Dashboard(baby: baby), const Locale('en'));
+    expect(find.byIcon(Icons.insights_outlined), findsNothing);
+    expect(find.text('Reports and trends'), findsNothing);
+    // Help and Settings are buttons, not hidden in a language menu.
+    expect(find.byTooltip('Emergency & help'), findsOneWidget);
+    expect(find.byTooltip('Settings'), findsOneWidget);
+    // Small labelled buttons on each card.
+    expect(find.text('Past feed'), findsOneWidget);
+    expect(find.text('Past sleep'), findsOneWidget);
+    expect(find.text('Past diaper'), findsOneWidget);
+    // "Past days" sits on each card, not next to today's timeline.
+    expect(find.text('Past days'), findsNWidgets(3));
+
+    await tester.tap(find.text('Diapers'));
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+    expect(tester.takeException(), isNull);
+    expect(find.byType(ReportsScreen), findsOneWidget);
+    expect(find.text('Wet a day'), findsOneWidget);
+  });
+
+  for (final locale in const [Locale('en'), Locale('ur')]) {
+    testWidgets('Reports has a tab each for feeds, sleep and diapers ($locale)', (tester) async {
+      final l10n = lookupAppLocalizations(locale);
+      await pumpScreen(tester, ReportsScreen(baby: baby), locale);
+      expect(find.text(l10n.feedsPerDay), findsOneWidget);
+      expect(find.text(l10n.sleepPerDay), findsNothing);
+
+      for (final (tab, shown, hidden) in [
+        (l10n.sleep, l10n.sleepPerDay, l10n.feedsPerDay),
+        (l10n.diapers, l10n.wetPerDay, l10n.sleepPerDay),
+      ]) {
+        await tester.tap(find.descendant(of: find.byType(TabBar), matching: find.text(tab)));
+        for (var i = 0; i < 5; i++) {
+          await tester.pump(const Duration(milliseconds: 200));
+        }
+        expect(tester.takeException(), isNull, reason: tab);
+        expect(find.text(shown), findsOneWidget, reason: tab);
+        expect(find.text(hidden), findsNothing, reason: tab);
+      }
+    });
+  }
+
+  testWidgets('Past days from the Feeds card shows only feeds', (tester) async {
+    await pumpScreen(tester, JournalScreen(baby: baby, only: TrackedTable.feeds), const Locale('en'));
+    expect(tester.takeException(), isNull);
+    expect(find.text('Feeds'), findsOneWidget); // the title
+    expect(find.byIcon(Icons.local_drink_outlined), findsWidgets);
+    expect(find.byIcon(Icons.bedtime_outlined), findsNothing);
+    expect(find.byIcon(Icons.baby_changing_station_outlined), findsNothing);
+    expect(find.textContaining('Pumping'), findsNothing);
+    expect(find.text('On this day'), findsNothing);
+  });
+
+  testWidgets('Reports opens on the tab asked for', (tester) async {
+    await pumpScreen(tester, ReportsScreen(baby: baby, initialTab: ReportTab.sleep), const Locale('en'));
+    expect(find.text('Sleep a day'), findsOneWidget);
+    expect(find.text('Feeds a day'), findsNothing);
   });
 }

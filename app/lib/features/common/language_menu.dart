@@ -9,18 +9,81 @@ import '../auth/google_auth.dart';
 import '../settings/help_screen.dart';
 import '../settings/settings_screen.dart';
 
-/// App-bar menu for switching between English, Urdu and Roman Urdu,
-/// optionally with a sign-out entry.
+/// The app's languages, each named in its own language.
+const appLanguages = [
+  (Locale('en'), 'English'),
+  (Locale('ur'), 'اردو'),
+  (Locale.fromSubtags(languageCode: 'ur', scriptCode: 'Latn'), 'Roman Urdu'),
+];
+
+/// Signs out, after a warning if offline changes haven't uploaded yet
+/// (signing out wipes the phone's database). [beforeSignOut] runs once
+/// it's confirmed, e.g. to close the screen it was started from.
+Future<void> signOut(BuildContext context, WidgetRef ref, {VoidCallback? beforeSignOut}) async {
+  if (!await _confirmSignOut(context, ref)) return;
+  // Read before closing anything: a closed screen's ref can't be used.
+  final auth = ref.read(supabaseProvider).auth;
+  beforeSignOut?.call();
+  await Reminders.cancelAll();
+  await GoogleAuth.signOut();
+  await auth.signOut();
+}
+
+Future<bool> _confirmSignOut(BuildContext context, WidgetRef ref) async {
+  final pending = await ref.read(powerSyncProvider).getNextCrudTransaction() != null;
+  if (!pending || !context.mounted) return true;
+  final l10n = AppLocalizations.of(context);
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(l10n.unsyncedSignOutTitle),
+      content: Text(l10n.unsyncedSignOutBody),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.cancelButton)),
+        TextButton(onPressed: () => Navigator.pop(context, true), child: Text(l10n.signOutAnyway)),
+      ],
+    ),
+  );
+  return confirmed ?? false;
+}
+
+/// App-bar buttons on the main tabs: emergency help (always in sight) and
+/// settings (babies, family, language, sign out).
+class MainActions extends StatelessWidget {
+  const MainActions({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    void open(Widget screen) =>
+        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute<void>(builder: (_) => screen));
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // "SOS" rather than a star-of-life symbol, which looked like the
+        // settings gear next to it.
+        IconButton(
+          icon: Icon(Icons.sos, color: Theme.of(context).colorScheme.error),
+          tooltip: l10n.helpTitle,
+          onPressed: () => open(const HelpScreen()),
+        ),
+        IconButton(
+          icon: const Icon(Icons.settings_outlined),
+          tooltip: l10n.settingsTitle,
+          onPressed: () => open(const SettingsScreen()),
+        ),
+      ],
+    );
+  }
+}
+
+/// App-bar menu for switching between English, Urdu and Roman Urdu, used
+/// before there's a baby (sign-in, first baby). With [showSignOut] it also
+/// has help, settings and sign out.
 class LanguageMenu extends ConsumerWidget {
   const LanguageMenu({super.key, this.showSignOut = false});
 
   final bool showSignOut;
-
-  static const _languages = [
-    (Locale('en'), 'English'),
-    (Locale('ur'), 'اردو'),
-    (Locale.fromSubtags(languageCode: 'ur', scriptCode: 'Latn'), 'Roman Urdu'),
-  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,7 +94,7 @@ class LanguageMenu extends ConsumerWidget {
       tooltip: l10n.language,
       onSelected: (action) => action(),
       itemBuilder: (context) => [
-        for (final (locale, label) in _languages)
+        for (final (locale, label) in appLanguages)
           CheckedPopupMenuItem(
             value: () => ref.read(localeProvider.notifier).set(locale),
             checked: locale == current,
@@ -44,7 +107,7 @@ class LanguageMenu extends ConsumerWidget {
                 .push(MaterialPageRoute<void>(builder: (_) => const HelpScreen())),
             child: ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: Icon(Icons.emergency_outlined, color: Theme.of(context).colorScheme.error),
+              leading: Icon(Icons.sos, color: Theme.of(context).colorScheme.error),
               title: Text(l10n.helpTitle),
             ),
           ),
@@ -58,12 +121,7 @@ class LanguageMenu extends ConsumerWidget {
             ),
           ),
           PopupMenuItem(
-            value: () async {
-              if (!await _confirmSignOut(context, ref)) return;
-              await Reminders.cancelAll();
-              await GoogleAuth.signOut();
-              await ref.read(supabaseProvider).auth.signOut();
-            },
+            value: () => signOut(context, ref),
             child: ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.logout),
@@ -73,25 +131,5 @@ class LanguageMenu extends ConsumerWidget {
         ],
       ],
     );
-  }
-
-  /// Signing out wipes the phone's database, so warn if offline changes
-  /// haven't uploaded yet.
-  Future<bool> _confirmSignOut(BuildContext context, WidgetRef ref) async {
-    final pending = await ref.read(powerSyncProvider).getNextCrudTransaction() != null;
-    if (!pending || !context.mounted) return true;
-    final l10n = AppLocalizations.of(context);
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.unsyncedSignOutTitle),
-        content: Text(l10n.unsyncedSignOutBody),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.cancelButton)),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: Text(l10n.signOutAnyway)),
-        ],
-      ),
-    );
-    return confirmed ?? false;
   }
 }

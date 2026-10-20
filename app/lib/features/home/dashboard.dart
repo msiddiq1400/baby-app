@@ -10,7 +10,7 @@ import '../../l10n/app_localizations.dart';
 import '../common/language_menu.dart';
 import '../journal/journal_screen.dart';
 import '../reports/reports_screen.dart';
-import 'glance_card.dart';
+import 'insights.dart';
 import 'live_timers.dart';
 import 'log_sheets.dart';
 import 'timeline.dart';
@@ -47,15 +47,7 @@ class Dashboard extends ConsumerWidget {
             ],
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.insights_outlined),
-            tooltip: l10n.seeReports,
-            onPressed: () => Navigator.of(context, rootNavigator: true)
-                .push(MaterialPageRoute<void>(builder: (_) => ReportsScreen(baby: baby))),
-          ),
-          const LanguageMenu(showSignOut: true),
-        ],
+        actions: const [MainActions()],
       ),
       body: RefreshIndicator(
         onRefresh: () => ref.refresh(todayLogProvider(baby.id).future),
@@ -65,6 +57,8 @@ class Dashboard extends ConsumerWidget {
               log: value,
               now: now,
               feedTimer: ref.watch(feedTimerProvider(baby.id)).value,
+              recentFeeds: ref.watch(recentFeedsProvider(baby.id)).value ?? const [],
+              recentSleeps: ref.watch(recentSleepsProvider(baby.id)).value ?? const [],
             ),
           AsyncError() => ListView(
               children: [
@@ -77,7 +71,6 @@ class Dashboard extends ConsumerWidget {
           _ => const Center(child: CircularProgressIndicator()),
         },
       ),
-      bottomNavigationBar: _QuickActions(baby: baby, ongoingSleep: today.value?.ongoingSleep),
     );
   }
 }
@@ -91,6 +84,8 @@ void _showBabySwitcher(BuildContext context, WidgetRef ref) {
     context: context,
     showDragHandle: true,
     builder: (context) => SafeArea(
+      // Clear of the phone's navigation buttons.
+      minimum: const EdgeInsets.only(bottom: 30),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -112,11 +107,20 @@ void _showBabySwitcher(BuildContext context, WidgetRef ref) {
 }
 
 class _TodayView extends StatelessWidget {
-  const _TodayView({required this.baby, required this.log, required this.now, this.feedTimer});
+  const _TodayView({
+    required this.baby,
+    required this.log,
+    required this.now,
+    required this.recentFeeds,
+    required this.recentSleeps,
+    this.feedTimer,
+  });
 
   final Baby baby;
   final TodayLog log;
   final DateTime now;
+  final List<Feed> recentFeeds;
+  final List<Sleep> recentSleeps;
   final Feed? feedTimer;
 
   @override
@@ -124,52 +128,80 @@ class _TodayView extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final lastFeed = log.lastFeed;
     final ongoing = log.ongoingSleep;
+    final hunger = hungerEstimate(recentFeeds);
+    final usualSleep = usualDailySleep(recentSleeps, now);
+    final wake = wakeWindow(recentSleeps, now);
+    void openReport(ReportTab tab) => Navigator.of(context, rootNavigator: true)
+        .push(MaterialPageRoute<void>(builder: (_) => ReportsScreen(baby: baby, initialTab: tab)));
+    // Past days of one kind, starting from yesterday (today is on this screen).
+    void openPastDays(TrackedTable only) => Navigator.of(context, rootNavigator: true).push(
+          MaterialPageRoute<void>(
+            builder: (_) => JournalScreen(
+              baby: baby,
+              only: only,
+              initialDay: DateTime(now.year, now.month, now.day - 1),
+            ),
+          ),
+        );
 
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         if (feedTimer case final feed?) FeedTimerCard(baby: baby, feed: feed),
         if (ongoing case final sleep?) SleepTimerCard(baby: baby, sleep: sleep),
-        GlanceCard(baby: baby, now: now),
+        // Compact cards: today's numbers and the usual pattern. Tapping one
+        // opens its report tab; the small buttons add a past entry or show
+        // past days of that kind.
         _SummaryCard(
           icon: Icons.local_drink_outlined,
           title: l10n.feeds,
           value: '${log.feeds.length}',
+          onTap: () => openReport(ReportTab.feeds),
           details: [
-            if (log.bottleMl > 0) l10n.bottleTotal(log.bottleMl),
-            if (lastFeed != null)
-              l10n.lastFeed(l10n.agoLabel(formatDuration(l10n, now.difference(lastFeed.endedAt ?? lastFeed.startedAt)))),
+            [
+              if (log.bottleMl > 0) l10n.bottleTotal(log.bottleMl),
+              if (lastFeed != null)
+                l10n.lastFeed(l10n.agoLabel(formatDuration(l10n, now.difference(lastFeed.endedAt ?? lastFeed.startedAt)))),
+            ].join(' · '),
+            if (hunger != null) l10n.nextFeedAround(TimeOfDay.fromDateTime(hunger.nextAround).format(context)),
+          ],
+          actions: [
+            _CardButton(Icons.add, l10n.pastFeedShort, () => showFeedSheet(context, baby, past: true)),
+            _CardButton(Icons.history, l10n.pastDays, () => openPastDays(TrackedTable.feeds)),
+          ],
+        ),
+        _SummaryCard(
+          icon: Icons.bedtime_outlined,
+          title: l10n.sleep,
+          value: formatDuration(l10n, log.sleptSince(now)),
+          onTap: () => openReport(ReportTab.sleep),
+          details: [
+            [
+              l10n.sleptToday,
+              if (usualSleep != null) l10n.sleepUsualShort(formatDuration(l10n, usualSleep)),
+            ].join(' · '),
+            // While asleep, the sleep timer card above shows the time.
+            if (ongoing == null)
+              if (wake.awakeFor case final awake? when awake.inHours < 12) l10n.awakeFor(formatDuration(l10n, awake)),
+          ],
+          actions: [
+            _CardButton(Icons.add, l10n.pastSleepShort, () => showSleepSheet(context, baby, past: true)),
+            _CardButton(Icons.history, l10n.pastDays, () => openPastDays(TrackedTable.sleeps)),
           ],
         ),
         _SummaryCard(
           icon: Icons.baby_changing_station_outlined,
           title: l10n.diapers,
           value: '${log.diapers.length}',
+          onTap: () => openReport(ReportTab.diapers),
           details: [if (log.diapers.isNotEmpty) l10n.diaperCounts(log.wetCount, log.dirtyCount)],
-        ),
-        _SummaryCard(
-          icon: Icons.bedtime_outlined,
-          title: l10n.sleep,
-          value: formatDuration(l10n, log.sleptSince(now)),
-          details: [
-            if (ongoing != null)
-              l10n.sleepingSince(TimeOfDay.fromDateTime(ongoing.startedAt).format(context))
-            else
-              l10n.sleptToday,
+          actions: [
+            _CardButton(Icons.add, l10n.pastDiaperShort, () => showDiaperSheet(context, baby, past: true)),
+            _CardButton(Icons.history, l10n.pastDays, () => openPastDays(TrackedTable.diapers)),
           ],
         ),
         const SizedBox(height: 16),
-        Row(
-          children: [
-            Expanded(child: Text(l10n.todayTimeline, style: Theme.of(context).textTheme.titleMedium)),
-            TextButton.icon(
-              onPressed: () => Navigator.of(context, rootNavigator: true)
-                  .push(MaterialPageRoute<void>(builder: (_) => JournalScreen(baby: baby))),
-              icon: const Icon(Icons.history, size: 18),
-              label: Text(l10n.pastDays),
-            ),
-          ],
-        ),
+        Text(l10n.todayTimeline, style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 8),
         Timeline(baby: baby, log: log, now: now),
       ],
@@ -178,29 +210,91 @@ class _TodayView extends StatelessWidget {
 }
 
 class _SummaryCard extends StatelessWidget {
-  const _SummaryCard({required this.icon, required this.title, required this.value, this.details = const []});
+  const _SummaryCard({
+    required this.icon,
+    required this.title,
+    required this.value,
+    required this.onTap,
+    this.details = const [],
+    this.actions = const [],
+  });
 
   final IconData icon;
   final String title;
   final String value;
+  final VoidCallback onTap;
   final List<String> details;
+
+  /// Small labelled buttons at the bottom of the card.
+  final List<Widget> actions;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final muted = theme.colorScheme.onSurfaceVariant;
+    final lines = details.where((d) => d.isNotEmpty);
     return Card(
-      child: ListTile(
-        leading: Icon(icon, size: 32, color: theme.colorScheme.primary),
-        title: Text(title),
-        subtitle: details.isEmpty ? null : Text(details.join('\n')),
-        // Long values (e.g. "13 گھنٹے 20 منٹ" in Urdu) shrink to fit rather
-        // than squeezing out the title.
-        trailing: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 140),
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            alignment: AlignmentDirectional.centerEnd,
-            child: Text(value, style: theme.textTheme.headlineSmall),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(12, 4, 4, 6),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                // Centred on the title line.
+                padding: const EdgeInsets.only(top: 6),
+                child: Icon(icon, size: 28, color: theme.colorScheme.primary),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title and today's number, then the arrow to the report.
+                    SizedBox(
+                      height: 40,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: Text(title, style: theme.textTheme.titleMedium, overflow: TextOverflow.ellipsis),
+                                ),
+                                const SizedBox(width: 8),
+                                // Long values (in Urdu, hours and minutes are
+                                // long words) shrink to fit.
+                                ConstrainedBox(
+                                  constraints: const BoxConstraints(maxWidth: 120),
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: Text(value, style: theme.textTheme.titleLarge),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Icon(Icons.chevron_right, color: muted),
+                        ],
+                      ),
+                    ),
+                    for (final line in lines) Text(line, style: theme.textTheme.bodyMedium?.copyWith(color: muted)),
+                    if (actions.isNotEmpty)
+                      Padding(
+                        // Room for Urdu script, which draws below its line.
+                        padding: const EdgeInsets.only(top: 6),
+                        child: Align(
+                          alignment: AlignmentDirectional.centerEnd,
+                          child: Wrap(spacing: 4, children: actions),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -208,66 +302,26 @@ class _SummaryCard extends StatelessWidget {
   }
 }
 
-class _QuickActions extends ConsumerWidget {
-  const _QuickActions({required this.baby, required this.ongoingSleep});
+/// A small labelled button on a card ("+ Past feed", "Past days"): short
+/// text, so the card stays compact; the card's title says what it's for.
+class _CardButton extends StatelessWidget {
+  const _CardButton(this.icon, this.label, this.onPressed);
 
-  final Baby baby;
-  final Sleep? ongoingSleep;
-
-  Future<void> _toggleSleep(BuildContext context, WidgetRef ref) async {
-    final repo = ref.read(trackingRepositoryProvider);
-    try {
-      final sleep = ongoingSleep;
-      if (sleep == null) {
-        await repo.startSleep(baby, at: DateTime.now());
-      } else {
-        await repo.endSleep(sleep.id, at: DateTime.now());
-      }
-      ref.invalidate(todayLogProvider(baby.id));
-    } catch (_) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).errorGeneric)));
-      }
-    }
-  }
+  final IconData icon;
+  final String label;
+  final VoidCallback onPressed;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    final asleep = ongoingSleep != null;
-
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-        child: Row(
-          children: [
-            Expanded(
-              child: FilledButton.icon(
-                onPressed: () => showFeedSheet(context, baby),
-                icon: const Icon(Icons.local_drink),
-                label: Text(l10n.logFeed),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: FilledButton.icon(
-                onPressed: () => showDiaperSheet(context, baby),
-                icon: const Icon(Icons.baby_changing_station),
-                label: Text(l10n.logDiaper),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: FilledButton.tonalIcon(
-                onPressed: () => _toggleSleep(context, ref),
-                icon: Icon(asleep ? Icons.wb_sunny_outlined : Icons.bedtime),
-                label: Text(asleep ? l10n.endSleep : l10n.startSleep),
-              ),
-            ),
-          ],
+  Widget build(BuildContext context) => TextButton.icon(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+          minimumSize: const Size(0, 32),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          visualDensity: VisualDensity.compact,
+          textStyle: Theme.of(context).textTheme.labelLarge,
         ),
-      ),
-    );
-  }
+        icon: Icon(icon, size: 18),
+        label: Text(label),
+      );
 }

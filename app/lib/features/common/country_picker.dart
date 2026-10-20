@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/countries.dart';
 import '../../core/emergency.dart';
 import '../../l10n/app_localizations.dart';
+import 'sheet.dart';
 
 /// The country's name in the app's current language.
 String countryLabel(BuildContext context, String code) {
@@ -65,7 +66,7 @@ class _CountrySheetState extends State<_CountrySheet> {
           ),
           Expanded(
             child: ListView(
-              padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom + 16),
+              padding: EdgeInsets.only(bottom: sheetBottomSpace(context) + 16),
               children: [
                 if (!searching) ...[
                   for (final code in featuredCountries) tile(code),

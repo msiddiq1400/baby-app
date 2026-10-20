@@ -148,7 +148,6 @@
   "invalidMinutes": "1 se 180 minute ke darmiyan likhein",
   "diaperWet": "Geela",
   "diaperDirty": "Ganda",
-  "chooseDiaper": "Geela, ganda ya dono chunein",
   "timeLabel": "Waqt",
   "sleepNap": "Nap",
   "sleepNight": "Raat ki neend",
@@ -606,7 +605,6 @@
   "sumFooter": "Walidain ne Palna mein record kiya.",
   "firstSyncLoading": "Aap ki family ka data load ho raha hai…",
   "firstSyncNeedsInternet": "Pehli baar is ke liye internet zaroori hai. Us ke baad app internet ke baghair bhi chalti hai.",
-  "offlineBanner": "Offline: tabdeeliyan save hain aur internet aane par sync ho jayengi.",
   "unsyncedSignOutTitle": "Kuch tabdeeliyan abhi sync nahi hui",
   "unsyncedSignOutBody": "Agar aap abhi sign out karein to offline kiye gaye indrajaat zaaya ho jayenge. Unhein mehfooz rakhne ke liye pehle internet se judein.",
   "signOutAnyway": "Phir bhi sign out karein",
@@ -655,62 +653,11 @@
   },
   "leaveFamilyConfirm": "Yeh family chhorein? Aap ko is ke bachay nazar aana band ho jayenge.",
   "switchBaby": "Baby badlein",
-  "atAGlance": "Ek nazar mein",
-  "hungerEstimate": "Aam taur par taqreeban har {interval} baad doodh peeta hai, is liye agli feed taqreeban {time} ke qareeb ho sakti hai.",
-  "@hungerEstimate": {
-    "placeholders": {
-      "interval": {
-        "type": "String"
-      },
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "hungerDisclaimer": "Yeh haaliya feeds se ek andaaza hai; hamesha baby ki bhook ke isharon par amal karein.",
-  "sleepUsual": "Aam taur par din mein taqreeban {usual} sota hai. Aaj ab tak: {today}.",
-  "@sleepUsual": {
-    "placeholders": {
-      "usual": {
-        "type": "String"
-      },
-      "today": {
-        "type": "String"
-      }
-    }
-  },
   "awakeFor": "{duration} se jaag raha hai",
   "@awakeFor": {
     "placeholders": {
       "duration": {
         "type": "String"
-      }
-    }
-  },
-  "usuallyAwake": "aam taur par neendon ke darmiyan taqreeban {duration}",
-  "@usuallyAwake": {
-    "placeholders": {
-      "duration": {
-        "type": "String"
-      }
-    }
-  },
-  "vaccinesOverdueLine": "Teekon mein der: {visit}",
-  "@vaccinesOverdueLine": {
-    "placeholders": {
-      "visit": {
-        "type": "String"
-      }
-    }
-  },
-  "medsTodayLine": "Aaj ki dawaiyan: {total} mein se {given} khurakein record",
-  "@medsTodayLine": {
-    "placeholders": {
-      "given": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
       }
     }
   },
@@ -859,7 +806,6 @@
   "feedingNotificationTitle": "{name} doodh pee raha hai",
   "sleepNotificationTitle": "{name} so raha hai",
   "reportsTitle": "Reports",
-  "seeReports": "Reports aur trends",
   "periodDays": "{count} din",
   "feedsPerDay": "Roz ki feeds",
   "timeBetweenFeeds": "Feeds ke darmiyan aam waqfa",
@@ -997,5 +943,16 @@
   "photoCaptionLabel": "Unwan (ikhtiyari)",
   "editCaption": "Unwan badlein",
   "replacePhoto": "Tabdeel karein",
-  "photoMonthTaken": "Is mahine ki tasveer pehle se mojood hai. Use khol kar Tabdeel karein dabayein."
+  "photoMonthTaken": "Is mahine ki tasveer pehle se mojood hai. Use khol kar Tabdeel karein dabayein.",
+  "diaperBoth": "Dono",
+  "diaperTapToSave": "Save karne ke liye ek dabayein.",
+  "addPastSleep": "Pichli neend darj karein",
+  "sleepUsualShort": "Aam taur par din mein taqreeban {usual}",
+  "addPastFeed": "Pichli feed darj karein",
+  "addPastDiaper": "Pichla diaper darj karein",
+  "nextFeedAround": "Agli feed shayad taqreeban {time} par",
+  "pastFeedShort": "Pichli feed",
+  "pastSleepShort": "Pichli neend",
+  "pastDiaperShort": "Pichla diaper",
+  "startSleepTitle": "Neend shuru karein"
 }

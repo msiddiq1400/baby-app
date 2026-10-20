@@ -34,7 +34,7 @@ class _HealthScreenState extends State<HealthScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(l10n.healthTitle),
-          actions: const [LanguageMenu(showSignOut: true)],
+          actions: const [MainActions()],
           bottom: TabBar(
             tabs: [Tab(text: l10n.tabVaccines), Tab(text: l10n.tabMedicines), Tab(text: l10n.tabSymptoms)],
           ),

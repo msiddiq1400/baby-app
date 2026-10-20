@@ -8,26 +8,38 @@ import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/sheet.dart';
 
-/// Log a new feed, or edit [existing].
-Future<void> showFeedSheet(BuildContext context, Baby baby, {Feed? existing}) =>
-    showFormSheet(context, _FeedSheet(baby: baby, existing: existing));
+/// Log a new feed, or edit [existing]. With [past], it's for a feed that's
+/// already over (no timer buttons).
+Future<void> showFeedSheet(BuildContext context, Baby baby, {Feed? existing, bool past = false}) =>
+    showFormSheet(context, _FeedSheet(baby: baby, existing: existing, past: past));
 
-/// Log a new diaper, or edit [existing].
-Future<void> showDiaperSheet(BuildContext context, Baby baby, {Diaper? existing}) =>
-    showFormSheet(context, _DiaperSheet(baby: baby, existing: existing));
+/// Log a new diaper, or edit [existing]. [past] only changes the title.
+Future<void> showDiaperSheet(BuildContext context, Baby baby, {Diaper? existing, bool past = false}) =>
+    showFormSheet(context, _DiaperSheet(baby: baby, existing: existing, past: past));
 
-Future<void> showSleepSheet(BuildContext context, Baby baby, Sleep existing) =>
-    showFormSheet(context, _SleepSheet(baby: baby, existing: existing));
+/// The sleep form. With no [existing]: start a sleep (from now, or a time
+/// the parent sets), or with [past], add one that's already over. With
+/// [existing]: edit it, or with [wakingUp], end it (wake time set to now).
+/// Nothing is saved until Save.
+Future<void> showSleepSheet(
+  BuildContext context,
+  Baby baby, {
+  Sleep? existing,
+  bool past = false,
+  bool wakingUp = false,
+}) =>
+    showFormSheet(context, _SleepSheet(baby: baby, existing: existing, past: past, wakingUp: wakingUp));
 
 /// Runs [action], refreshes today's data and closes the sheet.
 Future<void> _run(BuildContext context, WidgetRef ref, Baby baby, Future<void> Function() action) =>
     runAndClose(context, action, onDone: () => ref.invalidate(todayLogProvider(baby.id)));
 
 class _FeedSheet extends ConsumerStatefulWidget {
-  const _FeedSheet({required this.baby, this.existing});
+  const _FeedSheet({required this.baby, this.existing, this.past = false});
 
   final Baby baby;
   final Feed? existing;
+  final bool past;
 
   @override
   ConsumerState<_FeedSheet> createState() => _FeedSheetState();
@@ -43,13 +55,35 @@ class _FeedSheetState extends ConsumerState<_FeedSheet> {
   late DateTime _time;
   var _busy = false;
 
+  /// Recent feeds, oldest first (empty until loaded).
+  List<Feed> get _recent => ref.read(recentFeedsProvider(widget.baby.id)).value ?? const [];
+
+  /// The amount of the last bottle of [type], to offer it again.
+  String _lastAmount(FeedType type) =>
+      _recent.reversed.where((f) => f.type == type && f.amountMl != null).firstOrNull?.amountMl?.toString() ?? '';
+
   @override
   void initState() {
     super.initState();
     final feed = widget.existing;
-    _type = feed?.type ?? FeedType.breast;
+    // A new feed starts as the same kind as the last one (and the same
+    // bottle amount), so a repeat feed is just "Feed" then "Save".
+    _type = feed?.type ?? _recent.lastOrNull?.type ?? FeedType.breast;
     _time = feed?.endedAt ?? feed?.startedAt ?? DateTime.now();
-    _amount = TextEditingController(text: feed?.amountMl?.toString() ?? '');
+    _amount = TextEditingController(text: feed == null ? _lastAmount(_type) : feed.amountMl?.toString() ?? '');
+    // If recent feeds were still loading, use them once they arrive, unless
+    // the parent has already chosen.
+    if (feed == null && ref.read(recentFeedsProvider(widget.baby.id)).value == null) {
+      ref.listenManual(recentFeedsProvider(widget.baby.id), (previous, next) {
+        final recent = next.value;
+        if (recent == null || previous?.value != null || !mounted) return;
+        if (_type != FeedType.breast || _amount.text.isNotEmpty) return;
+        setState(() {
+          _type = recent.lastOrNull?.type ?? FeedType.breast;
+          _amount.text = _lastAmount(_type);
+        });
+      });
+    }
     _initialSeconds = feed == null ? (null, null) : secondsPerSide(feed);
     String minutes(int? seconds) => seconds == null || seconds == 0 ? '' : '${(seconds / 60).round()}';
     _left = TextEditingController(text: minutes(_initialSeconds.$1));
@@ -120,7 +154,10 @@ class _FeedSheetState extends ConsumerState<_FeedSheet> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(existing == null ? l10n.logFeed : l10n.editFeed, style: Theme.of(context).textTheme.titleLarge),
+          Text(
+            existing != null ? l10n.editFeed : (widget.past ? l10n.addPastFeed : l10n.logFeed),
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
           const SizedBox(height: 16),
           SegmentedButton<FeedType>(
             segments: [
@@ -130,11 +167,15 @@ class _FeedSheetState extends ConsumerState<_FeedSheet> {
             ],
             selected: {_type},
             showSelectedIcon: false,
-            onSelectionChanged: (s) => setState(() => _type = s.first),
+            onSelectionChanged: (s) => setState(() {
+              // Swap a suggested amount for the new type's; keep one the parent typed.
+              if (existing == null && _amount.text == _lastAmount(_type)) _amount.text = _lastAmount(s.first);
+              _type = s.first;
+            }),
           ),
           const SizedBox(height: 16),
           if (isBreast) ...[
-            if (existing == null) ...[
+            if (existing == null && !widget.past) ...[
               _TimerStart(baby: widget.baby, enabled: !_busy, onStart: _startTimer),
               const SizedBox(height: 20),
               Text(l10n.orEnterMinutes, style: Theme.of(context).textTheme.titleSmall),
@@ -166,13 +207,18 @@ class _FeedSheetState extends ConsumerState<_FeedSheet> {
               controller: _amount,
               decoration: InputDecoration(labelText: l10n.amountMl),
               keyboardType: TextInputType.number,
-              autofocus: existing == null,
+              autofocus: existing == null && _amount.text.isEmpty,
               validator: (v) {
                 final ml = parseLocalizedInt(v ?? '');
                 return ml == null || ml < 1 || ml > 1000 ? l10n.invalidAmount : null;
               },
             ),
-          TimeField(label: l10n.timeLabel, time: _time, onChanged: (t) => setState(() => _time = t)),
+          TimeField(
+            label: l10n.timeLabel,
+            time: _time,
+            firstDate: widget.baby.birthDate,
+            onChanged: (t) => setState(() => _time = t),
+          ),
           const SizedBox(height: 8),
           FilledButton(onPressed: _busy ? null : _submit, child: Text(l10n.saveButton)),
           if (existing != null)
@@ -269,22 +315,22 @@ String sideName(AppLocalizations l10n, BreastSide side) => switch (side) {
     };
 
 class _DiaperSheet extends ConsumerStatefulWidget {
-  const _DiaperSheet({required this.baby, this.existing});
+  const _DiaperSheet({required this.baby, this.existing, this.past = false});
 
   final Baby baby;
   final Diaper? existing;
+  final bool past;
 
   @override
   ConsumerState<_DiaperSheet> createState() => _DiaperSheetState();
 }
 
 class _DiaperSheetState extends ConsumerState<_DiaperSheet> {
-  late bool _wet = widget.existing?.isWet ?? true;
-  late bool _dirty = widget.existing?.isDirty ?? false;
   late DateTime _time = widget.existing?.occurredAt ?? DateTime.now();
   var _busy = false;
 
-  Future<void> _submit() async {
+  /// Each button saves straight away: "Diaper" then "Wet" is the whole job.
+  Future<void> _save({required bool wet, required bool dirty}) async {
     setState(() => _busy = true);
     await _run(
       context,
@@ -294,8 +340,8 @@ class _DiaperSheetState extends ConsumerState<_DiaperSheet> {
             widget.baby,
             existingId: widget.existing?.id,
             at: _time,
-            wet: _wet,
-            dirty: _dirty,
+            wet: wet,
+            dirty: dirty,
           ),
     );
     if (mounted) setState(() => _busy = false);
@@ -304,29 +350,45 @@ class _DiaperSheetState extends ConsumerState<_DiaperSheet> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final canSave = _wet || _dirty;
     final existing = widget.existing;
+
+    Widget button(String label, {required bool wet, required bool dirty}) {
+      final onPressed = _busy ? null : () => _save(wet: wet, dirty: dirty);
+      final text = Padding(padding: const EdgeInsets.symmetric(vertical: 14), child: Text(label));
+      // When editing, the diaper's current kind is the filled button.
+      final current = existing != null && existing.isWet == wet && existing.isDirty == dirty;
+      return Expanded(
+        child: existing == null || current
+            ? FilledButton(onPressed: onPressed, child: text)
+            : FilledButton.tonal(onPressed: onPressed, child: text),
+      );
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(existing == null ? l10n.logDiaper : l10n.editDiaper, style: Theme.of(context).textTheme.titleLarge),
-        const SizedBox(height: 16),
+        Text(
+          existing != null ? l10n.editDiaper : (widget.past ? l10n.addPastDiaper : l10n.logDiaper),
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        TimeField(
+            label: l10n.timeLabel,
+            time: _time,
+            firstDate: widget.baby.birthDate,
+            onChanged: (t) => setState(() => _time = t),
+          ),
+        Text(l10n.diaperTapToSave, style: Theme.of(context).textTheme.bodySmall),
+        const SizedBox(height: 8),
         Row(
           children: [
-            FilterChip(label: Text(l10n.diaperWet), selected: _wet, onSelected: (v) => setState(() => _wet = v)),
+            button(l10n.diaperWet, wet: true, dirty: false),
             const SizedBox(width: 8),
-            FilterChip(label: Text(l10n.diaperDirty), selected: _dirty, onSelected: (v) => setState(() => _dirty = v)),
+            button(l10n.diaperDirty, wet: false, dirty: true),
+            const SizedBox(width: 8),
+            button(l10n.diaperBoth, wet: true, dirty: true),
           ],
         ),
-        if (!canSave)
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Text(l10n.chooseDiaper, style: TextStyle(color: Theme.of(context).colorScheme.error)),
-          ),
-        TimeField(label: l10n.timeLabel, time: _time, onChanged: (t) => setState(() => _time = t)),
         const SizedBox(height: 8),
-        FilledButton(onPressed: _busy || !canSave ? null : _submit, child: Text(l10n.saveButton)),
         if (existing != null)
           DeleteButton(
             enabled: !_busy,
@@ -343,32 +405,43 @@ class _DiaperSheetState extends ConsumerState<_DiaperSheet> {
 }
 
 class _SleepSheet extends ConsumerStatefulWidget {
-  const _SleepSheet({required this.baby, required this.existing});
+  const _SleepSheet({required this.baby, this.existing, this.past = false, this.wakingUp = false});
 
   final Baby baby;
-  final Sleep existing;
+  final Sleep? existing;
+  final bool past;
+  final bool wakingUp;
 
   @override
   ConsumerState<_SleepSheet> createState() => _SleepSheetState();
 }
 
 class _SleepSheetState extends ConsumerState<_SleepSheet> {
-  late SleepKind _kind = widget.existing.kind;
-  late DateTime _start = widget.existing.startedAt;
-  late DateTime? _end = widget.existing.endedAt;
+  // A new sleep starts now (still asleep); a past one defaults to "the last
+  // hour"; waking up sets the end to now.
+  late DateTime _start =
+      widget.existing?.startedAt ?? (widget.past ? DateTime.now().subtract(const Duration(hours: 1)) : DateTime.now());
+  late SleepKind _kind = widget.existing?.kind ?? sleepKindAt(_start);
+  var _kindChosen = false;
+  late DateTime? _end = switch (widget.existing) {
+    null => widget.past ? DateTime.now() : null,
+    final sleep => widget.wakingUp ? DateTime.now() : sleep.endedAt,
+  };
   var _busy = false;
 
   bool get _timesValid => _end == null || _end!.isAfter(_start);
 
   Future<void> _submit() async {
     setState(() => _busy = true);
+    final repo = ref.read(trackingRepositoryProvider);
+    final existing = widget.existing;
     await _run(
       context,
       ref,
       widget.baby,
-      () => ref
-          .read(trackingRepositoryProvider)
-          .updateSleep(widget.existing.id, kind: _kind, startedAt: _start, endedAt: _end),
+      () => existing == null
+          ? repo.addSleep(widget.baby, kind: _kind, startedAt: _start, endedAt: _end)
+          : repo.updateSleep(existing.id, kind: _kind, startedAt: _start, endedAt: _end),
     );
     if (mounted) setState(() => _busy = false);
   }
@@ -376,11 +449,19 @@ class _SleepSheetState extends ConsumerState<_SleepSheet> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final existing = widget.existing;
+    // Only one sleep can be going at a time.
+    final otherOngoing = ref.watch(todayLogProvider(widget.baby.id)).value?.ongoingSleep;
+    final canBeOngoing = existing != null || otherOngoing == null;
+    final title = switch (existing) {
+      null => widget.past ? l10n.addPastSleep : l10n.startSleepTitle,
+      _ => widget.wakingUp ? l10n.endSleep : l10n.editSleep,
+    };
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(l10n.editSleep, style: Theme.of(context).textTheme.titleLarge),
+        Text(title, style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 16),
         SegmentedButton<SleepKind>(
           segments: [
@@ -389,29 +470,49 @@ class _SleepSheetState extends ConsumerState<_SleepSheet> {
           ],
           selected: {_kind},
           showSelectedIcon: false,
-          onSelectionChanged: (s) => setState(() => _kind = s.first),
+          onSelectionChanged: (s) => setState(() {
+            _kind = s.first;
+            _kindChosen = true;
+          }),
         ),
-        TimeField(label: l10n.sleepStartLabel, time: _start, onChanged: (t) => setState(() => _start = t)),
-        SwitchListTile(
-          contentPadding: EdgeInsets.zero,
-          title: Text(l10n.stillAsleep),
-          value: _end == null,
-          onChanged: (asleep) => setState(() => _end = asleep ? null : DateTime.now()),
+        TimeField(
+          label: l10n.sleepStartLabel,
+          time: _start,
+          firstDate: widget.baby.birthDate,
+          onChanged: (t) => setState(() {
+            _start = t;
+            // A new sleep follows its start time (nap or night) until the parent picks.
+            if (existing == null && !_kindChosen) _kind = sleepKindAt(t);
+          }),
         ),
-        if (_end != null) TimeField(label: l10n.sleepEndLabel, time: _end!, onChanged: (t) => setState(() => _end = t)),
+        if (canBeOngoing)
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(l10n.stillAsleep),
+            value: _end == null,
+            onChanged: (asleep) => setState(() => _end = asleep ? null : DateTime.now()),
+          ),
+        if (_end != null)
+          TimeField(
+            label: l10n.sleepEndLabel,
+            time: _end!,
+            firstDate: widget.baby.birthDate,
+            onChanged: (t) => setState(() => _end = t),
+          ),
         if (!_timesValid)
           Text(l10n.invalidSleepTimes, style: TextStyle(color: Theme.of(context).colorScheme.error)),
         const SizedBox(height: 8),
         FilledButton(onPressed: _busy || !_timesValid ? null : _submit, child: Text(l10n.saveButton)),
-        DeleteButton(
-          enabled: !_busy,
-          onConfirmed: () => _run(
-            context,
-            ref,
-            widget.baby,
-            () => ref.read(trackingRepositoryProvider).delete(TrackedTable.sleeps, widget.existing.id),
+        if (existing != null)
+          DeleteButton(
+            enabled: !_busy,
+            onConfirmed: () => _run(
+              context,
+              ref,
+              widget.baby,
+              () => ref.read(trackingRepositoryProvider).delete(TrackedTable.sleeps, existing.id),
+            ),
           ),
-        ),
       ],
     );
   }
