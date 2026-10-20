@@ -1178,5 +1178,16 @@
   "pastFeedShort": "Past feed",
   "pastSleepShort": "Past sleep",
   "pastDiaperShort": "Past diaper",
-  "startSleepTitle": "Start a sleep"
+  "startSleepTitle": "Start a sleep",
+  "chartFeedsPerDay": "Feeds each day",
+  "chartFeedTimes": "When feeds happen",
+  "chartBottleMl": "Bottle milk each day (ml)",
+  "chartSleepPerDay": "Sleep each day",
+  "chartSleepPattern": "Sleep pattern",
+  "chartLongestSleep": "Longest sleep each day",
+  "chartDiapersPerDay": "Diapers each day",
+  "chartDiaperTimes": "When diapers happen",
+  "nightFeedsPerDay": "Night feeds (10 pm–6 am)",
+  "legendBottle": "Bottle",
+  "legendNight": "Night (7 pm–6 am)"
 }

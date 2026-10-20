@@ -644,6 +644,33 @@ void main() {
     expect(find.text('On this day'), findsNothing);
   });
 
+  final en = lookupAppLocalizations(const Locale('en'));
+  for (final (tab, titles) in [
+    (ReportTab.feeds, [en.chartFeedsPerDay, en.chartFeedTimes, en.chartBottleMl]),
+    (ReportTab.sleep, [en.chartSleepPerDay, en.chartSleepPattern, en.chartLongestSleep]),
+    (ReportTab.diapers, [en.chartDiapersPerDay, en.chartDiaperTimes]),
+  ]) {
+    testWidgets('Reports ${tab.name} tab has all its charts', (tester) async {
+      await pumpScreen(tester, ReportsScreen(baby: baby, initialTab: tab), const Locale('en'));
+      // A very tall screen, so every chart on the tab is built.
+      tester.view.physicalSize = const Size(1080, 12000);
+      await tester.pump();
+      for (final title in titles) {
+        expect(find.text(title), findsOneWidget, reason: title);
+      }
+      expect(tester.takeException(), isNull);
+    });
+  }
+
+  testWidgets('30-day reports build in Urdu', (tester) async {
+    await pumpScreen(tester, ReportsScreen(baby: baby, initialTab: ReportTab.sleep), const Locale('ur'));
+    await tester.tap(find.text(lookupAppLocalizations(const Locale('ur')).periodDays(30)));
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('Reports opens on the tab asked for', (tester) async {
     await pumpScreen(tester, ReportsScreen(baby: baby, initialTab: ReportTab.sleep), const Locale('en'));
     expect(find.text('Sleep a day'), findsOneWidget);

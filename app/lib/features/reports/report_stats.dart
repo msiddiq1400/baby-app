@@ -13,6 +13,9 @@ class DayStats {
 
   final DateTime day;
   int feeds = 0;
+
+  /// Feeds starting between 10 pm and 6 am.
+  int nightFeeds = 0;
   int bottles = 0;
   int bottleMl = 0;
   int breastfeedsTimed = 0;
@@ -25,6 +28,9 @@ class DayStats {
   Duration night = Duration.zero;
   Duration naps = Duration.zero;
   int napCount = 0;
+
+  /// The longest single sleep that started this day.
+  Duration longest = Duration.zero;
 
   Duration get sleep => night + naps;
 }
@@ -52,6 +58,7 @@ List<DayStats> dailyStats({
     final s = on(f.startedAt);
     if (s == null) continue;
     s.feeds++;
+    if (isNightFeed(f.startedAt)) s.nightFeeds++;
     if (f.type.isBottle && f.amountMl != null) {
       s.bottles++;
       s.bottleMl += f.amountMl!;
@@ -87,6 +94,10 @@ List<DayStats> dailyStats({
       }
     }
     s.napCount = sleeps.where((x) => x.kind == SleepKind.nap && _day(x.startedAt) == s.day).length;
+    for (final sleep in sleeps.where((x) => _day(x.startedAt) == s.day)) {
+      final length = (sleep.endedAt ?? now).difference(sleep.startedAt);
+      if (length > s.longest) s.longest = length;
+    }
   }
   return stats;
 }
@@ -95,6 +106,7 @@ List<DayStats> dailyStats({
 class ReportSummary {
   const ReportSummary({
     this.feedsPerDay,
+    this.nightFeedsPerDay,
     this.usualGap,
     this.bottleMlPerDay,
     this.mlPerBottle,
@@ -114,6 +126,7 @@ class ReportSummary {
   });
 
   final double? feedsPerDay;
+  final double? nightFeedsPerDay;
   final Duration? usualGap;
   final double? bottleMlPerDay;
   final double? mlPerBottle;
@@ -176,6 +189,7 @@ ReportSummary summarize({
 
   return ReportSummary(
     feedsPerDay: _avg(withFeeds.map((d) => d.feeds)),
+    nightFeedsPerDay: _avg(withFeeds.map((d) => d.nightFeeds)),
     usualGap: hungerEstimate(feeds.where((f) => !f.startedAt.isBefore(from)).toList())?.usualGap,
     bottleMlPerDay: _avg(withBottles.map((d) => d.bottleMl)),
     mlPerBottle: bottles == 0 ? null : full.fold(0, (a, d) => a + d.bottleMl) / bottles,
@@ -198,6 +212,9 @@ ReportSummary summarize({
     dirtyPerDay: _avg(withDiapers.map((d) => d.dirty)),
   );
 }
+
+/// A feed starting between 10 pm and 6 am counts as a night feed.
+bool isNightFeed(DateTime start) => start.hour >= 22 || start.hour < 6;
 
 /// Typical total sleep per 24 hours for the baby's age, in hours, and its
 /// source: National Sleep Foundation (0-3 months), American Academy of

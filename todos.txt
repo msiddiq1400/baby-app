@@ -507,6 +507,11 @@ feed/sleep/diaper reports mixed together; nothing is committed)
   button). Change the time first if needed.
 - Feed: the form starts as the same kind as the last feed, with the last
   bottle amount filled in, so a repeat bottle is Feed > Save.
+- Reports: more charts on each tab. Feeds: "When feeds happen" (24-hour
+  strip per day, night shaded), "Bottle milk each day" (if bottles are
+  logged), plus a "Night feeds (10 pm-6 am)" figure. Sleep: "Sleep
+  pattern" (24-hour sleep log) and "Longest sleep each day". Diapers:
+  "When diapers happen" (wet / dirty times).
 - Sleep button no longer starts a sleep straight away: it opens a form
   (start time, nap or night, "Still asleep" on) and starts on Save. While
   asleep it says "Woke up" and opens the form with the wake time = now.

@@ -1794,6 +1794,39 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get startSleepTitle => 'نیند شروع کریں';
+
+  @override
+  String get chartFeedsPerDay => 'ہر دن کی خوراکیں';
+
+  @override
+  String get chartFeedTimes => 'خوراک کے اوقات';
+
+  @override
+  String get chartBottleMl => 'ہر دن بوتل کا دودھ (ml)';
+
+  @override
+  String get chartSleepPerDay => 'ہر دن کی نیند';
+
+  @override
+  String get chartSleepPattern => 'نیند کا معمول';
+
+  @override
+  String get chartLongestSleep => 'ہر دن کی سب سے لمبی نیند';
+
+  @override
+  String get chartDiapersPerDay => 'ہر دن کے ڈائپر';
+
+  @override
+  String get chartDiaperTimes => 'ڈائپر کے اوقات';
+
+  @override
+  String get nightFeedsPerDay => 'رات کی خوراکیں (رات 10 تا صبح 6)';
+
+  @override
+  String get legendBottle => 'بوتل';
+
+  @override
+  String get legendNight => 'رات (شام 7 تا صبح 6)';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -3590,4 +3623,37 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get startSleepTitle => 'Neend shuru karein';
+
+  @override
+  String get chartFeedsPerDay => 'Har din ki feeds';
+
+  @override
+  String get chartFeedTimes => 'Feed ke auqaat';
+
+  @override
+  String get chartBottleMl => 'Har din bottle ka doodh (ml)';
+
+  @override
+  String get chartSleepPerDay => 'Har din ki neend';
+
+  @override
+  String get chartSleepPattern => 'Neend ka mamool';
+
+  @override
+  String get chartLongestSleep => 'Har din ki sab se lambi neend';
+
+  @override
+  String get chartDiapersPerDay => 'Har din ke diapers';
+
+  @override
+  String get chartDiaperTimes => 'Diaper ke auqaat';
+
+  @override
+  String get nightFeedsPerDay => 'Raat ki feeds (raat 10 se subah 6)';
+
+  @override
+  String get legendBottle => 'Bottle';
+
+  @override
+  String get legendNight => 'Raat (shaam 7 se subah 6)';
 }

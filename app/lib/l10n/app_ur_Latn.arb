@@ -954,5 +954,16 @@
   "pastFeedShort": "Pichli feed",
   "pastSleepShort": "Pichli neend",
   "pastDiaperShort": "Pichla diaper",
-  "startSleepTitle": "Neend shuru karein"
+  "startSleepTitle": "Neend shuru karein",
+  "chartFeedsPerDay": "Har din ki feeds",
+  "chartFeedTimes": "Feed ke auqaat",
+  "chartBottleMl": "Har din bottle ka doodh (ml)",
+  "chartSleepPerDay": "Har din ki neend",
+  "chartSleepPattern": "Neend ka mamool",
+  "chartLongestSleep": "Har din ki sab se lambi neend",
+  "chartDiapersPerDay": "Har din ke diapers",
+  "chartDiaperTimes": "Diaper ke auqaat",
+  "nightFeedsPerDay": "Raat ki feeds (raat 10 se subah 6)",
+  "legendBottle": "Bottle",
+  "legendNight": "Raat (shaam 7 se subah 6)"
 }

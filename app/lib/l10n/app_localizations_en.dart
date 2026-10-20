@@ -1842,4 +1842,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get startSleepTitle => 'Start a sleep';
+
+  @override
+  String get chartFeedsPerDay => 'Feeds each day';
+
+  @override
+  String get chartFeedTimes => 'When feeds happen';
+
+  @override
+  String get chartBottleMl => 'Bottle milk each day (ml)';
+
+  @override
+  String get chartSleepPerDay => 'Sleep each day';
+
+  @override
+  String get chartSleepPattern => 'Sleep pattern';
+
+  @override
+  String get chartLongestSleep => 'Longest sleep each day';
+
+  @override
+  String get chartDiapersPerDay => 'Diapers each day';
+
+  @override
+  String get chartDiaperTimes => 'When diapers happen';
+
+  @override
+  String get nightFeedsPerDay => 'Night feeds (10 pm–6 am)';
+
+  @override
+  String get legendBottle => 'Bottle';
+
+  @override
+  String get legendNight => 'Night (7 pm–6 am)';
 }

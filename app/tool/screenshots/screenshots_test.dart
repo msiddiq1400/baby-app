@@ -365,6 +365,11 @@ void main() {
     'illness': (4, IllnessScreen(baby: baby, illnessId: 'ill'), null),
     // The sleep tab (the website's "Sleep, compared with what's typical").
     'reports2': (0, ReportsScreen(baby: baby, initialTab: ReportTab.sleep), null),
+    'reports3': (0, ReportsScreen(baby: baby, initialTab: ReportTab.diapers), null),
+    // The 24-hour charts, further down each tab.
+    'reports_times': (0, ReportsScreen(baby: baby), 'scroll'),
+    'reports2_times': (0, ReportsScreen(baby: baby, initialTab: ReportTab.sleep), 'scroll'),
+    'reports3_times': (0, ReportsScreen(baby: baby, initialTab: ReportTab.diapers), 'scroll'),
   };
 
   for (final (locale, tag, brightness) in const [

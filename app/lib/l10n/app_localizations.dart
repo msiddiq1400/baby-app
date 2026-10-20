@@ -3218,6 +3218,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start a sleep'**
   String get startSleepTitle;
+
+  /// No description provided for @chartFeedsPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Feeds each day'**
+  String get chartFeedsPerDay;
+
+  /// No description provided for @chartFeedTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'When feeds happen'**
+  String get chartFeedTimes;
+
+  /// No description provided for @chartBottleMl.
+  ///
+  /// In en, this message translates to:
+  /// **'Bottle milk each day (ml)'**
+  String get chartBottleMl;
+
+  /// No description provided for @chartSleepPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep each day'**
+  String get chartSleepPerDay;
+
+  /// No description provided for @chartSleepPattern.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep pattern'**
+  String get chartSleepPattern;
+
+  /// No description provided for @chartLongestSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'Longest sleep each day'**
+  String get chartLongestSleep;
+
+  /// No description provided for @chartDiapersPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Diapers each day'**
+  String get chartDiapersPerDay;
+
+  /// No description provided for @chartDiaperTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'When diapers happen'**
+  String get chartDiaperTimes;
+
+  /// No description provided for @nightFeedsPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Night feeds (10 pm–6 am)'**
+  String get nightFeedsPerDay;
+
+  /// No description provided for @legendBottle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bottle'**
+  String get legendBottle;
+
+  /// No description provided for @legendNight.
+  ///
+  /// In en, this message translates to:
+  /// **'Night (7 pm–6 am)'**
+  String get legendNight;
 }
 
 class _AppLocalizationsDelegate

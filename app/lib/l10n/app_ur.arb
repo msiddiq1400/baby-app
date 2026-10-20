@@ -954,5 +954,16 @@
   "pastFeedShort": "پچھلی خوراک",
   "pastSleepShort": "پچھلی نیند",
   "pastDiaperShort": "پچھلا ڈائپر",
-  "startSleepTitle": "نیند شروع کریں"
+  "startSleepTitle": "نیند شروع کریں",
+  "chartFeedsPerDay": "ہر دن کی خوراکیں",
+  "chartFeedTimes": "خوراک کے اوقات",
+  "chartBottleMl": "ہر دن بوتل کا دودھ (ml)",
+  "chartSleepPerDay": "ہر دن کی نیند",
+  "chartSleepPattern": "نیند کا معمول",
+  "chartLongestSleep": "ہر دن کی سب سے لمبی نیند",
+  "chartDiapersPerDay": "ہر دن کے ڈائپر",
+  "chartDiaperTimes": "ڈائپر کے اوقات",
+  "nightFeedsPerDay": "رات کی خوراکیں (رات 10 تا صبح 6)",
+  "legendBottle": "بوتل",
+  "legendNight": "رات (شام 7 تا صبح 6)"
 }
