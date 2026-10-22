@@ -1189,5 +1189,30 @@
   "chartDiaperTimes": "When diapers happen",
   "nightFeedsPerDay": "Night feeds (10 pm–6 am)",
   "legendBottle": "Bottle",
-  "legendNight": "Night (7 pm–6 am)"
+  "legendNight": "Night (7 pm–6 am)",
+  "solidsTabGuides": "Guides",
+  "solidsTabRecipes": "Recipes",
+  "solidsFoodsProgress": "{tried} of {total} foods tried",
+  "@solidsFoodsProgress": {
+    "placeholders": {
+      "tried": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "solidsAllergensProgress": "{introduced} of {total} allergens introduced",
+  "@solidsAllergensProgress": {
+    "placeholders": {
+      "introduced": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "foodsTried": "Tried"
 }

@@ -1875,4 +1875,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get legendNight => 'Night (7 pm–6 am)';
+
+  @override
+  String get solidsTabGuides => 'Guides';
+
+  @override
+  String get solidsTabRecipes => 'Recipes';
+
+  @override
+  String solidsFoodsProgress(int tried, int total) {
+    return '$tried of $total foods tried';
+  }
+
+  @override
+  String solidsAllergensProgress(int introduced, int total) {
+    return '$introduced of $total allergens introduced';
+  }
+
+  @override
+  String get foodsTried => 'Tried';
 }

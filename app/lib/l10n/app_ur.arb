@@ -965,5 +965,10 @@
   "chartDiaperTimes": "ڈائپر کے اوقات",
   "nightFeedsPerDay": "رات کی خوراکیں (رات 10 تا صبح 6)",
   "legendBottle": "بوتل",
-  "legendNight": "رات (شام 7 تا صبح 6)"
+  "legendNight": "رات (شام 7 تا صبح 6)",
+  "solidsTabGuides": "رہنمائی",
+  "solidsTabRecipes": "ترکیبیں",
+  "solidsFoodsProgress": "{total} میں سے {tried} غذائیں آزمائیں",
+  "solidsAllergensProgress": "{total} میں سے {introduced} الرجی والی غذائیں شروع",
+  "foodsTried": "آزمائی ہوئی"
 }

@@ -965,5 +965,10 @@
   "chartDiaperTimes": "Diaper ke auqaat",
   "nightFeedsPerDay": "Raat ki feeds (raat 10 se subah 6)",
   "legendBottle": "Bottle",
-  "legendNight": "Raat (shaam 7 se subah 6)"
+  "legendNight": "Raat (shaam 7 se subah 6)",
+  "solidsTabGuides": "Rehnumai",
+  "solidsTabRecipes": "Tarkeebein",
+  "solidsFoodsProgress": "{total} mein se {tried} ghizayein aazmayi",
+  "solidsAllergensProgress": "{total} mein se {introduced} allergy wali ghizayein shuru",
+  "foodsTried": "Aazmayi hui"
 }

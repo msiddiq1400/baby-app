@@ -472,12 +472,59 @@ void main() {
       final guide = FoodGuide.fromJson(
         jsonDecode(File('assets/foods.json').readAsStringSync()) as Map<String, dynamic>,
       );
-      await pumpScreen(tester, RecipesScreen(baby: baby, guide: guide), locale);
+      await pumpScreen(tester, Scaffold(body: RecipesView(baby: baby, guide: guide)), locale);
       await tester.tap(find.byType(ExpansionTile).first);
       await tester.pump(const Duration(milliseconds: 300));
       expect(tester.takeException(), isNull);
     });
   }
+
+  testWidgets('Solids: Foods tab shows progress and tried / not-tried groups, other tabs build', (tester) async {
+    await pumpScreen(tester, SolidsScreen(baby: baby), const Locale('en'));
+    expect(tester.takeException(), isNull);
+    // The baby is over 5 months, so Solids opens on Foods.
+    expect(find.textContaining('foods tried'), findsOneWidget);
+    expect(find.textContaining('allergens introduced'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('Not tried yet'), 300, scrollable: find.byType(Scrollable).last);
+    expect(find.text('Not tried yet'), findsOneWidget);
+    for (final (tab, expected) in [('Guides', 'Is my baby ready?'), ('Recipes', 'From 6 months')]) {
+      await tester.tap(find.text(tab));
+      for (var i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 200));
+      }
+      expect(tester.takeException(), isNull, reason: tab);
+      expect(find.text(expected), findsWidgets, reason: tab);
+    }
+  });
+
+  testWidgets('Solids guides: opening one closes the other', (tester) async {
+    final guide = FoodGuide.fromJson(
+      jsonDecode(File('assets/foods.json').readAsStringSync()) as Map<String, dynamic>,
+    );
+    Future<void> settle() async {
+      for (var i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 200));
+      }
+    }
+
+    await pumpScreen(tester, SolidsScreen(baby: baby), const Locale('en'));
+    await tester.tap(find.text('Guides'));
+    await settle();
+    // The allergic-reaction signs live on Foods only.
+    expect(find.text('Signs of an allergic reaction'), findsNothing);
+    final readiness = find.text(guide.readiness.english);
+    final firstRule = find.text('• ${guide.rules.first.english}');
+
+    await tester.tap(find.text('Is my baby ready?'));
+    await settle();
+    expect(readiness, findsOneWidget);
+
+    await tester.tap(find.text('Important rules'));
+    await settle();
+    expect(firstRule, findsOneWidget);
+    expect(readiness, findsNothing, reason: 'the first guide closes');
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('Health inner tabs (medicines, symptoms) build', (tester) async {
     await pumpScreen(tester, HealthScreen(baby: baby), const Locale('en'));

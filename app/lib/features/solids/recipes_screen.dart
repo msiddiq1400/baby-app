@@ -6,10 +6,11 @@ import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
 import 'food_sheets.dart';
 
-/// Home-style recipes grouped by age (from 6, 7 and 10 months). Recipes the
-/// baby isn't old enough for yet are shown but marked.
-class RecipesScreen extends StatelessWidget {
-  const RecipesScreen({super.key, required this.baby, required this.guide});
+/// The Recipes tab of Solids: home-style recipes grouped by age (from 6, 7
+/// and 10 months). Recipes the baby isn't old enough for yet are shown but
+/// marked.
+class RecipesView extends StatelessWidget {
+  const RecipesView({super.key, required this.baby, required this.guide});
 
   final Baby baby;
   final FoodGuide guide;
@@ -21,35 +22,32 @@ class RecipesScreen extends StatelessWidget {
     final ageMonths = babyAge(baby.birthDate, DateTime.now()).months;
     final stages = {for (final r in guide.recipes) r.fromMonths}.toList()..sort();
 
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.recipesTitle)),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          Text(l10n.recipesRules, style: theme.textTheme.bodyMedium),
-          for (final months in stages) ...[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(4, 20, 4, 6),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      l10n.recipesFromMonths(months),
-                      style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary),
-                    ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+      children: [
+        Text(l10n.recipesRules, style: theme.textTheme.bodyMedium),
+        for (final months in stages) ...[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(4, 20, 4, 6),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    l10n.recipesFromMonths(months),
+                    style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary),
                   ),
-                  if (ageMonths < months)
-                    Text(l10n.recipesNotYet, style: theme.textTheme.bodySmall),
-                ],
-              ),
+                ),
+                if (ageMonths < months)
+                  Text(l10n.recipesNotYet, style: theme.textTheme.bodySmall),
+              ],
             ),
-            for (final r in guide.recipes.where((r) => r.fromMonths == months))
-              _RecipeCard(baby: baby, guide: guide, recipe: r),
-          ],
-          const SizedBox(height: 16),
-          Text(l10n.recipesSource, style: theme.textTheme.bodySmall),
+          ),
+          for (final r in guide.recipes.where((r) => r.fromMonths == months))
+            _RecipeCard(baby: baby, guide: guide, recipe: r),
         ],
-      ),
+        const SizedBox(height: 16),
+        Text(l10n.recipesSource, style: theme.textTheme.bodySmall),
+      ],
     );
   }
 }

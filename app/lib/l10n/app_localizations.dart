@@ -3284,6 +3284,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Night (7 pm–6 am)'**
   String get legendNight;
+
+  /// No description provided for @solidsTabGuides.
+  ///
+  /// In en, this message translates to:
+  /// **'Guides'**
+  String get solidsTabGuides;
+
+  /// No description provided for @solidsTabRecipes.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipes'**
+  String get solidsTabRecipes;
+
+  /// No description provided for @solidsFoodsProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{tried} of {total} foods tried'**
+  String solidsFoodsProgress(int tried, int total);
+
+  /// No description provided for @solidsAllergensProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{introduced} of {total} allergens introduced'**
+  String solidsAllergensProgress(int introduced, int total);
+
+  /// No description provided for @foodsTried.
+  ///
+  /// In en, this message translates to:
+  /// **'Tried'**
+  String get foodsTried;
 }
 
 class _AppLocalizationsDelegate

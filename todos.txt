@@ -51,6 +51,8 @@ BABY APP: THINGS ONLY YOU CAN DO
 [ ] N8. Test the layout changes from tester feedback (list under "WHAT
         CHANGED ON 20 OCT" below). Already committed and pushed (21 Oct).
         No database or PowerSync change needed.
+[x] N9. Test the new Solids layout (list under "WHAT CHANGED ON 23 OCT"),
+        installed on the phone 23 Oct; committed and pushed 23 Oct.
 
 QUESTIONS FOR YOU (answer any time; nothing is blocked on them)
   Q1. Existing babies were set to Pakistan automatically. Fine, or should
@@ -358,9 +360,14 @@ Claude can build 31-36 without anything from you; say which ones first.
         while a timer runs, asleep/awake with a clock, and the next vaccines
         when due within 30 days. Tap it to open Palna. It refreshes whenever
         something is logged in the app.
-        Still open: the iPhone version (a WidgetKit extension; not in
-        app/ios yet. Codemagic works now, so Claude can build it) and Live
-        Activities for the timer.
+        Still open: Live Activities for the timer, and the iPhone widget
+        (LATER, parked 23 Oct). iPhone widget plan: Medium (4x2, same as
+        Android) + Small (2x2: last feed + asleep/awake), written in Swift
+        (WidgetKit) and built by Codemagic. You: developer.apple.com >
+        register an App Group (group.com.palnacare.app) on the app's App ID
+        + a new App ID com.palnacare.app.widget. Claude: the widget, the
+        app sharing data with it, codemagic.yaml signing for both. Test on
+        TestFlight (expect 2-4 builds).
 [ ] 38. Photos and memories (first smile, milestones with a photo).
         BUILT with the free limit (1 Oct night), please test after N1/N1b:
         Growth > Photos: one tile per month of age (Newborn, 1 month...),
@@ -496,6 +503,27 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
 
 
 ====================================================================
+WHAT CHANGED ON 23 OCT (tester feedback: Solids too cluttered;
+committed 23 Oct)
+====================================================================
+- Solids has three tabs: Foods | Guides | Recipes (like Reports).
+- Foods (opens first): "3 of 36 foods tried" with a progress bar and
+  "1 of 7 allergens introduced", the allergic-reaction signs, short
+  allergen chips (name + tick/circle; long-press shows the status),
+  search and categories, then the list split into "Tried" (latest
+  first) and "Not tried yet" (vegetables first). "From N months" only
+  shows while the baby is younger than that.
+- Guides: 5 guides (ready?, vegetables first, textures, rules, beliefs)
+  and the sources; opening one closes the others. The allergic-reaction
+  signs are on Foods only (where new foods are given). Babies under 5
+  months open Solids here, with the "most babies start around 6 months"
+  note.
+- Recipes: the 15 recipes right in the tab (no extra screen).
+- New text in English, Urdu and Roman Urdu. 217 automated checks pass.
+- Solids screenshots re-rendered (tool/screenshots/out/solids_*); the
+  website/store copies are still the old layout.
+
+====================================================================
 WHAT CHANGED ON 20 OCT (tester feedback: duplicates, too many taps,
 feed/sleep/diaper reports mixed together; committed 21 Oct)
 ====================================================================
@@ -541,7 +569,7 @@ feed/sleep/diaper reports mixed together; committed 21 Oct)
 - Screenshot tool: shows the new buttons; reports2 is now the Sleep tab.
   Re-run it before the next store/website screenshot update.
 
-Not done yet (from the same review; ask Claude when wanted):
+Not done yet (from the same review; LATER, not needed for now (22 Oct)):
 - One icon per topic everywhere (feeds use a cup, Milk a drop; the chart
   icon means Growth in the tabs).
 - Journal: show past days only (today is already on Today) and add

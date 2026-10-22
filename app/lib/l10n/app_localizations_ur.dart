@@ -1827,6 +1827,25 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get legendNight => 'رات (شام 7 تا صبح 6)';
+
+  @override
+  String get solidsTabGuides => 'رہنمائی';
+
+  @override
+  String get solidsTabRecipes => 'ترکیبیں';
+
+  @override
+  String solidsFoodsProgress(int tried, int total) {
+    return '$total میں سے $tried غذائیں آزمائیں';
+  }
+
+  @override
+  String solidsAllergensProgress(int introduced, int total) {
+    return '$total میں سے $introduced الرجی والی غذائیں شروع';
+  }
+
+  @override
+  String get foodsTried => 'آزمائی ہوئی';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -3656,4 +3675,23 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get legendNight => 'Raat (shaam 7 se subah 6)';
+
+  @override
+  String get solidsTabGuides => 'Rehnumai';
+
+  @override
+  String get solidsTabRecipes => 'Tarkeebein';
+
+  @override
+  String solidsFoodsProgress(int tried, int total) {
+    return '$total mein se $tried ghizayein aazmayi';
+  }
+
+  @override
+  String solidsAllergensProgress(int introduced, int total) {
+    return '$total mein se $introduced allergy wali ghizayein shuru';
+  }
+
+  @override
+  String get foodsTried => 'Aazmayi hui';
 }
