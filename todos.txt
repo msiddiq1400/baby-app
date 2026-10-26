@@ -20,11 +20,10 @@ to some of them), so they aren't in order. Last tidied 27 Oct 2026.
         "secret detected" alerts closed as "won't fix".
 [~] 36. Push notifications between phones: LIVE (26 Oct), Android works.
         Still to do:
-        - [ ] iPhone: developer.apple.com > Keys > + > Apple Push
-          Notifications service (APNs) > download the .p8 (only once; keep
-          it in stuff/). Firebase > Project settings > Cloud Messaging >
-          Apple app > upload it with its Key ID and Team ID W7AS897FPN.
-          Then test on a TestFlight build.
+        - [x] iPhone: APNs key Z4XXAP5224 (team-scoped, shared with
+          OathLock; file app-block/stuff/AuthKey_Z4XXAP5224.p8) uploaded to
+          Firebase for development and production (27 Oct).
+        - [ ] Test on an iPhone with the next TestFlight build.
         - [ ] Test with two accounts in one family: log a feed / sleep /
           dose on one phone, the other gets it. Also Settings >
           Notifications switches and quiet hours.
