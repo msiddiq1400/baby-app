@@ -49,7 +49,8 @@ to some of them), so they aren't in order. Last tidied 27 Oct 2026.
         Editor, sign in once on the phone (add a sample baby), then put the
         email/password in Play Console > App access and App Store Connect >
         App Review. (Same account as item 46: review@palnacare.com.)
-[~] 20. Android upload key: back up stuff/palna-upload.jks,
+[~] 20. (27 Oct: only on this PC for now; do it when the password manager
+        is set up, together with items 3-8.) Android upload key: back up stuff/palna-upload.jks,
         android/key.properties and stuff/palna-upload-key.properties in
         your password manager. Without them the app can't be updated on
         Play. After the first Play upload: Play Console > App integrity >
