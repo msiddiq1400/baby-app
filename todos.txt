@@ -1,926 +1,277 @@
-BABY APP: THINGS ONLY YOU CAN DO
-(Claude keeps this list up to date. Most urgent first.)
+PALNA (baby-app): TO-DO LIST
+Claude keeps this up to date. Open items only, most urgent first; finished
+work lives in git history. Item numbers never change (code comments refer
+to some of them), so they aren't in order. Last tidied 27 Oct 2026.
+
+[ ] open   [~] started / partly done   [x] done (kept only when useful)
+
+====================================================================
+1. DO NEXT (quick jobs only you can do)
 ====================================================================
 
---- WHEN YOU WAKE UP (1 OCT NIGHT) -----------------------------------
-
-[x] N1. !! FIRST, before running the new app build: apply the database
-        change (baby's country + vaccines by name + 5 new schedules):
-          cd d:\projects\baby-app
-          npx supabase db push --dry-run     (should list 20261001000001_countries)
-          npx supabase db push
-        Until it's applied, a phone running the new build can't upload
-        new babies or vaccines (they wait in the queue, nothing is lost).
-        The same push also adds monthly photos (20261001000002_photos: the
-        photos table, the private "photos" storage bucket and its rules).
-[x] N1b. !! PowerSync dashboard > Sync Streams > replace everything with
-        d:\projects\baby-app\powersync\sync-config.yaml > Validate > Deploy (new
-        table: photos). Without it, photos upload but then vanish from the
-        phone, and family members never see them.
-[x] N2. Test on the phone (list under "WHAT CHANGED ON 1 OCT NIGHT"), then
-        tell Claude to commit, or commit yourself.
-[~] N3. (SQL RUN 5 Oct; website DEPLOYED, checked 20 Oct; only the Play form still to do.) Delete entries for good after 30 days (item 27a): Supabase > SQL
-        Editor > paste d:\projects\baby-app\supabase\snippets\purge_deleted_entries.sql
-        > Run. THEN re-deploy the website (the delete-account page now has a
-        "Delete some of your data" section that promises this), THEN Play
-        Console > App content > Data safety > "delete some data without
-        deleting the account" > Yes, URL
-        https://palnacare.com/delete-account/#some-data
-        Don't deploy the website before running the SQL.
-[ ] N4. Demo account for Google/Apple review: run
-        d:\projects\baby-app\supabase\snippets\review_account.sql (set the password
-        first), sign in once on the phone, and put the same email/password
-        in Play Console > App access and App Store Connect > App Review.
-[ ] N5. Store text: the description gained a line for families abroad
-        ("Living abroad? Vaccine schedules for the UK, US, Canada, UAE and
-        Saudi Arabia too..."), and on 26 Oct "One tap to log..." became
-        "Feed, Diaper and Sleep buttons on every screen: a repeat bottle or
-        a wet diaper takes two taps...". Paste the updated description from
-        store/app-store.md into Play Console > Main store listing (and App
-        Store Connect when you get there).
-[ ] N7. Photos in the store forms (after testing photos):
-        - Play Console > App content > Data safety > Data types > Photos and
-          videos > Photos: collected, NOT shared, not ephemeral, OPTIONAL
-          ("users can choose"), purpose App functionality.
-        - App Store Connect (when filling App Privacy): User Content >
-          Photos or Videos, linked to the user, not tracking.
-        - [x] Website re-deployed (checked live 20 Oct): privacy policy and
-          delete-account page mention photos.
-[ ] N6. Testers: invite message in English / Urdu / Roman Urdu is in
-        store/tester-invite.md. Send it once the closed test is approved;
-        12+ testers must stay opted in for 14 days in a row.
-
-[ ] N8. Test the layout changes from tester feedback (list under "WHAT
-        CHANGED ON 20 OCT" below). Already committed and pushed (21 Oct).
-        No database or PowerSync change needed.
-[x] N9. Test the new Solids layout (list under "WHAT CHANGED ON 23 OCT"),
-        installed on the phone 23 Oct; committed and pushed 23 Oct.
-[x] N10. (Tested on the phone and merged 26 Oct.) Test the 26 Oct changes on the phone (list
-        under "WHAT CHANGED ON 26 OCT" below): Feeding tab (Milk + Solids
-        in one, 4 tabs at the bottom), baby's name on every tab, Doctor
-        summary at the top of Health, Journal with past days only and
-        filters, one icon per topic. No database or PowerSync change.
-          cd d:\projects\baby-app\app
-          flutter run --dart-define-from-file=env/prod.json
-        Then tell Claude to commit, or commit yourself. Pushing also
-        updates the website (new screenshots with the 4-tab layout).
-[x] N12. (Merged with N10, 26 Oct.) New automated tests (26 Oct): 541
-        checks, all passing twice in a row (~6 min: cd app, flutter test).
-        New: test/flows/ drives the real app on a real phone database with a
-        fake server: every flow on Today, Feeding, Growth, Health, Settings,
-        family, account, sign-in, uploads, plus a check that the phone and
-        server tables match. GitHub now runs them on every push
-        (.github/workflows/tests.yml): a red cross on a commit = something
-        broke. Fixed on the way: signing out while offline threw an error;
-        the reset-password error now shows straight away.
-[ ] N11. After N10: upload the new store screenshots (the old ones show 5
-        tabs): App Store size in app/tool/screenshots/out/iphone/, Play size
-        in app/tool/screenshots/out/play/ (re-rendered 26 Oct, already
-        flattened to RGB). Order: see store/google-play.md.
-
-QUESTIONS FOR YOU (answer any time; nothing is blocked on them)
-  Q1. Existing babies were set to Pakistan automatically. Fine, or should
-      the app ask every family once "Which country does <baby> live in?"
-  Q2. Canada: the app uses the NATIONAL schedule (Canadian Immunization
-      Guide). Provinces differ a lot (Ontario: no infant Hep B, chickenpox
-      at 15 months, MMRV at 4-6 years). Keep national + the "follow your
-      province" note, or ask for the province and add Ontario's version?
-  Q3. UK: the schedule is for babies born from 1 Jan 2025 (MMRV, 18-month
-      visit). Older UK children (born 2022-2024) had a slightly different
-      one. Worth adding by birth date, or leave as is (new babies are the
-      main users)?
-  Q4. Add the country schedules and emergency numbers to the website
-      (features + FAQ, 3 languages)? Claude can do it.
-  Q5. RSV antibody at birth (UAE for babies born Sep-Mar, US/Canada by
-      season) and yearly flu were left out of all schedules as "not
-      routine for every baby". Show them as optional reminders later?
-
-
---- WHEN YOU WAKE UP -------------------------------------------------
-
-[x] M1. !! BEFORE opening the new app: PowerSync dashboard > Sync Streams >
-        replace everything with d:\projects\baby-app\powersync\sync-config.yaml >
-        Validate > Deploy. (Two new tables tonight: illnesses and
-        doctor_visits. Without this, illnesses you add upload but then
-        vanish from the phone.)
-[x] M2. Supabase > Authentication > Emails > "Reset Password": subject
-        "Reset your Palna password", body = d:\projects\baby-app\supabase\templates\recovery.html
-        (so "Forgot password?" emails a 6-digit code, not a link).
-[x] M3. Re-deploy the website (Cloudflare > Workers & Pages > your Worker >
-        New deployment > drag in d:\projects\baby-app\website). New: illness and
-        dark-mode slides, a "small things" section, screenshots that turn
-        dark with the site's dark theme, and privacy/delete pages updated
-        for illnesses, the widget and 30-day encrypted backups.
-        (The backups line is only true once you switch backups on, item 18.)
-[x] M5. (WORKING: a push to main went live in ~40 s on 21 Oct.) Website auto-deploy: Cloudflare > your Worker > Settings > Build >
-        connect GitHub repo baby-app, branch main, build command empty,
-        deploy command "npx wrangler deploy". Uses wrangler.jsonc in the
-        repo root, so it only works once that file is committed and pushed.
-        After that, every push to main updates palnacare.com, and there's
-        no more dragging the folder in.
-[ ] M4. Test what was built overnight (list under "WHAT CHANGED ON 30 SEP
-        NIGHT" at the bottom). Already committed and pushed.
-
-
-[x] 0. !! FIRST, before opening the new app: PowerSync dashboard > Sync
-       Streams > replace everything with the current contents of
-       d:\projects\baby-app\powersync\sync-config.yaml > Validate > Deploy.
-       (Overnight I added two tables, food_tries and milestone_checks.
-       Until the rules are redeployed, foods tried and milestones ticked
-       would upload but then disappear from the phone.)
-
-[x] 0b. Install the new app on the phone. The phone disconnected
-        overnight, so it isn't installed yet. Plug it in (USB debugging on)
-        and run:
-          cd d:\projects\baby-app\app
-          flutter run --dart-define-from-file=env/prod.json
-        (Do item 0 first.)
-
-[x] 1. Tested the overnight work on the phone. Still to do: commit when
-       you're ready (you commit yourself):
-         cd d:\projects\baby-app
-         git status          (review the list)
-         git add -A
-         git commit -m "..."
-         git push
-       Nothing has been committed since "Add Continue with Google sign-in".
-
-[x] 2. Offline test: airplane mode on > log a feed + diaper > airplane
-       mode off > check the rows appear in Supabase > Table Editor.
-
---- DECISIONS NEEDED BEFORE THE FIRST STORE UPLOAD -------------------
-
-[x] 9a. App name chosen: "Palna" (subtitle "Mother & Baby Care"; store
-        listing "Palna: Mother & Baby Care"). Done in the app: the name under
-        the icon (Android + iOS), in-app title, invite message, doctor
-        summary footer, sign-up email template.
-[x] 9b. App id: "com.palnacare.app" (changed 30 Sep from
-        services.toolbox.palna to match the palnacare.com domain). Permanent
-        after the first store upload. Checked: no app named Palna in the App
-        Store (US, PK, UK, IN) or on Google Play.
-[x] 9d. Google sign-in works with the new app id (30 Sep). Clients kept:
-        "Palna Android Debug" (com.palnacare.app, debug SHA-1) and
-        "Supabase" (web client: the app and Supabase both use its id; never
-        delete it). The old "Android debug" client can be deleted.
-[x] 9c. Update the name where Claude can't:
-        - [x] Supabase "Confirm signup" template and SMTP sender "Palna"
-        - [x] Google Auth Platform > Branding (shown when choosing a Google
-          account; also needed to publish, item 19):
-            App name: Palna
-            User support email: hello@palnacare.com (after 17a receiving)
-            App logo: d:\projects\baby-app\app\assets\icon\icon.png
-            Home page: https://palnacare.com
-            Privacy policy: https://palnacare.com/privacy
-            Authorized domains: add palnacare.com
-        - [x] Supabase > Authentication > URL Configuration > Site URL:
-          https://palnacare.com (done 30 Sep; the old app.babyapp:// redirect
-          was removed, nothing in the app uses email links)
-        - [ ] Optional, cosmetic (nobody else sees these): rename the
-          Supabase project "baby-app", the Google Cloud project "Baby App"
-          and the PowerSync instance to Palna. Don't change their ids/URLs.
-[x] 10. App icon: navy moon-cradle (a palna on rockers, sleeping baby,
-        stars), plus the "modern classic" theme (navy / sand / rose on
-        cream; Lora headings, Nunito text, Nastaliq for Urdu). Source:
-        app/tool/icon/make_icon.py; a designer can polish it before launch.
-
---- ACCOUNTS / SERVICES ----------------------------------------------
-
-[x] 10a. REGISTERED (9 Oct 2026): TOOLBOX SERVICES (SMC-PRIVATE) LIMITED,
-        CUIN 0360341, NTN K372077-8 (RTO Peshawar, income tax active, not
-        registered for sales tax). Documents in business/ (git-ignored).
-        Letterhead and stamps made 13 Oct: business/letterhead, business/stamp.
-        STILL TO DO for the company:
-        - SECP: Form 1 has only a "correspondence address"; the registered
-          office box is empty. Notify the registered office on SECP LEAP
-          within 15 days of incorporation (by 24 Oct 2026, per LEAP's own
-          guideline). SUBMITTED 23 Oct, UNDER REVIEW (application
-          20261022_45065184). Check LEAP for approval or an objection.
-        - [x] Company bank account OPENED (22 Oct); cheque book due in 3-4
-          days. Still (NOT urgent, blocks nothing; do before the first
-          year-end, 30 June 2027): deposit the paid-up capital (PKR
-          1,000,000, Form 1 box 2.6; can be in parts, and the company can
-          spend it on business costs) and ask your consultant about the
-          SECP filing that confirms it. A company bank statement also works as the address
-          proof Google asked for.
-        - PSEB registration as a software house.
-        Was: Register the company: "Toolbox Services (SMC-Private) Limited"
-        (decided 30 Sep; the SECP name search showed nothing named
-        "Toolbox"; closest is "Tools Services (Pvt) Ltd").
-        Backup names: Toolbox Digital Services, Nestbyte Technologies.
-        SECP eServices: name reservation, then SMC incorporation. You are
-        the only member and director; a nominee and an alternate nominee
-        (CNICs and consent forms); registered office (home is fine);
-        capital e.g. PKR 100,000; business: software development, IT
-        services, mobile apps and web services. Then check the tax number
-        with the FBR, open a company bank account, and optionally register
-        with PSEB. One company publishes Palna and API Toolbox.
-        Logo: option 3, "Braces" (chosen 30 Sep):
-        stuff/company-logo-options/3-braces-*. Already on the
-        toolbox.services site (d:\work\toolbox, not committed yet).
-[~] 11. D-U-N-S number (free, dnb.com). APPLIED, waiting (as of 22 Oct).
-        Takes 1-4 weeks. Unblocks 12 (Apple org) and 13 (Play org).
-[ ] 12. Apple Developer Program as an organization ($99/yr).
-        [x] Enrolled as an INDIVIDUAL for now (approved 1 Oct 2026, renews
-            1 Oct 2027), Team ID W7AS897FPN, so family can test on
-            TestFlight. Once the company has its D-U-N-S number, ask Apple
-            Developer Support to migrate it to an organization.
-        [x] App ID com.palnacare.app registered (Sign In with Apple, Push).
-        [x] App Store Connect app created (1 Oct): "Palna - Mother & Baby
-            Care", SKU palna-ios, App Store ID (Apple ID) 6817859227.
-[ ] 13. Google Play Console as an organization ($25 once).
-        1 Oct: Palna was REJECTED on the personal Play account ("Violation of
-        Play Console Requirements"): apps with Medical features must come
-        from an organization account. Palna's health declaration truthfully
-        includes Medical ones (medicine doses and reminders, symptoms and
-        illnesses, EPI vaccines, emergency numbers, fever guidance). Don't
-        untick them to get through: Google calls a false declaration a
-        policy violation and can close the account.
-        Plan: company (10a) > D-U-N-S (11) > then FIRST try converting the
-        existing account: Play Console > Developer account > About you >
-        Change account type > Organization (new organization payments
-        profile with the D-U-N-S number; same email, no fee mentioned).
-        Only if that isn't offered: a new organization account ($25) on a
-        DIFFERENT Google account (e.g. apps@palnacare.com), then transfer
-        the app to it (package com.palnacare.app, listing and testers move
-        with it) > resubmit.
-        Until then: Android testers install stuff/Palna-1.0.0.apk (or
-        Firebase App Distribution once item 14 is done).
-[x] 14. Firebase: DONE (26 Oct). Project "Palna" (palna-care, Spark/free
-        plan) under msiddiq17328@gmail.com, apps "Palna Android" and
-        "Palna iOS" (com.palnacare.app). Their public settings are in
-        app/lib/core/config/firebase_config.dart (no google-services.json /
-        plist needed). Service account key: stuff/palna-firebase-service-
-        account.json (git-ignored; also set as the FCM_SERVICE_ACCOUNT
-        secret in Supabase). Later: Crashlytics could use the same project.
-[x] 15. Codemagic (iPhone builds, no Mac needed): DONE (22 Oct), builds
-        running. API key, "palna_prod" variables and codemagic.yaml all set
-        up. Workflows: "iPhone to TestFlight" (submit_to_testflight is still
-        false: turn it on once TestFlight > Test Information is filled in)
-        and "Android to Google Play" (internal track, drafts; needs the Play
-        account from item 13).
-[x] 16. iPhone Google sign-in: iOS client "Palna iOS" created (1 Oct), id
-        254198007439-tqm4...iupc; added to app/env/prod.json
-        (GOOGLE_IOS_CLIENT_ID) and to ios/Runner/Info.plist (URL scheme).
-        Supabase Google provider: iOS client id added after the web one,
-        "Skip nonce checks" on (1 Oct). Test once the iPhone build exists.
-[x] 17. Domain palnacare.com bought at Namecheap (29 Sep 2026). DNS now runs
-        on Cloudflare (active). Delete the 8 old Namecheap records in
-        Cloudflare > DNS if not done yet.
-[x] 17a. Email for palnacare.com (30 Sep):
-        - Sending: sign-up codes from no-reply@palnacare.com via Resend.
-        - Receiving: hello@palnacare.com forwards to your Gmail (Cloudflare
-          Email Routing). SPF, DMARC and MX checked. Gmail filter for
-          to:hello@palnacare.com set to "Never send to Spam".
-        - Optional: delete the old babyapp.toolbox.services domain in Resend.
-[ ] 17b. From 28 Nov 2026 (60 days after purchase, an ICANN rule): transfer
-        the registration from Namecheap to Cloudflare. Namecheap: turn off
-        Registrar Lock, get the Auth/EPP code > Cloudflare > Domain
-        Registration > Transfer Domains. Adds 1 year at cost (~$10.44);
-        years already paid carry over. Same for toolbox.services if
-        Cloudflare supports .services.
-[x] 17c. Website live at https://palnacare.com (30 Sep), hosted as a
-        Cloudflare Worker with static assets ("late-butterfly-bc9d"; can be
-        renamed to "palna" in its Settings). To update the site: open it in
-        Workers & Pages > New deployment > drag in d:\projects\baby-app\website.
-        [x] www.palnacare.com added as a second custom domain (30 Sep).
-[ ] 18. Supabase: stay on the FREE plan at launch (decided 30 Sep).
-        Nightly backup WRITTEN (30 Sep night): .github/workflows/db-backup.yml.
-        Every night at 02:30 PKT it saves the schema, all data and the
-        sign-in accounts, ENCRYPTS them (they hold health records) and keeps
-        30 days of copies in GitHub (Actions > Database backup > artifacts).
-        To switch it on, after committing and pushing:
-        - GitHub repo > Settings > Secrets and variables > Actions > New
-          repository secret:
-            SUPABASE_DB_URL = Supabase > Project Settings > Database >
-              Connection string > "Session pooler" URI (put the database
-              password in it)
-            BACKUP_PASSPHRASE = a long new password; save it in your
-              password manager: without it the backups can't be opened
-        - Actions > Database backup > Run workflow, to test it once.
-        Free plan limits: 500 MB database, 50,000 monthly users, pauses
-        after ~1 week with no activity. Upgrade to Pro ($25/mo) or move to
-        your own server once there are a few hundred active families.
-[ ] 19. Google Auth Platform > Audience: switch from "Testing" to
-        "In production" before launch (otherwise only test users can use
-        Google sign-in).
-[~] 20. Android release signing: SET UP (1 Oct). Upload key
-        stuff/palna-upload.jks + android/key.properties (both git-ignored;
-        password in stuff/palna-upload-key.properties). BACK UP all three in
-        your password manager: without them you can't update the app on Play.
-        Upload key SHA-1: 3E:C5:56:74:13:79:64:56:7D:6C:B2:0C:3C:5B:05:05:F6:4C:6E:A8
-        - [x] Google Cloud Android client "Palna Android Release" created
-          (1 Oct) with that SHA-1 (id 254198007439-0jvj...o29l). Nothing to
-          put in the app: Google matches it by package name + SHA-1.
-        - After the first Play upload: Play Console > Test and release >
-          App integrity > App signing key SHA-1 > one more Android client.
-        Builds: stuff/Palna-1.0.0.apk (share with Android testers) and
-        app/build/app/outputs/bundle/release/app-release.aab (for Play).
-
---- NOT BUILT YET (from the plan) --------------------------------------
-
-[ ] 28. "Is this normal?" (plan section 8). Needs pediatrician-written
-        question flows with green / yellow / red outcomes before any code.
-        Find a pediatrician to write or approve the content first.
-[ ] 29. Shopping assistant (plan section 11). Needs a product list
-        (names, sizes, PKR prices, ingredients, where to buy) and a way to
-        keep prices current. Decide the source (manual list, a partner
-        shop, scraping) and Claude can build the screens.
-[ ] 30. Pakistan hospitals and clinics directory (plan section 12). Needs a
-        trustworthy list (name, city, phone, children's emergency yes/no).
-
---- MISSING FEATURES (compared with MyBaby, mybabyapp.io) --------------
-Claude can build 31-36 without anything from you; say which ones first.
-
-[ ] 31. Breastfeeding timer: BUILT (30 Sep), please test.
-        Feed > Breast > "Start a timer" > Left or Right (the side after the
-        last feed's side is highlighted). The Today screen then shows a
-        "Feeding now" card: tap the other side to switch, the running side
-        to pause; Finish saves it, Discard deletes it. It keeps running if
-        you close the app or restart the phone, shows as a notification
-        with a live clock (Android), and appears on the family's phones.
-        Manual entry now takes Left and Right minutes separately.
-        Database: migration 20260930000001_feed_timer.sql (applied).
-        TEST: start a timer, switch sides, close the app, reopen, finish;
-        check the timeline shows "Left 5 min + Right 4 min".
-[ ] 32. Sleep timer: BUILT, please test. "Sleep" on Today now shows an
-        "Asleep" card with a running clock and "Woke up", plus the same
-        notification.
-[ ] 33. Reports: BUILT (30 Sep), please test. Today > the chart icon at the
-        top, or "Reports and trends" at the bottom of "At a glance".
-        7 / 30 days: feeds, sleep (night + naps) and diapers per day as
-        bars, plus averages: feeds a day, time between feeds, breastfeeding
-        per day and per feed, left/right split, bottle ml, sleep a day,
-        naps, longest sleep, bedtime, wake-up, wet and dirty a day.
-        PDF for the check-up: BUILT (30 Sep night). Health > Symptoms >
-        Doctor summary > "PDF": a one-page A4 summary (English, for the
-        doctor) to share on WhatsApp or print.
-[ ] 34. Journal: BUILT (30 Sep), please test. Today > "Past days" (next to
-        the Today list). One page per day since birth: swipe right for the
-        day before (left in Urdu), use the arrows, or tap the date / the
-        calendar icon to jump. Each day shows its totals, then "On this day"
-        (vaccines, measurements, foods tried, milestones), then everything
-        with a time in order: feeds, diapers, sleep, pumping, medicine
-        doses, symptoms. Tap an entry to edit it.
-[ ] 35. Solids: BUILT (30 Sep night), please test.
-        - "Start with vegetables" guide (NHS "veg first"), and vegetables
-          now come first in the food list. I read your note "first veges
-          not vegitable" as this advice; tell me if you meant something else.
-        - Solids > "Recipes for babies": 15 home-style recipes in 3
-          languages: from 6 months (lauki puree, carrot and potato, smooth
-          khichdi, suji kheer without sugar, banana oats), 7 months (veg
-          khichdi, daliya, egg, chicken yakhni mash, masoor daal chawal),
-          10 months (roti in daal, soft pulao, mild qeema aloo, fish and
-          potato, paneer and peas). Each shows allergens, ingredients, steps
-          and "Log a try" for its foods. Content: app/tool/content/recipes.py
-          (a pediatrician should check it with item 23).
-[~] 36. Push notifications between phones: BUILT AND LIVE (26 Oct),
-        Android working (test push reached the phone). When someone else in
-        the family logs a feed (or starts / finishes breastfeeding), a sleep
-        (fell asleep / woke up) or a medicine dose, the others get a
-        notification in their own language. Settings > Notifications: each
-        person turns feeds / sleep / medicines on or off and sets quiet
-        hours. Never about your own entries; old entries uploaded late (3 h+)
-        don't notify.
-        How it works: the app registers its push token (register_device);
-        a trigger on feeds / sleeps / medication_doses calls the Edge
-        Function notify-family, which sends through Firebase. Server tests:
-        cd supabase/tests, npm ci, npm test (also run by GitHub).
-        Live on Supabase (26 Oct, a one-time exception before merging, your
-        OK): migration 20261027000001_push_notifications, function
-        notify-family, secrets HOOK_SECRET + FCM_SERVICE_ACCOUNT, Vault
-        secret palna_hook_secret. To rotate the hook secret: set a new
-        HOOK_SECRET and update the Vault entry to the same value.
-        STILL TO DO:
+[ ] 18. Database backups: switch them on. The nightly backup
+        (.github/workflows/db-backup.yml, 02:30 PKT, encrypted, 30 days of
+        copies) FAILS EVERY NIGHT until these two exist. GitHub repo >
+        Settings > Secrets and variables > Actions > New repository secret:
+          SUPABASE_DB_URL = Supabase > Project Settings > Database >
+            Connection string > "Session pooler" URI, with the password in it
+          BACKUP_PASSPHRASE = a long new password; keep it in your password
+            manager (without it the backups can't be opened)
+        Then Actions > Database backup > Run workflow, to test it once.
+[ ] 14b. Firebase keys (GitHub sent 2 "secret detected" alerts): these are
+        public app keys, but limit them. console.cloud.google.com/apis/
+        credentials?project=palna-care > "Android key" and "iOS key" > API
+        restrictions > Restrict key > only Firebase Installations API + FCM
+        Registration API (or the Firebase list already ticked) > Save.
+        Leave Application restrictions alone until after the Play launch.
+        Then GitHub > Security > Secret scanning > close both as "Won't
+        fix" ("public Firebase client key, restricted").
+[~] 36. Push notifications between phones: LIVE (26 Oct), Android works.
+        Still to do:
         - [ ] iPhone: developer.apple.com > Keys > + > Apple Push
           Notifications service (APNs) > download the .p8 (only once; keep
           it in stuff/). Firebase > Project settings > Cloud Messaging >
           Apple app > upload it with its Key ID and Team ID W7AS897FPN.
-          Then a TestFlight build to test on iPhone.
-        - [ ] Test with two accounts in one family (log on one phone, the
-          other gets it); Settings > Notifications switches and quiet hours.
+          Then test on a TestFlight build.
+        - [ ] Test with two accounts in one family: log a feed / sleep /
+          dose on one phone, the other gets it. Also Settings >
+          Notifications switches and quiet hours.
         - Only phones with the new app version get notifications.
-[ ] 37. Home-screen widget (Android): BUILT (30 Sep night), please test.
-        Long-press the phone's home screen > Widgets > Palna > drag it out.
-        Shows the baby's name, time since the last feed (a live clock that
-        keeps counting with the app closed) and what it was, "Feeding now"
-        while a timer runs, asleep/awake with a clock, and the next vaccines
-        when due within 30 days. Tap it to open Palna. It refreshes whenever
-        something is logged in the app.
-        Still open: Live Activities for the timer, and the iPhone widget
-        (LATER, parked 23 Oct). iPhone widget plan: Medium (4x2, same as
-        Android) + Small (2x2: last feed + asleep/awake), written in Swift
-        (WidgetKit) and built by Codemagic. You: developer.apple.com >
-        register an App Group (group.com.palnacare.app) on the app's App ID
-        + a new App ID com.palnacare.app.widget. Claude: the widget, the
-        app sharing data with it, codemagic.yaml signing for both. Test on
-        TestFlight (expect 2-4 builds).
-[ ] 38. Photos and memories (first smile, milestones with a photo).
-        BUILT with the free limit (1 Oct night), please test after N1/N1b:
-        Growth > Photos: one tile per month of age (Newborn, 1 month...),
-        newest first. Tap an empty month > camera or gallery > caption >
-        Save. Tap a photo: full screen, share, edit caption, replace,
-        delete. Works offline: the photo is saved on the phone and uploads
-        when online; family members' phones download it.
-        TEST: add a photo, check it appears on a second family member's
-        phone; delete it and check Supabase > Storage > photos is empty.
-        DECIDED (1 Oct): Free plan = 1 photo per baby per month (a "monthly
-        photo", like a month-by-month album); Pro = more photos (the number
-        to decide with the pricing, item on paid plans). Build it with the
-        paid plans, or earlier with only the free limit.
-        Plan when building:
-        - Supabase Storage, private bucket, one folder per family; only
-          family members can read (storage policies like the tables).
-        - Shrink on the phone before upload (e.g. 1600 px, ~300 KB JPEG) to
-          keep storage low; photos also saved on the phone for offline.
-        - Limit checked on the SERVER too (a trigger/policy), not only in
-          the app, so it can't be bypassed.
-        - Delete photos when an entry, a baby or the account is deleted,
-          and in the 30-day purge (27a).
-        - Update before release: privacy policy, delete-account page, Play
-          Data safety ("Photos: collected"), App Store privacy ("Photos").
-        - Costs: Supabase free plan has 1 GB storage; at ~300 KB that's
-          ~3,000 photos in total, so Pro ($25/mo, 100 GB) is needed soon
-          after launch if photos are popular.
-[ ] 39. AI assistant (questions answered from the baby's own logs). Needs a
-        decision: which AI provider, cost per user, and medical-safety
-        rules; a pediatrician should approve the guardrails.
-[ ] 40. Website extras: articles/help centre, "compare apps" page, store
-        badges once the apps are live.
-[ ] 41. Illness tracking: BUILT (30 Sep night), please test after M1.
-        Health > Symptoms > "Baby unwell? Start tracking an illness" (name
-        like Cold, Fever... optional). A card shows "Day 3 · Cold", symptoms
-        so far, last temperature, doses today, and buttons: Log symptom,
-        Doctor's visit, Recovered. Tap it for the day-by-day page (symptoms,
-        temperatures, doses, visits). Past illnesses are listed below.
-        Doctor's visits also show in the journal.
-        Database: migration 20260930000003_illnesses.sql (applied).
-[ ] 42. Typical ranges: BUILT for sleep a day (NSF under 4 months, AASM
-        after; shaded on the chart), feeds for newborns, wet and dirty
-        diapers (NHS). No "typical wake window" on purpose: there's no solid
-        source for it. Still to do: growth *rate* compared with WHO
-        velocity data. A pediatrician should check the wording (item 22).
-        Growth RATE vs WHO velocity: BUILT (1 Oct night), see above.
-[ ] 44. "Forgot password?": BUILT (30 Sep night), please test after M2.
-        Sign-in screen > "Forgot password?" > email > 6-digit code + new
-        password > signed in. Also Settings > Account > "Change password"
-        (only shown to email-and-password users, not Google-only ones).
-[ ] 43. Dark mode: BUILT (30 Sep night), please test. Settings >
-        Appearance > Phone / Light / Dark (default follows the phone).
-        Dark uses deep navy with warm sand buttons, easy on the eyes at
-        night feeds. Still open: food pictures in the solids list (needs
-        images we're allowed to use).
-
-Where Palna is already ahead of MyBaby: Urdu and Roman Urdu, Pakistan EPI
-schedule, desi foods, works fully offline, emergency numbers and heat
-advice, breast-milk stash with use-by dates, a family (not just 2 parents).
-Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
-34 journal > 41 illness > 43 dark mode > 37 widgets > 36 push > 39 AI.
-
---- CONTENT REVIEW (a pediatrician should check) ----------------------
-
-[ ] 21. Vaccine schedules (app shows "confirm with your doctor"): Pakistan
-        EPI, and since 1 Oct the UK, US, Canada, UAE and Saudi Arabia (sources
-        in supabase/migrations/20261001000001_countries.sql). After review,
-        Claude can mark them verified. Watch the US one: a court appeal on
-        6 Oct 2026 could bring back the Jan 2026 CDC schedule (Hep B birth
-        dose, rotavirus and Hep A would stop being routine for everyone).
-[ ] 22. Under-3-months fever warning text, medicine safety note.
-[ ] 23. Solids guide and milestones content (added overnight, see below).
-[ ] 24. Urdu and Roman Urdu wording: a native speaker should read through
-        every screen.
-
---- STORE REQUIREMENTS -------------------------------------------------
-
-[ ] 27. In-app "Delete my account": BUILT (29 Sep), please test.
-        Settings > Account > Delete my account > type DELETE.
-        Migration 20260929000006_delete_account.sql is applied to the cloud.
-        TEST with a throwaway email account (not your main one): sign up,
-        add a baby, delete the account; check in Supabase > Authentication
-        that the user is gone and in Table Editor that the baby is gone.
-        Also test a shared family: the other member should keep the baby
-        and become owner.
-[x] 27a. Purge deleted entries after 30 days: SQL RUN (5 Oct), nightly at 03:00 PKT. Was: run it
-        yourself: see N3 at the top. Background: you said YES (30 Sep), but
-        Claude's safety check blocked creating a job that deletes live data,
-        even with your approval. Options: (a) allow it once in Claude Code's
-        permission settings and ask again, or (b) ask Claude for the SQL and
-        run it yourself in Supabase > SQL Editor. Until then, deleted
-        entries stay hidden in the database (the privacy pages don't claim
-        otherwise).
-
-[~] 25. Privacy policy and delete-account pages are LIVE (store URLs):
-          https://palnacare.com/privacy
-          https://palnacare.com/delete-account
-        Still: you or a lawyer should read them before the store launch.
-[x] 25b. Website redesign live (30 Sep): English / Urdu / Roman Urdu,
-        Light / Dark / Baby themes, animations, mobile menu, share image,
-        404 page, sitemap. Preview a look: palnacare.com/?lang=ur&theme=baby
-        When the apps are in the stores: swap "Coming soon" for the real
-        Google Play / App Store buttons (Claude can do it).
-[~] 25a. Terms of use page DRAFTED (30 Sep): website/terms, linked from every
-        page footer and the privacy policy. After re-deploying:
-        - Google Auth Platform > Branding > Terms of service link:
-          https://palnacare.com/terms
-        - [x] Added to Google branding (30 Sep).
-        - You or a lawyer should read it. It deliberately has no "governing
-          law" clause yet: add the country where Toolbox Services is (or will
-          be) registered once that's decided (item 11).
-[x] 26. Play Store health-app declaration and Data safety form: filled in
-        (1 Oct). All answers are in store/google-play.md.
-[ ] 45. Sign in with Apple: BUILT (1 Oct), iPhone only (required by Apple
-        because Palna offers Google sign-in). Supabase Apple provider
-        enabled with Client ID com.palnacare.app (1 Oct; no secret key, so
-        nothing expires every 6 months). Test on the next iPhone build. Apple shares the name only on the first sign-in; the
-        app saves it as the family display name.
-        Later (Apple asks for it, rarely checked): when an Apple user
-        deletes their account, also revoke their Apple token. Needs a
-        "Sign in with Apple" key from developer.apple.com and a small
-        server function; Claude can build it.
-[ ] 46. App Store listing: DRAFTED in store/app-store.md (name, subtitle,
-        description, keywords, review notes, App Privacy answers, age
-        rating). Screenshots at App Store size: app/tool/screenshots/out/
-        iphone/. Still: create the reviewer account review@palnacare.com
-        in Supabase (steps in that file) with a sample baby.
-[x] 47. Launch prep (1 Oct): version 1.0.0; iPhone only (no iPad
-        screenshots needed), portrait; iOS 15 minimum; reminders show while
-        the app is open on iPhone; a proper one-colour Android notification
-        icon; privacy policy mentions Sign in with Apple; terms now say the
-        laws of Pakistan apply.
-
+[~] N3. Play Console > App content > Data safety > "delete some data
+        without deleting the account" > Yes, URL
+        https://palnacare.com/delete-account/#some-data
+        (the 30-day purge, 27a, runs nightly since 5 Oct; site already says so)
+[ ] N7. Play Console > Data safety > Data types > Photos and videos >
+        Photos: collected, NOT shared, not ephemeral, OPTIONAL, purpose App
+        functionality. App Store Connect (later, App Privacy): User Content
+        > Photos or Videos, linked to the user, not tracking.
+[ ] N5. Paste the current description from store/app-store.md into Play
+        Console > Main store listing (and App Store Connect later).
+[ ] N11. Upload the new screenshots (4-tab layout, re-rendered 26 Oct):
+        Play size in app/tool/screenshots/out/play/, App Store size in
+        app/tool/screenshots/out/iphone/ (both already RGB). Order: see
+        store/google-play.md. Re-render after big UI changes:
+        cd app; flutter test tool/screenshots --update-goldens
+        --dart-define=SHOT_DEVICE=play (or iphone).
+[ ] N4. Reviewer demo account (Play and Apple): set a password in
+        supabase/snippets/review_account.sql, run it in Supabase > SQL
+        Editor, sign in once on the phone (add a sample baby), then put the
+        email/password in Play Console > App access and App Store Connect >
+        App Review. (Same account as item 46: review@palnacare.com.)
+[~] 20. Android upload key: back up stuff/palna-upload.jks,
+        android/key.properties and stuff/palna-upload-key.properties in
+        your password manager. Without them the app can't be updated on
+        Play. After the first Play upload: Play Console > App integrity >
+        App signing key SHA-1 > add one more Google Cloud Android client.
 
 ====================================================================
-WHAT CHANGED ON 26 OCT (the rest of the 20 Oct tester review;
-merged 26 Oct)
+2. WAITING ON THE D-U-N-S NUMBER
 ====================================================================
-- FEEDING TAB: Milk and Solids are one tab, "Feeding" (Urdu "دودھ اور
-  غذا", Roman "Doodh aur ghiza"), so the bottom bar has 4 tabs: Today,
-  Feeding, Growth, Health. Inside: Milk | Foods | Guides | Recipes.
-  Babies under 5 months open on Milk, older ones on Foods.
-- BABY'S NAME ON EVERY TAB: Feeding, Growth and Health show the baby's
-  name under the title (Today already did). With 2+ babies, tap it to
-  switch baby, like on Today.
-- DOCTOR SUMMARY: now a full-width button at the top of Health, above
-  Vaccines | Medicines | Symptoms (it was inside Symptoms only).
-- JOURNAL: starts at Yesterday (today is on the Today tab) and goes back
-  to the birth date. Chips under the date: All | Feeds | Sleep | Diapers.
-  "Past days" on a Today card opens it with that chip selected. A baby
-  born today sees "Past days will show here from tomorrow."
-- ONE ICON PER TOPIC, everywhere: feed = cup, breast milk/pumping/stash
-  = drop (stored-milk bags had a cup before), sleep = moon, diaper =
-  changing table, solids and the Feeding tab = fork and knife, growth =
-  scale (the tab used a chart icon, the journal a scale), Health tab =
-  first-aid kit, symptom = thermometer (Symptoms used a different icon
-  for non-fever ones), doctor's visit = hospital (also "When to talk to
-  the doctor" in Milestones).
-- GROWTH CHECK (Growth > Charts, your request 26 Oct): a card on top
-  that reads all three measures at once.
-  Red "Talk to your doctor": under the lowest grey line (3rd
-  percentile), head over the top line, dropping across two grey lines,
-  still under birth weight after 2 weeks.
-  Amber "Mention it at the next check-up": weight/length over the top
-  line or climbing across two lines, slow weight gain this month.
-  Otherwise "Growing as expected". Each reason is a plain sentence; tap
-  it to open that chart. Bigger text: the percentile says "heavier than
-  about 48 in 100 babies...", a proper chart key, and "What do
-  percentiles mean?" opens the explanation. A pediatrician should check
-  the thresholds and wording (item 22).
-  TEST: add a weight of 4.5 kg for a 5-month-old (red card), then
-  delete it; check Urdu.
-- Website: all 72 screenshots re-rendered with the new layout (live on
-  the next push). Store screenshots re-rendered (N11). Store description
-  line fixed (N5).
-- 222 automated checks, all passing (new: Feeding opens on Milk for young
-  babies, baby's name in each tab title, doctor summary at the top,
-  journal starts at yesterday, journal chips, newborn journal).
-TEST:
-  1. Bottom bar shows 4 tabs. Feeding > Milk, Foods, Guides, Recipes all
-     open; log pumping and a food try from there.
-  2. Add a second baby (or use one): on Feeding / Growth / Health, tap
-     the name under the title and switch.
-  3. Health > "Summary for the doctor" at the top opens the summary from
-     Vaccines, Medicines and Symptoms.
-  4. Today > book icon: opens on Yesterday; tap Sleep / All chips; Today
-     > Feeds card > "Past days": Feeds chip selected.
-  5. Look for any icon that still means two things.
 
-CODE STILL TO DO (Claude), each waiting on something from you:
-  - Push notifications between phones (36): needs Firebase (14).
-  - iPhone widget + Live Activities (37): needs the App Group and the
-    widget App ID registered at developer.apple.com.
-  - Apple token revoke on account delete (45): needs a "Sign in with
-    Apple" key from developer.apple.com.
-  - Play/App Store badges on the website (40, 25b): once the apps are live.
-  - Website help centre / "compare apps" page (40): say if you want them.
-  - Country schedules on the website (Q4) and optional RSV/flu reminders
-    (Q5): answer the questions above.
-  - "Is this normal?", shopping, hospitals, AI (28-30, 39): need content
-    or decisions first.
-  - Food pictures in the solids list (43): needs images we may use.
+[~] 11. D-U-N-S number (dnb.com, free): APPLIED, waiting (22 Oct; takes
+        1-4 weeks). Unblocks 12 and 13.
+[ ] 12. Apple: ask Apple Developer Support to move the INDIVIDUAL account
+        (Team ID W7AS897FPN, renews 1 Oct 2027) to an organization.
+[ ] 13. Google Play as an organization. Palna was REJECTED (1 Oct) on the
+        personal account: apps with medical features must come from an
+        organization. Don't untick the medical features to get through
+        (a false declaration can close the account).
+        FIRST try: Play Console > Developer account > About you > Change
+        account type > Organization (D-U-N-S, same email). Only if that
+        isn't offered: a new organization account ($25) on a DIFFERENT
+        Google account (e.g. apps@palnacare.com), transfer the app
+        (com.palnacare.app) to it, resubmit.
+        Until then Android testers install the APK.
+[ ] N6. Testers: send the invite (store/tester-invite.md, 3 languages)
+        once the closed test is approved; 12+ testers must stay opted in
+        for 14 days in a row.
 
 ====================================================================
-WHAT CHANGED ON 23 OCT (tester feedback: Solids too cluttered;
-committed 23 Oct)
+3. BEFORE LAUNCH
 ====================================================================
-- Solids has three tabs: Foods | Guides | Recipes (like Reports).
-- Foods (opens first): "3 of 36 foods tried" with a progress bar and
-  "1 of 7 allergens introduced", the allergic-reaction signs, short
-  allergen chips (name + tick/circle; long-press shows the status),
-  search and categories, then the list split into "Tried" (latest
-  first) and "Not tried yet" (vegetables first). "From N months" only
-  shows while the baby is younger than that.
-- Guides: 5 guides (ready?, vegetables first, textures, rules, beliefs)
-  and the sources; opening one closes the others. The allergic-reaction
-  signs are on Foods only (where new foods are given). Babies under 5
-  months open Solids here, with the "most babies start around 6 months"
-  note.
-- Recipes: the 15 recipes right in the tab (no extra screen).
-- New text in English, Urdu and Roman Urdu. 217 automated checks pass.
-- Solids screenshots re-rendered (tool/screenshots/out/solids_*); the
-  website/store copies are still the old layout.
 
-====================================================================
-WHAT CHANGED ON 20 OCT (tester feedback: duplicates, too many taps,
-feed/sleep/diaper reports mixed together; committed 21 Oct)
-====================================================================
-- Feed / Diaper / Sleep buttons now sit above the tabs on EVERY tab, not
-  just Today.
-- Diaper: tap Diaper, then Wet / Dirty / Both. That saves it (no Save
-  button). Change the time first if needed.
-- Feed: the form starts as the same kind as the last feed, with the last
-  bottle amount filled in, so a repeat bottle is Feed > Save.
-- Reports: more charts on each tab. Feeds: "When feeds happen" (24-hour
-  strip per day, night shaded), "Bottle milk each day" (if bottles are
-  logged), plus a "Night feeds (10 pm-6 am)" figure. Sleep: "Sleep
-  pattern" (24-hour sleep log) and "Longest sleep each day". Diapers:
-  "When diapers happen" (wet / dirty times).
-- Journal button (book icon) in Today's top bar opens the full journal
-  (every kind of entry, day by day).
-- Website updated and live (21 Oct): new screenshots everywhere, a sleep
-  pattern frame, text for buttons on every screen and past entries.
-  Store text and store screenshots: updated 26 Oct (N5, N11).
-- Sleep button no longer starts a sleep straight away: it opens a form
-  (start time, nap or night, "Still asleep" on) and starts on Save. While
-  asleep it says "Woke up" and opens the form with the wake time = now.
-- Today's Feeds / Sleep / Diapers cards are compact: title, today's
-  number, then two small icon buttons: add a past entry (clock with +)
-  and past days of that kind only (history clock). Long-press shows the
-  name. Tapping the card opens its report tab. "Past days" is no longer
-  next to "Today".
-- The feed, diaper and sleep forms have a day button next to the time
-  (Today, Yesterday or any date since birth) for entries from earlier days.
-- Reports: tabs for Feeds | Sleep | Diapers, each on its own page. Open
-  them by tapping the Feeds, Sleep or Diapers card on Today. The duplicate
-  chart icon at the top and the "Reports and trends" link are gone.
-- Today: the hunger guide is in the Feeds card; usual sleep and awake time
-  are in the Sleep card. "At a glance" is gone (it only repeated what the
-  Health tab shows).
-- No offline bar any more (offline works the same; entries upload later).
-- The help button is a red SOS badge (the old icon looked like Settings).
-- Top bar: the red Emergency & help button and Settings are always
-  visible (the old 3-dot menu was labelled "Language"). Language and Sign
-  out moved into Settings.
-- Screenshot tool: shows the new buttons; reports2 is now the Sleep tab.
-  Re-run it before the next store/website screenshot update.
-
-DONE 26 Oct (see "WHAT CHANGED ON 26 OCT"); was "later" on 22 Oct:
-- One icon per topic everywhere (feeds use a cup, Milk a drop; the chart
-  icon means Growth in the tabs).
-- Journal: show past days only (today is already on Today) and add
-  All / Feeds / Sleep / Diapers filters.
-- Merge Milk and Solids into one "Feeding" tab (4 tabs instead of 5).
-- Show the baby's name on every tab (with two babies, health entries
-  could go to the wrong one).
-- Move "Doctor summary" from Health > Symptoms to the top of Health.
+[ ] 3-8. Change everything that was pasted into chats (treat as exposed):
+        [ ] 3. Supabase database password: Project Settings > Database >
+               Reset database password, then on the PC:
+               npx supabase link --project-ref ixrlofqsstddisizofwc
+        [ ] 4. powersync_role password (if same as the DB password): SQL
+               Editor: alter role powersync_role with password '...'; then
+               PowerSync > Database Connection.
+        [ ] 5. Resend API key: new key (Sending access) > Supabase > Auth >
+               Emails > SMTP password > delete the old key.
+        [ ] 6. Google OAuth client secret: Google Cloud > Clients > Web
+               client > Add secret > Supabase > Auth > Providers > Google >
+               remove the old one.
+        [ ] 7. VPS (administrator@173.208.162.249): new password, SSH keys only.
+        [ ] 8. Move everything in cred.txt into a password manager (it's
+               git-ignored, but plain text).
+[ ] 19. Google Auth Platform > Audience: "Testing" > "In production"
+        (otherwise only test users can use Google sign-in).
+[~] 25. You or a lawyer: read palnacare.com/privacy, /delete-account and
+        /terms (terms say the laws of Pakistan apply).
+[ ] 17b. From 28 Nov 2026: move palnacare.com from Namecheap to Cloudflare
+        (Namecheap: Registrar Lock off, get the EPP code > Cloudflare >
+        Domain Registration > Transfer; ~$10.44, adds a year). Same for
+        toolbox.services if Cloudflare supports .services.
+[ ] 46. App Store listing: drafted in store/app-store.md; needs the
+        reviewer account (N4) and the screenshots (N11).
+[ ] 15b. Codemagic "iPhone to TestFlight": turn on submit_to_testflight
+        once TestFlight > Test Information is filled in.
+[ ] 40a. Website: swap "Coming soon" for the Play / App Store buttons once
+        the apps are live (Claude).
 
 ====================================================================
-WHAT CHANGED ON 1 OCT NIGHT (to test; committed)
+4. CONTENT REVIEW (a pediatrician, and a native Urdu speaker)
 ====================================================================
-Do N1 at the top first. Then press F5 (or flutter run).
 
-1. COUNTRY FOR EACH BABY
-   - Adding a baby now REQUIRES "Country where the baby lives" (no guess
-     from the phone: many phones in Pakistan are set to English (US)).
-     Pakistan and UK / US / Canada / UAE / Saudi Arabia are at the top,
-     then every country, with search (English or Urdu names).
-   - Existing babies are Pakistan. Change it: Settings > Babies > pencil.
-   TEST: add a baby with United Kingdom; edit an existing baby's country.
-
-2. VACCINES FOLLOW THE COUNTRY
-   - Health > Vaccines shows that country's schedule: Pakistan EPI, UK
-     (NHS/UKHSA 2026), US (CDC), Canada (national guide), UAE (MOHAP/DHA
-     2026), Saudi Arabia (MOH). Other countries: "No built-in vaccine
-     schedule for <country> yet" and NEVER Pakistan's schedule.
-   - New "Other vaccines" section for every country: "Add a vaccine" by
-     name (private typhoid, chickenpox, travel vaccines...). They show in
-     the journal too. Reminders, the Today card and the widget use the
-     baby's country.
-   - Sources, dates and caveats per country: the comments at the top of
-     supabase/migrations/20261001000001_countries.sql. All marked
-     unverified, like Pakistan's (content review item 21).
-   TEST: switch a baby to United Kingdom > Vaccines (8-week visit first);
-   to Japan > the "no schedule" card; add "Typhoid" with "Add a vaccine".
-
-3. EMERGENCY NUMBERS FOLLOW THE COUNTRY
-   - Menu > Emergency & help: Pakistan 1122/115/1020/15/16; UK 999 + NHS
-     111; US 911 + Poison Control; Canada 911 + 811; UAE 998/999/997;
-     Saudi 997/911/998/999; EU countries 112; plus Australia, NZ, India,
-     Bangladesh, Qatar, Kuwait, Oman, Bahrain, Malaysia, Turkiye. Other
-     countries: a note to save the local number. The hot-weather and
-     load-shedding card only shows for Pakistan, India and Bangladesh.
-   - Solids: "call 1122 / 115" in the allergy warnings now uses the
-     baby's country's number.
-
-4. WEIGHT GAIN vs WHO (item 42)
-   Growth > Weight: with two weights 3 to 6 weeks apart (the birth weight
-   counts), a card shows "About 650 g a month", the usual range for that
-   age (WHO growth velocity, 5th-95th percentile) and "within the usual
-   range" / "slower than most" (gently, with when to see a doctor) /
-   "faster than most". Birth to 12 months (where WHO's table ends).
-   Data: app/assets/who_weight_velocity.json, copied from WHO's tables.
-   A pediatrician should check the wording (item 22).
-
-5. SMALLER THINGS
-   - Settings shows "Version 1.0.0 (build N)" at the bottom.
-   - Codemagic: build numbers set automatically for iPhone AND a new
-     "Android to Google Play" workflow (setup steps at the top of
-     codemagic.yaml: upload the keystore, add a Play service account).
-   - Screenshot tool: SHOT_DEVICE=play makes 1080 x 1920 Play screenshots.
-   - store/google-play.md: every Play Console answer, for next time.
-   - Privacy policy: mentions the baby's country.
-   - 193 automated checks, all passing (new: countries, emergency numbers,
-     the vaccines/help screens per country, the country field, weight gain,
-     the photos tab).
-
-6. MONTHLY PHOTOS (item 38, free limit: 1 per baby per month)
-   Growth > Photos (third tab). See item 38 for what to test. The limit
-   is also enforced by the database, so it can't be bypassed. Deleting a
-   photo, a baby or your account deletes the picture from storage too.
-   Photos are shrunk on the phone to 1600 px JPEG (~200-400 KB) first.
-   iPhone asks for camera / photo access the first time (texts added).
-
-NOT DONE, and why
-   - Purge job (27a): written, but you run it (N3); Claude doesn't run
-     jobs that delete live data.
-   - Nothing else from the list can move without you: push (Firebase,
-     item 14), photos (38), AI (39), iPhone widget (needs a Mac/Codemagic),
-     "Is this normal?" / shopping / hospitals (28-30) need content.
-
+[ ] 21. Vaccine schedules: Pakistan EPI, UK, US, Canada, UAE, Saudi Arabia
+        (sources at the top of supabase/migrations/20261001000001_
+        countries.sql). After review Claude marks them verified. Watch the
+        US one: a court appeal (6 Oct 2026) could bring back the Jan 2026
+        CDC schedule.
+[ ] 22. Medical wording: under-3-months fever warning, medicine safety
+        note, weight gain vs WHO, and the Growth check thresholds
+        ("Talk to your doctor" / "Mention it at the next check-up").
+[ ] 23. Solids guide, 15 recipes (app/tool/content/recipes.py) and
+        milestones.
+[ ] 24. Urdu and Roman Urdu: read through every screen.
 
 ====================================================================
-WHAT CHANGED ON 30 SEP NIGHT (to test; committed)
+5. QUESTIONS FOR YOU (nothing is blocked on them)
 ====================================================================
-Do M1 and M2 at the top first. Then press F5 (or flutter run).
 
-1. FORGOT PASSWORD (item 44)
-   Sign out > Sign in screen > "Forgot password?" > email > "Send code" >
-   enter the 6-digit code and a new password > you're signed in.
-   Settings > Account > "Change password" (email accounts only).
-
-2. ILLNESS TRACKING (item 41)
-   Health > Symptoms > "Baby unwell? Start tracking an illness" > e.g.
-   "Cold" > Save. Log a symptom with a temperature, add a doctor's visit,
-   tap the card for the day-by-day page, then "Recovered". Past illnesses
-   are listed under the button. Visits also appear in the journal.
-
-3. DARK MODE (item 43)
-   Settings > Appearance > Dark (or Phone to follow the phone). Check the
-   Today tab with a feed timer running, Reports and the forms.
-
-4. RECIPES AND "VEGETABLES FIRST" (item 35)
-   Solids > "Start with vegetables" guide; vegetables now come first in
-   the food list. Solids > "Recipes for babies": 15 recipes by age, each
-   with allergens, ingredients, steps and "Log a try".
-
-5. PDF FOR THE DOCTOR (item 33)
-   Health > Symptoms > Doctor summary > "PDF" > share to WhatsApp or save.
-
-6. HOME-SCREEN WIDGET, Android (item 37)
-   Long-press the home screen > Widgets > Palna > place it. Log a feed or
-   start a sleep in the app and check the widget updates; its clocks keep
-   counting with the app closed. Tap it to open Palna.
-
-7. SMALLER FIXES
-   - Temperatures read correctly in Urdu (e.g. 38.9°C (102.0°F)).
-   - New database tables: illnesses, doctor_visits (migration applied).
-   - Nightly encrypted backup workflow written (item 18, needs secrets).
-   - 168 automated checks, all passing, including every new screen in
-     English, Urdu and Roman Urdu, and the main screens in dark mode.
-
-NOT DONE TONIGHT, and why
-   - 27a purge job: blocked by Claude's safety check (see 27a).
-   - 42 growth rate vs WHO velocity: needs the WHO growth-velocity tables
-     added as data first; Claude can do it when you want it.
-   - iPhone widget / Live Activities: needs a Mac or Codemagic (item 15).
-   - 36 push, 38 photos, 39 AI, 28-30: need your decisions or content.
-
+  Q1. Existing babies were set to Pakistan automatically. Fine, or ask
+      every family once "Which country does <baby> live in?"
+  Q2. Canada uses the NATIONAL schedule (provinces differ, e.g. Ontario).
+      Keep it with the "follow your province" note, or add Ontario?
+  Q3. UK schedule is for babies born from 1 Jan 2025. Add the older one
+      by birth date, or leave it?
+  Q4. Add the country schedules and emergency numbers to the website
+      (features + FAQ, 3 languages)? Claude can do it.
+  Q5. RSV antibody at birth and yearly flu are left out ("not routine for
+      every baby"). Show them as optional reminders later?
 
 ====================================================================
-WHAT CHANGED OVERNIGHT (to test)
+6. CHECK ONCE ON A PHONE (built; automated tests cover them)
 ====================================================================
-(filled in by Claude as work completes)
+Tick each when you've seen it work on a real phone.
 
-A. SETTINGS, SEVERAL BABIES, EDITING THE BABY  (⋮ menu > Settings)
-   - Language choice is now remembered after closing the app.
-   - Settings > Babies: tap a baby to show it; ✎ edits name, birth date,
-     sex, and birth weight / length / head size, or deletes the baby.
-     "Add another baby" for twins or siblings.
-   - Dashboard: when there are 2+ babies, tap the baby's name at the top
-     to switch.
-   TEST: add a second baby, switch between them, restart the app and check
-   the language and chosen baby are kept.
-
-B. INVITING CAREGIVERS  (Settings > Family & caregivers; needs internet)
-   - The owner taps "Invite a caregiver", gets a 6-letter code and shares
-     it (WhatsApp etc.). The code works once and expires in 7 days.
-   - The other person installs the app, signs up, and on the first screen
-     taps "Joining a family? Enter the invite code".
-   - Owners can remove caregivers; caregivers can leave.
-   - Database: new migration 20260929000004_family_invites.sql (already
-     applied to the cloud project).
-   TEST: needs a second account (e.g. another email). Invite it, join, and
-   check the baby and entries appear on the second phone or account.
-
-C. "AT A GLANCE" ON THE TODAY TAB
-   Shown only when there's enough data:
-   - Hunger guide: "Usually feeds about every 2h 50m, so the next feed may
-     be around 1:50 PM", from this baby's last 3 days (median gap; night
-     gaps over 8 h are ignored). Needs about 6+ feeds logged.
-   - Sleep: "Usually sleeps about 13h a day. Today so far: 10h 45m" (median
-     of the last 7 days that have 8h+ logged; needs 3 such days).
-   - "Awake for 1h 20m (usually about 2h between sleeps)".
-   - Overdue or next vaccines (within 30 days), today's medicine doses
-     recorded, and latest weight. Tapping one opens that tab.
-
-D. STARTING SOLIDS  (new "Solids" tab, 3rd at the bottom)
-   - Guides: "Is my baby ready?", how textures change (6 / 7-9 / 10-12 m),
-     important rules (no salt/sugar/honey, no whole nuts, quarter grapes,
-     stay with baby), signs of an allergic reaction (with 1122 / 115 for
-     emergencies), and "Common beliefs vs evidence" (ghutti with honey,
-     water in heat under 6 months, chai, cereal for sleep, delaying
-     allergens), as the plan asked.
-   - Allergen tracker: egg, milk, peanut, nuts, sesame, wheat, fish, each
-     shown as Not yet / Introduced / Reaction.
-   - 36 foods, including Pakistani staples (khichdi, daliya, suji, moong and
-     masoor daal, lauki, chikoo, qeema, dahi...), with search and category
-     filters. Tap one for how to prepare it, allergen and choking notes,
-     "Log a try" (date, liked/okay/disliked, reaction none/mild/severe,
-     notes), and the history. A severe reaction shows "call 1122/115 now".
-   - Sources: NHS weaning pages, WHO. The content is in
-     app/tool/content/make_foods.py and needs pediatrician review (item 23).
-
-E. MILESTONES  (Growth tab > "Milestones")
-   - CDC 2022 checklists for 2, 4, 6, 9, 12, 15 and 18 months (86 items),
-     grouped by social, language, learning and movement. The baby's current
-     age opens first. Tick what the baby does (the date is saved).
-   - "Ways to help" activities for each age, plus "When to talk to the
-     doctor" (several items missing, lost skills, or any worry). Worded to
-     reassure rather than alarm, as the plan asked.
-   - Database: migration 20260929000005_solids_and_milestones.sql (applied).
-     PowerSync sync rules must be redeployed (item 0 at the top).
-
-F. EMERGENCY & HELP  (⋮ menu > "Emergency & help", red icon)
-   - When to call for help straight away (breathing, floppy, colour, fits,
-     swelling) and tap-to-call numbers: Rescue 1122, Edhi 115, Chhipa 1020
-     (Karachi), Police 15, Fire 16.
-   - Hot weather and load-shedding tips for babies, and dehydration signs
-     (NHS / WHO).
-   TEST: tap a number and check it opens the dialer (don't press call).
-
-G. QUALITY CHECKS ADDED
-   - 97 automated checks, all passing (`cd app && flutter test`):
-     calculations (age, WHO percentiles, vaccines, medicines, milk, doctor
-     summary, insights), content (every text in all 3 languages), and every
-     screen and form built in English, Urdu (right-to-left) and Roman
-     Urdu, failing on any error or layout overflow.
-   - Fixed: the birth-date field crashed in Roman Urdu; a failed
-     notification-permission request can no longer break a screen.
-   - README.md now explains how everything fits together.
-
-
-
-(Your notes about breastfeeding by time, "first veges" and more recipes
-are now items 31 and 35.)
-
+[ ] 31. Breastfeeding timer: Feed > Breast > Start a timer > switch sides,
+        close and reopen the app, Finish; timeline shows both sides.
+[ ] 32. Sleep timer: Sleep > Save > "Asleep" card > Woke up.
+[ ] 33. Reports: tap the Feeds / Sleep / Diapers card on Today; 7 / 30
+        days. PDF: Health > Summary for the doctor > PDF > share.
+[ ] 34. Journal: Today > book icon (yesterday and back), chips.
+[ ] 35. Solids: Feeding > Foods / Guides / Recipes, log a try.
+[ ] 37. Android home-screen widget: long-press the home screen > Widgets >
+        Palna; it updates when you log something.
+[ ] 38. Monthly photos: Growth > Photos > add one; it appears on a second
+        family member's phone; delete it (Supabase > Storage > photos empty).
+[ ] 41. Illness tracking: Health > Symptoms > "Baby unwell?", log a
+        symptom and a doctor's visit, Recovered.
+[ ] 43. Dark mode: Settings > Appearance > Dark.
+[ ] 44. Forgot password: sign out > Forgot password? > code > new password.
+[ ] 27. Delete my account, with a throwaway account: sign up, add a baby,
+        delete; the user and baby are gone in Supabase. In a shared family
+        the other member keeps the baby and becomes owner.
+[ ] 45. Sign in with Apple (iPhone build). Apple gives the name only on
+        the first sign-in.
+[ ] 16. Continue with Google on iPhone (TestFlight build).
+[ ] 9e. Family invite with a second account: invite, join, entries show on
+        both phones.
 
 ====================================================================
---- SECURITY: BEFORE GOING LIVE ------------------------------------
-Postponed while in development. These were pasted or highlighted into
-the chat, so treat them as exposed and change them before real users
-arrive:
+7. LATER / IDEAS (need a decision, content or an account first)
+====================================================================
 
-[ ] 3. Supabase database password: Supabase > Project Settings > Database
-       > Reset database password. Then re-run `npx supabase link
-       --project-ref ixrlofqsstddisizofwc` on the PC (asks for the new one).
-[ ] 4. powersync_role password (if it's the same as the DB password):
-       Supabase SQL editor:  alter role powersync_role with password '...';
-       then update PowerSync > Database Connection with the new password.
-[ ] 5. Resend API key: Resend > API Keys > create a new one (Sending access),
-       paste it into Supabase > Authentication > Emails > SMTP password,
-       then delete the old key.
-[ ] 6. Google OAuth client secret: Google Cloud > Clients > Web client >
-       Add secret > paste the new one into Supabase > Auth > Providers >
-       Google > disable/delete the old secret.
-[ ] 7. VPS password (administrator@173.208.162.249): change it, and move to
-       SSH-key-only login.
-[ ] 8. Move secrets out of d:\projects\baby-app\cred.txt into a password manager.
-       (cred.txt is git-ignored, so it is never pushed, but it's plain text.)
+[ ] 37b. iPhone widget + Live Activities for the timers. You:
+        developer.apple.com > App Group group.com.palnacare.app on the app's
+        App ID + a new App ID com.palnacare.app.widget. Claude: the widget
+        (Swift, WidgetKit), data sharing, Codemagic signing; 2-4 TestFlight
+        builds.
+[ ] 45b. Apple token revoke when an Apple user deletes their account
+        (Apple asks for it; rarely checked). Needs a "Sign in with Apple"
+        key from developer.apple.com; Claude builds the server part.
+[ ] 38b. Paid plans (Free / Pro / Expert) once the features are done; Pro
+        gets more than 1 photo a month. Supabase free storage is 1 GB
+        (~3,000 photos), so Pro ($25/mo) soon after launch if photos are
+        popular. Also move to Supabase Pro (or own server) at a few hundred
+        active families (free plan: 500 MB DB, pauses after ~1 week idle).
+[ ] 28. "Is this normal?": needs pediatrician-written question flows
+        (green / yellow / red) before any code.
+[ ] 29. Shopping assistant: needs a product list (sizes, PKR prices,
+        where to buy) and a way to keep prices current.
+[ ] 30. Pakistan hospitals and clinics directory: needs a trustworthy list
+        (name, city, phone, children's emergency yes/no).
+[ ] 39. AI assistant (answers from the baby's own logs): choose a
+        provider, cost per user and medical-safety rules; a pediatrician
+        approves the guardrails.
+[ ] 40. Website extras: help centre / articles, a "compare apps" page.
+[ ] 43b. Food pictures in the solids list: needs images we may use.
+[ ] 14c. Crashlytics crash reports (same Firebase project).
+[ ] 9f. Optional tidy-ups: rename the Supabase project "baby-app", Google
+        Cloud project "Baby App" and the PowerSync instance to Palna (never
+        their ids); delete the old babyapp.toolbox.services domain in
+        Resend; delete the 8 old Namecheap DNS records in Cloudflare if
+        still there; rename the Cloudflare worker "late-butterfly-bc9d".
+
+====================================================================
+8. COMPANY (Toolbox Services (SMC-Private) Limited)
+====================================================================
+
+[~] 10a. SECP: registered-office notice SUBMITTED 23 Oct, under review
+        (LEAP application 20261022_45065184). Check LEAP for approval or an
+        objection.
+[ ] 10b. Deposit the paid-up capital (PKR 1,000,000, Form 1 box 2.6; can be
+        in parts) before the first year-end, 30 June 2027, and ask your
+        consultant about the SECP filing that confirms it.
+[ ] 10c. PSEB registration as a software house (optional).
+
+====================================================================
+REFERENCE (done; kept because it's useful later)
+====================================================================
+
+App and stores
+- App id com.palnacare.app (permanent). Name "Palna", store name "Palna:
+  Mother & Baby Care". Version 1.0.0, iPhone only, portrait, iOS 15+.
+- Apple: individual account, Team ID W7AS897FPN. App Store Connect app
+  "Palna - Mother & Baby Care", SKU palna-ios, Apple ID 6817859227. App ID
+  has Sign In with Apple and Push.
+- Play: health declaration and Data safety answers in store/google-play.md.
+- Android upload key SHA-1 3E:C5:56:74:13:79:64:56:7D:6C:B2:0C:3C:5B:05:
+  05:F6:4C:6E:A8; Google Cloud clients "Palna Android Release", "Palna
+  Android Debug", "Palna iOS" and "Supabase" (web: the app and Supabase
+  both use its id; never delete it).
+- Codemagic builds iPhone (TestFlight) and Android (Play internal track)
+  from codemagic.yaml; variables group "palna_prod".
+
+Services
+- Supabase project ixrlofqsstddisizofwc ("baby-app"), free plan. Run the
+  app against it: cd app; flutter run --dart-define-from-file=env/prod.json
+- Website palnacare.com (+ www): Cloudflare worker "late-butterfly-bc9d",
+  deploys automatically on every push to main (~40 s). Branch preview
+  builds are off.
+- Email: sign-up codes from no-reply@palnacare.com (Resend);
+  hello@palnacare.com forwards to Gmail (Cloudflare Email Routing).
+- Domain palnacare.com bought at Namecheap 29 Sep 2026; DNS on Cloudflare.
+- Firebase project "Palna" (palna-care, free) under msiddiq17328@gmail.com,
+  apps "Palna Android" / "Palna iOS". Public settings in
+  app/lib/core/config/firebase_config.dart. Server key:
+  stuff/palna-firebase-service-account.json (git-ignored).
+- Push (36): table push_devices, trigger -> Edge Function notify-family,
+  secrets HOOK_SECRET + FCM_SERVICE_ACCOUNT, Vault secret
+  palna_hook_secret. To rotate the hook secret: set a new HOOK_SECRET and
+  update the Vault entry to the same value.
+- 30-day purge of deleted entries (27a): nightly 03:00 PKT since 5 Oct
+  (supabase/snippets/purge_deleted_entries.sql).
+
+How to
+- New synced table: migration in supabase/migrations (dry run, then
+  npx supabase db push), add it to powersync/sync-config.yaml, then
+  PowerSync dashboard > Sync Streams > paste the file > Validate > Deploy,
+  and add it to app/lib/data/local_schema.dart. Without the PowerSync
+  step, new rows upload and then vanish from phones.
+- Tests: cd app; flutter analyze; flutter test (the full suite runs on
+  GitHub for pull requests into main). Server: cd supabase/tests; npm ci;
+  npm test.
+- Working rules (branches, pull requests, what needs your OK): CLAUDE.md.
