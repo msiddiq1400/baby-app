@@ -1,69 +1,39 @@
 PALNA (baby-app): TO-DO LIST
 Claude keeps this up to date. Open items only, most urgent first; finished
-work lives in git history. Item numbers never change (code comments refer
-to some of them), so they aren't in order. Last tidied 27 Oct 2026.
+work lives in git history (and a few useful facts in REFERENCE at the end).
+Item numbers never change (code comments refer to some of them), so they
+aren't in order. Last tidied 27 Oct 2026.
 
-[ ] open   [~] started / partly done   [x] done (kept only when useful)
+[ ] open   [~] started / partly done   [x] done
 
 ====================================================================
-1. DO NEXT (quick jobs only you can do)
+1. DO NEXT (only you can do these; nothing is blocking them)
 ====================================================================
 
-[x] 18. Database backups: ON since 27 Oct (first run OK, 37 KB). Nightly
-        02:30 PKT, encrypted, 30 days of copies: GitHub > Actions > Database
-        backup > a run > Artifacts. Passphrase: stuff/palna-backup-
-        passphrase.txt + your password manager. If the database password
-        changes (item 3), update the SUPABASE_DB_URL secret on GitHub too.
-[x] 14b. Firebase keys: checked 27 Oct. Both are limited to Firebase's 25
-        services (incl. FCM Registration and Installations); application
-        restrictions stay "None" until after the Play launch. GitHub's two
-        "secret detected" alerts closed as "won't fix".
-[~] 36. Push notifications between phones: LIVE (26 Oct), Android works.
-        Still to do:
-        - [x] iPhone: APNs key Z4XXAP5224 (team-scoped, shared with
-          OathLock; file app-block/stuff/AuthKey_Z4XXAP5224.p8) uploaded to
-          Firebase for development and production (27 Oct).
-        - [ ] Test on an iPhone with the next TestFlight build.
+[ ] 15b. iPhone test builds: App Store Connect > Palna > TestFlight > Test
+        Information (feedback email, what to test, beta app description) >
+        Save. Then Claude turns on submit_to_testflight in codemagic.yaml,
+        and Codemagic's "iPhone to TestFlight" puts each build on your
+        iPhone. Unblocks the iPhone checks below (36, 45, 16).
+[ ] 19. Google sign-in for everyone: Google Auth Platform (project "Baby
+        App") > Audience > "Testing" > "In production". Until then only the
+        listed test users can use "Continue with Google".
+[~] 36. Push notifications between phones: LIVE since 26 Oct on Android and
+        set up for iPhone (APNs key uploaded 27 Oct). Still to do:
         - [ ] Test with two accounts in one family: log a feed / sleep /
           dose on one phone, the other gets it. Also Settings >
           Notifications switches and quiet hours.
+        - [ ] Test on an iPhone with a TestFlight build (after 15b).
         - Only phones with the new app version get notifications.
-[~] N3. Play Console > App content > Data safety > "delete some data
-        without deleting the account" > Yes, URL
-        https://palnacare.com/delete-account/#some-data
-        (the 30-day purge, 27a, runs nightly since 5 Oct; site already says so)
-[ ] N7. Play Console > Data safety > Data types > Photos and videos >
-        Photos: collected, NOT shared, not ephemeral, OPTIONAL, purpose App
-        functionality. App Store Connect (later, App Privacy): User Content
-        > Photos or Videos, linked to the user, not tracking.
-[ ] N5. Paste the current description from store/app-store.md into Play
-        Console > Main store listing (and App Store Connect later).
-[ ] N11. Upload the new screenshots (4-tab layout, re-rendered 26 Oct):
-        Play size in app/tool/screenshots/out/play/, App Store size in
-        app/tool/screenshots/out/iphone/ (both already RGB). Order: see
-        store/google-play.md. Re-render after big UI changes:
-        cd app; flutter test tool/screenshots --update-goldens
-        --dart-define=SHOT_DEVICE=play (or iphone).
-[ ] N4. Reviewer demo account (Play and Apple): set a password in
-        supabase/snippets/review_account.sql, run it in Supabase > SQL
-        Editor, sign in once on the phone (add a sample baby), then put the
-        email/password in Play Console > App access and App Store Connect >
-        App Review. (Same account as item 46: review@palnacare.com.)
-[~] 20. (27 Oct: only on this PC for now; do it when the password manager
-        is set up, together with items 3-8.) Android upload key: back up stuff/palna-upload.jks,
-        android/key.properties and stuff/palna-upload-key.properties in
-        your password manager. Without them the app can't be updated on
-        Play. After the first Play upload: Play Console > App integrity >
-        App signing key SHA-1 > add one more Google Cloud Android client.
+[ ] 6.  Tick off section 6 below (features built but not yet seen on a
+        phone) as you notice them working.
 
 ====================================================================
-2. WAITING ON THE D-U-N-S NUMBER
+2. WAITING ON THE D-U-N-S NUMBER (then the Play and Apple accounts)
 ====================================================================
 
-[~] 11. D-U-N-S number (dnb.com, free): APPLIED, waiting (22 Oct; takes
-        1-4 weeks). Unblocks 12 and 13.
-[ ] 12. Apple: ask Apple Developer Support to move the INDIVIDUAL account
-        (Team ID W7AS897FPN, renews 1 Oct 2027) to an organization.
+[~] 11. D-U-N-S number (dnb.com, free): APPLIED 22 Oct, waiting (takes 1-4
+        weeks). Unblocks everything in this section.
 [ ] 13. Google Play as an organization. Palna was REJECTED (1 Oct) on the
         personal account: apps with medical features must come from an
         organization. Don't untick the medical features to get through
@@ -74,6 +44,28 @@ to some of them), so they aren't in order. Last tidied 27 Oct 2026.
         Google account (e.g. apps@palnacare.com), transfer the app
         (com.palnacare.app) to it, resubmit.
         Until then Android testers install the APK.
+[ ] 12. Apple: ask Apple Developer Support to move the INDIVIDUAL account
+        (Team ID W7AS897FPN, renews 1 Oct 2027) to an organization.
+        Then, in the Play Console of whichever account Palna ends up on:
+[~] N3. App content > Data safety > "delete some data without deleting the
+        account" > Yes, URL https://palnacare.com/delete-account/#some-data
+        (the 30-day purge, 27a, runs nightly since 5 Oct; the site says so).
+[ ] N7. Data safety > Data types > Photos and videos > Photos: collected,
+        NOT shared, not ephemeral, OPTIONAL, purpose App functionality.
+        (App Store Connect, App Privacy: User Content > Photos or Videos,
+        linked to the user, not tracking.)
+[ ] N5. Main store listing: paste the current description from
+        store/app-store.md (also App Store Connect).
+[ ] N11. Upload the screenshots (4-tab layout, re-rendered 26 Oct): Play
+        size in app/tool/screenshots/out/play/, App Store size in
+        app/tool/screenshots/out/iphone/ (both already RGB). Order: see
+        store/google-play.md. Ask Claude to re-render them first if the
+        app has changed since.
+[ ] N4. Reviewer demo account review@palnacare.com (Play and Apple): set a
+        password in supabase/snippets/review_account.sql, run it in
+        Supabase > SQL Editor, sign in once (add a sample baby), then put
+        the email/password in Play Console > App access and App Store
+        Connect > App Review.
 [ ] N6. Testers: send the invite (store/tester-invite.md, 3 languages)
         once the closed test is approved; 12+ testers must stay opted in
         for 14 days in a row.
@@ -82,10 +74,18 @@ to some of them), so they aren't in order. Last tidied 27 Oct 2026.
 3. BEFORE LAUNCH
 ====================================================================
 
-[ ] 3-8. Change everything that was pasted into chats (treat as exposed):
+[ ] 3-8 + 20. When you set up the password manager:
+        [ ] 20. Back up the Android upload key (only on this PC now):
+               stuff/palna-upload.jks, app/android/key.properties and
+               stuff/palna-upload-key.properties. Without them the app can
+               never be updated on Play.
+        [ ] 18b. Save the backup passphrase (stuff/palna-backup-
+               passphrase.txt) there too.
+        Then change everything that was pasted into chats (treat as exposed):
         [ ] 3. Supabase database password: Project Settings > Database >
-               Reset database password, then on the PC:
-               npx supabase link --project-ref ixrlofqsstddisizofwc
+               Reset database password; then on the PC
+               npx supabase link --project-ref ixrlofqsstddisizofwc, and
+               update the SUPABASE_DB_URL secret on GitHub (backups).
         [ ] 4. powersync_role password (if same as the DB password): SQL
                Editor: alter role powersync_role with password '...'; then
                PowerSync > Database Connection.
@@ -95,10 +95,8 @@ to some of them), so they aren't in order. Last tidied 27 Oct 2026.
                client > Add secret > Supabase > Auth > Providers > Google >
                remove the old one.
         [ ] 7. VPS (administrator@173.208.162.249): new password, SSH keys only.
-        [ ] 8. Move everything in cred.txt into a password manager (it's
+        [ ] 8. Move everything in cred.txt into the password manager (it's
                git-ignored, but plain text).
-[ ] 19. Google Auth Platform > Audience: "Testing" > "In production"
-        (otherwise only test users can use Google sign-in).
 [~] 25. You or a lawyer: read palnacare.com/privacy, /delete-account and
         /terms (terms say the laws of Pakistan apply).
 [ ] 17b. From 28 Nov 2026: move palnacare.com from Namecheap to Cloudflare
@@ -107,8 +105,9 @@ to some of them), so they aren't in order. Last tidied 27 Oct 2026.
         toolbox.services if Cloudflare supports .services.
 [ ] 46. App Store listing: drafted in store/app-store.md; needs the
         reviewer account (N4) and the screenshots (N11).
-[ ] 15b. Codemagic "iPhone to TestFlight": turn on submit_to_testflight
-        once TestFlight > Test Information is filled in.
+[ ] 20b. After the first Play upload: Play Console > App integrity > App
+        signing key SHA-1 > one more Google Cloud Android client (for
+        Google sign-in on Play installs).
 [ ] 40a. Website: swap "Coming soon" for the Play / App Store buttons once
         the apps are live (Claude).
 
@@ -277,6 +276,16 @@ Services
   secrets HOOK_SECRET + FCM_SERVICE_ACCOUNT, Vault secret
   palna_hook_secret. To rotate the hook secret: set a new HOOK_SECRET and
   update the Vault entry to the same value.
+- Database backups (18): nightly 02:30 PKT since 27 Oct, encrypted, 30
+  days of copies (GitHub > Actions > Database backup > a run > Artifacts).
+  Secrets SUPABASE_DB_URL + BACKUP_PASSPHRASE on GitHub; the passphrase
+  is in stuff/palna-backup-passphrase.txt. Restore steps at the top of
+  .github/workflows/db-backup.yml.
+- Firebase keys (14b): public app keys, limited to Firebase's 25 services;
+  GitHub's "secret detected" alerts closed as won't fix (27 Oct).
+- iPhone push: APNs key Z4XXAP5224 (team-scoped, shared with OathLock;
+  app-block/stuff/AuthKey_Z4XXAP5224.p8), uploaded to Firebase for
+  development and production. Don't delete it in either app.
 - 30-day purge of deleted entries (27a): nightly 03:00 PKT since 5 Oct
   (supabase/snippets/purge_deleted_entries.sql).
 
