@@ -14,6 +14,9 @@ Palna: Flutter app (`app/`), Supabase backend (`supabase/`), PowerSync, and the 
   the full test suite on the pull request.
 - Merge into `main` only after CI passes and the owner approves. Never commit
   feature work straight to `main` — a push to `main` is a release.
+- Once a branch is merged, delete it — on GitHub and locally. Don't keep old
+  branches around.
+- Commit messages: no "Co-Authored-By" or other AI attribution lines.
 - Ask before every commit that goes to `main`, before merging, and before
   any deploy.
 
