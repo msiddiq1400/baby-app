@@ -1,4 +1,6 @@
-# Runs the app's checks on pull requests into dev and into main: the analyzer and
+# Pull requests into dev get quick checks only: the analyzer, the translations
+# check and the server tests (a few minutes). The release pull request
+# dev -> main also runs the long app suite, and must pass before merging:
 # every automated test (calculations, screens in 3 languages, and the flow
 # tests that drive the real app on a real on-phone database with a fake
 # server). A red cross on a commit means something broke; the log says which
@@ -80,7 +82,10 @@ jobs:
       - name: Analyze
         run: flutter analyze
 
+      # The long suite (~18 min): release pull requests (into main) and the
+      # "Run workflow" button only.
       - name: Tests
+        if: github.event_name == 'workflow_dispatch' || github.base_ref == 'main'
         run: flutter test --reporter expanded --timeout 180s
 
   server:

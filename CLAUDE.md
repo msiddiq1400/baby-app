@@ -14,12 +14,12 @@ Palna: Flutter app (`app/`), Supabase backend (`supabase/`), PowerSync, and the 
   push it. Pushing a branch triggers no CI and no deploy.
 - The owner tests it locally first (debug build on the phone, or a local
   run). Only when they say it's OK: open a pull request into `dev`. CI runs
-  the full test suite on it. Merge into `dev` after CI passes and the owner
+  the quick checks on it. Merge into `dev` after they pass and the owner
   approves.
 - Release: when the owner says "release" (end of day, or twice a day), open
-  ONE pull request `dev` -> `main` for the repo, wait for CI, and merge it on
-  the owner's OK with a merge commit (not squash). That merge is the one
-  deploy (see Deploys).
+  ONE pull request `dev` -> `main` for the repo, wait for CI (the full test
+  suites run here, once), and merge it on the owner's OK with a merge commit
+  (not squash). That merge is the one deploy (see Deploys).
 - Never commit feature work straight to `dev` or `main`.
 - Once a feature branch is merged into `dev`, delete it — on GitHub and
   locally. Never delete `dev` or `main`.
@@ -30,24 +30,30 @@ Palna: Flutter app (`app/`), Supabase backend (`supabase/`), PowerSync, and the 
 ### Tests while working
 - Don't run the full test suite after every change — it wastes time. Run the
   analyzer/linter plus only the tests for the code you touched (commands
-  below). The full suite runs in CI on the pull request (or run it once
-  before merging if the owner asks).
+  below). The full suite runs in CI on the release pull request into
+  `main` (or locally after a big change, or when the owner asks).
 
 ### CI and deploys
-- Tests run on pull requests into `dev` and into `main`. Deploys run only on
-  a push to `main` (a merged release). Never deploy from `dev` or a feature
-  branch.
+- Pull requests into `dev` run quick checks only (analyzer and the fast
+  tests, a few minutes). The long test suites run once, on the release pull
+  request `dev` -> `main`, and must pass before it is merged. Nothing tests
+  again after that: the push to `main` only deploys. Never deploy from `dev`
+  or a feature branch.
+- Locally, run the long suites only now and then, after a big chunk of code
+  changes. Otherwise run the analyzer plus the tests for what you touched.
 
 ### Tests (run only what you touched)
 - App: in `app/`, `flutter analyze` then only the matching test files, e.g.
   `flutter test test/<file>_test.dart`.
-- Full app suite (`flutter test`): runs in GitHub CI on pull requests into
-  `dev` and `main`; locally only when the owner asks.
+- Full app suite (`flutter test`): runs in GitHub CI on the release pull
+  request into `main`; locally only after a big change or when the owner
+  asks.
 
 ### Deploys (merging the release into `main`)
 - The owner approves the release; everything below then happens by itself.
 - GitHub "Tests and deploy" (`.github/workflows/tests.yml`): on pull
-  requests into `dev` and `main` it runs the app and server tests. On a push
+  requests into `dev` it runs the quick checks (analyzer, translations,
+  server tests); into `main` (the release) the full app suite too. On a push
   to `main` (the release, already tested on its pull request) it applies new
   Supabase migrations and deploys the `notify-family` function. The nightly
   database backup runs on its own schedule (leave it).
