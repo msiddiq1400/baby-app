@@ -1,4 +1,4 @@
-# Runs the app's checks on main and on pull requests into main: the analyzer and
+# Runs the app's checks on pull requests into dev and into main: the analyzer and
 # every automated test (calculations, screens in 3 languages, and the flow
 # tests that drive the real app on a real on-phone database with a fake
 # server). A red cross on a commit means something broke; the log says which
@@ -16,9 +16,15 @@
 #   npm ci
 #   npm test
 #
-# Deploy: on a push to main (a merged pull request), once both test jobs
-# pass, the deploy-server job applies new Supabase migrations and deploys the
-# notify-family Edge Function. Pull requests never deploy. It needs two
+# Branches: feature branches -> pull request into dev (tested) -> dev is the
+# source of truth -> once or twice a day a release pull request dev -> main
+# (tested again) -> merging it deploys.
+#
+# Deploy: a push to main (the merged release pull request) runs only the
+# deploy-server job: it applies new Supabase migrations and deploys the
+# notify-family Edge Function. The tests already passed on that pull request,
+# on the same code, so they don't run again. Pull requests never deploy. It
+# needs two
 # repository secrets (GitHub > Settings > Secrets and variables > Actions):
 #   SUPABASE_DB_URL        Supabase > Project Settings > Database > Connection
 #                          string > "Session pooler" URI, password filled in
@@ -27,14 +33,14 @@
 
 name: Tests and deploy
 
-# Only for main: pushes to main and pull requests into main (feature
-# branches run the tests through their pull request).
+# Pushes to dev or feature branches run nothing; their code is tested
+# through the pull request.
 on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
-  workflow_dispatch: {} # "Run workflow" button
+    branches: [dev, main]
+  workflow_dispatch: {} # "Run workflow" button (tests only, never deploys)
 
 permissions:
   contents: read
@@ -47,6 +53,7 @@ concurrency:
 
 jobs:
   test:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 40
     defaults:
@@ -77,6 +84,7 @@ jobs:
         run: flutter test --reporter expanded --timeout 180s
 
   server:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     defaults:
@@ -97,10 +105,9 @@ jobs:
       - name: Server tests
         run: npm test
 
-  # Only after both test jobs pass, and only for main: puts new migrations
-  # and the Edge Function live. One deploy at a time.
+  # Only for a push to main (a merged release pull request, already tested):
+  # puts new migrations and the Edge Function live. One deploy at a time.
   deploy-server:
-    needs: [test, server]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
