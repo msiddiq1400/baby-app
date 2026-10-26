@@ -1,7 +1,11 @@
 # Codemagic builds the iPhone app on its Macs (there is no Mac here) and
-# uploads it to TestFlight, and builds the Android app for Google Play. Start
-# them by hand: Codemagic > baby-app > Start new build > "iPhone to
-# TestFlight" or "Android to Google Play".
+# uploads it to TestFlight, and builds the Android app for Google Play.
+#
+# Both start by themselves on every push to main (a merged pull request) that
+# changes app/. Merges that only touch the website, server or docs build
+# nothing, and a commit message with [skip ci] skips them too. They can still
+# be started by hand: Codemagic > baby-app > Start new build. Feature branches
+# never build.
 #
 # Versioning: the version name (1.0.0) comes from app/pubspec.yaml; raise it
 # there for each store release. The build number is set here: the store's
@@ -27,6 +31,17 @@ workflows:
     instance_type: mac_mini_m2
     max_build_duration: 60
     working_directory: app
+    triggering: &on_main
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+      cancel_previous_builds: true
+    when: &app_changed
+      changeset:
+        includes:
+          - "app/"
     integrations:
       app_store_connect: Palna App Store Connect
     environment:
@@ -87,6 +102,8 @@ workflows:
     instance_type: linux_x2
     max_build_duration: 60
     working_directory: app
+    triggering: *on_main
+    when: *app_changed
     environment:
       flutter: 3.44.9
       groups:

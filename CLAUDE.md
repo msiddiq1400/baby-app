@@ -36,10 +36,18 @@ Palna: Flutter app (`app/`), Supabase backend (`supabase/`), PowerSync, and the 
 - Full app suite (`flutter test`): runs in GitHub CI on pull requests into
   `main` and on `main`; locally only when the owner asks.
 
-### Deploys
-- Codemagic (iPhone to TestFlight, Android to Google Play): no triggers, run
-  only when started by hand, from `main`.
-- GitHub "tests" workflow: pushes to `main` and pull requests into `main`
-  only. The nightly database backup runs on its own schedule (leave it).
-- Website (`website/`, Cloudflare `wrangler.jsonc`): deploy only from `main`.
-- Supabase migrations: apply only from `main`, after the owner approves.
+### Deploys (merging into `main` is the release)
+- The owner approves the merge; everything below then happens by itself.
+  Never deploy from a feature branch.
+- GitHub "Tests and deploy" (`.github/workflows/tests.yml`): on pull
+  requests into `main` it runs the app and server tests. On a push to
+  `main`, once both pass, it applies new Supabase migrations and deploys the
+  `notify-family` function. The nightly database backup runs on its own
+  schedule (leave it).
+- Website (`website/`, Cloudflare `wrangler.jsonc`): Cloudflare rebuilds
+  palnacare.com on every push to `main`.
+- Codemagic: iPhone to TestFlight and Android to Google Play (internal,
+  draft) start on every push to `main` that changes `app/` (or
+  `codemagic.yaml`).
+- `[skip ci]` in the merge commit message skips the GitHub and Codemagic
+  runs (use it for docs-only merges; Cloudflare still rebuilds the site).
