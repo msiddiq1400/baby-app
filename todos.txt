@@ -14,14 +14,10 @@ to some of them), so they aren't in order. Last tidied 27 Oct 2026.
         backup > a run > Artifacts. Passphrase: stuff/palna-backup-
         passphrase.txt + your password manager. If the database password
         changes (item 3), update the SUPABASE_DB_URL secret on GitHub too.
-[ ] 14b. Firebase keys (GitHub sent 2 "secret detected" alerts): these are
-        public app keys, but limit them. console.cloud.google.com/apis/
-        credentials?project=palna-care > "Android key" and "iOS key" > API
-        restrictions > Restrict key > only Firebase Installations API + FCM
-        Registration API (or the Firebase list already ticked) > Save.
-        Leave Application restrictions alone until after the Play launch.
-        Then GitHub > Security > Secret scanning > close both as "Won't
-        fix" ("public Firebase client key, restricted").
+[x] 14b. Firebase keys: checked 27 Oct. Both are limited to Firebase's 25
+        services (incl. FCM Registration and Installations); application
+        restrictions stay "None" until after the Play launch. GitHub's two
+        "secret detected" alerts closed as "won't fix".
 [~] 36. Push notifications between phones: LIVE (26 Oct), Android works.
         Still to do:
         - [ ] iPhone: developer.apple.com > Keys > + > Apple Push
