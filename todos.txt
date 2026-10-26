@@ -129,19 +129,42 @@ to some of them), so they aren't in order. Last tidied 27 Oct 2026.
 [ ] 24. Urdu and Roman Urdu: read through every screen.
 
 ====================================================================
-5. QUESTIONS FOR YOU (nothing is blocked on them)
+5. DECIDED, TO BUILD LATER (your answers of 27 Oct; Claude builds them
+   when you say go, each on its own branch)
 ====================================================================
 
-  Q1. Existing babies were set to Pakistan automatically. Fine, or ask
-      every family once "Which country does <baby> live in?"
-  Q2. Canada uses the NATIONAL schedule (provinces differ, e.g. Ontario).
-      Keep it with the "follow your province" note, or add Ontario?
-  Q3. UK schedule is for babies born from 1 Jan 2025. Add the older one
-      by birth date, or leave it?
-  Q4. Add the country schedules and emergency numbers to the website
-      (features + FAQ, 3 languages)? Claude can do it.
-  Q5. RSV antibody at birth and yearly flu are left out ("not routine for
-      every baby"). Show them as optional reminders later?
+[ ] Q1. Baby's country: only the person who added the baby can set or
+        change it; invited family members don't see the option, and the
+        server refuses it too. If that person has left the family or
+        deleted their account, the family owner can. Name, birth date and
+        the rest stay editable by everyone (say if those should be locked
+        too). Existing babies stay Pakistan until their creator changes it.
+[ ] Q2. More countries: as many as possible, each with its own vaccine
+        schedule and emergency (SOS) numbers; no province / state versions.
+        The family picks the country and gets that schedule and those
+        numbers. Every schedule from the country's official source, then
+        the pediatrician check (21). Suggested first: India, Bangladesh,
+        Qatar, Kuwait, Oman, Bahrain, Malaysia, Australia, Germany,
+        Ireland, Italy, Spain, France, Netherlands, Norway, Sweden, Turkiye
+        (most already have emergency numbers, not schedules). Tell Claude
+        your order.
+[ ] Q5. Optional RSV and flu reminders, shown as "Optional - ask your
+        doctor" next to the routine vaccines, and each family can hide
+        them. Build together with Q2 (same research). Proposed rules (check
+        each country's current guidance first; RSV rules keep changing):
+        - RSV: only where it's offered to all babies (so far US, Canada,
+          UAE, Saudi Arabia; not Pakistan; the UK vaccinates mothers in
+          pregnancy instead). Born during the RSV season (about Oct-Mar in
+          the north): reminder at birth. Born before it and under 8 months
+          when it starts: reminder just before the season. Note: "If the
+          mother had the RSV vaccine in pregnancy, the baby may not need it."
+        - Flu: from 6 months, only where it's recommended for all babies
+          (US, Canada, UAE, Saudi Arabia; UK only from age 2; Pakistan not
+          routine). Reminder each autumn (Sep-Oct); the first year it's 2
+          doses 4 weeks apart.
+  Also decided: Q3 keep only the new UK schedule (babies born from 2025).
+  Q4 the country schedules and emergency numbers stay in the app, not on
+  the website.
 
 ====================================================================
 6. CHECK ONCE ON A PHONE (built; automated tests cover them)
