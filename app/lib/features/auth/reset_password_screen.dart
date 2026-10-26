@@ -108,7 +108,11 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
 
   void _showMessage(String message) {
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+    // Replace any message still showing (e.g. "code sent"), so an error
+    // appears straight away.
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override

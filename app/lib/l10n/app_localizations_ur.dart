@@ -563,6 +563,9 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
+  String get tabFeeding => 'دودھ اور غذا';
+
+  @override
   String get tabMilk => 'دودھ';
 
   @override
@@ -1397,6 +1400,10 @@ class AppLocalizationsUr extends AppLocalizations {
   String get nothingOnDay => 'اس دن کچھ درج نہیں کیا گیا۔';
 
   @override
+  String get journalNoPastDays =>
+      'پچھلے دن کل سے یہاں نظر آئیں گے۔ آج کی تفصیل «آج» والے صفحے پر ہے۔';
+
+  @override
   String get forgotPassword => 'پاس ورڈ بھول گئے؟';
 
   @override
@@ -1846,6 +1853,95 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get foodsTried => 'آزمائی ہوئی';
+
+  @override
+  String get growthCheckTitle => 'نشوونما کا جائزہ';
+
+  @override
+  String get growthCheckDoctorTitle => 'اپنے ڈاکٹر سے بات کریں';
+
+  @override
+  String get growthCheckMentionTitle => 'اگلے چیک اپ پر ڈاکٹر کو بتائیں';
+
+  @override
+  String get growthCheckOkTitle => 'نشوونما ٹھیک چل رہی ہے';
+
+  @override
+  String get growthCheckOkBody =>
+      'آپ کی درج کی گئی پیمائشیں اس عمر کے بچوں کی عام حد کے اندر ہیں۔';
+
+  @override
+  String get growthCheckDoctorBody =>
+      'اکثر یہ کوئی سنجیدہ بات نہیں ہوتی، لیکن ڈاکٹر کو پورا چارٹ دیکھنا چاہیے۔ اگلے چند دنوں میں ڈاکٹر کو دکھائیں۔ اگر بچہ ٹھیک سے دودھ نہیں پی رہا، پیشاب والے ڈائپر کم ہیں یا طبیعت خراب لگے تو آج ہی جائیں۔';
+
+  @override
+  String get growthCheckMentionBody =>
+      'عام طور پر فکر کی بات نہیں۔ اگلی بار ڈاکٹر کو یہ چارٹ دکھائیں۔';
+
+  @override
+  String get growthCheckTypo =>
+      'اگر کوئی عدد غلط لگے تو نیچے فہرست میں اس پر ٹیپ کر کے دیکھیں کہ صحیح درج ہوا ہے۔';
+
+  @override
+  String get growthMeasureWeight => 'وزن';
+
+  @override
+  String get growthMeasureLength => 'قد';
+
+  @override
+  String get growthMeasureHead => 'سر کا سائز';
+
+  @override
+  String growthFlagBelowRange(String measure) {
+    return '$measure سب سے نچلی سرمئی لکیر سے نیچے ہے (3 پرسنٹائل سے کم)۔';
+  }
+
+  @override
+  String growthFlagAboveRange(String measure) {
+    return '$measure سب سے اوپر والی سرمئی لکیر سے اوپر ہے (97 پرسنٹائل سے زیادہ)۔';
+  }
+
+  @override
+  String growthFlagFallingAcross(String measure) {
+    return 'پچھلے چند مہینوں میں $measure دو سرمئی لکیروں سے نیچے آ گیا ہے۔';
+  }
+
+  @override
+  String growthFlagRisingAcross(String measure) {
+    return 'پچھلے چند مہینوں میں $measure دو سرمئی لکیروں سے اوپر چلا گیا ہے۔';
+  }
+
+  @override
+  String get growthFlagBelowBirthWeight =>
+      'دو ہفتے بعد بھی وزن پیدائش کے وزن سے کم ہے۔ زیادہ تر بچے تب تک پیدائش کا وزن واپس پا لیتے ہیں۔';
+
+  @override
+  String get growthFlagSlowGain =>
+      'پچھلے مہینے وزن اس عمر کے زیادہ تر بچوں سے کم بڑھا ہے۔';
+
+  @override
+  String percentileMeaningWeight(String percentile) {
+    return 'اسی عمر اور جنس کے 100 میں سے تقریباً $percentile بچوں سے زیادہ وزن۔';
+  }
+
+  @override
+  String percentileMeaningLength(String percentile) {
+    return 'اسی عمر اور جنس کے 100 میں سے تقریباً $percentile بچوں سے لمبا قد۔';
+  }
+
+  @override
+  String percentileMeaningHead(String percentile) {
+    return 'اسی عمر اور جنس کے 100 میں سے تقریباً $percentile بچوں سے بڑا سر۔';
+  }
+
+  @override
+  String get percentileExplainTitle => 'پرسنٹائل کا کیا مطلب ہے؟';
+
+  @override
+  String get legendYourBaby => 'آپ کا بچہ';
+
+  @override
+  String get legendWhoCurves => 'WHO لکیریں، 3 سے 97 پرسنٹائل';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -2408,6 +2504,9 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String medicineReminderBody(String medicine, String dose) {
     return '$medicine: $dose';
   }
+
+  @override
+  String get tabFeeding => 'Doodh aur ghiza';
 
   @override
   String get tabMilk => 'Doodh';
@@ -3245,6 +3344,10 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String get nothingOnDay => 'Is din kuch darj nahi kiya gaya.';
 
   @override
+  String get journalNoPastDays =>
+      'Pichhle din kal se yahan nazar aayenge. Aaj ki tafseel \"Aaj\" wale safhe par hai.';
+
+  @override
   String get forgotPassword => 'Password bhool gaye?';
 
   @override
@@ -3694,4 +3797,93 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get foodsTried => 'Aazmayi hui';
+
+  @override
+  String get growthCheckTitle => 'Growth ka jaiza';
+
+  @override
+  String get growthCheckDoctorTitle => 'Apne doctor se baat karein';
+
+  @override
+  String get growthCheckMentionTitle => 'Agle check-up par doctor ko batayein';
+
+  @override
+  String get growthCheckOkTitle => 'Growth theek chal rahi hai';
+
+  @override
+  String get growthCheckOkBody =>
+      'Aap ki darj ki gayi paimaishein is umar ke bachon ki aam hadd ke andar hain.';
+
+  @override
+  String get growthCheckDoctorBody =>
+      'Aksar yeh koi sanjeeda baat nahi hoti, lekin doctor ko poora chart dekhna chahiye. Agle chand dinon mein doctor ko dikhayein. Agar bacha theek se doodh nahi pee raha, peshab wale diaper kam hain ya tabiyat kharab lage to aaj hi jayein.';
+
+  @override
+  String get growthCheckMentionBody =>
+      'Aam taur par fikr ki baat nahi. Agli baar doctor ko yeh chart dikhayein.';
+
+  @override
+  String get growthCheckTypo =>
+      'Agar koi number ghalat lage to neeche list mein us par tap kar ke dekhein ke sahi darj hua hai.';
+
+  @override
+  String get growthMeasureWeight => 'Wazan';
+
+  @override
+  String get growthMeasureLength => 'Qad';
+
+  @override
+  String get growthMeasureHead => 'Sar ka size';
+
+  @override
+  String growthFlagBelowRange(String measure) {
+    return '$measure sab se nichli grey line se neeche hai (3rd percentile se kam).';
+  }
+
+  @override
+  String growthFlagAboveRange(String measure) {
+    return '$measure sab se oopar wali grey line se oopar hai (97th percentile se zyada).';
+  }
+
+  @override
+  String growthFlagFallingAcross(String measure) {
+    return 'Pichhle chand mahinon mein $measure do grey lines se neeche aa gaya hai.';
+  }
+
+  @override
+  String growthFlagRisingAcross(String measure) {
+    return 'Pichhle chand mahinon mein $measure do grey lines se oopar chala gaya hai.';
+  }
+
+  @override
+  String get growthFlagBelowBirthWeight =>
+      'Do hafte baad bhi wazan paidaish ke wazan se kam hai. Zyada tar bache tab tak paidaish ka wazan wapas pa lete hain.';
+
+  @override
+  String get growthFlagSlowGain =>
+      'Pichhle mahine wazan is umar ke zyada tar bachon se kam barha hai.';
+
+  @override
+  String percentileMeaningWeight(String percentile) {
+    return 'Isi umar aur jins ke 100 mein se taqreeban $percentile bachon se zyada wazan.';
+  }
+
+  @override
+  String percentileMeaningLength(String percentile) {
+    return 'Isi umar aur jins ke 100 mein se taqreeban $percentile bachon se lamba qad.';
+  }
+
+  @override
+  String percentileMeaningHead(String percentile) {
+    return 'Isi umar aur jins ke 100 mein se taqreeban $percentile bachon se bara sar.';
+  }
+
+  @override
+  String get percentileExplainTitle => 'Percentile ka kya matlab hai?';
+
+  @override
+  String get legendYourBaby => 'Aap ka baby';
+
+  @override
+  String get legendWhoCurves => 'WHO lines, 3rd se 97th percentile';
 }

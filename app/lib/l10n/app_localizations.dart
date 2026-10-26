@@ -1089,6 +1089,12 @@ abstract class AppLocalizations {
   /// **'{medicine}: {dose}'**
   String medicineReminderBody(String medicine, String dose);
 
+  /// No description provided for @tabFeeding.
+  ///
+  /// In en, this message translates to:
+  /// **'Feeding'**
+  String get tabFeeding;
+
   /// No description provided for @tabMilk.
   ///
   /// In en, this message translates to:
@@ -2541,6 +2547,12 @@ abstract class AppLocalizations {
   /// **'Nothing was logged on this day.'**
   String get nothingOnDay;
 
+  /// No description provided for @journalNoPastDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Past days will show here from tomorrow. Today\'s entries are on the Today tab.'**
+  String get journalNoPastDays;
+
   /// No description provided for @forgotPassword.
   ///
   /// In en, this message translates to:
@@ -3314,6 +3326,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tried'**
   String get foodsTried;
+
+  /// No description provided for @growthCheckTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Growth check'**
+  String get growthCheckTitle;
+
+  /// No description provided for @growthCheckDoctorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Talk to your doctor'**
+  String get growthCheckDoctorTitle;
+
+  /// No description provided for @growthCheckMentionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mention it at the next check-up'**
+  String get growthCheckMentionTitle;
+
+  /// No description provided for @growthCheckOkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Growing as expected'**
+  String get growthCheckOkTitle;
+
+  /// No description provided for @growthCheckOkBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The measurements you\'ve entered are within the usual range for babies this age.'**
+  String get growthCheckOkBody;
+
+  /// No description provided for @growthCheckDoctorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This is often nothing serious, but a doctor should look at the whole chart. Book a visit in the next few days. Go today if your baby is feeding poorly, has few wet diapers or seems unwell.'**
+  String get growthCheckDoctorBody;
+
+  /// No description provided for @growthCheckMentionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Usually nothing to worry about. Show the chart to your doctor at the next visit.'**
+  String get growthCheckMentionBody;
+
+  /// No description provided for @growthCheckTypo.
+  ///
+  /// In en, this message translates to:
+  /// **'If a number looks wrong, tap it in the list below to check it was entered correctly.'**
+  String get growthCheckTypo;
+
+  /// No description provided for @growthMeasureWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get growthMeasureWeight;
+
+  /// No description provided for @growthMeasureLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Length'**
+  String get growthMeasureLength;
+
+  /// No description provided for @growthMeasureHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Head size'**
+  String get growthMeasureHead;
+
+  /// No description provided for @growthFlagBelowRange.
+  ///
+  /// In en, this message translates to:
+  /// **'{measure} is below the lowest grey line (under the 3rd percentile).'**
+  String growthFlagBelowRange(String measure);
+
+  /// No description provided for @growthFlagAboveRange.
+  ///
+  /// In en, this message translates to:
+  /// **'{measure} is above the highest grey line (over the 97th percentile).'**
+  String growthFlagAboveRange(String measure);
+
+  /// No description provided for @growthFlagFallingAcross.
+  ///
+  /// In en, this message translates to:
+  /// **'{measure} has dropped across two grey lines in the last few months.'**
+  String growthFlagFallingAcross(String measure);
+
+  /// No description provided for @growthFlagRisingAcross.
+  ///
+  /// In en, this message translates to:
+  /// **'{measure} has climbed across two grey lines in the last few months.'**
+  String growthFlagRisingAcross(String measure);
+
+  /// No description provided for @growthFlagBelowBirthWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight is still below the birth weight after two weeks. Most babies are back to their birth weight by then.'**
+  String get growthFlagBelowBirthWeight;
+
+  /// No description provided for @growthFlagSlowGain.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight gain over the last month is slower than most babies this age.'**
+  String get growthFlagSlowGain;
+
+  /// No description provided for @percentileMeaningWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Heavier than about {percentile} in 100 babies of the same age and sex.'**
+  String percentileMeaningWeight(String percentile);
+
+  /// No description provided for @percentileMeaningLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Longer than about {percentile} in 100 babies of the same age and sex.'**
+  String percentileMeaningLength(String percentile);
+
+  /// No description provided for @percentileMeaningHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Bigger head than about {percentile} in 100 babies of the same age and sex.'**
+  String percentileMeaningHead(String percentile);
+
+  /// No description provided for @percentileExplainTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What do percentiles mean?'**
+  String get percentileExplainTitle;
+
+  /// No description provided for @legendYourBaby.
+  ///
+  /// In en, this message translates to:
+  /// **'Your baby'**
+  String get legendYourBaby;
+
+  /// No description provided for @legendWhoCurves.
+  ///
+  /// In en, this message translates to:
+  /// **'WHO curves, 3rd to 97th percentile'**
+  String get legendWhoCurves;
 }
 
 class _AppLocalizationsDelegate

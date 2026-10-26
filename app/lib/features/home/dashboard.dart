@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/topic_icons.dart';
 import '../../core/baby_age.dart';
 import '../../core/providers.dart';
 import '../../data/baby_repository.dart';
@@ -8,6 +9,7 @@ import '../../data/models.dart';
 import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/language_menu.dart';
+import '../common/tab_title.dart';
 import '../journal/journal_screen.dart';
 import '../reports/reports_screen.dart';
 import 'insights.dart';
@@ -29,7 +31,7 @@ class Dashboard extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: InkWell(
-          onTap: () => _showBabySwitcher(context, ref),
+          onTap: () => showBabySwitcher(context, ref),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,7 +53,7 @@ class Dashboard extends ConsumerWidget {
           // The full journal: every kind of entry, day by day. (Each card's
           // "Past days" shows only its own kind.)
           IconButton(
-            icon: const Icon(Icons.menu_book_outlined),
+            icon: const Icon(TopicIcons.journal),
             tooltip: l10n.journalTitle,
             onPressed: () => Navigator.of(context, rootNavigator: true)
                 .push(MaterialPageRoute<void>(builder: (_) => JournalScreen(baby: baby))),
@@ -83,37 +85,6 @@ class Dashboard extends ConsumerWidget {
       ),
     );
   }
-}
-
-/// Lists the babies to switch between (only when there's more than one).
-void _showBabySwitcher(BuildContext context, WidgetRef ref) {
-  final babies = ref.read(babiesProvider).value ?? const [];
-  if (babies.length < 2) return;
-  final l10n = AppLocalizations.of(context);
-  showModalBottomSheet<void>(
-    context: context,
-    showDragHandle: true,
-    builder: (context) => SafeArea(
-      // Clear of the phone's navigation buttons.
-      minimum: const EdgeInsets.only(bottom: 30),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(l10n.switchBaby, style: Theme.of(context).textTheme.titleMedium),
-          for (final b in babies)
-            ListTile(
-              leading: const Icon(Icons.child_care),
-              title: Text(b.name),
-              subtitle: Text(formatBabyAge(l10n, b.birthDate, DateTime.now())),
-              onTap: () {
-                selectBaby(ref, b.id);
-                Navigator.pop(context);
-              },
-            ),
-        ],
-      ),
-    ),
-  );
 }
 
 class _TodayView extends StatelessWidget {
@@ -163,7 +134,7 @@ class _TodayView extends StatelessWidget {
         // opens its report tab; the small buttons add a past entry or show
         // past days of that kind.
         _SummaryCard(
-          icon: Icons.local_drink_outlined,
+          icon: TopicIcons.feed,
           title: l10n.feeds,
           value: '${log.feeds.length}',
           onTap: () => openReport(ReportTab.feeds),
@@ -181,7 +152,7 @@ class _TodayView extends StatelessWidget {
           ],
         ),
         _SummaryCard(
-          icon: Icons.bedtime_outlined,
+          icon: TopicIcons.sleep,
           title: l10n.sleep,
           value: formatDuration(l10n, log.sleptSince(now)),
           onTap: () => openReport(ReportTab.sleep),
@@ -200,7 +171,7 @@ class _TodayView extends StatelessWidget {
           ],
         ),
         _SummaryCard(
-          icon: Icons.baby_changing_station_outlined,
+          icon: TopicIcons.diaper,
           title: l10n.diapers,
           value: '${log.diapers.length}',
           onTap: () => openReport(ReportTab.diapers),

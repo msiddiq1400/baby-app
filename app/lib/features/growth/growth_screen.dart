@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/topic_icons.dart';
 import '../../core/weight_velocity.dart';
 import '../../core/who_growth.dart';
 import '../../data/baby_repository.dart';
@@ -8,7 +9,9 @@ import '../../data/growth_repository.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/language_menu.dart';
+import '../common/tab_title.dart';
 import 'growth_chart.dart';
+import 'growth_check.dart';
 import 'growth_points.dart';
 import 'growth_sheet.dart';
 import 'milestones_view.dart';
@@ -42,7 +45,7 @@ class _GrowthScreenState extends ConsumerState<GrowthScreen> with SingleTickerPr
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.growthTitle),
+        title: TabTitle(title: l10n.growthTitle, baby: baby),
         actions: const [MainActions()],
         bottom: TabBar(
           controller: _tabs,
@@ -110,11 +113,19 @@ class _GrowthBody extends ConsumerWidget {
     final theme = Theme.of(context);
     final points = growthPoints(baby, measurements, metric);
     final ageNow = WhoGrowth.ageInMonths(baby.birthDate, DateTime.now());
+    final check = checkGrowth(
+      baby: baby,
+      measurements: measurements,
+      who: who,
+      weightGain: ref.watch(weightVelocityProvider).value?.check(baby, measurements),
+    );
 
     return ListView(
       // Room at the bottom so the add button doesn't cover the last row.
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
       children: [
+        // All three measures at once, so a problem shows whichever tab is open.
+        _GrowthCheckCard(result: check, onShowMetric: onMetricChanged),
         SegmentedButton<GrowthMetric>(
           segments: [
             ButtonSegment(value: GrowthMetric.weight, label: Text(l10n.metricWeight)),
@@ -132,10 +143,23 @@ class _GrowthBody extends ConsumerWidget {
         const SizedBox(height: 8),
         GrowthChart(who: who, sex: baby.sex, metric: metric, points: points, ageNowMonths: ageNow),
         const SizedBox(height: 8),
-        if (baby.sex != null) Text(l10n.curvesLegend, style: theme.textTheme.bodySmall),
-        if (ageNow > WhoGrowth.maxMonths) Text(l10n.whoAgeLimit, style: theme.textTheme.bodySmall),
-        const SizedBox(height: 8),
-        Text(l10n.percentileExplain, style: theme.textTheme.bodySmall),
+        if (baby.sex != null) const _Legend(),
+        if (ageNow > WhoGrowth.maxMonths)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(l10n.whoAgeLimit, style: theme.textTheme.bodyMedium),
+          ),
+        Card(
+          margin: const EdgeInsets.only(top: 12),
+          child: ExpansionTile(
+            leading: const Icon(Icons.help_outline),
+            title: Text(l10n.percentileExplainTitle),
+            shape: const Border(),
+            childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            expandedAlignment: AlignmentDirectional.centerStart,
+            children: [Text(l10n.percentileExplain, style: theme.textTheme.bodyLarge)],
+          ),
+        ),
         const SizedBox(height: 16),
         if (points.isEmpty)
           Padding(
@@ -191,7 +215,7 @@ class _WeightGainCard extends ConsumerWidget {
             Text(l10n.weightGainSummary(check.gainPerMonthG.toString(), check.daysApart)),
             Text(
               l10n.weightGainRange(check.p5.toString(), check.p95.toString(), check.p50.toString()),
-              style: theme.textTheme.bodySmall,
+              style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
             ),
             const SizedBox(height: 8),
             Text(note),
@@ -219,6 +243,9 @@ class _LatestCard extends StatelessWidget {
     final previous = points.length > 1 ? points[points.length - 2] : null;
     final sex = baby.sex;
     final showPercentile = sex != null && latest.months <= WhoGrowth.maxMonths;
+    // Whole numbers between 1 and 99: "0 in 100" or "100 in 100" reads oddly.
+    final percentile =
+        showPercentile ? who.percentile(sex, metric, latest.months, latest.value).round().clamp(1, 99) : 0;
 
     return Card(
       child: Padding(
@@ -227,21 +254,163 @@ class _LatestCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(formatGrowthValue(metric, latest.value), style: theme.textTheme.headlineMedium),
-            if (showPercentile)
-              Text(l10n.percentileValue(who.percentile(sex, metric, latest.months, latest.value).round().toString())),
-            if (previous != null)
+            if (showPercentile) ...[
+              Text(l10n.percentileValue(percentile.toString()), style: theme.textTheme.titleMedium),
               Text(
-                l10n.changeSince(
-                  formatGrowthChange(metric, latest.value - previous.value),
-                  previous.measurement == null
-                      ? l10n.atBirth
-                      : MaterialLocalizations.of(context).formatMediumDate(previous.date),
+                switch (metric) {
+                  GrowthMetric.weight => l10n.percentileMeaningWeight(percentile.toString()),
+                  GrowthMetric.length => l10n.percentileMeaningLength(percentile.toString()),
+                  GrowthMetric.head => l10n.percentileMeaningHead(percentile.toString()),
+                },
+                style: theme.textTheme.bodyLarge,
+              ),
+            ],
+            if (previous != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Text(
+                  l10n.changeSince(
+                    formatGrowthChange(metric, latest.value - previous.value),
+                    previous.measurement == null
+                        ? l10n.atBirth
+                        : MaterialLocalizations.of(context).formatMediumDate(previous.date),
+                  ),
+                  style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                 ),
-                style: theme.textTheme.bodySmall,
               ),
           ],
         ),
       ),
+    );
+  }
+}
+
+/// The verdict on top of the charts: talk to a doctor, mention it at the
+/// next check-up, or growing as expected; with the reasons in plain words.
+/// Tapping a reason shows that measure's chart.
+class _GrowthCheckCard extends StatelessWidget {
+  const _GrowthCheckCard({required this.result, required this.onShowMetric});
+
+  final GrowthCheckResult result;
+  final ValueChanged<GrowthMetric> onShowMetric;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!result.hasEnoughData) return const SizedBox.shrink();
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final (title, body, icon, background, foreground) = switch (result.concern) {
+      GrowthConcern.doctor => (
+          l10n.growthCheckDoctorTitle,
+          l10n.growthCheckDoctorBody,
+          TopicIcons.doctorVisit,
+          scheme.errorContainer,
+          scheme.onErrorContainer,
+        ),
+      GrowthConcern.mention => (
+          l10n.growthCheckMentionTitle,
+          l10n.growthCheckMentionBody,
+          Icons.info_outline,
+          scheme.tertiaryContainer,
+          scheme.onTertiaryContainer,
+        ),
+      GrowthConcern.none => (
+          l10n.growthCheckOkTitle,
+          l10n.growthCheckOkBody,
+          Icons.check_circle_outline,
+          scheme.secondaryContainer,
+          scheme.onSecondaryContainer,
+        ),
+    };
+    String measure(GrowthMetric m) => switch (m) {
+          GrowthMetric.weight => l10n.growthMeasureWeight,
+          GrowthMetric.length => l10n.growthMeasureLength,
+          GrowthMetric.head => l10n.growthMeasureHead,
+        };
+    String reason(GrowthFlag f) => switch (f.kind) {
+          GrowthFlagKind.belowRange => l10n.growthFlagBelowRange(measure(f.metric)),
+          GrowthFlagKind.aboveRange => l10n.growthFlagAboveRange(measure(f.metric)),
+          GrowthFlagKind.fallingAcross => l10n.growthFlagFallingAcross(measure(f.metric)),
+          GrowthFlagKind.risingAcross => l10n.growthFlagRisingAcross(measure(f.metric)),
+          GrowthFlagKind.belowBirthWeight => l10n.growthFlagBelowBirthWeight,
+          GrowthFlagKind.slowGain => l10n.growthFlagSlowGain,
+        };
+    final text = theme.textTheme.bodyLarge?.copyWith(color: foreground);
+
+    return Card(
+      color: background,
+      margin: const EdgeInsets.only(bottom: 12),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.growthCheckTitle, style: theme.textTheme.labelLarge?.copyWith(color: foreground)),
+            const SizedBox(height: 4),
+            Row(
+              children: [
+                Icon(icon, size: 28, color: foreground),
+                const SizedBox(width: 12),
+                Expanded(child: Text(title, style: theme.textTheme.titleLarge?.copyWith(color: foreground))),
+              ],
+            ),
+            const SizedBox(height: 8),
+            for (final f in result.flags)
+              InkWell(
+                borderRadius: BorderRadius.circular(8),
+                onTap: () => onShowMetric(f.metric),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('•  ', style: text),
+                      Expanded(child: Text(reason(f), style: text?.copyWith(fontWeight: FontWeight.w600))),
+                    ],
+                  ),
+                ),
+              ),
+            if (result.flags.isNotEmpty) const SizedBox(height: 8),
+            Text(body, style: text),
+            if (result.concern != GrowthConcern.none) ...[
+              const SizedBox(height: 8),
+              Text(l10n.growthCheckTypo, style: theme.textTheme.bodyMedium?.copyWith(color: foreground)),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Key for the chart: the baby's line and the WHO curves.
+class _Legend extends StatelessWidget {
+  const _Legend();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    Widget item(Color color, double thickness, String label) => Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 24,
+              height: thickness,
+              decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(2)),
+            ),
+            const SizedBox(width: 8),
+            Flexible(child: Text(label, style: theme.textTheme.bodyMedium)),
+          ],
+        );
+    return Wrap(
+      spacing: 20,
+      runSpacing: 6,
+      children: [
+        item(theme.colorScheme.primary, 4, l10n.legendYourBaby),
+        item(theme.colorScheme.outline, 2, l10n.legendWhoCurves),
+      ],
     );
   }
 }

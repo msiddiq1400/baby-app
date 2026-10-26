@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/topic_icons.dart';
 import '../../data/illness_repository.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
@@ -39,7 +40,7 @@ class IllnessSection extends ConsumerWidget {
         else
           OutlinedButton.icon(
             onPressed: () => showIllnessSheet(context, baby),
-            icon: const Icon(Icons.sick_outlined),
+            icon: const Icon(TopicIcons.illness),
             label: Text(l10n.startIllnessButton),
           ),
         for (final i in past)
@@ -90,7 +91,7 @@ class _CurrentIllnessCard extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  Icon(Icons.sick_outlined, color: scheme.error),
+                  Icon(TopicIcons.illness, color: scheme.error),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -131,12 +132,12 @@ class _CurrentIllnessCard extends ConsumerWidget {
                 children: [
                   FilledButton.tonalIcon(
                     onPressed: () => showSymptomSheet(context, baby),
-                    icon: const Icon(Icons.thermostat_outlined),
+                    icon: const Icon(TopicIcons.symptom),
                     label: Text(l10n.logSymptom),
                   ),
                   FilledButton.tonalIcon(
                     onPressed: () => showDoctorVisitSheet(context, baby),
-                    icon: const Icon(Icons.local_hospital_outlined),
+                    icon: const Icon(TopicIcons.doctorVisit),
                     label: Text(l10n.doctorVisit),
                   ),
                   FilledButton.icon(
@@ -197,7 +198,7 @@ class _EpisodeView extends ConsumerWidget {
       for (final s in episode.symptoms)
         (
           s.occurredAt,
-          Icons.thermostat_outlined,
+          TopicIcons.symptom,
           [
             symptomName(l10n, s.symptom),
             if (s.temperatureC != null) displayTemperature(s.temperatureC!),
@@ -207,11 +208,11 @@ class _EpisodeView extends ConsumerWidget {
           () => showSymptomSheet(context, baby, existing: s),
         ),
       for (final (:dose, :medicine) in episode.doses)
-        (dose.givenAt, Icons.medication_outlined, '$medicine · ${dose.skipped ? l10n.doseSkipped : l10n.doseGiven}', null, null),
+        (dose.givenAt, TopicIcons.medicine, '$medicine · ${dose.skipped ? l10n.doseSkipped : l10n.doseGiven}', null, null),
       for (final v in episode.visits)
         (
           v.visitedAt,
-          Icons.local_hospital_outlined,
+          TopicIcons.doctorVisit,
           [l10n.doctorVisit, if (v.doctor != null) v.doctor!, if (v.diagnosis != null) v.diagnosis!].join(' · '),
           v.advice,
           () => showDoctorVisitSheet(context, baby, existing: v),
@@ -273,12 +274,12 @@ class _EpisodeView extends ConsumerWidget {
                     children: [
                       FilledButton.tonalIcon(
                         onPressed: () => showSymptomSheet(context, baby),
-                        icon: const Icon(Icons.thermostat_outlined),
+                        icon: const Icon(TopicIcons.symptom),
                         label: Text(l10n.logSymptom),
                       ),
                       FilledButton.tonalIcon(
                         onPressed: () => showDoctorVisitSheet(context, baby),
-                        icon: const Icon(Icons.local_hospital_outlined),
+                        icon: const Icon(TopicIcons.doctorVisit),
                         label: Text(l10n.doctorVisit),
                       ),
                       if (illness.ongoing)

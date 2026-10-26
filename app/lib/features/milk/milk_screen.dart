@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/topic_icons.dart';
 import '../../data/milk_repository.dart';
 import '../../data/models.dart';
 import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
-import '../common/language_menu.dart';
 import 'milk_rules.dart';
 import 'milk_sheets.dart';
 
-/// Milk tab: pumping today, the stored-milk inventory, and storage guidance.
-class MilkScreen extends ConsumerWidget {
-  const MilkScreen({super.key, required this.baby});
+/// Breast milk (on the Feeding tab): pumping today, the stored-milk
+/// inventory, and storage guidance.
+class MilkView extends ConsumerWidget {
+  const MilkView({super.key, required this.baby});
 
   final Baby baby;
 
@@ -21,24 +22,21 @@ class MilkScreen extends ConsumerWidget {
     final bags = ref.watch(milkBagsProvider(baby.id));
     final pumping = ref.watch(pumpingTodayProvider(baby.id));
 
-    return Scaffold(
-      appBar: AppBar(title: Text(l10n.milkTitle), actions: const [MainActions()]),
-      body: RefreshIndicator(
-        onRefresh: () => Future.wait([
-          ref.refresh(milkBagsProvider(baby.id).future),
-          ref.refresh(pumpingTodayProvider(baby.id).future),
-        ]),
-        child: switch ((bags, pumping)) {
-          (AsyncData(value: final bags), AsyncData(value: final sessions)) =>
-            _MilkBody(baby: baby, bags: bags, sessions: sessions),
-          (AsyncError(), _) || (_, AsyncError()) => ListView(
-              children: [
-                Padding(padding: const EdgeInsets.all(32), child: Text(l10n.errorGeneric, textAlign: TextAlign.center)),
-              ],
-            ),
-          _ => const Center(child: CircularProgressIndicator()),
-        },
-      ),
+    return RefreshIndicator(
+      onRefresh: () => Future.wait([
+        ref.refresh(milkBagsProvider(baby.id).future),
+        ref.refresh(pumpingTodayProvider(baby.id).future),
+      ]),
+      child: switch ((bags, pumping)) {
+        (AsyncData(value: final bags), AsyncData(value: final sessions)) =>
+          _MilkBody(baby: baby, bags: bags, sessions: sessions),
+        (AsyncError(), _) || (_, AsyncError()) => ListView(
+            children: [
+              Padding(padding: const EdgeInsets.all(32), child: Text(l10n.errorGeneric, textAlign: TextAlign.center)),
+            ],
+          ),
+        _ => const Center(child: CircularProgressIndicator()),
+      },
     );
   }
 }
@@ -77,7 +75,7 @@ class _MilkBody extends StatelessWidget {
             Expanded(
               child: FilledButton.icon(
                 onPressed: () => showPumpingSheet(context, baby),
-                icon: const Icon(Icons.water_drop_outlined),
+                icon: const Icon(TopicIcons.milk),
                 label: Text(l10n.logPumping),
               ),
             ),
@@ -128,7 +126,7 @@ class _MilkBody extends StatelessWidget {
             ListTile(
               dense: true,
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.water_drop_outlined),
+              leading: const Icon(TopicIcons.milk),
               title: Text(s.amountMl == null ? l10n.logPumping : '${s.amountMl} ml'),
               trailing: Text(TimeOfDay.fromDateTime(s.startedAt).format(context)),
               onTap: () => showPumpingSheet(context, baby, existing: s),
@@ -243,7 +241,7 @@ class _BagTile extends ConsumerWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: Icon(
-        expired ? Icons.warning_amber : Icons.local_drink_outlined,
+        expired ? Icons.warning_amber : TopicIcons.milk,
         color: expired ? theme.colorScheme.error : theme.colorScheme.primary,
       ),
       title: Text('${bag.amountMl} ml · ${l10n.pumpedOn(when(bag.pumpedAt))}'),

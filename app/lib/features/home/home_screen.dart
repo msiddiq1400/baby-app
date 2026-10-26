@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/topic_icons.dart';
 import '../../data/baby_repository.dart';
 import '../../data/local_db.dart';
 import '../../data/models.dart';
@@ -56,23 +57,20 @@ class BabyShell extends ConsumerWidget {
                             selectedIcon: const Icon(Icons.today),
                             label: l10n.tabToday,
                           ),
+                          // Breast milk and solids together.
                           NavigationDestination(
-                            icon: const Icon(Icons.water_drop_outlined),
-                            selectedIcon: const Icon(Icons.water_drop),
-                            label: l10n.tabMilk,
+                            icon: const Icon(TopicIcons.food),
+                            selectedIcon: const Icon(TopicIcons.foodFilled),
+                            label: l10n.tabFeeding,
                           ),
                           NavigationDestination(
-                            icon: const Icon(Icons.restaurant_outlined),
-                            selectedIcon: const Icon(Icons.restaurant),
-                            label: l10n.tabSolids,
-                          ),
-                          NavigationDestination(
-                            icon: const Icon(Icons.show_chart),
+                            icon: const Icon(TopicIcons.growth),
+                            selectedIcon: const Icon(TopicIcons.growthFilled),
                             label: l10n.tabGrowth,
                           ),
                           NavigationDestination(
-                            icon: const Icon(Icons.vaccines_outlined),
-                            selectedIcon: const Icon(Icons.vaccines),
+                            icon: const Icon(TopicIcons.health),
+                            selectedIcon: const Icon(TopicIcons.healthFilled),
                             label: l10n.tabHealth,
                           ),
                         ],

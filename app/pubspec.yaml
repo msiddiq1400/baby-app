@@ -41,6 +41,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  # Fake Supabase server in the flow tests (already used by Supabase).
+  http: ^1.6.0
+  meta: ^1.18.0
   flutter_launcher_icons: ^0.14.4
 flutter:
   uses-material-design: true

@@ -8,12 +8,11 @@ import '../core/providers.dart';
 import '../features/auth/sign_in_screen.dart';
 import '../features/auth/reset_password_screen.dart';
 import '../features/auth/verify_code_screen.dart';
+import '../features/feeding/feeding_screen.dart';
 import '../features/growth/growth_screen.dart';
 import '../features/health/health_screen.dart';
 import '../features/home/dashboard.dart';
 import '../features/home/home_screen.dart';
-import '../features/milk/milk_screen.dart';
-import '../features/solids/solids_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final auth = ref.watch(supabaseProvider).auth;
@@ -38,14 +37,8 @@ final routerProvider = Provider<GoRouter>((ref) {
           ]),
           StatefulShellBranch(routes: [
             GoRoute(
-              path: '/milk',
-              builder: (context, state) => WithBaby(builder: (baby) => MilkScreen(baby: baby)),
-            ),
-          ]),
-          StatefulShellBranch(routes: [
-            GoRoute(
-              path: '/solids',
-              builder: (context, state) => WithBaby(builder: (baby) => SolidsScreen(baby: baby)),
+              path: '/feeding',
+              builder: (context, state) => WithBaby(builder: (baby) => FeedingScreen(baby: baby)),
             ),
           ]),
           StatefulShellBranch(routes: [

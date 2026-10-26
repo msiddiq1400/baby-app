@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/topic_icons.dart';
 import '../../data/medication_repository.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
@@ -143,7 +144,7 @@ class _MedicineCard extends ConsumerWidget {
           children: [
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: Icon(Icons.medication_outlined, color: theme.colorScheme.primary),
+              leading: Icon(TopicIcons.medicine, color: theme.colorScheme.primary),
               title: Text(medication.name, style: theme.textTheme.titleMedium),
               subtitle: Text(_summary(context, medication)),
               trailing: IconButton(

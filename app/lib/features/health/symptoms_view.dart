@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/topic_icons.dart';
 import '../../data/models.dart';
 import '../../data/symptom_repository.dart';
 import '../../l10n/app_localizations.dart';
 import 'doctor_summary.dart';
-import 'doctor_summary_screen.dart';
 import 'illness_screen.dart';
 import 'symptom_sheet.dart';
 
-/// Symptoms tab: the last 14 days by day, and the summary for the doctor.
+/// Symptoms tab: illnesses, then the last 14 days of symptoms by day.
 class SymptomsView extends ConsumerWidget {
   const SymptomsView({super.key, required this.baby});
 
@@ -55,26 +55,11 @@ class _SymptomList extends StatelessWidget {
       children: [
         IllnessSection(baby: baby),
         const SizedBox(height: 16),
-        Row(
-          children: [
-            Expanded(
-              child: FilledButton.icon(
-                onPressed: () => showSymptomSheet(context, baby),
-                icon: const Icon(Icons.add),
-                label: Text(l10n.logSymptom),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: FilledButton.tonalIcon(
-                onPressed: () => Navigator.of(context, rootNavigator: true).push(
-                  MaterialPageRoute<void>(builder: (_) => DoctorSummaryScreen(baby: baby, recentSymptoms: logs)),
-                ),
-                icon: const Icon(Icons.description_outlined),
-                label: Text(l10n.doctorSummary, overflow: TextOverflow.ellipsis),
-              ),
-            ),
-          ],
+        // The doctor summary is at the top of the Health tab.
+        FilledButton.icon(
+          onPressed: () => showSymptomSheet(context, baby),
+          icon: const Icon(Icons.add),
+          label: Text(l10n.logSymptom),
         ),
         if (logs.isEmpty)
           Padding(
@@ -90,7 +75,7 @@ class _SymptomList extends StatelessWidget {
           ListTile(
             dense: true,
             contentPadding: EdgeInsets.zero,
-            leading: Icon(log.symptom == 'fever' ? Icons.thermostat : Icons.healing_outlined),
+            leading: const Icon(TopicIcons.symptom),
             title: Text(
               [
                 symptomName(l10n, log.symptom),

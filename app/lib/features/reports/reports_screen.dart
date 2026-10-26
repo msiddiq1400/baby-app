@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
+import '../../app/topic_icons.dart';
 import '../../app/theme.dart';
 import '../../core/baby_age.dart';
 import '../../core/l10n_lookup.dart';
@@ -47,9 +48,9 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen> {
           title: Text(l10n.reportsTitle),
           bottom: TabBar(
             tabs: [
-              Tab(icon: const Icon(Icons.local_drink_outlined), text: l10n.feeds),
-              Tab(icon: const Icon(Icons.bedtime_outlined), text: l10n.sleep),
-              Tab(icon: const Icon(Icons.baby_changing_station_outlined), text: l10n.diapers),
+              Tab(icon: const Icon(TopicIcons.feed), text: l10n.feeds),
+              Tab(icon: const Icon(TopicIcons.sleep), text: l10n.sleep),
+              Tab(icon: const Icon(TopicIcons.diaper), text: l10n.diapers),
             ],
           ),
         ),

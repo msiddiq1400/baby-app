@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/topic_icons.dart';
 import '../../core/who_growth.dart';
 import '../../data/content.dart';
 import '../../data/models.dart';
@@ -91,7 +92,7 @@ class MilestonesView extends ConsumerWidget {
         Card(
           color: theme.colorScheme.tertiaryContainer,
           child: ListTile(
-            leading: const Icon(Icons.medical_services_outlined),
+            leading: const Icon(TopicIcons.doctorVisit),
             title: Text(l10n.actEarlyTitle),
             subtitle: Text(guide.actEarly.of(l10n)),
           ),

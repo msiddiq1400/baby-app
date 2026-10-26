@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/topic_icons.dart';
 import '../../data/models.dart';
 import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
@@ -29,7 +30,7 @@ class QuickLogBar extends ConsumerWidget {
             Expanded(
               child: FilledButton.icon(
                 onPressed: () => showFeedSheet(context, baby),
-                icon: const Icon(Icons.local_drink),
+                icon: const Icon(TopicIcons.feedFilled),
                 label: Text(l10n.logFeed, overflow: TextOverflow.ellipsis),
               ),
             ),
@@ -37,7 +38,7 @@ class QuickLogBar extends ConsumerWidget {
             Expanded(
               child: FilledButton.icon(
                 onPressed: () => showDiaperSheet(context, baby),
-                icon: const Icon(Icons.baby_changing_station),
+                icon: const Icon(TopicIcons.diaperFilled),
                 label: Text(l10n.logDiaper, overflow: TextOverflow.ellipsis),
               ),
             ),
@@ -49,7 +50,7 @@ class QuickLogBar extends ConsumerWidget {
                 onPressed: () => ongoing == null
                     ? showSleepSheet(context, baby)
                     : showSleepSheet(context, baby, existing: ongoing, wakingUp: true),
-                icon: Icon(ongoing != null ? Icons.wb_sunny_outlined : Icons.bedtime),
+                icon: Icon(ongoing != null ? Icons.wb_sunny_outlined : TopicIcons.sleepFilled),
                 label: Text(ongoing != null ? l10n.endSleep : l10n.startSleep, overflow: TextOverflow.ellipsis),
               ),
             ),

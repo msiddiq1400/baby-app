@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../app/topic_icons.dart';
 import '../../core/baby_age.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
@@ -19,16 +20,16 @@ class Timeline extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final entries = <(DateTime, IconData, String, VoidCallback)>[
       for (final f in log.feeds)
-        (f.startedAt, Icons.local_drink_outlined, feedEntryText(l10n, f, now), () => showFeedSheet(context, baby, existing: f)),
+        (f.startedAt, TopicIcons.feed, feedEntryText(l10n, f, now), () => showFeedSheet(context, baby, existing: f)),
       for (final d in log.diapers)
         (
           d.occurredAt,
-          Icons.baby_changing_station_outlined,
+          TopicIcons.diaper,
           diaperEntryText(l10n, d),
           () => showDiaperSheet(context, baby, existing: d),
         ),
       for (final s in log.sleeps)
-        (s.startedAt, Icons.bedtime_outlined, sleepEntryText(l10n, s), () => showSleepSheet(context, baby, existing: s)),
+        (s.startedAt, TopicIcons.sleep, sleepEntryText(l10n, s), () => showSleepSheet(context, baby, existing: s)),
     ]..sort((a, b) => b.$1.compareTo(a.$1));
 
     if (entries.isEmpty) {

@@ -1,0 +1,59 @@
+# Runs the app's checks on main and on pull requests into main: the analyzer and
+# every automated test (calculations, screens in 3 languages, and the flow
+# tests that drive the real app on a real on-phone database with a fake
+# server). A red cross on a commit means something broke; the log says which
+# test and why.
+#
+# Run the same on your PC:
+#   cd app
+#   flutter analyze
+#   flutter test
+
+name: Tests
+
+# Only for main: pushes to main and pull requests into main (feature
+# branches run the tests through their pull request).
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {} # "Run workflow" button
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.44.9 # same as the PC; raise both together
+          cache: true
+
+      - name: Get packages
+        run: flutter pub get
+
+      # The checked-in translations must match the .arb files.
+      - name: Translations up to date
+        run: |
+          flutter gen-l10n
+          git diff --exit-code -- lib/l10n
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Tests
+        run: flutter test --reporter expanded --timeout 180s

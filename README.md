@@ -7,15 +7,16 @@ Open tasks for the owner: [todos.txt](todos.txt).
 ```
 app/                 Flutter app
   lib/data/          Database on the phone (PowerSync), repositories, models, bundled content
-  lib/features/      Screens, one folder per area (home, milk, solids, growth, health, settings...)
+  lib/features/      Screens, one folder per area (home, feeding, milk, solids, growth, health, settings...)
   assets/            WHO growth tables, solids guide, milestone checklists (JSON)
   tool/content/      Scripts that generate the solids and milestone JSON (edit these, not the JSON)
   test/              Unit tests, content checks, and screen/form smoke tests (EN, UR, Roman Urdu)
+  test/flows/        Flow tests: the real app on a real on-phone database, with a fake Supabase
 supabase/            Database migrations (the schema), email templates, local Supabase config
 powersync/           Sync rules: which rows each phone downloads
 website/             palnacare.com (plain HTML, hosted on Cloudflare); screenshots come from
                      app/tool/screenshots (flutter test tool/screenshots --update-goldens)
-.github/workflows/   Nightly encrypted database backup
+.github/workflows/   Tests on main and pull requests into main (tests.yml); nightly encrypted database backup
 ```
 
 ## How data flows
@@ -48,6 +49,21 @@ flutter test                                          # all tests
 ```
 
 `app/env/*.json` holds the server URLs and public keys (git-ignored; see `env/example.json`).
+
+## Tests
+
+`flutter test` runs everything; GitHub runs the same on pull requests into main and on main (`.github/workflows/tests.yml`).
+
+- `test/*.dart`: calculations (ages, WHO percentiles, vaccine and medicine plans, reports), the
+  bundled content, and every screen and form built in English, Urdu and Roman Urdu (fails on any
+  error or text overflow).
+- `test/flows/`: whole flows through the real app: tap Feed > Save, then check the row in the
+  database, the upload queue and the screen. `harness.dart` opens a fresh database per test and
+  fakes Supabase (`env.server.on('POST', '/rest/v1/rpc/...', ...)`), so no network is used.
+
+When you add a feature, add a flow test next to the ones for that tab; when you fix a bug, add a
+test that fails without the fix. Use texts from `lookupAppLocalizations(const Locale('en'))`, not
+English literals, so wording changes don't break tests.
 
 ## Changing the database
 

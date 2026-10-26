@@ -12,6 +12,7 @@ import 'package:powersync/powersync.dart';
 import 'package:sqlite_async/sqlite_async.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../core/providers.dart';
 import '../core/dates.dart';
 import 'local_db.dart';
 import 'models.dart';
@@ -175,7 +176,7 @@ final photoRepositoryProvider = Provider(
     ref.watch(powerSyncProvider),
     ref.watch(photoQueueProvider),
     ref.watch(photoFolderProvider),
-    Supabase.instance.client,
+    ref.watch(supabaseProvider),
   ),
 );
 

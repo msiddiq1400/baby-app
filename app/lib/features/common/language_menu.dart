@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' show AuthException;
 
 import '../../core/providers.dart';
 import '../../core/reminders.dart';
@@ -26,7 +27,12 @@ Future<void> signOut(BuildContext context, WidgetRef ref, {VoidCallback? beforeS
   beforeSignOut?.call();
   await Reminders.cancelAll();
   await GoogleAuth.signOut();
-  await auth.signOut();
+  try {
+    await auth.signOut();
+  } on AuthException {
+    // Offline: the phone is signed out already (the session is cleared
+    // first); only telling the server failed, and the token expires anyway.
+  }
 }
 
 Future<bool> _confirmSignOut(BuildContext context, WidgetRef ref) async {

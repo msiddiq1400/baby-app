@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
+import '../../app/topic_icons.dart';
 import '../../core/l10n_lookup.dart';
 import '../../core/providers.dart';
 import '../../core/reminders.dart';
@@ -248,7 +249,7 @@ class SleepTimerCard extends ConsumerWidget {
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
-              Icon(Icons.bedtime, color: scheme.onSecondaryContainer, size: 32),
+              Icon(TopicIcons.sleepFilled, color: scheme.onSecondaryContainer, size: 32),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(

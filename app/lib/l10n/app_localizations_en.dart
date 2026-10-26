@@ -574,6 +574,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get tabFeeding => 'Feeding';
+
+  @override
   String get tabMilk => 'Milk';
 
   @override
@@ -1427,6 +1430,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nothingOnDay => 'Nothing was logged on this day.';
 
   @override
+  String get journalNoPastDays =>
+      'Past days will show here from tomorrow. Today\'s entries are on the Today tab.';
+
+  @override
   String get forgotPassword => 'Forgot password?';
 
   @override
@@ -1894,4 +1901,93 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get foodsTried => 'Tried';
+
+  @override
+  String get growthCheckTitle => 'Growth check';
+
+  @override
+  String get growthCheckDoctorTitle => 'Talk to your doctor';
+
+  @override
+  String get growthCheckMentionTitle => 'Mention it at the next check-up';
+
+  @override
+  String get growthCheckOkTitle => 'Growing as expected';
+
+  @override
+  String get growthCheckOkBody =>
+      'The measurements you\'ve entered are within the usual range for babies this age.';
+
+  @override
+  String get growthCheckDoctorBody =>
+      'This is often nothing serious, but a doctor should look at the whole chart. Book a visit in the next few days. Go today if your baby is feeding poorly, has few wet diapers or seems unwell.';
+
+  @override
+  String get growthCheckMentionBody =>
+      'Usually nothing to worry about. Show the chart to your doctor at the next visit.';
+
+  @override
+  String get growthCheckTypo =>
+      'If a number looks wrong, tap it in the list below to check it was entered correctly.';
+
+  @override
+  String get growthMeasureWeight => 'Weight';
+
+  @override
+  String get growthMeasureLength => 'Length';
+
+  @override
+  String get growthMeasureHead => 'Head size';
+
+  @override
+  String growthFlagBelowRange(String measure) {
+    return '$measure is below the lowest grey line (under the 3rd percentile).';
+  }
+
+  @override
+  String growthFlagAboveRange(String measure) {
+    return '$measure is above the highest grey line (over the 97th percentile).';
+  }
+
+  @override
+  String growthFlagFallingAcross(String measure) {
+    return '$measure has dropped across two grey lines in the last few months.';
+  }
+
+  @override
+  String growthFlagRisingAcross(String measure) {
+    return '$measure has climbed across two grey lines in the last few months.';
+  }
+
+  @override
+  String get growthFlagBelowBirthWeight =>
+      'Weight is still below the birth weight after two weeks. Most babies are back to their birth weight by then.';
+
+  @override
+  String get growthFlagSlowGain =>
+      'Weight gain over the last month is slower than most babies this age.';
+
+  @override
+  String percentileMeaningWeight(String percentile) {
+    return 'Heavier than about $percentile in 100 babies of the same age and sex.';
+  }
+
+  @override
+  String percentileMeaningLength(String percentile) {
+    return 'Longer than about $percentile in 100 babies of the same age and sex.';
+  }
+
+  @override
+  String percentileMeaningHead(String percentile) {
+    return 'Bigger head than about $percentile in 100 babies of the same age and sex.';
+  }
+
+  @override
+  String get percentileExplainTitle => 'What do percentiles mean?';
+
+  @override
+  String get legendYourBaby => 'Your baby';
+
+  @override
+  String get legendWhoCurves => 'WHO curves, 3rd to 97th percentile';
 }

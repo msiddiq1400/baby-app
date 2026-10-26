@@ -355,6 +355,7 @@
       }
     }
   },
+  "tabFeeding": "Feeding",
   "tabMilk": "Milk",
   "milkTitle": "Breast milk",
   "logPumping": "Log pumping",
@@ -911,6 +912,7 @@
   "onThisDay": "On this day",
   "pumpingEntry": "Pumping",
   "nothingOnDay": "Nothing was logged on this day.",
+  "journalNoPastDays": "Past days will show here from tomorrow. Today's entries are on the Today tab.",
   "forgotPassword": "Forgot password?",
   "resetTitle": "Reset your password",
   "resetHelp": "Enter your email and we'll send you a 6-digit code.",
@@ -1214,5 +1216,77 @@
       }
     }
   },
-  "foodsTried": "Tried"
+  "foodsTried": "Tried",
+  "growthCheckTitle": "Growth check",
+  "growthCheckDoctorTitle": "Talk to your doctor",
+  "growthCheckMentionTitle": "Mention it at the next check-up",
+  "growthCheckOkTitle": "Growing as expected",
+  "growthCheckOkBody": "The measurements you've entered are within the usual range for babies this age.",
+  "growthCheckDoctorBody": "This is often nothing serious, but a doctor should look at the whole chart. Book a visit in the next few days. Go today if your baby is feeding poorly, has few wet diapers or seems unwell.",
+  "growthCheckMentionBody": "Usually nothing to worry about. Show the chart to your doctor at the next visit.",
+  "growthCheckTypo": "If a number looks wrong, tap it in the list below to check it was entered correctly.",
+  "growthMeasureWeight": "Weight",
+  "growthMeasureLength": "Length",
+  "growthMeasureHead": "Head size",
+  "growthFlagBelowRange": "{measure} is below the lowest grey line (under the 3rd percentile).",
+  "@growthFlagBelowRange": {
+    "placeholders": {
+      "measure": {
+        "type": "String"
+      }
+    }
+  },
+  "growthFlagAboveRange": "{measure} is above the highest grey line (over the 97th percentile).",
+  "@growthFlagAboveRange": {
+    "placeholders": {
+      "measure": {
+        "type": "String"
+      }
+    }
+  },
+  "growthFlagFallingAcross": "{measure} has dropped across two grey lines in the last few months.",
+  "@growthFlagFallingAcross": {
+    "placeholders": {
+      "measure": {
+        "type": "String"
+      }
+    }
+  },
+  "growthFlagRisingAcross": "{measure} has climbed across two grey lines in the last few months.",
+  "@growthFlagRisingAcross": {
+    "placeholders": {
+      "measure": {
+        "type": "String"
+      }
+    }
+  },
+  "growthFlagBelowBirthWeight": "Weight is still below the birth weight after two weeks. Most babies are back to their birth weight by then.",
+  "growthFlagSlowGain": "Weight gain over the last month is slower than most babies this age.",
+  "percentileMeaningWeight": "Heavier than about {percentile} in 100 babies of the same age and sex.",
+  "@percentileMeaningWeight": {
+    "placeholders": {
+      "percentile": {
+        "type": "String"
+      }
+    }
+  },
+  "percentileMeaningLength": "Longer than about {percentile} in 100 babies of the same age and sex.",
+  "@percentileMeaningLength": {
+    "placeholders": {
+      "percentile": {
+        "type": "String"
+      }
+    }
+  },
+  "percentileMeaningHead": "Bigger head than about {percentile} in 100 babies of the same age and sex.",
+  "@percentileMeaningHead": {
+    "placeholders": {
+      "percentile": {
+        "type": "String"
+      }
+    }
+  },
+  "percentileExplainTitle": "What do percentiles mean?",
+  "legendYourBaby": "Your baby",
+  "legendWhoCurves": "WHO curves, 3rd to 97th percentile"
 }

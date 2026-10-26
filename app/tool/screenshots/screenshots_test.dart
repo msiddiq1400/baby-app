@@ -20,6 +20,7 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 
+import 'package:baby_app/app/topic_icons.dart';
 import 'package:baby_app/core/providers.dart';
 import 'package:baby_app/data/baby_repository.dart';
 import 'package:baby_app/data/family_repository.dart';
@@ -35,15 +36,14 @@ import 'package:baby_app/data/solids_repository.dart';
 import 'package:baby_app/data/symptom_repository.dart';
 import 'package:baby_app/data/tracking_repository.dart';
 import 'package:baby_app/data/vaccine_repository.dart';
+import 'package:baby_app/features/feeding/feeding_screen.dart';
 import 'package:baby_app/features/growth/growth_screen.dart';
 import 'package:baby_app/features/health/health_screen.dart';
 import 'package:baby_app/features/health/illness_screen.dart';
 import 'package:baby_app/features/home/dashboard.dart';
 import 'package:baby_app/features/home/quick_log_bar.dart';
 import 'package:baby_app/features/journal/journal_screen.dart';
-import 'package:baby_app/features/milk/milk_screen.dart';
 import 'package:baby_app/features/reports/reports_screen.dart';
-import 'package:baby_app/features/solids/solids_screen.dart';
 import 'package:baby_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -300,10 +300,9 @@ class _Shell extends StatelessWidget {
         selectedIndex: index,
         destinations: [
           NavigationDestination(icon: const Icon(Icons.today_outlined), selectedIcon: const Icon(Icons.today), label: l10n.tabToday),
-          NavigationDestination(icon: const Icon(Icons.water_drop_outlined), selectedIcon: const Icon(Icons.water_drop), label: l10n.tabMilk),
-          NavigationDestination(icon: const Icon(Icons.restaurant_outlined), selectedIcon: const Icon(Icons.restaurant), label: l10n.tabSolids),
-          NavigationDestination(icon: const Icon(Icons.show_chart), label: l10n.tabGrowth),
-          NavigationDestination(icon: const Icon(Icons.vaccines_outlined), selectedIcon: const Icon(Icons.vaccines), label: l10n.tabHealth),
+          NavigationDestination(icon: const Icon(TopicIcons.food), selectedIcon: const Icon(TopicIcons.foodFilled), label: l10n.tabFeeding),
+          NavigationDestination(icon: const Icon(TopicIcons.growth), selectedIcon: const Icon(TopicIcons.growthFilled), label: l10n.tabGrowth),
+          NavigationDestination(icon: const Icon(TopicIcons.health), selectedIcon: const Icon(TopicIcons.healthFilled), label: l10n.tabHealth),
         ],
           ),
         ],
@@ -355,14 +354,14 @@ void main() {
   final shots = <String, (int, Widget, String?)>{
     'today': (0, Dashboard(baby: baby), null),
     'timer': (0, Dashboard(baby: baby), null),
-    'milk': (1, MilkScreen(baby: baby), null),
-    'solids': (2, SolidsScreen(baby: baby), null),
-    'growth': (3, GrowthScreen(baby: baby), null),
-    'milestones': (3, GrowthScreen(baby: baby), 'milestones'),
-    'vaccines': (4, HealthScreen(baby: baby), null),
+    'milk': (1, FeedingScreen(baby: baby), 'milk'),
+    'solids': (1, FeedingScreen(baby: baby), null),
+    'growth': (2, GrowthScreen(baby: baby), null),
+    'milestones': (2, GrowthScreen(baby: baby), 'milestones'),
+    'vaccines': (3, HealthScreen(baby: baby), null),
     'reports': (0, ReportsScreen(baby: baby), null),
     'journal': (0, JournalScreen(baby: baby), null),
-    'illness': (4, IllnessScreen(baby: baby, illnessId: 'ill'), null),
+    'illness': (3, IllnessScreen(baby: baby, illnessId: 'ill'), null),
     // The sleep tab (the website's "Sleep, compared with what's typical").
     'reports2': (0, ReportsScreen(baby: baby, initialTab: ReportTab.sleep), null),
     // Further down the sleep tab: the 24-hour sleep log and longest sleeps.
@@ -418,6 +417,10 @@ void main() {
         await _settle(tester);
         if (inner == 'scroll') {
           await tester.drag(find.byType(ListView).first, const Offset(0, -700));
+          await _settle(tester);
+        }
+        if (inner == 'milk') {
+          await tester.tap(find.descendant(of: find.byType(TabBar), matching: find.text(lookupAppLocalizations(locale).tabMilk)));
           await _settle(tester);
         }
         if (inner == 'milestones') {

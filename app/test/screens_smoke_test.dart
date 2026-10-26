@@ -24,11 +24,12 @@ import 'package:baby_app/data/vaccine_repository.dart';
 import 'package:baby_app/features/auth/reset_password_screen.dart';
 import 'package:baby_app/features/auth/sign_in_screen.dart';
 import 'package:baby_app/features/baby/add_baby_screen.dart';
+import 'package:baby_app/features/feeding/feeding_screen.dart';
 import 'package:baby_app/features/growth/growth_screen.dart';
+import 'package:baby_app/features/health/doctor_summary_screen.dart';
 import 'package:baby_app/features/health/health_screen.dart';
 import 'package:baby_app/features/health/illness_screen.dart';
 import 'package:baby_app/features/home/dashboard.dart';
-import 'package:baby_app/features/milk/milk_screen.dart';
 import 'package:baby_app/features/journal/journal_screen.dart';
 import 'package:baby_app/features/reports/reports_screen.dart';
 import 'package:baby_app/features/settings/change_password_dialog.dart';
@@ -36,7 +37,6 @@ import 'package:baby_app/features/settings/help_screen.dart';
 import 'package:baby_app/features/settings/settings_screen.dart';
 import 'package:baby_app/l10n/app_localizations.dart';
 import 'package:baby_app/features/solids/recipes_screen.dart';
-import 'package:baby_app/features/solids/solids_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -402,8 +402,7 @@ void main() {
 
   final screens = <String, Widget Function()>{
     'Today': () => Dashboard(baby: baby),
-    'Milk': () => MilkScreen(baby: baby),
-    'Solids': () => SolidsScreen(baby: baby),
+    'Feeding': () => FeedingScreen(baby: baby),
     'Growth': () => GrowthScreen(baby: baby),
     'Health': () => HealthScreen(baby: baby),
     'Settings': () => const SettingsScreen(),
@@ -479,15 +478,15 @@ void main() {
     });
   }
 
-  testWidgets('Solids: Foods tab shows progress and tried / not-tried groups, other tabs build', (tester) async {
-    await pumpScreen(tester, SolidsScreen(baby: baby), const Locale('en'));
+  testWidgets('Feeding: Foods tab shows progress and tried / not-tried groups, other tabs build', (tester) async {
+    await pumpScreen(tester, FeedingScreen(baby: baby), const Locale('en'));
     expect(tester.takeException(), isNull);
-    // The baby is over 5 months, so Solids opens on Foods.
+    // The baby is over 5 months, so Feeding opens on Foods.
     expect(find.textContaining('foods tried'), findsOneWidget);
     expect(find.textContaining('allergens introduced'), findsOneWidget);
     await tester.scrollUntilVisible(find.text('Not tried yet'), 300, scrollable: find.byType(Scrollable).last);
     expect(find.text('Not tried yet'), findsOneWidget);
-    for (final (tab, expected) in [('Guides', 'Is my baby ready?'), ('Recipes', 'From 6 months')]) {
+    for (final (tab, expected) in [('Guides', 'Is my baby ready?'), ('Recipes', 'From 6 months'), ('Milk', 'Log pumping')]) {
       await tester.tap(find.text(tab));
       for (var i = 0; i < 5; i++) {
         await tester.pump(const Duration(milliseconds: 200));
@@ -507,7 +506,7 @@ void main() {
       }
     }
 
-    await pumpScreen(tester, SolidsScreen(baby: baby), const Locale('en'));
+    await pumpScreen(tester, FeedingScreen(baby: baby), const Locale('en'));
     await tester.tap(find.text('Guides'));
     await settle();
     // The allergic-reaction signs live on Foods only.
@@ -524,6 +523,41 @@ void main() {
     expect(firstRule, findsOneWidget);
     expect(readiness, findsNothing, reason: 'the first guide closes');
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Feeding opens on Milk for a baby too young for solids', (tester) async {
+    final young = Baby(id: 'b2', familyId: 'f1', name: 'Zara', birthDate: ago(days: 60), sex: 'female');
+    await pumpScreen(tester, FeedingScreen(baby: young), const Locale('en'));
+    expect(tester.takeException(), isNull);
+    expect(find.text('Log pumping'), findsOneWidget);
+  });
+
+  for (final (name, build) in [
+    ('Feeding', () => FeedingScreen(baby: baby)),
+    ('Growth', () => GrowthScreen(baby: baby)),
+    ('Health', () => HealthScreen(baby: baby)),
+  ]) {
+    testWidgets('$name shows the baby name in the title', (tester) async {
+      await pumpScreen(tester, build(), const Locale('en'));
+      expect(find.descendant(of: find.byType(AppBar), matching: find.text('Aisha')), findsOneWidget);
+    });
+  }
+
+  testWidgets('Health has the doctor summary at the top, on every inner tab', (tester) async {
+    await pumpScreen(tester, HealthScreen(baby: baby), const Locale('en'));
+    expect(find.text('Summary for the doctor'), findsOneWidget);
+    await tester.tap(find.text('Symptoms'));
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+    // Only the one at the top: not repeated inside Symptoms.
+    expect(find.text('Summary for the doctor'), findsOneWidget);
+    await tester.tap(find.text('Summary for the doctor'));
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+    expect(tester.takeException(), isNull);
+    expect(find.byType(DoctorSummaryScreen), findsOneWidget);
   });
 
   testWidgets('Health inner tabs (medicines, symptoms) build', (tester) async {
@@ -604,10 +638,12 @@ void main() {
     }
   }
 
-  testWidgets('Journal shows every kind of entry and swipes to the day before', (tester) async {
+  testWidgets('Journal starts at yesterday, shows every kind of entry and swipes to the day before', (tester) async {
     await pumpScreen(tester, JournalScreen(baby: baby), const Locale('en'));
     expect(tester.takeException(), isNull);
-    expect(find.text('Today'), findsOneWidget);
+    // Today is on the Today tab, not in the journal.
+    expect(find.text('Today'), findsNothing);
+    expect(find.text('Yesterday'), findsOneWidget);
     expect(find.text('On this day'), findsOneWidget);
     // The list is long and built lazily; scroll to each entry (their order
     // depends on the time of day the test runs).
@@ -624,8 +660,38 @@ void main() {
       await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 20)));
       await tester.pump(const Duration(milliseconds: 100));
     }
-    expect(find.text('Yesterday'), findsOneWidget);
+    expect(find.text('Yesterday'), findsNothing);
+    final twoDaysAgo = DateTime(now.year, now.month, now.day - 2);
+    expect(find.text(MaterialLocalizations.of(tester.element(find.byType(PageView))).formatMediumDate(twoDaysAgo)), findsOneWidget);
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Journal chips filter to one kind and back to all', (tester) async {
+    Future<void> settle() async {
+      for (var i = 0; i < 5; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+    }
+
+    await pumpScreen(tester, JournalScreen(baby: baby), const Locale('en'));
+    expect(find.text('On this day'), findsOneWidget);
+    await tester.tap(find.widgetWithText(ChoiceChip, 'Sleep'));
+    await settle();
+    expect(find.text('On this day'), findsNothing);
+    expect(find.byIcon(Icons.bedtime_outlined), findsWidgets);
+    expect(find.byIcon(Icons.local_drink_outlined), findsNothing);
+    await tester.tap(find.widgetWithText(ChoiceChip, 'All'));
+    await settle();
+    expect(find.text('On this day'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Journal for a baby born today says past days come later', (tester) async {
+    final newborn = Baby(id: 'b3', familyId: 'f1', name: 'Noor', birthDate: DateTime(now.year, now.month, now.day), sex: 'female');
+    await pumpScreen(tester, JournalScreen(baby: newborn), const Locale('en'));
+    expect(tester.takeException(), isNull);
+    expect(find.textContaining('Past days will show here'), findsOneWidget);
+    expect(find.byType(PageView), findsNothing);
   });
 
   testWidgets('Today shows patterns in the cards, and no "At a glance" (Health has that)', (tester) async {
@@ -684,7 +750,7 @@ void main() {
   testWidgets('Past days from the Feeds card shows only feeds', (tester) async {
     await pumpScreen(tester, JournalScreen(baby: baby, only: TrackedTable.feeds), const Locale('en'));
     expect(tester.takeException(), isNull);
-    expect(find.text('Feeds'), findsOneWidget); // the title
+    expect(tester.widget<ChoiceChip>(find.widgetWithText(ChoiceChip, 'Feeds')).selected, isTrue);
     expect(find.byIcon(Icons.local_drink_outlined), findsWidgets);
     expect(find.byIcon(Icons.bedtime_outlined), findsNothing);
     expect(find.byIcon(Icons.baby_changing_station_outlined), findsNothing);

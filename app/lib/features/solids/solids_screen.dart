@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/baby_age.dart';
 import '../../data/content.dart';
@@ -7,51 +6,7 @@ import '../../data/models.dart';
 import '../../data/solids_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/country_picker.dart';
-import '../common/language_menu.dart';
 import 'food_sheets.dart';
-import 'recipes_screen.dart';
-
-/// Solids tab, split into three: Foods (what the baby has tried, allergens,
-/// the food list), Guides (readiness, textures, rules...) and Recipes.
-/// Babies too young for solids open on Guides.
-class SolidsScreen extends ConsumerWidget {
-  const SolidsScreen({super.key, required this.baby});
-
-  final Baby baby;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    final guide = ref.watch(foodGuideProvider);
-    final tries = ref.watch(foodTriesProvider(baby.id)).value ?? const [];
-    final tooYoung = babyAge(baby.birthDate, DateTime.now()).months < 5;
-
-    return DefaultTabController(
-      length: 3,
-      initialIndex: tooYoung ? 1 : 0,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(l10n.solidsTitle),
-          actions: const [MainActions()],
-          bottom: TabBar(
-            tabs: [Tab(text: l10n.foodsTitle), Tab(text: l10n.solidsTabGuides), Tab(text: l10n.solidsTabRecipes)],
-          ),
-        ),
-        body: switch (guide) {
-          AsyncData(value: final guide) => TabBarView(
-              children: [
-                _FoodsView(baby: baby, guide: guide, tries: tries),
-                _GuidesView(baby: baby, guide: guide, tooYoung: tooYoung),
-                RecipesView(baby: baby, guide: guide),
-              ],
-            ),
-          AsyncError() => Center(child: Text(l10n.errorGeneric)),
-          _ => const Center(child: CircularProgressIndicator()),
-        },
-      ),
-    );
-  }
-}
 
 /// A collapsible guide card.
 Widget _guideTile(
@@ -87,18 +42,20 @@ Widget _reactionSignsTile(BuildContext context, Baby baby, FoodGuide guide) => _
 // Vegetables first: the advice is to start with them, before fruit.
 int _categoryRank(String category) => category == 'vegetable' ? 0 : 1;
 
-class _FoodsView extends StatefulWidget {
-  const _FoodsView({required this.baby, required this.guide, required this.tries});
+/// Solids on the Feeding tab: what the baby has tried, allergens and the
+/// food list.
+class FoodsView extends StatefulWidget {
+  const FoodsView({super.key, required this.baby, required this.guide, required this.tries});
 
   final Baby baby;
   final FoodGuide guide;
   final List<FoodTry> tries;
 
   @override
-  State<_FoodsView> createState() => _FoodsViewState();
+  State<FoodsView> createState() => _FoodsViewState();
 }
 
-class _FoodsViewState extends State<_FoodsView> {
+class _FoodsViewState extends State<FoodsView> {
   String? _category;
   var _query = '';
 
@@ -225,19 +182,20 @@ class _FoodsViewState extends State<_FoodsView> {
 // The allergic-reaction signs are on the Foods tab, where new foods are given.
 enum _Guide { readiness, vegFirst, textures, rules, beliefs }
 
-/// The guides, as an accordion: opening one closes the one that was open.
-class _GuidesView extends StatefulWidget {
-  const _GuidesView({required this.baby, required this.guide, required this.tooYoung});
+/// The solids guides (readiness, textures, rules...), as an accordion:
+/// opening one closes the one that was open.
+class SolidsGuidesView extends StatefulWidget {
+  const SolidsGuidesView({super.key, required this.baby, required this.guide, required this.tooYoung});
 
   final Baby baby;
   final FoodGuide guide;
   final bool tooYoung;
 
   @override
-  State<_GuidesView> createState() => _GuidesViewState();
+  State<SolidsGuidesView> createState() => _GuidesViewState();
 }
 
-class _GuidesViewState extends State<_GuidesView> {
+class _GuidesViewState extends State<SolidsGuidesView> {
   final _controllers = {for (final g in _Guide.values) g: ExpansibleController()};
 
   @override

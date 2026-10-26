@@ -24,7 +24,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 > Palna is a calm, simple baby tracker made for families in Pakistan. Log feeds, sleep, diapers, growth, vaccines and medicines in a few taps, in English, اردو or Roman Urdu, and share one log with the whole family.
 >
 > WHY PARENTS USE PALNA
-> • One tap to log a feed, a nap or a diaper, even with one hand at 3 am
+> • Feed, Diaper and Sleep buttons on every screen: a repeat bottle or a wet diaper takes two taps, even with one hand at 3 am
 > • Breastfeeding timer with left and right sides, and a sleep timer that keeps running when you close the app
 > • Everything works offline and syncs when you're back online
 > • Share with your family: parents, grandparents and helpers see the same log on their own phones

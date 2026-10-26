@@ -33,7 +33,9 @@ BABY APP: THINGS ONLY YOU CAN DO
         in Play Console > App access and App Store Connect > App Review.
 [ ] N5. Store text: the description gained a line for families abroad
         ("Living abroad? Vaccine schedules for the UK, US, Canada, UAE and
-        Saudi Arabia too..."). Paste the updated description from
+        Saudi Arabia too..."), and on 26 Oct "One tap to log..." became
+        "Feed, Diaper and Sleep buttons on every screen: a repeat bottle or
+        a wet diaper takes two taps...". Paste the updated description from
         store/app-store.md into Play Console > Main store listing (and App
         Store Connect when you get there).
 [ ] N7. Photos in the store forms (after testing photos):
@@ -53,6 +55,28 @@ BABY APP: THINGS ONLY YOU CAN DO
         No database or PowerSync change needed.
 [x] N9. Test the new Solids layout (list under "WHAT CHANGED ON 23 OCT"),
         installed on the phone 23 Oct; committed and pushed 23 Oct.
+[x] N10. (Tested on the phone and merged 26 Oct.) Test the 26 Oct changes on the phone (list
+        under "WHAT CHANGED ON 26 OCT" below): Feeding tab (Milk + Solids
+        in one, 4 tabs at the bottom), baby's name on every tab, Doctor
+        summary at the top of Health, Journal with past days only and
+        filters, one icon per topic. No database or PowerSync change.
+          cd d:\projects\baby-app\app
+          flutter run --dart-define-from-file=env/prod.json
+        Then tell Claude to commit, or commit yourself. Pushing also
+        updates the website (new screenshots with the 4-tab layout).
+[x] N12. (Merged with N10, 26 Oct.) New automated tests (26 Oct): 541
+        checks, all passing twice in a row (~6 min: cd app, flutter test).
+        New: test/flows/ drives the real app on a real phone database with a
+        fake server: every flow on Today, Feeding, Growth, Health, Settings,
+        family, account, sign-in, uploads, plus a check that the phone and
+        server tables match. GitHub now runs them on every push
+        (.github/workflows/tests.yml): a red cross on a commit = something
+        broke. Fixed on the way: signing out while offline threw an error;
+        the reset-password error now shows straight away.
+[ ] N11. After N10: upload the new store screenshots (the old ones show 5
+        tabs): App Store size in app/tool/screenshots/out/iphone/, Play size
+        in app/tool/screenshots/out/play/ (re-rendered 26 Oct, already
+        flattened to RGB). Order: see store/google-play.md.
 
 QUESTIONS FOR YOU (answer any time; nothing is blocked on them)
   Q1. Existing babies were set to Pakistan automatically. Fine, or should
@@ -503,6 +527,75 @@ Suggested order to overtake them: 31 timers > 33 reports + 42 ranges >
 
 
 ====================================================================
+WHAT CHANGED ON 26 OCT (the rest of the 20 Oct tester review;
+merged 26 Oct)
+====================================================================
+- FEEDING TAB: Milk and Solids are one tab, "Feeding" (Urdu "دودھ اور
+  غذا", Roman "Doodh aur ghiza"), so the bottom bar has 4 tabs: Today,
+  Feeding, Growth, Health. Inside: Milk | Foods | Guides | Recipes.
+  Babies under 5 months open on Milk, older ones on Foods.
+- BABY'S NAME ON EVERY TAB: Feeding, Growth and Health show the baby's
+  name under the title (Today already did). With 2+ babies, tap it to
+  switch baby, like on Today.
+- DOCTOR SUMMARY: now a full-width button at the top of Health, above
+  Vaccines | Medicines | Symptoms (it was inside Symptoms only).
+- JOURNAL: starts at Yesterday (today is on the Today tab) and goes back
+  to the birth date. Chips under the date: All | Feeds | Sleep | Diapers.
+  "Past days" on a Today card opens it with that chip selected. A baby
+  born today sees "Past days will show here from tomorrow."
+- ONE ICON PER TOPIC, everywhere: feed = cup, breast milk/pumping/stash
+  = drop (stored-milk bags had a cup before), sleep = moon, diaper =
+  changing table, solids and the Feeding tab = fork and knife, growth =
+  scale (the tab used a chart icon, the journal a scale), Health tab =
+  first-aid kit, symptom = thermometer (Symptoms used a different icon
+  for non-fever ones), doctor's visit = hospital (also "When to talk to
+  the doctor" in Milestones).
+- GROWTH CHECK (Growth > Charts, your request 26 Oct): a card on top
+  that reads all three measures at once.
+  Red "Talk to your doctor": under the lowest grey line (3rd
+  percentile), head over the top line, dropping across two grey lines,
+  still under birth weight after 2 weeks.
+  Amber "Mention it at the next check-up": weight/length over the top
+  line or climbing across two lines, slow weight gain this month.
+  Otherwise "Growing as expected". Each reason is a plain sentence; tap
+  it to open that chart. Bigger text: the percentile says "heavier than
+  about 48 in 100 babies...", a proper chart key, and "What do
+  percentiles mean?" opens the explanation. A pediatrician should check
+  the thresholds and wording (item 22).
+  TEST: add a weight of 4.5 kg for a 5-month-old (red card), then
+  delete it; check Urdu.
+- Website: all 72 screenshots re-rendered with the new layout (live on
+  the next push). Store screenshots re-rendered (N11). Store description
+  line fixed (N5).
+- 222 automated checks, all passing (new: Feeding opens on Milk for young
+  babies, baby's name in each tab title, doctor summary at the top,
+  journal starts at yesterday, journal chips, newborn journal).
+TEST:
+  1. Bottom bar shows 4 tabs. Feeding > Milk, Foods, Guides, Recipes all
+     open; log pumping and a food try from there.
+  2. Add a second baby (or use one): on Feeding / Growth / Health, tap
+     the name under the title and switch.
+  3. Health > "Summary for the doctor" at the top opens the summary from
+     Vaccines, Medicines and Symptoms.
+  4. Today > book icon: opens on Yesterday; tap Sleep / All chips; Today
+     > Feeds card > "Past days": Feeds chip selected.
+  5. Look for any icon that still means two things.
+
+CODE STILL TO DO (Claude), each waiting on something from you:
+  - Push notifications between phones (36): needs Firebase (14).
+  - iPhone widget + Live Activities (37): needs the App Group and the
+    widget App ID registered at developer.apple.com.
+  - Apple token revoke on account delete (45): needs a "Sign in with
+    Apple" key from developer.apple.com.
+  - Play/App Store badges on the website (40, 25b): once the apps are live.
+  - Website help centre / "compare apps" page (40): say if you want them.
+  - Country schedules on the website (Q4) and optional RSV/flu reminders
+    (Q5): answer the questions above.
+  - "Is this normal?", shopping, hospitals, AI (28-30, 39): need content
+    or decisions first.
+  - Food pictures in the solids list (43): needs images we may use.
+
+====================================================================
 WHAT CHANGED ON 23 OCT (tester feedback: Solids too cluttered;
 committed 23 Oct)
 ====================================================================
@@ -542,9 +635,7 @@ feed/sleep/diaper reports mixed together; committed 21 Oct)
   (every kind of entry, day by day).
 - Website updated and live (21 Oct): new screenshots everywhere, a sleep
   pattern frame, text for buttons on every screen and past entries.
-  Still old: store listing text ("One tap to log" in store/app-store.md
-  and the Play listing) and the store screenshots (tool/screenshots
-  with SHOT_DEVICE=iphone / play).
+  Store text and store screenshots: updated 26 Oct (N5, N11).
 - Sleep button no longer starts a sleep straight away: it opens a form
   (start time, nap or night, "Still asleep" on) and starts on Save. While
   asleep it says "Woke up" and opens the form with the wake time = now.
@@ -569,7 +660,7 @@ feed/sleep/diaper reports mixed together; committed 21 Oct)
 - Screenshot tool: shows the new buttons; reports2 is now the Sleep tab.
   Re-run it before the next store/website screenshot update.
 
-Not done yet (from the same review; LATER, not needed for now (22 Oct)):
+DONE 26 Oct (see "WHAT CHANGED ON 26 OCT"); was "later" on 22 Oct:
 - One icon per topic everywhere (feeds use a cup, Milk a drop; the chart
   icon means Growth in the tabs).
 - Journal: show past days only (today is already on Today) and add

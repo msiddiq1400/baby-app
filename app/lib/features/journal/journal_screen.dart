@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
+import '../../app/topic_icons.dart';
 import '../../core/baby_age.dart';
 import '../../core/l10n_lookup.dart';
 import '../../data/content.dart';
@@ -22,15 +23,17 @@ import '../milk/milk_sheets.dart';
 import '../reports/report_stats.dart';
 import '../solids/food_sheets.dart';
 
-/// Every day since birth, one page each: swipe (or use the arrows or the
-/// calendar) to go back in time. Today is the first page.
+/// Every past day since birth, one page each: swipe (or use the arrows or
+/// the calendar) to go back in time. Yesterday is the first page; today is
+/// on the Today tab. Chips filter to feeds, sleep or diapers.
 class JournalScreen extends StatefulWidget {
   const JournalScreen({super.key, required this.baby, this.initialDay, this.only});
 
   final Baby baby;
   final DateTime? initialDay;
 
-  /// Show only feeds, sleep or diapers (opened from that card on Today).
+  /// Start filtered to feeds, sleep or diapers (opened from that card on
+  /// Today). The chips change it.
   final TrackedTable? only;
 
   @override
@@ -39,9 +42,12 @@ class JournalScreen extends StatefulWidget {
 
 class _JournalScreenState extends State<JournalScreen> {
   late final DateTime _today;
+
+  /// Past days since birth (0 on the day the baby is born).
   late final int _pageCount;
   late final PageController _pages;
   late int _page;
+  late TrackedTable? _only = widget.only;
 
   @override
   void initState() {
@@ -50,8 +56,8 @@ class _JournalScreenState extends State<JournalScreen> {
     _today = DateTime(now.year, now.month, now.day);
     final birth = widget.baby.birthDate;
     final days = _daysBetween(DateTime(birth.year, birth.month, birth.day), _today);
-    _pageCount = days < 0 ? 1 : days + 1;
-    _page = widget.initialDay == null ? 0 : _pageFor(widget.initialDay!);
+    _pageCount = days < 0 ? 0 : days;
+    _page = widget.initialDay == null || _pageCount == 0 ? 0 : _pageFor(widget.initialDay!);
     _pages = PageController(initialPage: _page);
   }
 
@@ -65,19 +71,19 @@ class _JournalScreenState extends State<JournalScreen> {
   static int _daysBetween(DateTime a, DateTime b) =>
       DateTime.utc(b.year, b.month, b.day).difference(DateTime.utc(a.year, a.month, a.day)).inDays;
 
-  DateTime _dayAt(int page) => DateTime(_today.year, _today.month, _today.day - page);
-  int _pageFor(DateTime day) => _daysBetween(day, _today).clamp(0, _pageCount - 1);
+  /// Page 0 is yesterday.
+  DateTime _dayAt(int page) => DateTime(_today.year, _today.month, _today.day - 1 - page);
+  int _pageFor(DateTime day) => (_daysBetween(day, _today) - 1).clamp(0, _pageCount - 1);
 
   void _go(int page) =>
       _pages.animateToPage(page, duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
 
   Future<void> _pickDate() async {
-    final birth = widget.baby.birthDate;
     final picked = await showDatePicker(
       context: context,
       initialDate: _dayAt(_page),
-      firstDate: _dayAt(_pageCount - 1).isAfter(birth) ? birth : _dayAt(_pageCount - 1),
-      lastDate: _today,
+      firstDate: _dayAt(_pageCount - 1),
+      lastDate: _dayAt(0),
     );
     if (picked != null) _pages.jumpToPage(_pageFor(picked));
   }
@@ -85,76 +91,100 @@ class _JournalScreenState extends State<JournalScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final empty = _pageCount == 0;
     final day = _dayAt(_page);
-    final label = switch (_page) {
-      0 => l10n.tabToday,
-      1 => l10n.yesterday,
-      _ => DateFormat.EEEE(dateLocale(l10n)).format(day),
-    };
+    final label = _page == 0 ? l10n.yesterday : DateFormat.EEEE(dateLocale(l10n)).format(day);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(switch (widget.only) {
-          null => l10n.journalTitle,
-          TrackedTable.feeds => l10n.feeds,
-          TrackedTable.sleeps => l10n.sleep,
-          TrackedTable.diapers => l10n.diapers,
-        }),
+        title: Text(l10n.journalTitle),
         actions: [
-          IconButton(icon: const Icon(Icons.calendar_month_outlined), tooltip: l10n.pickDate, onPressed: _pickDate),
+          if (!empty)
+            IconButton(icon: const Icon(Icons.calendar_month_outlined), tooltip: l10n.pickDate, onPressed: _pickDate),
         ],
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
+      body: empty
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: Text(l10n.journalNoPastDays, textAlign: TextAlign.center),
+              ),
+            )
+          : Column(
               children: [
-                IconButton(
-                  icon: const Icon(Icons.chevron_left),
-                  tooltip: l10n.olderDay,
-                  onPressed: _page < _pageCount - 1 ? () => _go(_page + 1) : null,
-                ),
-                Expanded(
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(12),
-                    onTap: _pickDate,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Column(
-                        children: [
-                          Text(label, style: Theme.of(context).textTheme.titleMedium),
-                          Text(
-                            MaterialLocalizations.of(context).formatMediumDate(day),
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                        ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.chevron_left),
+                        tooltip: l10n.olderDay,
+                        onPressed: _page < _pageCount - 1 ? () => _go(_page + 1) : null,
                       ),
-                    ),
+                      Expanded(
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(12),
+                          onTap: _pickDate,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Column(
+                              children: [
+                                Text(label, style: theme.textTheme.titleMedium),
+                                Text(
+                                  MaterialLocalizations.of(context).formatMediumDate(day),
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.chevron_right),
+                        tooltip: l10n.newerDay,
+                        onPressed: _page > 0 ? () => _go(_page - 1) : null,
+                      ),
+                    ],
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.chevron_right),
-                  tooltip: l10n.newerDay,
-                  onPressed: _page > 0 ? () => _go(_page - 1) : null,
+                // All / Feeds / Sleep / Diapers.
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: Row(
+                    children: [
+                      for (final (kind, text) in [
+                        (null, l10n.categoryAll),
+                        (TrackedTable.feeds, l10n.feeds),
+                        (TrackedTable.sleeps, l10n.sleep),
+                        (TrackedTable.diapers, l10n.diapers),
+                      ])
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(end: 8),
+                          child: ChoiceChip(
+                            label: Text(text),
+                            selected: _only == kind,
+                            onSelected: (_) => setState(() => _only = kind),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                const Divider(height: 1),
+                Expanded(
+                  // Page 0 is yesterday; older days are to the left (to the
+                  // right in Urdu), like turning back the pages of a diary.
+                  child: PageView.builder(
+                    controller: _pages,
+                    reverse: true,
+                    itemCount: _pageCount,
+                    onPageChanged: (p) => setState(() => _page = p),
+                    itemBuilder: (context, page) => JournalDayView(baby: widget.baby, day: _dayAt(page), only: _only),
+                  ),
                 ),
               ],
             ),
-          ),
-          const Divider(height: 1),
-          Expanded(
-            // Page 0 is today; older days are to the left (to the right in
-            // Urdu), like turning back the pages of a diary.
-            child: PageView.builder(
-              controller: _pages,
-              reverse: true,
-              itemCount: _pageCount,
-              onPageChanged: (p) => setState(() => _page = p),
-              itemBuilder: (context, page) => JournalDayView(baby: widget.baby, day: _dayAt(page), only: widget.only),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -231,21 +261,21 @@ class _DayContent extends ConsumerWidget {
         if (v.isOther)
           _Entry(
             null,
-            Icons.vaccines_outlined,
+            TopicIcons.vaccine,
             v.vaccineName ?? v.vaccineCode,
             () => showEditOtherVaccineSheet(context, baby, v),
           )
         else if (schedule.where((s) => s.code == v.vaccineCode).firstOrNull case final dose)
           _Entry(
             null,
-            Icons.vaccines_outlined,
+            TopicIcons.vaccine,
             dose == null ? v.vaccineCode : doseTitle(dose),
             dose == null ? null : () => showEditVaccinationSheet(context, baby, dose, v),
           ),
       for (final g in journal.growth)
         _Entry(
           null,
-          Icons.monitor_weight_outlined,
+          TopicIcons.growth,
           [
             if (g.weightG != null) '${l10n.metricWeight} ${(g.weightG! / 1000).toStringAsFixed(2)} kg',
             if (g.lengthMm != null) '${l10n.metricLength} ${(g.lengthMm! / 10).toStringAsFixed(1)} cm',
@@ -256,7 +286,7 @@ class _DayContent extends ConsumerWidget {
       for (final m in journal.milestones)
         _Entry(
           null,
-          Icons.emoji_events_outlined,
+          TopicIcons.milestone,
           milestones?.ages.expand((a) => a.milestones).where((x) => x.id == m.milestoneId).firstOrNull?.text.of(l10n) ??
               l10n.tabMilestones,
         ),
@@ -264,7 +294,7 @@ class _DayContent extends ConsumerWidget {
         if (foods?.food(t.foodId) case final food?)
           _Entry(
             null,
-            Icons.restaurant_outlined,
+            TopicIcons.food,
             [
               food.name.of(l10n),
               if (t.opinion case final o?)
@@ -284,19 +314,19 @@ class _DayContent extends ConsumerWidget {
     final timed = <_Entry>[
       if (show(TrackedTable.feeds))
         for (final f in log.feeds)
-          _Entry(f.startedAt, Icons.local_drink_outlined, feedEntryText(l10n, f, now), () => showFeedSheet(context, baby, existing: f)),
+          _Entry(f.startedAt, TopicIcons.feed, feedEntryText(l10n, f, now), () => showFeedSheet(context, baby, existing: f)),
       if (show(TrackedTable.diapers))
         for (final x in log.diapers)
-          _Entry(x.occurredAt, Icons.baby_changing_station_outlined, diaperEntryText(l10n, x),
+          _Entry(x.occurredAt, TopicIcons.diaper, diaperEntryText(l10n, x),
               () => showDiaperSheet(context, baby, existing: x)),
       if (show(TrackedTable.sleeps))
         for (final s in log.sleeps)
-          _Entry(s.startedAt, Icons.bedtime_outlined, sleepEntryText(l10n, s), () => showSleepSheet(context, baby, existing: s)),
+          _Entry(s.startedAt, TopicIcons.sleep, sleepEntryText(l10n, s), () => showSleepSheet(context, baby, existing: s)),
       if (only == null)
         for (final p in journal.pumping)
           _Entry(
             p.startedAt,
-            Icons.water_drop_outlined,
+            TopicIcons.milk,
             [
               l10n.pumpingEntry,
               if (p.side != null) sideName(l10n, p.side!),
@@ -308,14 +338,14 @@ class _DayContent extends ConsumerWidget {
         for (final (:dose, :medicine) in journal.doses)
           _Entry(
             dose.givenAt,
-            Icons.medication_outlined,
+            TopicIcons.medicine,
             '$medicine · ${dose.skipped ? l10n.doseSkipped : l10n.doseGiven}',
           ),
       if (only == null)
         for (final s in journal.symptoms)
           _Entry(
             s.occurredAt,
-            Icons.thermostat_outlined,
+            TopicIcons.symptom,
             [
               symptomName(l10n, s.symptom),
               if (s.temperatureC != null) displayTemperature(s.temperatureC!),
@@ -327,7 +357,7 @@ class _DayContent extends ConsumerWidget {
         for (final v in journal.visits)
           _Entry(
             v.visitedAt,
-            Icons.local_hospital_outlined,
+            TopicIcons.doctorVisit,
             [l10n.doctorVisit, if (v.doctor != null) v.doctor!, if (v.diagnosis != null) v.diagnosis!].join(' · '),
             () => showDoctorVisitSheet(context, baby, existing: v),
           ),
@@ -336,14 +366,14 @@ class _DayContent extends ConsumerWidget {
     final stats = dailyStats(feeds: log.feeds, diapers: log.diapers, sleeps: log.sleeps, days: 1, now: now).single;
     final totals = [
       if (show(TrackedTable.feeds)) ...[
-        if (stats.feeds > 0) (Icons.local_drink_outlined, '${stats.feeds} ${l10n.feeds}'),
-        if (stats.bottleMl > 0) (Icons.local_drink, '${stats.bottleMl} ml'),
+        if (stats.feeds > 0) (TopicIcons.feed, '${stats.feeds} ${l10n.feeds}'),
+        if (stats.bottleMl > 0) (TopicIcons.feed, '${stats.bottleMl} ml'),
         if (stats.nursingSeconds > 0)
           (Icons.timer_outlined, formatDuration(l10n, Duration(seconds: stats.nursingSeconds))),
       ],
       if (show(TrackedTable.diapers) && stats.diapers > 0)
-        (Icons.baby_changing_station_outlined, l10n.diaperCounts(stats.wet, stats.dirty)),
-      if (show(TrackedTable.sleeps) && stats.sleep > Duration.zero) (Icons.bedtime_outlined, formatDuration(l10n, stats.sleep)),
+        (TopicIcons.diaper, l10n.diaperCounts(stats.wet, stats.dirty)),
+      if (show(TrackedTable.sleeps) && stats.sleep > Duration.zero) (TopicIcons.sleep, formatDuration(l10n, stats.sleep)),
     ];
 
     Widget tile(_Entry e) => ListTile(
