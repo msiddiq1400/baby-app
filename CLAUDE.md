@@ -46,8 +46,9 @@ Palna: Flutter app (`app/`), Supabase backend (`supabase/`), PowerSync, and the 
   schedule (leave it).
 - Website (`website/`, Cloudflare `wrangler.jsonc`): Cloudflare rebuilds
   palnacare.com on every push to `main`.
-- Codemagic: iPhone to TestFlight and Android to Google Play (internal,
-  draft) start on every push to `main` that changes `app/` (or
+- Codemagic (free plan: Mac machines only, 500 minutes a month shared with
+  OathLock and API Toolbox): iPhone to TestFlight and Android to Google Play
+  (internal, draft) start on every push to `main` that changes `app/` (or
   `codemagic.yaml`).
 - `[skip ci]` in the merge commit message skips the GitHub and Codemagic
   runs (use it for docs-only merges; Cloudflare still rebuilds the site).

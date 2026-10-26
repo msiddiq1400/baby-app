@@ -99,7 +99,7 @@ workflows:
 
   android-play:
     name: Android to Google Play
-    instance_type: linux_x2
+    instance_type: mac_mini_m2 # the free plan has Mac machines only
     max_build_duration: 60
     working_directory: app
     triggering: *on_main
