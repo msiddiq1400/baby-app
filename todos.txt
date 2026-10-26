@@ -9,15 +9,11 @@ to some of them), so they aren't in order. Last tidied 27 Oct 2026.
 1. DO NEXT (quick jobs only you can do)
 ====================================================================
 
-[ ] 18. Database backups: switch them on. The nightly backup
-        (.github/workflows/db-backup.yml, 02:30 PKT, encrypted, 30 days of
-        copies) FAILS EVERY NIGHT until these two exist. GitHub repo >
-        Settings > Secrets and variables > Actions > New repository secret:
-          SUPABASE_DB_URL = Supabase > Project Settings > Database >
-            Connection string > "Session pooler" URI, with the password in it
-          BACKUP_PASSPHRASE = a long new password; keep it in your password
-            manager (without it the backups can't be opened)
-        Then Actions > Database backup > Run workflow, to test it once.
+[x] 18. Database backups: ON since 27 Oct (first run OK, 37 KB). Nightly
+        02:30 PKT, encrypted, 30 days of copies: GitHub > Actions > Database
+        backup > a run > Artifacts. Passphrase: stuff/palna-backup-
+        passphrase.txt + your password manager. If the database password
+        changes (item 3), update the SUPABASE_DB_URL secret on GitHub too.
 [ ] 14b. Firebase keys (GitHub sent 2 "secret detected" alerts): these are
         public app keys, but limit them. console.cloud.google.com/apis/
         credentials?project=palna-care > "Android key" and "iOS key" > API
