@@ -16,6 +16,14 @@ Finder _tab(String label) => find.descendant(of: find.byType(NavigationBar), mat
 Finder _inAppBar(Finder f) => find.descendant(of: find.byType(AppBar), matching: f);
 Finder _inSheet(Finder f) => find.descendant(of: find.byType(BottomSheet), matching: f);
 
+/// Waits until the top bar shows [name]. A switch of baby is a database
+/// write, and the new name reaches the title only after a chain of real I/O
+/// (the write, the setting's watch, then the babies' watch). settle() stops
+/// once the screen looks still for a few rounds, which on a slow machine
+/// (CI) can be before that chain has finished; so wait for the name itself.
+Future<void> _waitForTitle(WidgetTester tester, String name) =>
+    pumpUntil(tester, () => _inAppBar(find.text(name)).evaluate().isNotEmpty, max: 300);
+
 void main() {
   setUpFlowTests();
   fakePlugins();
@@ -211,6 +219,7 @@ void main() {
       // Back on Settings; closing it shows Bilal on Today.
       await tester.pageBack();
       await settle(tester);
+      await _waitForTitle(tester, 'Bilal');
       expect(_inAppBar(find.text('Bilal')), findsOneWidget);
     });
 
@@ -227,6 +236,7 @@ void main() {
       await tester.pageBack();
       await settle(tester);
       expectNoErrors(tester);
+      await _waitForTitle(tester, 'Aisha');
       expect(_inAppBar(find.text('Aisha')), findsOneWidget);
     });
   });
@@ -248,6 +258,7 @@ void main() {
       expect(await settingValue(tester, env, SettingKeys.babyId), bilal);
       await tester.pageBack();
       await settle(tester);
+      await _waitForTitle(tester, 'Bilal');
       expect(_inAppBar(find.text('Bilal')), findsOneWidget);
     });
 
@@ -257,6 +268,7 @@ void main() {
       expect(find.text(en.switchBaby), findsOneWidget);
       await tapAndSettle(tester, _inSheet(find.text('Bilal')));
       expect(await settingValue(tester, env, SettingKeys.babyId), bilal);
+      await _waitForTitle(tester, 'Bilal');
       expect(_inAppBar(find.text('Bilal')), findsOneWidget);
     });
 
@@ -270,6 +282,7 @@ void main() {
         await tapAndSettle(tester, _inSheet(find.text('Bilal')));
         expectNoErrors(tester);
         expect(await settingValue(tester, env, SettingKeys.babyId), bilal);
+        await _waitForTitle(tester, 'Bilal');
         expect(_inAppBar(find.text('Bilal')), findsOneWidget);
         // Still on the same tab.
         expect(_inAppBar(find.text(tab)), findsOneWidget);
@@ -281,6 +294,7 @@ void main() {
       await tapAndSettle(tester, _inAppBar(find.text('Aisha')));
       await tapAndSettle(tester, _inSheet(find.text('Bilal')));
       await restartPalna(tester, env);
+      await _waitForTitle(tester, 'Bilal');
       expect(_inAppBar(find.text('Bilal')), findsOneWidget);
     });
 

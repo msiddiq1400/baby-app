@@ -1,4 +1,6 @@
-# Runs the app's checks on main and on pull requests into main: the analyzer and
+# Pull requests into dev get quick checks only: the analyzer, the translations
+# check and the server tests (a few minutes). The release pull request
+# dev -> main also runs the long app suite, and must pass before merging:
 # every automated test (calculations, screens in 3 languages, and the flow
 # tests that drive the real app on a real on-phone database with a fake
 # server). A red cross on a commit means something broke; the log says which
@@ -15,27 +17,45 @@
 #   cd ../supabase/tests
 #   npm ci
 #   npm test
+#
+# Branches: feature branches -> pull request into dev (tested) -> dev is the
+# source of truth -> once or twice a day a release pull request dev -> main
+# (tested again) -> merging it deploys.
+#
+# Deploy: a push to main (the merged release pull request) runs only the
+# deploy-server job: it applies new Supabase migrations and deploys the
+# notify-family Edge Function. The tests already passed on that pull request,
+# on the same code, so they don't run again. Pull requests never deploy. It
+# needs two
+# repository secrets (GitHub > Settings > Secrets and variables > Actions):
+#   SUPABASE_DB_URL        Supabase > Project Settings > Database > Connection
+#                          string > "Session pooler" URI, password filled in
+#                          (the nightly backup uses the same secret)
+#   SUPABASE_ACCESS_TOKEN  supabase.com > Account > Access Tokens
 
-name: Tests
+name: Tests and deploy
 
-# Only for main: pushes to main and pull requests into main (feature
-# branches run the tests through their pull request).
+# Pushes to dev or feature branches run nothing; their code is tested
+# through the pull request.
 on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
-  workflow_dispatch: {} # "Run workflow" button
+    branches: [dev, main]
+  workflow_dispatch: {} # "Run workflow" button (tests only, never deploys)
 
 permissions:
   contents: read
 
+# A newer push cancels an older pull request run, but never a run on main:
+# that one may be in the middle of a deploy.
 concurrency:
   group: tests-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   test:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 40
     defaults:
@@ -62,10 +82,14 @@ jobs:
       - name: Analyze
         run: flutter analyze
 
+      # The long suite (~18 min): release pull requests (into main) and the
+      # "Run workflow" button only.
       - name: Tests
+        if: github.event_name == 'workflow_dispatch' || github.base_ref == 'main'
         run: flutter test --reporter expanded --timeout 180s
 
   server:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     defaults:
@@ -85,3 +109,40 @@ jobs:
 
       - name: Server tests
         run: npm test
+
+  # Only for a push to main (a merged release pull request, already tested):
+  # puts new migrations and the Edge Function live. One deploy at a time.
+  deploy-server:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: deploy-server
+      cancel-in-progress: false
+    env:
+      PROJECT_REF: ixrlofqsstddisizofwc
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the secrets are set
+        run: |
+          if [ -z "$SUPABASE_DB_URL" ] || [ -z "$SUPABASE_ACCESS_TOKEN" ]; then
+            echo "::error::Add the SUPABASE_DB_URL and SUPABASE_ACCESS_TOKEN repository secrets; nothing was deployed."
+            exit 1
+          fi
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.122.0
+
+      - name: Migrations to apply
+        run: supabase db push --db-url "$SUPABASE_DB_URL" --skip-vault --dry-run
+
+      - name: Apply migrations
+        run: supabase db push --db-url "$SUPABASE_DB_URL" --skip-vault --yes
+
+      # The caller is the database (pg_net), not a signed-in user.
+      - name: Deploy the notify-family function
+        run: supabase functions deploy notify-family --project-ref "$PROJECT_REF" --no-verify-jwt --use-api
