@@ -4,10 +4,17 @@
 # server). A red cross on a commit means something broke; the log says which
 # test and why.
 #
+# A second job checks the server: every Supabase migration applied in order
+# on a real Postgres (PGlite), the database rules and triggers, and the
+# notify-family Edge Function's messages.
+#
 # Run the same on your PC:
 #   cd app
 #   flutter analyze
 #   flutter test
+#   cd ../supabase/tests
+#   npm ci
+#   npm test
 
 name: Tests
 
@@ -57,3 +64,24 @@ jobs:
 
       - name: Tests
         run: flutter test --reporter expanded --timeout 180s
+
+  server:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: supabase/tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: supabase/tests/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Server tests
+        run: npm test

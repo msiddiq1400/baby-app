@@ -3464,6 +3464,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'WHO curves, 3rd to 97th percentile'**
   String get legendWhoCurves;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @notificationsSettingsHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'When someone else logs a feed, sleep or medicine'**
+  String get notificationsSettingsHelp;
+
+  /// No description provided for @pushIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Get a notification on this phone when someone else in your family logs:'**
+  String get pushIntro;
+
+  /// No description provided for @pushFeedsHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Feeds, and when breastfeeding starts and ends'**
+  String get pushFeedsHelp;
+
+  /// No description provided for @pushSleepHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Fell asleep and woke up'**
+  String get pushSleepHelp;
+
+  /// No description provided for @pushMedicines.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicine doses'**
+  String get pushMedicines;
+
+  /// No description provided for @pushMedicinesHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'When a dose is given, so nobody gives it twice'**
+  String get pushMedicinesHelp;
+
+  /// No description provided for @quietHours.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiet hours'**
+  String get quietHours;
+
+  /// No description provided for @quietHoursOn.
+  ///
+  /// In en, this message translates to:
+  /// **'No family notifications from {from} to {to}'**
+  String quietHoursOn(String from, String to);
+
+  /// No description provided for @quietHoursOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off: notifications come at any time'**
+  String get quietHoursOff;
+
+  /// No description provided for @quietFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get quietFrom;
+
+  /// No description provided for @quietTo.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get quietTo;
+
+  /// No description provided for @pushFooter.
+  ///
+  /// In en, this message translates to:
+  /// **'You never get notified about what you log yourself. Vaccine and medicine reminders on this phone don\'t change.'**
+  String get pushFooter;
+
+  /// No description provided for @pushUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications from your family aren\'t available on this phone yet. Your choices below are saved for when they are.'**
+  String get pushUnavailable;
 }
 
 class _AppLocalizationsDelegate

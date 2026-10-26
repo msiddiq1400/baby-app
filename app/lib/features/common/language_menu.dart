@@ -7,6 +7,7 @@ import '../../core/reminders.dart';
 import '../../data/local_db.dart';
 import '../../l10n/app_localizations.dart';
 import '../auth/google_auth.dart';
+import '../notifications/push.dart';
 import '../settings/help_screen.dart';
 import '../settings/settings_screen.dart';
 
@@ -23,9 +24,13 @@ const appLanguages = [
 Future<void> signOut(BuildContext context, WidgetRef ref, {VoidCallback? beforeSignOut}) async {
   if (!await _confirmSignOut(context, ref)) return;
   // Read before closing anything: a closed screen's ref can't be used.
-  final auth = ref.read(supabaseProvider).auth;
+  final supabase = ref.read(supabaseProvider);
+  final auth = supabase.auth;
+  final pushDevice = ref.read(pushDeviceProvider);
   beforeSignOut?.call();
   await Reminders.cancelAll();
+  // While still signed in: stop family updates to this phone.
+  await unregisterPush(pushDevice, supabase);
   await GoogleAuth.signOut();
   try {
     await auth.signOut();

@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- Push notifications from family members (Push is enabled on the App
+	     ID com.palnacare.app); production for TestFlight / App Store. -->
+	<key>aps-environment</key>
+	<string>production</string>
 	<!-- Sign in with Apple (enabled on the App ID com.palnacare.app). -->
 	<key>com.apple.developer.applesignin</key>
 	<array>

@@ -1,0 +1,15 @@
+{
+  "name": "palna-server-tests",
+  "private": true,
+  "type": "module",
+  "description": "Server rule tests: every supabase/migrations/*.sql on PGlite (real Postgres in WASM), plus the notify-family function's message logic. Never touches the live project.",
+  "scripts": {
+    "test": "node --disable-warning=ExperimentalWarning --test --test-concurrency=4 *.test.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.2.17"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

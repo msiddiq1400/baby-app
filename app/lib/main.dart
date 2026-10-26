@@ -15,6 +15,7 @@ import 'data/local_db.dart';
 import 'data/local_schema.dart';
 import 'data/photo_repository.dart';
 import 'data/supabase_connector.dart';
+import 'features/notifications/push.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,10 @@ Future<void> main() async {
     url: Env.supabaseUrl,
     publishableKey: Env.supabasePublishableKey,
   );
+
+  // Push notifications from family members (Firebase); without it the app
+  // works the same, just without them.
+  await PushSetup.start();
 
   final (db, photoQueue, photoFolder) = await _openDatabase();
   runApp(

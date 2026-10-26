@@ -1942,6 +1942,54 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get legendWhoCurves => 'WHO لکیریں، 3 سے 97 پرسنٹائل';
+
+  @override
+  String get notificationsTitle => 'اطلاعات';
+
+  @override
+  String get notificationsSettingsHelp =>
+      'جب کوئی اور خوراک، نیند یا دوا درج کرے';
+
+  @override
+  String get pushIntro =>
+      'جب آپ کے خاندان میں کوئی اور یہ درج کرے تو اس فون پر اطلاع پائیں:';
+
+  @override
+  String get pushFeedsHelp => 'خوراک، اور دودھ پلانا کب شروع اور ختم ہوا';
+
+  @override
+  String get pushSleepHelp => 'سو گیا اور جاگ گیا';
+
+  @override
+  String get pushMedicines => 'دوا کی خوراکیں';
+
+  @override
+  String get pushMedicinesHelp => 'جب خوراک دی جائے، تاکہ کوئی دوبارہ نہ دے';
+
+  @override
+  String get quietHours => 'خاموش اوقات';
+
+  @override
+  String quietHoursOn(String from, String to) {
+    return '$from سے $to تک خاندان کی کوئی اطلاع نہیں';
+  }
+
+  @override
+  String get quietHoursOff => 'بند: اطلاعات کسی بھی وقت آ سکتی ہیں';
+
+  @override
+  String get quietFrom => 'سے';
+
+  @override
+  String get quietTo => 'تک';
+
+  @override
+  String get pushFooter =>
+      'آپ کو اپنی درج کی ہوئی چیزوں کی اطلاع کبھی نہیں ملتی۔ اس فون پر ویکسین اور دوا کی یاد دہانیاں ویسی ہی رہیں گی۔';
+
+  @override
+  String get pushUnavailable =>
+      'خاندان کی اطلاعات ابھی اس فون پر دستیاب نہیں۔ نیچے آپ کی پسند محفوظ ہے اور بعد میں کام آئے گی۔';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -3886,4 +3934,54 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get legendWhoCurves => 'WHO lines, 3rd se 97th percentile';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsSettingsHelp =>
+      'Jab koi aur feed, neend ya dawa darj kare';
+
+  @override
+  String get pushIntro =>
+      'Jab aap ke khandan mein koi aur yeh darj kare to is phone par notification paayein:';
+
+  @override
+  String get pushFeedsHelp =>
+      'Feeds, aur doodh pilana kab shuru aur khatam hua';
+
+  @override
+  String get pushSleepHelp => 'So gaya aur jaag gaya';
+
+  @override
+  String get pushMedicines => 'Dawa ki khuraakein';
+
+  @override
+  String get pushMedicinesHelp =>
+      'Jab khuraak di jaye, taa ke koi dobara na de';
+
+  @override
+  String get quietHours => 'Khamosh auqaat';
+
+  @override
+  String quietHoursOn(String from, String to) {
+    return '$from se $to tak khandan ki koi notification nahi';
+  }
+
+  @override
+  String get quietHoursOff => 'Band: notifications kisi bhi waqt aa sakti hain';
+
+  @override
+  String get quietFrom => 'Se';
+
+  @override
+  String get quietTo => 'Tak';
+
+  @override
+  String get pushFooter =>
+      'Aap ko apni darj ki hui cheezon ki notification kabhi nahi milti. Is phone par vaccine aur dawa ki yaad dehaniyan waisi hi rahengi.';
+
+  @override
+  String get pushUnavailable =>
+      'Khandan ki notifications abhi is phone par dastiyab nahi. Neeche aap ki pasand mehfooz hai aur baad mein kaam aayegi.';
 }

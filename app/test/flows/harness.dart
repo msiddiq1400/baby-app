@@ -251,11 +251,17 @@ class FlowEnv {
 
   /// Pumps the whole app (router, tabs, Feed / Diaper / Sleep bar) and
   /// waits until the first screen has loaded.
-  Future<void> pumpApp(WidgetTester tester, {Size size = const Size(1080, 2316), double ratio = 2.75}) async {
+  /// [extra] replaces more providers, e.g. a fake push device.
+  Future<void> pumpApp(
+    WidgetTester tester, {
+    Size size = const Size(1080, 2316),
+    double ratio = 2.75,
+    List<Override> extra = const [],
+  }) async {
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = ratio;
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(ProviderScope(overrides: overrides, child: const BabyApp()));
+    await tester.pumpWidget(ProviderScope(overrides: [...overrides, ...extra], child: const BabyApp()));
     _unmountAtEnd(tester);
     await settle(tester);
   }

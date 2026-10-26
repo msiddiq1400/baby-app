@@ -245,15 +245,13 @@ QUESTIONS FOR YOU (answer any time; nothing is blocked on them)
         with it) > resubmit.
         Until then: Android testers install stuff/Palna-1.0.0.apk (or
         Firebase App Distribution once item 14 is done).
-[ ] 14. Firebase project (console.firebase.google.com), add it to the
-        existing "Baby App" Google Cloud project. Needed later for:
-        - push notifications across phones (e.g. "Dad logged a feed")
-        - Crashlytics crash reports
-        Then add an Android app (package com.palnacare.app) and an
-        iOS app (bundle id com.palnacare.app), download google-services.json + GoogleService-Info.plist,
-        and give them to Claude.
-        NOTE: today's reminders (vaccines, medicines, milk) are local
-        notifications and do NOT need Firebase.
+[x] 14. Firebase: DONE (26 Oct). Project "Palna" (palna-care, Spark/free
+        plan) under msiddiq17328@gmail.com, apps "Palna Android" and
+        "Palna iOS" (com.palnacare.app). Their public settings are in
+        app/lib/core/config/firebase_config.dart (no google-services.json /
+        plist needed). Service account key: stuff/palna-firebase-service-
+        account.json (git-ignored; also set as the FCM_SERVICE_ACCOUNT
+        secret in Supabase). Later: Crashlytics could use the same project.
 [x] 15. Codemagic (iPhone builds, no Mac needed): DONE (22 Oct), builds
         running. API key, "palna_prod" variables and codemagic.yaml all set
         up. Workflows: "iPhone to TestFlight" (submit_to_testflight is still
@@ -375,8 +373,32 @@ Claude can build 31-36 without anything from you; say which ones first.
           potato, paneer and peas). Each shows allergens, ingredients, steps
           and "Log a try" for its foods. Content: app/tool/content/recipes.py
           (a pediatrician should check it with item 23).
-[ ] 36. Push notifications between phones ("Ali logged a feed"). Needs
-        Firebase (item 14).
+[~] 36. Push notifications between phones: BUILT AND LIVE (26 Oct),
+        Android working (test push reached the phone). When someone else in
+        the family logs a feed (or starts / finishes breastfeeding), a sleep
+        (fell asleep / woke up) or a medicine dose, the others get a
+        notification in their own language. Settings > Notifications: each
+        person turns feeds / sleep / medicines on or off and sets quiet
+        hours. Never about your own entries; old entries uploaded late (3 h+)
+        don't notify.
+        How it works: the app registers its push token (register_device);
+        a trigger on feeds / sleeps / medication_doses calls the Edge
+        Function notify-family, which sends through Firebase. Server tests:
+        cd supabase/tests, npm ci, npm test (also run by GitHub).
+        Live on Supabase (26 Oct, a one-time exception before merging, your
+        OK): migration 20261027000001_push_notifications, function
+        notify-family, secrets HOOK_SECRET + FCM_SERVICE_ACCOUNT, Vault
+        secret palna_hook_secret. To rotate the hook secret: set a new
+        HOOK_SECRET and update the Vault entry to the same value.
+        STILL TO DO:
+        - [ ] iPhone: developer.apple.com > Keys > + > Apple Push
+          Notifications service (APNs) > download the .p8 (only once; keep
+          it in stuff/). Firebase > Project settings > Cloud Messaging >
+          Apple app > upload it with its Key ID and Team ID W7AS897FPN.
+          Then a TestFlight build to test on iPhone.
+        - [ ] Test with two accounts in one family (log on one phone, the
+          other gets it); Settings > Notifications switches and quiet hours.
+        - Only phones with the new app version get notifications.
 [ ] 37. Home-screen widget (Android): BUILT (30 Sep night), please test.
         Long-press the phone's home screen > Widgets > Palna > drag it out.
         Shows the baby's name, time since the last feed (a live clock that
