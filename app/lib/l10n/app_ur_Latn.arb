@@ -995,5 +995,19 @@
   "percentileMeaningHead": "Isi umar aur jins ke 100 mein se taqreeban {percentile} bachon se bara sar.",
   "percentileExplainTitle": "Percentile ka kya matlab hai?",
   "legendYourBaby": "Aap ka baby",
-  "legendWhoCurves": "WHO lines, 3rd se 97th percentile"
+  "legendWhoCurves": "WHO lines, 3rd se 97th percentile",
+  "notificationsTitle": "Notifications",
+  "notificationsSettingsHelp": "Jab koi aur feed, neend ya dawa darj kare",
+  "pushIntro": "Jab aap ke khandan mein koi aur yeh darj kare to is phone par notification paayein:",
+  "pushFeedsHelp": "Feeds, aur doodh pilana kab shuru aur khatam hua",
+  "pushSleepHelp": "So gaya aur jaag gaya",
+  "pushMedicines": "Dawa ki khuraakein",
+  "pushMedicinesHelp": "Jab khuraak di jaye, taa ke koi dobara na de",
+  "quietHours": "Khamosh auqaat",
+  "quietHoursOn": "{from} se {to} tak khandan ki koi notification nahi",
+  "quietHoursOff": "Band: notifications kisi bhi waqt aa sakti hain",
+  "quietFrom": "Se",
+  "quietTo": "Tak",
+  "pushFooter": "Aap ko apni darj ki hui cheezon ki notification kabhi nahi milti. Is phone par vaccine aur dawa ki yaad dehaniyan waisi hi rahengi.",
+  "pushUnavailable": "Khandan ki notifications abhi is phone par dastiyab nahi. Neeche aap ki pasand mehfooz hai aur baad mein kaam aayegi."
 }

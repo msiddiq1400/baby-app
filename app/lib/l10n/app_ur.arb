@@ -995,5 +995,19 @@
   "percentileMeaningHead": "اسی عمر اور جنس کے 100 میں سے تقریباً {percentile} بچوں سے بڑا سر۔",
   "percentileExplainTitle": "پرسنٹائل کا کیا مطلب ہے؟",
   "legendYourBaby": "آپ کا بچہ",
-  "legendWhoCurves": "WHO لکیریں، 3 سے 97 پرسنٹائل"
+  "legendWhoCurves": "WHO لکیریں، 3 سے 97 پرسنٹائل",
+  "notificationsTitle": "اطلاعات",
+  "notificationsSettingsHelp": "جب کوئی اور خوراک، نیند یا دوا درج کرے",
+  "pushIntro": "جب آپ کے خاندان میں کوئی اور یہ درج کرے تو اس فون پر اطلاع پائیں:",
+  "pushFeedsHelp": "خوراک، اور دودھ پلانا کب شروع اور ختم ہوا",
+  "pushSleepHelp": "سو گیا اور جاگ گیا",
+  "pushMedicines": "دوا کی خوراکیں",
+  "pushMedicinesHelp": "جب خوراک دی جائے، تاکہ کوئی دوبارہ نہ دے",
+  "quietHours": "خاموش اوقات",
+  "quietHoursOn": "{from} سے {to} تک خاندان کی کوئی اطلاع نہیں",
+  "quietHoursOff": "بند: اطلاعات کسی بھی وقت آ سکتی ہیں",
+  "quietFrom": "سے",
+  "quietTo": "تک",
+  "pushFooter": "آپ کو اپنی درج کی ہوئی چیزوں کی اطلاع کبھی نہیں ملتی۔ اس فون پر ویکسین اور دوا کی یاد دہانیاں ویسی ہی رہیں گی۔",
+  "pushUnavailable": "خاندان کی اطلاعات ابھی اس فون پر دستیاب نہیں۔ نیچے آپ کی پسند محفوظ ہے اور بعد میں کام آئے گی۔"
 }

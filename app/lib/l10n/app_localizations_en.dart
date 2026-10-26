@@ -1990,4 +1990,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get legendWhoCurves => 'WHO curves, 3rd to 97th percentile';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsSettingsHelp =>
+      'When someone else logs a feed, sleep or medicine';
+
+  @override
+  String get pushIntro =>
+      'Get a notification on this phone when someone else in your family logs:';
+
+  @override
+  String get pushFeedsHelp => 'Feeds, and when breastfeeding starts and ends';
+
+  @override
+  String get pushSleepHelp => 'Fell asleep and woke up';
+
+  @override
+  String get pushMedicines => 'Medicine doses';
+
+  @override
+  String get pushMedicinesHelp =>
+      'When a dose is given, so nobody gives it twice';
+
+  @override
+  String get quietHours => 'Quiet hours';
+
+  @override
+  String quietHoursOn(String from, String to) {
+    return 'No family notifications from $from to $to';
+  }
+
+  @override
+  String get quietHoursOff => 'Off: notifications come at any time';
+
+  @override
+  String get quietFrom => 'From';
+
+  @override
+  String get quietTo => 'To';
+
+  @override
+  String get pushFooter =>
+      'You never get notified about what you log yourself. Vaccine and medicine reminders on this phone don\'t change.';
+
+  @override
+  String get pushUnavailable =>
+      'Notifications from your family aren\'t available on this phone yet. Your choices below are saved for when they are.';
 }

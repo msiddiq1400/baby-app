@@ -146,6 +146,52 @@ abstract final class TimerNotifications {
   }
 }
 
+/// Updates from other family members ("Sana logged a feed"), sent by the
+/// server as push notifications. With the app closed, the phone shows them
+/// itself on the [channelId] channel; with it open, [show] puts them up.
+abstract final class FamilyNotifications {
+  static const channelId = 'family_updates';
+
+  /// Creates the Android channel the server's pushes are posted to (once;
+  /// harmless to repeat).
+  static Future<void> createChannel() async {
+    if (kIsWeb || defaultTargetPlatform != TargetPlatform.android) return;
+    await Reminders._ensureReady();
+    await Reminders._plugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(
+          const AndroidNotificationChannel(
+            channelId,
+            'Family updates',
+            description: 'When someone else in the family logs a feed, sleep or medicine',
+            importance: Importance.high,
+          ),
+        );
+  }
+
+  /// Shows a family update that arrived while the app is open. [tag] is the
+  /// entry it's about, so a later update (a timer finishing) replaces it.
+  static Future<void> show({required String title, required String body, required String tag}) async {
+    await Reminders._ensureReady();
+    await Reminders._plugin.show(
+      id: notificationId('family:$tag'),
+      title: title,
+      body: body,
+      payload: 'family:$tag',
+      notificationDetails: const NotificationDetails(
+        android: AndroidNotificationDetails(
+          channelId,
+          'Family updates',
+          channelDescription: 'When someone else in the family logs a feed, sleep or medicine',
+          importance: Importance.high,
+          priority: Priority.high,
+        ),
+        iOS: DarwinNotificationDetails(),
+      ),
+    );
+  }
+}
+
 /// Stable 31-bit id from a string (FNV-1a), so the same reminder always gets
 /// the same notification id across app restarts.
 @visibleForTesting

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../notifications/notifications_screen.dart';
 import '../../core/baby_age.dart';
 import '../../data/baby_repository.dart';
 import '../../data/family_repository.dart';
@@ -84,6 +85,15 @@ class SettingsScreen extends ConsumerWidget {
               title: Text(label),
               onTap: () => ref.read(localeProvider.notifier).set(locale),
             ),
+          const Divider(height: 32),
+          _Header(l10n.notificationsTitle),
+          ListTile(
+            leading: const Icon(Icons.notifications_outlined),
+            title: Text(l10n.notificationsTitle),
+            subtitle: Text(l10n.notificationsSettingsHelp),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const NotificationsScreen())),
+          ),
           const Divider(height: 32),
           _Header(l10n.appearanceSection),
           Padding(

@@ -37,4 +37,12 @@ abstract final class SettingKeys {
   static const locale = 'locale';
   static const babyId = 'baby_id';
   static const themeMode = 'theme_mode';
+
+  // Family updates (push): '0' when switched off, otherwise on.
+  static const notifyFeeds = 'notify_feeds';
+  static const notifySleep = 'notify_sleep';
+  static const notifyMedicines = 'notify_medicines';
+
+  /// Quiet hours as 'from-to' minutes after midnight, e.g. '1320-420'.
+  static const quietHours = 'quiet_hours';
 }
