@@ -60,6 +60,14 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 > • Delete your account and data in the app at any time
 >
 > Palna is not a medical device and doesn't replace advice from your doctor. If you're worried about your baby, contact a doctor straight away.
+>
+> PALNA PRO (OPTIONAL)
+> Palna is free. Palna Pro is an optional monthly or yearly subscription for the whole family: more than one baby, more photos each month, 30-day reports, the PDF summary for your doctor, colour themes and widget extras. Payment is charged to your Apple ID; it renews automatically unless cancelled at least 24 hours before the end of the period, and you can manage it in your Apple ID settings.
+>
+> Terms of use: https://palnacare.com/terms/
+> Privacy policy: https://palnacare.com/privacy/
+
+(The Pro paragraph and the two links are required by Apple for apps with subscriptions; keep them. License Agreement in App Information stays "Apple's Standard License Agreement".)
 
 **Keywords (100, comma-separated, no spaces needed)**
 
