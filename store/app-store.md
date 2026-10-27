@@ -29,7 +29,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 > • Everything works offline and syncs when you're back online
 > • Share with your family: parents, grandparents and helpers see the same log on their own phones
 >
-> MADE FOR YOU, WHEREVER YOU LIVE
+> YOUR LANGUAGE, YOUR COUNTRY
 > • Vaccine schedules for 23 countries: Pakistan's EPI, the UK, US, Canada, the Gulf, Europe, Australia and more, with reminders before each visit
 > • Emergency numbers for your country, wherever you live
 > • Desi first foods and 15 recipes for babies, from lauki purée at 6 months to qeema aloo at 10
