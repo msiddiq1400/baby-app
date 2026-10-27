@@ -20,6 +20,10 @@ abstract final class Env {
   static const revenueCatAppleKey = String.fromEnvironment('REVENUECAT_APPLE_KEY');
   static const revenueCatGoogleKey = String.fromEnvironment('REVENUECAT_GOOGLE_KEY');
 
+  /// RevenueCat Test Store key (test_..., public): pretend purchases for
+  /// trying Palna Pro. Used by debug builds only, never in a release.
+  static const revenueCatTestKey = String.fromEnvironment('REVENUECAT_TEST_KEY');
+
   static void assertConfigured() {
     if (supabaseUrl.isEmpty || supabasePublishableKey.isEmpty || powersyncUrl.isEmpty) {
       throw StateError(

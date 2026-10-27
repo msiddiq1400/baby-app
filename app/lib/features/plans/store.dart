@@ -22,6 +22,8 @@ abstract final class ProStore {
   /// This build has a RevenueCat key for this platform.
   static String get _apiKey {
     if (kIsWeb) return '';
+    // Debug builds: RevenueCat's Test Store, if this build has its key.
+    if (kDebugMode && Env.revenueCatTestKey.isNotEmpty) return Env.revenueCatTestKey;
     return switch (defaultTargetPlatform) {
       TargetPlatform.iOS => Env.revenueCatAppleKey,
       TargetPlatform.android => Env.revenueCatGoogleKey,
@@ -117,6 +119,10 @@ abstract final class ProStore {
     }
   }
 }
+
+/// The signed-in person's own Pro on RevenueCat, checked when the app
+/// starts (covers the moments before the server's family flag syncs).
+final storeEntitlementProvider = FutureProvider<bool>((ref) async => await ProStore.currentlyPro() ?? false);
 
 /// Pro bought or restored on this phone in this session (shown at once,
 /// before the server's family flag syncs back).

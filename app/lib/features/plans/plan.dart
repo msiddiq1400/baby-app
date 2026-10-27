@@ -34,7 +34,7 @@ final familyProUntilProvider = StreamProvider.family<DateTime?, String>(
 /// Whether the selected baby's family has Pro: from the server, or right
 /// after a purchase on this phone (before the server has caught up).
 final isProProvider = Provider<bool>((ref) {
-  if (ref.watch(storeProProvider)) return true;
+  if (ref.watch(storeProProvider) || (ref.watch(storeEntitlementProvider).value ?? false)) return true;
   final baby = ref.watch(currentBabyProvider).value;
   if (baby == null) return false;
   final until = ref.watch(familyProUntilProvider(baby.familyId)).value;
