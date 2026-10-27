@@ -150,22 +150,24 @@ Only when we build those features
           sign-in screen now shows the Palna name and logo.
         - [ ] Test "Continue with Google" with an account that was NOT a
           test user.
-[ ] 38e. RevenueCat (revenuecat.com, free until ~$2,500/month in sales),
-        after 38c / 38d:
-        - [ ] New project "Palna": add the App Store app (com.palnacare.app,
-          App Store Connect API key or in-app purchase key) and the Play app
-          (service account JSON with financial access).
-        - [ ] Entitlement "pro" with both products; offering "default" with
-          the Monthly and Annual packages.
-        - [ ] Public SDK keys (appl_..., goog_...) into app/env/prod.json and
-          Codemagic group palna_prod as REVENUECAT_APPLE_KEY and
+[~] 38e. RevenueCat (revenuecat.com, free until ~$2,500/month in sales).
+        Done 27 Oct: project "Palna", entitlement "pro", offering "default"
+        (Monthly, Yearly), App Store app (In-App Purchase key NHFX3Y85NR),
+        Test Store key (debug builds), Apple public key in app/env/prod.json.
+        - [ ] Codemagic > group palna_prod: add REVENUECAT_APPLE_KEY =
+          appl_jREEioWGhJtuRXOZgXBpSpDBwOJ (public key), and later
           REVENUECAT_GOOGLE_KEY.
-        - [ ] Supabase secrets: supabase secrets set REVENUECAT_SECRET_KEY=...
-          (RevenueCat > API keys > secret key) REVENUECAT_WEBHOOK_AUTH=<long
-          random string>; RevenueCat > Integrations > Webhooks: URL
+        - [ ] Play Store app (com.palnacare.app): service account JSON from
+          Google Cloud "Baby App", invited in Play Console with financial
+          and orders permissions; then send Claude the goog_ key.
+        - [ ] Secret key (v1) into Supabase > Edge Functions > Secrets as
+          REVENUECAT_SECRET_KEY; Claude sets REVENUECAT_WEBHOOK_AUTH; then
+          RevenueCat > Integrations > Webhooks: URL
           https://ixrlofqsstddisizofwc.supabase.co/functions/v1/revenuecat,
-          Authorization header "Bearer <that string>".
-        - [ ] Test with sandbox / licence testers (needs 38c / 38d done).
+          Authorization "Bearer <that password>" (works after the release).
+        - [ ] After 38c / 38d: import palna_pro_monthly / palna_pro_yearly,
+          attach to "pro", put them in the Monthly / Yearly packages.
+        - [ ] Test with sandbox / licence testers.
 [ ] 3-8 + 20. When you set up the password manager:
         [ ] 20. Back up the Android upload key (only on this PC now):
                stuff/palna-upload.jks, app/android/key.properties and
@@ -313,6 +315,9 @@ App and stores
   both use its id; never delete it).
 - Codemagic builds iPhone (TestFlight) and Android (Play internal track)
   from codemagic.yaml; variables group "palna_prod".
+- Apple In-App Purchase key (team-wide, reuse for OathLock / API Toolbox
+  in RevenueCat): Key ID NHFX3Y85NR, file in D:/projects/business/
+  apple-account/ (not in git; copy it into the password manager too).
 - Palna Pro (38b): RevenueCat -> webhook -> Edge Function revenuecat ->
   public.subscriptions -> families.pro_until (triggers), synced to phones.
   Free Pro for an email: insert into public.pro_emails (SQL editor);
