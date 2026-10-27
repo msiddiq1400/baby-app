@@ -62,6 +62,14 @@ Ready: Claude starts when you say go
 [ ] 50. toolbox.services (toolbox repo): make sure the site shows the
         company's legal name "Toolbox Services (SMC-Private) Limited" and
         address (About / footer) before Apple checks the company (12).
+[ ] 52. Palna Pro prices: check what other baby trackers charge (Huckleberry,
+        Baby Tracker by Nighp, Glow Baby, Sprout, BabyCenter, Nara, MyBaby,
+        Pakistani apps if any): monthly / yearly / lifetime, free trial,
+        what's free vs paid, family sharing, prices in Pakistan and abroad.
+        Then the owner decides; today's prices (Rs 299 / month, Rs 2,499 /
+        year, $2.99 / $19.99 abroad; see reference notes) were picked
+        without this check. Do it before the products go live in the stores
+        (38c, 38d).
 [ ] 38f. Palna Pro, later: Expert plan once there's something for it (AI
         assistant 39, "Is this normal?" 28); RSV / flu rules re-check each
         summer (US court case, Norway RSV from 1 Jul 2027; see
