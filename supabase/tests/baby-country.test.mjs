@@ -14,6 +14,13 @@ async function rejects(promise, code) {
 
 /** Adds a baby as [c] (like a PowerSync upload); returns its id. */
 async function addBaby(c, extra = {}) {
+  // A second baby needs Pro (plans.test.mjs): the owner has it.
+  await h.admin(
+    `insert into public.subscriptions (user_id, pro_until)
+     select user_id, 'infinity' from public.family_members where family_id = $1 and role = 'owner'
+     on conflict do nothing`,
+    [c.familyId],
+  );
   const row = { id: crypto.randomUUID(), family_id: c.familyId, name: "Ali", birth_date: "2026-09-01", country_code: "PK", ...extra };
   const keys = Object.keys(row);
   await c.sql(
