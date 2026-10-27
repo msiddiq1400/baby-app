@@ -8,11 +8,11 @@ DateTime? _localOrNull(Object? value) => value == null ? null : _local(value as 
 
 /// Arrays are JSON text on the phone.
 List<Object?> _jsonList(Object? value) => switch (value) {
-      null => const [],
-      String s => jsonDecode(s) as List<Object?>,
-      List<Object?> l => l,
-      _ => const [],
-    };
+  null => const [],
+  String s => jsonDecode(s) as List<Object?>,
+  List<Object?> l => l,
+  _ => const [],
+};
 
 /// Booleans are 0/1 on the phone.
 bool _bool(Object? value) => value == true || value == 1;
@@ -28,10 +28,15 @@ class Baby {
     this.birthLengthMm,
     this.birthHeadMm,
     this.countryCode = 'PK',
+    this.createdBy,
   });
 
   final String id;
   final String familyId;
+
+  /// Who added the baby; only they set the country (null once their account
+  /// is deleted).
+  final String? createdBy;
   final String name;
   final DateTime birthDate;
 
@@ -46,19 +51,20 @@ class Baby {
   final int? birthHeadMm;
 
   static const columns =
-      'id, family_id, name, birth_date, sex, birth_weight_g, birth_length_mm, birth_head_mm, country_code';
+      'id, family_id, name, birth_date, sex, birth_weight_g, birth_length_mm, birth_head_mm, country_code, created_by';
 
   factory Baby.fromJson(Map<String, dynamic> json) => Baby(
-        id: json['id'] as String,
-        familyId: json['family_id'] as String,
-        name: json['name'] as String,
-        birthDate: DateTime.parse(json['birth_date'] as String),
-        sex: json['sex'] as String?,
-        birthWeightG: json['birth_weight_g'] as int?,
-        birthLengthMm: json['birth_length_mm'] as int?,
-        birthHeadMm: json['birth_head_mm'] as int?,
-        countryCode: (json['country_code'] as String?) ?? 'PK',
-      );
+    id: json['id'] as String,
+    familyId: json['family_id'] as String,
+    name: json['name'] as String,
+    birthDate: DateTime.parse(json['birth_date'] as String),
+    sex: json['sex'] as String?,
+    birthWeightG: json['birth_weight_g'] as int?,
+    birthLengthMm: json['birth_length_mm'] as int?,
+    birthHeadMm: json['birth_head_mm'] as int?,
+    countryCode: (json['country_code'] as String?) ?? 'PK',
+    createdBy: json['created_by'] as String?,
+  );
 }
 
 /// One visit to the scale / measuring tape. Any of the three may be missing.
@@ -72,12 +78,12 @@ class GrowthMeasurement {
   final int? headMm;
 
   factory GrowthMeasurement.fromJson(Map<String, dynamic> json) => GrowthMeasurement(
-        id: json['id'] as String,
-        measuredOn: DateTime.parse(json['measured_on'] as String),
-        weightG: json['weight_g'] as int?,
-        lengthMm: json['length_mm'] as int?,
-        headMm: json['head_mm'] as int?,
-      );
+    id: json['id'] as String,
+    measuredOn: DateTime.parse(json['measured_on'] as String),
+    weightG: json['weight_g'] as int?,
+    lengthMm: json['length_mm'] as int?,
+    headMm: json['head_mm'] as int?,
+  );
 }
 
 enum FeedType {
@@ -151,26 +157,26 @@ class Feed {
   (int left, int right) bankedAt(DateTime now) => (secondsOn(BreastSide.left, now), secondsOn(BreastSide.right, now));
 
   factory Feed.fromJson(Map<String, dynamic> json) => Feed(
-        id: json['id'] as String,
-        type: FeedType.fromDb(json['type'] as String),
-        startedAt: _local(json['started_at'] as String),
-        endedAt: _localOrNull(json['ended_at']),
-        side: json['side'] == null ? null : BreastSide.values.byName(json['side'] as String),
-        amountMl: json['amount_ml'] as int?,
-        leftSeconds: json['left_seconds'] as int?,
-        rightSeconds: json['right_seconds'] as int?,
-        timerSide: json['timer_side'] == null ? null : BreastSide.values.byName(json['timer_side'] as String),
-        timerStartedAt: _localOrNull(json['timer_started_at']),
-      );
+    id: json['id'] as String,
+    type: FeedType.fromDb(json['type'] as String),
+    startedAt: _local(json['started_at'] as String),
+    endedAt: _localOrNull(json['ended_at']),
+    side: json['side'] == null ? null : BreastSide.values.byName(json['side'] as String),
+    amountMl: json['amount_ml'] as int?,
+    leftSeconds: json['left_seconds'] as int?,
+    rightSeconds: json['right_seconds'] as int?,
+    timerSide: json['timer_side'] == null ? null : BreastSide.values.byName(json['timer_side'] as String),
+    timerStartedAt: _localOrNull(json['timer_started_at']),
+  );
 }
 
 /// The side a breastfeed counts as, from the time on each side.
 BreastSide? sideFromSeconds(int left, int right) => switch ((left > 0, right > 0)) {
-      (true, true) => BreastSide.both,
-      (true, false) => BreastSide.left,
-      (false, true) => BreastSide.right,
-      _ => null,
-    };
+  (true, true) => BreastSide.both,
+  (true, false) => BreastSide.left,
+  (false, true) => BreastSide.right,
+  _ => null,
+};
 
 class Diaper {
   const Diaper({required this.id, required this.occurredAt, required this.isWet, required this.isDirty});
@@ -181,11 +187,11 @@ class Diaper {
   final bool isDirty;
 
   factory Diaper.fromJson(Map<String, dynamic> json) => Diaper(
-        id: json['id'] as String,
-        occurredAt: _local(json['occurred_at'] as String),
-        isWet: _bool(json['is_wet']),
-        isDirty: _bool(json['is_dirty']),
-      );
+    id: json['id'] as String,
+    occurredAt: _local(json['occurred_at'] as String),
+    isWet: _bool(json['is_wet']),
+    isDirty: _bool(json['is_dirty']),
+  );
 }
 
 enum SleepKind { nap, night }
@@ -201,11 +207,11 @@ class Sleep {
   bool get isOngoing => endedAt == null;
 
   factory Sleep.fromJson(Map<String, dynamic> json) => Sleep(
-        id: json['id'] as String,
-        kind: SleepKind.values.byName(json['kind'] as String),
-        startedAt: _local(json['started_at'] as String),
-        endedAt: _localOrNull(json['ended_at']),
-      );
+    id: json['id'] as String,
+    kind: SleepKind.values.byName(json['kind'] as String),
+    startedAt: _local(json['started_at'] as String),
+    endedAt: _localOrNull(json['ended_at']),
+  );
 }
 
 /// Everything logged for one baby today, plus the totals the dashboard shows.
@@ -219,9 +225,7 @@ class TodayLog {
   /// Sleeps that overlap today, including one that started last night.
   final List<Sleep> sleeps;
 
-  int get bottleMl => feeds
-      .where((f) => f.type.isBottle)
-      .fold(0, (sum, f) => sum + (f.amountMl ?? 0));
+  int get bottleMl => feeds.where((f) => f.type.isBottle).fold(0, (sum, f) => sum + (f.amountMl ?? 0));
 
   Feed? get lastFeed => feeds.isEmpty ? null : feeds.reduce((a, b) => a.startedAt.isAfter(b.startedAt) ? a : b);
 
@@ -232,10 +236,10 @@ class TodayLog {
 
   /// Time asleep since midnight; a sleep that began yesterday counts from midnight.
   Duration sleptSince(DateTime now) => sleeps.fold(Duration.zero, (total, s) {
-        final start = s.startedAt.isBefore(dayStart) ? dayStart : s.startedAt;
-        final end = s.endedAt ?? now;
-        return end.isAfter(start) ? total + end.difference(start) : total;
-      });
+    final start = s.startedAt.isBefore(dayStart) ? dayStart : s.startedAt;
+    final end = s.endedAt ?? now;
+    return end.isAfter(start) ? total + end.difference(start) : total;
+  });
 }
 
 /// One dose in the national schedule, e.g. Pentavalent dose 2 at 10 weeks.
@@ -259,13 +263,13 @@ class VaccineDose {
   final int sortOrder;
 
   factory VaccineDose.fromJson(Map<String, dynamic> json) => VaccineDose(
-        code: json['code'] as String,
-        name: json['name'] as String,
-        doseLabel: json['dose_label'] as String?,
-        dueAgeValue: json['due_age_value'] as int,
-        dueAgeUnit: json['due_age_unit'] as String,
-        sortOrder: json['sort_order'] as int,
-      );
+    code: json['code'] as String,
+    name: json['name'] as String,
+    doseLabel: json['dose_label'] as String?,
+    dueAgeValue: json['due_age_value'] as int,
+    dueAgeUnit: json['due_age_unit'] as String,
+    sortOrder: json['sort_order'] as int,
+  );
 }
 
 /// A dose the baby has received.
@@ -295,14 +299,14 @@ class Vaccination {
   bool get isOther => vaccineCode == otherCode;
 
   factory Vaccination.fromJson(Map<String, dynamic> json) => Vaccination(
-        id: json['id'] as String,
-        vaccineCode: json['vaccine_code'] as String,
-        vaccineName: json['vaccine_name'] as String?,
-        givenOn: DateTime.parse(json['given_on'] as String),
-        batchNumber: json['batch_number'] as String?,
-        clinic: json['clinic'] as String?,
-        notes: json['notes'] as String?,
-      );
+    id: json['id'] as String,
+    vaccineCode: json['vaccine_code'] as String,
+    vaccineName: json['vaccine_name'] as String?,
+    givenOn: DateTime.parse(json['given_on'] as String),
+    batchNumber: json['batch_number'] as String?,
+    clinic: json['clinic'] as String?,
+    notes: json['notes'] as String?,
+  );
 }
 
 /// A time of day for a scheduled dose, e.g. 08:00.
@@ -369,16 +373,16 @@ class Medication {
   }
 
   factory Medication.fromJson(Map<String, dynamic> json) => Medication(
-        id: json['id'] as String,
-        name: json['name'] as String,
-        prescribedDose: json['prescribed_dose'] as String,
-        doseTimes: [for (final t in _jsonList(json['dose_times'])) DoseTime.parse(t as String)]..sort(),
-        asNeeded: _bool(json['as_needed']),
-        startDate: DateTime.parse(json['start_date'] as String),
-        endDate: json['end_date'] == null ? null : DateTime.parse(json['end_date'] as String),
-        prescribedBy: json['prescribed_by'] as String?,
-        notes: json['notes'] as String?,
-      );
+    id: json['id'] as String,
+    name: json['name'] as String,
+    prescribedDose: json['prescribed_dose'] as String,
+    doseTimes: [for (final t in _jsonList(json['dose_times'])) DoseTime.parse(t as String)]..sort(),
+    asNeeded: _bool(json['as_needed']),
+    startDate: DateTime.parse(json['start_date'] as String),
+    endDate: json['end_date'] == null ? null : DateTime.parse(json['end_date'] as String),
+    prescribedBy: json['prescribed_by'] as String?,
+    notes: json['notes'] as String?,
+  );
 }
 
 /// A dose given (or deliberately skipped).
@@ -400,12 +404,12 @@ class MedicationDose {
   final DateTime? scheduledFor;
 
   factory MedicationDose.fromJson(Map<String, dynamic> json) => MedicationDose(
-        id: json['id'] as String,
-        medicationId: json['medication_id'] as String,
-        givenAt: DateTime.parse(json['given_at'] as String).toLocal(),
-        skipped: _bool(json['skipped']),
-        scheduledFor: json['scheduled_for'] == null ? null : DateTime.parse(json['scheduled_for'] as String).toLocal(),
-      );
+    id: json['id'] as String,
+    medicationId: json['medication_id'] as String,
+    givenAt: DateTime.parse(json['given_at'] as String).toLocal(),
+    skipped: _bool(json['skipped']),
+    scheduledFor: json['scheduled_for'] == null ? null : DateTime.parse(json['scheduled_for'] as String).toLocal(),
+  );
 }
 
 class PumpingSession {
@@ -418,12 +422,12 @@ class PumpingSession {
   final int? amountMl;
 
   factory PumpingSession.fromJson(Map<String, dynamic> json) => PumpingSession(
-        id: json['id'] as String,
-        startedAt: DateTime.parse(json['started_at'] as String).toLocal(),
-        endedAt: json['ended_at'] == null ? null : DateTime.parse(json['ended_at'] as String).toLocal(),
-        side: json['side'] == null ? null : BreastSide.values.byName(json['side'] as String),
-        amountMl: json['amount_ml'] as int?,
-      );
+    id: json['id'] as String,
+    startedAt: DateTime.parse(json['started_at'] as String).toLocal(),
+    endedAt: json['ended_at'] == null ? null : DateTime.parse(json['ended_at'] as String).toLocal(),
+    side: json['side'] == null ? null : BreastSide.values.byName(json['side'] as String),
+    amountMl: json['amount_ml'] as int?,
+  );
 }
 
 /// Where a bag of stored milk is kept; decides how long it lasts.
@@ -452,19 +456,29 @@ class MilkBag {
   static DateTime? _time(Object? v) => v == null ? null : DateTime.parse(v as String).toLocal();
 
   factory MilkBag.fromJson(Map<String, dynamic> json) => MilkBag(
-        id: json['id'] as String,
-        pumpedAt: DateTime.parse(json['pumped_at'] as String).toLocal(),
-        amountMl: json['amount_ml'] as int,
-        location: MilkLocation.values.byName(json['location'] as String),
-        frozenAt: _time(json['frozen_at']),
-        thawedAt: _time(json['thawed_at']),
-      );
+    id: json['id'] as String,
+    pumpedAt: DateTime.parse(json['pumped_at'] as String).toLocal(),
+    amountMl: json['amount_ml'] as int,
+    location: MilkLocation.values.byName(json['location'] as String),
+    frozenAt: _time(json['frozen_at']),
+    thawedAt: _time(json['thawed_at']),
+  );
 }
 
 /// Symptom codes, matching the database check constraint.
 const symptomCodes = [
-  'fever', 'cough', 'runny_nose', 'vomiting', 'diarrhea', 'constipation',
-  'rash', 'teething', 'feeding_refusal', 'crying', 'congestion', 'other',
+  'fever',
+  'cough',
+  'runny_nose',
+  'vomiting',
+  'diarrhea',
+  'constipation',
+  'rash',
+  'teething',
+  'feeding_refusal',
+  'crying',
+  'congestion',
+  'other',
 ];
 
 class SymptomLog {
@@ -489,11 +503,11 @@ class SymptomLog {
   final String? notes;
 
   factory SymptomLog.fromJson(Map<String, dynamic> json) => SymptomLog(
-        id: json['id'] as String,
-        symptom: json['symptom'] as String,
-        occurredAt: DateTime.parse(json['occurred_at'] as String).toLocal(),
-        temperatureC: (json['temperature_c'] as num?)?.toDouble(),
-        severity: json['severity'] as int?,
-        notes: json['notes'] as String?,
-      );
+    id: json['id'] as String,
+    symptom: json['symptom'] as String,
+    occurredAt: DateTime.parse(json['occurred_at'] as String).toLocal(),
+    temperatureC: (json['temperature_c'] as num?)?.toDouble(),
+    severity: json['severity'] as int?,
+    notes: json['notes'] as String?,
+  );
 }

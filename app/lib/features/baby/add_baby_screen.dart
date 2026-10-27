@@ -10,6 +10,7 @@ import '../common/country_picker.dart';
 import '../common/language_menu.dart';
 import '../common/sheet.dart';
 import '../settings/join_family_dialog.dart';
+import 'country_permission.dart';
 
 /// Adds a baby, or edits [existing]. Shown by itself on first run (when
 /// there's no baby yet) and pushed from Settings afterwards.
@@ -77,6 +78,13 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
     return n == null || n < min || n > max ? message : null;
   };
 
+  /// A new baby is always the user's own; for an existing one, see
+  /// [canChangeBabyCountry].
+  bool get _canSetCountry {
+    final existing = widget.existing;
+    return existing == null || ref.read(canChangeBabyCountryProvider(existing));
+  }
+
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _busy = true);
@@ -100,7 +108,7 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
           existing.id,
           name: _name.text.trim(),
           birthDate: _birthDate!,
-          countryCode: _country!,
+          countryCode: _canSetCountry ? _country : null,
           sex: _sex,
           birthWeightG: _scaled(_weight, 1000),
           birthLengthMm: _scaled(_length, 10),
@@ -124,6 +132,8 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
     final dateText = _birthDate == null ? '' : MaterialLocalizations.of(context).formatMediumDate(_birthDate!);
     final countryText = _country == null ? '' : countryLabel(context, _country!);
     const decimal = TextInputType.numberWithOptions(decimal: true);
+    // Only the person who added the baby sets the country (todos.txt Q1).
+    final canSetCountry = existing == null || ref.watch(canChangeBabyCountryProvider(existing));
 
     return Scaffold(
       appBar: AppBar(
@@ -165,20 +175,22 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
                 ),
                 validator: (_) => _birthDate == null ? l10n.fieldRequired : null,
               ),
-              const SizedBox(height: 12),
-              TextFormField(
-                key: ValueKey('country-$countryText'),
-                initialValue: countryText,
-                readOnly: true,
-                onTap: _pickCountry,
-                decoration: InputDecoration(
-                  labelText: l10n.countryLabel,
-                  helperText: l10n.countryHelp,
-                  helperMaxLines: 3,
-                  suffixIcon: const Icon(Icons.public),
+              if (canSetCountry) ...[
+                const SizedBox(height: 12),
+                TextFormField(
+                  key: ValueKey('country-$countryText'),
+                  initialValue: countryText,
+                  readOnly: true,
+                  onTap: _pickCountry,
+                  decoration: InputDecoration(
+                    labelText: l10n.countryLabel,
+                    helperText: l10n.countryHelp,
+                    helperMaxLines: 3,
+                    suffixIcon: const Icon(Icons.public),
+                  ),
+                  validator: (_) => _country == null ? l10n.fieldRequired : null,
                 ),
-                validator: (_) => _country == null ? l10n.fieldRequired : null,
-              ),
+              ],
               const SizedBox(height: 20),
               Text(l10n.sexLabel, style: Theme.of(context).textTheme.bodyMedium),
               const SizedBox(height: 8),

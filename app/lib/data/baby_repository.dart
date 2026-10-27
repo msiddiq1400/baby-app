@@ -51,12 +51,14 @@ class BabyRepository {
     String id, {
     required String name,
     required DateTime birthDate,
-    required String countryCode,
+    String? countryCode,
     String? sex,
     int? birthWeightG,
     int? birthLengthMm,
     int? birthHeadMm,
   }) {
+    // countryCode is left out (null) for people who may not change it, so the
+    // server never rejects the whole edit (todos.txt Q1).
     return updateRow(_db, 'babies', id, {
       'name': name,
       'birth_date': dateOnly(birthDate),
@@ -64,7 +66,7 @@ class BabyRepository {
       'birth_weight_g': birthWeightG,
       'birth_length_mm': birthLengthMm,
       'birth_head_mm': birthHeadMm,
-      'country_code': countryCode,
+      'country_code': ?countryCode,
     });
   }
 

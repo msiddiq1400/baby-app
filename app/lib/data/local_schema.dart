@@ -20,6 +20,7 @@ final localSchema = Schema([
     Column.integer('birth_length_mm'),
     Column.integer('birth_head_mm'),
     Column.text('country_code'),
+    Column.text('created_by'),
     Column.text('created_at'),
     Column.text('deleted_at'),
   ]),
