@@ -14,47 +14,21 @@ review / 7 company.
 1. CODE CHANGES (Claude builds them; one branch from dev per batch)
 ====================================================================
 
+Built 27 Oct on branch feat/baby-app-countries-plans-crashlytics-v1 (not
+merged yet): Q1 country lock, Q2 17 more countries, Q5 optional RSV / flu,
+38b Palna Pro, 14c crash reports. Their phone checks are in section 5,
+their setup in sections 2-4. Decided: Q3 keep only the new UK schedule
+(babies born from 2025); Q4 schedules and emergency numbers stay in the
+app, not on the website.
+
 Ready: Claude starts when you say go
-[ ] Q1. Baby's country: only the person who added the baby can set or
-        change it; invited family members don't see the option, and the
-        server refuses it too. If that person has left the family or
-        deleted their account, the family owner can. Name, birth date and
-        the rest stay editable by everyone (say if those should be locked
-        too). Existing babies stay Pakistan until their creator changes it.
-[ ] Q2. More countries: as many as possible, each with its own vaccine
-        schedule and emergency (SOS) numbers; no province / state versions.
-        The family picks the country and gets that schedule and those
-        numbers. Every schedule from the country's official source, then
-        the pediatrician check (21). Suggested first: India, Bangladesh,
-        Qatar, Kuwait, Oman, Bahrain, Malaysia, Australia, Germany,
-        Ireland, Italy, Spain, France, Netherlands, Norway, Sweden, Turkiye
-        (most already have emergency numbers, not schedules). Tell Claude
-        your order.
-[ ] Q5. Optional RSV and flu reminders, shown as "Optional - ask your
-        doctor" next to the routine vaccines, and each family can hide
-        them. Build together with Q2 (same research). Proposed rules (check
-        each country's current guidance first; RSV rules keep changing):
-        - RSV: only where it's offered to all babies (so far US, Canada,
-          UAE, Saudi Arabia; not Pakistan; the UK vaccinates mothers in
-          pregnancy instead). Born during the RSV season (about Oct-Mar in
-          the north): reminder at birth. Born before it and under 8 months
-          when it starts: reminder just before the season. Note: "If the
-          mother had the RSV vaccine in pregnancy, the baby may not need it."
-        - Flu: from 6 months, only where it's recommended for all babies
-          (US, Canada, UAE, Saudi Arabia; UK only from age 2; Pakistan not
-          routine). Reminder each autumn (Sep-Oct); the first year it's 2
-          doses 4 weeks apart.
-  Also decided: Q3 keep only the new UK schedule (babies born from 2025).
-  Q4 the country schedules and emergency numbers stay in the app, not on
-  the website.
-[ ] 38b. Paid plans (Free / Pro / Expert). You decide first what each plan
-        includes and the prices (PKR and USD); Pro gets more than 1 photo a
-        month. Can be built while D-U-N-S is pending; buying can only be
-        tested once the store payment setup is done (38c, 38d). Supabase
-        free storage is 1 GB (~3,000 photos), so Supabase Pro ($25/mo) soon
-        after launch if photos are popular, and at a few hundred active
-        families anyway (free plan: 500 MB DB, pauses after ~1 week idle).
-[ ] 14c. Crashlytics crash reports (same Firebase project).
+[ ] 38f. Palna Pro, later: Expert plan once there's something for it (AI
+        assistant 39, "Is this normal?" 28); RSV / flu rules re-check each
+        summer (US court case, Norway RSV from 1 Jul 2027; see
+        app/lib/core/optional_vaccines.dart). Supabase free storage is 1 GB
+        (~3,000 photos): Supabase Pro ($25/mo) soon after launch if photos
+        are popular, and at a few hundred active families anyway (free
+        plan: 500 MB DB, pauses after ~1 week idle).
 
 Waiting on something
 [ ] 15c. Codemagic: turn on submit_to_testflight + beta_groups ["Ext-Test"]
@@ -109,8 +83,11 @@ After D-U-N-S (11)
 [ ] 12. Ask Apple Developer Support to move the INDIVIDUAL account (Team
         ID W7AS897FPN, renews 1 Oct 2027) to an organization.
 [ ] 38c. Payments: Business > Paid Applications Agreement, company bank
-        account and tax forms; then the subscriptions for 38b. Do it after
-        12, so the bank account matches the account owner.
+        account and tax forms (after 12, so the bank account matches the
+        account owner). Then the two subscriptions exactly as in
+        store/app-store.md "In-App Purchases" (palna_pro_monthly,
+        palna_pro_yearly with a 7-day trial), and App Privacy > Purchases >
+        Purchase History. Then RevenueCat (38e).
 [ ] 46b. Submit version 1.0 for App Store review (after 46 and 12).
 
 Only when we build those features
@@ -156,8 +133,11 @@ Only when we build those features
 [ ] 20b. After the first Play upload: Play Console > App integrity > App
         signing key SHA-1 > one more Google Cloud Android client (for
         Google sign-in on Play installs).
-[ ] 38d. Payments: payments profile with the company bank account, then the
-        subscriptions for 38b.
+[ ] 38d. Payments: payments profile with the company bank account, then
+        the two subscriptions as in store/google-play.md "Palna Pro";
+        content rating "digital purchases: yes"; Data safety: Purchase
+        history, Crash logs, Diagnostics, Device or other IDs (table in
+        google-play.md). Then RevenueCat (38e).
 
 ====================================================================
 4. OTHER SETUP AND SECURITY
@@ -170,6 +150,22 @@ Only when we build those features
           sign-in screen now shows the Palna name and logo.
         - [ ] Test "Continue with Google" with an account that was NOT a
           test user.
+[ ] 38e. RevenueCat (revenuecat.com, free until ~$2,500/month in sales),
+        after 38c / 38d:
+        - [ ] New project "Palna": add the App Store app (com.palnacare.app,
+          App Store Connect API key or in-app purchase key) and the Play app
+          (service account JSON with financial access).
+        - [ ] Entitlement "pro" with both products; offering "default" with
+          the Monthly and Annual packages.
+        - [ ] Public SDK keys (appl_..., goog_...) into app/env/prod.json and
+          Codemagic group palna_prod as REVENUECAT_APPLE_KEY and
+          REVENUECAT_GOOGLE_KEY.
+        - [ ] Supabase secrets: supabase secrets set REVENUECAT_SECRET_KEY=...
+          (RevenueCat > API keys > secret key) REVENUECAT_WEBHOOK_AUTH=<long
+          random string>; RevenueCat > Integrations > Webhooks: URL
+          https://ixrlofqsstddisizofwc.supabase.co/functions/v1/revenuecat,
+          Authorization header "Bearer <that string>".
+        - [ ] Test with sandbox / licence testers (needs 38c / 38d done).
 [ ] 3-8 + 20. When you set up the password manager:
         [ ] 20. Back up the Android upload key (only on this PC now):
                stuff/palna-upload.jks, app/android/key.properties and
@@ -209,6 +205,19 @@ Only when we build those features
 Tick each when you've seen it work on a real phone. iPhone: install the
 latest build from the TestFlight app (you're in "Int-Test").
 
+[ ] 47. Built 27 Oct, check after the merge (or on a debug build):
+        - [ ] Q1 country: as an invited member, Edit baby has no country
+          field; the person who added the baby still sees it.
+        - [ ] Q2: pick e.g. India or Germany; Vaccines shows its schedule;
+          Help shows its emergency numbers.
+        - [ ] Q5: a US / Saudi / UK baby shows "Optional - ask your doctor"
+          (RSV, flu); Hide works on the other phone too; reminder fires.
+        - [ ] 38b Palna Pro (Free): Settings > Palna Pro opens (says "can't be
+          bought yet" until 38e); a 2nd baby, a 2nd photo in a month, 30
+          days in Reports, the PDF and a colour all open Palna Pro. With the
+          review account (Pro): all of them work; widget shows "Today: ...".
+        - [ ] 14c: a release build appears in Firebase > Crashlytics after
+          the first launch (Crashlytics shows "No crashes" once it's set up).
 [~] 36. Push notifications between phones: LIVE since 26 Oct on Android and
         set up for iPhone (APNs key uploaded 27 Oct). Still to do:
         - [ ] Test with two accounts in one family: log a feed / sleep /
@@ -246,10 +255,14 @@ latest build from the TestFlight app (you're in "Int-Test").
 ====================================================================
 
 [~] 25. You or a lawyer: read palnacare.com/privacy, /delete-account and
-        /terms (terms say the laws of Pakistan apply).
+        /terms (terms say the laws of Pakistan apply). Updated 27 Oct for
+        notifications, crash reports and Palna Pro (terms section 7).
 [ ] 21. Vaccine schedules: Pakistan EPI, UK, US, Canada, UAE, Saudi Arabia
         (sources at the top of supabase/migrations/20261001000001_
-        countries.sql). After review Claude marks them verified. Watch the
+        countries.sql) and the 17 added 27 Oct (sources and open doubts in
+        docs/vaccine-research-2026-10/; e.g. Bangladesh PCV dose 3 at 14 or
+        18 weeks, Italy MenB at 2/4 or 3/5 months), plus the RSV and flu
+        rules (Q5). After review Claude marks them verified. Watch the
         US one: a court appeal (6 Oct 2026) could bring back the Jan 2026
         CDC schedule.
 [ ] 22. Medical wording: under-3-months fever warning, medicine safety
@@ -300,6 +313,11 @@ App and stores
   both use its id; never delete it).
 - Codemagic builds iPhone (TestFlight) and Android (Play internal track)
   from codemagic.yaml; variables group "palna_prod".
+- Palna Pro (38b): RevenueCat -> webhook -> Edge Function revenuecat ->
+  public.subscriptions -> families.pro_until (triggers), synced to phones.
+  Free Pro for an email: insert into public.pro_emails (SQL editor);
+  review@palnacare.com is on it. Limits on the server: 1 baby per family,
+  1 photo per baby per month (Pro 10).
 - Reviewer login review@palnacare.com: created by
   supabase/snippets/review_account.sql (30 Sep); password in the TestFlight
   Test Information (and the password manager once set up).
