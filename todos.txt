@@ -75,18 +75,21 @@ Can do now
         limit 100): https://testflight.apple.com/join/TNv2mUxa.
         When approved: send the iPhone invite in store/tester-invite.md,
         and tell Claude (15c).
-[ ] 46. App Store listing (fill in now; it stays with the app when the
-        account moves to the company). All text is in store/app-store.md:
-        - [ ] App Information: name, subtitle "Baby tracker for the
-          family" (no country or language in it),
-          categories, age rating.
-        - [ ] Version 1.0: promotional text, description, keywords.
-        - [ ] Screenshots from app/tool/screenshots/out/iphone/ (see N11;
-          ask Claude to re-render first if the app has changed).
-        - [ ] App Privacy: the data types in app-store.md, including User
-          Content > Photos or Videos (linked to the user, not tracking).
-        - [ ] App Review: same login as TestFlight (N4) and the notes from
-          app-store.md.
+[~] 46. App Store listing. Done 27 Oct: App Information (subtitle "Baby
+        tracker for the family", Health & Fitness / Lifestyle, no third-
+        party content, Apple's standard licence), age rating 18+ (matches
+        the terms' 18+), not a regulated medical device, App Store server
+        notifications -> RevenueCat, version 1.0 text (promo, description
+        with the Pro paragraph and terms / privacy links, keywords, URLs,
+        copyright 2026 Muhammad Siddiqu), App Review login and notes,
+        manual release. Still to do:
+        - [ ] Screenshots: Claude re-renders them (N11) with Pro and the new
+          countries, then upload (6.9" iPhone).
+        - [ ] App Privacy: the data types in app-store.md (incl. Photos,
+          Purchase History, Crash Data).
+        - [ ] Build: add the first build after the release (it has Pro).
+        - [ ] After 12: copyright -> 2026 Toolbox Services (SMC-Private)
+          Limited.
 
 After D-U-N-S (11)
 [ ] 12. Ask Apple Developer Support to move the INDIVIDUAL account (Team
