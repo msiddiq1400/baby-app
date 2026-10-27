@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/optional_vaccines.dart';
+import '../../data/baby_repository.dart';
 import '../../data/models.dart';
 import '../../data/vaccine_repository.dart';
 import '../../l10n/app_localizations.dart';
@@ -34,6 +36,7 @@ class VaccinesView extends ConsumerWidget {
             for (final v in given)
               if (v.isOther) v,
           ],
+          given: given,
         ),
         (AsyncError(), _) || (_, AsyncError()) => ListView(
           children: [
@@ -50,7 +53,13 @@ class VaccinesView extends ConsumerWidget {
 }
 
 class _VisitList extends StatelessWidget {
-  const _VisitList({required this.baby, required this.hasSchedule, required this.visits, required this.others});
+  const _VisitList({
+    required this.baby,
+    required this.hasSchedule,
+    required this.visits,
+    required this.others,
+    required this.given,
+  });
 
   final Baby baby;
   final bool hasSchedule;
@@ -58,6 +67,9 @@ class _VisitList extends StatelessWidget {
 
   /// Vaccines added by name, oldest first.
   final List<Vaccination> others;
+
+  /// Everything recorded (for the optional RSV and flu doses).
+  final List<Vaccination> given;
 
   @override
   Widget build(BuildContext context) {
@@ -106,6 +118,7 @@ class _VisitList extends StatelessWidget {
           ),
         const SizedBox(height: 8),
         for (final visit in visits) _VisitCard(baby: baby, visit: visit, today: today),
+        _OptionalSection(baby: baby, given: given, today: today),
         if (hasSchedule || others.isNotEmpty)
           Padding(
             padding: const EdgeInsets.fromLTRB(4, 16, 4, 4),
@@ -214,6 +227,168 @@ class _VisitCard extends StatelessWidget {
                 ),
               ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Optional RSV and flu protection where the country offers it to all babies
+/// (todos.txt Q5), with a switch to hide it for this baby (the whole family).
+class _OptionalSection extends ConsumerWidget {
+  const _OptionalSection({required this.baby, required this.given, required this.today});
+
+  final Baby baby;
+  final List<Vaccination> given;
+  final DateTime today;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final items = optionalVaccines(baby.countryCode, baby.birthDate, today, {for (final v in given) v.vaccineCode});
+    if (items.isEmpty) return const SizedBox.shrink();
+    final repo = ref.read(babyRepositoryProvider);
+
+    if (baby.hideOptionalVaccines) {
+      return Card(
+        child: ListTile(
+          leading: const Icon(Icons.visibility_off_outlined),
+          title: Text(l10n.optionalVaccinesHidden),
+          trailing: TextButton(
+            onPressed: () => repo.setHideOptionalVaccines(baby.id, false),
+            child: Text(l10n.optionalVaccinesShow),
+          ),
+        ),
+      );
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(4, 16, 0, 0),
+          child: Row(
+            children: [
+              Expanded(child: Text(l10n.optionalVaccinesTitle, style: theme.textTheme.titleMedium)),
+              TextButton(
+                onPressed: () => repo.setHideOptionalVaccines(baby.id, true),
+                child: Text(l10n.optionalVaccinesHide),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(4, 0, 4, 4),
+          child: Text(
+            l10n.optionalVaccinesHelp(countryLabel(context, baby.countryCode)),
+            style: theme.textTheme.bodySmall,
+          ),
+        ),
+        for (final item in items)
+          _OptionalCard(
+            baby: baby,
+            item: item,
+            given: given.where((v) => v.vaccineCode == item.code).firstOrNull,
+            today: today,
+          ),
+      ],
+    );
+  }
+}
+
+class _OptionalCard extends StatelessWidget {
+  const _OptionalCard({required this.baby, required this.item, required this.given, required this.today});
+
+  final Baby baby;
+  final OptionalVaccine item;
+  final Vaccination? given;
+  final DateTime today;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final dates = MaterialLocalizations.of(context);
+    // Recorded with the same sheets as the schedule.
+    final dose = VaccineDose(
+      code: item.code,
+      name: optionalName(l10n, baby.countryCode, item),
+      dueAgeValue: 0,
+      dueAgeUnit: 'day',
+      sortOrder: 0,
+    );
+    final day = DateTime(today.year, today.month, today.day);
+    final notes = [
+      switch (item.kind) {
+        OptionalKind.rsv => l10n.rsvNote,
+        OptionalKind.flu => l10n.fluNote,
+      },
+      if (item.firstFlu) l10n.fluNoteFirst(item.twoDosesUnderYears!),
+      if (item.nasal) l10n.fluNoteNasal,
+    ];
+    final given = this.given;
+    final (statusText, statusColor) = given != null
+        ? (l10n.statusDone, theme.colorScheme.primary)
+        : item.dueDate.isBefore(day)
+        ? (l10n.statusOverdue, theme.colorScheme.error)
+        : !item.dueDate.isAfter(day.add(const Duration(days: 7)))
+        ? (l10n.statusDueSoon, theme.colorScheme.tertiary)
+        : (l10n.statusUpcoming, theme.colorScheme.outline);
+
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        // Recorded: tap to change the date or delete it.
+        onTap: given == null ? null : () => showEditVaccinationSheet(context, baby, dose, given),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 8, 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  if (given != null)
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(end: 12),
+                      child: Icon(Icons.check_circle, color: theme.colorScheme.primary),
+                    ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(dose.name, style: theme.textTheme.titleMedium),
+                        Text(
+                          given != null
+                              ? l10n.givenOn(dates.formatMediumDate(given.givenOn))
+                              : l10n.dueOn(dates.formatMediumDate(item.dueDate)),
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: Text(statusText, style: theme.textTheme.labelLarge?.copyWith(color: statusColor)),
+                  ),
+                ],
+              ),
+              if (given == null) ...[
+                const SizedBox(height: 6),
+                for (final note in notes)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8, bottom: 4),
+                    child: Text(note, style: theme.textTheme.bodySmall),
+                  ),
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: TextButton(
+                    onPressed: () => showRecordVaccinationSheet(context, baby, [dose]),
+                    child: Text(l10n.markGiven),
+                  ),
+                ),
+              ],
+            ],
+          ),
         ),
       ),
     );

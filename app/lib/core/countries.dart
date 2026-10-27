@@ -3,7 +3,8 @@
 library;
 
 /// Shown first in the picker: Pakistan and the countries most Pakistani
-/// families abroad live in. These have a vaccine schedule in the database.
+/// families abroad live in. (23 countries have a vaccine schedule in the
+/// database; the rest get vaccines added by name.)
 const featuredCountries = ['PK', 'GB', 'US', 'CA', 'AE', 'SA'];
 
 /// Babies saved before countries existed are in Pakistan.

@@ -57,8 +57,21 @@ Every type: collected, **not shared**, not ephemeral.
 | Health and fitness > Health info | Required | App functionality |
 | App activity > Other user-generated content | Optional | App functionality |
 | Photos and videos > Photos | Optional | App functionality |
+| App info and performance > Crash logs | Required | Analytics (Firebase Crashlytics, to fix crashes) |
+| App info and performance > Diagnostics | Required | Analytics (Firebase Crashlytics) |
+| Device or other IDs | Required | App functionality (push address for family notifications), Analytics (Crashlytics installation ID) |
 
-## When paid plans arrive
+Firebase (Google) acts as our service provider, so this counts as **not shared** in Play's terms.
 
-Content rating: digital purchases Yes. Data safety: add Financial info > Purchase history.
-Give the demo account the top plan. Financial features stay "none".
+## Palna Pro (todos.txt 38b, 38d)
+
+Monetize > Products > Subscriptions, product IDs matching RevenueCat:
+
+| Product ID | Base plan | Price | Offer |
+|---|---|---|---|
+| palna_pro_monthly | monthly, auto-renewing | Rs 299 (US $2.99, others from it) | none |
+| palna_pro_yearly | yearly, auto-renewing | Rs 2,499 (US $19.99) | 7-day free trial, new customers |
+
+Content rating: digital purchases **Yes**. Data safety: add **Financial info > Purchase history**
+(collected, not shared, required, App functionality). Financial features stay "none". The demo
+account review@palnacare.com already has Pro (pro_emails table).

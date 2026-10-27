@@ -2039,4 +2039,217 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pushUnavailable =>
       'Notifications from your family aren\'t available on this phone yet. Your choices below are saved for when they are.';
+
+  @override
+  String get numOutOfHoursDoctor => 'Out-of-hours doctor';
+
+  @override
+  String get numHealthAdvice => 'Health advice line (24 hours)';
+
+  @override
+  String get optionalVaccinesTitle => 'Optional – ask your doctor';
+
+  @override
+  String optionalVaccinesHelp(String country) {
+    return 'Offered to all babies in $country, but not part of the routine schedule. Ask your doctor or clinic whether your baby should have them.';
+  }
+
+  @override
+  String get optionalVaccinesHide => 'Hide';
+
+  @override
+  String get optionalVaccinesHidden =>
+      'Optional RSV and flu reminders are hidden.';
+
+  @override
+  String get optionalVaccinesShow => 'Show';
+
+  @override
+  String get rsvName => 'RSV protection (antibody injection)';
+
+  @override
+  String get rsvNote =>
+      'Protects against RSV, a common chest infection that is most serious in young babies. If the mother had the RSV vaccine in pregnancy, the baby may not need it.';
+
+  @override
+  String fluName(String season) {
+    return 'Flu vaccine $season';
+  }
+
+  @override
+  String get fluNote => 'Given once a year, before and during the flu season.';
+
+  @override
+  String fluNoteFirst(int age) {
+    return 'The first time, children under $age years usually need 2 doses, 4 weeks apart.';
+  }
+
+  @override
+  String get fluNoteNasal =>
+      'Usually given as a nasal spray, which contains pork gelatine. You can ask for an injection instead.';
+
+  @override
+  String optionalReminderTitle(String name, String vaccine) {
+    return '$name: $vaccine (optional)';
+  }
+
+  @override
+  String get optionalReminderBody =>
+      'Ask your doctor or clinic whether to have it.';
+
+  @override
+  String get proTitle => 'Palna Pro';
+
+  @override
+  String get proIntro => 'Everything in Free, plus:';
+
+  @override
+  String get proFeatureBabies => 'Twins, siblings: add every baby';
+
+  @override
+  String get proFeaturePhotos =>
+      'Up to 10 photos a month for each baby (Free: 1)';
+
+  @override
+  String get proFeatureReports =>
+      '30-day reports, and the PDF summary for the doctor';
+
+  @override
+  String get proFeatureThemes =>
+      'Colour themes, and today\'s totals on the home-screen widget';
+
+  @override
+  String get proFamilyNote =>
+      'One subscription covers the whole family: everyone you share the baby with gets Pro too.';
+
+  @override
+  String get proYearly => 'Yearly';
+
+  @override
+  String get proMonthly => 'Monthly';
+
+  @override
+  String proPricePerYear(String price) {
+    return '$price / year';
+  }
+
+  @override
+  String proPricePerMonth(String price) {
+    return '$price / month';
+  }
+
+  @override
+  String proPricePerDay(String price) {
+    return 'That\'s about $price a day';
+  }
+
+  @override
+  String proSave(int percent) {
+    return 'Save $percent%';
+  }
+
+  @override
+  String proTrialDays(int days) {
+    return '$days days free';
+  }
+
+  @override
+  String get proStartTrial => 'Start free trial';
+
+  @override
+  String get proSubscribe => 'Subscribe';
+
+  @override
+  String get proRestore => 'Restore purchases';
+
+  @override
+  String get proLegalApple =>
+      'Payment is charged to your Apple ID. The subscription renews automatically unless you cancel it at least 24 hours before the period ends; manage or cancel it in your Apple ID settings. After a free trial, the price above is charged.';
+
+  @override
+  String get proLegalGoogle =>
+      'Payment is charged to your Google Play account. The subscription renews automatically unless you cancel it before the period ends; manage or cancel it in Google Play > Payments and subscriptions. After a free trial, the price above is charged.';
+
+  @override
+  String get proTerms => 'Terms of use';
+
+  @override
+  String get proPrivacy => 'Privacy policy';
+
+  @override
+  String get proUnavailable =>
+      'Palna Pro can\'t be bought on this phone yet. Everything else works as usual.';
+
+  @override
+  String get proActive => 'Your family has Palna Pro';
+
+  @override
+  String proActiveUntil(String date) {
+    return 'Until $date';
+  }
+
+  @override
+  String get proThanks => 'Thank you for supporting Palna!';
+
+  @override
+  String get proManage => 'Manage subscription';
+
+  @override
+  String get proRestoreNone =>
+      'No Palna Pro purchase was found for this store account.';
+
+  @override
+  String get proError => 'The purchase didn\'t go through. Please try again.';
+
+  @override
+  String get proReasonBabies => 'Add more than one baby with Palna Pro';
+
+  @override
+  String get proReasonPhotos => 'Add more photos for this month with Palna Pro';
+
+  @override
+  String get proReasonReports => 'See 30 days at a time with Palna Pro';
+
+  @override
+  String get proReasonPdf =>
+      'The PDF summary for the doctor is part of Palna Pro';
+
+  @override
+  String get proReasonThemes => 'Colour themes are part of Palna Pro';
+
+  @override
+  String get proBadge => 'PRO';
+
+  @override
+  String get settingsProFree => 'Free plan · see what Pro adds';
+
+  @override
+  String get settingsProActive => 'Pro, for your whole family';
+
+  @override
+  String get photoAddAnother => 'Add another';
+
+  @override
+  String get photoMonthFull =>
+      'This month has 10 photos, the most for one month.';
+
+  @override
+  String get themeColour => 'Colour';
+
+  @override
+  String get themeNavy => 'Navy';
+
+  @override
+  String get themeRose => 'Rose';
+
+  @override
+  String get themeSage => 'Sage';
+
+  @override
+  String get themeLavender => 'Lavender';
+
+  @override
+  String widgetToday(int feeds, int diapers, String sleep) {
+    return 'Today: $feeds feeds · $diapers diapers · $sleep sleep';
+  }
 }

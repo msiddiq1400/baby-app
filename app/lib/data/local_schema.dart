@@ -10,7 +10,8 @@ import 'package:powersync/powersync.dart';
 // them slightly differently. Booleans are 0/1 integers; arrays are JSON text.
 
 final localSchema = Schema([
-  Table('families', [Column.text('name')]),
+  // pro_until: Palna Pro end date, set by the server (todos.txt 38b).
+  Table('families', [Column.text('name'), Column.text('pro_until')]),
   Table('babies', [
     Column.text('family_id'),
     Column.text('name'),
@@ -20,6 +21,8 @@ final localSchema = Schema([
     Column.integer('birth_length_mm'),
     Column.integer('birth_head_mm'),
     Column.text('country_code'),
+    Column.text('created_by'),
+    Column.integer('hide_optional_vaccines'),
     Column.text('created_at'),
     Column.text('deleted_at'),
   ]),

@@ -116,7 +116,31 @@ Data collected, all **linked to the user**, all **not used for tracking**, purpo
 | User Content | Photos or Videos | Monthly baby photos the parent chooses to add (shared only with their family) |
 | Identifiers | User ID | The account ID that keeps each family's data separate |
 
-Not collected: location, contacts, browsing, purchases, usage data, diagnostics, advertising data.
+| Purchases | Purchase History | Palna Pro subscription (through RevenueCat), so the family gets Pro |
+
+Also collected, **not linked to the user**, not used for tracking, purpose **App Functionality**:
+
+| Apple category | Data type | Why |
+|---|---|---|
+| Diagnostics | Crash Data | Firebase Crashlytics crash reports (release builds; no user ID attached) |
+
+Not collected: location, contacts, browsing, usage data, other diagnostics, advertising data.
+
+## In-App Purchases: Palna Pro (todos.txt 38b, 38c)
+
+Distribution > Subscriptions > subscription group **Palna Pro**, two auto-renewable subscriptions
+(level 1 both). Product IDs must match RevenueCat:
+
+| Reference name | Product ID | Duration | Price | Intro offer |
+|---|---|---|---|---|
+| Palna Pro Monthly | palna_pro_monthly | 1 month | US $2.99; Pakistan Rs 299 | none |
+| Palna Pro Yearly | palna_pro_yearly | 1 year | US $19.99; Pakistan Rs 2,499 | 7-day free trial (new subscribers) |
+
+Display name "Palna Pro"; description "More babies, photos, 30-day reports and the doctor's PDF, for
+your whole family." Review screenshot: the Palna Pro screen (Settings > Palna Pro). Review notes:
+"The demo account already has Pro (free) so every Pro feature can be checked; the purchase screen is
+in Settings > Palna Pro." Needs the Paid Applications Agreement, bank and tax first (38c).
+
 
 ## Age rating
 

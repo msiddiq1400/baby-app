@@ -19,9 +19,11 @@ class BabyRepository {
 
   /// Adds a baby to [familyId], or to a new family if the user has none yet
   /// (the server makes the creator its owner when it uploads). Returns the
-  /// new baby's id.
+  /// new baby's id. [createdBy] (the signed-in user) is saved on the phone
+  /// right away, so they can set the country before it has synced (Q1).
   Future<String> addBaby({
     required String name,
+    String? createdBy,
     required DateTime birthDate,
     required String countryCode,
     String? familyId,
@@ -42,6 +44,7 @@ class BabyRepository {
         'birth_length_mm': birthLengthMm,
         'birth_head_mm': birthHeadMm,
         'country_code': countryCode,
+        'created_by': ?createdBy,
         'created_at': utcTimestamp(DateTime.now()),
       });
     });
@@ -51,12 +54,14 @@ class BabyRepository {
     String id, {
     required String name,
     required DateTime birthDate,
-    required String countryCode,
+    String? countryCode,
     String? sex,
     int? birthWeightG,
     int? birthLengthMm,
     int? birthHeadMm,
   }) {
+    // countryCode is left out (null) for people who may not change it, so the
+    // server never rejects the whole edit (todos.txt Q1).
     return updateRow(_db, 'babies', id, {
       'name': name,
       'birth_date': dateOnly(birthDate),
@@ -64,11 +69,15 @@ class BabyRepository {
       'birth_weight_g': birthWeightG,
       'birth_length_mm': birthLengthMm,
       'birth_head_mm': birthHeadMm,
-      'country_code': countryCode,
+      'country_code': ?countryCode,
     });
   }
 
   Future<void> setSex(String babyId, String sex) => updateRow(_db, 'babies', babyId, {'sex': sex});
+
+  /// Shows or hides the optional RSV and flu reminders for the whole family.
+  Future<void> setHideOptionalVaccines(String babyId, bool hide) =>
+      updateRow(_db, 'babies', babyId, {'hide_optional_vaccines': hide ? 1 : 0});
 
   /// Soft delete; the baby's history stays in the database but is hidden.
   Future<void> delete(String id) => updateRow(_db, 'babies', id, {'deleted_at': utcTimestamp(DateTime.now())});

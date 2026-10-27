@@ -228,6 +228,7 @@ class FlowEnv {
     final now = DateTime.now();
     final id = await BabyRepository(db).addBaby(
       name: name,
+      createdBy: testUserId,
       birthDate: birthDate ?? DateTime(now.year, now.month - 5, now.day - 20),
       countryCode: country,
       sex: sex,
@@ -237,6 +238,10 @@ class FlowEnv {
     familyId ??= (await db.get('SELECT family_id FROM babies WHERE id = ?', [id]))['family_id'] as String;
     return id;
   }
+
+  /// Gives the family Palna Pro, as the server would after a purchase
+  /// (families.pro_until; todos.txt 38b).
+  Future<void> makePro() => db.execute("UPDATE families SET pro_until = 'infinity' WHERE id = ?", [familyId]);
 
   /// Saves an on-phone setting (language, chosen baby, theme) before the app starts.
   Future<void> setting(String key, String? value) => SettingsRepository(db).set(key, value);

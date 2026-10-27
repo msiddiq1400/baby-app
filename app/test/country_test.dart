@@ -97,6 +97,14 @@ void main() {
       expect(primaryEmergencyNumber('JP'), isNull);
       expect(emergencyNumbers('JP'), isEmpty);
     });
+
+    test('EU countries: 112, plus local lines where we list them', () {
+      expect(emergencyNumbers('AT').map((n) => n.number), ['112']);
+      expect(emergencyNumbers('DE').map((n) => n.service), contains(EmergencyService.outOfHoursDoctor));
+      // In Norway 112 is the police: the ambulance (113) comes first.
+      expect(primaryEmergencyNumber('NO'), '113');
+      expect(primaryEmergencyNumber('FR'), '15');
+    });
   });
 
   testWidgets('Vaccines in Pakistan show the schedule and vaccines added by name', (tester) async {

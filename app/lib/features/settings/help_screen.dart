@@ -35,6 +35,8 @@ class HelpScreen extends ConsumerWidget {
             EmergencyService.poison => l10n.numPoison,
             EmergencyService.nurseLine => l10n.numNurseLine,
             EmergencyService.unified => l10n.numUnified,
+            EmergencyService.outOfHoursDoctor => l10n.numOutOfHoursDoctor,
+            EmergencyService.healthAdvice => l10n.numHealthAdvice,
           },
         ),
     ];
@@ -71,7 +73,7 @@ class HelpScreen extends ConsumerWidget {
                 // Phone numbers always read left to right.
                 title: Text(number, textDirection: TextDirection.ltr, style: theme.textTheme.titleLarge),
                 subtitle: Text(name),
-                onTap: () => launchUrl(Uri(scheme: 'tel', path: number.replaceAll('-', ''))),
+                onTap: () => launchUrl(Uri(scheme: 'tel', path: number.replaceAll(RegExp(r'[- ]'), ''))),
               ),
             ),
           const SizedBox(height: 16),

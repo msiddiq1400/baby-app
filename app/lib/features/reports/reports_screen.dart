@@ -13,6 +13,8 @@ import '../../data/models.dart';
 import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
 import 'report_stats.dart';
+import '../plans/paywall_screen.dart';
+import '../plans/plan.dart';
 
 enum ReportTab { feeds, sleep, diapers }
 
@@ -56,7 +58,18 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen> {
         ),
         body: switch ((feeds, sleeps, diapers)) {
           (AsyncData(value: final f), AsyncData(value: final s), AsyncData(value: final d)) =>
-            _Report(baby: widget.baby, days: _days, feeds: f, sleeps: s, diapers: d, onDays: (d) => setState(() => _days = d)),
+            _Report(
+              baby: widget.baby,
+              days: _days,
+              feeds: f,
+              sleeps: s,
+              diapers: d,
+              onDays: (days) async {
+                // Free: 7 days; 30 days is part of Palna Pro.
+                if (days > PlanLimits.freeReportDays && !await requirePro(context, ref, l10n.proReasonReports)) return;
+                if (mounted) setState(() => _days = days);
+              },
+            ),
           (AsyncError(), _, _) || (_, AsyncError(), _) || (_, _, AsyncError()) => Center(child: Text(l10n.errorGeneric)),
           _ => const Center(child: CircularProgressIndicator()),
         },

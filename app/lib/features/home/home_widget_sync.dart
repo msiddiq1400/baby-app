@@ -13,6 +13,8 @@ import '../../l10n/app_localizations.dart';
 import '../health/vaccine_plan.dart';
 import 'log_sheets.dart';
 import 'timeline.dart';
+import '../../core/baby_age.dart';
+import '../plans/plan.dart';
 
 /// What the home-screen widget shows, as the text values the Android side
 /// (PalnaWidgetProvider.kt) reads. Times are epoch milliseconds as text;
@@ -26,6 +28,7 @@ Map<String, String?> widgetValues({
   Sleep? ongoingSleep,
   List<Sleep> recentSleeps = const [],
   VaccineVisit? nextVisit,
+  TodayLog? today,
 }) {
   String ms(DateTime t) => '${t.millisecondsSinceEpoch}';
   final values = <String, String?>{
@@ -37,6 +40,7 @@ Map<String, String?> widgetValues({
     'sleep_label': null,
     'sleep_since': null,
     'vaccine': null,
+    'today': null,
   };
   if (baby == null) return values;
 
@@ -70,6 +74,12 @@ Map<String, String?> widgetValues({
     }
   }
 
+  // Palna Pro (todos.txt 38b): today's totals. Null [today] = Free.
+  if (today != null) {
+    final slept = today.sleeps.fold(Duration.zero, (sum, s) => sum + ((s.endedAt ?? now).difference(s.startedAt)));
+    values['today'] = l10n.widgetToday(today.feeds.length, today.diapers.length, formatDuration(l10n, slept));
+  }
+
   if (nextVisit != null) {
     values['vaccine'] = l10n.widgetNextVaccine(
       visitLabel(l10n, nextVisit),
@@ -93,15 +103,17 @@ final homeWidgetSyncProvider = FutureProvider<void>((ref) async {
     final next = planVisits(baby.birthDate, schedule, given)
         .where((v) => v.status(now) != VisitStatus.done && v.dueDate.difference(now).inDays <= 30)
         .firstOrNull;
+    final log = await ref.watch(todayLogProvider(baby.id).future);
     values = widgetValues(
       l10n: l10n,
       now: now,
       baby: baby,
       feedTimer: await ref.watch(feedTimerProvider(baby.id).future),
       recentFeeds: await ref.watch(recentFeedsProvider(baby.id).future),
-      ongoingSleep: (await ref.watch(todayLogProvider(baby.id).future)).ongoingSleep,
+      ongoingSleep: log.ongoingSleep,
       recentSleeps: await ref.watch(recentSleepsProvider(baby.id).future),
       nextVisit: next,
+      today: ref.watch(isProProvider) ? log : null,
     );
   }
   try {

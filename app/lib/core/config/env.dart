@@ -14,6 +14,16 @@ abstract final class Env {
   static const googleWebClientId = String.fromEnvironment('GOOGLE_WEB_CLIENT_ID');
   static const googleIosClientId = String.fromEnvironment('GOOGLE_IOS_CLIENT_ID');
 
+  /// RevenueCat public SDK keys (appl_... / goog_..., not secrets) for Palna
+  /// Pro (todos.txt 38b). Empty: the upgrade screen says plans aren't
+  /// available yet.
+  static const revenueCatAppleKey = String.fromEnvironment('REVENUECAT_APPLE_KEY');
+  static const revenueCatGoogleKey = String.fromEnvironment('REVENUECAT_GOOGLE_KEY');
+
+  /// RevenueCat Test Store key (test_..., public): pretend purchases for
+  /// trying Palna Pro. Used by debug builds only, never in a release.
+  static const revenueCatTestKey = String.fromEnvironment('REVENUECAT_TEST_KEY');
+
   static void assertConfigured() {
     if (supabaseUrl.isEmpty || supabasePublishableKey.isEmpty || powersyncUrl.isEmpty) {
       throw StateError(

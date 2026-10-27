@@ -65,6 +65,15 @@ class PalnaWidgetProvider : HomeWidgetProvider() {
             views.setViewVisibility(R.id.sleep_row, View.GONE)
         }
 
+        // Palna Pro: today's feeds, diapers and sleep.
+        val today = data.getString("today", null)
+        if (today.isNullOrEmpty()) {
+            views.setViewVisibility(R.id.today, View.GONE)
+        } else {
+            views.setViewVisibility(R.id.today, View.VISIBLE)
+            views.setTextViewText(R.id.today, today)
+        }
+
         val vaccine = data.getString("vaccine", null)
         if (vaccine.isNullOrEmpty()) {
             views.setViewVisibility(R.id.vaccine, View.GONE)
