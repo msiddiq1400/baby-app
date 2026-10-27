@@ -83,8 +83,9 @@ Can do now
         with the Pro paragraph and terms / privacy links, keywords, URLs,
         copyright 2026 Muhammad Siddiqu), App Review login and notes,
         manual release. Still to do:
-        - [ ] Screenshots: Claude re-renders them (N11) with Pro and the new
-          countries, then upload (6.9" iPhone).
+        - [x] Screenshots (27 Oct): 8 uploaded at 1206 x 2622 (medium
+          iPhone); vaccines shot shows a UK family. Play set ready in
+          app/tool/screenshots/out/upload-play/ for N11.
         - [x] App Privacy (27 Oct): 9 types, all App Functionality, not
           tracking; linked except Crash Data; privacy URL set.
         - [ ] Build: add the first build after the release (it has Pro).
