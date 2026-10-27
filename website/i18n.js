@@ -20,7 +20,7 @@ window.PALNA_I18N = {
     'theme.baby': 'بے بی',
     'theme.system': 'فون کے مطابق',
 
-    'hero.eyebrow': 'ہر جگہ کے خاندانوں کے لیے، اردو اور انگریزی میں',
+    'hero.eyebrow': 'پورے خاندان کے لیے بچے کا ٹریکر',
     'hero.title': 'ہر خوراک، ہر نیند، ہر ٹیکہ۔ <em>آپ کی اپنی زبان میں۔</em>',
     'hero.lead': 'پالنا آخری خوراک، اگلا ٹیکہ اور آج رات کی دوا یاد رکھتا ہے، تاکہ آپ کو نہ رکھنی پڑے۔ سیکنڈوں میں درج کریں، پورے خاندان کے ساتھ شیئر کریں، اور انٹرنیٹ یا بجلی نہ ہو تب بھی کام جاری رکھیں۔',
     'store.soon': 'جلد آ رہا ہے',
@@ -211,7 +211,7 @@ window.PALNA_I18N = {
     'theme.baby': 'Baby',
     'theme.system': 'Phone ke mutabiq',
 
-    'hero.eyebrow': 'Har jagah ke khandanon ke liye, Urdu aur English mein',
+    'hero.eyebrow': 'Poore khandan ke liye baby tracker',
     'hero.title': 'Har feed, har neend, har teeka. <em>Aap ki apni zabaan mein.</em>',
     'hero.lead': 'Palna aakhri feed, agla teeka aur aaj raat ki dawa yaad rakhta hai, taake aap ko na rakhni pare. Seconds mein darj karein, poore khandan ke saath share karein, aur internet ya bijli na ho tab bhi kaam jaari rakhein.',
     'store.soon': 'Jald aa raha hai',

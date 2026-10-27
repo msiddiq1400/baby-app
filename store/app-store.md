@@ -7,7 +7,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 | Field | Value |
 |---|---|
 | Name (30) | Palna - Mother & Baby Care |
-| Subtitle (30) | Baby feeding & sleep tracker |
+| Subtitle (30) | Baby tracker for the family |
 | Primary category | Health & Fitness |
 | Secondary category | Lifestyle |
 | Content rights | No, it doesn't contain, show or access third-party content |
