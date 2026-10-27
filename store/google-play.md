@@ -8,7 +8,7 @@ Package name: `com.palnacare.app` (permanent).
 | Field | Value |
 |---|---|
 | App name (30) | Palna - Mother & Baby Care |
-| Short description (80) | Baby tracker in Urdu & English: feeds, sleep, diapers, vaccines. Works offline. |
+| Short description (80) | Baby tracker for feeds, sleep, diapers and vaccines. Works offline. |
 | Full description (4000) | The "Description" from [app-store.md](app-store.md), unchanged |
 | App icon (512 x 512) | `store/play/icon-512.png` |
 | Feature graphic (1024 x 500) | `store/play/feature-graphic-1024x500.png` |

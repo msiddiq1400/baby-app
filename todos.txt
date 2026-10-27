@@ -10,12 +10,19 @@ review / 7 company.
 
 [ ] open   [~] started / partly done   [x] done
 
+Positioning (owner, 27 Oct 2026): Palna is a baby tracker for families
+everywhere, not for one country. No "made for Pakistan" / "Pakistani
+families" wording in the store listings, website, invites or new copy;
+Pakistan's EPI, desi foods and 1122 can still be named as highlights.
+App Store subtitle and website top line: "Baby tracker for the family".
+(Website fixed on branch chore/baby-app-global-positioning-v1, live with
+the next release.)
+
 ====================================================================
 1. CODE CHANGES (Claude builds them; one branch from dev per batch)
 ====================================================================
 
-Built 27 Oct on branch feat/baby-app-countries-plans-crashlytics-v1 (not
-merged yet): Q1 country lock, Q2 17 more countries, Q5 optional RSV / flu,
+Built 27 Oct, merged into dev (PR #5), live with the next release: Q1 country lock, Q2 17 more countries, Q5 optional RSV / flu,
 38b Palna Pro, 14c crash reports. Their phone checks are in section 5,
 their setup in sections 2-4. Decided: Q3 keep only the new UK schedule
 (babies born from 2025); Q4 schedules and emergency numbers stay in the
@@ -68,16 +75,22 @@ Can do now
         limit 100): https://testflight.apple.com/join/TNv2mUxa.
         When approved: send the iPhone invite in store/tester-invite.md,
         and tell Claude (15c).
-[ ] 46. App Store listing (fill in now; it stays with the app when the
-        account moves to the company). All text is in store/app-store.md:
-        - [ ] App Information: name, subtitle, categories, age rating.
-        - [ ] Version 1.0: promotional text, description, keywords.
-        - [ ] Screenshots from app/tool/screenshots/out/iphone/ (see N11;
-          ask Claude to re-render first if the app has changed).
-        - [ ] App Privacy: the data types in app-store.md, including User
-          Content > Photos or Videos (linked to the user, not tracking).
-        - [ ] App Review: same login as TestFlight (N4) and the notes from
-          app-store.md.
+[~] 46. App Store listing. Done 27 Oct: App Information (subtitle "Baby
+        tracker for the family", Health & Fitness / Lifestyle, no third-
+        party content, Apple's standard licence), age rating 18+ (matches
+        the terms' 18+), not a regulated medical device, App Store server
+        notifications -> RevenueCat, version 1.0 text (promo, description
+        with the Pro paragraph and terms / privacy links, keywords, URLs,
+        copyright 2026 Muhammad Siddiqu), App Review login and notes,
+        manual release. Still to do:
+        - [x] Screenshots (27 Oct): 8 uploaded at 1206 x 2622 (medium
+          iPhone); vaccines shot shows a UK family. Play set ready in
+          app/tool/screenshots/out/upload-play/ for N11.
+        - [x] App Privacy (27 Oct): 9 types, all App Functionality, not
+          tracking; linked except Crash Data; privacy URL set.
+        - [ ] Build: add the first build after the release (it has Pro).
+        - [ ] After 12: copyright -> 2026 Toolbox Services (SMC-Private)
+          Limited.
 
 After D-U-N-S (11)
 [ ] 12. Ask Apple Developer Support to move the INDIVIDUAL account (Team
@@ -88,6 +101,10 @@ After D-U-N-S (11)
         store/app-store.md "In-App Purchases" (palna_pro_monthly,
         palna_pro_yearly with a 7-day trial), and App Privacy > Purchases >
         Purchase History. Then RevenueCat (38e).
+[ ] 46c. App Information > Digital Services Act: declare as a trader (Palna
+        sells Pro) after 12, so the company's address, phone and the email
+        hello@palnacare.com are what the EU App Store shows. Needed before
+        selling in the EU.
 [ ] 46b. Submit version 1.0 for App Store review (after 46 and 12).
 
 Only when we build those features
@@ -125,9 +142,10 @@ Only when we build those features
 [~] N4. App access: reviewer login review@palnacare.com (exists with a
         sample baby; password changed 27 Oct, same as in TestFlight Test
         Information). Save it in the password manager too.
-[ ] N12. Closed testing: create the track, add the testers list, send the
+[ ] N12. (Only if Palna stays on a PERSONAL Play account: organization
+        accounts skip the closed-test rule.) Closed testing: create the track, add the testers list, send the
         build for review.
-[ ] N6. Testers: send the Android invite (store/tester-invite.md, 3
+[ ] N6. (Same: personal account only.) Testers: send the Android invite (store/tester-invite.md, 3
         languages) once the closed test is approved; 12+ testers must stay
         opted in for 14 days in a row.
 [ ] 20b. After the first Play upload: Play Console > App integrity > App
