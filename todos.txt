@@ -160,7 +160,7 @@ Only when we build those features
         app info, financial data, orders and testing-track releases;
         key creation allowed for project Baby App by an org policy
         override). Google takes up to 36 h to accept it.
-        - [ ] Codemagic > baby-app > Environment variables, group
+        - [x] Codemagic > baby-app > Environment variables, group
           palna_prod: REVENUECAT_APPLE_KEY = appl_jREEioWGhJtuRXOZgXBpSpDBwOJ
           and REVENUECAT_GOOGLE_KEY = goog_ydYQOQSdVOQiLxpeKkRzjRAUQMH
           (public keys), and GCLOUD_SERVICE_ACCOUNT_CREDENTIALS = the whole
