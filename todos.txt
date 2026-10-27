@@ -69,8 +69,8 @@ Can do now
         and tell Claude (15c).
 [ ] 46. App Store listing (fill in now; it stays with the app when the
         account moves to the company). All text is in store/app-store.md:
-        - [ ] App Information: name, subtitle "Baby tracker in Urdu &
-          English" (not "for Pakistan": Palna is for families everywhere),
+        - [ ] App Information: name, subtitle "Baby feeding & sleep
+          tracker" (no country or language in it),
           categories, age rating.
         - [ ] Version 1.0: promotional text, description, keywords.
         - [ ] Screenshots from app/tool/screenshots/out/iphone/ (see N11;
