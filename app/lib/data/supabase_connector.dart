@@ -19,6 +19,7 @@ class SupabaseConnector extends PowerSyncBackendConnector {
     'diapers': {'is_wet', 'is_dirty'},
     'medications': {'as_needed'},
     'medication_doses': {'skipped'},
+    'babies': {'hide_optional_vaccines'},
   };
 
   /// Columns stored as JSON text on the phone but arrays in Postgres.

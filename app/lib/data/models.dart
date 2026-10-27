@@ -29,6 +29,7 @@ class Baby {
     this.birthHeadMm,
     this.countryCode = 'PK',
     this.createdBy,
+    this.hideOptionalVaccines = false,
   });
 
   final String id;
@@ -37,6 +38,9 @@ class Baby {
   /// Who added the baby; only they set the country (null once their account
   /// is deleted).
   final String? createdBy;
+
+  /// The family chose to hide the optional RSV and flu reminders (Q5).
+  final bool hideOptionalVaccines;
   final String name;
   final DateTime birthDate;
 
@@ -51,7 +55,7 @@ class Baby {
   final int? birthHeadMm;
 
   static const columns =
-      'id, family_id, name, birth_date, sex, birth_weight_g, birth_length_mm, birth_head_mm, country_code, created_by';
+      'id, family_id, name, birth_date, sex, birth_weight_g, birth_length_mm, birth_head_mm, country_code, created_by, hide_optional_vaccines';
 
   factory Baby.fromJson(Map<String, dynamic> json) => Baby(
     id: json['id'] as String,
@@ -64,6 +68,7 @@ class Baby {
     birthHeadMm: json['birth_head_mm'] as int?,
     countryCode: (json['country_code'] as String?) ?? 'PK',
     createdBy: json['created_by'] as String?,
+    hideOptionalVaccines: _bool(json['hide_optional_vaccines']),
   );
 }
 

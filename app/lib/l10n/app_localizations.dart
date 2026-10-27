@@ -3548,6 +3548,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notifications from your family aren\'t available on this phone yet. Your choices below are saved for when they are.'**
   String get pushUnavailable;
+
+  /// No description provided for @numOutOfHoursDoctor.
+  ///
+  /// In en, this message translates to:
+  /// **'Out-of-hours doctor'**
+  String get numOutOfHoursDoctor;
+
+  /// No description provided for @numHealthAdvice.
+  ///
+  /// In en, this message translates to:
+  /// **'Health advice line (24 hours)'**
+  String get numHealthAdvice;
+
+  /// No description provided for @optionalVaccinesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional – ask your doctor'**
+  String get optionalVaccinesTitle;
+
+  /// No description provided for @optionalVaccinesHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Offered to all babies in {country}, but not part of the routine schedule. Ask your doctor or clinic whether your baby should have them.'**
+  String optionalVaccinesHelp(String country);
+
+  /// No description provided for @optionalVaccinesHide.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide'**
+  String get optionalVaccinesHide;
+
+  /// No description provided for @optionalVaccinesHidden.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional RSV and flu reminders are hidden.'**
+  String get optionalVaccinesHidden;
+
+  /// No description provided for @optionalVaccinesShow.
+  ///
+  /// In en, this message translates to:
+  /// **'Show'**
+  String get optionalVaccinesShow;
+
+  /// No description provided for @rsvName.
+  ///
+  /// In en, this message translates to:
+  /// **'RSV protection (antibody injection)'**
+  String get rsvName;
+
+  /// No description provided for @rsvNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Protects against RSV, a common chest infection that is most serious in young babies. If the mother had the RSV vaccine in pregnancy, the baby may not need it.'**
+  String get rsvNote;
+
+  /// No description provided for @fluName.
+  ///
+  /// In en, this message translates to:
+  /// **'Flu vaccine {season}'**
+  String fluName(String season);
+
+  /// No description provided for @fluNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Given once a year, before and during the flu season.'**
+  String get fluNote;
+
+  /// No description provided for @fluNoteFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'The first time, children under {age} years usually need 2 doses, 4 weeks apart.'**
+  String fluNoteFirst(int age);
+
+  /// No description provided for @fluNoteNasal.
+  ///
+  /// In en, this message translates to:
+  /// **'Usually given as a nasal spray, which contains pork gelatine. You can ask for an injection instead.'**
+  String get fluNoteNasal;
+
+  /// No description provided for @optionalReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}: {vaccine} (optional)'**
+  String optionalReminderTitle(String name, String vaccine);
+
+  /// No description provided for @optionalReminderBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask your doctor or clinic whether to have it.'**
+  String get optionalReminderBody;
 }
 
 class _AppLocalizationsDelegate

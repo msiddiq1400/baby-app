@@ -72,6 +72,10 @@ class BabyRepository {
 
   Future<void> setSex(String babyId, String sex) => updateRow(_db, 'babies', babyId, {'sex': sex});
 
+  /// Shows or hides the optional RSV and flu reminders for the whole family.
+  Future<void> setHideOptionalVaccines(String babyId, bool hide) =>
+      updateRow(_db, 'babies', babyId, {'hide_optional_vaccines': hide ? 1 : 0});
+
   /// Soft delete; the baby's history stays in the database but is hidden.
   Future<void> delete(String id) => updateRow(_db, 'babies', id, {'deleted_at': utcTimestamp(DateTime.now())});
 }

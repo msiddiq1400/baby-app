@@ -2039,4 +2039,61 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pushUnavailable =>
       'Notifications from your family aren\'t available on this phone yet. Your choices below are saved for when they are.';
+
+  @override
+  String get numOutOfHoursDoctor => 'Out-of-hours doctor';
+
+  @override
+  String get numHealthAdvice => 'Health advice line (24 hours)';
+
+  @override
+  String get optionalVaccinesTitle => 'Optional – ask your doctor';
+
+  @override
+  String optionalVaccinesHelp(String country) {
+    return 'Offered to all babies in $country, but not part of the routine schedule. Ask your doctor or clinic whether your baby should have them.';
+  }
+
+  @override
+  String get optionalVaccinesHide => 'Hide';
+
+  @override
+  String get optionalVaccinesHidden =>
+      'Optional RSV and flu reminders are hidden.';
+
+  @override
+  String get optionalVaccinesShow => 'Show';
+
+  @override
+  String get rsvName => 'RSV protection (antibody injection)';
+
+  @override
+  String get rsvNote =>
+      'Protects against RSV, a common chest infection that is most serious in young babies. If the mother had the RSV vaccine in pregnancy, the baby may not need it.';
+
+  @override
+  String fluName(String season) {
+    return 'Flu vaccine $season';
+  }
+
+  @override
+  String get fluNote => 'Given once a year, before and during the flu season.';
+
+  @override
+  String fluNoteFirst(int age) {
+    return 'The first time, children under $age years usually need 2 doses, 4 weeks apart.';
+  }
+
+  @override
+  String get fluNoteNasal =>
+      'Usually given as a nasal spray, which contains pork gelatine. You can ask for an injection instead.';
+
+  @override
+  String optionalReminderTitle(String name, String vaccine) {
+    return '$name: $vaccine (optional)';
+  }
+
+  @override
+  String get optionalReminderBody =>
+      'Ask your doctor or clinic whether to have it.';
 }

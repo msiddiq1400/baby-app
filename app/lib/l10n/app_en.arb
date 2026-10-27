@@ -1312,5 +1312,51 @@
   "quietFrom": "From",
   "quietTo": "To",
   "pushFooter": "You never get notified about what you log yourself. Vaccine and medicine reminders on this phone don't change.",
-  "pushUnavailable": "Notifications from your family aren't available on this phone yet. Your choices below are saved for when they are."
+  "pushUnavailable": "Notifications from your family aren't available on this phone yet. Your choices below are saved for when they are.",
+  "numOutOfHoursDoctor": "Out-of-hours doctor",
+  "numHealthAdvice": "Health advice line (24 hours)",
+  "optionalVaccinesTitle": "Optional – ask your doctor",
+  "optionalVaccinesHelp": "Offered to all babies in {country}, but not part of the routine schedule. Ask your doctor or clinic whether your baby should have them.",
+  "@optionalVaccinesHelp": {
+    "placeholders": {
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "optionalVaccinesHide": "Hide",
+  "optionalVaccinesHidden": "Optional RSV and flu reminders are hidden.",
+  "optionalVaccinesShow": "Show",
+  "rsvName": "RSV protection (antibody injection)",
+  "rsvNote": "Protects against RSV, a common chest infection that is most serious in young babies. If the mother had the RSV vaccine in pregnancy, the baby may not need it.",
+  "fluName": "Flu vaccine {season}",
+  "@fluName": {
+    "placeholders": {
+      "season": {
+        "type": "String"
+      }
+    }
+  },
+  "fluNote": "Given once a year, before and during the flu season.",
+  "fluNoteFirst": "The first time, children under {age} years usually need 2 doses, 4 weeks apart.",
+  "@fluNoteFirst": {
+    "placeholders": {
+      "age": {
+        "type": "int"
+      }
+    }
+  },
+  "fluNoteNasal": "Usually given as a nasal spray, which contains pork gelatine. You can ask for an injection instead.",
+  "optionalReminderTitle": "{name}: {vaccine} (optional)",
+  "@optionalReminderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "vaccine": {
+        "type": "String"
+      }
+    }
+  },
+  "optionalReminderBody": "Ask your doctor or clinic whether to have it."
 }

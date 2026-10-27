@@ -1,4 +1,5 @@
 import '../../core/dates.dart';
+import '../../core/optional_vaccines.dart';
 import '../../core/reminders.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
@@ -27,7 +28,10 @@ class VaccineVisit {
 
   String get key => '$ageValue$ageUnit';
 
-  List<VaccineDose> get pending => [for (final d in doses) if (!given.containsKey(d.code)) d];
+  List<VaccineDose> get pending => [
+    for (final d in doses)
+      if (!given.containsKey(d.code)) d,
+  ];
 
   /// "Due soon" means within the next 7 days.
   VisitStatus status(DateTime today) {
@@ -82,11 +86,11 @@ List<VaccineVisit> planVisits(DateTime birth, List<VaccineDose> schedule, List<V
 String doseTitle(VaccineDose dose) => dose.doseLabel == null ? dose.name : '${dose.name} · ${dose.doseLabel}';
 
 String visitLabel(AppLocalizations l10n, VaccineVisit visit) => switch (visit.ageUnit) {
-      _ when visit.ageValue == 0 => l10n.visitAtBirth,
-      'week' => l10n.visitWeeks(visit.ageValue),
-      'month' => l10n.visitMonths(visit.ageValue),
-      _ => l10n.ageDays(visit.ageValue),
-    };
+  _ when visit.ageValue == 0 => l10n.visitAtBirth,
+  'week' => l10n.visitWeeks(visit.ageValue),
+  'month' => l10n.visitMonths(visit.ageValue),
+  _ => l10n.ageDays(visit.ageValue),
+};
 
 /// Reminders at 9 am: the day before, on the day, and a week late if the
 /// visit still isn't recorded. Visits already done get none.
@@ -110,3 +114,28 @@ List<Reminder> vaccineReminders(List<VaccineVisit> visits, AppLocalizations l10n
       ],
   ];
 }
+
+/// "RSV protection (antibody injection)", "Flu vaccine 2026–27".
+String optionalName(AppLocalizations l10n, String country, OptionalVaccine item) => switch (item.kind) {
+  OptionalKind.rsv => l10n.rsvName,
+  OptionalKind.flu => l10n.fluName(fluSeasonLabel(country, item.season!)),
+};
+
+/// A reminder at 9 am on the day each optional RSV / flu dose is due, unless
+/// it's recorded or the family hid them (todos.txt Q5).
+List<Reminder> optionalVaccineReminders(
+  List<OptionalVaccine> items,
+  Set<String> givenCodes,
+  AppLocalizations l10n,
+  String country,
+  String babyName,
+) => [
+  for (final item in items)
+    if (!givenCodes.contains(item.code))
+      Reminder(
+        key: 'optional-${item.code}',
+        at: DateTime(item.dueDate.year, item.dueDate.month, item.dueDate.day, 9),
+        title: l10n.optionalReminderTitle(babyName, optionalName(l10n, country, item)),
+        body: l10n.optionalReminderBody,
+      ),
+];

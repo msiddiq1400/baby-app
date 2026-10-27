@@ -21,8 +21,14 @@ bool canChangeBabyCountry(Baby baby, {required String? me, List<FamilyMember>? m
 
 /// `ref.watch(canChangeBabyCountryProvider(baby))`.
 final canChangeBabyCountryProvider = Provider.autoDispose.family<bool, Baby>((ref, baby) {
-  final me = ref.watch(currentUserIdProvider);
-  if (me != null && baby.createdBy == me) return true;
-  final members = ref.watch(familyMembersProvider(baby.familyId)).value;
-  return canChangeBabyCountry(baby, me: me, members: members);
+  try {
+    final me = ref.watch(currentUserIdProvider);
+    if (me == null) return false;
+    if (baby.createdBy == me) return true;
+    final members = ref.watch(familyMembersProvider(baby.familyId)).value;
+    return canChangeBabyCountry(baby, me: me, members: members);
+  } on Object {
+    // Signed-in state or the member list unknown (offline, server error): no.
+    return false;
+  }
 });

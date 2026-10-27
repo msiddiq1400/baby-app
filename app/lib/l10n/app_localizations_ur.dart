@@ -1990,6 +1990,64 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get pushUnavailable =>
       'خاندان کی اطلاعات ابھی اس فون پر دستیاب نہیں۔ نیچے آپ کی پسند محفوظ ہے اور بعد میں کام آئے گی۔';
+
+  @override
+  String get numOutOfHoursDoctor => 'رات اور چھٹی کے وقت ڈاکٹر';
+
+  @override
+  String get numHealthAdvice => 'صحت کے مشورے کی لائن (24 گھنٹے)';
+
+  @override
+  String get optionalVaccinesTitle => 'اختیاری – اپنے ڈاکٹر سے پوچھیں';
+
+  @override
+  String optionalVaccinesHelp(String country) {
+    return '$country میں یہ سب بچوں کو دیے جاتے ہیں، لیکن باقاعدہ شیڈول کا حصہ نہیں۔ اپنے ڈاکٹر یا کلینک سے پوچھیں کہ آپ کے بچے کو لگوانے چاہییں یا نہیں۔';
+  }
+
+  @override
+  String get optionalVaccinesHide => 'چھپائیں';
+
+  @override
+  String get optionalVaccinesHidden =>
+      'RSV اور فلو کی اختیاری یاد دہانیاں چھپی ہوئی ہیں۔';
+
+  @override
+  String get optionalVaccinesShow => 'دکھائیں';
+
+  @override
+  String get rsvName => 'RSV سے حفاظت (اینٹی باڈی کا انجکشن)';
+
+  @override
+  String get rsvNote =>
+      'RSV سے بچاتا ہے، سینے کا ایک عام انفیکشن جو چھوٹے بچوں کے لیے سب سے زیادہ خطرناک ہوتا ہے۔ اگر ماں کو حمل میں RSV ویکسین لگی تھی تو شاید بچے کو اس کی ضرورت نہ ہو۔';
+
+  @override
+  String fluName(String season) {
+    return 'فلو ویکسین $season';
+  }
+
+  @override
+  String get fluNote =>
+      'سال میں ایک بار، فلو کے موسم سے پہلے اور دوران لگتی ہے۔';
+
+  @override
+  String fluNoteFirst(int age) {
+    return 'پہلی بار $age سال سے کم عمر بچوں کو عام طور پر 4 ہفتے کے وقفے سے 2 خوراکیں لگتی ہیں۔';
+  }
+
+  @override
+  String get fluNoteNasal =>
+      'عام طور پر ناک کے اسپرے کی صورت میں دی جاتی ہے، جس میں سؤر کی جیلاٹین ہوتی ہے۔ آپ اس کی جگہ انجکشن مانگ سکتے ہیں۔';
+
+  @override
+  String optionalReminderTitle(String name, String vaccine) {
+    return '$name: $vaccine (اختیاری)';
+  }
+
+  @override
+  String get optionalReminderBody =>
+      'اپنے ڈاکٹر یا کلینک سے پوچھیں کہ لگوانی ہے یا نہیں۔';
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -3984,4 +4042,62 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   @override
   String get pushUnavailable =>
       'Khandan ki notifications abhi is phone par dastiyab nahi. Neeche aap ki pasand mehfooz hai aur baad mein kaam aayegi.';
+
+  @override
+  String get numOutOfHoursDoctor => 'Raat aur chhutti ke waqt doctor';
+
+  @override
+  String get numHealthAdvice => 'Sehat ke mashware ki line (24 ghante)';
+
+  @override
+  String get optionalVaccinesTitle => 'Ikhtiyari – apne doctor se poochein';
+
+  @override
+  String optionalVaccinesHelp(String country) {
+    return '$country mein yeh sab bachon ko diye jaate hain, lekin baqaida schedule ka hissa nahi. Apne doctor ya clinic se poochein ke aap ke bache ko lagwane chahiyen ya nahi.';
+  }
+
+  @override
+  String get optionalVaccinesHide => 'Chhupayein';
+
+  @override
+  String get optionalVaccinesHidden =>
+      'RSV aur flu ki ikhtiyari yaad dihaniyan chhupi hui hain.';
+
+  @override
+  String get optionalVaccinesShow => 'Dikhayein';
+
+  @override
+  String get rsvName => 'RSV se hifazat (antibody ka injection)';
+
+  @override
+  String get rsvNote =>
+      'RSV se bachata hai, seene ka aik aam infection jo chhote bachon ke liye sab se zyada khatarnaak hota hai. Agar maa ko hamal mein RSV vaccine lagi thi to shayad bache ko is ki zaroorat na ho.';
+
+  @override
+  String fluName(String season) {
+    return 'Flu vaccine $season';
+  }
+
+  @override
+  String get fluNote =>
+      'Saal mein aik baar, flu ke mausam se pehle aur dauran lagti hai.';
+
+  @override
+  String fluNoteFirst(int age) {
+    return 'Pehli baar $age saal se kam umar bachon ko aam taur par 4 hafte ke waqfe se 2 khuraakein lagti hain.';
+  }
+
+  @override
+  String get fluNoteNasal =>
+      'Aam taur par naak ke spray ki soorat mein di jaati hai, jis mein suar ki gelatine hoti hai. Aap is ki jagah injection maang sakte hain.';
+
+  @override
+  String optionalReminderTitle(String name, String vaccine) {
+    return '$name: $vaccine (ikhtiyari)';
+  }
+
+  @override
+  String get optionalReminderBody =>
+      'Apne doctor ya clinic se poochein ke lagwani hai ya nahi.';
 }
