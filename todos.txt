@@ -89,6 +89,10 @@ After D-U-N-S (11)
         store/app-store.md "In-App Purchases" (palna_pro_monthly,
         palna_pro_yearly with a 7-day trial), and App Privacy > Purchases >
         Purchase History. Then RevenueCat (38e).
+[ ] 46c. App Information > Digital Services Act: declare as a trader (Palna
+        sells Pro) after 12, so the company's address, phone and the email
+        hello@palnacare.com are what the EU App Store shows. Needed before
+        selling in the EU.
 [ ] 46b. Submit version 1.0 for App Store review (after 46 and 12).
 
 Only when we build those features
