@@ -82,7 +82,8 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 
 **Copyright:** 2026 followed by your legal name, exactly as on your Apple developer account (change it to Toolbox Services (SMC-Private) Limited after the move to an organization)
 
-**Screenshots (6.9" iPhone):** `app/tool/screenshots/out/iphone/` (1320 x 2868, git-ignored; made with
+**Screenshots:** App Store Connect (2026) asks for the "iPhone with Dynamic Island (medium display)" size, **1206 x 2622**: scale the 6.9" renders down (same proportions; `out/upload-iphone-6.3/`, RGB, 01-08 in order).
+**Source renders (6.9" iPhone):** `app/tool/screenshots/out/iphone/` (1320 x 2868, git-ignored; made with
 `flutter test tool/screenshots --dart-define=SHOT_DEVICE=iphone`, then flattened to RGB because
 App Store Connect rejects images with an alpha channel). Suggested order: timer_en, today_en, reports_en, vaccines_en, illness_en, growth_en, journal_en, timer_en_dark. Up to 10.
 
