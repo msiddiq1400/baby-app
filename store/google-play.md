@@ -57,6 +57,11 @@ Every type: collected, **not shared**, not ephemeral.
 | Health and fitness > Health info | Required | App functionality |
 | App activity > Other user-generated content | Optional | App functionality |
 | Photos and videos > Photos | Optional | App functionality |
+| App info and performance > Crash logs | Required | Analytics (Firebase Crashlytics, to fix crashes) |
+| App info and performance > Diagnostics | Required | Analytics (Firebase Crashlytics) |
+| Device or other IDs | Required | App functionality (push address for family notifications), Analytics (Crashlytics installation ID) |
+
+Firebase (Google) acts as our service provider, so this counts as **not shared** in Play's terms.
 
 ## When paid plans arrive
 

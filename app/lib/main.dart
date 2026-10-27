@@ -11,6 +11,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'app/app.dart';
 import 'core/config/env.dart';
+import 'core/crash_reports.dart';
 import 'data/local_db.dart';
 import 'data/local_schema.dart';
 import 'data/photo_repository.dart';
@@ -49,6 +50,8 @@ Future<void> main() async {
   // Push notifications from family members (Firebase); without it the app
   // works the same, just without them.
   await PushSetup.start();
+  // Crash reports (release builds only), on the same Firebase project.
+  await CrashReports.start(firebaseReady: PushSetup.available);
 
   final (db, photoQueue, photoFolder) = await _openDatabase();
   runApp(

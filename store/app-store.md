@@ -116,7 +116,13 @@ Data collected, all **linked to the user**, all **not used for tracking**, purpo
 | User Content | Photos or Videos | Monthly baby photos the parent chooses to add (shared only with their family) |
 | Identifiers | User ID | The account ID that keeps each family's data separate |
 
-Not collected: location, contacts, browsing, purchases, usage data, diagnostics, advertising data.
+Also collected, **not linked to the user**, not used for tracking, purpose **App Functionality**:
+
+| Apple category | Data type | Why |
+|---|---|---|
+| Diagnostics | Crash Data | Firebase Crashlytics crash reports (release builds; no user ID attached) |
+
+Not collected: location, contacts, browsing, purchases, usage data, other diagnostics, advertising data.
 
 ## Age rating
 

@@ -4,6 +4,10 @@ plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    // Crash reports (todos.txt 14c). google-services.json holds the same
+    // public Firebase ids as lib/core/config/firebase_config.dart.
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 // Upload key for Google Play (android/key.properties, git-ignored; the
