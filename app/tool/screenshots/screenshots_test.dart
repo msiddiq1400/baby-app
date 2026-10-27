@@ -156,6 +156,42 @@ final schedule = [
   VaccineDose(code: 'MR-2', name: 'Measles-Rubella', doseLabel: 'Dose 2', dueAgeValue: 15, dueAgeUnit: 'month', sortOrder: 60),
 ];
 
+// The vaccines screenshot shows a family in the UK (Palna is for families
+// everywhere, not one country): UKHSA schedule from 1 Sep 2026, as in
+// supabase/migrations/20261001000001_countries.sql.
+final ukBaby = Baby(
+  id: 'b1-uk',
+  familyId: 'f1',
+  name: 'Aisha',
+  birthDate: baby.birthDate,
+  sex: 'female',
+  birthWeightG: 3200,
+  countryCode: 'GB',
+);
+
+final ukSchedule = [
+  for (final (w, n, o) in [(8, 1, 10), (12, 2, 20), (16, 3, 30)]) ...[
+    VaccineDose(code: '6IN1-$n', name: '6-in-1 (DTaP/IPV/Hib/HepB)', doseLabel: 'Dose $n', dueAgeValue: w, dueAgeUnit: 'week', sortOrder: o),
+    if (n < 3) ...[
+      VaccineDose(code: 'MENB-$n', name: 'MenB', doseLabel: 'Dose $n', dueAgeValue: w, dueAgeUnit: 'week', sortOrder: o + 1),
+      VaccineDose(code: 'ROTA-$n', name: 'Rotavirus (oral)', doseLabel: 'Dose $n', dueAgeValue: w, dueAgeUnit: 'week', sortOrder: o + 2),
+    ] else
+      VaccineDose(code: 'PCV-1', name: 'Pneumococcal (PCV)', doseLabel: 'Dose 1', dueAgeValue: w, dueAgeUnit: 'week', sortOrder: o + 1),
+  ],
+  VaccineDose(code: 'PCV-2', name: 'Pneumococcal (PCV)', doseLabel: 'Dose 2 (booster)', dueAgeValue: 12, dueAgeUnit: 'month', sortOrder: 40),
+  VaccineDose(code: 'MENB-3', name: 'MenB', doseLabel: 'Dose 3 (booster)', dueAgeValue: 12, dueAgeUnit: 'month', sortOrder: 41),
+  VaccineDose(code: 'MMRV-1', name: 'MMRV (measles, mumps, rubella, chickenpox)', doseLabel: 'Dose 1', dueAgeValue: 12, dueAgeUnit: 'month', sortOrder: 42),
+  VaccineDose(code: '6IN1-4', name: '6-in-1 (DTaP/IPV/Hib/HepB)', doseLabel: 'Dose 4', dueAgeValue: 18, dueAgeUnit: 'month', sortOrder: 50),
+  VaccineDose(code: 'MMRV-2', name: 'MMRV (measles, mumps, rubella, chickenpox)', doseLabel: 'Dose 2', dueAgeValue: 18, dueAgeUnit: 'month', sortOrder: 51),
+];
+
+// The 8, 12 and 16 week visits given on time, at the GP surgery.
+final ukVaccinations = [
+  for (final d in ukSchedule)
+    if (d.dueAgeUnit == 'week')
+      Vaccination(id: 'uk-${d.code}', vaccineCode: d.code, givenOn: ageDays(d.dueAgeValue * 7), clinic: 'GP surgery'),
+];
+
 // Everything up to 14 weeks given on time.
 final vaccinations = [
   for (final d in schedule)
@@ -200,8 +236,10 @@ final overrides = [
   ),
   recentSleepsProvider.overrideWith((ref, id) => Stream.value(sleeps)),
   photosProvider.overrideWith((ref, id) => Stream.value(const <Photo>[])),
-  vaccineScheduleProvider.overrideWith((ref, country) => Stream.value(schedule)),
-  vaccinationsProvider.overrideWith((ref, id) => Stream.value(vaccinations)),
+  vaccineScheduleProvider.overrideWith((ref, country) => Stream.value(country == 'GB' ? ukSchedule : schedule)),
+  // Only the vaccines screenshot uses the UK baby (its own id: some vaccine
+  // codes are the same in both countries).
+  vaccinationsProvider.overrideWith((ref, id) => Stream.value(id == ukBaby.id ? ukVaccinations : vaccinations)),
   medicationsProvider.overrideWith((ref, id) => Stream.value([vitaminD])),
   recentDosesProvider.overrideWith(
     (ref, id) => Stream.value([
@@ -358,7 +396,7 @@ void main() {
     'solids': (1, FeedingScreen(baby: baby), null),
     'growth': (2, GrowthScreen(baby: baby), null),
     'milestones': (2, GrowthScreen(baby: baby), 'milestones'),
-    'vaccines': (3, HealthScreen(baby: baby), null),
+    'vaccines': (3, HealthScreen(baby: ukBaby), null),
     'reports': (0, ReportsScreen(baby: baby), null),
     'journal': (0, JournalScreen(baby: baby), null),
     'illness': (3, IllnessScreen(baby: baby, illnessId: 'ill'), null),
