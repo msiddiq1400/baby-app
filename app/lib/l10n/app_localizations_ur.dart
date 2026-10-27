@@ -2048,6 +2048,160 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get optionalReminderBody =>
       'اپنے ڈاکٹر یا کلینک سے پوچھیں کہ لگوانی ہے یا نہیں۔';
+
+  @override
+  String get proTitle => 'پالنا پرو';
+
+  @override
+  String get proIntro => 'مفت پلان کی ہر چیز، اور:';
+
+  @override
+  String get proFeatureBabies => 'جڑواں، بہن بھائی: ہر بچہ شامل کریں';
+
+  @override
+  String get proFeaturePhotos => 'ہر بچے کی مہینے میں 10 تک تصویریں (مفت: 1)';
+
+  @override
+  String get proFeatureReports => '30 دن کی رپورٹس، اور ڈاکٹر کے لیے PDF خلاصہ';
+
+  @override
+  String get proFeatureThemes =>
+      'رنگوں کے تھیم، اور ہوم اسکرین ویجٹ پر آج کا حساب';
+
+  @override
+  String get proFamilyNote =>
+      'ایک سبسکرپشن پورے خاندان کے لیے: جن کے ساتھ آپ بچہ شیئر کرتے ہیں انہیں بھی پرو ملتا ہے۔';
+
+  @override
+  String get proYearly => 'سالانہ';
+
+  @override
+  String get proMonthly => 'ماہانہ';
+
+  @override
+  String proPricePerYear(String price) {
+    return '$price / سال';
+  }
+
+  @override
+  String proPricePerMonth(String price) {
+    return '$price / مہینہ';
+  }
+
+  @override
+  String proPricePerDay(String price) {
+    return 'یعنی تقریباً $price روزانہ';
+  }
+
+  @override
+  String proSave(int percent) {
+    return '$percent% بچت';
+  }
+
+  @override
+  String proTrialDays(int days) {
+    return '$days دن مفت';
+  }
+
+  @override
+  String get proStartTrial => 'مفت ٹرائل شروع کریں';
+
+  @override
+  String get proSubscribe => 'سبسکرائب کریں';
+
+  @override
+  String get proRestore => 'پچھلی خریداری بحال کریں';
+
+  @override
+  String get proLegalApple =>
+      'ادائیگی آپ کے Apple ID سے ہوگی۔ سبسکرپشن خود بخود تجدید ہوتی ہے جب تک آپ مدت ختم ہونے سے کم از کم 24 گھنٹے پہلے اسے منسوخ نہ کریں؛ اسے Apple ID کی سیٹنگز میں سنبھالیں یا منسوخ کریں۔ مفت ٹرائل کے بعد اوپر والی قیمت لی جاتی ہے۔';
+
+  @override
+  String get proLegalGoogle =>
+      'ادائیگی آپ کے Google Play اکاؤنٹ سے ہوگی۔ سبسکرپشن خود بخود تجدید ہوتی ہے جب تک آپ مدت ختم ہونے سے پہلے اسے منسوخ نہ کریں؛ اسے Google Play > Payments and subscriptions میں سنبھالیں یا منسوخ کریں۔ مفت ٹرائل کے بعد اوپر والی قیمت لی جاتی ہے۔';
+
+  @override
+  String get proTerms => 'استعمال کی شرائط';
+
+  @override
+  String get proPrivacy => 'پرائیویسی پالیسی';
+
+  @override
+  String get proUnavailable =>
+      'پالنا پرو ابھی اس فون پر نہیں خریدا جا سکتا۔ باقی سب کچھ معمول کے مطابق کام کرتا ہے۔';
+
+  @override
+  String get proActive => 'آپ کے خاندان کے پاس پالنا پرو ہے';
+
+  @override
+  String proActiveUntil(String date) {
+    return '$date تک';
+  }
+
+  @override
+  String get proThanks => 'پالنا کا ساتھ دینے کا شکریہ!';
+
+  @override
+  String get proManage => 'سبسکرپشن سنبھالیں';
+
+  @override
+  String get proRestoreNone =>
+      'اس اسٹور اکاؤنٹ پر پالنا پرو کی کوئی خریداری نہیں ملی۔';
+
+  @override
+  String get proError => 'خریداری مکمل نہیں ہو سکی۔ دوبارہ کوشش کریں۔';
+
+  @override
+  String get proReasonBabies => 'پالنا پرو کے ساتھ ایک سے زیادہ بچے شامل کریں';
+
+  @override
+  String get proReasonPhotos =>
+      'پالنا پرو کے ساتھ اس مہینے کی مزید تصویریں شامل کریں';
+
+  @override
+  String get proReasonReports => 'پالنا پرو کے ساتھ 30 دن ایک ساتھ دیکھیں';
+
+  @override
+  String get proReasonPdf => 'ڈاکٹر کے لیے PDF خلاصہ پالنا پرو کا حصہ ہے';
+
+  @override
+  String get proReasonThemes => 'رنگوں کے تھیم پالنا پرو کا حصہ ہیں';
+
+  @override
+  String get proBadge => 'پرو';
+
+  @override
+  String get settingsProFree => 'مفت پلان · دیکھیں پرو میں کیا ہے';
+
+  @override
+  String get settingsProActive => 'پرو، آپ کے پورے خاندان کے لیے';
+
+  @override
+  String get photoAddAnother => 'ایک اور شامل کریں';
+
+  @override
+  String get photoMonthFull =>
+      'اس مہینے میں 10 تصویریں ہیں، ایک مہینے کی زیادہ سے زیادہ حد۔';
+
+  @override
+  String get themeColour => 'رنگ';
+
+  @override
+  String get themeNavy => 'نیلا';
+
+  @override
+  String get themeRose => 'گلابی';
+
+  @override
+  String get themeSage => 'سبز';
+
+  @override
+  String get themeLavender => 'جامنی';
+
+  @override
+  String widgetToday(int feeds, int diapers, String sleep) {
+    return 'آج: $feeds فیڈ · $diapers ڈائپر · $sleep نیند';
+  }
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -4100,4 +4254,163 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   @override
   String get optionalReminderBody =>
       'Apne doctor ya clinic se poochein ke lagwani hai ya nahi.';
+
+  @override
+  String get proTitle => 'Palna Pro';
+
+  @override
+  String get proIntro => 'Free plan ki har cheez, aur:';
+
+  @override
+  String get proFeatureBabies => 'Judwaan, behan bhai: har bacha shamil karein';
+
+  @override
+  String get proFeaturePhotos =>
+      'Har bache ki mahine mein 10 tak tasveerein (Free: 1)';
+
+  @override
+  String get proFeatureReports =>
+      '30 din ki reports, aur doctor ke liye PDF khulasa';
+
+  @override
+  String get proFeatureThemes =>
+      'Rangon ke theme, aur home screen widget par aaj ka hisaab';
+
+  @override
+  String get proFamilyNote =>
+      'Aik subscription poore khandan ke liye: jin ke saath aap bacha share karte hain unhein bhi Pro milta hai.';
+
+  @override
+  String get proYearly => 'Saalana';
+
+  @override
+  String get proMonthly => 'Mahana';
+
+  @override
+  String proPricePerYear(String price) {
+    return '$price / saal';
+  }
+
+  @override
+  String proPricePerMonth(String price) {
+    return '$price / mahina';
+  }
+
+  @override
+  String proPricePerDay(String price) {
+    return 'Yaani taqreeban $price rozana';
+  }
+
+  @override
+  String proSave(int percent) {
+    return '$percent% bachat';
+  }
+
+  @override
+  String proTrialDays(int days) {
+    return '$days din free';
+  }
+
+  @override
+  String get proStartTrial => 'Free trial shuru karein';
+
+  @override
+  String get proSubscribe => 'Subscribe karein';
+
+  @override
+  String get proRestore => 'Pichli khareedari bahaal karein';
+
+  @override
+  String get proLegalApple =>
+      'Adaaigi aap ke Apple ID se hogi. Subscription khud ba khud renew hoti hai jab tak aap muddat khatam hone se kam az kam 24 ghante pehle isay cancel na karein; isay Apple ID ki settings mein manage ya cancel karein. Free trial ke baad oopar wali qeemat li jaati hai.';
+
+  @override
+  String get proLegalGoogle =>
+      'Adaaigi aap ke Google Play account se hogi. Subscription khud ba khud renew hoti hai jab tak aap muddat khatam hone se pehle isay cancel na karein; isay Google Play > Payments and subscriptions mein manage ya cancel karein. Free trial ke baad oopar wali qeemat li jaati hai.';
+
+  @override
+  String get proTerms => 'Istemaal ki sharaait';
+
+  @override
+  String get proPrivacy => 'Privacy policy';
+
+  @override
+  String get proUnavailable =>
+      'Palna Pro abhi is phone par nahi khareeda ja sakta. Baqi sab kuch maamool ke mutabiq kaam karta hai.';
+
+  @override
+  String get proActive => 'Aap ke khandan ke paas Palna Pro hai';
+
+  @override
+  String proActiveUntil(String date) {
+    return '$date tak';
+  }
+
+  @override
+  String get proThanks => 'Palna ka saath dene ka shukriya!';
+
+  @override
+  String get proManage => 'Subscription manage karein';
+
+  @override
+  String get proRestoreNone =>
+      'Is store account par Palna Pro ki koi khareedari nahi mili.';
+
+  @override
+  String get proError =>
+      'Khareedari mukammal nahi ho saki. Dobara koshish karein.';
+
+  @override
+  String get proReasonBabies =>
+      'Palna Pro ke saath aik se zyada bache shamil karein';
+
+  @override
+  String get proReasonPhotos =>
+      'Palna Pro ke saath is mahine ki mazeed tasveerein shamil karein';
+
+  @override
+  String get proReasonReports => 'Palna Pro ke saath 30 din aik saath dekhein';
+
+  @override
+  String get proReasonPdf =>
+      'Doctor ke liye PDF khulasa Palna Pro ka hissa hai';
+
+  @override
+  String get proReasonThemes => 'Rangon ke theme Palna Pro ka hissa hain';
+
+  @override
+  String get proBadge => 'PRO';
+
+  @override
+  String get settingsProFree => 'Free plan · dekhein Pro mein kya hai';
+
+  @override
+  String get settingsProActive => 'Pro, aap ke poore khandan ke liye';
+
+  @override
+  String get photoAddAnother => 'Aik aur shamil karein';
+
+  @override
+  String get photoMonthFull =>
+      'Is mahine mein 10 tasveerein hain, aik mahine ki zyada se zyada hadd.';
+
+  @override
+  String get themeColour => 'Rang';
+
+  @override
+  String get themeNavy => 'Neela';
+
+  @override
+  String get themeRose => 'Gulabi';
+
+  @override
+  String get themeSage => 'Sabz';
+
+  @override
+  String get themeLavender => 'Jamni';
+
+  @override
+  String widgetToday(int feeds, int diapers, String sleep) {
+    return 'Aaj: $feeds feed · $diapers diaper · $sleep neend';
+  }
 }

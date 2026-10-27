@@ -22,8 +22,8 @@ import 'models.dart';
 // phone and uploads to / downloads from the private Storage bucket "photos"
 // at <family_id>/<photo id>.jpg, retrying while offline.
 
-/// One photo per baby per month of age (the free plan; the server enforces
-/// it too). A paid plan will allow more (todos.txt item 38).
+/// The month already has as many photos as the plan allows (Free 1, Pro
+/// 10; the server enforces it too, todos.txt 38b).
 class PhotoLimitException implements Exception {
   const PhotoLimitException();
 }
@@ -62,7 +62,11 @@ class SupabasePhotoStorage implements RemoteStorage {
     }
     await _supabase.storage
         .from(_bucket)
-        .uploadBinary(_path(attachment), bytes.takeBytes(), fileOptions: const FileOptions(contentType: 'image/jpeg', upsert: true));
+        .uploadBinary(
+          _path(attachment),
+          bytes.takeBytes(),
+          fileOptions: const FileOptions(contentType: 'image/jpeg', upsert: true),
+        );
   }
 
   @override
@@ -75,16 +79,18 @@ class SupabasePhotoStorage implements RemoteStorage {
 
 /// The queue, created in main() with the folder the files live in.
 AttachmentQueue createPhotoQueue(PowerSyncDatabase db, SupabaseClient supabase, String folder) => AttachmentQueue(
-      db: db,
-      remoteStorage: SupabasePhotoStorage(supabase),
-      localStorage: IOLocalStorage(Directory(folder)),
-      watchAttachments: () => db.watch('SELECT id, family_id FROM photos WHERE deleted_at IS NULL').map(
-            (rows) => [
-              for (final r in rows)
-                WatchedAttachmentItem(id: r['id'] as String, fileExtension: 'jpg', metaData: r['family_id'] as String),
-            ],
-          ),
-    );
+  db: db,
+  remoteStorage: SupabasePhotoStorage(supabase),
+  localStorage: IOLocalStorage(Directory(folder)),
+  watchAttachments: () => db
+      .watch('SELECT id, family_id FROM photos WHERE deleted_at IS NULL')
+      .map(
+        (rows) => [
+          for (final r in rows)
+            WatchedAttachmentItem(id: r['id'] as String, fileExtension: 'jpg', metaData: r['family_id'] as String),
+        ],
+      ),
+);
 
 class PhotoRepository {
   PhotoRepository(this._db, this._queue, this._folder, this._supabase);
@@ -99,7 +105,7 @@ class PhotoRepository {
       .watch(
         'SELECT p.id, p.age_month, p.caption, a.local_uri FROM photos p '
         'LEFT JOIN attachments_queue a ON a.id = p.id '
-        'WHERE p.baby_id = ? AND p.deleted_at IS NULL ORDER BY p.age_month',
+        'WHERE p.baby_id = ? AND p.deleted_at IS NULL ORDER BY p.age_month, p.created_at',
         parameters: [babyId],
       )
       .map(
@@ -117,14 +123,20 @@ class PhotoRepository {
         ],
       );
 
-  /// Saves [jpeg] as the photo for [ageMonth]; throws [PhotoLimitException]
-  /// if that month already has one.
-  Future<void> add(Baby baby, {required int ageMonth, required Uint8List jpeg, String? caption}) async {
-    final taken = await _db.getOptional(
-      'SELECT 1 FROM photos WHERE baby_id = ? AND age_month = ? AND deleted_at IS NULL',
+  /// Saves [jpeg] as a photo for [ageMonth]; throws [PhotoLimitException]
+  /// if that month already has [perMonth].
+  Future<void> add(
+    Baby baby, {
+    required int ageMonth,
+    required Uint8List jpeg,
+    String? caption,
+    int perMonth = 1,
+  }) async {
+    final row = await _db.get(
+      'SELECT count(*) AS n FROM photos WHERE baby_id = ? AND age_month = ? AND deleted_at IS NULL',
       [baby.id, ageMonth],
     );
-    if (taken != null) throw const PhotoLimitException();
+    if ((row['n'] as int) >= perMonth) throw const PhotoLimitException();
     await _queue.saveFile(
       data: Stream.value(jpeg),
       mediaType: 'image/jpeg',

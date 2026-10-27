@@ -3638,6 +3638,270 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ask your doctor or clinic whether to have it.'**
   String get optionalReminderBody;
+
+  /// No description provided for @proTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Palna Pro'**
+  String get proTitle;
+
+  /// No description provided for @proIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything in Free, plus:'**
+  String get proIntro;
+
+  /// No description provided for @proFeatureBabies.
+  ///
+  /// In en, this message translates to:
+  /// **'Twins, siblings: add every baby'**
+  String get proFeatureBabies;
+
+  /// No description provided for @proFeaturePhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to 10 photos a month for each baby (Free: 1)'**
+  String get proFeaturePhotos;
+
+  /// No description provided for @proFeatureReports.
+  ///
+  /// In en, this message translates to:
+  /// **'30-day reports, and the PDF summary for the doctor'**
+  String get proFeatureReports;
+
+  /// No description provided for @proFeatureThemes.
+  ///
+  /// In en, this message translates to:
+  /// **'Colour themes, and today\'s totals on the home-screen widget'**
+  String get proFeatureThemes;
+
+  /// No description provided for @proFamilyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'One subscription covers the whole family: everyone you share the baby with gets Pro too.'**
+  String get proFamilyNote;
+
+  /// No description provided for @proYearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get proYearly;
+
+  /// No description provided for @proMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get proMonthly;
+
+  /// No description provided for @proPricePerYear.
+  ///
+  /// In en, this message translates to:
+  /// **'{price} / year'**
+  String proPricePerYear(String price);
+
+  /// No description provided for @proPricePerMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'{price} / month'**
+  String proPricePerMonth(String price);
+
+  /// No description provided for @proPricePerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s about {price} a day'**
+  String proPricePerDay(String price);
+
+  /// No description provided for @proSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save {percent}%'**
+  String proSave(int percent);
+
+  /// No description provided for @proTrialDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days free'**
+  String proTrialDays(int days);
+
+  /// No description provided for @proStartTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'Start free trial'**
+  String get proStartTrial;
+
+  /// No description provided for @proSubscribe.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe'**
+  String get proSubscribe;
+
+  /// No description provided for @proRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchases'**
+  String get proRestore;
+
+  /// No description provided for @proLegalApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment is charged to your Apple ID. The subscription renews automatically unless you cancel it at least 24 hours before the period ends; manage or cancel it in your Apple ID settings. After a free trial, the price above is charged.'**
+  String get proLegalApple;
+
+  /// No description provided for @proLegalGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment is charged to your Google Play account. The subscription renews automatically unless you cancel it before the period ends; manage or cancel it in Google Play > Payments and subscriptions. After a free trial, the price above is charged.'**
+  String get proLegalGoogle;
+
+  /// No description provided for @proTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of use'**
+  String get proTerms;
+
+  /// No description provided for @proPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get proPrivacy;
+
+  /// No description provided for @proUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Palna Pro can\'t be bought on this phone yet. Everything else works as usual.'**
+  String get proUnavailable;
+
+  /// No description provided for @proActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Your family has Palna Pro'**
+  String get proActive;
+
+  /// No description provided for @proActiveUntil.
+  ///
+  /// In en, this message translates to:
+  /// **'Until {date}'**
+  String proActiveUntil(String date);
+
+  /// No description provided for @proThanks.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for supporting Palna!'**
+  String get proThanks;
+
+  /// No description provided for @proManage.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage subscription'**
+  String get proManage;
+
+  /// No description provided for @proRestoreNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No Palna Pro purchase was found for this store account.'**
+  String get proRestoreNone;
+
+  /// No description provided for @proError.
+  ///
+  /// In en, this message translates to:
+  /// **'The purchase didn\'t go through. Please try again.'**
+  String get proError;
+
+  /// No description provided for @proReasonBabies.
+  ///
+  /// In en, this message translates to:
+  /// **'Add more than one baby with Palna Pro'**
+  String get proReasonBabies;
+
+  /// No description provided for @proReasonPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Add more photos for this month with Palna Pro'**
+  String get proReasonPhotos;
+
+  /// No description provided for @proReasonReports.
+  ///
+  /// In en, this message translates to:
+  /// **'See 30 days at a time with Palna Pro'**
+  String get proReasonReports;
+
+  /// No description provided for @proReasonPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'The PDF summary for the doctor is part of Palna Pro'**
+  String get proReasonPdf;
+
+  /// No description provided for @proReasonThemes.
+  ///
+  /// In en, this message translates to:
+  /// **'Colour themes are part of Palna Pro'**
+  String get proReasonThemes;
+
+  /// No description provided for @proBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'PRO'**
+  String get proBadge;
+
+  /// No description provided for @settingsProFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free plan · see what Pro adds'**
+  String get settingsProFree;
+
+  /// No description provided for @settingsProActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro, for your whole family'**
+  String get settingsProActive;
+
+  /// No description provided for @photoAddAnother.
+  ///
+  /// In en, this message translates to:
+  /// **'Add another'**
+  String get photoAddAnother;
+
+  /// No description provided for @photoMonthFull.
+  ///
+  /// In en, this message translates to:
+  /// **'This month has 10 photos, the most for one month.'**
+  String get photoMonthFull;
+
+  /// No description provided for @themeColour.
+  ///
+  /// In en, this message translates to:
+  /// **'Colour'**
+  String get themeColour;
+
+  /// No description provided for @themeNavy.
+  ///
+  /// In en, this message translates to:
+  /// **'Navy'**
+  String get themeNavy;
+
+  /// No description provided for @themeRose.
+  ///
+  /// In en, this message translates to:
+  /// **'Rose'**
+  String get themeRose;
+
+  /// No description provided for @themeSage.
+  ///
+  /// In en, this message translates to:
+  /// **'Sage'**
+  String get themeSage;
+
+  /// No description provided for @themeLavender.
+  ///
+  /// In en, this message translates to:
+  /// **'Lavender'**
+  String get themeLavender;
+
+  /// No description provided for @widgetToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today: {feeds} feeds · {diapers} diapers · {sleep} sleep'**
+  String widgetToday(int feeds, int diapers, String sleep);
 }
 
 class _AppLocalizationsDelegate

@@ -200,6 +200,8 @@ void main() {
     });
 
     flowWidgets('Add another baby: same family, becomes the chosen baby', (tester) async {
+      // A second baby needs Palna Pro (38b).
+      await tester.runAsync(env.makePro);
       await pumpPalna(tester, env);
       await openSettings(tester);
       await tapAndSettle(tester, find.text(en.addAnotherBaby));

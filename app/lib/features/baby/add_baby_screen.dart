@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/numbers.dart';
+import '../../core/providers.dart';
 import '../../data/baby_repository.dart';
 import '../../data/models.dart';
 import '../../data/photo_repository.dart';
@@ -94,6 +95,7 @@ class _AddBabyScreenState extends ConsumerState<AddBabyScreen> {
       if (existing == null) {
         final id = await repo.addBaby(
           name: _name.text.trim(),
+          createdBy: ref.read(currentUserIdProvider),
           birthDate: _birthDate!,
           countryCode: _country!,
           familyId: widget.familyId,

@@ -92,6 +92,18 @@
             android:textSize="16sp" />
     </LinearLayout>
 
+    <!-- Palna Pro: today's totals. -->
+    <TextView
+        android:id="@+id/today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="#DCE4F2"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/vaccine"
         android:layout_width="wrap_content"

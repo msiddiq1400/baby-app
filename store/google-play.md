@@ -63,7 +63,15 @@ Every type: collected, **not shared**, not ephemeral.
 
 Firebase (Google) acts as our service provider, so this counts as **not shared** in Play's terms.
 
-## When paid plans arrive
+## Palna Pro (todos.txt 38b, 38d)
 
-Content rating: digital purchases Yes. Data safety: add Financial info > Purchase history.
-Give the demo account the top plan. Financial features stay "none".
+Monetize > Products > Subscriptions, product IDs matching RevenueCat:
+
+| Product ID | Base plan | Price | Offer |
+|---|---|---|---|
+| palna_pro_monthly | monthly, auto-renewing | Rs 299 (US $2.99, others from it) | none |
+| palna_pro_yearly | yearly, auto-renewing | Rs 2,499 (US $19.99) | 7-day free trial, new customers |
+
+Content rating: digital purchases **Yes**. Data safety: add **Financial info > Purchase history**
+(collected, not shared, required, App functionality). Financial features stay "none". The demo
+account review@palnacare.com already has Pro (pro_emails table).

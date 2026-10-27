@@ -19,9 +19,11 @@ class BabyRepository {
 
   /// Adds a baby to [familyId], or to a new family if the user has none yet
   /// (the server makes the creator its owner when it uploads). Returns the
-  /// new baby's id.
+  /// new baby's id. [createdBy] (the signed-in user) is saved on the phone
+  /// right away, so they can set the country before it has synced (Q1).
   Future<String> addBaby({
     required String name,
+    String? createdBy,
     required DateTime birthDate,
     required String countryCode,
     String? familyId,
@@ -42,6 +44,7 @@ class BabyRepository {
         'birth_length_mm': birthLengthMm,
         'birth_head_mm': birthHeadMm,
         'country_code': countryCode,
+        'created_by': ?createdBy,
         'created_at': utcTimestamp(DateTime.now()),
       });
     });

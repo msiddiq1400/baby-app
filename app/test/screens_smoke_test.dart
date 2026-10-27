@@ -45,6 +45,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'test_app.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:baby_app/features/plans/paywall_screen.dart';
 
 final now = DateTime.now();
 DateTime ago({int days = 0, int hours = 0, int minutes = 0}) =>
@@ -413,6 +414,7 @@ void main() {
     'Sign in': () => const SignInScreen(),
     'Reset password': () => const ResetPasswordScreen(email: 'sana@example.com'),
     'Edit baby': () => AddBabyScreen(existing: baby),
+    'Palna Pro': () => const PaywallScreen(reason: 'Add more than one baby with Palna Pro'),
   };
 
   for (final locale in const [
