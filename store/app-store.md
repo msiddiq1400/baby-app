@@ -120,6 +120,7 @@ Data collected, all **linked to the user**, all **not used for tracking**, purpo
 | Contact Info | Name | Shown to family members who share a baby |
 | Contact Info | Email Address | Sign-in and sign-up codes |
 | Health & Fitness | Health | Baby's growth, feeds, sleep, vaccines, medicines, symptoms, illnesses |
+| Sensitive Info | Sensitive Info | Birth details (date, weight, length, head size), breastfeeding and pumping logs: Apple lists "pregnancy or childbirth information" here, so declare it |
 | Location | Coarse Location | No: the baby's country is chosen by the parent, not read from the phone, so it is not "location" in Apple's sense |
 | User Content | Other User Content | Notes, milestones, foods tried |
 | User Content | Photos or Videos | Monthly baby photos the parent chooses to add (shared only with their family) |
