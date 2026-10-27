@@ -153,13 +153,22 @@ Only when we build those features
 [~] 38e. RevenueCat (revenuecat.com, free until ~$2,500/month in sales).
         Done 27 Oct: project "Palna", entitlement "pro", offering "default"
         (Monthly, Yearly), App Store app (In-App Purchase key NHFX3Y85NR),
-        Test Store key (debug builds), Apple public key in app/env/prod.json.
-        - [ ] Codemagic > group palna_prod: add REVENUECAT_APPLE_KEY =
-          appl_jREEioWGhJtuRXOZgXBpSpDBwOJ (public key), and later
-          REVENUECAT_GOOGLE_KEY.
-        - [ ] Play Store app (com.palnacare.app): service account JSON from
-          Google Cloud "Baby App", invited in Play Console with financial
-          and orders permissions; then send Claude the goog_ key.
+        Test Store key (debug builds), Apple and Google public keys in
+        app/env/prod.json. Play Store app added with service account
+        revenuecat@baby-app-510018.iam.gserviceaccount.com (key in
+        D:/projects/business/google-account/, invited in Play Console with
+        app info, financial data, orders and testing-track releases;
+        key creation allowed for project Baby App by an org policy
+        override). Google takes up to 36 h to accept it.
+        - [ ] Codemagic > baby-app > Environment variables, group
+          palna_prod: REVENUECAT_APPLE_KEY = appl_jREEioWGhJtuRXOZgXBpSpDBwOJ
+          and REVENUECAT_GOOGLE_KEY = goog_ydYQOQSdVOQiLxpeKkRzjRAUQMH
+          (public keys), and GCLOUD_SERVICE_ACCOUNT_CREDENTIALS = the whole
+          service account JSON (Secure). The last one also fixes the
+          failing Android build (it uploads to Play internal testing).
+        - [ ] 28 Oct: RevenueCat > Palna (Play Store) > Check again; then
+          Google developer notifications: pick / create a topic > Connect
+          to Google (Cloud Pub/Sub API enabled in Baby App first).
         - [ ] Secret key (v1) into Supabase > Edge Functions > Secrets as
           REVENUECAT_SECRET_KEY; Claude sets REVENUECAT_WEBHOOK_AUTH; then
           RevenueCat > Integrations > Webhooks: URL
