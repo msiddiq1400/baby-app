@@ -17,7 +17,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 
 **Promotional text (170)**
 
-> Log feeds, sleep and diapers in seconds, in English, Urdu or Roman Urdu. Works offline, and the whole family sees the same log.
+> Log feeds, sleep and diapers in seconds. Works offline, and the whole family sees the same log on their own phones.
 
 **Description (4000)**
 
@@ -31,9 +31,8 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 >
 > YOUR LANGUAGE, YOUR COUNTRY
 > • Vaccine schedules for 23 countries: Pakistan's EPI, the UK, US, Canada, the Gulf, Europe, Australia and more, with reminders before each visit
-> • Emergency numbers for your country, wherever you live
+> • Emergency numbers for your country, and hot-weather advice where it matters
 > • Desi first foods and 15 recipes for babies, from lauki purée at 6 months to qeema aloo at 10
-> • Emergency numbers and advice for hot weather
 > • Full Urdu and Roman Urdu, not just English
 >
 > TRACK EVERYTHING IN ONE PLACE
@@ -104,7 +103,9 @@ App Store Connect rejects images with an alpha channel). Suggested order: timer_
 >
 > The language can be switched between English, Urdu and Roman Urdu from the globe icon on the sign-in screen or in Settings. Data is stored on the phone and syncs to our server, so the app works offline.
 >
-> Palna shows general guidance from WHO, NHS and Pakistan's EPI programme and always tells parents to confirm with their doctor; it does not diagnose or give treatment.
+> Palna Pro (optional subscription, Settings > Palna Pro): the demo account already has Pro for free, so every Pro feature (more babies, more photos, 30-day reports, the PDF summary, colour themes) can be checked without buying.
+>
+> Palna shows general guidance from WHO, NHS and national vaccine programmes and always tells parents to confirm with their doctor; it does not diagnose or give treatment.
 
 **Demo account:** Supabase > Authentication > Users > Add user > Create new user: email `review@palnacare.com`, a strong password, tick "Auto Confirm User". Then sign in with it on your phone and add a sample baby with a few feeds, sleeps, diapers and a vaccine, so the reviewer sees a real app. Keep the account; Apple reuses it for every update.
 
