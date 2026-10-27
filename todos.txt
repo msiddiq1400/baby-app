@@ -169,11 +169,10 @@ Only when we build those features
         - [ ] 28 Oct: RevenueCat > Palna (Play Store) > Check again; then
           Google developer notifications: pick / create a topic > Connect
           to Google (Cloud Pub/Sub API enabled in Baby App first).
-        - [ ] Secret key (v1) into Supabase > Edge Functions > Secrets as
-          REVENUECAT_SECRET_KEY; Claude sets REVENUECAT_WEBHOOK_AUTH; then
-          RevenueCat > Integrations > Webhooks: URL
-          https://ixrlofqsstddisizofwc.supabase.co/functions/v1/revenuecat,
-          Authorization "Bearer <that password>" (works after the release).
+        - [x] Supabase secrets REVENUECAT_SECRET_KEY and
+          REVENUECAT_WEBHOOK_AUTH set; RevenueCat webhook "Supabase" ->
+          .../functions/v1/revenuecat (Active). Works from the release that
+          deploys the revenuecat function.
         - [ ] After 38c / 38d: import palna_pro_monthly / palna_pro_yearly,
           attach to "pro", put them in the Monthly / Yearly packages.
         - [ ] Test with sandbox / licence testers.
