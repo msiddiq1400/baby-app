@@ -2,11 +2,11 @@ PALNA (baby-app): TO-DO LIST
 Claude keeps this up to date. Open items only, most urgent first; finished
 work lives in git history (and a few useful facts in REFERENCE at the end).
 Item numbers never change (code comments refer to some of them), so they
-aren't in order. Last tidied 27 Oct 2026.
+aren't in order. Last tidied 28 Oct 2026.
 
-Sections: 1 code changes (Claude) / 2 Apple setup / 3 Google Play setup /
-4 other setup and security / 5 testing on a phone / 6 content and legal
-review / 7 company.
+Sections: 0 next up / 1 code changes (Claude) / 2 Apple setup / 3 Google
+Play setup / 4 other setup and security / 5 testing on a phone / 6 content
+and legal review / 7 company.
 
 [ ] open   [~] started / partly done   [x] done
 
@@ -15,8 +15,33 @@ everywhere, not for one country. No "made for Pakistan" / "Pakistani
 families" wording in the store listings, website, invites or new copy;
 Pakistan's EPI, desi foods and 1122 can still be named as highlights.
 App Store subtitle and website top line: "Baby tracker for the family".
-(Website fixed on branch chore/baby-app-global-positioning-v1, live with
-the next release.)
+(Website and store text updated in dev, PR #6; live with the release.)
+
+====================================================================
+0. NEXT UP (in this order)
+====================================================================
+
+[ ] 48. RELEASE dev -> main (say "release"). It ships PR #5 (country lock,
+        17 countries, RSV / flu, Palna Pro, crash reports) and PR #6 (the
+        "families everywhere" wording, UK vaccines screenshot):
+        - migrations 20261027000002-05 apply: the Free limits switch on
+          for everyone (1 baby per family, 1 photo per baby per month;
+          families that already have more keep them);
+        - the revenuecat Edge Function deploys (webhook starts working);
+        - palnacare.com shows the new wording;
+        - Codemagic builds both apps. Watch them: the first iPhone build
+          with the Crashlytics and RevenueCat pods (never built on a Mac
+          yet), and the first Android build that uploads to Play internal
+          testing (GCLOUD_SERVICE_ACCOUNT_CREDENTIALS added 27 Oct).
+        After it: phone checks (47), add the new iPhone build to the App
+        Store version (46), Android testers get the Play internal build.
+[ ] 38e (28 Oct part): RevenueCat > Palna (Play Store) > Check again; then
+        Google developer notifications (details in 38e, section 4).
+[ ] 12 (lookup): Apple D-U-N-S lookup again on 30 Oct and 2 Nov; contact
+        Apple on 3 Nov if still "No match" (details in 12, section 2).
+[ ] 13 (wait): Google is verifying the new organization payments profile;
+        an email comes when it's done (details in 13, section 3).
+
 
 ====================================================================
 1. CODE CHANGES (Claude builds them; one branch from dev per batch)
@@ -29,6 +54,14 @@ their setup in sections 2-4. Decided: Q3 keep only the new UK schedule
 app, not on the website.
 
 Ready: Claude starts when you say go
+[ ] 49. Review pack for the pediatrician (21-23): one readable document
+        with all 23 vaccine schedules, the RSV / flu rules, the medical
+        wording and the solids guide, each with its source and the open
+        questions (from docs/vaccine-research-2026-10/), for the doctor to
+        mark up.
+[ ] 50. toolbox.services (toolbox repo): make sure the site shows the
+        company's legal name "Toolbox Services (SMC-Private) Limited" and
+        address (About / footer) before Apple checks the company (12).
 [ ] 38f. Palna Pro, later: Expert plan once there's something for it (AI
         assistant 39, "Is this normal?" 28); RSV / flu rules re-check each
         summer (US court case, Norway RSV from 1 Jul 2027; see
@@ -78,8 +111,7 @@ Can do now
 [~] 46. App Store listing. Done 27 Oct: App Information (subtitle "Baby
         tracker for the family", Health & Fitness / Lifestyle, no third-
         party content, Apple's standard licence), age rating 18+ (matches
-        the terms' 18+), not a regulated medical device, App Store server
-        notifications -> RevenueCat, version 1.0 text (promo, description
+        the terms' 18+), version 1.0 text (promo, description
         with the Pro paragraph and terms / privacy links, keywords, URLs,
         copyright 2026 Muhammad Siddiqu), App Review login and notes,
         manual release. Still to do:
@@ -88,13 +120,37 @@ Can do now
           app/tool/screenshots/out/upload-play/ for N11.
         - [x] App Privacy (27 Oct): 9 types, all App Functionality, not
           tracking; linked except Crash Data; privacy URL set.
+        - [ ] Check (told 27 Oct, not confirmed): App Information >
+          Regulated Medical Devices declared "not a medical device"; App
+          Store Server Notifications, production AND sandbox, set to the
+          URL from RevenueCat > Apps > Palna (App Store) > "Apple Server to
+          Server notification settings" (Version 2).
         - [ ] Build: add the first build after the release (it has Pro).
         - [ ] After 12: copyright -> 2026 Toolbox Services (SMC-Private)
           Limited.
 
 After D-U-N-S (11)
-[ ] 12. Ask Apple Developer Support to move the INDIVIDUAL account (Team
-        ID W7AS897FPN, renews 1 Oct 2027) to an organization.
+[~] 12. Move the INDIVIDUAL account (Team ID W7AS897FPN, renews 1 Oct
+        2027) to an organization. Apps, Team ID, TestFlight and keys stay.
+        - [~] D-U-N-S lookup (developer.apple.com/enroll/duns-lookup):
+          "No match found" (code 40003) on 27 Oct, the day D&B issued the
+          number. Retry 30 Oct and 2 Nov with: Toolbox Services
+          (SMC-Private) Limited; street "House 890, Shah Gul Baba Arat,
+          Nowshera Kalan, Mardan Road" (also try D&B's "House No. 890, Shah
+          Gul Baba Araat"); city Nowshera; "Pakistan region"; 24100; phone
+          +92 3125328555; Muhammad Siddiqu (CNIC spelling);
+          ceo@toolbox.services. Never use the lookup's "submit to D&B"
+          option (duplicate record).
+        - [ ] Still no match on 3 Nov: developer.apple.com/contact >
+          Membership and Account > Program Enrollment: convert Team
+          W7AS897FPN to an organization, D-U-N-S 311913824, SECP CUIN
+          0360341, website toolbox.services (see 50), sole director / CEO.
+          Proof: business/verification/Toolbox-Services-registration-proof
+          .pdf. Apple may call the phone on the D&B record. If D&B's record
+          is the problem (location line typo "Pakis Pakistan"), ask D&B to
+          fix it (case 11143663).
+        - [ ] After the move: accept the new agreements; copyright and
+          seller name show the company.
 [ ] 38c. Payments: Business > Paid Applications Agreement, company bank
         account and tax forms (after 12, so the bank account matches the
         account owner). Then the two subscriptions exactly as in
@@ -105,7 +161,10 @@ After D-U-N-S (11)
         sells Pro) after 12, so the company's address, phone and the email
         hello@palnacare.com are what the EU App Store shows. Needed before
         selling in the EU.
-[ ] 46b. Submit version 1.0 for App Store review (after 46 and 12).
+[ ] 46d. Apple Small Business Program (15% fee instead of 30%) after 12:
+        developer.apple.com/app-store/small-business-program; then turn it
+        on in RevenueCat > Apps > Palna (App Store) so revenue shows right.
+[ ] 46b. Submit version 1.0 for App Store review (after 46, 12, 38c).
 
 Only when we build those features
 [ ] 37b. (Apple part) developer.apple.com: App Group
@@ -117,7 +176,12 @@ Only when we build those features
 3. GOOGLE PLAY SETUP (all after D-U-N-S, 11)
 ====================================================================
 
-[ ] 13. Google Play as an organization. Palna was REJECTED (1 Oct) on the
+[~] 13. Google Play as an organization. 27 Oct: "Change account type" to
+        Organization SUBMITTED; Google is verifying the new organization
+        payments profile (email when done; website toolbox.services already
+        verified there). Until then the account stays Personal. After it:
+        check Palna's Dashboard no longer shows the 12-testers / 14-days
+        task (N12 / N6). Background: Palna was REJECTED (1 Oct) on the
         personal account: apps with medical features must come from an
         organization. Don't untick the medical features to get through
         (a false declaration can close the account).
@@ -133,12 +197,13 @@ Only when we build those features
         (the 30-day purge, 27a, runs nightly since 5 Oct; the site says so).
 [ ] N7. Data safety > Data types > Photos and videos > Photos: collected,
         NOT shared, not ephemeral, OPTIONAL, purpose App functionality.
-[ ] N5. Main store listing: paste the current description from
-        store/google-play.md.
-[ ] N11. Upload the screenshots (4-tab layout, re-rendered 26 Oct) from
-        app/tool/screenshots/out/play/ (already RGB). Order: see
-        store/google-play.md. Ask Claude to re-render them first if the
-        app has changed since.
+[ ] N5. Main store listing: short description and full description from
+        store/google-play.md (the full one is the App Store description;
+        no "for Pakistan" wording).
+[ ] N11. Upload the 8 phone screenshots from
+        app/tool/screenshots/out/upload-play/ (1080 x 1920, RGB, 01-08 in
+        order, vaccines shot shows a UK family; rendered 27 Oct). Ask
+        Claude to re-render if the app has changed since.
 [~] N4. App access: reviewer login review@palnacare.com (exists with a
         sample baby; password changed 27 Oct, same as in TestFlight Test
         Information). Save it in the password manager too.
@@ -216,7 +281,21 @@ Only when we build those features
                remove the old one.
         [ ] 7. VPS (administrator@173.208.162.249): new password, SSH keys only.
         [ ] 8. Move everything in cred.txt into the password manager (it's
-               git-ignored, but plain text).
+               git-ignored, but plain text), and business/auth/info.txt.
+        [ ] 8b. Also into the password manager (27 Oct): the Apple In-App
+               Purchase key (business/apple-account/SubscriptionKey_
+               NHFX3Y85NR.p8, can't be downloaded again), the Google service
+               account key (business/google-account/baby-app-510018-
+               15d11522812e.json), the RevenueCat webhook password (same as
+               Supabase secret REVENUECAT_WEBHOOK_AUTH), the reviewer login
+               password, and the TestFlight public link.
+        [ ] 8c. DO NOW: sign out of developer.apple.com and back in (Apple
+               session cookies were pasted into a chat on 27 Oct; signing
+               out ends that session).
+[ ] 51. Google Cloud free trial (account msiddiq17328) ends about 7 Nov:
+        Billing > My projects: check no project relies on the trial billing
+        account. Google sign-in (Baby App) and Firebase (Palna, Spark plan)
+        don't need billing, so nothing should stop.
 [ ] 17b. From 28 Nov 2026: move palnacare.com from Namecheap to Cloudflare
         (Namecheap: Registrar Lock off, get the EPP code > Cloudflare >
         Domain Registration > Transfer; ~$10.44, adds a year). Same for
@@ -233,7 +312,9 @@ Only when we build those features
 Tick each when you've seen it work on a real phone. iPhone: install the
 latest build from the TestFlight app (you're in "Int-Test").
 
-[ ] 47. Built 27 Oct, check after the merge (or on a debug build):
+[ ] 47. Built 27 Oct, check after the release (48). A debug build is on the
+        owner's phone since 27 Oct (UI checks passed; server parts wait for
+        the release):
         - [ ] Q1 country: as an invited member, Edit baby has no country
           field; the person who added the baby still sees it.
         - [ ] Q2: pick e.g. India or Germany; Vaccines shows its schedule;
@@ -246,6 +327,13 @@ latest build from the TestFlight app (you're in "Int-Test").
           review account (Pro): all of them work; widget shows "Today: ...".
         - [ ] 14c: a release build appears in Firebase > Crashlytics after
           the first launch (Crashlytics shows "No crashes" once it's set up).
+        - [ ] Pretend purchase (works now on a debug build, RevenueCat Test
+          Store): Settings > Palna Pro > Start free trial > complete in the
+          test dialog; Pro unlocks on that phone. After the release the
+          webhook also gives the family Pro on the other phones.
+        - [ ] Free limits on the server (after the release): a 2nd baby or a
+          2nd photo in a month on a Free family is refused (the app shows
+          Palna Pro first).
 [~] 36. Push notifications between phones: LIVE since 26 Oct on Android and
         set up for iPhone (APNs key uploaded 27 Oct). Still to do:
         - [ ] Test with two accounts in one family: log a feed / sleep /
@@ -304,10 +392,9 @@ latest build from the TestFlight app (you're in "Int-Test").
 7. COMPANY (Toolbox Services (SMC-Private) Limited)
 ====================================================================
 
-[~] 11. D-U-N-S number 311913824: issued 27 Oct. Waiting for Apple and
-        Google to see it (usually a few business days, sometimes up to
-        ~2 weeks); then start 12 and 13. Unblocks 12, 13, 38c, 38d and the
-        rest of section 3.
+[~] 11. D-U-N-S number 311913824: issued 27 Oct. Google: account change
+        submitted (13). Apple: not in its lookup yet (12). Unblocks 12, 13,
+        38c, 38d and the rest of section 3.
         Company bank account: opened (27 Oct).
 [~] 10a. SECP: registered-office notice SUBMITTED 23 Oct, under review
         (LEAP application 20261022_45065184). Check LEAP for approval or an
@@ -340,7 +427,26 @@ App and stores
   Android Debug", "Palna iOS" and "Supabase" (web: the app and Supabase
   both use its id; never delete it).
 - Codemagic builds iPhone (TestFlight) and Android (Play internal track)
-  from codemagic.yaml; variables group "palna_prod".
+  from codemagic.yaml; variables group "palna_prod" (personal account:
+  baby-app > gear > Environment variables): SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY, POWERSYNC_URL, GOOGLE_WEB_CLIENT_ID,
+  GOOGLE_IOS_CLIENT_ID, CERTIFICATE_PRIVATE_KEY, REVENUECAT_APPLE_KEY,
+  REVENUECAT_GOOGLE_KEY, GCLOUD_SERVICE_ACCOUNT_CREDENTIALS (Secure).
+- Store screenshots: cd app; flutter test tool/screenshots
+  --dart-define=SHOT_DEVICE=iphone (and --update-goldens
+  --dart-define=SHOT_DEVICE=play), then flatten to RGB; App Store wants
+  1206 x 2622 (scale the 6.9" renders down). Steps in store/app-store.md.
+- Palna Pro prices: Rs 299 / month, Rs 2,499 / year (7-day trial); abroad
+  $2.99 / $19.99. Paywall shows the billed price first, "about Rs 10 a
+  day" under it.
+- RevenueCat project "Palna": entitlement "pro", offering "default"
+  (Monthly, Yearly); Test Store key in app/env/prod.json
+  (REVENUECAT_TEST_KEY, debug builds only); webhook "Supabase" ->
+  functions/v1/revenuecat. API Toolbox has its own project.
+- Google Cloud "Baby App" (baby-app-510018) sits under the organization
+  msiddiq17328-org; service account key creation is allowed for this
+  project only (org policy iam.disableServiceAccountKeyCreation overridden
+  27 Oct; you have Organization Policy Administrator on the org).
 - Apple In-App Purchase key (team-wide, reuse for OathLock / API Toolbox
   in RevenueCat): Key ID NHFX3Y85NR, file in D:/projects/business/
   apple-account/ (not in git; copy it into the password manager too).
