@@ -10,6 +10,14 @@ review / 7 company.
 
 [ ] open   [~] started / partly done   [x] done
 
+Positioning (owner, 27 Oct 2026): Palna is a baby tracker for families
+everywhere, not for one country. No "made for Pakistan" / "Pakistani
+families" wording in the store listings, website, invites or new copy;
+Pakistan's EPI, desi foods and 1122 can still be named as highlights.
+App Store subtitle and website top line: "Baby tracker for the family".
+(Website fixed on branch chore/baby-app-global-positioning-v1, live with
+the next release.)
+
 ====================================================================
 1. CODE CHANGES (Claude builds them; one branch from dev per batch)
 ====================================================================
