@@ -14,8 +14,7 @@ review / 7 company.
 1. CODE CHANGES (Claude builds them; one branch from dev per batch)
 ====================================================================
 
-Built 27 Oct on branch feat/baby-app-countries-plans-crashlytics-v1 (not
-merged yet): Q1 country lock, Q2 17 more countries, Q5 optional RSV / flu,
+Built 27 Oct, merged into dev (PR #5), live with the next release: Q1 country lock, Q2 17 more countries, Q5 optional RSV / flu,
 38b Palna Pro, 14c crash reports. Their phone checks are in section 5,
 their setup in sections 2-4. Decided: Q3 keep only the new UK schedule
 (babies born from 2025); Q4 schedules and emergency numbers stay in the
@@ -70,7 +69,9 @@ Can do now
         and tell Claude (15c).
 [ ] 46. App Store listing (fill in now; it stays with the app when the
         account moves to the company). All text is in store/app-store.md:
-        - [ ] App Information: name, subtitle, categories, age rating.
+        - [ ] App Information: name, subtitle "Baby tracker in Urdu &
+          English" (not "for Pakistan": Palna is for families everywhere),
+          categories, age rating.
         - [ ] Version 1.0: promotional text, description, keywords.
         - [ ] Screenshots from app/tool/screenshots/out/iphone/ (see N11;
           ask Claude to re-render first if the app has changed).
@@ -125,9 +126,10 @@ Only when we build those features
 [~] N4. App access: reviewer login review@palnacare.com (exists with a
         sample baby; password changed 27 Oct, same as in TestFlight Test
         Information). Save it in the password manager too.
-[ ] N12. Closed testing: create the track, add the testers list, send the
+[ ] N12. (Only if Palna stays on a PERSONAL Play account: organization
+        accounts skip the closed-test rule.) Closed testing: create the track, add the testers list, send the
         build for review.
-[ ] N6. Testers: send the Android invite (store/tester-invite.md, 3
+[ ] N6. (Same: personal account only.) Testers: send the Android invite (store/tester-invite.md, 3
         languages) once the closed test is approved; 12+ testers must stay
         opted in for 14 days in a row.
 [ ] 20b. After the first Play upload: Play Console > App integrity > App

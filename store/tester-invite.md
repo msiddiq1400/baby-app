@@ -9,7 +9,7 @@ stay opted in for 14 days in a row, so invite 15–20 people.
 
 ## English
 
-Assalam o alaikum! I've made **Palna**, a baby tracker for Pakistani families (feeds, sleep, diapers, vaccines, growth, in English and Urdu). Before it goes on the Play Store, Google needs a few people to test it for 2 weeks. Could you help?
+Assalam o alaikum! I've made **Palna**, a baby tracker for families, in English, Urdu and Roman Urdu (feeds, sleep, diapers, vaccines, growth, in English and Urdu). Before it goes on the Play Store, Google needs a few people to test it for 2 weeks. Could you help?
 
 1. On your Android phone, open this link while signed in to your Gmail: <LINK>
 2. Tap **Become a tester**, then **Download it on Google Play** and install Palna.
@@ -22,7 +22,7 @@ Anything confusing or broken? Just reply here or email hello@palnacare.com. Than
 
 ## اردو
 
-السلام علیکم! میں نے **پالنا** بنایا ہے، پاکستانی گھرانوں کے لیے بچے کا ٹریکر (دودھ، نیند، ڈائپر، ویکسین، گروتھ، اردو اور انگریزی میں)۔ پلے اسٹور پر آنے سے پہلے گوگل کو کچھ لوگ چاہییں جو اسے 2 ہفتے ٹیسٹ کریں۔ کیا آپ مدد کریں گے؟
+السلام علیکم! میں نے **پالنا** بنایا ہے، ہر گھرانے کے لیے بچے کا ٹریکر، اردو اور انگریزی میں (دودھ، نیند، ڈائپر، ویکسین، گروتھ، اردو اور انگریزی میں)۔ پلے اسٹور پر آنے سے پہلے گوگل کو کچھ لوگ چاہییں جو اسے 2 ہفتے ٹیسٹ کریں۔ کیا آپ مدد کریں گے؟
 
 1. اپنے اینڈرائیڈ فون پر، اپنے Gmail میں سائن اِن ہو کر یہ لنک کھولیں: <LINK>
 2. **Become a tester** دبائیں، پھر **Download it on Google Play** دبا کر پالنا انسٹال کریں۔
@@ -35,7 +35,7 @@ Anything confusing or broken? Just reply here or email hello@palnacare.com. Than
 
 ## Roman Urdu
 
-Assalam o alaikum! Maine **Palna** banaya hai, Pakistani gharon ke liye baby tracker (doodh, neend, diaper, vaccine, growth, Urdu aur English mein). Play Store par aane se pehle Google ko kuch log chahiyen jo ise 2 hafte test karein. Kya aap madad karenge?
+Assalam o alaikum! Maine **Palna** banaya hai, har ghar ke liye baby tracker, Urdu aur English mein (doodh, neend, diaper, vaccine, growth, Urdu aur English mein). Play Store par aane se pehle Google ko kuch log chahiyen jo ise 2 hafte test karein. Kya aap madad karenge?
 
 1. Apne Android phone par, apne Gmail mein sign in ho kar yeh link kholein: <LINK>
 2. **Become a tester** dabayein, phir **Download it on Google Play** daba kar Palna install karein.
@@ -59,7 +59,7 @@ leave any time.
 
 ## English
 
-Assalam o alaikum! I've made **Palna**, a baby tracker for Pakistani families (feeds, sleep, diapers, vaccines, growth, in English and Urdu). It isn't on the App Store yet. Could you test it on your iPhone?
+Assalam o alaikum! I've made **Palna**, a baby tracker for families, in English, Urdu and Roman Urdu (feeds, sleep, diapers, vaccines, growth, in English and Urdu). It isn't on the App Store yet. Could you test it on your iPhone?
 
 1. Install **TestFlight** from the App Store (Apple's free app for testing new apps).
 2. On your iPhone, open this link: https://testflight.apple.com/join/TNv2mUxa
@@ -72,7 +72,7 @@ Anything confusing or broken? Take a screenshot and TestFlight will offer to sen
 
 ## اردو
 
-السلام علیکم! میں نے **پالنا** بنایا ہے، پاکستانی گھرانوں کے لیے بچے کا ٹریکر (دودھ، نیند، ڈائپر، ویکسین، گروتھ، اردو اور انگریزی میں)۔ یہ ابھی ایپ اسٹور پر نہیں ہے۔ کیا آپ اسے اپنے آئی فون پر ٹیسٹ کریں گے؟
+السلام علیکم! میں نے **پالنا** بنایا ہے، ہر گھرانے کے لیے بچے کا ٹریکر، اردو اور انگریزی میں (دودھ، نیند، ڈائپر، ویکسین، گروتھ، اردو اور انگریزی میں)۔ یہ ابھی ایپ اسٹور پر نہیں ہے۔ کیا آپ اسے اپنے آئی فون پر ٹیسٹ کریں گے؟
 
 1. ایپ اسٹور سے **TestFlight** انسٹال کریں (نئی ایپس ٹیسٹ کرنے کے لیے ایپل کی مفت ایپ)۔
 2. اپنے آئی فون پر یہ لنک کھولیں: https://testflight.apple.com/join/TNv2mUxa
@@ -85,7 +85,7 @@ Anything confusing or broken? Take a screenshot and TestFlight will offer to sen
 
 ## Roman Urdu
 
-Assalam o alaikum! Maine **Palna** banaya hai, Pakistani gharon ke liye baby tracker (doodh, neend, diaper, vaccine, growth, Urdu aur English mein). Yeh abhi App Store par nahin hai. Kya aap ise apne iPhone par test karenge?
+Assalam o alaikum! Maine **Palna** banaya hai, har ghar ke liye baby tracker, Urdu aur English mein (doodh, neend, diaper, vaccine, growth, Urdu aur English mein). Yeh abhi App Store par nahin hai. Kya aap ise apne iPhone par test karenge?
 
 1. App Store se **TestFlight** install karein (nayi apps test karne ke liye Apple ki free app).
 2. Apne iPhone par yeh link kholein: https://testflight.apple.com/join/TNv2mUxa

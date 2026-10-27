@@ -7,7 +7,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 | Field | Value |
 |---|---|
 | Name (30) | Palna - Mother & Baby Care |
-| Subtitle (30) | Baby tracker for Pakistan |
+| Subtitle (30) | Baby tracker in Urdu & English |
 | Primary category | Health & Fitness |
 | Secondary category | Lifestyle |
 | Content rights | No, it doesn't contain, show or access third-party content |
@@ -21,7 +21,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 
 **Description (4000)**
 
-> Palna is a calm, simple baby tracker made for families in Pakistan. Log feeds, sleep, diapers, growth, vaccines and medicines in a few taps, in English, اردو or Roman Urdu, and share one log with the whole family.
+> Palna is a calm, simple baby tracker for families everywhere, made with Pakistani and Urdu-speaking families in mind. Log feeds, sleep, diapers, growth, vaccines and medicines in a few taps, in English, اردو or Roman Urdu, and share one log with the whole family.
 >
 > WHY PARENTS USE PALNA
 > • Feed, Diaper and Sleep buttons on every screen: a repeat bottle or a wet diaper takes two taps, even with one hand at 3 am
@@ -29,9 +29,9 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 > • Everything works offline and syncs when you're back online
 > • Share with your family: parents, grandparents and helpers see the same log on their own phones
 >
-> MADE FOR PAKISTAN
-> • Pakistan's EPI vaccine schedule, with reminders before each visit
-> • Living abroad? Vaccine schedules for the UK, US, Canada, UAE and Saudi Arabia too, and emergency numbers for your country
+> MADE FOR YOU, WHEREVER YOU LIVE
+> • Vaccine schedules for 23 countries: Pakistan's EPI, the UK, US, Canada, the Gulf, Europe, Australia and more, with reminders before each visit
+> • Emergency numbers for your country, wherever you live
 > • Desi first foods and 15 recipes for babies, from lauki purée at 6 months to qeema aloo at 10
 > • Emergency numbers and advice for hot weather
 > • Full Urdu and Roman Urdu, not just English
@@ -159,4 +159,4 @@ Answer **None** to everything except:
 | Advertising identifier (IDFA) | No |
 | EU Digital Services Act trader status | Not a trader (free app, no payments), while the account is individual |
 | Price | Free |
-| Availability | All countries, or start with Pakistan only |
+| Availability | All countries |
