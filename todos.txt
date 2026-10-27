@@ -85,8 +85,8 @@ Can do now
         manual release. Still to do:
         - [ ] Screenshots: Claude re-renders them (N11) with Pro and the new
           countries, then upload (6.9" iPhone).
-        - [ ] App Privacy: the data types in app-store.md (incl. Photos,
-          Purchase History, Crash Data).
+        - [x] App Privacy (27 Oct): 9 types, all App Functionality, not
+          tracking; linked except Crash Data; privacy URL set.
         - [ ] Build: add the first build after the release (it has Pro).
         - [ ] After 12: copyright -> 2026 Toolbox Services (SMC-Private)
           Limited.
