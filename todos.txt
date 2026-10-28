@@ -21,7 +21,8 @@ App Store subtitle and website top line: "Baby tracker for the family".
 0. NEXT UP (in this order)
 ====================================================================
 
-[ ] 48. RELEASE dev -> main (say "release"). It ships PR #5 (country lock,
+[x] 48. RELEASED 28 Oct (PR #12, dev -> main; deploy green, PowerSync
+        config deployed, iPhone build 8 in TestFlight). It shipped PR #5 (country lock,
         17 countries, RSV / flu, Palna Pro, crash reports) and PR #6 (the
         "families everywhere" wording, UK vaccines screenshot):
         - migrations 20261027000002-05 apply: the Free limits switch on
@@ -56,7 +57,7 @@ their setup in sections 2-4. Decided: Q3 keep only the new UK schedule
 app, not on the website.
 
 Ready: Claude starts when you say go
-[~] 53. Merged into dev 28 Oct (PR #10); live with the next release:
+[x] 53. Released 28 Oct (PR #10 into dev, then the release PR #12):
         - Palna Pro Lifetime (one-time purchase) on the paywall, next to
           Monthly / Yearly; "For life" when the family has it; terms 7 and
           the store text mention it. New prices in store/*.md (52).
@@ -75,10 +76,22 @@ Ready: Claude starts when you say go
         palna-medical-review.docx (62 pages, 91 open questions, a
         "questions we most need answered" page). Give it to the doctor
         (21-23); regenerate with make_review_docx.py after changes.
-[~] 55. Built 28 Oct on feat/baby-app-switch-predictions-help-v1: nap and
+[x] 55. Released 28 Oct (PR #11 into dev, then the release PR #12): nap and
         bedtime predictions (Palna Pro; Sleep card on Today, "Nap times"
         teaser for Free), palnacare.com "switch from Nara / Huckleberry"
         pages and a help centre with articles, the review pack (49).
+[~] 57. Store fixes (29 Oct, chore/baby-app-store-fixes-v1):
+        - The first Play upload from Codemagic failed at "Setting release
+          for track internal" (Play won't send changes for review
+          automatically). codemagic.yaml now sets
+          changes_not_sent_for_review: true; send for review in Play
+          Console. For now: upload build 2 by hand (the Codemagic .aab).
+        - The Palna Pro screen with US prices for App Store Connect's
+          in-app purchase review screenshot: flutter test
+          tool/screenshots --update-goldens --dart-define=SHOT_DEVICE=iphone
+          --plain-name paywall (out/iphone/paywall_en.png). Apple's
+          subscription description is at most 45 characters: "More
+          babies, photos, reports and doctor PDF".
 [ ] 56. Found while making the review pack (28 Oct); fix after the doctor
         answers, or sooner where obvious (Claude):
         - "verified" flag on schedules isn't shown anywhere in the app.
