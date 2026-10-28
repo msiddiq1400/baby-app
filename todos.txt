@@ -37,10 +37,12 @@ App Store subtitle and website top line: "Baby tracker for the family".
         Store version (46), Android testers get the Play internal build.
 [ ] 38e (28 Oct part): RevenueCat > Palna (Play Store) > Check again; then
         Google developer notifications (details in 38e, section 4).
-[ ] 12 (lookup): Apple D-U-N-S lookup again on 30 Oct and 2 Nov; contact
-        Apple on 3 Nov if still "No match" (details in 12, section 2).
-[ ] 13 (wait): Google is verifying the new organization payments profile;
-        an email comes when it's done (details in 13, section 3).
+[~] 12 (wait): Apple is converting the account to the company: request
+        sent 28 Oct, Case ID 103011473705 (reply by email to
+        msiddiq17328@gmail.com; Apple may phone +92 312 5328555). Details
+        in 12, section 2.
+[x] 13: Google Play account is an ORGANIZATION since 28 Oct. Next: Palna's
+        Play steps in section 3 (no closed test needed any more).
 
 
 ====================================================================
@@ -140,23 +142,18 @@ Can do now
 After D-U-N-S (11)
 [~] 12. Move the INDIVIDUAL account (Team ID W7AS897FPN, renews 1 Oct
         2027) to an organization. Apps, Team ID, TestFlight and keys stay.
-        - [~] D-U-N-S lookup (developer.apple.com/enroll/duns-lookup):
-          "No match found" (code 40003) on 27 Oct, the day D&B issued the
-          number. Retry 30 Oct and 2 Nov with: Toolbox Services
-          (SMC-Private) Limited; street "House 890, Shah Gul Baba Arat,
-          Nowshera Kalan, Mardan Road" (also try D&B's "House No. 890, Shah
-          Gul Baba Araat"); city Nowshera; "Pakistan region"; 24100; phone
-          +92 3125328555; Muhammad Siddiqu (CNIC spelling);
-          ceo@toolbox.services. Never use the lookup's "submit to D&B"
-          option (duplicate record).
-        - [ ] Still no match on 3 Nov: developer.apple.com/contact >
-          Membership and Account > Program Enrollment: convert Team
-          W7AS897FPN to an organization, D-U-N-S 311913824, SECP CUIN
-          0360341, website toolbox.services (see 50), sole director / CEO.
-          Proof: business/verification/Toolbox-Services-registration-proof
-          .pdf. Apple may call the phone on the D&B record. If D&B's record
-          is the problem (location line typo "Pakis Pakistan"), ask D&B to
-          fix it (case 11143663).
+        - [x] D-U-N-S lookup: MATCH on 28 Oct (27 Oct was "No match", the
+          day D&B issued it). Entered exactly as D&B has it: TOOLBOX
+          SERVICES (SMC-PRIVATE) LIMITED, "House No. 890, Shah Gul Baba
+          Araat, Nowshera Kalan", Nowshera, 24100. Apple emailed
+          ceo@toolbox.services: D-U-N-S 311913824. Did NOT use "Enroll now"
+          (that makes a second account and fee).
+        - [~] Conversion requested 28 Oct: developer.apple.com/contact >
+          Membership and Account > Program Enrollment, Case ID
+          103011473705 (Team W7AS897FPN, D-U-N-S 311913824, SECP CUIN
+          0360341, toolbox.services, sole director / CEO). Apple may phone
+          +92 312 5328555 and ask for business/verification/
+          Toolbox-Services-registration-proof.pdf. Reply comes by email.
         - [ ] After the move: accept the new agreements; copyright and
           seller name show the company.
 [ ] 38c. Payments: Business > Paid Applications Agreement, company bank
@@ -184,12 +181,13 @@ Only when we build those features
 3. GOOGLE PLAY SETUP (all after D-U-N-S, 11)
 ====================================================================
 
-[~] 13. Google Play as an organization. 27 Oct: "Change account type" to
-        Organization SUBMITTED; Google is verifying the new organization
-        payments profile (email when done; website toolbox.services already
-        verified there). Until then the account stays Personal. After it:
-        check Palna's Dashboard no longer shows the 12-testers / 14-days
-        task (N12 / N6). Background: Palna was REJECTED (1 Oct) on the
+[x] 13. Google Play is an ORGANIZATION since 28 Oct (same account ID
+        7401643253836682455; company TOOLBOX SERVICES (SMC-PRIVATE) LIMITED,
+        D-U-N-S 311913824). Check Palna's Dashboard no longer shows the
+        12-testers / 14-days task (N12 / N6 then not needed). Developer name
+        "Toolbox Services" is taken by someone else: pick e.g. "Toolbox
+        Services Ltd" (or keep "toolbox.services"). Check Settings >
+        Payments profile = the company profile (38d). Background: Palna was REJECTED (1 Oct) on the
         personal account: apps with medical features must come from an
         organization. Don't untick the medical features to get through
         (a false declaration can close the account).
@@ -400,8 +398,9 @@ latest build from the TestFlight app (you're in "Int-Test").
 7. COMPANY (Toolbox Services (SMC-Private) Limited)
 ====================================================================
 
-[~] 11. D-U-N-S number 311913824: issued 27 Oct. Google: account change
-        submitted (13). Apple: not in its lookup yet (12). Unblocks 12, 13,
+[~] 11. D-U-N-S number 311913824: issued 27 Oct. Google: account is an
+        organization (28 Oct, 13). Apple: found in its lookup 28 Oct,
+        conversion requested, Case ID 103011473705 (12). Unblocks 12, 13,
         38c, 38d and the rest of section 3.
         Company bank account: opened (27 Oct).
 [~] 10a. SECP: registered-office notice SUBMITTED 23 Oct, under review
