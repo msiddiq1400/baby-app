@@ -149,3 +149,7 @@ workflows:
         # roll the draft out in Play Console. Set false after that so internal
         # testers get each build straight away.
         submit_as_draft: true
+        # Play refuses to send changes for review automatically while the
+        # Console has other unsent changes (store listing, countries, ...).
+        # Upload and save the release; send it for review in Play Console.
+        changes_not_sent_for_review: true

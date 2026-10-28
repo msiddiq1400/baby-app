@@ -43,14 +43,19 @@ import 'package:baby_app/features/health/illness_screen.dart';
 import 'package:baby_app/features/home/dashboard.dart';
 import 'package:baby_app/features/home/quick_log_bar.dart';
 import 'package:baby_app/features/journal/journal_screen.dart';
+import 'package:baby_app/features/plans/paywall_screen.dart';
+import 'package:baby_app/features/plans/plan.dart';
+import 'package:baby_app/features/plans/store.dart';
 import 'package:baby_app/features/reports/reports_screen.dart';
 import 'package:baby_app/l10n/app_localizations.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../../test/test_app.dart';
 
@@ -474,4 +479,50 @@ void main() {
       });
     }
   }
+
+  // The Palna Pro screen for App Store Connect's in-app purchase review
+  // (todos.txt 38c), with the US prices. English, light, iPhone only:
+  //
+  //   flutter test tool/screenshots --update-goldens --dart-define=SHOT_DEVICE=iphone --plain-name paywall
+  testWidgets('screenshot paywall en', (tester) async {
+    tester.view.physicalSize = const Size(1320, 2868);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+    // The Apple wording ("Payment is charged to your Apple Account ...").
+    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+    StoreProduct product(String id, double price, {IntroductoryPrice? intro}) =>
+        StoreProduct(id, '', '', price, '\$$price', 'USD', introductoryPrice: intro);
+    Package package(String id, PackageType type, StoreProduct product) =>
+        Package(id, type, product, const PresentedOfferingContext('default', null, null));
+    final ProPackages packages = (
+      monthly: package(r'$rc_monthly', PackageType.monthly, product('palna_pro_monthly', 3.99)),
+      yearly: package(
+        r'$rc_annual',
+        PackageType.annual,
+        product('palna_pro_yearly', 24.99, intro: const IntroductoryPrice(0, r'$0.00', 'P1W', 1, PeriodUnit.day, 7)),
+      ),
+      lifetime: package(r'$rc_lifetime', PackageType.lifetime, product('palna_pro_lifetime', 49.99)),
+    );
+    await tester.pumpWidget(
+      RepaintBoundary(
+        key: _root,
+        child: ProviderScope(
+          overrides: [
+            ...overrides,
+            isProProvider.overrideWithValue(false),
+            proUntilProvider.overrideWithValue(null),
+            proForLifeProvider.overrideWithValue(false),
+          ],
+          child: testApp(locale: const Locale('en'), home: PaywallScreen(packages: packages)),
+        ),
+      ),
+    );
+    await _settle(tester);
+    if (_iphone) {
+      await _savePixels(tester, 'tool/screenshots/out/iphone/paywall_en.png');
+    } else {
+      await expectLater(find.byKey(_root), matchesGoldenFile('out/paywall_en.png'));
+    }
+    debugDefaultTargetPlatformOverride = null;
+  });
 }
