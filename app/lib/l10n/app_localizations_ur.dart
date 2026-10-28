@@ -961,6 +961,33 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
+  String nextNapAround(String from, String to) {
+    return 'اگلی جھپکی تقریباً $from–$to';
+  }
+
+  @override
+  String bedtimeAround(String from, String to) {
+    return 'سونے کا وقت تقریباً $from–$to';
+  }
+
+  @override
+  String napTimeNow(String to) {
+    return 'اب جھپکی کا اچھا وقت ہے ($to تک)';
+  }
+
+  @override
+  String bedtimeNow(String to) {
+    return 'اب سونے کا اچھا وقت ہے ($to تک)';
+  }
+
+  @override
+  String get predictionFromAge =>
+      'ایک ہفتے کی نیند لکھنے تک عمر کے حساب سے اندازہ';
+
+  @override
+  String get napTimesShort => 'جھپکی کے اوقات';
+
+  @override
   String get tabSolids => 'ٹھوس غذا';
 
   @override
@@ -1193,6 +1220,140 @@ class AppLocalizationsUr extends AppLocalizations {
   String get accountSection => 'اکاؤنٹ';
 
   @override
+  String get dataSection => 'آپ کا ڈیٹا';
+
+  @override
+  String get dataTitle => 'ایکسپورٹ اور امپورٹ';
+
+  @override
+  String get dataSettingsHelp =>
+      'سب کچھ اسپریڈشیٹ میں محفوظ کریں، یا Nara Baby یا Huckleberry سے اپنا ریکارڈ لے آئیں';
+
+  @override
+  String get exportTitle => 'ایکسپورٹ';
+
+  @override
+  String exportHelp(String name) {
+    return '$name کے لیے لکھا گیا سب کچھ، ایک CSV فائل میں۔ یہ Excel یا Google Sheets میں کھلتی ہے، اور پالنا اسے دوبارہ امپورٹ کر سکتا ہے۔';
+  }
+
+  @override
+  String get exportButton => 'CSV میں ایکسپورٹ کریں';
+
+  @override
+  String exportSubject(String name) {
+    return '$name کا پالنا ریکارڈ';
+  }
+
+  @override
+  String get importTitle => 'کسی اور ایپ سے امپورٹ';
+
+  @override
+  String importHelp(String name) {
+    return 'خوراک، نیند، ڈائپر، دودھ نکالنا، نشوونما، بخار اور سرگرمیاں لے آئیں۔ یہ $name میں شامل ہوں گی؛ جو پہلے سے پالنا میں ہیں وہ دوہری نہیں ہوں گی۔';
+  }
+
+  @override
+  String get importFromPalna => 'پالنا کی ایکسپورٹ فائل';
+
+  @override
+  String get importStepsNara =>
+      'Nara Baby میں: Activity اسکرین پر بچے کی تصویر پر ٹیپ کریں، پھر Export Data۔ CSV فائل محفوظ کریں، پھر یہاں منتخب کریں۔';
+
+  @override
+  String get importStepsHuckleberry =>
+      'Huckleberry میں: بچے کے آئیکن پر ٹیپ کریں، نیچے جائیں، Export tracking data as CSV پر ٹیپ کریں۔ ای میل والا لنک کھولیں، فائل محفوظ کریں، پھر یہاں منتخب کریں۔';
+
+  @override
+  String get importStepsPalna =>
+      'اوپر والے ایکسپورٹ سے بنی CSV فائل، اس فون یا کسی اور فون سے۔';
+
+  @override
+  String get importChooseFile => 'فائل منتخب کریں';
+
+  @override
+  String get importChooseAnother => 'کوئی اور فائل منتخب کریں';
+
+  @override
+  String get importWrongFile =>
+      'یہ فائل پڑھی نہیں جا سکتی۔ براہ کرم ایپ سے ایکسپورٹ کی گئی CSV فائل منتخب کریں۔';
+
+  @override
+  String get importExcelMangled =>
+      'یہ فائل Excel میں کھول کر محفوظ کی گئی ہے، جس سے وقت بدل جاتے ہیں۔ براہ کرم دوبارہ ایکسپورٹ کریں اور کھولے بغیر یہاں منتخب کریں۔';
+
+  @override
+  String get importNothingFound => 'اس فائل میں امپورٹ کرنے کے لیے کچھ نہیں۔';
+
+  @override
+  String importFileBaby(String name) {
+    return 'فائل میں: $name';
+  }
+
+  @override
+  String importDates(String from, String to) {
+    return '$from سے $to تک';
+  }
+
+  @override
+  String get importTemperatures => 'بخار / درجہ حرارت';
+
+  @override
+  String importSkippedTitle(int count) {
+    return 'امپورٹ نہیں ہوں گے: $count';
+  }
+
+  @override
+  String get importSkipMedicine => 'دوائیں (صحت میں شامل کریں)';
+
+  @override
+  String get importSkipSolids => 'ٹھوس غذا';
+
+  @override
+  String get importSkipMilestone => 'سنگ میل';
+
+  @override
+  String get importSkipVaccine => 'ٹیکے (صحت میں نشان لگائیں)';
+
+  @override
+  String get importSkipDry => 'خشک ڈائپر';
+
+  @override
+  String get importSkipSleepGoing => 'نیند جس کا ختم ہونے کا وقت نہیں';
+
+  @override
+  String get importSkipRange => 'حد سے باہر قدریں';
+
+  @override
+  String get importSkipUnreadable => 'قطاریں جو پڑھی نہ جا سکیں';
+
+  @override
+  String importIntoBaby(String name) {
+    return 'سب کچھ $name میں شامل ہوگا۔';
+  }
+
+  @override
+  String importButton(int count, String name) {
+    return '$name میں $count اندراج امپورٹ کریں';
+  }
+
+  @override
+  String get importWorking => 'امپورٹ ہو رہا ہے... پالنا کھلا رکھیں۔';
+
+  @override
+  String importDone(int count, String name) {
+    return '$name میں $count اندراج شامل ہو گئے';
+  }
+
+  @override
+  String importDuplicates(int count) {
+    return '$count پہلے سے پالنا میں تھے، چھوڑ دیے گئے۔';
+  }
+
+  @override
+  String get doneButton => 'ہو گیا';
+
+  @override
   String get deleteAccount => 'میرا اکاؤنٹ حذف کریں';
 
   @override
@@ -1377,6 +1538,86 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get pastDays => 'پچھلے دن';
+
+  @override
+  String get activities => 'سرگرمیاں';
+
+  @override
+  String get activityTummyTime => 'پیٹ کے بل وقت';
+
+  @override
+  String get activityBath => 'نہلانا';
+
+  @override
+  String get activityPlay => 'کھیل';
+
+  @override
+  String get activityOutdoors => 'باہر کی سیر';
+
+  @override
+  String get activityReading => 'کہانی / کتاب';
+
+  @override
+  String get activityMassage => 'مالش';
+
+  @override
+  String get activityOther => 'کچھ اور';
+
+  @override
+  String get activityLabelHint => 'کیا تھا؟ (مثلاً تیراکی)';
+
+  @override
+  String get addActivity => 'سرگرمی شامل کریں';
+
+  @override
+  String get editActivity => 'سرگرمی میں تبدیلی';
+
+  @override
+  String get activityShort => 'سرگرمی';
+
+  @override
+  String get activityStartedLabel => 'شروع';
+
+  @override
+  String get activityHowLong => 'کتنی دیر';
+
+  @override
+  String get activityNotTimed => 'وقت نہیں لکھا';
+
+  @override
+  String activityMinutes(int minutes) {
+    return '$minutes منٹ';
+  }
+
+  @override
+  String get activityStartTimer => 'ٹائمر شروع کریں';
+
+  @override
+  String get tummyTimer => 'ٹمی ٹائمر';
+
+  @override
+  String get activityStop => 'روکیں';
+
+  @override
+  String get activityStopNow => 'ابھی روکیں';
+
+  @override
+  String get activityRunning => 'ٹائمر چل رہا ہے';
+
+  @override
+  String activitySince(String time) {
+    return '$time سے';
+  }
+
+  @override
+  String get activityTimerBusy =>
+      'ایک اور سرگرمی کا ٹائمر چل رہا ہے۔ پہلے اسے روکیں۔';
+
+  @override
+  String get activitiesNoneToday => 'پیٹ کے بل وقت، نہلانا، کھیل...';
+
+  @override
+  String get tummyTimeToday => 'آج پیٹ کے بل وقت';
 
   @override
   String get yesterday => 'کل';
@@ -1990,6 +2231,250 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get pushUnavailable =>
       'خاندان کی اطلاعات ابھی اس فون پر دستیاب نہیں۔ نیچے آپ کی پسند محفوظ ہے اور بعد میں کام آئے گی۔';
+
+  @override
+  String get numOutOfHoursDoctor => 'رات اور چھٹی کے وقت ڈاکٹر';
+
+  @override
+  String get numHealthAdvice => 'صحت کے مشورے کی لائن (24 گھنٹے)';
+
+  @override
+  String get optionalVaccinesTitle => 'اختیاری – اپنے ڈاکٹر سے پوچھیں';
+
+  @override
+  String optionalVaccinesHelp(String country) {
+    return '$country میں یہ سب بچوں کو دیے جاتے ہیں، لیکن باقاعدہ شیڈول کا حصہ نہیں۔ اپنے ڈاکٹر یا کلینک سے پوچھیں کہ آپ کے بچے کو لگوانے چاہییں یا نہیں۔';
+  }
+
+  @override
+  String get optionalVaccinesHide => 'چھپائیں';
+
+  @override
+  String get optionalVaccinesHidden =>
+      'RSV اور فلو کی اختیاری یاد دہانیاں چھپی ہوئی ہیں۔';
+
+  @override
+  String get optionalVaccinesShow => 'دکھائیں';
+
+  @override
+  String get rsvName => 'RSV سے حفاظت (اینٹی باڈی کا انجکشن)';
+
+  @override
+  String get rsvNote =>
+      'RSV سے بچاتا ہے، سینے کا ایک عام انفیکشن جو چھوٹے بچوں کے لیے سب سے زیادہ خطرناک ہوتا ہے۔ اگر ماں کو حمل میں RSV ویکسین لگی تھی تو شاید بچے کو اس کی ضرورت نہ ہو۔';
+
+  @override
+  String fluName(String season) {
+    return 'فلو ویکسین $season';
+  }
+
+  @override
+  String get fluNote =>
+      'سال میں ایک بار، فلو کے موسم سے پہلے اور دوران لگتی ہے۔';
+
+  @override
+  String fluNoteFirst(int age) {
+    return 'پہلی بار $age سال سے کم عمر بچوں کو عام طور پر 4 ہفتے کے وقفے سے 2 خوراکیں لگتی ہیں۔';
+  }
+
+  @override
+  String get fluNoteNasal =>
+      'عام طور پر ناک کے اسپرے کی صورت میں دی جاتی ہے، جس میں سؤر کی جیلاٹین ہوتی ہے۔ آپ اس کی جگہ انجکشن مانگ سکتے ہیں۔';
+
+  @override
+  String optionalReminderTitle(String name, String vaccine) {
+    return '$name: $vaccine (اختیاری)';
+  }
+
+  @override
+  String get optionalReminderBody =>
+      'اپنے ڈاکٹر یا کلینک سے پوچھیں کہ لگوانی ہے یا نہیں۔';
+
+  @override
+  String get proTitle => 'پالنا پرو';
+
+  @override
+  String get proIntro => 'مفت پلان کی ہر چیز، اور:';
+
+  @override
+  String get proFeatureBabies => 'جڑواں، بہن بھائی: ہر بچہ شامل کریں';
+
+  @override
+  String get proFeaturePhotos => 'ہر بچے کی مہینے میں 10 تک تصویریں (مفت: 1)';
+
+  @override
+  String get proFeatureReports => '30 دن کی رپورٹس، اور ڈاکٹر کے لیے PDF خلاصہ';
+
+  @override
+  String get proFeaturePredictions =>
+      'اگلی جھپکی اور سونے کا وقت، آپ کے بچے کے اپنے معمول سے';
+
+  @override
+  String get proReasonPredictions =>
+      'اگلی جھپکی اور سونے کے اوقات پالنا پرو کا حصہ ہیں';
+
+  @override
+  String get proFeatureThemes =>
+      'رنگوں کے تھیم، اور ہوم اسکرین ویجٹ پر آج کا حساب';
+
+  @override
+  String get proFamilyNote =>
+      'ایک سبسکرپشن پورے خاندان کے لیے: جن کے ساتھ آپ بچہ شیئر کرتے ہیں انہیں بھی پرو ملتا ہے۔';
+
+  @override
+  String get proYearly => 'سالانہ';
+
+  @override
+  String get proMonthly => 'ماہانہ';
+
+  @override
+  String proPricePerYear(String price) {
+    return '$price / سال';
+  }
+
+  @override
+  String proPricePerMonth(String price) {
+    return '$price / مہینہ';
+  }
+
+  @override
+  String proPricePerDay(String price) {
+    return 'یعنی تقریباً $price روزانہ';
+  }
+
+  @override
+  String proSave(int percent) {
+    return '$percent% بچت';
+  }
+
+  @override
+  String proTrialDays(int days) {
+    return '$days دن مفت';
+  }
+
+  @override
+  String get proStartTrial => 'مفت ٹرائل شروع کریں';
+
+  @override
+  String get proSubscribe => 'سبسکرائب کریں';
+
+  @override
+  String get proRestore => 'پچھلی خریداری بحال کریں';
+
+  @override
+  String get proLegalApple =>
+      'ادائیگی آپ کے Apple ID سے ہوگی۔ سبسکرپشن خود بخود تجدید ہوتی ہے جب تک آپ مدت ختم ہونے سے کم از کم 24 گھنٹے پہلے اسے منسوخ نہ کریں؛ اسے Apple ID کی سیٹنگز میں سنبھالیں یا منسوخ کریں۔ مفت ٹرائل کے بعد اوپر والی قیمت لی جاتی ہے۔';
+
+  @override
+  String get proLegalGoogle =>
+      'ادائیگی آپ کے Google Play اکاؤنٹ سے ہوگی۔ سبسکرپشن خود بخود تجدید ہوتی ہے جب تک آپ مدت ختم ہونے سے پہلے اسے منسوخ نہ کریں؛ اسے Google Play > Payments and subscriptions میں سنبھالیں یا منسوخ کریں۔ مفت ٹرائل کے بعد اوپر والی قیمت لی جاتی ہے۔';
+
+  @override
+  String get proTerms => 'استعمال کی شرائط';
+
+  @override
+  String get proPrivacy => 'پرائیویسی پالیسی';
+
+  @override
+  String get proUnavailable =>
+      'پالنا پرو ابھی اس فون پر نہیں خریدا جا سکتا۔ باقی سب کچھ معمول کے مطابق کام کرتا ہے۔';
+
+  @override
+  String get proActive => 'آپ کے خاندان کے پاس پالنا پرو ہے';
+
+  @override
+  String proActiveUntil(String date) {
+    return '$date تک';
+  }
+
+  @override
+  String get proThanks => 'پالنا کا ساتھ دینے کا شکریہ!';
+
+  @override
+  String get proManage => 'سبسکرپشن سنبھالیں';
+
+  @override
+  String get proLifetime => 'ہمیشہ کے لیے';
+
+  @override
+  String proPriceOnce(String price) {
+    return '$price ایک بار';
+  }
+
+  @override
+  String get proLifetimeNote => 'ایک بار ادائیگی: پورے خاندان کے لیے ہمیشہ پرو';
+
+  @override
+  String get proNoSubscription => 'کوئی سبسکرپشن نہیں';
+
+  @override
+  String get proBuyOnce => 'ایک بار خریدیں';
+
+  @override
+  String get proActiveForLife => 'ہمیشہ کے لیے، کوئی سبسکرپشن نہیں';
+
+  @override
+  String get proLegalLifetime =>
+      'ہمیشہ والا پلان ایک بار کی خریداری ہے: قیمت ایک ہی بار لی جاتی ہے اور کبھی تجدید نہیں ہوتی۔';
+
+  @override
+  String get proRestoreNone =>
+      'اس اسٹور اکاؤنٹ پر پالنا پرو کی کوئی خریداری نہیں ملی۔';
+
+  @override
+  String get proError => 'خریداری مکمل نہیں ہو سکی۔ دوبارہ کوشش کریں۔';
+
+  @override
+  String get proReasonBabies => 'پالنا پرو کے ساتھ ایک سے زیادہ بچے شامل کریں';
+
+  @override
+  String get proReasonPhotos =>
+      'پالنا پرو کے ساتھ اس مہینے کی مزید تصویریں شامل کریں';
+
+  @override
+  String get proReasonReports => 'پالنا پرو کے ساتھ 30 دن ایک ساتھ دیکھیں';
+
+  @override
+  String get proReasonPdf => 'ڈاکٹر کے لیے PDF خلاصہ پالنا پرو کا حصہ ہے';
+
+  @override
+  String get proReasonThemes => 'رنگوں کے تھیم پالنا پرو کا حصہ ہیں';
+
+  @override
+  String get proBadge => 'پرو';
+
+  @override
+  String get settingsProFree => 'مفت پلان · دیکھیں پرو میں کیا ہے';
+
+  @override
+  String get settingsProActive => 'پرو، آپ کے پورے خاندان کے لیے';
+
+  @override
+  String get photoAddAnother => 'ایک اور شامل کریں';
+
+  @override
+  String get photoMonthFull =>
+      'اس مہینے میں 10 تصویریں ہیں، ایک مہینے کی زیادہ سے زیادہ حد۔';
+
+  @override
+  String get themeColour => 'رنگ';
+
+  @override
+  String get themeNavy => 'نیلا';
+
+  @override
+  String get themeRose => 'گلابی';
+
+  @override
+  String get themeSage => 'سبز';
+
+  @override
+  String get themeLavender => 'جامنی';
+
+  @override
+  String widgetToday(int feeds, int diapers, String sleep) {
+    return 'آج: $feeds فیڈ · $diapers ڈائپر · $sleep نیند';
+  }
 }
 
 /// The translations for Urdu, using the Latin script (`ur_Latn`).
@@ -2952,6 +3437,33 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   }
 
   @override
+  String nextNapAround(String from, String to) {
+    return 'Agli jhapki taqreeban $from–$to';
+  }
+
+  @override
+  String bedtimeAround(String from, String to) {
+    return 'Sone ka waqt taqreeban $from–$to';
+  }
+
+  @override
+  String napTimeNow(String to) {
+    return 'Ab jhapki ka acha waqt hai ($to tak)';
+  }
+
+  @override
+  String bedtimeNow(String to) {
+    return 'Ab sone ka acha waqt hai ($to tak)';
+  }
+
+  @override
+  String get predictionFromAge =>
+      'Aik haftay ki neend likhne tak umar ke hisaab se andaaza';
+
+  @override
+  String get napTimesShort => 'Jhapki ke auqaat';
+
+  @override
   String get tabSolids => 'Thos ghiza';
 
   @override
@@ -3185,6 +3697,141 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String get accountSection => 'Account';
 
   @override
+  String get dataSection => 'Aap ka data';
+
+  @override
+  String get dataTitle => 'Export aur import';
+
+  @override
+  String get dataSettingsHelp =>
+      'Sab kuch spreadsheet mein save karein, ya Nara Baby ya Huckleberry se apna record le aayein';
+
+  @override
+  String get exportTitle => 'Export';
+
+  @override
+  String exportHelp(String name) {
+    return '$name ke liye likha gaya sab kuch, aik CSV file mein. Yeh Excel ya Google Sheets mein khulti hai, aur Palna isay dobara import kar sakta hai.';
+  }
+
+  @override
+  String get exportButton => 'CSV mein export karein';
+
+  @override
+  String exportSubject(String name) {
+    return '$name ka Palna record';
+  }
+
+  @override
+  String get importTitle => 'Kisi aur app se import';
+
+  @override
+  String importHelp(String name) {
+    return 'Feeds, neend, diapers, pumping, growth, temperature aur activities le aayein. Yeh $name mein shamil hongi; jo pehle se Palna mein hain woh dohri nahi hongi.';
+  }
+
+  @override
+  String get importFromPalna => 'Palna ki export file';
+
+  @override
+  String get importStepsNara =>
+      'Nara Baby mein: Activity screen par bachay ki tasveer par tap karein, phir Export Data. CSV file save karein, phir yahan chunein.';
+
+  @override
+  String get importStepsHuckleberry =>
+      'Huckleberry mein: bachay ke icon par tap karein, neeche jayein, Export tracking data as CSV par tap karein. Email wala link kholein, file save karein, phir yahan chunein.';
+
+  @override
+  String get importStepsPalna =>
+      'Oopar wale Export se bani CSV file, is phone ya kisi aur phone se.';
+
+  @override
+  String get importChooseFile => 'File chunein';
+
+  @override
+  String get importChooseAnother => 'Koi aur file chunein';
+
+  @override
+  String get importWrongFile =>
+      'Yeh file parhi nahi ja sakti. Barah-e-karam app se export ki gayi CSV file chunein.';
+
+  @override
+  String get importExcelMangled =>
+      'Yeh file Excel mein khol kar save ki gayi hai, jis se waqt badal jaate hain. Barah-e-karam dobara export karein aur khole baghair yahan chunein.';
+
+  @override
+  String get importNothingFound =>
+      'Is file mein import karne ke liye kuch nahi.';
+
+  @override
+  String importFileBaby(String name) {
+    return 'File mein: $name';
+  }
+
+  @override
+  String importDates(String from, String to) {
+    return '$from se $to tak';
+  }
+
+  @override
+  String get importTemperatures => 'Temperature';
+
+  @override
+  String importSkippedTitle(int count) {
+    return 'Import nahi honge: $count';
+  }
+
+  @override
+  String get importSkipMedicine => 'Dawaiyan (Health mein shamil karein)';
+
+  @override
+  String get importSkipSolids => 'Thos ghiza';
+
+  @override
+  String get importSkipMilestone => 'Milestones';
+
+  @override
+  String get importSkipVaccine => 'Teeke (Health mein nishan lagayein)';
+
+  @override
+  String get importSkipDry => 'Khushk diapers';
+
+  @override
+  String get importSkipSleepGoing => 'Neend jis ka khatam hone ka waqt nahi';
+
+  @override
+  String get importSkipRange => 'Had se bahar values';
+
+  @override
+  String get importSkipUnreadable => 'Rows jo parhi na ja sakein';
+
+  @override
+  String importIntoBaby(String name) {
+    return 'Sab kuch $name mein shamil hoga.';
+  }
+
+  @override
+  String importButton(int count, String name) {
+    return '$name mein $count entries import karein';
+  }
+
+  @override
+  String get importWorking => 'Import ho raha hai... Palna khula rakhein.';
+
+  @override
+  String importDone(int count, String name) {
+    return '$name mein $count entries shamil ho gayin';
+  }
+
+  @override
+  String importDuplicates(int count) {
+    return '$count pehle se Palna mein thay, chhor diye gaye.';
+  }
+
+  @override
+  String get doneButton => 'Ho gaya';
+
+  @override
   String get deleteAccount => 'Mera account delete karein';
 
   @override
@@ -3369,6 +4016,86 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get pastDays => 'Pichle din';
+
+  @override
+  String get activities => 'Activities';
+
+  @override
+  String get activityTummyTime => 'Tummy time';
+
+  @override
+  String get activityBath => 'Nahlana';
+
+  @override
+  String get activityPlay => 'Khel';
+
+  @override
+  String get activityOutdoors => 'Bahar ki sair';
+
+  @override
+  String get activityReading => 'Kahani / kitaab';
+
+  @override
+  String get activityMassage => 'Maalish';
+
+  @override
+  String get activityOther => 'Kuch aur';
+
+  @override
+  String get activityLabelHint => 'Kya tha? (maslan swimming)';
+
+  @override
+  String get addActivity => 'Activity shamil karein';
+
+  @override
+  String get editActivity => 'Activity edit karein';
+
+  @override
+  String get activityShort => 'Activity';
+
+  @override
+  String get activityStartedLabel => 'Shuru';
+
+  @override
+  String get activityHowLong => 'Kitni der';
+
+  @override
+  String get activityNotTimed => 'Waqt nahi likha';
+
+  @override
+  String activityMinutes(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get activityStartTimer => 'Timer shuru karein';
+
+  @override
+  String get tummyTimer => 'Tummy timer';
+
+  @override
+  String get activityStop => 'Rokein';
+
+  @override
+  String get activityStopNow => 'Abhi rokein';
+
+  @override
+  String get activityRunning => 'Timer chal raha hai';
+
+  @override
+  String activitySince(String time) {
+    return '$time se';
+  }
+
+  @override
+  String get activityTimerBusy =>
+      'Aik aur activity ka timer chal raha hai. Pehle usay rokein.';
+
+  @override
+  String get activitiesNoneToday => 'Tummy time, nahlana, khel...';
+
+  @override
+  String get tummyTimeToday => 'Aaj tummy time';
 
   @override
   String get yesterday => 'Kal';
@@ -3984,4 +4711,254 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   @override
   String get pushUnavailable =>
       'Khandan ki notifications abhi is phone par dastiyab nahi. Neeche aap ki pasand mehfooz hai aur baad mein kaam aayegi.';
+
+  @override
+  String get numOutOfHoursDoctor => 'Raat aur chhutti ke waqt doctor';
+
+  @override
+  String get numHealthAdvice => 'Sehat ke mashware ki line (24 ghante)';
+
+  @override
+  String get optionalVaccinesTitle => 'Ikhtiyari – apne doctor se poochein';
+
+  @override
+  String optionalVaccinesHelp(String country) {
+    return '$country mein yeh sab bachon ko diye jaate hain, lekin baqaida schedule ka hissa nahi. Apne doctor ya clinic se poochein ke aap ke bache ko lagwane chahiyen ya nahi.';
+  }
+
+  @override
+  String get optionalVaccinesHide => 'Chhupayein';
+
+  @override
+  String get optionalVaccinesHidden =>
+      'RSV aur flu ki ikhtiyari yaad dihaniyan chhupi hui hain.';
+
+  @override
+  String get optionalVaccinesShow => 'Dikhayein';
+
+  @override
+  String get rsvName => 'RSV se hifazat (antibody ka injection)';
+
+  @override
+  String get rsvNote =>
+      'RSV se bachata hai, seene ka aik aam infection jo chhote bachon ke liye sab se zyada khatarnaak hota hai. Agar maa ko hamal mein RSV vaccine lagi thi to shayad bache ko is ki zaroorat na ho.';
+
+  @override
+  String fluName(String season) {
+    return 'Flu vaccine $season';
+  }
+
+  @override
+  String get fluNote =>
+      'Saal mein aik baar, flu ke mausam se pehle aur dauran lagti hai.';
+
+  @override
+  String fluNoteFirst(int age) {
+    return 'Pehli baar $age saal se kam umar bachon ko aam taur par 4 hafte ke waqfe se 2 khuraakein lagti hain.';
+  }
+
+  @override
+  String get fluNoteNasal =>
+      'Aam taur par naak ke spray ki soorat mein di jaati hai, jis mein suar ki gelatine hoti hai. Aap is ki jagah injection maang sakte hain.';
+
+  @override
+  String optionalReminderTitle(String name, String vaccine) {
+    return '$name: $vaccine (ikhtiyari)';
+  }
+
+  @override
+  String get optionalReminderBody =>
+      'Apne doctor ya clinic se poochein ke lagwani hai ya nahi.';
+
+  @override
+  String get proTitle => 'Palna Pro';
+
+  @override
+  String get proIntro => 'Free plan ki har cheez, aur:';
+
+  @override
+  String get proFeatureBabies => 'Judwaan, behan bhai: har bacha shamil karein';
+
+  @override
+  String get proFeaturePhotos =>
+      'Har bache ki mahine mein 10 tak tasveerein (Free: 1)';
+
+  @override
+  String get proFeatureReports =>
+      '30 din ki reports, aur doctor ke liye PDF khulasa';
+
+  @override
+  String get proFeaturePredictions =>
+      'Agli jhapki aur sone ka waqt, aap ke bachay ke apne mamool se';
+
+  @override
+  String get proReasonPredictions =>
+      'Agli jhapki aur sone ke auqaat Palna Pro ka hissa hain';
+
+  @override
+  String get proFeatureThemes =>
+      'Rangon ke theme, aur home screen widget par aaj ka hisaab';
+
+  @override
+  String get proFamilyNote =>
+      'Aik subscription poore khandan ke liye: jin ke saath aap bacha share karte hain unhein bhi Pro milta hai.';
+
+  @override
+  String get proYearly => 'Saalana';
+
+  @override
+  String get proMonthly => 'Mahana';
+
+  @override
+  String proPricePerYear(String price) {
+    return '$price / saal';
+  }
+
+  @override
+  String proPricePerMonth(String price) {
+    return '$price / mahina';
+  }
+
+  @override
+  String proPricePerDay(String price) {
+    return 'Yaani taqreeban $price rozana';
+  }
+
+  @override
+  String proSave(int percent) {
+    return '$percent% bachat';
+  }
+
+  @override
+  String proTrialDays(int days) {
+    return '$days din free';
+  }
+
+  @override
+  String get proStartTrial => 'Free trial shuru karein';
+
+  @override
+  String get proSubscribe => 'Subscribe karein';
+
+  @override
+  String get proRestore => 'Pichli khareedari bahaal karein';
+
+  @override
+  String get proLegalApple =>
+      'Adaaigi aap ke Apple ID se hogi. Subscription khud ba khud renew hoti hai jab tak aap muddat khatam hone se kam az kam 24 ghante pehle isay cancel na karein; isay Apple ID ki settings mein manage ya cancel karein. Free trial ke baad oopar wali qeemat li jaati hai.';
+
+  @override
+  String get proLegalGoogle =>
+      'Adaaigi aap ke Google Play account se hogi. Subscription khud ba khud renew hoti hai jab tak aap muddat khatam hone se pehle isay cancel na karein; isay Google Play > Payments and subscriptions mein manage ya cancel karein. Free trial ke baad oopar wali qeemat li jaati hai.';
+
+  @override
+  String get proTerms => 'Istemaal ki sharaait';
+
+  @override
+  String get proPrivacy => 'Privacy policy';
+
+  @override
+  String get proUnavailable =>
+      'Palna Pro abhi is phone par nahi khareeda ja sakta. Baqi sab kuch maamool ke mutabiq kaam karta hai.';
+
+  @override
+  String get proActive => 'Aap ke khandan ke paas Palna Pro hai';
+
+  @override
+  String proActiveUntil(String date) {
+    return '$date tak';
+  }
+
+  @override
+  String get proThanks => 'Palna ka saath dene ka shukriya!';
+
+  @override
+  String get proManage => 'Subscription manage karein';
+
+  @override
+  String get proLifetime => 'Hamesha ke liye';
+
+  @override
+  String proPriceOnce(String price) {
+    return '$price aik baar';
+  }
+
+  @override
+  String get proLifetimeNote =>
+      'Aik baar adaaigi: poore khandan ke liye hamesha Pro';
+
+  @override
+  String get proNoSubscription => 'Koi subscription nahi';
+
+  @override
+  String get proBuyOnce => 'Aik baar khareedein';
+
+  @override
+  String get proActiveForLife => 'Hamesha ke liye, koi subscription nahi';
+
+  @override
+  String get proLegalLifetime =>
+      'Hamesha wala plan aik baar ki khareedari hai: qeemat aik hi baar li jaati hai aur kabhi renew nahi hoti.';
+
+  @override
+  String get proRestoreNone =>
+      'Is store account par Palna Pro ki koi khareedari nahi mili.';
+
+  @override
+  String get proError =>
+      'Khareedari mukammal nahi ho saki. Dobara koshish karein.';
+
+  @override
+  String get proReasonBabies =>
+      'Palna Pro ke saath aik se zyada bache shamil karein';
+
+  @override
+  String get proReasonPhotos =>
+      'Palna Pro ke saath is mahine ki mazeed tasveerein shamil karein';
+
+  @override
+  String get proReasonReports => 'Palna Pro ke saath 30 din aik saath dekhein';
+
+  @override
+  String get proReasonPdf =>
+      'Doctor ke liye PDF khulasa Palna Pro ka hissa hai';
+
+  @override
+  String get proReasonThemes => 'Rangon ke theme Palna Pro ka hissa hain';
+
+  @override
+  String get proBadge => 'PRO';
+
+  @override
+  String get settingsProFree => 'Free plan · dekhein Pro mein kya hai';
+
+  @override
+  String get settingsProActive => 'Pro, aap ke poore khandan ke liye';
+
+  @override
+  String get photoAddAnother => 'Aik aur shamil karein';
+
+  @override
+  String get photoMonthFull =>
+      'Is mahine mein 10 tasveerein hain, aik mahine ki zyada se zyada hadd.';
+
+  @override
+  String get themeColour => 'Rang';
+
+  @override
+  String get themeNavy => 'Neela';
+
+  @override
+  String get themeRose => 'Gulabi';
+
+  @override
+  String get themeSage => 'Sabz';
+
+  @override
+  String get themeLavender => 'Jamni';
+
+  @override
+  String widgetToday(int feeds, int diapers, String sleep) {
+    return 'Aaj: $feeds feed · $diapers diaper · $sleep neend';
+  }
 }

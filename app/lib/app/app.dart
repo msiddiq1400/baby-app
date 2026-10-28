@@ -3,6 +3,7 @@ import 'localization_delegates.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/providers.dart';
+import '../features/plans/plan.dart';
 import '../l10n/app_localizations.dart';
 import 'router.dart';
 import 'theme.dart';
@@ -12,10 +13,11 @@ class BabyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final accent = ref.watch(themeAccentProvider);
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-      theme: buildTheme(const Locale('en')),
-      darkTheme: buildTheme(const Locale('en'), brightness: Brightness.dark),
+      theme: buildTheme(const Locale('en'), accent: accent),
+      darkTheme: buildTheme(const Locale('en'), brightness: Brightness.dark, accent: accent),
       themeMode: ref.watch(themeModeProvider),
       locale: ref.watch(localeProvider),
       localizationsDelegates: appLocalizationsDelegates,
@@ -28,7 +30,10 @@ class BabyApp extends ConsumerWidget {
         // Latin fonts.
         // Theme.of already reflects light or dark (themeMode above).
         final brightness = Theme.of(context).brightness;
-        Widget themed = Theme(data: buildTheme(locale, brightness: brightness), child: child!);
+        Widget themed = Theme(
+          data: buildTheme(locale, brightness: brightness, accent: accent),
+          child: child!,
+        );
         if (locale.languageCode == 'ur' && locale.scriptCode == 'Latn') {
           themed = Directionality(textDirection: TextDirection.ltr, child: themed);
         }

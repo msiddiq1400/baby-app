@@ -7,7 +7,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 | Field | Value |
 |---|---|
 | Name (30) | Palna - Mother & Baby Care |
-| Subtitle (30) | Baby tracker for Pakistan |
+| Subtitle (30) | Baby tracker for the family |
 | Primary category | Health & Fitness |
 | Secondary category | Lifestyle |
 | Content rights | No, it doesn't contain, show or access third-party content |
@@ -17,11 +17,11 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 
 **Promotional text (170)**
 
-> Log feeds, sleep and diapers in seconds, in English, Urdu or Roman Urdu. Works offline, and the whole family sees the same log.
+> Log feeds, sleep and diapers in seconds. Works offline, and the whole family sees the same log on their own phones.
 
 **Description (4000)**
 
-> Palna is a calm, simple baby tracker made for families in Pakistan. Log feeds, sleep, diapers, growth, vaccines and medicines in a few taps, in English, اردو or Roman Urdu, and share one log with the whole family.
+> Palna is a calm, simple baby tracker for families everywhere, made with Pakistani and Urdu-speaking families in mind. Log feeds, sleep, diapers, growth, vaccines and medicines in a few taps, in English, اردو or Roman Urdu, and share one log with the whole family.
 >
 > WHY PARENTS USE PALNA
 > • Feed, Diaper and Sleep buttons on every screen: a repeat bottle or a wet diaper takes two taps, even with one hand at 3 am
@@ -29,11 +29,10 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 > • Everything works offline and syncs when you're back online
 > • Share with your family: parents, grandparents and helpers see the same log on their own phones
 >
-> MADE FOR PAKISTAN
-> • Pakistan's EPI vaccine schedule, with reminders before each visit
-> • Living abroad? Vaccine schedules for the UK, US, Canada, UAE and Saudi Arabia too, and emergency numbers for your country
+> YOUR LANGUAGE, YOUR COUNTRY
+> • Vaccine schedules for 23 countries: Pakistan's EPI, the UK, US, Canada, the Gulf, Europe, Australia and more, with reminders before each visit
+> • Emergency numbers for your country, and hot-weather advice where it matters
 > • Desi first foods and 15 recipes for babies, from lauki purée at 6 months to qeema aloo at 10
-> • Emergency numbers and advice for hot weather
 > • Full Urdu and Roman Urdu, not just English
 >
 > TRACK EVERYTHING IN ONE PLACE
@@ -60,6 +59,14 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 > • Delete your account and data in the app at any time
 >
 > Palna is not a medical device and doesn't replace advice from your doctor. If you're worried about your baby, contact a doctor straight away.
+>
+> PALNA PRO (OPTIONAL)
+> Palna is free. Palna Pro is optional, for the whole family: monthly, yearly, or a one-time lifetime purchase. It adds more than one baby, more photos each month, next nap and bedtime times, 30-day reports, the PDF summary for your doctor, colour themes and widget extras. Payment is charged to your Apple ID. Subscriptions renew automatically unless cancelled at least 24 hours before the end of the period; manage them in your Apple ID settings. Lifetime is charged once and never renews.
+>
+> Terms of use: https://palnacare.com/terms/
+> Privacy policy: https://palnacare.com/privacy/
+
+(The Pro paragraph and the two links are required by Apple for apps with subscriptions; keep them. License Agreement in App Information stays "Apple's Standard License Agreement".)
 
 **Keywords (100, comma-separated, no spaces needed)**
 
@@ -75,7 +82,8 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 
 **Copyright:** 2026 followed by your legal name, exactly as on your Apple developer account (change it to Toolbox Services (SMC-Private) Limited after the move to an organization)
 
-**Screenshots (6.9" iPhone):** `app/tool/screenshots/out/iphone/` (1320 x 2868, git-ignored; made with
+**Screenshots:** App Store Connect (2026) asks for the "iPhone with Dynamic Island (medium display)" size, **1206 x 2622**: scale the 6.9" renders down (same proportions; `out/upload-iphone-6.3/`, RGB, 01-08 in order).
+**Source renders (6.9" iPhone):** `app/tool/screenshots/out/iphone/` (1320 x 2868, git-ignored; made with
 `flutter test tool/screenshots --dart-define=SHOT_DEVICE=iphone`, then flattened to RGB because
 App Store Connect rejects images with an alpha channel). Suggested order: timer_en, today_en, reports_en, vaccines_en, illness_en, growth_en, journal_en, timer_en_dark. Up to 10.
 
@@ -96,7 +104,9 @@ App Store Connect rejects images with an alpha channel). Suggested order: timer_
 >
 > The language can be switched between English, Urdu and Roman Urdu from the globe icon on the sign-in screen or in Settings. Data is stored on the phone and syncs to our server, so the app works offline.
 >
-> Palna shows general guidance from WHO, NHS and Pakistan's EPI programme and always tells parents to confirm with their doctor; it does not diagnose or give treatment.
+> Palna Pro (optional subscription, Settings > Palna Pro): the demo account already has Pro for free, so every Pro feature (more babies, more photos, 30-day reports, the PDF summary, colour themes) can be checked without buying.
+>
+> Palna shows general guidance from WHO, NHS and national vaccine programmes and always tells parents to confirm with their doctor; it does not diagnose or give treatment.
 
 **Demo account:** Supabase > Authentication > Users > Add user > Create new user: email `review@palnacare.com`, a strong password, tick "Auto Confirm User". Then sign in with it on your phone and add a sample baby with a few feeds, sleeps, diapers and a vaccine, so the reviewer sees a real app. Keep the account; Apple reuses it for every update.
 
@@ -111,12 +121,43 @@ Data collected, all **linked to the user**, all **not used for tracking**, purpo
 | Contact Info | Name | Shown to family members who share a baby |
 | Contact Info | Email Address | Sign-in and sign-up codes |
 | Health & Fitness | Health | Baby's growth, feeds, sleep, vaccines, medicines, symptoms, illnesses |
+| Sensitive Info | Sensitive Info | Birth details (date, weight, length, head size), breastfeeding and pumping logs: Apple lists "pregnancy or childbirth information" here, so declare it |
 | Location | Coarse Location | No: the baby's country is chosen by the parent, not read from the phone, so it is not "location" in Apple's sense |
 | User Content | Other User Content | Notes, milestones, foods tried |
 | User Content | Photos or Videos | Monthly baby photos the parent chooses to add (shared only with their family) |
 | Identifiers | User ID | The account ID that keeps each family's data separate |
 
-Not collected: location, contacts, browsing, purchases, usage data, diagnostics, advertising data.
+| Purchases | Purchase History | Palna Pro subscription (through RevenueCat), so the family gets Pro |
+
+Also collected, **not linked to the user**, not used for tracking, purpose **App Functionality**:
+
+| Apple category | Data type | Why |
+|---|---|---|
+| Diagnostics | Crash Data | Firebase Crashlytics crash reports (release builds; no user ID attached) |
+
+Not collected: location, contacts, browsing, usage data, other diagnostics, advertising data.
+
+## In-App Purchases: Palna Pro (todos.txt 38b, 38c)
+
+Distribution > Subscriptions > subscription group **Palna Pro**, two auto-renewable subscriptions
+(level 1 both), plus one **non-consumable** in-app purchase for Lifetime (Distribution > In-App
+Purchases). Product IDs must match RevenueCat. Prices decided 28 Oct 2026 (todos.txt 52):
+
+| Reference name | Product ID | Type / duration | Price | Intro offer |
+|---|---|---|---|---|
+| Palna Pro Monthly | palna_pro_monthly | auto-renewable, 1 month | US $3.99; Pakistan Rs 299 | none |
+| Palna Pro Yearly | palna_pro_yearly | auto-renewable, 1 year | US $24.99; Pakistan Rs 1,999 | 7-day free trial (new subscribers) |
+| Palna Pro Lifetime | palna_pro_lifetime | non-consumable | US $49.99; Pakistan Rs 4,999 | none |
+
+Set the US price as the base and then set Pakistan by hand (and India if wanted: Rs 149 / 999 /
+2,499 as ₹); otherwise Apple converts $3.99 to about Rs 1,100. Gulf countries keep the US-based
+price. If Apple has no exact Rs 1,999 or 4,999 price point, pick the nearest one below.
+
+Display name "Palna Pro"; description "More babies, photos, 30-day reports and the doctor's PDF, for
+your whole family." Review screenshot: the Palna Pro screen (Settings > Palna Pro). Review notes:
+"The demo account already has Pro (free) so every Pro feature can be checked; the purchase screen is
+in Settings > Palna Pro." Needs the Paid Applications Agreement, bank and tax first (38c).
+
 
 ## Age rating
 
@@ -135,4 +176,4 @@ Answer **None** to everything except:
 | Advertising identifier (IDFA) | No |
 | EU Digital Services Act trader status | Not a trader (free app, no payments), while the account is individual |
 | Price | Free |
-| Availability | All countries, or start with Pakistan only |
+| Availability | All countries |

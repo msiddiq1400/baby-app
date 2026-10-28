@@ -987,6 +987,33 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String nextNapAround(String from, String to) {
+    return 'Next nap around $from–$to';
+  }
+
+  @override
+  String bedtimeAround(String from, String to) {
+    return 'Bedtime around $from–$to';
+  }
+
+  @override
+  String napTimeNow(String to) {
+    return 'Good time for a nap now (until $to)';
+  }
+
+  @override
+  String bedtimeNow(String to) {
+    return 'Good time for bed now (until $to)';
+  }
+
+  @override
+  String get predictionFromAge =>
+      'A guess from age until a week of sleep is logged';
+
+  @override
+  String get napTimesShort => 'Nap times';
+
+  @override
   String get tabSolids => 'Solids';
 
   @override
@@ -1223,6 +1250,140 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountSection => 'Account';
 
   @override
+  String get dataSection => 'Your data';
+
+  @override
+  String get dataTitle => 'Export and import';
+
+  @override
+  String get dataSettingsHelp =>
+      'Save everything as a spreadsheet, or bring in your log from Nara Baby or Huckleberry';
+
+  @override
+  String get exportTitle => 'Export';
+
+  @override
+  String exportHelp(String name) {
+    return 'Everything logged for $name, as one CSV file. It opens in Excel or Google Sheets, and Palna can import it again.';
+  }
+
+  @override
+  String get exportButton => 'Export as CSV';
+
+  @override
+  String exportSubject(String name) {
+    return 'Palna log for $name';
+  }
+
+  @override
+  String get importTitle => 'Import from another app';
+
+  @override
+  String importHelp(String name) {
+    return 'Bring in feeds, sleep, diapers, pumping, growth, temperatures and activities. They are added to $name; entries already in Palna aren\'t doubled.';
+  }
+
+  @override
+  String get importFromPalna => 'A Palna export';
+
+  @override
+  String get importStepsNara =>
+      'In Nara Baby: on the Activity screen, tap your baby\'s picture, then Export Data. Save the CSV file, then choose it here.';
+
+  @override
+  String get importStepsHuckleberry =>
+      'In Huckleberry: tap your child\'s icon, scroll down, tap Export tracking data as CSV. Open the emailed link, save the file, then choose it here.';
+
+  @override
+  String get importStepsPalna =>
+      'A CSV file made with Export above, on this phone or another.';
+
+  @override
+  String get importChooseFile => 'Choose file';
+
+  @override
+  String get importChooseAnother => 'Choose another file';
+
+  @override
+  String get importWrongFile =>
+      'This file can\'t be read. Please choose the CSV file exported from the app.';
+
+  @override
+  String get importExcelMangled =>
+      'This file was opened and saved in Excel, which changes the times. Please export it again and choose it without opening it first.';
+
+  @override
+  String get importNothingFound => 'Nothing in this file can be imported.';
+
+  @override
+  String importFileBaby(String name) {
+    return 'In the file: $name';
+  }
+
+  @override
+  String importDates(String from, String to) {
+    return '$from to $to';
+  }
+
+  @override
+  String get importTemperatures => 'Temperatures';
+
+  @override
+  String importSkippedTitle(int count) {
+    return 'Not imported: $count';
+  }
+
+  @override
+  String get importSkipMedicine => 'Medicines (add them in Health)';
+
+  @override
+  String get importSkipSolids => 'Solid foods';
+
+  @override
+  String get importSkipMilestone => 'Milestones';
+
+  @override
+  String get importSkipVaccine => 'Vaccines (tick them in Health)';
+
+  @override
+  String get importSkipDry => 'Dry diapers';
+
+  @override
+  String get importSkipSleepGoing => 'Sleep without an end time';
+
+  @override
+  String get importSkipRange => 'Values out of range';
+
+  @override
+  String get importSkipUnreadable => 'Rows that couldn\'t be read';
+
+  @override
+  String importIntoBaby(String name) {
+    return 'Everything will be added to $name.';
+  }
+
+  @override
+  String importButton(int count, String name) {
+    return 'Import $count entries into $name';
+  }
+
+  @override
+  String get importWorking => 'Importing... Keep Palna open.';
+
+  @override
+  String importDone(int count, String name) {
+    return 'Added $count entries to $name';
+  }
+
+  @override
+  String importDuplicates(int count) {
+    return '$count were already in Palna and were skipped.';
+  }
+
+  @override
+  String get doneButton => 'Done';
+
+  @override
   String get deleteAccount => 'Delete my account';
 
   @override
@@ -1407,6 +1568,86 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pastDays => 'Past days';
+
+  @override
+  String get activities => 'Activities';
+
+  @override
+  String get activityTummyTime => 'Tummy time';
+
+  @override
+  String get activityBath => 'Bath';
+
+  @override
+  String get activityPlay => 'Play';
+
+  @override
+  String get activityOutdoors => 'Outdoors';
+
+  @override
+  String get activityReading => 'Reading';
+
+  @override
+  String get activityMassage => 'Massage';
+
+  @override
+  String get activityOther => 'Other';
+
+  @override
+  String get activityLabelHint => 'What was it? (e.g. swimming)';
+
+  @override
+  String get addActivity => 'Add activity';
+
+  @override
+  String get editActivity => 'Edit activity';
+
+  @override
+  String get activityShort => 'Activity';
+
+  @override
+  String get activityStartedLabel => 'Started';
+
+  @override
+  String get activityHowLong => 'How long';
+
+  @override
+  String get activityNotTimed => 'Not timed';
+
+  @override
+  String activityMinutes(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get activityStartTimer => 'Start timer';
+
+  @override
+  String get tummyTimer => 'Tummy timer';
+
+  @override
+  String get activityStop => 'Stop';
+
+  @override
+  String get activityStopNow => 'Stop now';
+
+  @override
+  String get activityRunning => 'Timer running';
+
+  @override
+  String activitySince(String time) {
+    return 'Since $time';
+  }
+
+  @override
+  String get activityTimerBusy =>
+      'Another activity timer is running. Stop it first.';
+
+  @override
+  String get activitiesNoneToday => 'Tummy time, bath, play...';
+
+  @override
+  String get tummyTimeToday => 'Tummy time today';
 
   @override
   String get yesterday => 'Yesterday';
@@ -2039,4 +2280,249 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pushUnavailable =>
       'Notifications from your family aren\'t available on this phone yet. Your choices below are saved for when they are.';
+
+  @override
+  String get numOutOfHoursDoctor => 'Out-of-hours doctor';
+
+  @override
+  String get numHealthAdvice => 'Health advice line (24 hours)';
+
+  @override
+  String get optionalVaccinesTitle => 'Optional – ask your doctor';
+
+  @override
+  String optionalVaccinesHelp(String country) {
+    return 'Offered to all babies in $country, but not part of the routine schedule. Ask your doctor or clinic whether your baby should have them.';
+  }
+
+  @override
+  String get optionalVaccinesHide => 'Hide';
+
+  @override
+  String get optionalVaccinesHidden =>
+      'Optional RSV and flu reminders are hidden.';
+
+  @override
+  String get optionalVaccinesShow => 'Show';
+
+  @override
+  String get rsvName => 'RSV protection (antibody injection)';
+
+  @override
+  String get rsvNote =>
+      'Protects against RSV, a common chest infection that is most serious in young babies. If the mother had the RSV vaccine in pregnancy, the baby may not need it.';
+
+  @override
+  String fluName(String season) {
+    return 'Flu vaccine $season';
+  }
+
+  @override
+  String get fluNote => 'Given once a year, before and during the flu season.';
+
+  @override
+  String fluNoteFirst(int age) {
+    return 'The first time, children under $age years usually need 2 doses, 4 weeks apart.';
+  }
+
+  @override
+  String get fluNoteNasal =>
+      'Usually given as a nasal spray, which contains pork gelatine. You can ask for an injection instead.';
+
+  @override
+  String optionalReminderTitle(String name, String vaccine) {
+    return '$name: $vaccine (optional)';
+  }
+
+  @override
+  String get optionalReminderBody =>
+      'Ask your doctor or clinic whether to have it.';
+
+  @override
+  String get proTitle => 'Palna Pro';
+
+  @override
+  String get proIntro => 'Everything in Free, plus:';
+
+  @override
+  String get proFeatureBabies => 'Twins, siblings: add every baby';
+
+  @override
+  String get proFeaturePhotos =>
+      'Up to 10 photos a month for each baby (Free: 1)';
+
+  @override
+  String get proFeatureReports =>
+      '30-day reports, and the PDF summary for the doctor';
+
+  @override
+  String get proFeaturePredictions =>
+      'Next nap and bedtime, from your baby\'s own pattern';
+
+  @override
+  String get proReasonPredictions =>
+      'Next nap and bedtime times are part of Palna Pro';
+
+  @override
+  String get proFeatureThemes =>
+      'Colour themes, and today\'s totals on the home-screen widget';
+
+  @override
+  String get proFamilyNote =>
+      'One subscription covers the whole family: everyone you share the baby with gets Pro too.';
+
+  @override
+  String get proYearly => 'Yearly';
+
+  @override
+  String get proMonthly => 'Monthly';
+
+  @override
+  String proPricePerYear(String price) {
+    return '$price / year';
+  }
+
+  @override
+  String proPricePerMonth(String price) {
+    return '$price / month';
+  }
+
+  @override
+  String proPricePerDay(String price) {
+    return 'That\'s about $price a day';
+  }
+
+  @override
+  String proSave(int percent) {
+    return 'Save $percent%';
+  }
+
+  @override
+  String proTrialDays(int days) {
+    return '$days days free';
+  }
+
+  @override
+  String get proStartTrial => 'Start free trial';
+
+  @override
+  String get proSubscribe => 'Subscribe';
+
+  @override
+  String get proRestore => 'Restore purchases';
+
+  @override
+  String get proLegalApple =>
+      'Payment is charged to your Apple ID. The subscription renews automatically unless you cancel it at least 24 hours before the period ends; manage or cancel it in your Apple ID settings. After a free trial, the price above is charged.';
+
+  @override
+  String get proLegalGoogle =>
+      'Payment is charged to your Google Play account. The subscription renews automatically unless you cancel it before the period ends; manage or cancel it in Google Play > Payments and subscriptions. After a free trial, the price above is charged.';
+
+  @override
+  String get proTerms => 'Terms of use';
+
+  @override
+  String get proPrivacy => 'Privacy policy';
+
+  @override
+  String get proUnavailable =>
+      'Palna Pro can\'t be bought on this phone yet. Everything else works as usual.';
+
+  @override
+  String get proActive => 'Your family has Palna Pro';
+
+  @override
+  String proActiveUntil(String date) {
+    return 'Until $date';
+  }
+
+  @override
+  String get proThanks => 'Thank you for supporting Palna!';
+
+  @override
+  String get proManage => 'Manage subscription';
+
+  @override
+  String get proLifetime => 'Lifetime';
+
+  @override
+  String proPriceOnce(String price) {
+    return '$price once';
+  }
+
+  @override
+  String get proLifetimeNote => 'Pay once: Pro for your whole family, for good';
+
+  @override
+  String get proNoSubscription => 'No subscription';
+
+  @override
+  String get proBuyOnce => 'Buy once';
+
+  @override
+  String get proActiveForLife => 'For life, no subscription';
+
+  @override
+  String get proLegalLifetime =>
+      'Lifetime is a one-time purchase: it is charged once and never renews.';
+
+  @override
+  String get proRestoreNone =>
+      'No Palna Pro purchase was found for this store account.';
+
+  @override
+  String get proError => 'The purchase didn\'t go through. Please try again.';
+
+  @override
+  String get proReasonBabies => 'Add more than one baby with Palna Pro';
+
+  @override
+  String get proReasonPhotos => 'Add more photos for this month with Palna Pro';
+
+  @override
+  String get proReasonReports => 'See 30 days at a time with Palna Pro';
+
+  @override
+  String get proReasonPdf =>
+      'The PDF summary for the doctor is part of Palna Pro';
+
+  @override
+  String get proReasonThemes => 'Colour themes are part of Palna Pro';
+
+  @override
+  String get proBadge => 'PRO';
+
+  @override
+  String get settingsProFree => 'Free plan · see what Pro adds';
+
+  @override
+  String get settingsProActive => 'Pro, for your whole family';
+
+  @override
+  String get photoAddAnother => 'Add another';
+
+  @override
+  String get photoMonthFull =>
+      'This month has 10 photos, the most for one month.';
+
+  @override
+  String get themeColour => 'Colour';
+
+  @override
+  String get themeNavy => 'Navy';
+
+  @override
+  String get themeRose => 'Rose';
+
+  @override
+  String get themeSage => 'Sage';
+
+  @override
+  String get themeLavender => 'Lavender';
+
+  @override
+  String widgetToday(int feeds, int diapers, String sleep) {
+    return 'Today: $feeds feeds · $diapers diapers · $sleep sleep';
+  }
 }

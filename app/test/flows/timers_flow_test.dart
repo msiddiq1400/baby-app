@@ -84,6 +84,8 @@ void main() {
     expect(row['ended_at'], isNull);
     expect(find.byType(BottomSheet), findsNothing);
     expect(onCard(find.text(en.feedingNowTitle)), findsOneWidget);
+    // The timeline is below the cards: scroll down to it.
+    await tester.scrollUntilVisible(find.textContaining(en.feedingNow), 300, scrollable: find.byType(Scrollable).first);
     expect(find.textContaining(en.feedingNow), findsWidgets);
   });
 

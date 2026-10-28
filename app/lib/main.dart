@@ -11,11 +11,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'app/app.dart';
 import 'core/config/env.dart';
+import 'core/crash_reports.dart';
 import 'data/local_db.dart';
 import 'data/local_schema.dart';
 import 'data/photo_repository.dart';
 import 'data/supabase_connector.dart';
 import 'features/notifications/push.dart';
+import 'features/plans/store.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +51,10 @@ Future<void> main() async {
   // Push notifications from family members (Firebase); without it the app
   // works the same, just without them.
   await PushSetup.start();
+  // Crash reports (release builds only), on the same Firebase project.
+  await CrashReports.start(firebaseReady: PushSetup.available);
+  // Palna Pro purchases (Apple / Google billing via RevenueCat).
+  await ProStore.start(Supabase.instance.client);
 
   final (db, photoQueue, photoFolder) = await _openDatabase();
   runApp(

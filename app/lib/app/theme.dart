@@ -74,22 +74,72 @@ class _Palette {
   );
 }
 
+/// Colour themes (Palna Pro, todos.txt 38b). Navy is everyone's default.
+enum ThemeAccent { navy, rose, sage, lavender }
+
+/// The main colour of an accent, light and dark (navy: the palettes above).
+typedef _AccentColors = ({
+  Color light,
+  Color lightContainer,
+  Color onLightContainer,
+  Color dark,
+  Color onDark,
+  Color darkContainer,
+  Color onDarkContainer,
+});
+
+const _accents = <ThemeAccent, _AccentColors>{
+  ThemeAccent.rose: (
+    light: Color(0xFFA4545C),
+    lightContainer: Color(0xFFF6DADA),
+    onLightContainer: Color(0xFF4F1F24),
+    dark: Color(0xFFE0959B),
+    onDark: Color(0xFF3A1519),
+    darkContainer: Color(0xFF4A2A2E),
+    onDarkContainer: Color(0xFFF6DADA),
+  ),
+  ThemeAccent.sage: (
+    light: Color(0xFF4E6E58),
+    lightContainer: Color(0xFFD6E8DA),
+    onLightContainer: Color(0xFF1C3324),
+    dark: Color(0xFF9CC5A6),
+    onDark: Color(0xFF10261A),
+    darkContainer: Color(0xFF26392C),
+    onDarkContainer: Color(0xFFD6E8DA),
+  ),
+  ThemeAccent.lavender: (
+    light: Color(0xFF66558F),
+    lightContainer: Color(0xFFE5DDF5),
+    onLightContainer: Color(0xFF2A1F45),
+    dark: Color(0xFFB9A9E0),
+    onDark: Color(0xFF231A3A),
+    darkContainer: Color(0xFF332A4D),
+    onDarkContainer: Color(0xFFE5DDF5),
+  ),
+};
+
+/// The swatch shown in the colour picker.
+Color accentSwatch(ThemeAccent accent) => _accents[accent]?.light ?? PalnaColors.navy;
+
 /// Modern classic: a serif (Lora) for headings, a rounded sans (Nunito) for
 /// everything else, and Nastaliq (Noto Nastaliq Urdu) for Urdu script.
 /// Fonts are bundled, so they work offline.
-ThemeData buildTheme(Locale locale, {Brightness brightness = Brightness.light}) {
+ThemeData buildTheme(Locale locale, {Brightness brightness = Brightness.light, ThemeAccent accent = ThemeAccent.navy}) {
   final dark = brightness == Brightness.dark;
   final p = dark ? _Palette.dark : _Palette.light;
+  final a = _accents[accent];
+  final primary = a == null ? p.primary : (dark ? a.dark : a.light);
+  final onPrimary = a == null ? p.onPrimary : (dark ? a.onDark : Colors.white);
   final urduScript = locale.languageCode == 'ur' && locale.scriptCode != 'Latn';
   final bodyFont = urduScript ? 'NotoNastaliqUrdu' : 'Nunito';
   final headingFont = urduScript ? 'NotoNastaliqUrdu' : 'Lora';
 
   final scheme = dark
       ? ColorScheme.fromSeed(seedColor: PalnaColors.navy, brightness: Brightness.dark).copyWith(
-          primary: p.primary,
-          onPrimary: p.onPrimary,
-          primaryContainer: const Color(0xFF2D3B57),
-          onPrimaryContainer: const Color(0xFFDCE4F2),
+          primary: primary,
+          onPrimary: onPrimary,
+          primaryContainer: a?.darkContainer ?? const Color(0xFF2D3B57),
+          onPrimaryContainer: a?.onDarkContainer ?? const Color(0xFFDCE4F2),
           secondary: PalnaColors.sand,
           onSecondary: const Color(0xFF2B1F08),
           secondaryContainer: const Color(0xFF3A3326),
@@ -108,10 +158,10 @@ ThemeData buildTheme(Locale locale, {Brightness brightness = Brightness.light}) 
           outlineVariant: p.line,
         )
       : ColorScheme.fromSeed(seedColor: PalnaColors.navy).copyWith(
-          primary: PalnaColors.navy,
+          primary: primary,
           onPrimary: Colors.white,
-          primaryContainer: const Color(0xFFDCE4F2),
-          onPrimaryContainer: PalnaColors.navyDeep,
+          primaryContainer: a?.lightContainer ?? const Color(0xFFDCE4F2),
+          onPrimaryContainer: a?.onLightContainer ?? PalnaColors.navyDeep,
           secondary: const Color(0xFF8A6327),
           onSecondary: Colors.white,
           secondaryContainer: PalnaColors.sandLight,
@@ -130,11 +180,10 @@ ThemeData buildTheme(Locale locale, {Brightness brightness = Brightness.light}) 
           outlineVariant: PalnaColors.line,
         );
 
-  final base = ThemeData(useMaterial3: true, colorScheme: scheme).textTheme.apply(
-        fontFamily: bodyFont,
-        bodyColor: p.ink,
-        displayColor: p.ink,
-      );
+  final base = ThemeData(
+    useMaterial3: true,
+    colorScheme: scheme,
+  ).textTheme.apply(fontFamily: bodyFont, bodyColor: p.ink, displayColor: p.ink);
   TextStyle? heading(TextStyle? s) => s?.copyWith(fontFamily: headingFont, fontWeight: FontWeight.w600);
   final text = base.copyWith(
     displayLarge: heading(base.displayLarge),
@@ -196,8 +245,8 @@ ThemeData buildTheme(Locale locale, {Brightness brightness = Brightness.light}) 
     ),
     textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(textStyle: text.labelLarge)),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: p.primary,
-      foregroundColor: p.onPrimary,
+      backgroundColor: primary,
+      foregroundColor: onPrimary,
       shape: const StadiumBorder(),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -205,7 +254,7 @@ ThemeData buildTheme(Locale locale, {Brightness brightness = Brightness.light}) 
       fillColor: p.card,
       border: roundedField,
       enabledBorder: roundedField,
-      focusedBorder: roundedField.copyWith(borderSide: BorderSide(color: p.primary, width: 1.6)),
+      focusedBorder: roundedField.copyWith(borderSide: BorderSide(color: primary, width: 1.6)),
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: p.card,
@@ -224,7 +273,9 @@ ThemeData buildTheme(Locale locale, {Brightness brightness = Brightness.light}) 
       backgroundColor: p.card,
       selectedColor: p.chipSelected,
     ),
-    listTileTheme: ListTileThemeData(iconColor: dark ? PalnaColors.nightNavy : PalnaColors.navy),
+    listTileTheme: ListTileThemeData(
+      iconColor: a == null ? (dark ? PalnaColors.nightNavy : PalnaColors.navy) : primary,
+    ),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: p.background,
       surfaceTintColor: Colors.transparent,

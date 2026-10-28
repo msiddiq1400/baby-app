@@ -146,3 +146,8 @@ jobs:
       # The caller is the database (pg_net), not a signed-in user.
       - name: Deploy the notify-family function
         run: supabase functions deploy notify-family --project-ref "$PROJECT_REF" --no-verify-jwt --use-api
+
+      # Paid plans (todos.txt 38b). Called by RevenueCat's webhook (its own
+      # secret) and by the app (the person's login, checked in the function).
+      - name: Deploy the revenuecat function
+        run: supabase functions deploy revenuecat --project-ref "$PROJECT_REF" --no-verify-jwt --use-api

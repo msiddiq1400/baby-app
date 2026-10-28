@@ -544,6 +544,8 @@ void main() {
     });
 
     flowWidgets('PDF builds a real PDF file and hands it to the share sheet', (tester) async {
+      // The PDF is part of Palna Pro (38b).
+      await tester.runAsync(env.makePro);
       await seedHealthData(tester);
       final messenger = tester.binding.defaultBinaryMessenger;
       final tempDir = Directory('${env.dir.path}/tmp')..createSync();

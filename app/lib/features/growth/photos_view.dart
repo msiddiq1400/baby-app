@@ -11,6 +11,8 @@ import '../../data/models.dart';
 import '../../data/photo_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/sheet.dart';
+import '../plans/paywall_screen.dart';
+import '../plans/plan.dart';
 
 /// Oldest month a photo can be added for (the database allows up to 60).
 const _maxMonth = 60;
@@ -30,7 +32,10 @@ class PhotosView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    final byMonth = {for (final p in ref.watch(photosProvider(baby.id)).value ?? const <Photo>[]) p.ageMonth: p};
+    final byMonth = <int, List<Photo>>{};
+    for (final p in ref.watch(photosProvider(baby.id)).value ?? const <Photo>[]) {
+      (byMonth[p.ageMonth] ??= []).add(p);
+    }
     final current = babyAge(baby.birthDate, DateTime.now()).months.clamp(0, _maxMonth);
 
     return ListView(
@@ -45,7 +50,7 @@ class PhotosView extends ConsumerWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            for (var m = current; m >= 0; m--) _MonthTile(baby: baby, ageMonth: m, photo: byMonth[m]),
+            for (var m = current; m >= 0; m--) _MonthTile(baby: baby, ageMonth: m, photos: byMonth[m] ?? const []),
           ],
         ),
       ],
@@ -54,29 +59,36 @@ class PhotosView extends ConsumerWidget {
 }
 
 class _MonthTile extends ConsumerWidget {
-  const _MonthTile({required this.baby, required this.ageMonth, this.photo});
+  const _MonthTile({required this.baby, required this.ageMonth, required this.photos});
 
   final Baby baby;
   final int ageMonth;
-  final Photo? photo;
+
+  /// Oldest first; the first is the month's cover.
+  final List<Photo> photos;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    final photo = this.photo;
+    final photo = photos.firstOrNull;
     final file = photo?.localPath == null ? null : File(photo!.localPath!);
 
     final Widget content = switch ((photo, file)) {
       (null, _) => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.add_a_photo_outlined, color: theme.colorScheme.primary),
-            const SizedBox(height: 4),
-            Text(l10n.addPhoto, style: theme.textTheme.labelSmall, textAlign: TextAlign.center),
-          ],
-        ),
-      (_, final File f) => Image.file(f, fit: BoxFit.cover, cacheWidth: 400, errorBuilder: (_, _, _) => const _Waiting()),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.add_a_photo_outlined, color: theme.colorScheme.primary),
+          const SizedBox(height: 4),
+          Text(l10n.addPhoto, style: theme.textTheme.labelSmall, textAlign: TextAlign.center),
+        ],
+      ),
+      (_, final File f) => Image.file(
+        f,
+        fit: BoxFit.cover,
+        cacheWidth: 400,
+        errorBuilder: (_, _, _) => const _Waiting(),
+      ),
       _ => const _Waiting(),
     };
 
@@ -87,11 +99,25 @@ class _MonthTile extends ConsumerWidget {
       child: InkWell(
         onTap: () => photo == null
             ? addPhoto(context, ref, baby, ageMonth)
-            : Navigator.of(context).push(MaterialPageRoute(builder: (_) => PhotoScreen(baby: baby, photo: photo))),
+            : Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => PhotoScreen(baby: baby, ageMonth: ageMonth),
+                ),
+              ),
         child: Stack(
           fit: StackFit.expand,
           children: [
             content,
+            if (photos.length > 1)
+              PositionedDirectional(
+                top: 6,
+                end: 6,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(color: Colors.black54, borderRadius: BorderRadius.circular(8)),
+                  child: Text('${photos.length}', style: theme.textTheme.labelSmall?.copyWith(color: Colors.white)),
+                ),
+              ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -119,7 +145,8 @@ class _Waiting extends StatelessWidget {
   const _Waiting();
 
   @override
-  Widget build(BuildContext context) => Center(child: Icon(Icons.cloud_download_outlined, color: Theme.of(context).colorScheme.outline));
+  Widget build(BuildContext context) =>
+      Center(child: Icon(Icons.cloud_download_outlined, color: Theme.of(context).colorScheme.outline));
 }
 
 /// Camera or gallery, then a preview with an optional caption. Photos are
@@ -164,7 +191,7 @@ class _SavePhotoSheet extends ConsumerStatefulWidget {
   final int ageMonth;
   final Uint8List bytes;
 
-  /// Photo this one replaces (deleted first, keeping one per month).
+  /// Photo this one replaces (deleted first, so the month's count stays).
   final String? replacing;
 
   @override
@@ -187,14 +214,20 @@ class _SavePhotoSheetState extends ConsumerState<_SavePhotoSheet> {
     final caption = _caption.text.trim();
     try {
       if (widget.replacing case final old?) await repo.delete(widget.baby, old);
-      await repo.add(widget.baby, ageMonth: widget.ageMonth, jpeg: widget.bytes, caption: caption.isEmpty ? null : caption);
+      await repo.add(
+        widget.baby,
+        ageMonth: widget.ageMonth,
+        jpeg: widget.bytes,
+        caption: caption.isEmpty ? null : caption,
+        perMonth: photosPerMonth(ref),
+      );
       if (mounted) Navigator.pop(context);
     } catch (e) {
       if (!mounted) return;
       final l10n = AppLocalizations.of(context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e is PhotoLimitException ? l10n.photoMonthTaken : l10n.errorGeneric)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e is PhotoLimitException ? l10n.photoMonthTaken : l10n.errorGeneric)));
       setState(() => _busy = false);
     }
   }
@@ -229,13 +262,45 @@ class _SavePhotoSheetState extends ConsumerState<_SavePhotoSheet> {
 }
 
 /// One photo, full screen: share, replace, edit the caption or delete.
-class PhotoScreen extends ConsumerWidget {
-  const PhotoScreen({super.key, required this.baby, required this.photo});
+/// How many photos per baby per month this family's plan allows.
+int photosPerMonth(WidgetRef ref) =>
+    ref.read(isProProvider) ? PlanLimits.proPhotosPerMonth : PlanLimits.freePhotosPerMonth;
+
+/// Adds one more photo to [ageMonth] if the plan allows it, offering Pro
+/// when Free (one per month).
+Future<void> addAnotherPhoto(BuildContext context, WidgetRef ref, Baby baby, int ageMonth, int count) async {
+  final l10n = AppLocalizations.of(context);
+  if (count >= PlanLimits.freePhotosPerMonth && !await requirePro(context, ref, l10n.proReasonPhotos)) return;
+  if (!context.mounted) return;
+  if (count >= PlanLimits.proPhotosPerMonth) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.photoMonthFull)));
+    return;
+  }
+  await addPhoto(context, ref, baby, ageMonth);
+}
+
+/// The photos of one month, swipe between them.
+class PhotoScreen extends ConsumerStatefulWidget {
+  const PhotoScreen({super.key, required this.baby, required this.ageMonth});
 
   final Baby baby;
-  final Photo photo;
+  final int ageMonth;
 
-  Future<void> _editCaption(BuildContext context, WidgetRef ref) async {
+  @override
+  ConsumerState<PhotoScreen> createState() => _PhotoScreenState();
+}
+
+class _PhotoScreenState extends ConsumerState<PhotoScreen> {
+  final _pages = PageController();
+  var _index = 0;
+
+  @override
+  void dispose() {
+    _pages.dispose();
+    super.dispose();
+  }
+
+  Future<void> _editCaption(Photo photo) async {
     final l10n = AppLocalizations.of(context);
     final controller = TextEditingController(text: photo.caption ?? '');
     final caption = await showDialog<String>(
@@ -256,27 +321,44 @@ class PhotoScreen extends ConsumerWidget {
     controller.dispose();
     if (caption != null) {
       await ref.read(photoRepositoryProvider).updateCaption(photo.id, caption.isEmpty ? null : caption);
-      if (context.mounted) Navigator.pop(context);
     }
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
+    final baby = widget.baby;
+    final photos = [
+      for (final p in ref.watch(photosProvider(baby.id)).value ?? const <Photo>[])
+        if (p.ageMonth == widget.ageMonth) p,
+    ];
+    final label = photoMonthLabel(l10n, widget.ageMonth);
+    if (photos.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: Text('${baby.name} · $label')),
+        body: const _Waiting(),
+      );
+    }
+    final index = _index.clamp(0, photos.length - 1);
+    final photo = photos[index];
     final path = photo.localPath;
-    final label = photoMonthLabel(l10n, photo.ageMonth);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${baby.name} · $label'),
+        title: Text(
+          photos.length > 1 ? '${baby.name} · $label (${index + 1}/${photos.length})' : '${baby.name} · $label',
+        ),
         actions: [
           if (path != null)
             IconButton(
               tooltip: l10n.shareButton,
               icon: const Icon(Icons.share_outlined),
               onPressed: () => SharePlus.instance.share(
-                ShareParams(files: [XFile(path, mimeType: 'image/jpeg')], text: '${baby.name} · $label'),
+                ShareParams(
+                  files: [XFile(path, mimeType: 'image/jpeg')],
+                  text: '${baby.name} · $label',
+                ),
               ),
             ),
         ],
@@ -284,12 +366,23 @@ class PhotoScreen extends ConsumerWidget {
       body: Column(
         children: [
           Expanded(
-            child: path == null
-                ? const _Waiting()
-                : InteractiveViewer(child: Center(child: Image.file(File(path), errorBuilder: (_, _, _) => const _Waiting()))),
+            child: PageView.builder(
+              controller: _pages,
+              itemCount: photos.length,
+              onPageChanged: (i) => setState(() => _index = i),
+              itemBuilder: (context, i) => switch (photos[i].localPath) {
+                final String p => InteractiveViewer(
+                  child: Center(child: Image.file(File(p), errorBuilder: (_, _, _) => const _Waiting())),
+                ),
+                _ => const _Waiting(),
+              },
+            ),
           ),
           if (photo.caption case final caption?)
-            Padding(padding: const EdgeInsets.all(16), child: Text(caption, style: theme.textTheme.bodyLarge)),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(caption, style: theme.textTheme.bodyLarge),
+            ),
           SafeArea(
             top: false,
             child: Wrap(
@@ -299,20 +392,22 @@ class PhotoScreen extends ConsumerWidget {
                 TextButton.icon(
                   icon: const Icon(Icons.edit_outlined),
                   label: Text(l10n.editCaption),
-                  onPressed: () => _editCaption(context, ref),
+                  onPressed: () => _editCaption(photo),
                 ),
                 TextButton.icon(
                   icon: const Icon(Icons.swap_horiz),
                   label: Text(l10n.replacePhoto),
-                  onPressed: () async {
-                    await addPhoto(context, ref, baby, photo.ageMonth, replacing: photo.id);
-                    if (context.mounted) Navigator.pop(context);
-                  },
+                  onPressed: () => addPhoto(context, ref, baby, photo.ageMonth, replacing: photo.id),
+                ),
+                TextButton.icon(
+                  icon: const Icon(Icons.add_photo_alternate_outlined),
+                  label: Text(l10n.photoAddAnother),
+                  onPressed: () => addAnotherPhoto(context, ref, baby, widget.ageMonth, photos.length),
                 ),
                 DeleteButton(
                   onConfirmed: () async {
                     await ref.read(photoRepositoryProvider).delete(baby, photo.id);
-                    if (context.mounted) Navigator.pop(context);
+                    if (photos.length == 1 && context.mounted) Navigator.pop(context);
                   },
                 ),
               ],

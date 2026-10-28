@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n-title="huck.meta.title">Switch from Huckleberry to Palna · Import your log</title>
+  <meta name="description" data-i18n-attr="content:huck.meta.desc" content="Move your baby's feeds, sleep, diapers and growth from Huckleberry to Palna in three steps. Free family sharing, vaccine schedules for 23 countries, and English, Urdu or Roman Urdu.">
+  <link rel="canonical" href="https://palnacare.com/switch-from-huckleberry/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Palna">
+  <meta property="og:title" content="Switch from Huckleberry to Palna">
+  <meta property="og:description" content="Move your baby's feeds, sleep, diapers and growth from Huckleberry to Palna in three steps. Free family sharing, vaccine schedules for 23 countries, and English, Urdu or Roman Urdu.">
+  <meta property="og:image" content="https://palnacare.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://palnacare.com/switch-from-huckleberry/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#fbf7f0">
+  <link rel="icon" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../icon-192.png">
+  <script>
+    // Theme and language before the first paint, so nothing flashes.
+    (function () {
+      var r = document.documentElement;
+      try {
+        var params = new URLSearchParams(location.search);
+        var pt = params.get('theme');
+        if (pt) localStorage.setItem('palna-theme', pt);
+        var t = pt || localStorage.getItem('palna-theme');
+        if (t && t !== 'system') r.dataset.theme = t;
+        var q = params.get('lang');
+        var l = q || localStorage.getItem('palna-lang') || (/^ur/i.test(navigator.language || '') ? 'ur' : 'en');
+        if (q) localStorage.setItem('palna-lang', q);
+        r.dataset.lang = l;
+        if (l !== 'en') r.classList.add('i18n-pending');
+        if (l === 'ur') { r.lang = 'ur'; r.dir = 'rtl'; } else if (l === 'roman') { r.lang = 'ur-Latn'; }
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Noto+Nastaliq+Urdu:wght@400;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img src="../icon-192.png" alt="" width="38" height="38"><b>Palna</b></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="../index.html#pakistan" data-i18n="nav.pk">Why Palna</a>
+      <a href="../index.html#features" data-i18n="nav.features">Features</a>
+      <a href="../index.html#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="../help/index.html" data-i18n="nav.help">Help</a>
+    </nav>
+    <div class="controls">
+      <div class="menu">
+        <button class="chip" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language" data-i18n-attr="aria-label:ui.language">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>
+          <span data-lang-label>EN</span>
+        </button>
+        <ul role="menu">
+          <li><button type="button" role="menuitemradio" data-set-lang="en" lang="en">English</button></li>
+          <li><button type="button" role="menuitemradio" data-set-lang="ur" lang="ur" class="ur">اردو</button></li>
+          <li><button type="button" role="menuitemradio" data-set-lang="roman" lang="ur-Latn">Roman Urdu</button></li>
+        </ul>
+      </div>
+      <div class="menu">
+        <button class="chip square" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Theme" data-i18n-attr="aria-label:ui.theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true" data-theme-icon></svg>
+        </button>
+        <ul role="menu">
+          <li><button type="button" role="menuitemradio" data-set-theme="light"><span class="swatch" style="background:#fbf7f0"></span><span data-i18n="theme.light">Light</span></button></li>
+          <li><button type="button" role="menuitemradio" data-set-theme="dark"><span class="swatch" style="background:#1b2230"></span><span data-i18n="theme.dark">Dark</span></button></li>
+          <li><button type="button" role="menuitemradio" data-set-theme="baby"><span class="swatch" style="background:linear-gradient(135deg,#f6c3d6 50%,#bfe8dc 50%)"></span><span data-i18n="theme.baby">Baby</span></button></li>
+          <li><button type="button" role="menuitemradio" data-set-theme="system"><span class="swatch" style="background:linear-gradient(135deg,#fbf7f0 50%,#1b2230 50%)"></span><span data-i18n="theme.system">Same as device</span></button></li>
+        </ul>
+      </div>
+      <a class="btn get" href="../index.html#get" data-i18n="cta.get">Get Palna</a>
+      <button class="chip square burger" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menu" data-i18n-attr="aria-label:nav.menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main class="guide" id="main">
+  <div class="guide-hero">
+    <div class="wrap">
+      <p class="crumbs"><a href="../help/index.html" data-i18n="f.help">Help centre</a></p>
+      <p class="kicker" data-i18n="huck.kicker">Switch from Huckleberry</p>
+      <h1 data-i18n="huck.title">Bring your Huckleberry log to Palna.</h1>
+      <p class="sub" data-i18n="huck.sub">Huckleberry's free tracking may be all you need. If you'd like the whole family on one log, your country's vaccine schedule, or the app in Urdu, you can move your baby's history into Palna in a few minutes.</p>
+    </div>
+  </div>
+  <section aria-labelledby="why-title">
+    <div class="wrap">
+      <p class="kicker" data-i18n="huck.why.kicker">What Palna adds</p>
+      <h2 class="title" id="why-title" data-i18n="huck.why.title">Free in Palna, for the whole family.</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
+          <h3 data-i18n="huck.c1.t">Family sharing</h3>
+          <p data-i18n="huck.c1.p">Parents, grandparents and helpers, each on their own phone. Owner and caregiver roles, and a notification when someone logs a feed, sleep or medicine.</p>
+        </div>
+        <div class="card">
+          <div class="icon rose"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2l4 4M17 7l3-3M19 9l-8 8-4 1 1-4 8-8zM7 18l-4 4"/></svg></div>
+          <h3 data-i18n="huck.c2.t">Vaccine schedules for 23 countries</h3>
+          <p data-i18n="huck.c2.p">Due dates worked out from your baby's birthday, with reminders.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 7 8M11 5c0 3-3 7-7 8"/><path d="M13 21l4-9 4 9M14.5 18h5"/></svg></div>
+          <h3 data-i18n="huck.c3.t">English, Urdu or Roman Urdu</h3>
+          <p data-i18n="huck.c3.p">Each person in the family picks their own language.</p>
+        </div>
+        <div class="card">
+          <div class="icon rose"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6M10 2v3l-2 3v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8l-2-3V2"/><path d="M8 13h8"/></svg></div>
+          <h3 data-i18n="huck.c4.t">Breast-milk stash</h3>
+          <p data-i18n="huck.c4.p">Fridge and freezer milk with use-by dates, next to your pumping log.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4v10.5a4 4 0 1 1-4 0V4a2 2 0 1 1 4 0z"/><path d="M12 17.5v-4"/></svg></div>
+          <h3 data-i18n="huck.c5.t">Illness, day by day</h3>
+          <p data-i18n="huck.c5.p">Temperatures, medicine doses and doctor visits grouped by day, until your baby is better.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="band" aria-labelledby="steps-title">
+    <div class="wrap">
+      <p class="kicker" data-i18n="sw.steps.kicker">Three steps</p>
+      <h2 class="title" id="steps-title" data-i18n="sw.steps.title">How to move your log</h2>
+      <ol class="steps" role="list" style="list-style:none;padding:0">
+        <li class="step"><h3 data-i18n="huck.s1.t">Export from Huckleberry</h3><p data-i18n="huck.s1.p">Tap your child's icon in the menu bar, scroll down and tap Export tracking data as CSV. Huckleberry emails you a link that works for 24 hours. Open it and download the CSV.</p></li>
+        <li class="step"><h3 data-i18n="sw.s2.t">Open Palna</h3><p data-i18n="huck.s2.p">Open Settings, then Your data &gt; Export and import, and pick Huckleberry.</p></li>
+        <li class="step"><h3 data-i18n="sw.s3.t">Import</h3><p data-i18n="sw.s3.p">Tap Choose file and pick the CSV. Check the preview, then tap Import. Entries already in Palna aren't doubled.</p></li>
+      </ol>
+      <p class="tip" data-i18n-html="sw.tip"><b>Tip:</b> don't open the file in Excel and save it before importing, because Excel changes the times. If that has happened, export the file again.</p>
+    </div>
+  </section>
+  <section aria-labelledby="what-title">
+    <div class="wrap">
+      <p class="kicker" data-i18n="sw.what.kicker">What comes across</p>
+      <h2 class="title" id="what-title" data-i18n="sw.what.title">Your history, not a fresh start.</h2>
+      <div class="lists">
+        <div>
+          <h3 data-i18n="sw.in.t">Imported</h3>
+          <ul class="ticks">
+            <li data-i18n="sw.in.1">Feeds</li>
+            <li data-i18n="sw.in.2">Sleep</li>
+            <li data-i18n="sw.in.3">Diapers</li>
+            <li data-i18n="sw.in.4">Pumping</li>
+            <li data-i18n="sw.in.5">Growth measurements</li>
+            <li data-i18n="sw.in.6">Temperatures</li>
+            <li data-i18n="sw.in.7">Activities</li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="sw.out.t">Not imported</h3>
+          <ul class="ticks crosses">
+            <li data-i18n="sw.out.1">Medicines</li>
+            <li data-i18n="sw.out.2">Solid foods</li>
+            <li data-i18n="sw.out.3">Vaccines</li>
+            <li data-i18n="sw.out.4">Milestones</li>
+          </ul>
+          <p data-i18n="sw.out.p">These are listed in the preview, so you can see what was left out. You can enter them again in Palna's Health section.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="band" aria-labelledby="cmp-title">
+    <div class="wrap">
+      <p class="kicker" data-i18n="sw.cmp.kicker">Free plan</p>
+      <h2 class="title" id="cmp-title" data-i18n="sw.cmp.title">What's free in Palna, and what Pro adds</h2>
+      <p class="sub" data-i18n="sw.cmp.sub">Many baby apps keep some of these behind a subscription. In Palna, everything in the Free column is free, with no ads.</p>
+      <div class="table-wrap">
+        <table class="compare">
+          <caption data-i18n="sw.cmp.cap">Palna Pro is optional and covers the whole family: monthly, yearly or lifetime.</caption>
+          <thead>
+            <tr><th scope="col" data-i18n="sw.cmp.h.feature">Feature</th><th scope="col" data-i18n="sw.cmp.h.free">Free</th><th scope="col" data-i18n="sw.cmp.h.pro">Palna Pro</th></tr>
+          </thead>
+          <tbody>
+              <tr><th scope="row" data-i18n="sw.cmp.r1">Feeds, sleep, diapers and pumping</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r2">Family sharing: parents, grandparents and helpers on their own phones</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r3">Vaccine schedules for 23 countries, with reminders</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r4">Medicines and doses, with reminders</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r5">Growth on WHO charts, and milestones</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r6">Breast-milk stash with use-by dates</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r7">Illness tracking, day by day</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r8">7-day reports and a daily journal</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r9">English, Urdu and Roman Urdu, and dark mode</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r10">Works offline, with no ads</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r11">Import from Nara Baby and Huckleberry, and CSV export</th><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r12">More than one baby</th><td class="no"><span aria-hidden="true">–</span><span class="sr-only" data-i18n="sw.cmp.no">Not included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r13">30-day reports and the PDF summary for the doctor</th><td class="no"><span aria-hidden="true">–</span><span class="sr-only" data-i18n="sw.cmp.no">Not included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r14">10 photos a month for each baby</th><td class="no"><span aria-hidden="true">–</span><span class="sr-only" data-i18n="sw.cmp.no">Not included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r15">Colour themes and widget extras</th><td class="no"><span aria-hidden="true">–</span><span class="sr-only" data-i18n="sw.cmp.no">Not included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+              <tr><th scope="row" data-i18n="sw.cmp.r16">Next nap and bedtime times</th><td class="no"><span aria-hidden="true">–</span><span class="sr-only" data-i18n="sw.cmp.no">Not included</span></td><td class="yes"><span aria-hidden="true">✓</span><span class="sr-only" data-i18n="sw.cmp.yes">Included</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker" data-i18n="faq.kicker">Questions</p>
+        <h2 class="title" id="faq-title" data-i18n="faq.title">Frequently asked</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary data-i18n="sw.faq.1.q">Is Palna free?</summary>
+          <p data-i18n="sw.faq.1.a">Yes. Everything in the Free column above is free, including the import, and there are no ads. Palna Pro is optional: it adds more than one baby, next nap and bedtime times, 30-day reports, the PDF summary for the doctor, more photos and colour themes. One Pro plan covers the whole family: monthly, yearly or lifetime.</p>
+        </details>
+        <details>
+          <summary data-i18n="sw.faq.2.q">Will my partner see the imported log?</summary>
+          <p data-i18n-html="sw.faq.2.a">Yes. Imported entries are added to your baby's log, so everyone you invite to the family sees them on their own phone. To invite someone, open Settings, then Family &amp; caregivers &gt; Invite a caregiver. See <a href="../help/share-with-family/index.html">how family sharing works</a>.</p>
+        </details>
+        <details>
+          <summary data-i18n="sw.faq.3.q">What about twins?</summary>
+          <p data-i18n="huck.faq.3.a">Export a file for each child from Huckleberry, and import each one into its own baby in Palna: choose the baby first, then its file. The Free plan covers one baby; for a second baby you'll need Palna Pro.</p>
+        </details>
+        <details>
+          <summary data-i18n="sw.faq.4.q">What if I import the same file twice?</summary>
+          <p data-i18n="sw.faq.4.a">Nothing is doubled. Entries already in Palna are skipped, so you can import a newer export later to bring in the days since.</p>
+        </details>
+        <details>
+          <summary data-i18n="huck.faq.5.q">The email link from Huckleberry has expired.</summary>
+          <p data-i18n="huck.faq.5.a">The link works for 24 hours. Export again from Huckleberry to get a new one.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <div class="cta">
+        <img src="../icon-192.png" alt="" width="84" height="84">
+        <h2 class="title" style="margin-inline:auto" data-i18n="sw.cta.title">Bring your history with you.</h2>
+        <p style="margin:0 auto;max-width:34em" data-i18n="sw.cta.sub">Palna is coming soon to Google Play and the App Store. Export your file now, and we'll email you the day Palna launches.</p>
+        <div class="stores">
+          <a class="store" href="../index.html#faq" aria-label="Google Play, coming soon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 2.8v18.4c0 .4.4.6.7.4L20.4 12.9c.3-.2.3-.6 0-.8L4.7 2.4c-.3-.2-.7 0-.7.4z"/></svg>
+            <div><small data-i18n="store.soon">Coming soon</small><span>Google Play</span></div>
+          </a>
+          <a class="store" href="../index.html#faq" aria-label="App Store, coming soon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8s2 .8 3.3.8c1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.8-1.1-2.8-4.2zM13.9 5.1c.7-.8 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></svg>
+            <div><small data-i18n="store.soon">Coming soon</small><span>App Store</span></div>
+          </a>
+          <a class="store" href="mailto:hello@palnacare.com?subject=Tell%20me%20when%20Palna%20launches">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+            <div><small data-i18n="cta.small">Get told on launch day</small><span data-i18n="cta.btn">Email me</span></div>
+          </a>
+        </div>
+      </div>
+      <nav class="more" aria-labelledby="more-title" style="margin-top:40px">
+        <h2 class="title" id="more-title" style="font-size:1.4rem" data-i18n="sw.more.title">More help</h2>
+        <ul class="ticks">
+          <li><a href="../help/index.html" data-i18n="f.help">Help centre</a></li>
+          <li><a href="../switch-from-nara/index.html" data-i18n="f.switchNara">Switch from Nara Baby</a></li>
+          <li><a href="../help/share-with-family/index.html" data-i18n="help.family.t">Share Palna with your family</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="legal" style="margin-top:0">
+      <span><span data-i18n="foot.copy">© 2026 Toolbox Services. Palna is not a medical device.</span> · <a href="../index.html" data-i18n="f.home">Home</a> · <a href="../help/index.html" data-i18n="f.help">Help centre</a> · <a href="../switch-from-nara/index.html" data-i18n="f.switchNara">Switch from Nara Baby</a> · <a href="../switch-from-huckleberry/index.html" data-i18n="f.switchHuck">Switch from Huckleberry</a> · <a href="../privacy/index.html" data-i18n="f.privacy">Privacy policy</a> · <a href="../terms/index.html" data-i18n="f.terms">Terms of use</a> · <a href="../delete-account/index.html" data-i18n="f.delete">Delete your account</a></span>
+      <span><a href="mailto:hello@palnacare.com">hello@palnacare.com</a></span>
+    </div>
+  </div>
+</footer>
+<script src="../i18n.js"></script>
+<script src="../i18n-guides.js"></script>
+<script src="../site.js"></script>
+</body>
+</html>

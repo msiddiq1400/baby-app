@@ -27,7 +27,8 @@ class JournalDay {
 
   final DateTime day;
 
-  /// Feeds, diapers and sleeps (a sleep crossing midnight is on both days).
+  /// Feeds, diapers, sleeps and activities (a sleep crossing midnight is on
+  /// both days).
   final TodayLog log;
   final List<PumpingSession> pumping;
   final List<NamedDose> doses;
@@ -43,6 +44,7 @@ class JournalDay {
 
   bool get isEmpty =>
       log.feeds.isEmpty &&
+      log.activities.isEmpty &&
       log.diapers.isEmpty &&
       log.sleeps.isEmpty &&
       pumping.isEmpty &&
@@ -73,6 +75,7 @@ class JournalRepository {
     'vaccinations',
     'milestone_checks',
     'doctor_visits',
+    'activities',
   ];
 
   Future<JournalDay> load(String babyId, DateTime day) async {
@@ -123,6 +126,7 @@ class JournalRepository {
     );
     final milestones = await onDate('milestone_checks', 'id, milestone_id, achieved_on', 'achieved_on');
     final visits = await inRange('doctor_visits', 'id, visited_at, doctor, diagnosis, advice', 'visited_at');
+    final activities = await inRange('activities', Activity.columns, 'started_at');
 
     return JournalDay(
       day: start,
@@ -131,6 +135,7 @@ class JournalRepository {
         feeds: feeds.map(Feed.fromJson).toList(),
         diapers: diapers.map(Diaper.fromJson).toList(),
         sleeps: sleeps.map(Sleep.fromJson).toList(),
+        activities: activities.map(Activity.fromJson).toList(),
       ),
       pumping: pumping.map(PumpingSession.fromJson).toList(),
       doses: [for (final d in doses) (dose: MedicationDose.fromJson(d), medicine: d['medicine'] as String)],

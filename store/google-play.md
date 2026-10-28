@@ -8,7 +8,7 @@ Package name: `com.palnacare.app` (permanent).
 | Field | Value |
 |---|---|
 | App name (30) | Palna - Mother & Baby Care |
-| Short description (80) | Baby tracker in Urdu & English: feeds, sleep, diapers, vaccines. Works offline. |
+| Short description (80) | Baby tracker for feeds, sleep, diapers and vaccines. Works offline. |
 | Full description (4000) | The "Description" from [app-store.md](app-store.md), unchanged |
 | App icon (512 x 512) | `store/play/icon-512.png` |
 | Feature graphic (1024 x 500) | `store/play/feature-graphic-1024x500.png` |
@@ -57,8 +57,26 @@ Every type: collected, **not shared**, not ephemeral.
 | Health and fitness > Health info | Required | App functionality |
 | App activity > Other user-generated content | Optional | App functionality |
 | Photos and videos > Photos | Optional | App functionality |
+| App info and performance > Crash logs | Required | Analytics (Firebase Crashlytics, to fix crashes) |
+| App info and performance > Diagnostics | Required | Analytics (Firebase Crashlytics) |
+| Device or other IDs | Required | App functionality (push address for family notifications), Analytics (Crashlytics installation ID) |
 
-## When paid plans arrive
+Firebase (Google) acts as our service provider, so this counts as **not shared** in Play's terms.
 
-Content rating: digital purchases Yes. Data safety: add Financial info > Purchase history.
-Give the demo account the top plan. Financial features stay "none".
+## Palna Pro (todos.txt 38b, 38d)
+
+Monetize > Products > Subscriptions, product IDs matching RevenueCat, plus Lifetime under
+Monetize > Products > In-app products (one-time). Prices decided 28 Oct 2026 (todos.txt 52):
+
+| Product ID | Type / base plan | Price | Offer |
+|---|---|---|---|
+| palna_pro_monthly | subscription, monthly, auto-renewing | US $3.99; Pakistan Rs 299 | none |
+| palna_pro_yearly | subscription, yearly, auto-renewing | US $24.99; Pakistan Rs 1,999 | 7-day free trial, new customers |
+| palna_pro_lifetime | in-app product (one-time, not consumed) | US $49.99; Pakistan Rs 4,999 | none |
+
+Set the US price, let Play convert the rest, then override Pakistan by hand (otherwise Play
+converts $3.99 to about Rs 1,100). India optional: Rs 149 / 999 / 2,499 as ₹.
+
+Content rating: digital purchases **Yes**. Data safety: add **Financial info > Purchase history**
+(collected, not shared, required, App functionality). Financial features stay "none". The demo
+account review@palnacare.com already has Pro (pro_emails table).

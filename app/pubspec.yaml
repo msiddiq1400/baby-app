@@ -18,6 +18,8 @@ dependencies:
   # Google sign-in can't use (same pin as OathLock).
   firebase_core: ">=4.0.0 <5.0.0"
   firebase_messaging: ">=16.0.0 <17.0.0"
+  # Crash reports (todos.txt 14c); the release that goes with firebase_core 4.
+  firebase_crashlytics: ">=5.0.0 <6.0.0"
   flutter:
     sdk: flutter
   flutter_local_notifications: ^22.3.1
@@ -41,6 +43,8 @@ dependencies:
   timezone: ^0.11.1
   url_launcher: ^6.3.2
   uuid: ^4.6.0
+  purchases_flutter: ^10.19.0
+  file_picker: ^13.3.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,6 @@
 // Today tab flows on the real app and database: logging, editing and
-// deleting feeds, diapers and sleep from the Feed / Diaper / Sleep bar and
-// the cards, what Today then shows (counts, last feed, the timeline), and
+// deleting feeds, diapers, sleep and activities from the Feed / Diaper /
+// Sleep bar and the cards, what Today then shows (counts, last feed, the timeline), and
 // the card buttons (past entries, past days, reports). Timers are in
 // timers_flow_test.dart; the journal and reports in
 // journal_reports_flow_test.dart.
@@ -262,6 +262,143 @@ void main() {
       await tapAndSettle(tester, find.descendant(of: find.byType(AlertDialog), matching: find.text(en.deleteButton)));
       expect((await env.rows(tester, 'SELECT deleted_at FROM diapers')).single['deleted_at'], isNotNull);
       expect(find.text(en.nothingLoggedToday), findsOneWidget);
+    });
+  });
+
+  group('activities', () {
+    /// The Activities card's "Activity" button opens the form.
+    Future<void> openActivityForm(WidgetTester tester) =>
+        tapAndSettle(tester, find.widgetWithText(TextButton, en.activityShort));
+
+    flowTest('tummy time with a duration: saved, counted on the card and in the timeline', (tester) async {
+      await env.pumpApp(tester);
+      expect(find.text(en.activitiesNoneToday), findsOneWidget);
+      await openActivityForm(tester);
+      expect(inSheet(find.text(en.addActivity)), findsOneWidget);
+      // Tummy time is chosen by default; pick 10 minutes.
+      await tapAndSettle(tester, inSheet(find.widgetWithText(ChoiceChip, en.activityMinutes(10))));
+      await tapAndSettle(tester, inSheet(find.widgetWithText(FilledButton, en.saveButton)));
+      expect(find.byType(BottomSheet), findsNothing);
+
+      final row = (await env.rows(tester, 'SELECT kind, label, started_at, ended_at FROM activities')).single;
+      expect(row['kind'], 'tummy_time');
+      expect(row['label'], isNull);
+      expect(parseUtc(row['ended_at']).difference(parseUtc(row['started_at'])), const Duration(minutes: 10));
+      expect(find.text(en.tummyTimeToday), findsOneWidget);
+      expect(timelineTexts(tester), ['${en.activityTummyTime} · ${en.durationM(10)}']);
+      expectNoErrors(tester);
+    });
+
+    flowTest('Tummy timer starts a timer; Stop ends it', (tester) async {
+      await env.pumpApp(tester);
+      await tapAndSettle(tester, find.widgetWithText(TextButton, en.tummyTimer));
+      final started = (await env.rows(tester, 'SELECT kind, ended_at FROM activities')).single;
+      expect(started, {'kind': 'tummy_time', 'ended_at': null});
+      expect(find.byType(ActivityTimerCard), findsOneWidget);
+      // Only one activity timer at a time.
+      expect(find.widgetWithText(TextButton, en.tummyTimer), findsNothing);
+      expect(timelineTexts(tester), ['${en.activityTummyTime} · ${en.activityRunning}']);
+
+      await tapAndSettle(
+        tester,
+        find.descendant(of: find.byType(ActivityTimerCard), matching: find.widgetWithText(FilledButton, en.activityStop)),
+      );
+      expect((await env.rows(tester, 'SELECT ended_at FROM activities')).single['ended_at'], isNotNull);
+      // The ticking clock can make the first settle stop before the
+      // database change reaches the screen.
+      await settle(tester);
+      expect(find.byType(ActivityTimerCard), findsNothing);
+      expect(find.widgetWithText(TextButton, en.tummyTimer), findsOneWidget);
+      expectNoErrors(tester);
+    });
+
+    flowTest('a bath without a time, then edited to "other" with a label, then deleted', (tester) async {
+      await env.pumpApp(tester);
+      await openActivityForm(tester);
+      await tapAndSettle(tester, inSheet(find.widgetWithText(ChoiceChip, en.activityBath)));
+      // "Not timed" is the default.
+      await tapAndSettle(tester, inSheet(find.widgetWithText(FilledButton, en.saveButton)));
+      final bath = (await env.rows(tester, 'SELECT kind, started_at, ended_at FROM activities')).single;
+      expect(bath['kind'], 'bath');
+      expect(bath['ended_at'], bath['started_at']);
+      expect(timelineTexts(tester), [en.activityBath]);
+      expect(find.textContaining(en.activityBath), findsWidgets);
+
+      await tapAndSettle(tester, find.descendant(of: find.byType(Timeline), matching: find.byType(ListTile)));
+      expect(inSheet(find.text(en.editActivity)), findsOneWidget);
+      await tapAndSettle(tester, inSheet(find.widgetWithText(ChoiceChip, en.activityOther)));
+      await tester.enterText(inSheet(find.widgetWithText(TextField, en.activityLabelHint)), '  Swimming ');
+      await tester.pump();
+      await tapAndSettle(tester, inSheet(find.widgetWithText(ChoiceChip, en.activityMinutes(30))));
+      await tapAndSettle(tester, inSheet(find.widgetWithText(FilledButton, en.saveButton)));
+      final edited = (await env.rows(tester, 'SELECT kind, label FROM activities')).single;
+      expect(edited, {'kind': 'other', 'label': 'Swimming'});
+      expect(timelineTexts(tester), ['Swimming · ${en.durationM(30)}']);
+
+      await tapAndSettle(tester, find.descendant(of: find.byType(Timeline), matching: find.byType(ListTile)));
+      await tapAndSettle(tester, inSheet(find.widgetWithText(TextButton, en.deleteButton)));
+      await tapAndSettle(tester, find.descendant(of: find.byType(AlertDialog), matching: find.text(en.deleteButton)));
+      expect((await env.rows(tester, 'SELECT deleted_at FROM activities')).single['deleted_at'], isNotNull);
+      expect(find.text(en.nothingLoggedToday), findsOneWidget);
+    });
+
+    flowTest("the Activities card's Past days opens the journal filtered to activities", (tester) async {
+      final now = DateTime.now();
+      final yesterday = DateTime(now.year, now.month, now.day - 1, 10);
+      await env.exec(
+        tester,
+        "INSERT INTO activities (id, family_id, baby_id, kind, started_at, ended_at) VALUES (uuid(), ?, ?, 'tummy_time', ?, ?)",
+        [env.familyId, env.babyId, utcTimestamp(yesterday), utcTimestamp(yesterday.add(const Duration(minutes: 5)))],
+      );
+      await insertFeed(tester, type: 'bottle_formula', at: yesterday, ml: 90);
+      await env.pumpApp(tester);
+      // The Activities card is the fourth.
+      await tapAndSettle(tester, find.widgetWithText(TextButton, en.pastDays).at(3));
+      expect(find.byType(JournalScreen), findsOneWidget);
+      expect(tester.widget<ChoiceChip>(find.widgetWithText(ChoiceChip, en.activities)).selected, isTrue);
+      expect(find.text('${en.activityTummyTime} · ${en.durationM(5)}'), findsOneWidget);
+      // The feed that day is filtered out.
+      expect(find.textContaining('90 ml'), findsNothing);
+      expectNoErrors(tester);
+    });
+  });
+
+  group('nap predictions', () {
+    /// A night that ended 30 minutes ago: the baby is awake now.
+    Future<void> wokeHalfAnHourAgo(WidgetTester tester) {
+      final now = DateTime.now();
+      return env.exec(
+        tester,
+        "INSERT INTO sleeps (id, family_id, baby_id, kind, started_at, ended_at) VALUES (uuid(), ?, ?, 'night', ?, ?)",
+        [
+          env.familyId,
+          env.babyId,
+          utcTimestamp(now.subtract(const Duration(hours: 10))),
+          utcTimestamp(now.subtract(const Duration(minutes: 30))),
+        ],
+      );
+    }
+
+    flowTest('Free: the Sleep card offers "Nap times", which opens Palna Pro', (tester) async {
+      await wokeHalfAnHourAgo(tester);
+      await env.pumpApp(tester);
+      await pumpUntil(tester, () => find.widgetWithText(TextButton, en.napTimesShort).evaluate().isNotEmpty);
+      expect(find.textContaining('Next nap'), findsNothing);
+      await tapAndSettle(tester, find.widgetWithText(TextButton, en.napTimesShort));
+      expect(find.text(en.proReasonPredictions), findsOneWidget);
+      expectNoErrors(tester);
+    });
+
+    flowTest('Pro: the Sleep card shows the next nap (a guess from age at first)', (tester) async {
+      await wokeHalfAnHourAgo(tester);
+      await tester.runAsync(env.makePro);
+      await env.pumpApp(tester);
+      // The last week's sleep loads a moment after Today.
+      await pumpUntil(tester, () => find.textContaining('Next nap around').evaluate().isNotEmpty);
+      expect(find.textContaining('Next nap around'), findsOneWidget);
+      expect(find.text(en.predictionFromAge), findsOneWidget);
+      expect(find.widgetWithText(TextButton, en.napTimesShort), findsNothing);
+      expectNoErrors(tester);
     });
   });
 

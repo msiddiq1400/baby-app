@@ -12,6 +12,7 @@ import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
 import 'doctor_summary.dart';
 import 'summary_pdf.dart';
+import '../plans/paywall_screen.dart';
 
 /// Everything the summary needs for a period starting at `from` (the key is
 /// (baby id, from)). Feeds and diapers include the 7 days before, for "usually".
@@ -61,7 +62,9 @@ class _DoctorSummaryScreenState extends ConsumerState<DoctorSummaryScreen> {
   /// Shares the summary as a PDF. The PDF is always in English (for the
   /// doctor; the PDF library can't lay out Nastaliq Urdu).
   Future<void> _sharePdf(DoctorSummaryInput input) async {
+    // The summary on screen is free; the PDF is part of Palna Pro.
     final l10n = AppLocalizations.of(context);
+    if (!await requirePro(context, ref, l10n.proReasonPdf) || !mounted) return;
     setState(() => _makingPdf = true);
     try {
       final en = lookupAppLocalizations(const Locale('en'));

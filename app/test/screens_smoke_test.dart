@@ -45,6 +45,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'test_app.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:baby_app/features/plans/paywall_screen.dart';
+import 'package:baby_app/features/transfer/data_screen.dart';
+import 'package:baby_app/features/transfer/import_model.dart';
 
 final now = DateTime.now();
 DateTime ago({int days = 0, int hours = 0, int minutes = 0}) =>
@@ -413,6 +416,9 @@ void main() {
     'Sign in': () => const SignInScreen(),
     'Reset password': () => const ResetPasswordScreen(email: 'sana@example.com'),
     'Edit baby': () => AddBabyScreen(existing: baby),
+    'Palna Pro': () => const PaywallScreen(reason: 'Add more than one baby with Palna Pro'),
+    'Export and import': () => const DataScreen(),
+    'Import from Nara': () => ImportScreen(baby: baby, source: ImportSource.nara),
   };
 
   for (final locale in const [
@@ -714,7 +720,8 @@ void main() {
     expect(find.text('Past sleep'), findsOneWidget);
     expect(find.text('Past diaper'), findsOneWidget);
     // "Past days" sits on each card, not next to today's timeline.
-    expect(find.text('Past days'), findsNWidgets(3));
+    // (Feeds, Sleep, Diapers and Activities.)
+    expect(find.text('Past days'), findsNWidgets(4));
 
     await tester.tap(find.text('Diapers'));
     for (var i = 0; i < 5; i++) {

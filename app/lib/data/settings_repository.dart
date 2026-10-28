@@ -38,6 +38,9 @@ abstract final class SettingKeys {
   static const babyId = 'baby_id';
   static const themeMode = 'theme_mode';
 
+  /// Colour theme (Palna Pro): 'rose', 'sage', 'lavender'; null = navy.
+  static const themeAccent = 'theme_accent';
+
   // Family updates (push): '0' when switched off, otherwise on.
   static const notifyFeeds = 'notify_feeds';
   static const notifySleep = 'notify_sleep';

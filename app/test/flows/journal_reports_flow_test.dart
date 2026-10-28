@@ -278,6 +278,8 @@ void main() {
         tapAndSettle(tester, find.descendant(of: find.byType(TabBar), matching: find.text(tab)));
 
     flowTest('Feeds: averages over the logged days, then over 30 days', (tester) async {
+      // 30 days is part of Palna Pro (38b).
+      await tester.runAsync(env.makePro);
       await seedReports(tester);
       await openReports(tester);
       expect(find.text(en.feedsPerDay), findsOneWidget);

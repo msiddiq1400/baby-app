@@ -17,7 +17,9 @@
 #     "Palna App Store Connect".
 #   - Environment variables, group "palna_prod": SUPABASE_URL,
 #     SUPABASE_PUBLISHABLE_KEY, POWERSYNC_URL, GOOGLE_WEB_CLIENT_ID,
-#     GOOGLE_IOS_CLIENT_ID (the same values as app/env/prod.json), and
+#     GOOGLE_IOS_CLIENT_ID, REVENUECAT_APPLE_KEY, REVENUECAT_GOOGLE_KEY
+#     (the same values as app/env/prod.json; the RevenueCat ones are public
+#     SDK keys and may stay empty until paid plans are set up), and
 #     CERTIFICATE_PRIVATE_KEY (the signing key in stuff/, kept secret), and
 #     GCLOUD_SERVICE_ACCOUNT_CREDENTIALS (JSON key of a Google Cloud service
 #     account invited in Play Console > Users and permissions, with release
@@ -64,8 +66,11 @@ workflows:
             --arg ps "$POWERSYNC_URL" \
             --arg web "$GOOGLE_WEB_CLIENT_ID" \
             --arg ios "$GOOGLE_IOS_CLIENT_ID" \
+            --arg rcApple "${REVENUECAT_APPLE_KEY:-}" \
+            --arg rcGoogle "${REVENUECAT_GOOGLE_KEY:-}" \
             '{SUPABASE_URL: $url, SUPABASE_PUBLISHABLE_KEY: $key, POWERSYNC_URL: $ps,
-              GOOGLE_WEB_CLIENT_ID: $web, GOOGLE_IOS_CLIENT_ID: $ios}' > env/prod.json
+              GOOGLE_WEB_CLIENT_ID: $web, GOOGLE_IOS_CLIENT_ID: $ios,
+              REVENUECAT_APPLE_KEY: $rcApple, REVENUECAT_GOOGLE_KEY: $rcGoogle}' > env/prod.json
       - name: Signing certificate and profile
         # Creates the App Store certificate and profile on first run (from
         # CERTIFICATE_PRIVATE_KEY) and reuses them afterwards.

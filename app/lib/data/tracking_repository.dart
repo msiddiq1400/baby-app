@@ -38,16 +38,24 @@ class TrackingRepository {
       [babyId, from],
     );
 
+    // Includes a timer started before midnight that is still running.
+    final activities = await _db.getAll(
+      'SELECT ${Activity.columns} FROM activities WHERE baby_id = ? AND deleted_at IS NULL '
+      'AND (ended_at IS NULL OR julianday(started_at) >= julianday(?)) ORDER BY julianday(started_at) DESC',
+      [babyId, from],
+    );
+
     return TodayLog(
       dayStart: dayStart,
       feeds: feeds.map(Feed.fromJson).toList(),
       diapers: diapers.map(Diaper.fromJson).toList(),
       sleeps: sleeps.map(Sleep.fromJson).toList(),
+      activities: activities.map(Activity.fromJson).toList(),
     );
   }
 
   Stream<TodayLog> watchToday(String babyId) =>
-      watchTables(_db, const ['feeds', 'diapers', 'sleeps'], () => today(babyId));
+      watchTables(_db, const ['feeds', 'diapers', 'sleeps', 'activities'], () => today(babyId));
 
   /// Feeds since [from], oldest first, kept live (for the hunger guide).
   Stream<List<Feed>> watchFeedsSince(String babyId, DateTime from) => _db
@@ -185,6 +193,68 @@ class TrackingRepository {
     return _save('diapers', baby, existingId, {'occurred_at': utcTimestamp(at), 'is_wet': wet, 'is_dirty': dirty});
   }
 
+  /// Adds an activity, or updates [existingId]. With no [duration] it's a
+  /// moment (ended_at = started_at); [startedAt] is when it began.
+  Future<void> saveActivity(
+    Baby baby, {
+    String? existingId,
+    required ActivityKind kind,
+    required DateTime startedAt,
+    Duration? duration,
+    String? label,
+    String? notes,
+  }) {
+    final label0 = kind == ActivityKind.other ? label?.trim() : null;
+    final notes0 = notes?.trim();
+    return _save('activities', baby, existingId, {
+      'kind': kind.dbValue,
+      'label': label0 == null || label0.isEmpty ? null : label0,
+      'started_at': utcTimestamp(startedAt),
+      'ended_at': utcTimestamp(startedAt.add(duration ?? Duration.zero)),
+      'notes': notes0 == null || notes0.isEmpty ? null : notes0,
+    });
+  }
+
+  /// Starts an activity timer (e.g. tummy time) now.
+  Future<void> startActivityTimer(Baby baby, ActivityKind kind, {required DateTime at, String? label}) =>
+      insertRow(_db, 'activities', {
+        'family_id': baby.familyId,
+        'baby_id': baby.id,
+        'kind': kind.dbValue,
+        if (kind == ActivityKind.other && label != null && label.trim().isNotEmpty) 'label': label.trim(),
+        'started_at': utcTimestamp(at),
+      });
+
+  /// Edits a running timer's details without stopping it.
+  Future<void> updateActivityDetails(
+    String id, {
+    required ActivityKind kind,
+    required DateTime startedAt,
+    String? label,
+    String? notes,
+  }) {
+    final label0 = kind == ActivityKind.other ? label?.trim() : null;
+    final notes0 = notes?.trim();
+    return updateRow(_db, 'activities', id, {
+      'kind': kind.dbValue,
+      'label': label0 == null || label0.isEmpty ? null : label0,
+      'started_at': utcTimestamp(startedAt),
+      'notes': notes0 == null || notes0.isEmpty ? null : notes0,
+    });
+  }
+
+  Future<void> stopActivityTimer(String id, {required DateTime at}) =>
+      updateRow(_db, 'activities', id, {'ended_at': utcTimestamp(at)});
+
+  /// Activities since [from], oldest first, kept live (for reports).
+  Stream<List<Activity>> watchActivitiesSince(String babyId, DateTime from) => _db
+      .watch(
+        'SELECT ${Activity.columns} FROM activities WHERE baby_id = ? AND deleted_at IS NULL '
+        'AND julianday(started_at) >= julianday(?) ORDER BY julianday(started_at)',
+        parameters: [babyId, utcTimestamp(from)],
+      )
+      .map((rows) => rows.map(Activity.fromJson).toList());
+
   /// Edits a sleep's times; a null [endedAt] means still asleep.
   Future<void> updateSleep(String id, {required SleepKind kind, required DateTime startedAt, DateTime? endedAt}) {
     return updateRow(_db, 'sleeps', id, {
@@ -221,7 +291,7 @@ class TrackingRepository {
 /// Sleep starting between 7 pm and 6 am counts as night sleep.
 SleepKind sleepKindAt(DateTime start) => start.hour >= 19 || start.hour < 6 ? SleepKind.night : SleepKind.nap;
 
-enum TrackedTable { feeds, diapers, sleeps }
+enum TrackedTable { feeds, diapers, sleeps, activities }
 
 final trackingRepositoryProvider = Provider((ref) => TrackingRepository(ref.watch(powerSyncProvider)));
 

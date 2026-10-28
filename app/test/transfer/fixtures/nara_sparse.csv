@@ -1,0 +1,7 @@
+_activityKey,Type,[Diaper] Type,Start Date/time (Epoch),Note,[Sleep] End Date/time (Epoch),[Sleep] Duration (Seconds),Profile Name,Start Date/time,Time Zone,[Breastfeed] Right Duration (Seconds),[Breastfeed] Left Duration (Seconds),[Breastfeed] Begin Side,[Breastfeed] End Side
+t-1,Diaper,Wet,1790042400000,,,,Ali,2026-09-22 07:00:00,Asia/Karachi,,,,
+t-2,Diaper,Mixed,1790049600000,,,,Ali,2026-09-22 09:00:00,Asia/Karachi
+t-3,Sleep,,1790053200000,,1790058600000,5400,Ali,2026-09-22 10:00:00,Asia/Karachi,,,,
+t-4,Breastfeed,,1790060400000,,,,Ali,2026-09-22 12:00:00,Asia/Karachi,420.0,,RIGHT,RIGHT
+t-5,Diaper,Wet,,,,,Ali,2026-09-22 14:00:00,Asia/Karachi,,,,
+t-6,Diaper,Both,1790071200000,"Rash, cream applied",,,Ali,2026-09-22 15:00:00,Asia/Karachi,,,,

@@ -1773,6 +1773,42 @@ abstract class AppLocalizations {
   /// **'Awake for {duration}'**
   String awakeFor(String duration);
 
+  /// No description provided for @nextNapAround.
+  ///
+  /// In en, this message translates to:
+  /// **'Next nap around {from}–{to}'**
+  String nextNapAround(String from, String to);
+
+  /// No description provided for @bedtimeAround.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedtime around {from}–{to}'**
+  String bedtimeAround(String from, String to);
+
+  /// No description provided for @napTimeNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Good time for a nap now (until {to})'**
+  String napTimeNow(String to);
+
+  /// No description provided for @bedtimeNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Good time for bed now (until {to})'**
+  String bedtimeNow(String to);
+
+  /// No description provided for @predictionFromAge.
+  ///
+  /// In en, this message translates to:
+  /// **'A guess from age until a week of sleep is logged'**
+  String get predictionFromAge;
+
+  /// No description provided for @napTimesShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Nap times'**
+  String get napTimesShort;
+
   /// No description provided for @tabSolids.
   ///
   /// In en, this message translates to:
@@ -2187,6 +2223,222 @@ abstract class AppLocalizations {
   /// **'Account'**
   String get accountSection;
 
+  /// No description provided for @dataSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data'**
+  String get dataSection;
+
+  /// No description provided for @dataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Export and import'**
+  String get dataTitle;
+
+  /// No description provided for @dataSettingsHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Save everything as a spreadsheet, or bring in your log from Nara Baby or Huckleberry'**
+  String get dataSettingsHelp;
+
+  /// No description provided for @exportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Export'**
+  String get exportTitle;
+
+  /// No description provided for @exportHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything logged for {name}, as one CSV file. It opens in Excel or Google Sheets, and Palna can import it again.'**
+  String exportHelp(String name);
+
+  /// No description provided for @exportButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Export as CSV'**
+  String get exportButton;
+
+  /// No description provided for @exportSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Palna log for {name}'**
+  String exportSubject(String name);
+
+  /// No description provided for @importTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Import from another app'**
+  String get importTitle;
+
+  /// No description provided for @importHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Bring in feeds, sleep, diapers, pumping, growth, temperatures and activities. They are added to {name}; entries already in Palna aren\'t doubled.'**
+  String importHelp(String name);
+
+  /// No description provided for @importFromPalna.
+  ///
+  /// In en, this message translates to:
+  /// **'A Palna export'**
+  String get importFromPalna;
+
+  /// No description provided for @importStepsNara.
+  ///
+  /// In en, this message translates to:
+  /// **'In Nara Baby: on the Activity screen, tap your baby\'s picture, then Export Data. Save the CSV file, then choose it here.'**
+  String get importStepsNara;
+
+  /// No description provided for @importStepsHuckleberry.
+  ///
+  /// In en, this message translates to:
+  /// **'In Huckleberry: tap your child\'s icon, scroll down, tap Export tracking data as CSV. Open the emailed link, save the file, then choose it here.'**
+  String get importStepsHuckleberry;
+
+  /// No description provided for @importStepsPalna.
+  ///
+  /// In en, this message translates to:
+  /// **'A CSV file made with Export above, on this phone or another.'**
+  String get importStepsPalna;
+
+  /// No description provided for @importChooseFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose file'**
+  String get importChooseFile;
+
+  /// No description provided for @importChooseAnother.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose another file'**
+  String get importChooseAnother;
+
+  /// No description provided for @importWrongFile.
+  ///
+  /// In en, this message translates to:
+  /// **'This file can\'t be read. Please choose the CSV file exported from the app.'**
+  String get importWrongFile;
+
+  /// No description provided for @importExcelMangled.
+  ///
+  /// In en, this message translates to:
+  /// **'This file was opened and saved in Excel, which changes the times. Please export it again and choose it without opening it first.'**
+  String get importExcelMangled;
+
+  /// No description provided for @importNothingFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing in this file can be imported.'**
+  String get importNothingFound;
+
+  /// No description provided for @importFileBaby.
+  ///
+  /// In en, this message translates to:
+  /// **'In the file: {name}'**
+  String importFileBaby(String name);
+
+  /// No description provided for @importDates.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} to {to}'**
+  String importDates(String from, String to);
+
+  /// No description provided for @importTemperatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperatures'**
+  String get importTemperatures;
+
+  /// No description provided for @importSkippedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Not imported: {count}'**
+  String importSkippedTitle(int count);
+
+  /// No description provided for @importSkipMedicine.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicines (add them in Health)'**
+  String get importSkipMedicine;
+
+  /// No description provided for @importSkipSolids.
+  ///
+  /// In en, this message translates to:
+  /// **'Solid foods'**
+  String get importSkipSolids;
+
+  /// No description provided for @importSkipMilestone.
+  ///
+  /// In en, this message translates to:
+  /// **'Milestones'**
+  String get importSkipMilestone;
+
+  /// No description provided for @importSkipVaccine.
+  ///
+  /// In en, this message translates to:
+  /// **'Vaccines (tick them in Health)'**
+  String get importSkipVaccine;
+
+  /// No description provided for @importSkipDry.
+  ///
+  /// In en, this message translates to:
+  /// **'Dry diapers'**
+  String get importSkipDry;
+
+  /// No description provided for @importSkipSleepGoing.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep without an end time'**
+  String get importSkipSleepGoing;
+
+  /// No description provided for @importSkipRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Values out of range'**
+  String get importSkipRange;
+
+  /// No description provided for @importSkipUnreadable.
+  ///
+  /// In en, this message translates to:
+  /// **'Rows that couldn\'t be read'**
+  String get importSkipUnreadable;
+
+  /// No description provided for @importIntoBaby.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything will be added to {name}.'**
+  String importIntoBaby(String name);
+
+  /// No description provided for @importButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Import {count} entries into {name}'**
+  String importButton(int count, String name);
+
+  /// No description provided for @importWorking.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing... Keep Palna open.'**
+  String get importWorking;
+
+  /// No description provided for @importDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Added {count} entries to {name}'**
+  String importDone(int count, String name);
+
+  /// No description provided for @importDuplicates.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} were already in Palna and were skipped.'**
+  String importDuplicates(int count);
+
+  /// No description provided for @doneButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get doneButton;
+
   /// No description provided for @deleteAccount.
   ///
   /// In en, this message translates to:
@@ -2504,6 +2756,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Past days'**
   String get pastDays;
+
+  /// No description provided for @activities.
+  ///
+  /// In en, this message translates to:
+  /// **'Activities'**
+  String get activities;
+
+  /// No description provided for @activityTummyTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Tummy time'**
+  String get activityTummyTime;
+
+  /// No description provided for @activityBath.
+  ///
+  /// In en, this message translates to:
+  /// **'Bath'**
+  String get activityBath;
+
+  /// No description provided for @activityPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get activityPlay;
+
+  /// No description provided for @activityOutdoors.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoors'**
+  String get activityOutdoors;
+
+  /// No description provided for @activityReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading'**
+  String get activityReading;
+
+  /// No description provided for @activityMassage.
+  ///
+  /// In en, this message translates to:
+  /// **'Massage'**
+  String get activityMassage;
+
+  /// No description provided for @activityOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get activityOther;
+
+  /// No description provided for @activityLabelHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What was it? (e.g. swimming)'**
+  String get activityLabelHint;
+
+  /// No description provided for @addActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Add activity'**
+  String get addActivity;
+
+  /// No description provided for @editActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit activity'**
+  String get editActivity;
+
+  /// No description provided for @activityShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get activityShort;
+
+  /// No description provided for @activityStartedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Started'**
+  String get activityStartedLabel;
+
+  /// No description provided for @activityHowLong.
+  ///
+  /// In en, this message translates to:
+  /// **'How long'**
+  String get activityHowLong;
+
+  /// No description provided for @activityNotTimed.
+  ///
+  /// In en, this message translates to:
+  /// **'Not timed'**
+  String get activityNotTimed;
+
+  /// No description provided for @activityMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String activityMinutes(int minutes);
+
+  /// No description provided for @activityStartTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Start timer'**
+  String get activityStartTimer;
+
+  /// No description provided for @tummyTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Tummy timer'**
+  String get tummyTimer;
+
+  /// No description provided for @activityStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get activityStop;
+
+  /// No description provided for @activityStopNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop now'**
+  String get activityStopNow;
+
+  /// No description provided for @activityRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'Timer running'**
+  String get activityRunning;
+
+  /// No description provided for @activitySince.
+  ///
+  /// In en, this message translates to:
+  /// **'Since {time}'**
+  String activitySince(String time);
+
+  /// No description provided for @activityTimerBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'Another activity timer is running. Stop it first.'**
+  String get activityTimerBusy;
+
+  /// No description provided for @activitiesNoneToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tummy time, bath, play...'**
+  String get activitiesNoneToday;
+
+  /// No description provided for @tummyTimeToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tummy time today'**
+  String get tummyTimeToday;
 
   /// No description provided for @yesterday.
   ///
@@ -3548,6 +3950,414 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notifications from your family aren\'t available on this phone yet. Your choices below are saved for when they are.'**
   String get pushUnavailable;
+
+  /// No description provided for @numOutOfHoursDoctor.
+  ///
+  /// In en, this message translates to:
+  /// **'Out-of-hours doctor'**
+  String get numOutOfHoursDoctor;
+
+  /// No description provided for @numHealthAdvice.
+  ///
+  /// In en, this message translates to:
+  /// **'Health advice line (24 hours)'**
+  String get numHealthAdvice;
+
+  /// No description provided for @optionalVaccinesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional – ask your doctor'**
+  String get optionalVaccinesTitle;
+
+  /// No description provided for @optionalVaccinesHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Offered to all babies in {country}, but not part of the routine schedule. Ask your doctor or clinic whether your baby should have them.'**
+  String optionalVaccinesHelp(String country);
+
+  /// No description provided for @optionalVaccinesHide.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide'**
+  String get optionalVaccinesHide;
+
+  /// No description provided for @optionalVaccinesHidden.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional RSV and flu reminders are hidden.'**
+  String get optionalVaccinesHidden;
+
+  /// No description provided for @optionalVaccinesShow.
+  ///
+  /// In en, this message translates to:
+  /// **'Show'**
+  String get optionalVaccinesShow;
+
+  /// No description provided for @rsvName.
+  ///
+  /// In en, this message translates to:
+  /// **'RSV protection (antibody injection)'**
+  String get rsvName;
+
+  /// No description provided for @rsvNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Protects against RSV, a common chest infection that is most serious in young babies. If the mother had the RSV vaccine in pregnancy, the baby may not need it.'**
+  String get rsvNote;
+
+  /// No description provided for @fluName.
+  ///
+  /// In en, this message translates to:
+  /// **'Flu vaccine {season}'**
+  String fluName(String season);
+
+  /// No description provided for @fluNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Given once a year, before and during the flu season.'**
+  String get fluNote;
+
+  /// No description provided for @fluNoteFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'The first time, children under {age} years usually need 2 doses, 4 weeks apart.'**
+  String fluNoteFirst(int age);
+
+  /// No description provided for @fluNoteNasal.
+  ///
+  /// In en, this message translates to:
+  /// **'Usually given as a nasal spray, which contains pork gelatine. You can ask for an injection instead.'**
+  String get fluNoteNasal;
+
+  /// No description provided for @optionalReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}: {vaccine} (optional)'**
+  String optionalReminderTitle(String name, String vaccine);
+
+  /// No description provided for @optionalReminderBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask your doctor or clinic whether to have it.'**
+  String get optionalReminderBody;
+
+  /// No description provided for @proTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Palna Pro'**
+  String get proTitle;
+
+  /// No description provided for @proIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything in Free, plus:'**
+  String get proIntro;
+
+  /// No description provided for @proFeatureBabies.
+  ///
+  /// In en, this message translates to:
+  /// **'Twins, siblings: add every baby'**
+  String get proFeatureBabies;
+
+  /// No description provided for @proFeaturePhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to 10 photos a month for each baby (Free: 1)'**
+  String get proFeaturePhotos;
+
+  /// No description provided for @proFeatureReports.
+  ///
+  /// In en, this message translates to:
+  /// **'30-day reports, and the PDF summary for the doctor'**
+  String get proFeatureReports;
+
+  /// No description provided for @proFeaturePredictions.
+  ///
+  /// In en, this message translates to:
+  /// **'Next nap and bedtime, from your baby\'s own pattern'**
+  String get proFeaturePredictions;
+
+  /// No description provided for @proReasonPredictions.
+  ///
+  /// In en, this message translates to:
+  /// **'Next nap and bedtime times are part of Palna Pro'**
+  String get proReasonPredictions;
+
+  /// No description provided for @proFeatureThemes.
+  ///
+  /// In en, this message translates to:
+  /// **'Colour themes, and today\'s totals on the home-screen widget'**
+  String get proFeatureThemes;
+
+  /// No description provided for @proFamilyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'One subscription covers the whole family: everyone you share the baby with gets Pro too.'**
+  String get proFamilyNote;
+
+  /// No description provided for @proYearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get proYearly;
+
+  /// No description provided for @proMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get proMonthly;
+
+  /// No description provided for @proPricePerYear.
+  ///
+  /// In en, this message translates to:
+  /// **'{price} / year'**
+  String proPricePerYear(String price);
+
+  /// No description provided for @proPricePerMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'{price} / month'**
+  String proPricePerMonth(String price);
+
+  /// No description provided for @proPricePerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s about {price} a day'**
+  String proPricePerDay(String price);
+
+  /// No description provided for @proSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save {percent}%'**
+  String proSave(int percent);
+
+  /// No description provided for @proTrialDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days free'**
+  String proTrialDays(int days);
+
+  /// No description provided for @proStartTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'Start free trial'**
+  String get proStartTrial;
+
+  /// No description provided for @proSubscribe.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe'**
+  String get proSubscribe;
+
+  /// No description provided for @proRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchases'**
+  String get proRestore;
+
+  /// No description provided for @proLegalApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment is charged to your Apple ID. The subscription renews automatically unless you cancel it at least 24 hours before the period ends; manage or cancel it in your Apple ID settings. After a free trial, the price above is charged.'**
+  String get proLegalApple;
+
+  /// No description provided for @proLegalGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment is charged to your Google Play account. The subscription renews automatically unless you cancel it before the period ends; manage or cancel it in Google Play > Payments and subscriptions. After a free trial, the price above is charged.'**
+  String get proLegalGoogle;
+
+  /// No description provided for @proTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of use'**
+  String get proTerms;
+
+  /// No description provided for @proPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get proPrivacy;
+
+  /// No description provided for @proUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Palna Pro can\'t be bought on this phone yet. Everything else works as usual.'**
+  String get proUnavailable;
+
+  /// No description provided for @proActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Your family has Palna Pro'**
+  String get proActive;
+
+  /// No description provided for @proActiveUntil.
+  ///
+  /// In en, this message translates to:
+  /// **'Until {date}'**
+  String proActiveUntil(String date);
+
+  /// No description provided for @proThanks.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for supporting Palna!'**
+  String get proThanks;
+
+  /// No description provided for @proManage.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage subscription'**
+  String get proManage;
+
+  /// No description provided for @proLifetime.
+  ///
+  /// In en, this message translates to:
+  /// **'Lifetime'**
+  String get proLifetime;
+
+  /// No description provided for @proPriceOnce.
+  ///
+  /// In en, this message translates to:
+  /// **'{price} once'**
+  String proPriceOnce(String price);
+
+  /// No description provided for @proLifetimeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay once: Pro for your whole family, for good'**
+  String get proLifetimeNote;
+
+  /// No description provided for @proNoSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'No subscription'**
+  String get proNoSubscription;
+
+  /// No description provided for @proBuyOnce.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy once'**
+  String get proBuyOnce;
+
+  /// No description provided for @proActiveForLife.
+  ///
+  /// In en, this message translates to:
+  /// **'For life, no subscription'**
+  String get proActiveForLife;
+
+  /// No description provided for @proLegalLifetime.
+  ///
+  /// In en, this message translates to:
+  /// **'Lifetime is a one-time purchase: it is charged once and never renews.'**
+  String get proLegalLifetime;
+
+  /// No description provided for @proRestoreNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No Palna Pro purchase was found for this store account.'**
+  String get proRestoreNone;
+
+  /// No description provided for @proError.
+  ///
+  /// In en, this message translates to:
+  /// **'The purchase didn\'t go through. Please try again.'**
+  String get proError;
+
+  /// No description provided for @proReasonBabies.
+  ///
+  /// In en, this message translates to:
+  /// **'Add more than one baby with Palna Pro'**
+  String get proReasonBabies;
+
+  /// No description provided for @proReasonPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Add more photos for this month with Palna Pro'**
+  String get proReasonPhotos;
+
+  /// No description provided for @proReasonReports.
+  ///
+  /// In en, this message translates to:
+  /// **'See 30 days at a time with Palna Pro'**
+  String get proReasonReports;
+
+  /// No description provided for @proReasonPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'The PDF summary for the doctor is part of Palna Pro'**
+  String get proReasonPdf;
+
+  /// No description provided for @proReasonThemes.
+  ///
+  /// In en, this message translates to:
+  /// **'Colour themes are part of Palna Pro'**
+  String get proReasonThemes;
+
+  /// No description provided for @proBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'PRO'**
+  String get proBadge;
+
+  /// No description provided for @settingsProFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free plan · see what Pro adds'**
+  String get settingsProFree;
+
+  /// No description provided for @settingsProActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro, for your whole family'**
+  String get settingsProActive;
+
+  /// No description provided for @photoAddAnother.
+  ///
+  /// In en, this message translates to:
+  /// **'Add another'**
+  String get photoAddAnother;
+
+  /// No description provided for @photoMonthFull.
+  ///
+  /// In en, this message translates to:
+  /// **'This month has 10 photos, the most for one month.'**
+  String get photoMonthFull;
+
+  /// No description provided for @themeColour.
+  ///
+  /// In en, this message translates to:
+  /// **'Colour'**
+  String get themeColour;
+
+  /// No description provided for @themeNavy.
+  ///
+  /// In en, this message translates to:
+  /// **'Navy'**
+  String get themeNavy;
+
+  /// No description provided for @themeRose.
+  ///
+  /// In en, this message translates to:
+  /// **'Rose'**
+  String get themeRose;
+
+  /// No description provided for @themeSage.
+  ///
+  /// In en, this message translates to:
+  /// **'Sage'**
+  String get themeSage;
+
+  /// No description provided for @themeLavender.
+  ///
+  /// In en, this message translates to:
+  /// **'Lavender'**
+  String get themeLavender;
+
+  /// No description provided for @widgetToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today: {feeds} feeds · {diapers} diapers · {sleep} sleep'**
+  String widgetToday(int feeds, int diapers, String sleep);
 }
 
 class _AppLocalizationsDelegate
