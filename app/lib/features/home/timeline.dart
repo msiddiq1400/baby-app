@@ -4,9 +4,10 @@ import '../../app/topic_icons.dart';
 import '../../core/baby_age.dart';
 import '../../data/models.dart';
 import '../../l10n/app_localizations.dart';
+import 'activity_sheet.dart';
 import 'log_sheets.dart';
 
-/// Today's feeds, diapers and sleeps in one list, newest first.
+/// Today's feeds, diapers, sleeps and activities in one list, newest first.
 /// Tapping an entry opens it for editing.
 class Timeline extends StatelessWidget {
   const Timeline({super.key, required this.baby, required this.log, required this.now});
@@ -30,6 +31,13 @@ class Timeline extends StatelessWidget {
         ),
       for (final s in log.sleeps)
         (s.startedAt, TopicIcons.sleep, sleepEntryText(l10n, s), () => showSleepSheet(context, baby, existing: s)),
+      for (final a in log.activities)
+        (
+          a.startedAt,
+          activityIcon(a.kind),
+          activityEntryText(l10n, a, now),
+          () => showActivitySheet(context, baby, existing: a),
+        ),
     ]..sort((a, b) => b.$1.compareTo(a.$1));
 
     if (entries.isEmpty) {
@@ -88,4 +96,12 @@ String diaperEntryText(AppLocalizations l10n, Diaper d) => [
 String sleepEntryText(AppLocalizations l10n, Sleep s) => [
       s.kind == SleepKind.night ? l10n.sleepNight : l10n.sleepNap,
       s.endedAt == null ? l10n.sleepingNow : formatDuration(l10n, s.endedAt!.difference(s.startedAt)),
+    ].join(' · ');
+
+String activityEntryText(AppLocalizations l10n, Activity a, DateTime now) => [
+      activityTitle(l10n, a),
+      if (a.isOngoing)
+        l10n.activityRunning
+      else if (a.duration(now) case final d?)
+        formatDuration(l10n, d),
     ].join(' · ');

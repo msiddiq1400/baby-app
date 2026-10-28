@@ -219,13 +219,82 @@ class Sleep {
   );
 }
 
+/// Tummy time, bath and other activities. Stored as snake_case text.
+enum ActivityKind {
+  tummyTime('tummy_time'),
+  bath('bath'),
+  play('play'),
+  outdoors('outdoors'),
+  reading('reading'),
+  massage('massage'),
+  other('other');
+
+  const ActivityKind(this.dbValue);
+
+  final String dbValue;
+
+  static ActivityKind fromDb(String? value) =>
+      values.firstWhere((k) => k.dbValue == value, orElse: () => ActivityKind.other);
+}
+
+class Activity {
+  const Activity({required this.id, required this.kind, required this.startedAt, this.endedAt, this.label, this.notes});
+
+  final String id;
+  final ActivityKind kind;
+  final DateTime startedAt;
+
+  /// Null while the timer runs; equal to [startedAt] when no duration was
+  /// given.
+  final DateTime? endedAt;
+
+  /// The family's own name for an "other" activity.
+  final String? label;
+  final String? notes;
+
+  bool get isOngoing => endedAt == null;
+
+  /// How long it lasted (so far, while running); null if no duration.
+  Duration? duration(DateTime now) {
+    final d = (endedAt ?? now).difference(startedAt);
+    return endedAt != null && d == Duration.zero ? null : d;
+  }
+
+  static const columns = 'id, kind, label, started_at, ended_at, notes';
+
+  factory Activity.fromJson(Map<String, dynamic> json) => Activity(
+    id: json['id'] as String,
+    kind: ActivityKind.fromDb(json['kind'] as String?),
+    label: json['label'] as String?,
+    startedAt: _local(json['started_at'] as String),
+    endedAt: _localOrNull(json['ended_at']),
+    notes: json['notes'] as String?,
+  );
+}
+
 /// Everything logged for one baby today, plus the totals the dashboard shows.
 class TodayLog {
-  const TodayLog({required this.dayStart, required this.feeds, required this.diapers, required this.sleeps});
+  const TodayLog({
+    required this.dayStart,
+    required this.feeds,
+    required this.diapers,
+    required this.sleeps,
+    this.activities = const [],
+  });
 
   final DateTime dayStart;
   final List<Feed> feeds;
   final List<Diaper> diapers;
+
+  /// Activities started today, plus a timer still running from before.
+  final List<Activity> activities;
+
+  Activity? get ongoingActivity => activities.where((a) => a.isOngoing).firstOrNull;
+
+  /// Total time of one kind of activity today (e.g. tummy time).
+  Duration timeOn(ActivityKind kind, DateTime now) => activities
+      .where((a) => a.kind == kind)
+      .fold(Duration.zero, (total, a) => total + (a.duration(now) ?? Duration.zero));
 
   /// Sleeps that overlap today, including one that started last night.
   final List<Sleep> sleeps;

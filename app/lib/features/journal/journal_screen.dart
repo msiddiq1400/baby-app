@@ -17,6 +17,7 @@ import '../health/illness_sheets.dart';
 import '../health/symptom_sheet.dart';
 import '../health/vaccination_sheet.dart';
 import '../health/vaccine_plan.dart';
+import '../home/activity_sheet.dart';
 import '../home/log_sheets.dart';
 import '../home/timeline.dart';
 import '../milk/milk_sheets.dart';
@@ -159,6 +160,7 @@ class _JournalScreenState extends State<JournalScreen> {
                         (TrackedTable.feeds, l10n.feeds),
                         (TrackedTable.sleeps, l10n.sleep),
                         (TrackedTable.diapers, l10n.diapers),
+                        (TrackedTable.activities, l10n.activities),
                       ])
                         Padding(
                           padding: const EdgeInsetsDirectional.only(end: 8),
@@ -243,6 +245,7 @@ class _DayContent extends ConsumerWidget {
       TrackedTable.feeds => log.feeds.isEmpty,
       TrackedTable.sleeps => log.sleeps.isEmpty,
       TrackedTable.diapers => log.diapers.isEmpty,
+      TrackedTable.activities => log.activities.isEmpty,
     };
     if (nothingToShow) {
       return Center(
@@ -322,6 +325,14 @@ class _DayContent extends ConsumerWidget {
       if (show(TrackedTable.sleeps))
         for (final s in log.sleeps)
           _Entry(s.startedAt, TopicIcons.sleep, sleepEntryText(l10n, s), () => showSleepSheet(context, baby, existing: s)),
+      if (show(TrackedTable.activities))
+        for (final a in log.activities)
+          _Entry(
+            a.startedAt,
+            activityIcon(a.kind),
+            activityEntryText(l10n, a, now),
+            () => showActivitySheet(context, baby, existing: a),
+          ),
       if (only == null)
         for (final p in journal.pumping)
           _Entry(
@@ -374,6 +385,11 @@ class _DayContent extends ConsumerWidget {
       if (show(TrackedTable.diapers) && stats.diapers > 0)
         (TopicIcons.diaper, l10n.diaperCounts(stats.wet, stats.dirty)),
       if (show(TrackedTable.sleeps) && stats.sleep > Duration.zero) (TopicIcons.sleep, formatDuration(l10n, stats.sleep)),
+      if (show(TrackedTable.activities) && log.timeOn(ActivityKind.tummyTime, now) > Duration.zero)
+        (
+          activityIcon(ActivityKind.tummyTime),
+          '${l10n.activityTummyTime} ${formatDuration(l10n, log.timeOn(ActivityKind.tummyTime, now))}',
+        ),
     ];
 
     Widget tile(_Entry e) => ListTile(

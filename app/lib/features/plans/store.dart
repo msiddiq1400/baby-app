@@ -12,8 +12,11 @@ import '../../core/config/env.dart';
 /// gives the whole family Pro.
 ///
 /// RevenueCat setup (dashboard): entitlement "pro"; products
-/// palna_pro_monthly and palna_pro_yearly (7-day free trial) in the
-/// "default" offering as the Monthly and Annual packages.
+/// palna_pro_monthly, palna_pro_yearly (7-day free trial) and
+/// palna_pro_lifetime (one-time purchase) in the "default" offering as the
+/// Monthly, Annual and Lifetime packages.
+typedef ProPackages = ({Package? monthly, Package? yearly, Package? lifetime});
+
 abstract final class ProStore {
   static const entitlement = 'pro';
 
@@ -58,14 +61,14 @@ abstract final class ProStore {
     }
   }
 
-  /// The monthly and yearly options, or null when they can't be loaded
-  /// (offline, or not set up yet).
-  static Future<({Package? monthly, Package? yearly})?> packages() async {
+  /// The monthly, yearly and lifetime options, or null when they can't be
+  /// loaded (offline, or not set up yet).
+  static Future<ProPackages?> packages() async {
     if (!_started) return null;
     try {
       final offering = (await Purchases.getOfferings()).current;
       if (offering == null) return null;
-      return (monthly: offering.monthly, yearly: offering.annual);
+      return (monthly: offering.monthly, yearly: offering.annual, lifetime: offering.lifetime);
     } catch (e) {
       debugPrint('RevenueCat offerings: $e');
       return null;

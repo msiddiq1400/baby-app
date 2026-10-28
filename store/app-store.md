@@ -61,7 +61,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 > Palna is not a medical device and doesn't replace advice from your doctor. If you're worried about your baby, contact a doctor straight away.
 >
 > PALNA PRO (OPTIONAL)
-> Palna is free. Palna Pro is an optional monthly or yearly subscription for the whole family: more than one baby, more photos each month, 30-day reports, the PDF summary for your doctor, colour themes and widget extras. Payment is charged to your Apple ID; it renews automatically unless cancelled at least 24 hours before the end of the period, and you can manage it in your Apple ID settings.
+> Palna is free. Palna Pro is optional, for the whole family: monthly, yearly, or a one-time lifetime purchase. It adds more than one baby, more photos each month, 30-day reports, the PDF summary for your doctor, colour themes and widget extras. Payment is charged to your Apple ID. Subscriptions renew automatically unless cancelled at least 24 hours before the end of the period; manage them in your Apple ID settings. Lifetime is charged once and never renews.
 >
 > Terms of use: https://palnacare.com/terms/
 > Privacy policy: https://palnacare.com/privacy/
@@ -140,12 +140,18 @@ Not collected: location, contacts, browsing, usage data, other diagnostics, adve
 ## In-App Purchases: Palna Pro (todos.txt 38b, 38c)
 
 Distribution > Subscriptions > subscription group **Palna Pro**, two auto-renewable subscriptions
-(level 1 both). Product IDs must match RevenueCat:
+(level 1 both), plus one **non-consumable** in-app purchase for Lifetime (Distribution > In-App
+Purchases). Product IDs must match RevenueCat. Prices decided 28 Oct 2026 (todos.txt 52):
 
-| Reference name | Product ID | Duration | Price | Intro offer |
+| Reference name | Product ID | Type / duration | Price | Intro offer |
 |---|---|---|---|---|
-| Palna Pro Monthly | palna_pro_monthly | 1 month | US $2.99; Pakistan Rs 299 | none |
-| Palna Pro Yearly | palna_pro_yearly | 1 year | US $19.99; Pakistan Rs 2,499 | 7-day free trial (new subscribers) |
+| Palna Pro Monthly | palna_pro_monthly | auto-renewable, 1 month | US $3.99; Pakistan Rs 299 | none |
+| Palna Pro Yearly | palna_pro_yearly | auto-renewable, 1 year | US $24.99; Pakistan Rs 1,999 | 7-day free trial (new subscribers) |
+| Palna Pro Lifetime | palna_pro_lifetime | non-consumable | US $49.99; Pakistan Rs 4,999 | none |
+
+Set the US price as the base and then set Pakistan by hand (and India if wanted: Rs 149 / 999 /
+2,499 as ₹); otherwise Apple converts $3.99 to about Rs 1,100. Gulf countries keep the US-based
+price. If Apple has no exact Rs 1,999 or 4,999 price point, pick the nearest one below.
 
 Display name "Palna Pro"; description "More babies, photos, 30-day reports and the doctor's PDF, for
 your whole family." Review screenshot: the Palna Pro screen (Settings > Palna Pro). Review notes:

@@ -14,6 +14,7 @@ import '../../core/providers.dart';
 import '../../app/theme.dart';
 import '../../data/settings_repository.dart';
 import '../plans/paywall_screen.dart';
+import '../transfer/data_screen.dart';
 import '../plans/plan.dart';
 import '../common/language_menu.dart';
 import 'change_password_dialog.dart';
@@ -142,6 +143,15 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
           const _AccentPicker(),
+          const Divider(height: 32),
+          _Header(l10n.dataSection),
+          ListTile(
+            leading: const Icon(Icons.import_export),
+            title: Text(l10n.dataTitle),
+            subtitle: Text(l10n.dataSettingsHelp),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const DataScreen())),
+          ),
           const Divider(height: 32),
           _Header(l10n.accountSection),
           if (ref.watch(canChangePasswordProvider))

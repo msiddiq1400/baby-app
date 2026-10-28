@@ -790,6 +790,121 @@
   "dehydrationSigns": "• fewer wet diapers than usual\n• few or no tears when crying, or a dry mouth\n• a sunken soft spot on the head, or sunken eyes\n• unusually drowsy or irritable",
   "helpSources": "Based on NHS and WHO guidance. This is general information, not a diagnosis; if you're worried, contact a doctor.",
   "accountSection": "Account",
+  "dataSection": "Your data",
+  "dataTitle": "Export and import",
+  "dataSettingsHelp": "Save everything as a spreadsheet, or bring in your log from Nara Baby or Huckleberry",
+  "exportTitle": "Export",
+  "exportHelp": "Everything logged for {name}, as one CSV file. It opens in Excel or Google Sheets, and Palna can import it again.",
+  "@exportHelp": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "exportButton": "Export as CSV",
+  "exportSubject": "Palna log for {name}",
+  "@exportSubject": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importTitle": "Import from another app",
+  "importHelp": "Bring in feeds, sleep, diapers, pumping, growth, temperatures and activities. They are added to {name}; entries already in Palna aren't doubled.",
+  "@importHelp": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importFromPalna": "A Palna export",
+  "importStepsNara": "In Nara Baby: on the Activity screen, tap your baby's picture, then Export Data. Save the CSV file, then choose it here.",
+  "importStepsHuckleberry": "In Huckleberry: tap your child's icon, scroll down, tap Export tracking data as CSV. Open the emailed link, save the file, then choose it here.",
+  "importStepsPalna": "A CSV file made with Export above, on this phone or another.",
+  "importChooseFile": "Choose file",
+  "importChooseAnother": "Choose another file",
+  "importWrongFile": "This file can't be read. Please choose the CSV file exported from the app.",
+  "importExcelMangled": "This file was opened and saved in Excel, which changes the times. Please export it again and choose it without opening it first.",
+  "importNothingFound": "Nothing in this file can be imported.",
+  "importFileBaby": "In the file: {name}",
+  "@importFileBaby": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importDates": "{from} to {to}",
+  "@importDates": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "importTemperatures": "Temperatures",
+  "importSkippedTitle": "Not imported: {count}",
+  "@importSkippedTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importSkipMedicine": "Medicines (add them in Health)",
+  "importSkipSolids": "Solid foods",
+  "importSkipMilestone": "Milestones",
+  "importSkipVaccine": "Vaccines (tick them in Health)",
+  "importSkipDry": "Dry diapers",
+  "importSkipSleepGoing": "Sleep without an end time",
+  "importSkipRange": "Values out of range",
+  "importSkipUnreadable": "Rows that couldn't be read",
+  "importIntoBaby": "Everything will be added to {name}.",
+  "@importIntoBaby": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importButton": "Import {count} entries into {name}",
+  "@importButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importWorking": "Importing... Keep Palna open.",
+  "importDone": "Added {count} entries to {name}",
+  "@importDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "importDuplicates": "{count} were already in Palna and were skipped.",
+  "@importDuplicates": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "doneButton": "Done",
   "deleteAccount": "Delete my account",
   "deleteAccountBody": "This permanently deletes your login. Babies and entries in families that only you belong to are deleted too. In families you share, the other members keep everything, and if you're the owner, the next member becomes the owner. This can't be undone.",
   "deleteAccountTypeHint": "Type DELETE to confirm",
@@ -905,6 +1020,45 @@
   "reportSources": "Typical ranges: National Sleep Foundation (under 4 months), American Academy of Sleep Medicine (4 months and older), NHS (feeds and diapers). The shaded band on the sleep chart is the typical range. Every baby is different; if you're worried, talk to your doctor.",
   "journalTitle": "Journal",
   "pastDays": "Past days",
+  "activities": "Activities",
+  "activityTummyTime": "Tummy time",
+  "activityBath": "Bath",
+  "activityPlay": "Play",
+  "activityOutdoors": "Outdoors",
+  "activityReading": "Reading",
+  "activityMassage": "Massage",
+  "activityOther": "Other",
+  "activityLabelHint": "What was it? (e.g. swimming)",
+  "addActivity": "Add activity",
+  "editActivity": "Edit activity",
+  "activityShort": "Activity",
+  "activityStartedLabel": "Started",
+  "activityHowLong": "How long",
+  "activityNotTimed": "Not timed",
+  "activityMinutes": "{minutes} min",
+  "@activityMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "activityStartTimer": "Start timer",
+  "tummyTimer": "Tummy timer",
+  "activityStop": "Stop",
+  "activityStopNow": "Stop now",
+  "activityRunning": "Timer running",
+  "activitySince": "Since {time}",
+  "@activitySince": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "activityTimerBusy": "Another activity timer is running. Stop it first.",
+  "activitiesNoneToday": "Tummy time, bath, play...",
+  "tummyTimeToday": "Tummy time today",
   "yesterday": "Yesterday",
   "pickDate": "Choose a date",
   "olderDay": "Day before",
@@ -1427,6 +1581,20 @@
   },
   "proThanks": "Thank you for supporting Palna!",
   "proManage": "Manage subscription",
+  "proLifetime": "Lifetime",
+  "proPriceOnce": "{price} once",
+  "@proPriceOnce": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "proLifetimeNote": "Pay once: Pro for your whole family, for good",
+  "proNoSubscription": "No subscription",
+  "proBuyOnce": "Buy once",
+  "proActiveForLife": "For life, no subscription",
+  "proLegalLifetime": "Lifetime is a one-time purchase: it is charged once and never renews.",
   "proRestoreNone": "No Palna Pro purchase was found for this store account.",
   "proError": "The purchase didn't go through. Please try again.",
   "proReasonBabies": "Add more than one baby with Palna Pro",
