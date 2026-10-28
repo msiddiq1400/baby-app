@@ -48,9 +48,13 @@ int? trialDays(StoreProduct product) {
 }
 
 class PaywallScreen extends ConsumerStatefulWidget {
-  const PaywallScreen({super.key, this.reason});
+  const PaywallScreen({super.key, this.reason, this.packages});
 
   final String? reason;
+
+  /// Store options to show instead of RevenueCat's (the store screenshots).
+  @visibleForTesting
+  final ProPackages? packages;
 
   @override
   ConsumerState<PaywallScreen> createState() => _PaywallScreenState();
@@ -60,7 +64,7 @@ class PaywallScreen extends ConsumerStatefulWidget {
 enum ProChoice { yearly, monthly, lifetime }
 
 class _PaywallScreenState extends ConsumerState<PaywallScreen> {
-  late final _packages = ProStore.packages();
+  late final _packages = widget.packages != null ? Future.value(widget.packages) : ProStore.packages();
   var _choice = ProChoice.yearly;
   var _busy = false;
 
