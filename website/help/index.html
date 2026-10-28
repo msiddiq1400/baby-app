@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n-title="help.meta.title">Palna Help Centre: guides for the first year</title>
+  <meta name="description" data-i18n-attr="content:help.meta.desc" content="Guides for the first year: tummy time, vaccine schedules, first foods, newborn feeds and diapers, and sharing Palna with your family. Plus how to move your log from Nara Baby or Huckleberry.">
+  <link rel="canonical" href="https://palnacare.com/help/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Palna">
+  <meta property="og:title" content="Palna Help Centre">
+  <meta property="og:description" content="Guides for the first year: tummy time, vaccine schedules, first foods, newborn feeds and diapers, and sharing Palna with your family. Plus how to move your log from Nara Baby or Huckleberry.">
+  <meta property="og:image" content="https://palnacare.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://palnacare.com/help/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#fbf7f0">
+  <link rel="icon" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../icon-192.png">
+  <script>
+    // Theme and language before the first paint, so nothing flashes.
+    (function () {
+      var r = document.documentElement;
+      try {
+        var params = new URLSearchParams(location.search);
+        var pt = params.get('theme');
+        if (pt) localStorage.setItem('palna-theme', pt);
+        var t = pt || localStorage.getItem('palna-theme');
+        if (t && t !== 'system') r.dataset.theme = t;
+        var q = params.get('lang');
+        var l = q || localStorage.getItem('palna-lang') || (/^ur/i.test(navigator.language || '') ? 'ur' : 'en');
+        if (q) localStorage.setItem('palna-lang', q);
+        r.dataset.lang = l;
+        if (l !== 'en') r.classList.add('i18n-pending');
+        if (l === 'ur') { r.lang = 'ur'; r.dir = 'rtl'; } else if (l === 'roman') { r.lang = 'ur-Latn'; }
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Noto+Nastaliq+Urdu:wght@400;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><img src="../icon-192.png" alt="" width="38" height="38"><b>Palna</b></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="../index.html#pakistan" data-i18n="nav.pk">Why Palna</a>
+      <a href="../index.html#features" data-i18n="nav.features">Features</a>
+      <a href="../index.html#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="../help/index.html" data-i18n="nav.help" aria-current="page">Help</a>
+    </nav>
+    <div class="controls">
+      <div class="menu">
+        <button class="chip" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language" data-i18n-attr="aria-label:ui.language">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>
+          <span data-lang-label>EN</span>
+        </button>
+        <ul role="menu">
+          <li><button type="button" role="menuitemradio" data-set-lang="en" lang="en">English</button></li>
+          <li><button type="button" role="menuitemradio" data-set-lang="ur" lang="ur" class="ur">اردو</button></li>
+          <li><button type="button" role="menuitemradio" data-set-lang="roman" lang="ur-Latn">Roman Urdu</button></li>
+        </ul>
+      </div>
+      <div class="menu">
+        <button class="chip square" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Theme" data-i18n-attr="aria-label:ui.theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true" data-theme-icon></svg>
+        </button>
+        <ul role="menu">
+          <li><button type="button" role="menuitemradio" data-set-theme="light"><span class="swatch" style="background:#fbf7f0"></span><span data-i18n="theme.light">Light</span></button></li>
+          <li><button type="button" role="menuitemradio" data-set-theme="dark"><span class="swatch" style="background:#1b2230"></span><span data-i18n="theme.dark">Dark</span></button></li>
+          <li><button type="button" role="menuitemradio" data-set-theme="baby"><span class="swatch" style="background:linear-gradient(135deg,#f6c3d6 50%,#bfe8dc 50%)"></span><span data-i18n="theme.baby">Baby</span></button></li>
+          <li><button type="button" role="menuitemradio" data-set-theme="system"><span class="swatch" style="background:linear-gradient(135deg,#fbf7f0 50%,#1b2230 50%)"></span><span data-i18n="theme.system">Same as device</span></button></li>
+        </ul>
+      </div>
+      <a class="btn get" href="../index.html#get" data-i18n="cta.get">Get Palna</a>
+      <button class="chip square burger" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menu" data-i18n-attr="aria-label:nav.menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main class="guide" id="main">
+  <div class="guide-hero">
+    <div class="wrap">
+      <p class="kicker" data-i18n="help.kicker">Help centre</p>
+      <h1 data-i18n="help.title">Answers for the first year.</h1>
+      <p class="sub" data-i18n="help.sub">Practical guides, and help moving your baby's log to Palna. Short and plain, based on advice from the WHO, NHS, CDC and national vaccine programmes.</p>
+    </div>
+  </div>
+  <section aria-labelledby="switch-title">
+    <div class="wrap">
+      <h2 class="title" id="switch-title" data-i18n="help.switch.title">Moving to Palna</h2>
+      <div class="grid">
+        <div class="card link">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h13l-3-3M20 17H7l3 3"/></svg></div>
+          <h3><a href="../switch-from-nara/index.html" data-i18n="help.nara.t">Switch from Nara Baby</a></h3>
+          <p data-i18n="help.nara.p">Export your log from Nara Baby and import it in three steps.</p>
+        </div>
+        <div class="card link">
+          <div class="icon rose"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h13l-3-3M20 17H7l3 3"/></svg></div>
+          <h3><a href="../switch-from-huckleberry/index.html" data-i18n="help.huck.t">Switch from Huckleberry</a></h3>
+          <p data-i18n="help.huck.p">Download your Huckleberry CSV and bring it into Palna.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="band" aria-labelledby="guides-title">
+    <div class="wrap">
+      <h2 class="title" id="guides-title" data-i18n="help.guides.title">Guides</h2>
+      <p class="notice ur-only ur" lang="ur" dir="rtl">یہ رہنما مضامین ابھی صرف انگریزی میں ہیں۔</p>
+      <p class="notice roman-only" lang="ur-Latn">Yeh guides abhi sirf English mein hain.</p>
+      <div class="grid">
+        <div class="card link">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M3 17c3-4 6-5 9-5s6 1 9 5M3 20h18"/></svg></div>
+          <h3><a href="tummy-time/index.html" data-i18n="help.tummy.t">Tummy time: when to start and how much</a></h3>
+          <p data-i18n="help.tummy.p">Starting from the first days, how much by age, and keeping it safe.</p>
+        </div>
+        <div class="card link">
+          <div class="icon rose"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2l4 4M17 7l3-3M19 9l-8 8-4 1 1-4 8-8zM7 18l-4 4"/></svg></div>
+          <h3><a href="vaccines-pakistan/index.html" data-i18n="help.epi.t">Pakistan's EPI vaccine schedule</a></h3>
+          <p data-i18n="help.epi.p">Every routine dose from birth to 15 months, and what each one protects against.</p>
+        </div>
+        <div class="card link">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M8 14h2M14 14h2M8 18h2"/></svg></div>
+          <h3><a href="uk-vaccine-schedule/index.html" data-i18n="help.uk.t">The UK baby vaccine schedule</a></h3>
+          <p data-i18n="help.uk.p">The NHS schedule for babies born from 2025, from 8 weeks to 3 years 4 months.</p>
+        </div>
+        <div class="card link">
+          <div class="icon rose"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18a9 9 0 0 1-18 0zM7 7c0-2 2-2 2-4M12 7c0-2 2-2 2-4M17 7c0-2 2-2 2-4"/></svg></div>
+          <h3><a href="first-foods/index.html" data-i18n="help.solids.t">Starting solids: first foods</a></h3>
+          <p data-i18n="help.solids.p">Signs of readiness, textures by age, allergens, and desi first foods.</p>
+        </div>
+        <div class="card link">
+          <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6M10 2v3l-2 3v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8l-2-3V2"/><path d="M8 13h8"/></svg></div>
+          <h3><a href="newborn-feeding-and-diapers/index.html" data-i18n="help.newborn.t">Newborn feeds and diapers</a></h3>
+          <p data-i18n="help.newborn.p">How often newborns feed, and the wet and dirty diapers that show they're getting enough.</p>
+        </div>
+        <div class="card link">
+          <div class="icon rose"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
+          <h3><a href="share-with-family/index.html" data-i18n="help.family.t">Share Palna with your family</a></h3>
+          <p data-i18n="help.family.p">Invite parents, grandparents and helpers, and choose who gets notified.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="contact-title">
+    <div class="wrap center">
+      <h2 class="title" id="contact-title" data-i18n="help.contact.title">Still have a question?</h2>
+      <p class="sub" data-i18n-html="help.contact.p">Email <a href="mailto:hello@palnacare.com">hello@palnacare.com</a>, in English or Urdu.</p>
+      <p class="fine" style="margin-inline:auto" data-i18n="help.note">Palna's guides are general information, not medical advice, and Palna isn't a medical device. If you're worried about your baby, ask your doctor. In an emergency, call your local emergency number.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="legal" style="margin-top:0">
+      <span><span data-i18n="foot.copy">© 2026 Toolbox Services. Palna is not a medical device.</span> · <a href="../index.html" data-i18n="f.home">Home</a> · <a href="../help/index.html" data-i18n="f.help">Help centre</a> · <a href="../switch-from-nara/index.html" data-i18n="f.switchNara">Switch from Nara Baby</a> · <a href="../switch-from-huckleberry/index.html" data-i18n="f.switchHuck">Switch from Huckleberry</a> · <a href="../privacy/index.html" data-i18n="f.privacy">Privacy policy</a> · <a href="../terms/index.html" data-i18n="f.terms">Terms of use</a> · <a href="../delete-account/index.html" data-i18n="f.delete">Delete your account</a></span>
+      <span><a href="mailto:hello@palnacare.com">hello@palnacare.com</a></span>
+    </div>
+  </div>
+</footer>
+<script src="../i18n.js"></script>
+<script src="../i18n-guides.js"></script>
+<script src="../site.js"></script>
+</body>
+</html>

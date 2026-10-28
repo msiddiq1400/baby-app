@@ -363,6 +363,45 @@ void main() {
     });
   });
 
+  group('nap predictions', () {
+    /// A night that ended 30 minutes ago: the baby is awake now.
+    Future<void> wokeHalfAnHourAgo(WidgetTester tester) {
+      final now = DateTime.now();
+      return env.exec(
+        tester,
+        "INSERT INTO sleeps (id, family_id, baby_id, kind, started_at, ended_at) VALUES (uuid(), ?, ?, 'night', ?, ?)",
+        [
+          env.familyId,
+          env.babyId,
+          utcTimestamp(now.subtract(const Duration(hours: 10))),
+          utcTimestamp(now.subtract(const Duration(minutes: 30))),
+        ],
+      );
+    }
+
+    flowTest('Free: the Sleep card offers "Nap times", which opens Palna Pro', (tester) async {
+      await wokeHalfAnHourAgo(tester);
+      await env.pumpApp(tester);
+      await pumpUntil(tester, () => find.widgetWithText(TextButton, en.napTimesShort).evaluate().isNotEmpty);
+      expect(find.textContaining('Next nap'), findsNothing);
+      await tapAndSettle(tester, find.widgetWithText(TextButton, en.napTimesShort));
+      expect(find.text(en.proReasonPredictions), findsOneWidget);
+      expectNoErrors(tester);
+    });
+
+    flowTest('Pro: the Sleep card shows the next nap (a guess from age at first)', (tester) async {
+      await wokeHalfAnHourAgo(tester);
+      await tester.runAsync(env.makePro);
+      await env.pumpApp(tester);
+      // The last week's sleep loads a moment after Today.
+      await pumpUntil(tester, () => find.textContaining('Next nap around').evaluate().isNotEmpty);
+      expect(find.textContaining('Next nap around'), findsOneWidget);
+      expect(find.text(en.predictionFromAge), findsOneWidget);
+      expect(find.widgetWithText(TextButton, en.napTimesShort), findsNothing);
+      expectNoErrors(tester);
+    });
+  });
+
   group('sleep', () {
     flowTest('Sleep > Save starts a sleep; the card and the bar then offer Woke up, which ends it', (tester) async {
       await env.pumpApp(tester);

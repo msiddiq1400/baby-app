@@ -961,6 +961,33 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
+  String nextNapAround(String from, String to) {
+    return 'اگلی جھپکی تقریباً $from–$to';
+  }
+
+  @override
+  String bedtimeAround(String from, String to) {
+    return 'سونے کا وقت تقریباً $from–$to';
+  }
+
+  @override
+  String napTimeNow(String to) {
+    return 'اب جھپکی کا اچھا وقت ہے ($to تک)';
+  }
+
+  @override
+  String bedtimeNow(String to) {
+    return 'اب سونے کا اچھا وقت ہے ($to تک)';
+  }
+
+  @override
+  String get predictionFromAge =>
+      'ایک ہفتے کی نیند لکھنے تک عمر کے حساب سے اندازہ';
+
+  @override
+  String get napTimesShort => 'جھپکی کے اوقات';
+
+  @override
   String get tabSolids => 'ٹھوس غذا';
 
   @override
@@ -2279,6 +2306,14 @@ class AppLocalizationsUr extends AppLocalizations {
   String get proFeatureReports => '30 دن کی رپورٹس، اور ڈاکٹر کے لیے PDF خلاصہ';
 
   @override
+  String get proFeaturePredictions =>
+      'اگلی جھپکی اور سونے کا وقت، آپ کے بچے کے اپنے معمول سے';
+
+  @override
+  String get proReasonPredictions =>
+      'اگلی جھپکی اور سونے کے اوقات پالنا پرو کا حصہ ہیں';
+
+  @override
   String get proFeatureThemes =>
       'رنگوں کے تھیم، اور ہوم اسکرین ویجٹ پر آج کا حساب';
 
@@ -3400,6 +3435,33 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String awakeFor(String duration) {
     return '$duration se jaag raha hai';
   }
+
+  @override
+  String nextNapAround(String from, String to) {
+    return 'Agli jhapki taqreeban $from–$to';
+  }
+
+  @override
+  String bedtimeAround(String from, String to) {
+    return 'Sone ka waqt taqreeban $from–$to';
+  }
+
+  @override
+  String napTimeNow(String to) {
+    return 'Ab jhapki ka acha waqt hai ($to tak)';
+  }
+
+  @override
+  String bedtimeNow(String to) {
+    return 'Ab sone ka acha waqt hai ($to tak)';
+  }
+
+  @override
+  String get predictionFromAge =>
+      'Aik haftay ki neend likhne tak umar ke hisaab se andaaza';
+
+  @override
+  String get napTimesShort => 'Jhapki ke auqaat';
 
   @override
   String get tabSolids => 'Thos ghiza';
@@ -4724,6 +4786,14 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   @override
   String get proFeatureReports =>
       '30 din ki reports, aur doctor ke liye PDF khulasa';
+
+  @override
+  String get proFeaturePredictions =>
+      'Agli jhapki aur sone ka waqt, aap ke bachay ke apne mamool se';
+
+  @override
+  String get proReasonPredictions =>
+      'Agli jhapki aur sone ke auqaat Palna Pro ka hissa hain';
 
   @override
   String get proFeatureThemes =>

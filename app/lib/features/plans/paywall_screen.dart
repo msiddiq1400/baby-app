@@ -145,6 +145,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
               (Icons.child_friendly_outlined, l10n.proFeatureBabies),
               (Icons.photo_library_outlined, l10n.proFeaturePhotos),
               (Icons.insert_chart_outlined, l10n.proFeatureReports),
+              (Icons.bedtime_outlined, l10n.proFeaturePredictions),
               (Icons.palette_outlined, l10n.proFeatureThemes),
             ])
               ListTile(

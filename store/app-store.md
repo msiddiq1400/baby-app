@@ -61,7 +61,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 > Palna is not a medical device and doesn't replace advice from your doctor. If you're worried about your baby, contact a doctor straight away.
 >
 > PALNA PRO (OPTIONAL)
-> Palna is free. Palna Pro is optional, for the whole family: monthly, yearly, or a one-time lifetime purchase. It adds more than one baby, more photos each month, 30-day reports, the PDF summary for your doctor, colour themes and widget extras. Payment is charged to your Apple ID. Subscriptions renew automatically unless cancelled at least 24 hours before the end of the period; manage them in your Apple ID settings. Lifetime is charged once and never renews.
+> Palna is free. Palna Pro is optional, for the whole family: monthly, yearly, or a one-time lifetime purchase. It adds more than one baby, more photos each month, next nap and bedtime times, 30-day reports, the PDF summary for your doctor, colour themes and widget extras. Payment is charged to your Apple ID. Subscriptions renew automatically unless cancelled at least 24 hours before the end of the period; manage them in your Apple ID settings. Lifetime is charged once and never renews.
 >
 > Terms of use: https://palnacare.com/terms/
 > Privacy policy: https://palnacare.com/privacy/

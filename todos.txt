@@ -56,8 +56,7 @@ their setup in sections 2-4. Decided: Q3 keep only the new UK schedule
 app, not on the website.
 
 Ready: Claude starts when you say go
-[~] 53. Built 28 Oct on feat/baby-app-lifetime-activities-export-v1 (not
-        merged yet; owner tests it first):
+[~] 53. Merged into dev 28 Oct (PR #10); live with the next release:
         - Palna Pro Lifetime (one-time purchase) on the paywall, next to
           Monthly / Yearly; "For life" when the family has it; terms 7 and
           the store text mention it. New prices in store/*.md (52).
@@ -72,11 +71,38 @@ Ready: Claude starts when you say go
         At release (48), ALSO: PowerSync dashboard > Sync Streams > paste
         powersync/sync-config.yaml (it now has activities) > Validate >
         Deploy. Without it, activities upload and then vanish from phones.
-[ ] 49. Review pack for the pediatrician (21-23): one readable document
-        with all 23 vaccine schedules, the RSV / flu rules, the medical
-        wording and the solids guide, each with its source and the open
-        questions (from docs/vaccine-research-2026-10/), for the doctor to
-        mark up.
+[x] 49. Review pack for the pediatrician: docs/pediatrician-review/
+        palna-medical-review.docx (62 pages, 91 open questions, a
+        "questions we most need answered" page). Give it to the doctor
+        (21-23); regenerate with make_review_docx.py after changes.
+[~] 55. Built 28 Oct on feat/baby-app-switch-predictions-help-v1: nap and
+        bedtime predictions (Palna Pro; Sleep card on Today, "Nap times"
+        teaser for Free), palnacare.com "switch from Nara / Huckleberry"
+        pages and a help centre with articles, the review pack (49).
+[ ] 56. Found while making the review pack (28 Oct); fix after the doctor
+        answers, or sooner where obvious (Claude):
+        - "verified" flag on schedules isn't shown anywhere in the app.
+        - Rotavirus dose 3: left out for DE/ES/FR but included for SE and
+          the US "RotaTeq only" dose; make it consistent.
+        - Sweden chickenpox at 18 months only applies to babies born from
+          1 Jul 2025 (from 1 Jan 2027); shown to everyone now.
+        - UK: babies born before 2025 get reminders from the new schedule.
+        - RSV / flu: Germany, Spain, Italy offer RSV to all babies (Spain,
+          Italy also child flu) but aren't in the optional rules.
+          Netherlands: babies born 15-30 Sep get no RSV reminder. Check our
+          own limits: France catch-up < 7 months, UK flu "aged 2 or 3 on
+          31 Aug", Bahrain flu "up to 5 years".
+        - Weight velocity scales month one to 30.4 days (WHO uses 28).
+        - Solids: rohu in the fish recipe (many small bones); ghee not
+          flagged as a milk allergen.
+        - Emergency: every poison line is labelled "Poison Control"
+          (Ireland 8am-10pm, Sweden less urgent); Netherlands only 112.
+        - Wording that reads like advice ("Book a visit in the next few
+          days", "usually nothing to worry about", "series usually doesn't
+          need to restart", "flattens out" which the check doesn't detect).
+        - Hot-weather advice only for PK / IN / BD, not the Gulf.
+        - The app never says "not a medical device" (store, site and terms
+          do); add it to Help or Settings.
 [~] 50. toolbox.services shows the legal name and address (new /about page,
         footer, terms / privacy / refund): toolbox PR #1 into main, opened
         28 Oct. Merge and deploy on the owner's OK, before Apple checks the
