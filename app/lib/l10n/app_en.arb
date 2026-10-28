@@ -662,6 +662,46 @@
       }
     }
   },
+  "nextNapAround": "Next nap around {from}–{to}",
+  "@nextNapAround": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "bedtimeAround": "Bedtime around {from}–{to}",
+  "@bedtimeAround": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "napTimeNow": "Good time for a nap now (until {to})",
+  "@napTimeNow": {
+    "placeholders": {
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "bedtimeNow": "Good time for bed now (until {to})",
+  "@bedtimeNow": {
+    "placeholders": {
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "predictionFromAge": "A guess from age until a week of sleep is logged",
+  "napTimesShort": "Nap times",
   "tabSolids": "Solids",
   "solidsTitle": "Starting solids",
   "solidsTooYoung": "Most babies start solids around 6 months. You can read ahead in the meantime.",
@@ -1518,6 +1558,8 @@
   "proFeatureBabies": "Twins, siblings: add every baby",
   "proFeaturePhotos": "Up to 10 photos a month for each baby (Free: 1)",
   "proFeatureReports": "30-day reports, and the PDF summary for the doctor",
+  "proFeaturePredictions": "Next nap and bedtime, from your baby's own pattern",
+  "proReasonPredictions": "Next nap and bedtime times are part of Palna Pro",
   "proFeatureThemes": "Colour themes, and today's totals on the home-screen widget",
   "proFamilyNote": "One subscription covers the whole family: everyone you share the baby with gets Pro too.",
   "proYearly": "Yearly",

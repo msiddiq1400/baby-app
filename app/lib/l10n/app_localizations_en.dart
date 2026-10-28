@@ -987,6 +987,33 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String nextNapAround(String from, String to) {
+    return 'Next nap around $from–$to';
+  }
+
+  @override
+  String bedtimeAround(String from, String to) {
+    return 'Bedtime around $from–$to';
+  }
+
+  @override
+  String napTimeNow(String to) {
+    return 'Good time for a nap now (until $to)';
+  }
+
+  @override
+  String bedtimeNow(String to) {
+    return 'Good time for bed now (until $to)';
+  }
+
+  @override
+  String get predictionFromAge =>
+      'A guess from age until a week of sleep is logged';
+
+  @override
+  String get napTimesShort => 'Nap times';
+
+  @override
   String get tabSolids => 'Solids';
 
   @override
@@ -2327,6 +2354,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get proFeatureReports =>
       '30-day reports, and the PDF summary for the doctor';
+
+  @override
+  String get proFeaturePredictions =>
+      'Next nap and bedtime, from your baby\'s own pattern';
+
+  @override
+  String get proReasonPredictions =>
+      'Next nap and bedtime times are part of Palna Pro';
 
   @override
   String get proFeatureThemes =>

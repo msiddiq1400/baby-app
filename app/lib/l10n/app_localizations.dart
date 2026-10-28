@@ -1773,6 +1773,42 @@ abstract class AppLocalizations {
   /// **'Awake for {duration}'**
   String awakeFor(String duration);
 
+  /// No description provided for @nextNapAround.
+  ///
+  /// In en, this message translates to:
+  /// **'Next nap around {from}–{to}'**
+  String nextNapAround(String from, String to);
+
+  /// No description provided for @bedtimeAround.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedtime around {from}–{to}'**
+  String bedtimeAround(String from, String to);
+
+  /// No description provided for @napTimeNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Good time for a nap now (until {to})'**
+  String napTimeNow(String to);
+
+  /// No description provided for @bedtimeNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Good time for bed now (until {to})'**
+  String bedtimeNow(String to);
+
+  /// No description provided for @predictionFromAge.
+  ///
+  /// In en, this message translates to:
+  /// **'A guess from age until a week of sleep is logged'**
+  String get predictionFromAge;
+
+  /// No description provided for @napTimesShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Nap times'**
+  String get napTimesShort;
+
   /// No description provided for @tabSolids.
   ///
   /// In en, this message translates to:
@@ -4034,6 +4070,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'30-day reports, and the PDF summary for the doctor'**
   String get proFeatureReports;
+
+  /// No description provided for @proFeaturePredictions.
+  ///
+  /// In en, this message translates to:
+  /// **'Next nap and bedtime, from your baby\'s own pattern'**
+  String get proFeaturePredictions;
+
+  /// No description provided for @proReasonPredictions.
+  ///
+  /// In en, this message translates to:
+  /// **'Next nap and bedtime times are part of Palna Pro'**
+  String get proReasonPredictions;
 
   /// No description provided for @proFeatureThemes.
   ///

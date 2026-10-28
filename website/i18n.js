@@ -70,7 +70,7 @@ window.PALNA_I18N = {
     'g.growth.t': 'ایک وزن نہیں، پورا رجحان دیکھیں۔',
     'g.growth.p': 'وزن، قد اور سر کے لیے WHO کے چارٹ، پرسنٹائل کی آسان وضاحت کے ساتھ۔',
     'g.vaccines.t': 'کوئی ٹیکہ نہ چھوٹے۔',
-    'g.vaccines.p': 'ہر EPI وزٹ کی تاریخ، کہاں کیا لگا، اور ہر ایک سے پہلے یاد دہانی۔',
+    'g.vaccines.p': 'آپ کے ملک کے شیڈول (پاکستان کا EPI اور 22 مزید) کا ہر وزٹ اس کی تاریخ کے ساتھ، کہاں کیا لگا، اور ہر ایک سے پہلے یاد دہانی۔',
     'g.milestones.t': 'ہر سنگِ میل کی خوشی منائیں۔',
     'g.milestones.p': '2 سے 18 ماہ تک CDC کی فہرستیں، تسلی دینے والے الفاظ میں، ہر عمر میں مدد کے طریقوں کے ساتھ۔',
 
@@ -149,9 +149,9 @@ window.PALNA_I18N = {
     'faq.2.q': 'کیا یہ انٹرنیٹ کے بغیر چلتا ہے؟',
     'faq.2.a': 'جی ہاں۔ جو کچھ آپ درج کریں وہ پہلے فون میں محفوظ ہوتا ہے، اس لیے پالنا لوڈشیڈنگ، کمزور سگنل یا بغیر ڈیٹا کے بھی چلتا ہے۔ انٹرنیٹ واپس آنے پر خاندان کے ساتھ سنک ہو جاتا ہے۔',
     'faq.3.q': 'کیا پورا خاندان اسے استعمال کر سکتا ہے؟',
-    'faq.3.a': 'جی ہاں۔ بچہ شامل کرنے والے والدین 6 حرفی کوڈ سے دوسروں کو بلا سکتے ہیں (یہ ایک بار چلتا ہے اور 7 دن میں ختم ہو جاتا ہے)۔ سب ایک ہی بچے کو دیکھتے ہیں، اور ہر شخص انگریزی، اردو یا رومن اردو چن سکتا ہے۔',
+    'faq.3.a': 'جی ہاں۔ بچہ شامل کرنے والے والدین 6 ہندسوں/حروف والے کوڈ سے دوسروں کو بلا سکتے ہیں (یہ ایک بار چلتا ہے اور 7 دن میں ختم ہو جاتا ہے)۔ سب ایک ہی بچے کو دیکھتے ہیں، اور ہر شخص انگریزی، اردو یا رومن اردو چن سکتا ہے۔',
     'faq.4.q': 'جڑواں یا ایک سے زیادہ بچے؟',
-    'faq.4.a': 'جتنے چاہیں بچے شامل کریں اور ہوم اسکرین سے ان کے درمیان بدلیں۔',
+    'faq.4.a': 'مفت پلان میں ایک بچہ شامل ہے۔ پالنا پرو کے ساتھ ہر بچہ شامل کریں (جڑواں، بہن بھائی) اور ہوم اسکرین سے ان کے درمیان بدلیں؛ ایک پرو پورے خاندان کے لیے ہے۔',
     'faq.5.q': 'کیا ٹیکوں کا شیڈول سرکاری ہے؟',
     'faq.5.a': 'یہ پاکستان کے توسیعی پروگرام برائے حفاظتی ٹیکہ جات (EPI) کے مطابق ہے۔ شیڈول بدل سکتا ہے اور صوبوں میں مختلف ہو سکتا ہے، اس لیے تاریخوں کی تصدیق ہمیشہ ویکسینیٹر یا بچوں کے ڈاکٹر سے کریں۔',
     'faq.6.q': 'کیا پالنا طبی مشورہ ہے؟',
@@ -185,12 +185,17 @@ window.PALNA_I18N = {
     'f.terms': 'استعمال کی شرائط',
     'f.delete': 'اکاؤنٹ حذف کریں',
     'f.home': 'ہوم',
+    'nav.help': 'مدد',
+    'f.help': 'مدد کا مرکز',
+    'f.switchNara': 'Nara Baby سے پالنا پر آئیں',
+    'f.switchHuck': 'Huckleberry سے پالنا پر آئیں',
     'foot.copy': '© 2026 ٹول باکس سروسز۔ پالنا طبی آلہ نہیں۔',
     'foot.emergency': 'ایمرجنسی: ریسکیو 1122 · ایدھی 115',
 
     'lost.title': 'یہ صفحہ نہیں ملا',
     'lost.text': 'شاید لنک پرانا ہے۔ ہوم پیج سے دوبارہ شروع کریں۔',
-    'lost.home': 'ہوم پیج پر جائیں'
+    'lost.home': 'ہوم پیج پر جائیں',
+    'lost.help': 'یا مدد کا مرکز دیکھیں'
   },
 
   roman: {
@@ -261,7 +266,7 @@ window.PALNA_I18N = {
     'g.growth.t': 'Ek wazan nahi, poora rujhaan dekhein.',
     'g.growth.p': 'Wazan, qad aur sar ke liye WHO ke charts, percentile ki aasaan wazahat ke saath.',
     'g.vaccines.t': 'Koi teeka na chhoote.',
-    'g.vaccines.p': 'Har EPI visit ki tareekh, kahan kya laga, aur har ek se pehle yaad dehani.',
+    'g.vaccines.p': 'Aap ke mulk ke schedule (Pakistan ka EPI aur 22 mazeed) ka har visit us ki tareekh ke saath, kahan kya laga, aur har ek se pehle yaad dehani.',
     'g.milestones.t': 'Har milestone ki khushi manayein.',
     'g.milestones.p': '2 se 18 maah tak CDC ki fehristein, tasalli dene wale alfaaz mein, har umar mein madad ke tareeqon ke saath.',
 
@@ -340,9 +345,9 @@ window.PALNA_I18N = {
     'faq.2.q': 'Kya yeh internet ke baghair chalta hai?',
     'faq.2.a': 'Ji haan. Jo kuch aap darj karein woh pehle phone mein mehfooz hota hai, is liye Palna load-shedding, kamzor signal ya baghair data ke bhi chalta hai. Internet wapas aane par khandan ke saath sync ho jata hai.',
     'faq.3.q': 'Kya poora khandan ise istemaal kar sakta hai?',
-    'faq.3.a': 'Ji haan. Bacha shamil karne wale walidain 6 harfi code se doosron ko bula sakte hain (yeh ek baar chalta hai aur 7 din mein khatam ho jata hai). Sab ek hi bachay ko dekhte hain, aur har shakhs English, Urdu ya Roman Urdu chun sakta hai.',
+    'faq.3.a': 'Ji haan. Bacha shamil karne wale walidain 6 character ke code se doosron ko bula sakte hain (yeh ek baar chalta hai aur 7 din mein khatam ho jata hai). Sab ek hi bachay ko dekhte hain, aur har shakhs English, Urdu ya Roman Urdu chun sakta hai.',
     'faq.4.q': 'Judwaan ya ek se zyada bachay?',
-    'faq.4.a': 'Jitne chahein bachay shamil karein aur home screen se un ke darmiyan badlein.',
+    'faq.4.a': 'Free plan mein aik bacha shamil hai. Palna Pro ke saath har bacha shamil karein (judwa, behan bhai) aur home screen se un ke darmiyan badlein; aik Pro poore khandan ke liye hai.',
     'faq.5.q': 'Kya teekon ka schedule sarkari hai?',
     'faq.5.a': 'Yeh Pakistan ke Expanded Programme on Immunization (EPI) ke mutabiq hai. Schedule badal sakta hai aur subon mein mukhtalif ho sakta hai, is liye tareekhon ki tasdeeq hamesha vaccinator ya bachon ke doctor se karein.',
     'faq.6.q': 'Kya Palna medical mashwara hai?',
@@ -376,11 +381,16 @@ window.PALNA_I18N = {
     'f.terms': 'Istemaal ki sharaait',
     'f.delete': 'Account delete karein',
     'f.home': 'Home',
+    'nav.help': 'Madad',
+    'f.help': 'Help centre',
+    'f.switchNara': 'Nara Baby se Palna par aayein',
+    'f.switchHuck': 'Huckleberry se Palna par aayein',
     'foot.copy': '© 2026 Toolbox Services. Palna medical device nahi.',
     'foot.emergency': 'Emergency: Rescue 1122 · Edhi 115',
 
     'lost.title': 'Yeh safha nahi mila',
     'lost.text': 'Shayad link purana hai. Home page se dobara shuru karein.',
-    'lost.home': 'Home page par jayein'
+    'lost.home': 'Home page par jayein',
+    'lost.help': 'Ya Help centre dekhein'
   }
 };

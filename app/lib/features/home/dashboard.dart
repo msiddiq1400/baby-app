@@ -13,9 +13,12 @@ import '../common/tab_title.dart';
 import '../journal/journal_screen.dart';
 import '../reports/reports_screen.dart';
 import 'activity_sheet.dart';
+import '../plans/paywall_screen.dart';
+import '../plans/plan.dart';
 import 'insights.dart';
 import 'live_timers.dart';
 import 'log_sheets.dart';
+import 'sleep_predictions.dart';
 import 'timeline.dart';
 
 class Dashboard extends ConsumerWidget {
@@ -72,6 +75,7 @@ class Dashboard extends ConsumerWidget {
               feedTimer: ref.watch(feedTimerProvider(baby.id)).value,
               recentFeeds: ref.watch(recentFeedsProvider(baby.id)).value ?? const [],
               recentSleeps: ref.watch(recentSleepsProvider(baby.id)).value ?? const [],
+              isPro: ref.watch(isProProvider),
             ),
           AsyncError() => ListView(
               children: [
@@ -96,6 +100,7 @@ class _TodayView extends StatelessWidget {
     required this.recentFeeds,
     required this.recentSleeps,
     this.feedTimer,
+    this.isPro = false,
   });
 
   final Baby baby;
@@ -105,6 +110,9 @@ class _TodayView extends StatelessWidget {
   final List<Sleep> recentSleeps;
   final Feed? feedTimer;
 
+  /// Palna Pro: shows the next nap / bedtime.
+  final bool isPro;
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -113,6 +121,11 @@ class _TodayView extends StatelessWidget {
     final hunger = hungerEstimate(recentFeeds);
     final usualSleep = usualDailySleep(recentSleeps, now);
     final wake = wakeWindow(recentSleeps, now);
+    // The next nap or bedtime (Pro); only while awake.
+    final prediction = ongoing == null
+        ? predictNextSleep(birthDate: baby.birthDate, sleeps: recentSleeps, now: now)
+        : null;
+    String time(DateTime t) => TimeOfDay.fromDateTime(t).format(context);
     void openReport(ReportTab tab) => Navigator.of(context, rootNavigator: true)
         .push(MaterialPageRoute<void>(builder: (_) => ReportsScreen(baby: baby, initialTab: tab)));
     // Past days of one kind, starting from yesterday (today is on this screen).
@@ -166,8 +179,24 @@ class _TodayView extends StatelessWidget {
             // While asleep, the sleep timer card above shows the time.
             if (ongoing == null)
               if (wake.awakeFor case final awake? when awake.inHours < 12) l10n.awakeFor(formatDuration(l10n, awake)),
+            if (prediction case final p? when isPro) ...[
+              switch ((p.kind, now.isBefore(p.from))) {
+                (SleepPredictionKind.nap, true) => l10n.nextNapAround(time(p.from), time(p.to)),
+                (SleepPredictionKind.nap, false) => l10n.napTimeNow(time(p.to)),
+                (SleepPredictionKind.bedtime, true) => l10n.bedtimeAround(time(p.from), time(p.to)),
+                (SleepPredictionKind.bedtime, false) => l10n.bedtimeNow(time(p.to)),
+              },
+              if (!p.personal) l10n.predictionFromAge,
+            ],
           ],
           actions: [
+            // Free: a way to see what the nap times are about.
+            if (prediction != null && !isPro)
+              _CardButton(
+                Icons.lock_outline,
+                l10n.napTimesShort,
+                () => showPaywall(context, reason: l10n.proReasonPredictions),
+              ),
             _CardButton(Icons.add, l10n.pastSleepShort, () => showSleepSheet(context, baby, past: true)),
             _CardButton(Icons.history, l10n.pastDays, () => openPastDays(TrackedTable.sleeps)),
           ],

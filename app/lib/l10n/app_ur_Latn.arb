@@ -662,6 +662,12 @@
       }
     }
   },
+  "nextNapAround": "Agli jhapki taqreeban {from}–{to}",
+  "bedtimeAround": "Sone ka waqt taqreeban {from}–{to}",
+  "napTimeNow": "Ab jhapki ka acha waqt hai ({to} tak)",
+  "bedtimeNow": "Ab sone ka acha waqt hai ({to} tak)",
+  "predictionFromAge": "Aik haftay ki neend likhne tak umar ke hisaab se andaaza",
+  "napTimesShort": "Jhapki ke auqaat",
   "tabSolids": "Thos ghiza",
   "solidsTitle": "Thos ghiza ka aaghaz",
   "solidsTooYoung": "Zyada tar bachay taqreeban 6 mahine par thos ghiza shuru karte hain. Tab tak aap pehle se parh sakte hain.",
@@ -1091,6 +1097,8 @@
   "proFeatureBabies": "Judwaan, behan bhai: har bacha shamil karein",
   "proFeaturePhotos": "Har bache ki mahine mein 10 tak tasveerein (Free: 1)",
   "proFeatureReports": "30 din ki reports, aur doctor ke liye PDF khulasa",
+  "proFeaturePredictions": "Agli jhapki aur sone ka waqt, aap ke bachay ke apne mamool se",
+  "proReasonPredictions": "Agli jhapki aur sone ke auqaat Palna Pro ka hissa hain",
   "proFeatureThemes": "Rangon ke theme, aur home screen widget par aaj ka hisaab",
   "proFamilyNote": "Aik subscription poore khandan ke liye: jin ke saath aap bacha share karte hain unhein bhi Pro milta hai.",
   "proYearly": "Saalana",
