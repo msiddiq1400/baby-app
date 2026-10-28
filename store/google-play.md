@@ -65,12 +65,17 @@ Firebase (Google) acts as our service provider, so this counts as **not shared**
 
 ## Palna Pro (todos.txt 38b, 38d)
 
-Monetize > Products > Subscriptions, product IDs matching RevenueCat:
+Monetize > Products > Subscriptions, product IDs matching RevenueCat, plus Lifetime under
+Monetize > Products > In-app products (one-time). Prices decided 28 Oct 2026 (todos.txt 52):
 
-| Product ID | Base plan | Price | Offer |
+| Product ID | Type / base plan | Price | Offer |
 |---|---|---|---|
-| palna_pro_monthly | monthly, auto-renewing | Rs 299 (US $2.99, others from it) | none |
-| palna_pro_yearly | yearly, auto-renewing | Rs 2,499 (US $19.99) | 7-day free trial, new customers |
+| palna_pro_monthly | subscription, monthly, auto-renewing | US $3.99; Pakistan Rs 299 | none |
+| palna_pro_yearly | subscription, yearly, auto-renewing | US $24.99; Pakistan Rs 1,999 | 7-day free trial, new customers |
+| palna_pro_lifetime | in-app product (one-time, not consumed) | US $49.99; Pakistan Rs 4,999 | none |
+
+Set the US price, let Play convert the rest, then override Pakistan by hand (otherwise Play
+converts $3.99 to about Rs 1,100). India optional: Rs 149 / 999 / 2,499 as ₹.
 
 Content rating: digital purchases **Yes**. Data safety: add **Financial info > Purchase history**
 (collected, not shared, required, App functionality). Financial features stay "none". The demo

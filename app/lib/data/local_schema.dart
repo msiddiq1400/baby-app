@@ -184,6 +184,18 @@ final localSchema = Schema([
     Column.text('created_at'),
     Column.text('deleted_at'),
   ]),
+  // Tummy time, bath, play...: a running timer has no ended_at; an entry
+  // without a duration has ended_at = started_at.
+  Table('activities', [
+    Column.text('family_id'),
+    Column.text('baby_id'),
+    Column.text('kind'),
+    Column.text('label'),
+    Column.text('started_at'),
+    Column.text('ended_at'),
+    Column.text('notes'),
+    Column.text('deleted_at'),
+  ]),
   // Upload / download state of each photo file (this phone only).
   // ignore: experimental_member_use
   AttachmentsQueueTable(),

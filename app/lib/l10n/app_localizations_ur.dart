@@ -1193,6 +1193,140 @@ class AppLocalizationsUr extends AppLocalizations {
   String get accountSection => 'اکاؤنٹ';
 
   @override
+  String get dataSection => 'آپ کا ڈیٹا';
+
+  @override
+  String get dataTitle => 'ایکسپورٹ اور امپورٹ';
+
+  @override
+  String get dataSettingsHelp =>
+      'سب کچھ اسپریڈشیٹ میں محفوظ کریں، یا Nara Baby یا Huckleberry سے اپنا ریکارڈ لے آئیں';
+
+  @override
+  String get exportTitle => 'ایکسپورٹ';
+
+  @override
+  String exportHelp(String name) {
+    return '$name کے لیے لکھا گیا سب کچھ، ایک CSV فائل میں۔ یہ Excel یا Google Sheets میں کھلتی ہے، اور پالنا اسے دوبارہ امپورٹ کر سکتا ہے۔';
+  }
+
+  @override
+  String get exportButton => 'CSV میں ایکسپورٹ کریں';
+
+  @override
+  String exportSubject(String name) {
+    return '$name کا پالنا ریکارڈ';
+  }
+
+  @override
+  String get importTitle => 'کسی اور ایپ سے امپورٹ';
+
+  @override
+  String importHelp(String name) {
+    return 'خوراک، نیند، ڈائپر، دودھ نکالنا، نشوونما، بخار اور سرگرمیاں لے آئیں۔ یہ $name میں شامل ہوں گی؛ جو پہلے سے پالنا میں ہیں وہ دوہری نہیں ہوں گی۔';
+  }
+
+  @override
+  String get importFromPalna => 'پالنا کی ایکسپورٹ فائل';
+
+  @override
+  String get importStepsNara =>
+      'Nara Baby میں: Activity اسکرین پر بچے کی تصویر پر ٹیپ کریں، پھر Export Data۔ CSV فائل محفوظ کریں، پھر یہاں منتخب کریں۔';
+
+  @override
+  String get importStepsHuckleberry =>
+      'Huckleberry میں: بچے کے آئیکن پر ٹیپ کریں، نیچے جائیں، Export tracking data as CSV پر ٹیپ کریں۔ ای میل والا لنک کھولیں، فائل محفوظ کریں، پھر یہاں منتخب کریں۔';
+
+  @override
+  String get importStepsPalna =>
+      'اوپر والے ایکسپورٹ سے بنی CSV فائل، اس فون یا کسی اور فون سے۔';
+
+  @override
+  String get importChooseFile => 'فائل منتخب کریں';
+
+  @override
+  String get importChooseAnother => 'کوئی اور فائل منتخب کریں';
+
+  @override
+  String get importWrongFile =>
+      'یہ فائل پڑھی نہیں جا سکتی۔ براہ کرم ایپ سے ایکسپورٹ کی گئی CSV فائل منتخب کریں۔';
+
+  @override
+  String get importExcelMangled =>
+      'یہ فائل Excel میں کھول کر محفوظ کی گئی ہے، جس سے وقت بدل جاتے ہیں۔ براہ کرم دوبارہ ایکسپورٹ کریں اور کھولے بغیر یہاں منتخب کریں۔';
+
+  @override
+  String get importNothingFound => 'اس فائل میں امپورٹ کرنے کے لیے کچھ نہیں۔';
+
+  @override
+  String importFileBaby(String name) {
+    return 'فائل میں: $name';
+  }
+
+  @override
+  String importDates(String from, String to) {
+    return '$from سے $to تک';
+  }
+
+  @override
+  String get importTemperatures => 'بخار / درجہ حرارت';
+
+  @override
+  String importSkippedTitle(int count) {
+    return 'امپورٹ نہیں ہوں گے: $count';
+  }
+
+  @override
+  String get importSkipMedicine => 'دوائیں (صحت میں شامل کریں)';
+
+  @override
+  String get importSkipSolids => 'ٹھوس غذا';
+
+  @override
+  String get importSkipMilestone => 'سنگ میل';
+
+  @override
+  String get importSkipVaccine => 'ٹیکے (صحت میں نشان لگائیں)';
+
+  @override
+  String get importSkipDry => 'خشک ڈائپر';
+
+  @override
+  String get importSkipSleepGoing => 'نیند جس کا ختم ہونے کا وقت نہیں';
+
+  @override
+  String get importSkipRange => 'حد سے باہر قدریں';
+
+  @override
+  String get importSkipUnreadable => 'قطاریں جو پڑھی نہ جا سکیں';
+
+  @override
+  String importIntoBaby(String name) {
+    return 'سب کچھ $name میں شامل ہوگا۔';
+  }
+
+  @override
+  String importButton(int count, String name) {
+    return '$name میں $count اندراج امپورٹ کریں';
+  }
+
+  @override
+  String get importWorking => 'امپورٹ ہو رہا ہے... پالنا کھلا رکھیں۔';
+
+  @override
+  String importDone(int count, String name) {
+    return '$name میں $count اندراج شامل ہو گئے';
+  }
+
+  @override
+  String importDuplicates(int count) {
+    return '$count پہلے سے پالنا میں تھے، چھوڑ دیے گئے۔';
+  }
+
+  @override
+  String get doneButton => 'ہو گیا';
+
+  @override
   String get deleteAccount => 'میرا اکاؤنٹ حذف کریں';
 
   @override
@@ -1377,6 +1511,86 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get pastDays => 'پچھلے دن';
+
+  @override
+  String get activities => 'سرگرمیاں';
+
+  @override
+  String get activityTummyTime => 'پیٹ کے بل وقت';
+
+  @override
+  String get activityBath => 'نہلانا';
+
+  @override
+  String get activityPlay => 'کھیل';
+
+  @override
+  String get activityOutdoors => 'باہر کی سیر';
+
+  @override
+  String get activityReading => 'کہانی / کتاب';
+
+  @override
+  String get activityMassage => 'مالش';
+
+  @override
+  String get activityOther => 'کچھ اور';
+
+  @override
+  String get activityLabelHint => 'کیا تھا؟ (مثلاً تیراکی)';
+
+  @override
+  String get addActivity => 'سرگرمی شامل کریں';
+
+  @override
+  String get editActivity => 'سرگرمی میں تبدیلی';
+
+  @override
+  String get activityShort => 'سرگرمی';
+
+  @override
+  String get activityStartedLabel => 'شروع';
+
+  @override
+  String get activityHowLong => 'کتنی دیر';
+
+  @override
+  String get activityNotTimed => 'وقت نہیں لکھا';
+
+  @override
+  String activityMinutes(int minutes) {
+    return '$minutes منٹ';
+  }
+
+  @override
+  String get activityStartTimer => 'ٹائمر شروع کریں';
+
+  @override
+  String get tummyTimer => 'ٹمی ٹائمر';
+
+  @override
+  String get activityStop => 'روکیں';
+
+  @override
+  String get activityStopNow => 'ابھی روکیں';
+
+  @override
+  String get activityRunning => 'ٹائمر چل رہا ہے';
+
+  @override
+  String activitySince(String time) {
+    return '$time سے';
+  }
+
+  @override
+  String get activityTimerBusy =>
+      'ایک اور سرگرمی کا ٹائمر چل رہا ہے۔ پہلے اسے روکیں۔';
+
+  @override
+  String get activitiesNoneToday => 'پیٹ کے بل وقت، نہلانا، کھیل...';
+
+  @override
+  String get tummyTimeToday => 'آج پیٹ کے بل وقت';
 
   @override
   String get yesterday => 'کل';
@@ -2143,6 +2357,30 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get proManage => 'سبسکرپشن سنبھالیں';
+
+  @override
+  String get proLifetime => 'ہمیشہ کے لیے';
+
+  @override
+  String proPriceOnce(String price) {
+    return '$price ایک بار';
+  }
+
+  @override
+  String get proLifetimeNote => 'ایک بار ادائیگی: پورے خاندان کے لیے ہمیشہ پرو';
+
+  @override
+  String get proNoSubscription => 'کوئی سبسکرپشن نہیں';
+
+  @override
+  String get proBuyOnce => 'ایک بار خریدیں';
+
+  @override
+  String get proActiveForLife => 'ہمیشہ کے لیے، کوئی سبسکرپشن نہیں';
+
+  @override
+  String get proLegalLifetime =>
+      'ہمیشہ والا پلان ایک بار کی خریداری ہے: قیمت ایک ہی بار لی جاتی ہے اور کبھی تجدید نہیں ہوتی۔';
 
   @override
   String get proRestoreNone =>
@@ -3397,6 +3635,141 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String get accountSection => 'Account';
 
   @override
+  String get dataSection => 'Aap ka data';
+
+  @override
+  String get dataTitle => 'Export aur import';
+
+  @override
+  String get dataSettingsHelp =>
+      'Sab kuch spreadsheet mein save karein, ya Nara Baby ya Huckleberry se apna record le aayein';
+
+  @override
+  String get exportTitle => 'Export';
+
+  @override
+  String exportHelp(String name) {
+    return '$name ke liye likha gaya sab kuch, aik CSV file mein. Yeh Excel ya Google Sheets mein khulti hai, aur Palna isay dobara import kar sakta hai.';
+  }
+
+  @override
+  String get exportButton => 'CSV mein export karein';
+
+  @override
+  String exportSubject(String name) {
+    return '$name ka Palna record';
+  }
+
+  @override
+  String get importTitle => 'Kisi aur app se import';
+
+  @override
+  String importHelp(String name) {
+    return 'Feeds, neend, diapers, pumping, growth, temperature aur activities le aayein. Yeh $name mein shamil hongi; jo pehle se Palna mein hain woh dohri nahi hongi.';
+  }
+
+  @override
+  String get importFromPalna => 'Palna ki export file';
+
+  @override
+  String get importStepsNara =>
+      'Nara Baby mein: Activity screen par bachay ki tasveer par tap karein, phir Export Data. CSV file save karein, phir yahan chunein.';
+
+  @override
+  String get importStepsHuckleberry =>
+      'Huckleberry mein: bachay ke icon par tap karein, neeche jayein, Export tracking data as CSV par tap karein. Email wala link kholein, file save karein, phir yahan chunein.';
+
+  @override
+  String get importStepsPalna =>
+      'Oopar wale Export se bani CSV file, is phone ya kisi aur phone se.';
+
+  @override
+  String get importChooseFile => 'File chunein';
+
+  @override
+  String get importChooseAnother => 'Koi aur file chunein';
+
+  @override
+  String get importWrongFile =>
+      'Yeh file parhi nahi ja sakti. Barah-e-karam app se export ki gayi CSV file chunein.';
+
+  @override
+  String get importExcelMangled =>
+      'Yeh file Excel mein khol kar save ki gayi hai, jis se waqt badal jaate hain. Barah-e-karam dobara export karein aur khole baghair yahan chunein.';
+
+  @override
+  String get importNothingFound =>
+      'Is file mein import karne ke liye kuch nahi.';
+
+  @override
+  String importFileBaby(String name) {
+    return 'File mein: $name';
+  }
+
+  @override
+  String importDates(String from, String to) {
+    return '$from se $to tak';
+  }
+
+  @override
+  String get importTemperatures => 'Temperature';
+
+  @override
+  String importSkippedTitle(int count) {
+    return 'Import nahi honge: $count';
+  }
+
+  @override
+  String get importSkipMedicine => 'Dawaiyan (Health mein shamil karein)';
+
+  @override
+  String get importSkipSolids => 'Thos ghiza';
+
+  @override
+  String get importSkipMilestone => 'Milestones';
+
+  @override
+  String get importSkipVaccine => 'Teeke (Health mein nishan lagayein)';
+
+  @override
+  String get importSkipDry => 'Khushk diapers';
+
+  @override
+  String get importSkipSleepGoing => 'Neend jis ka khatam hone ka waqt nahi';
+
+  @override
+  String get importSkipRange => 'Had se bahar values';
+
+  @override
+  String get importSkipUnreadable => 'Rows jo parhi na ja sakein';
+
+  @override
+  String importIntoBaby(String name) {
+    return 'Sab kuch $name mein shamil hoga.';
+  }
+
+  @override
+  String importButton(int count, String name) {
+    return '$name mein $count entries import karein';
+  }
+
+  @override
+  String get importWorking => 'Import ho raha hai... Palna khula rakhein.';
+
+  @override
+  String importDone(int count, String name) {
+    return '$name mein $count entries shamil ho gayin';
+  }
+
+  @override
+  String importDuplicates(int count) {
+    return '$count pehle se Palna mein thay, chhor diye gaye.';
+  }
+
+  @override
+  String get doneButton => 'Ho gaya';
+
+  @override
   String get deleteAccount => 'Mera account delete karein';
 
   @override
@@ -3581,6 +3954,86 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get pastDays => 'Pichle din';
+
+  @override
+  String get activities => 'Activities';
+
+  @override
+  String get activityTummyTime => 'Tummy time';
+
+  @override
+  String get activityBath => 'Nahlana';
+
+  @override
+  String get activityPlay => 'Khel';
+
+  @override
+  String get activityOutdoors => 'Bahar ki sair';
+
+  @override
+  String get activityReading => 'Kahani / kitaab';
+
+  @override
+  String get activityMassage => 'Maalish';
+
+  @override
+  String get activityOther => 'Kuch aur';
+
+  @override
+  String get activityLabelHint => 'Kya tha? (maslan swimming)';
+
+  @override
+  String get addActivity => 'Activity shamil karein';
+
+  @override
+  String get editActivity => 'Activity edit karein';
+
+  @override
+  String get activityShort => 'Activity';
+
+  @override
+  String get activityStartedLabel => 'Shuru';
+
+  @override
+  String get activityHowLong => 'Kitni der';
+
+  @override
+  String get activityNotTimed => 'Waqt nahi likha';
+
+  @override
+  String activityMinutes(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get activityStartTimer => 'Timer shuru karein';
+
+  @override
+  String get tummyTimer => 'Tummy timer';
+
+  @override
+  String get activityStop => 'Rokein';
+
+  @override
+  String get activityStopNow => 'Abhi rokein';
+
+  @override
+  String get activityRunning => 'Timer chal raha hai';
+
+  @override
+  String activitySince(String time) {
+    return '$time se';
+  }
+
+  @override
+  String get activityTimerBusy =>
+      'Aik aur activity ka timer chal raha hai. Pehle usay rokein.';
+
+  @override
+  String get activitiesNoneToday => 'Tummy time, nahlana, khel...';
+
+  @override
+  String get tummyTimeToday => 'Aaj tummy time';
 
   @override
   String get yesterday => 'Kal';
@@ -4351,6 +4804,31 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
 
   @override
   String get proManage => 'Subscription manage karein';
+
+  @override
+  String get proLifetime => 'Hamesha ke liye';
+
+  @override
+  String proPriceOnce(String price) {
+    return '$price aik baar';
+  }
+
+  @override
+  String get proLifetimeNote =>
+      'Aik baar adaaigi: poore khandan ke liye hamesha Pro';
+
+  @override
+  String get proNoSubscription => 'Koi subscription nahi';
+
+  @override
+  String get proBuyOnce => 'Aik baar khareedein';
+
+  @override
+  String get proActiveForLife => 'Hamesha ke liye, koi subscription nahi';
+
+  @override
+  String get proLegalLifetime =>
+      'Hamesha wala plan aik baar ki khareedari hai: qeemat aik hi baar li jaati hai aur kabhi renew nahi hoti.';
 
   @override
   String get proRestoreNone =>

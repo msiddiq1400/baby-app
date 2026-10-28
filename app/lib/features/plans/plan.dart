@@ -49,6 +49,14 @@ final proUntilProvider = Provider<DateTime?>((ref) {
   return until == null || until.year >= 9999 ? null : until;
 });
 
+/// The family has Pro with no end date (a lifetime purchase).
+final proForLifeProvider = Provider<bool>((ref) {
+  final baby = ref.watch(currentBabyProvider).value;
+  if (baby == null) return false;
+  final until = ref.watch(familyProUntilProvider(baby.familyId)).value;
+  return until != null && until.year >= 9999;
+});
+
 /// The colour theme: the one chosen on this phone while the family has Pro,
 /// otherwise navy.
 final themeAccentProvider = Provider<ThemeAccent>((ref) {

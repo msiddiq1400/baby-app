@@ -1223,6 +1223,140 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountSection => 'Account';
 
   @override
+  String get dataSection => 'Your data';
+
+  @override
+  String get dataTitle => 'Export and import';
+
+  @override
+  String get dataSettingsHelp =>
+      'Save everything as a spreadsheet, or bring in your log from Nara Baby or Huckleberry';
+
+  @override
+  String get exportTitle => 'Export';
+
+  @override
+  String exportHelp(String name) {
+    return 'Everything logged for $name, as one CSV file. It opens in Excel or Google Sheets, and Palna can import it again.';
+  }
+
+  @override
+  String get exportButton => 'Export as CSV';
+
+  @override
+  String exportSubject(String name) {
+    return 'Palna log for $name';
+  }
+
+  @override
+  String get importTitle => 'Import from another app';
+
+  @override
+  String importHelp(String name) {
+    return 'Bring in feeds, sleep, diapers, pumping, growth, temperatures and activities. They are added to $name; entries already in Palna aren\'t doubled.';
+  }
+
+  @override
+  String get importFromPalna => 'A Palna export';
+
+  @override
+  String get importStepsNara =>
+      'In Nara Baby: on the Activity screen, tap your baby\'s picture, then Export Data. Save the CSV file, then choose it here.';
+
+  @override
+  String get importStepsHuckleberry =>
+      'In Huckleberry: tap your child\'s icon, scroll down, tap Export tracking data as CSV. Open the emailed link, save the file, then choose it here.';
+
+  @override
+  String get importStepsPalna =>
+      'A CSV file made with Export above, on this phone or another.';
+
+  @override
+  String get importChooseFile => 'Choose file';
+
+  @override
+  String get importChooseAnother => 'Choose another file';
+
+  @override
+  String get importWrongFile =>
+      'This file can\'t be read. Please choose the CSV file exported from the app.';
+
+  @override
+  String get importExcelMangled =>
+      'This file was opened and saved in Excel, which changes the times. Please export it again and choose it without opening it first.';
+
+  @override
+  String get importNothingFound => 'Nothing in this file can be imported.';
+
+  @override
+  String importFileBaby(String name) {
+    return 'In the file: $name';
+  }
+
+  @override
+  String importDates(String from, String to) {
+    return '$from to $to';
+  }
+
+  @override
+  String get importTemperatures => 'Temperatures';
+
+  @override
+  String importSkippedTitle(int count) {
+    return 'Not imported: $count';
+  }
+
+  @override
+  String get importSkipMedicine => 'Medicines (add them in Health)';
+
+  @override
+  String get importSkipSolids => 'Solid foods';
+
+  @override
+  String get importSkipMilestone => 'Milestones';
+
+  @override
+  String get importSkipVaccine => 'Vaccines (tick them in Health)';
+
+  @override
+  String get importSkipDry => 'Dry diapers';
+
+  @override
+  String get importSkipSleepGoing => 'Sleep without an end time';
+
+  @override
+  String get importSkipRange => 'Values out of range';
+
+  @override
+  String get importSkipUnreadable => 'Rows that couldn\'t be read';
+
+  @override
+  String importIntoBaby(String name) {
+    return 'Everything will be added to $name.';
+  }
+
+  @override
+  String importButton(int count, String name) {
+    return 'Import $count entries into $name';
+  }
+
+  @override
+  String get importWorking => 'Importing... Keep Palna open.';
+
+  @override
+  String importDone(int count, String name) {
+    return 'Added $count entries to $name';
+  }
+
+  @override
+  String importDuplicates(int count) {
+    return '$count were already in Palna and were skipped.';
+  }
+
+  @override
+  String get doneButton => 'Done';
+
+  @override
   String get deleteAccount => 'Delete my account';
 
   @override
@@ -1407,6 +1541,86 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pastDays => 'Past days';
+
+  @override
+  String get activities => 'Activities';
+
+  @override
+  String get activityTummyTime => 'Tummy time';
+
+  @override
+  String get activityBath => 'Bath';
+
+  @override
+  String get activityPlay => 'Play';
+
+  @override
+  String get activityOutdoors => 'Outdoors';
+
+  @override
+  String get activityReading => 'Reading';
+
+  @override
+  String get activityMassage => 'Massage';
+
+  @override
+  String get activityOther => 'Other';
+
+  @override
+  String get activityLabelHint => 'What was it? (e.g. swimming)';
+
+  @override
+  String get addActivity => 'Add activity';
+
+  @override
+  String get editActivity => 'Edit activity';
+
+  @override
+  String get activityShort => 'Activity';
+
+  @override
+  String get activityStartedLabel => 'Started';
+
+  @override
+  String get activityHowLong => 'How long';
+
+  @override
+  String get activityNotTimed => 'Not timed';
+
+  @override
+  String activityMinutes(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get activityStartTimer => 'Start timer';
+
+  @override
+  String get tummyTimer => 'Tummy timer';
+
+  @override
+  String get activityStop => 'Stop';
+
+  @override
+  String get activityStopNow => 'Stop now';
+
+  @override
+  String get activityRunning => 'Timer running';
+
+  @override
+  String activitySince(String time) {
+    return 'Since $time';
+  }
+
+  @override
+  String get activityTimerBusy =>
+      'Another activity timer is running. Stop it first.';
+
+  @override
+  String get activitiesNoneToday => 'Tummy time, bath, play...';
+
+  @override
+  String get tummyTimeToday => 'Tummy time today';
 
   @override
   String get yesterday => 'Yesterday';
@@ -2193,6 +2407,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get proManage => 'Manage subscription';
+
+  @override
+  String get proLifetime => 'Lifetime';
+
+  @override
+  String proPriceOnce(String price) {
+    return '$price once';
+  }
+
+  @override
+  String get proLifetimeNote => 'Pay once: Pro for your whole family, for good';
+
+  @override
+  String get proNoSubscription => 'No subscription';
+
+  @override
+  String get proBuyOnce => 'Buy once';
+
+  @override
+  String get proActiveForLife => 'For life, no subscription';
+
+  @override
+  String get proLegalLifetime =>
+      'Lifetime is a one-time purchase: it is charged once and never renews.';
 
   @override
   String get proRestoreNone =>

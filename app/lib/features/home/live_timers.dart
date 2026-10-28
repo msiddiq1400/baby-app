@@ -12,6 +12,7 @@ import '../../data/baby_repository.dart';
 import '../../data/models.dart';
 import '../../data/tracking_repository.dart';
 import '../../l10n/app_localizations.dart';
+import 'activity_sheet.dart';
 import 'log_sheets.dart';
 
 /// "12:05", or "1:02:05" past an hour.
@@ -291,18 +292,86 @@ class SleepTimerCard extends ConsumerWidget {
   }
 }
 
-/// Keeps the "timer running" notifications in step with the feed timer and
-/// the sleep that are going, including ones started on another phone.
+/// An activity timer (tummy time, ...) that's running: its clock and Stop.
+class ActivityTimerCard extends ConsumerWidget {
+  const ActivityTimerCard({super.key, required this.baby, required this.activity});
+
+  final Baby baby;
+  final Activity activity;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final scheme = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
+
+    return Card(
+      color: scheme.tertiaryContainer,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: () => showActivitySheet(context, baby, existing: activity),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Icon(activityIcon(activity.kind), color: scheme.onTertiaryContainer, size: 32),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      activityTitle(l10n, activity),
+                      style: text.titleMedium?.copyWith(color: scheme.onTertiaryContainer),
+                    ),
+                    _Ticker(
+                      builder: (context, now) => Text(
+                        clockText(now.difference(activity.startedAt)),
+                        style: text.headlineSmall?.copyWith(
+                          color: scheme.onTertiaryContainer,
+                          fontFeatures: const [FontFeature.tabularFigures()],
+                        ),
+                      ),
+                    ),
+                    Text(
+                      l10n.activitySince(TimeOfDay.fromDateTime(activity.startedAt).format(context)),
+                      style: text.bodySmall?.copyWith(color: scheme.onTertiaryContainer),
+                    ),
+                  ],
+                ),
+              ),
+              FilledButton.icon(
+                onPressed: () => _guard(context, () async {
+                  await ref.read(trackingRepositoryProvider).stopActivityTimer(activity.id, at: DateTime.now());
+                  ref.invalidate(todayLogProvider(baby.id));
+                }),
+                icon: const Icon(Icons.stop),
+                label: Text(l10n.activityStop),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Keeps the "timer running" notifications in step with the feed timer, the
+/// sleep and the activity timer that are going, including ones started on
+/// another phone.
 final timerNotificationsProvider = FutureProvider<void>((ref) async {
   final baby = await ref.watch(currentBabyProvider.future);
   if (baby == null) {
     await TimerNotifications.cancel('feed');
     await TimerNotifications.cancel('sleep');
+    await TimerNotifications.cancel('activity');
     return;
   }
   final l10n = appL10n(ref.watch(localeProvider));
   final feed = await ref.watch(feedTimerProvider(baby.id).future);
-  final sleep = (await ref.watch(todayLogProvider(baby.id).future)).ongoingSleep;
+  final today = await ref.watch(todayLogProvider(baby.id).future);
+  final sleep = today.ongoingSleep;
+  final activity = today.ongoingActivity;
   final now = DateTime.now();
 
   if (feed == null) {
@@ -326,6 +395,17 @@ final timerNotificationsProvider = FutureProvider<void>((ref) async {
       title: l10n.sleepNotificationTitle(baby.name),
       body: l10n.sleepingSince(DateFormat.jm(dateLocale(l10n)).format(sleep.startedAt)),
       runningSince: sleep.startedAt,
+    );
+  }
+
+  if (activity == null) {
+    await TimerNotifications.cancel('activity');
+  } else {
+    await TimerNotifications.show(
+      'activity',
+      title: '${baby.name} · ${activityTitle(l10n, activity)}',
+      body: l10n.activitySince(DateFormat.jm(dateLocale(l10n)).format(activity.startedAt)),
+      runningSince: activity.startedAt,
     );
   }
 });

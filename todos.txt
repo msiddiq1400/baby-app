@@ -56,22 +56,31 @@ their setup in sections 2-4. Decided: Q3 keep only the new UK schedule
 app, not on the website.
 
 Ready: Claude starts when you say go
+[~] 53. Built 28 Oct on feat/baby-app-lifetime-activities-export-v1 (not
+        merged yet; owner tests it first):
+        - Palna Pro Lifetime (one-time purchase) on the paywall, next to
+          Monthly / Yearly; "For life" when the family has it; terms 7 and
+          the store text mention it. New prices in store/*.md (52).
+        - Activities: tummy time, bath, play, outdoors, reading, massage,
+          other (own label), with an optional duration or a timer; a card
+          on Today ("Tummy timer"), the timeline and the journal. New
+          table public.activities (migration 20261028000001).
+        - Settings > Your data: export a baby's whole log as CSV (free), and
+          import from Nara Baby, Huckleberry or a Palna export (duplicates
+          skipped; medicines, solids, vaccines and milestones are listed as
+          not imported).
+        At release (48), ALSO: PowerSync dashboard > Sync Streams > paste
+        powersync/sync-config.yaml (it now has activities) > Validate >
+        Deploy. Without it, activities upload and then vanish from phones.
 [ ] 49. Review pack for the pediatrician (21-23): one readable document
         with all 23 vaccine schedules, the RSV / flu rules, the medical
         wording and the solids guide, each with its source and the open
         questions (from docs/vaccine-research-2026-10/), for the doctor to
         mark up.
-[ ] 50. toolbox.services (toolbox repo): make sure the site shows the
-        company's legal name "Toolbox Services (SMC-Private) Limited" and
-        address (About / footer) before Apple checks the company (12).
-[ ] 52. Palna Pro prices: check what other baby trackers charge (Huckleberry,
-        Baby Tracker by Nighp, Glow Baby, Sprout, BabyCenter, Nara, MyBaby,
-        Pakistani apps if any): monthly / yearly / lifetime, free trial,
-        what's free vs paid, family sharing, prices in Pakistan and abroad.
-        Then the owner decides; today's prices (Rs 299 / month, Rs 2,499 /
-        year, $2.99 / $19.99 abroad; see reference notes) were picked
-        without this check. Do it before the products go live in the stores
-        (38c, 38d).
+[~] 50. toolbox.services shows the legal name and address (new /about page,
+        footer, terms / privacy / refund): toolbox PR #1 into main, opened
+        28 Oct. Merge and deploy on the owner's OK, before Apple checks the
+        company (12).
 [ ] 38f. Palna Pro, later: Expert plan once there's something for it (AI
         assistant 39, "Is this normal?" 28); RSV / flu rules re-check each
         summer (US court case, Norway RSV from 1 Jul 2027; see
@@ -136,6 +145,8 @@ Can do now
           URL from RevenueCat > Apps > Palna (App Store) > "Apple Server to
           Server notification settings" (Version 2).
         - [ ] Build: add the first build after the release (it has Pro).
+        - [ ] Description: paste the new PALNA PRO paragraph from
+          store/app-store.md (now mentions Lifetime; changed 28 Oct).
         - [ ] After 12: copyright -> 2026 Toolbox Services (SMC-Private)
           Limited.
 
@@ -158,10 +169,11 @@ After D-U-N-S (11)
           seller name show the company.
 [ ] 38c. Payments: Business > Paid Applications Agreement, company bank
         account and tax forms (after 12, so the bank account matches the
-        account owner). Then the two subscriptions exactly as in
-        store/app-store.md "In-App Purchases" (palna_pro_monthly,
-        palna_pro_yearly with a 7-day trial), and App Privacy > Purchases >
-        Purchase History. Then RevenueCat (38e).
+        account owner). Then the two subscriptions AND the Lifetime
+        non-consumable exactly as in store/app-store.md "In-App Purchases"
+        (palna_pro_monthly, palna_pro_yearly with a 7-day trial,
+        palna_pro_lifetime; Pakistan prices set by hand), and App Privacy >
+        Purchases > Purchase History. Then RevenueCat (38e).
 [ ] 46c. App Information > Digital Services Act: declare as a trader (Palna
         sells Pro) after 12, so the company's address, phone and the email
         hello@palnacare.com are what the EU App Store shows. Needed before
@@ -222,8 +234,34 @@ Only when we build those features
 [ ] 20b. After the first Play upload: Play Console > App integrity > App
         signing key SHA-1 > one more Google Cloud Android client (for
         Google sign-in on Play installs).
+[ ] 38d-0. BLOCKER (found 28 Oct): Play's linked payments profile is still the
+        INDIVIDUAL one (6279-1713-3577, Muhammad Siddiqu), not the company's
+        Organization profile 1663-4363-4904 (TOOLBOX SERVICES (SMC-PRIVATE)
+        LIMITED; its identity verification is in progress since 28 Oct,
+        "allow a few days"). Ask Play support to
+        link 1663-4363-4904 instead. (9842-2199-8708 is an old personal
+        profile, unused.) Ticket sent 28 Oct (Monetization > merchant
+        account / payments profile). Google's help says a merchant profile
+        "can be linked only once" -> likely fix: NEW organization developer
+        account + app transfer. Plan if support confirms:
+        1. Cloudflare Email Routing: play@toolbox.services -> Gmail.
+        2. New Google account with play@toolbox.services ("use existing
+           email"), phone 2FA, Gmail as recovery.
+        3. payments.google.com: add play@ as admin user on 1663-4363-4904
+           (ask support first whether that profile may serve a 2nd account).
+        4. play.google.com/console/signup as Organization with that profile,
+           $25, verify D-U-N-S + toolbox.services (Search Console owner).
+        5. Add msiddiq17328@gmail.com as admin on the new account.
+        6. Transfer Palna (+ API Toolbox if it's on the old account);
+           OathLock is created on the new account directly.
+        7. Re-invite RevenueCat + Codemagic service accounts, 15% fee
+           enrollment, company bank account, then the products (38d).
+        8. Close the old developer account when empty. Don't add a bank account
+        or edit the account type until it's switched. Also enroll for the
+        15% service fee (Payments profile > Manage account group).
 [ ] 38d. Payments: payments profile with the company bank account, then
-        the two subscriptions as in store/google-play.md "Palna Pro";
+        the two subscriptions and the Lifetime one-time product as in
+        store/google-play.md "Palna Pro" (Pakistan prices set by hand);
         content rating "digital purchases: yes"; Data safety: Purchase
         history, Crash logs, Diagnostics, Device or other IDs (table in
         google-play.md). Then RevenueCat (38e).
@@ -262,8 +300,9 @@ Only when we build those features
           REVENUECAT_WEBHOOK_AUTH set; RevenueCat webhook "Supabase" ->
           .../functions/v1/revenuecat (Active). Works from the release that
           deploys the revenuecat function.
-        - [ ] After 38c / 38d: import palna_pro_monthly / palna_pro_yearly,
-          attach to "pro", put them in the Monthly / Yearly packages.
+        - [ ] After 38c / 38d: import palna_pro_monthly / palna_pro_yearly /
+          palna_pro_lifetime, attach all three to "pro", and put them in
+          the Monthly / Annual / Lifetime packages of offering "default".
         - [ ] Test with sandbox / licence testers.
 [ ] 3-8 + 20. When you set up the password manager:
         [ ] 20. Back up the Android upload key (only on this PC now):
@@ -318,6 +357,20 @@ Only when we build those features
 Tick each when you've seen it work on a real phone. iPhone: install the
 latest build from the TestFlight app (you're in "Int-Test").
 
+[ ] 54. Built 28 Oct (53), check on the debug build before the pull request:
+        - [ ] Today > Activities: "Tummy timer" starts a timer card; Stop
+          ends it; "+ Activity" logs a bath (not timed) and 10 min of play;
+          the card shows today's tummy time; Past days opens the journal on
+          Activities. A timer shows in the notification bar (Android).
+        - [ ] Settings > Your data > Export as CSV: share to Drive / email,
+          open in Google Sheets (Urdu notes readable).
+        - [ ] Import that file into a second baby (or a test account): counts
+          look right; importing again adds nothing.
+        - [ ] If you know anyone with Nara Baby or Huckleberry: import their
+          export (Nara's exact file wasn't available to test against).
+        - [ ] Settings > Palna Pro shows Yearly, Monthly and Lifetime once
+          the Lifetime product is in RevenueCat (Test Store: add a
+          "lifetime" package to see it on a debug build).
 [ ] 47. Built 27 Oct, check after the release (48). A debug build is on the
         owner's phone since 27 Oct (UI checks passed; server parts wait for
         the release):
@@ -443,9 +496,17 @@ App and stores
   --dart-define=SHOT_DEVICE=iphone (and --update-goldens
   --dart-define=SHOT_DEVICE=play), then flatten to RGB; App Store wants
   1206 x 2622 (scale the 6.9" renders down). Steps in store/app-store.md.
-- Palna Pro prices: Rs 299 / month, Rs 2,499 / year (7-day trial); abroad
-  $2.99 / $19.99. Paywall shows the billed price first, "about Rs 10 a
-  day" under it.
+- Palna Pro prices (decided 28 Oct after the market check, 52): Pakistan
+  Rs 299 / month, Rs 1,999 / year (7-day trial), Rs 4,999 lifetime; abroad
+  $3.99 / $24.99 / $49.99. India optional: Rs 149 / 999 / 2,499 as ₹.
+  Competitors: Nighp $5.99 / $49.99, MyBaby $6.99 / $49.99 / $79.99 life,
+  Huckleberry $11.99+ ; Baby Daybook Rs 449+ in Pakistan. Set Pakistan by
+  hand in both stores or they convert $3.99 to ~Rs 1,100. Paywall shows
+  the billed price first, "about Rs 10 a day" under it.
+- Feature gaps vs competitors (28 Oct): still missing nap predictions
+  (Pro candidate), iPhone widget / Live Activities (37b), AI (39), Apple
+  Watch, Siri, Hindi / Arabic. Palna leads on vaccine schedules, Urdu,
+  milk stash, caregiver roles, free family sharing.
 - RevenueCat project "Palna": entitlement "pro", offering "default"
   (Monthly, Yearly); Test Store key in app/env/prod.json
   (REVENUECAT_TEST_KEY, debug builds only); webhook "Supabase" ->

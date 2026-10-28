@@ -56,9 +56,12 @@ class PaywallScreen extends ConsumerStatefulWidget {
   ConsumerState<PaywallScreen> createState() => _PaywallScreenState();
 }
 
+/// The options on the Pro screen.
+enum ProChoice { yearly, monthly, lifetime }
+
 class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   late final _packages = ProStore.packages();
-  var _yearly = true;
+  var _choice = ProChoice.yearly;
   var _busy = false;
 
   void _snack(String text) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
@@ -103,6 +106,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     final theme = Theme.of(context);
     final isPro = ref.watch(isProProvider);
     final until = ref.watch(proUntilProvider);
+    final forLife = ref.watch(proForLifeProvider);
     final dates = MaterialLocalizations.of(context);
 
     return Scaffold(
@@ -121,12 +125,17 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                 child: ListTile(
                   leading: Icon(Icons.workspace_premium, color: theme.colorScheme.onPrimaryContainer),
                   title: Text(l10n.proActive, style: TextStyle(color: theme.colorScheme.onPrimaryContainer)),
-                  subtitle: until == null
-                      ? null
-                      : Text(
-                          l10n.proActiveUntil(dates.formatMediumDate(until.toLocal())),
-                          style: TextStyle(color: theme.colorScheme.onPrimaryContainer),
-                        ),
+                  subtitle: switch ((until, forLife)) {
+                    (_, true) => Text(
+                      l10n.proActiveForLife,
+                      style: TextStyle(color: theme.colorScheme.onPrimaryContainer),
+                    ),
+                    (final DateTime u, _) => Text(
+                      l10n.proActiveUntil(dates.formatMediumDate(u.toLocal())),
+                      style: TextStyle(color: theme.colorScheme.onPrimaryContainer),
+                    ),
+                    _ => null,
+                  },
                 ),
               ),
             const SizedBox(height: 8),
@@ -145,9 +154,10 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
               ),
             Text(l10n.proFamilyNote, style: theme.textTheme.bodyMedium),
             const SizedBox(height: 20),
-            if (isPro)
+            // A lifetime purchase has no subscription to manage.
+            if (isPro && !forLife)
               OutlinedButton(onPressed: _manage, child: Text(l10n.proManage))
-            else
+            else if (!isPro)
               FutureBuilder(
                 future: _packages,
                 builder: (context, snap) {
@@ -155,14 +165,13 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                     return const Center(child: CircularProgressIndicator());
                   }
                   final p = snap.data;
-                  if (p == null || (p.monthly == null && p.yearly == null)) {
+                  if (p == null || (p.monthly == null && p.yearly == null && p.lifetime == null)) {
                     return Text(l10n.proUnavailable, style: theme.textTheme.bodyMedium);
                   }
                   return _Choices(
-                    monthly: p.monthly,
-                    yearly: p.yearly,
-                    yearlySelected: _yearly && p.yearly != null || p.monthly == null,
-                    onSelect: (yearly) => setState(() => _yearly = yearly),
+                    packages: p,
+                    selected: availableChoice(_choice, p),
+                    onSelect: (choice) => setState(() => _choice = choice),
                     busy: _busy,
                     onBuy: (package) => _run(() async => _done(await ProStore.buy(package), notFound: '')),
                   );
@@ -183,6 +192,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
               defaultTargetPlatform == TargetPlatform.iOS ? l10n.proLegalApple : l10n.proLegalGoogle,
               style: theme.textTheme.bodySmall,
             ),
+            const SizedBox(height: 4),
+            Text(l10n.proLegalLifetime, style: theme.textTheme.bodySmall),
             Wrap(
               alignment: WrapAlignment.center,
               children: [
@@ -203,32 +214,48 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   }
 }
 
-/// The yearly (highlighted, with the free trial) and monthly options and the
-/// buy button. The billed price is always the biggest text (store rules).
+/// [wanted] if the store offers it, otherwise the first option it does offer
+/// (yearly, then monthly, then lifetime).
+ProChoice availableChoice(ProChoice wanted, ProPackages p) {
+  Package? of(ProChoice c) => switch (c) {
+    ProChoice.yearly => p.yearly,
+    ProChoice.monthly => p.monthly,
+    ProChoice.lifetime => p.lifetime,
+  };
+  if (of(wanted) != null) return wanted;
+  return ProChoice.values.firstWhere((c) => of(c) != null, orElse: () => ProChoice.yearly);
+}
+
+/// The yearly (highlighted, with the free trial), monthly and lifetime
+/// options and the buy button. The billed price is always the biggest text
+/// (store rules).
 class _Choices extends StatelessWidget {
   const _Choices({
-    required this.monthly,
-    required this.yearly,
-    required this.yearlySelected,
+    required this.packages,
+    required this.selected,
     required this.onSelect,
     required this.busy,
     required this.onBuy,
   });
 
-  final Package? monthly;
-  final Package? yearly;
-  final bool yearlySelected;
-  final ValueChanged<bool> onSelect;
+  final ProPackages packages;
+  final ProChoice selected;
+  final ValueChanged<ProChoice> onSelect;
   final bool busy;
   final ValueChanged<Package> onBuy;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final selected = yearlySelected ? yearly! : monthly!;
-    final trial = trialDays(selected.storeProduct);
+    final (:monthly, :yearly, :lifetime) = packages;
+    final package = switch (selected) {
+      ProChoice.yearly => yearly,
+      ProChoice.monthly => monthly,
+      ProChoice.lifetime => lifetime,
+    }!;
+    final trial = selected == ProChoice.lifetime ? null : trialDays(package.storeProduct);
     final saving = monthly != null && yearly != null
-        ? yearlySaving(monthly!.storeProduct.price, yearly!.storeProduct.price)
+        ? yearlySaving(monthly.storeProduct.price, yearly.storeProduct.price)
         : 0;
 
     return Column(
@@ -243,8 +270,8 @@ class _Choices extends StatelessWidget {
               if (trialDays(y.storeProduct) case final days?) l10n.proTrialDays(days),
               if (saving > 0) l10n.proSave(saving),
             ],
-            selected: yearlySelected,
-            onTap: () => onSelect(true),
+            selected: selected == ProChoice.yearly,
+            onTap: () => onSelect(ProChoice.yearly),
           ),
         if (monthly case final m?)
           _Option(
@@ -252,15 +279,28 @@ class _Choices extends StatelessWidget {
             price: l10n.proPricePerMonth(m.storeProduct.priceString),
             perDay: l10n.proPricePerDay(pricePerDay(m.storeProduct.price, m.storeProduct.currencyCode, 30)),
             badges: [if (trialDays(m.storeProduct) case final days?) l10n.proTrialDays(days)],
-            selected: !yearlySelected,
-            onTap: () => onSelect(false),
+            selected: selected == ProChoice.monthly,
+            onTap: () => onSelect(ProChoice.monthly),
+          ),
+        if (lifetime case final l?)
+          _Option(
+            title: l10n.proLifetime,
+            price: l10n.proPriceOnce(l.storeProduct.priceString),
+            perDay: l10n.proLifetimeNote,
+            badges: [l10n.proNoSubscription],
+            selected: selected == ProChoice.lifetime,
+            onTap: () => onSelect(ProChoice.lifetime),
           ),
         const SizedBox(height: 12),
         FilledButton(
-          onPressed: busy ? null : () => onBuy(selected),
+          onPressed: busy ? null : () => onBuy(package),
           child: busy
               ? const SizedBox.square(dimension: 20, child: CircularProgressIndicator(strokeWidth: 2))
-              : Text(trial != null ? l10n.proStartTrial : l10n.proSubscribe),
+              : Text(switch (selected) {
+                  ProChoice.lifetime => l10n.proBuyOnce,
+                  _ when trial != null => l10n.proStartTrial,
+                  _ => l10n.proSubscribe,
+                }),
         ),
       ],
     );
