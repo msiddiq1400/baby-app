@@ -376,6 +376,9 @@ Only when we build those features
         [ ] 8c. DO NOW: sign out of developer.apple.com and back in (Apple
                session cookies were pasted into a chat on 27 Oct; signing
                out ends that session).
+[ ] 58. YouTube channel @palnacare (Brand Account under ceo@toolbox.services):
+        not for now (owner, 2026-11-05). Needs the channel verification
+        first; see app-block/todos.txt 45. Logo: branding/palna-logo-512.png.
 [ ] 51. Google Cloud free trial (account msiddiq17328) ends about 7 Nov:
         Billing > My projects: check no project relies on the trial billing
         account. Google sign-in (Baby App) and Firebase (Palna, Spark plan)
