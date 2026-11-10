@@ -2,7 +2,7 @@ PALNA (baby-app): TO-DO LIST
 Claude keeps this up to date. Open items only, most urgent first; finished
 work lives in git history (and a few useful facts in REFERENCE at the end).
 Item numbers never change (code comments refer to some of them), so they
-aren't in order. Last tidied 10 Nov 2026.
+aren't in order. Last tidied 11 Nov 2026.
 
 Sections: 0 next up / 1 code changes (Claude) / 2 Google Play / 3 Apple /
 4 other setup and security / 5 testing on a phone / 6 content and legal
@@ -16,78 +16,49 @@ families" wording in the store listings, website, invites or new copy;
 Pakistan's EPI, desi foods and 1122 can still be named as highlights.
 App Store subtitle and website top line: "Baby tracker for the family".
 
-Where things stand (10 Nov): the last release (28 Oct, PR #12 + #14) is
-live: Palna Pro with Lifetime, activities, CSV export / import, nap
-predictions, help centre, 17 more countries. Google Play: Palna is on the
-company's ORGANIZATION account since 3 Nov, so Android can go to
-production now (section 2). Apple: the account is being moved to the
-company; no iPhone builds until that's done (section 3).
+Where things stand (11 Nov): Android 1.0.0 (build 3) is IN GOOGLE PLAY
+REVIEW for production, sent 10 Nov with managed publishing ON (nothing
+goes live until you press Publish). Everything Play needed is done (list
+in section 2). Apple: the account is being moved to the company; no
+iPhone builds until that's done (section 3).
 
 ====================================================================
-0. NEXT UP (in this order) - Android production
+0. NEXT UP (in this order) - Android launch
 ====================================================================
 
-[ ] 59. Play policy issue. Palna was rejected on the old PERSONAL account
-        (1 Oct): apps with medical features must come from an organization.
-        Palna is on the organization account now, so this should clear once
-        the app is sent for review again: Publishing overview > Send changes
-        for review (with the steps below done first, so it's one review).
-        Keep the health declaration as it is (don't untick medical features;
-        a false declaration can close the account). If Play still shows the
-        issue after review, send Claude the Policy status page.
-[ ] 20b. Google sign-in on Play installs: Play Console > Palna > Test and
-        release > App integrity > App signing key certificate SHA-1 > Google
-        Cloud "Baby App" > Clients > new Android client (com.palnacare.app +
-        that SHA-1). Without it "Continue with Google" fails on Play
-        installs.
-[ ] 38d. Palna Pro on Play (Monetize with Play > Products):
-        - subscriptions palna_pro_monthly and palna_pro_yearly (base plan +
-          7-day trial offer), one-time product palna_pro_lifetime, exactly
-          as in store/google-play.md "Palna Pro"; $3.99 / $24.99 / $49.99,
-          Pakistan set by hand: Rs 299 / Rs 1,999 / Rs 4,999.
-        - App content > content rating: "digital purchases: yes".
-        - Data safety: add Purchase history, Crash logs, Diagnostics, Device
-          or other IDs (table in google-play.md).
-[ ] 38e. RevenueCat > Palna (Play Store):
-        - credentials show valid on the new account (the service account
-          revenuecat@baby-app-510018 is invited there, account-wide);
-        - Google developer notifications: topic
-          projects/baby-app-510018/topics/Play-Store-Notifications (shared
-          with OathLock) > Connect; send a test notification;
-        - import the 3 products, attach them to "pro", put them in the
-          Monthly / Annual / Lifetime packages of offering "default".
-[ ] 62. App-level trader status: App content > Start declaration > Yes, Terms
-        of Service https://palnacare.com/terms/ (the account-level
-        declaration is done). Needed because Palna sells Pro.
-[ ] N5. Main store listing: short and full description from
-        store/google-play.md (no "for Pakistan" wording).
-[ ] N11. 8 phone screenshots (1080 x 1920, RGB). The ones in
-        app/tool/screenshots/out/upload-play/ are from 27 Oct; the app has
-        changed since (activities, nap predictions): Claude re-renders them.
-[ ] N7. Data safety > Photos: collected, NOT shared, not ephemeral,
-        OPTIONAL, purpose App functionality.
-[~] N3. Data safety > "delete some data without deleting the account" >
-        Yes, https://palnacare.com/delete-account/#some-data. Check it's
-        still saved after the transfer.
-[~] N4. App access: reviewer login review@palnacare.com (password in
-        TestFlight Test Information). Check it's still saved.
-[ ] 60. Fresh build: Codemagic > baby-app > Android workflow from main
-        (uploads to internal testing as a draft) > Play Console > roll it
-        out to internal testing (license testers list "Testers").
-[ ] 47b. Phone checks on the Play install before production (section 5,
-        47 and 54): Google sign-in, a test purchase with the license tester
-        (Monthly, "Test card, always approves" > Pro on both family phones
-        > Restore purchases), free limits, country / vaccines.
-[ ] 61. Production: Test and release > Production > create release (same
-        build), countries (all), managed publishing ON, send for review
-        (this is also the review for 59). After the first release is out:
-        codemagic.yaml submit_as_draft: false (Claude), website Play button
-        (40a).
+[~] 59. Play review (sent 10 Nov; usually 1-7 days for a first health-app
+        release). It also clears the old 1 Oct rejection (health app on the
+        personal account). If Google rejects anything, send Claude the
+        Policy status page. Don't untick the medical features in the health
+        declaration (a false declaration can close the account).
+[ ] 47b. While it's in review, phone checks on the Play install: Internal
+        testing > Testers tab > tick list "Testers" > Save > open the "Join
+        on the web" link on the phone (msiddiq17328) > install from Play
+        (uninstall the debug build first: different signing key). Then:
+        - Continue with Google signs in (Play signing SHA-1 clients added
+          10 Nov);
+        - with a Free account, Settings > Palna Pro shows Yearly (7-day
+          trial), Monthly and Lifetime at Play prices; buy Monthly with
+          "Test card, always approves" > Pro on this phone and the other
+          family phone > Restore purchases works; RevenueCat shows the
+          customer; cancel in Play Store > Payments & subscriptions (test
+          subscriptions renew every 5 minutes);
+        - the other checks in section 5 (47, 54) as time allows.
+[ ] 61. When Google approves AND 47b is fine: Publishing overview > Publish.
+        Then (Claude): codemagic.yaml submit_as_draft: false, website Play
+        button (40a).
 
 ====================================================================
 1. CODE CHANGES (Claude builds them; one branch from dev per batch)
 ====================================================================
 
+[ ] 64. Journal: open on TODAY (it opens on yesterday now), with the usual
+        arrows back to earlier days. Owner's idea, 11 Nov; not started.
+[ ] 65. Awake time: when a sleep ends ("Woke up"), show how long the baby has
+        been awake ("Awake since 2:10 PM, 1h 5m"). The Today Sleep card
+        already has an "Awake for 1h 5m" line; check with the owner where
+        else it should show (the card after Woke up, the timeline, the
+        notification). Owner's idea, 11 Nov; not started.
 [ ] 63. "Not a medical device" line inside the app (Help or Settings > About);
         the store, site and terms already say it. Before production.
 [ ] 56. Found while making the pediatrician review pack (28 Oct); fix after
@@ -160,6 +131,30 @@ The steps to production are in section 0. Background:
   trader status at account level, license testers list "Testers",
   msiddiq17328@gmail.com as Admin, the RevenueCat / Codemagic service
   account invited.
+- Done for Palna (10 Nov), all in the review sent that day:
+  - Build 3 (1.0.0) from Codemagic (main 66a899a) on internal testing,
+    closed Alpha (replaced the rejected build 1) and production; all
+    countries; managed publishing ON.
+  - Google sign-in on Play installs: Android clients "Palna Android Play 1"
+    (F2:DD:A2:87:...:53:56) and "Play 3" (58:7C:58:17:...:25:CD) in Google
+    Cloud Baby App; the 3rd signing SHA-1 (4E:CE:21:D0:...) already had
+    "Palna Android - Play signing".
+  - Products: palna_pro_monthly (base plan monthly, $3.99 / Rs 299),
+    palna_pro_yearly (base plan yearly, $24.99 / Rs 1,999, offer trial-7d
+    for "never had any subscription"), palna_pro_lifetime (purchase option
+    buy, $49.99 / Rs 4,999). Benefits on both subscriptions.
+  - RevenueCat Palna (Play Store): credentials valid, products imported
+    (lifetime as non-consumable) and attached to "pro" and the Monthly /
+    Annual / Lifetime packages of "default". Real-time notifications:
+    Monetization setup > topic projects/baby-app-510018/topics/Play-Store-
+    Notifications, all one-time products too; test received 10 Nov.
+  - App content: app-level trader status (terms URL), data safety (added
+    Other info, Purchase history, Crash logs, Diagnostics, Device or other
+    IDs; partial deletion Yes), content rating redone (digital purchases
+    Yes), the rest unchanged from October.
+  - Store listing: Play description (store/google-play.md), 8 screenshots
+    re-rendered 10 Nov (out/upload-play), new feature graphic without
+    "made for Pakistan"; AI asset declaration "don't label".
 [ ] 13b. Ask Play support to refund the old account's $25 (fee transaction
         PDS.3409-9987-7214-57403); close the old account once it's empty.
 
