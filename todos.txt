@@ -52,6 +52,13 @@ iPhone builds until that's done (section 3).
 1. CODE CHANGES (Claude builds them; one branch from dev per batch)
 ====================================================================
 
+[ ] 64. Journal: open on TODAY (it opens on yesterday now), with the usual
+        arrows back to earlier days. Owner's idea, 11 Nov; not started.
+[ ] 65. Awake time: when a sleep ends ("Woke up"), show how long the baby has
+        been awake ("Awake since 2:10 PM, 1h 5m"). The Today Sleep card
+        already has an "Awake for 1h 5m" line; check with the owner where
+        else it should show (the card after Woke up, the timeline, the
+        notification). Owner's idea, 11 Nov; not started.
 [ ] 63. "Not a medical device" line inside the app (Help or Settings > About);
         the store, site and terms already say it. Before production.
 [ ] 56. Found while making the pediatrician review pack (28 Oct); fix after
