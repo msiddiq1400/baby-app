@@ -19,8 +19,9 @@ App Store subtitle and website top line: "Baby tracker for the family".
 Where things stand (11 Nov): Android 1.0.0 (build 3) is IN GOOGLE PLAY
 REVIEW for production, sent 10 Nov with managed publishing ON (nothing
 goes live until you press Publish). Everything Play needed is done (list
-in section 2). Apple: the account is being moved to the company; no
-iPhone builds until that's done (section 3).
+in section 2). Apple: the account is an Organization since 13 Nov (12
+done); Paid Apps Agreement banking and tax are being processed (38c),
+then iPhone builds again (section 3).
 
 ====================================================================
 0. NEXT UP (in this order) - Android launch
@@ -162,17 +163,15 @@ The steps to production are in section 0. Background:
 3. APPLE (App Store Connect, developer.apple.com)
 ====================================================================
 
-[~] 12. Moving the INDIVIDUAL account (Team ID W7AS897FPN, renews 1 Oct
-        2027) to the company. Apps, Team ID, TestFlight and keys stay.
-        - Case 103011473705: Apple said yes (9 Nov) and started the
-          migration; organization enrollment submitted 9 Nov, Enrollment ID
-          5UBCZ4Q9X7 (D-U-N-S 311913824, ceo@toolbox.services). Apple checks
-          signing authority (may phone +92 312 5328555), then emails how to
-          finish.
-        - Until it's done: Certificates, Identifiers & Profiles is closed,
-          so Codemagic can't sign iPhone builds.
-        - [ ] After: accept the new agreements; seller name becomes the
-          company's.
+[x] 12. Account moved to the company: DONE 13 Nov 2026. Team ID W7AS897FPN
+        (renews 1 Oct 2027) now Enrolled as Organization, TOOLBOX SERVICES
+        (SMC-PRIVATE) LIMITED (case 103011473705, enrollment 5UBCZ4Q9X7).
+        Apps, TestFlight and keys stayed. Record and Apple's consent text:
+        business/apple-account/2026-11-13-apple-migration-done.txt.
+        - [ ] Check Certificates, Identifiers & Profiles is open again and
+          run one Codemagic iPhone build (signing was blocked during it).
+        - [ ] Close Apple's duplicate case 103012994526.
+        - [ ] By 13 Dec (Apple's 30-day rule): Copyright (46) for every app.
 [~] 15b. TestFlight for outside testers. Internal group "Int-Test" gets every
         build. External group "Ext-Test": build 7 submitted to Beta App
         Review 27 Oct. Public link (limit 100):
@@ -189,8 +188,10 @@ The steps to production are in section 0. Background:
         - [ ] Description: paste the PALNA PRO paragraph from
           store/app-store.md (mentions Lifetime).
         - [ ] Copyright -> 2026 Toolbox Services (SMC-Private) Limited.
-[ ] 38c. After 12: Business > Paid Applications Agreement, company bank
-        account and tax forms. Then the in-app purchases exactly as in
+[~] 38c. Business > Paid Applications Agreement, company bank account and
+        tax forms: all submitted 13 Nov (EU DSA = trader, Askari PKR bank,
+        W-8BEN-E with treaty Article III(2) 0%); banking "processing ~24 h",
+        check it shows Active. Then the in-app purchases exactly as in
         store/app-store.md "In-App Purchases" (palna_pro_monthly,
         palna_pro_yearly with a 7-day trial, palna_pro_lifetime; Pakistan
         prices by hand). Review screenshot: flutter test tool/screenshots
