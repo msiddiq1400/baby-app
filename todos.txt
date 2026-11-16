@@ -16,10 +16,9 @@ families" wording in the store listings, website, invites or new copy;
 Pakistan's EPI, desi foods and 1122 can still be named as highlights.
 App Store subtitle and website top line: "Baby tracker for the family".
 
-Where things stand (11 Nov): Android 1.0.0 (build 3) is IN GOOGLE PLAY
-REVIEW for production, sent 10 Nov with managed publishing ON (nothing
-goes live until you press Publish). Everything Play needed is done (list
-in section 2). Apple: the account is an Organization since 13 Nov (12
+Where things stand (17 Nov): Android 1.0.0 (build 3) is PUBLISHED and
+live on Google Play worldwide (17 Nov). Managed publishing is still ON
+(see 66). Apple: the account is an Organization since 13 Nov (12
 done); Paid Apps Agreement banking and tax are being processed (38c),
 then iPhone builds again (section 3).
 
@@ -121,6 +120,16 @@ Ideas: need content or a decision before any code
 ====================================================================
 2. GOOGLE PLAY (account Toolbox Services Ltd, 5279563011998838344)
 ====================================================================
+
+[ ] 66. AFTER THE iPHONE APPS ARE APPROVED (owner, 17 Nov): auto-publish
+        for all 3 apps (Palna, OathLock, API Toolbox).
+        - Play Console -> each app -> Publishing overview -> Managed
+          publishing -> OFF. Updates then go live as soon as Google
+          approves them.
+        - App Store Connect: on each new version pick "Automatically
+          release this version" before sending it for review.
+        - Then decide: should Codemagic upload straight to Production and
+          send for review (today: internal track, draft, not sent)?
 
 The steps to production are in section 0. Background:
 - Palna moved here from the old personal account (7401643253836682455) on
