@@ -24,6 +24,7 @@ window.PALNA_I18N = {
     'hero.title': 'ہر خوراک، ہر نیند، ہر ٹیکہ۔ <em>آپ کی اپنی زبان میں۔</em>',
     'hero.lead': 'پالنا آخری خوراک، اگلا ٹیکہ اور آج رات کی دوا یاد رکھتا ہے، تاکہ آپ کو نہ رکھنی پڑے۔ سیکنڈوں میں درج کریں، پورے خاندان کے ساتھ شیئر کریں، اور انٹرنیٹ یا بجلی نہ ہو تب بھی کام جاری رکھیں۔',
     'store.soon': 'جلد آ رہا ہے',
+    'store.get': 'ابھی حاصل کریں',
     'hero.fine': 'پالنا عالمی ادارۂ صحت (WHO)، NHS، CDC اور پاکستان کے EPI کی عمومی معلومات دیتا ہے۔ یہ طبی آلہ نہیں اور ڈاکٹر کا متبادل نہیں۔ ایمرجنسی میں ریسکیو 1122 یا ایدھی 115 پر کال کریں۔',
 
     'stat.langs': 'زبانیں',
@@ -144,8 +145,8 @@ window.PALNA_I18N = {
 
     'faq.kicker': 'سوالات',
     'faq.title': 'اکثر پوچھے جانے والے سوالات',
-    'faq.1.q': 'پالنا کب ڈاؤن لوڈ کر سکیں گے؟',
-    'faq.1.a': 'پالنا آخری ٹیسٹنگ میں ہے اور جلد گوگل پلے اور ایپ اسٹور پر آ رہا ہے۔ <a href="mailto:hello@palnacare.com?subject=Tell%20me%20when%20Palna%20launches">hello@palnacare.com</a> پر ای میل کریں، لانچ کے دن ہم آپ کو بتا دیں گے۔',
+    'faq.1.q': 'پالنا کہاں سے ڈاؤن لوڈ کریں؟',
+    'faq.1.a': 'پالنا اب <a href="https://play.google.com/store/apps/details?id=com.palnacare.app" target="_blank" rel="noopener">گوگل پلے</a> پر دستیاب ہے۔ آئی فون ایپ جلد ایپ اسٹور پر آ رہی ہے: <a href="mailto:hello@palnacare.com?subject=Tell%20me%20when%20Palna%20is%20on%20iPhone">hello@palnacare.com</a> پر ای میل کریں، لانچ کے دن ہم آپ کو بتا دیں گے۔',
     'faq.2.q': 'کیا یہ انٹرنیٹ کے بغیر چلتا ہے؟',
     'faq.2.a': 'جی ہاں۔ جو کچھ آپ درج کریں وہ پہلے فون میں محفوظ ہوتا ہے، اس لیے پالنا لوڈشیڈنگ، کمزور سگنل یا بغیر ڈیٹا کے بھی چلتا ہے۔ انٹرنیٹ واپس آنے پر خاندان کے ساتھ سنک ہو جاتا ہے۔',
     'faq.3.q': 'کیا پورا خاندان اسے استعمال کر سکتا ہے؟',
@@ -162,7 +163,7 @@ window.PALNA_I18N = {
     'faq.8.a': 'ایپ میں: سیٹنگز، پھر "میرا اکاؤنٹ حذف کریں"۔ یا ہمیں ای میل کریں۔ تفصیل <a href="delete-account/index.html">اکاؤنٹ حذف کرنے</a> کے صفحے پر ہے۔',
 
     'cta.title': 'سب کچھ یاد رکھنے کا بوجھ اتار دیں۔',
-    'cta.small': 'لانچ کے دن اطلاع پائیں',
+    'cta.small': 'آئی فون: لانچ کے دن اطلاع پائیں',
     'cta.btn': 'مجھے ای میل کریں',
     'cta.sub': 'پالنا: ماں اور بچے کی دیکھ بھال',
 
@@ -220,6 +221,7 @@ window.PALNA_I18N = {
     'hero.title': 'Har feed, har neend, har teeka. <em>Aap ki apni zabaan mein.</em>',
     'hero.lead': 'Palna aakhri feed, agla teeka aur aaj raat ki dawa yaad rakhta hai, taake aap ko na rakhni pare. Seconds mein darj karein, poore khandan ke saath share karein, aur internet ya bijli na ho tab bhi kaam jaari rakhein.',
     'store.soon': 'Jald aa raha hai',
+    'store.get': 'Abhi hasil karein',
     'hero.fine': 'Palna WHO, NHS, CDC aur Pakistan ke EPI ki aam maloomat deta hai. Yeh medical device nahi aur doctor ka mutabadil nahi. Emergency mein Rescue 1122 ya Edhi 115 par call karein.',
 
     'stat.langs': 'zabaanein',
@@ -340,8 +342,8 @@ window.PALNA_I18N = {
 
     'faq.kicker': 'Sawalat',
     'faq.title': 'Aksar poochhe jane wale sawalat',
-    'faq.1.q': 'Palna kab download kar sakenge?',
-    'faq.1.a': 'Palna aakhri testing mein hai aur jald Google Play aur App Store par aa raha hai. <a href="mailto:hello@palnacare.com?subject=Tell%20me%20when%20Palna%20launches">hello@palnacare.com</a> par email karein, launch ke din hum aap ko bata denge.',
+    'faq.1.q': 'Palna kahan se download karein?',
+    'faq.1.a': 'Palna ab <a href="https://play.google.com/store/apps/details?id=com.palnacare.app" target="_blank" rel="noopener">Google Play</a> par mojood hai. iPhone app jald App Store par aa rahi hai: <a href="mailto:hello@palnacare.com?subject=Tell%20me%20when%20Palna%20is%20on%20iPhone">hello@palnacare.com</a> par email karein, launch ke din hum aap ko bata denge.',
     'faq.2.q': 'Kya yeh internet ke baghair chalta hai?',
     'faq.2.a': 'Ji haan. Jo kuch aap darj karein woh pehle phone mein mehfooz hota hai, is liye Palna load-shedding, kamzor signal ya baghair data ke bhi chalta hai. Internet wapas aane par khandan ke saath sync ho jata hai.',
     'faq.3.q': 'Kya poora khandan ise istemaal kar sakta hai?',
@@ -358,7 +360,7 @@ window.PALNA_I18N = {
     'faq.8.a': 'App mein: Settings, phir "Mera account delete karein". Ya hamein email karein. Tafseel <a href="delete-account/index.html">account delete karne</a> ke safhe par hai.',
 
     'cta.title': 'Sab kuch yaad rakhne ka bojh utaar dein.',
-    'cta.small': 'Launch ke din itla paayein',
+    'cta.small': 'iPhone: launch ke din itla paayein',
     'cta.btn': 'Mujhe email karein',
     'cta.sub': 'Palna: Maa aur bachay ki dekh bhaal',
 
