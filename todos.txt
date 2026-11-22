@@ -16,25 +16,28 @@ families" wording in the store listings, website, invites or new copy;
 Pakistan's EPI, desi foods and 1122 can still be named as highlights.
 App Store subtitle and website top line: "Baby tracker for the family".
 
-Where things stand (17 Nov): Android 1.0.0 (build 3) is PUBLISHED and
-live on Google Play worldwide (17 Nov). Managed publishing is still ON
-(see 66). Apple: the account is an Organization since 13 Nov (12
-done); Paid Apps Agreement banking and tax are being processed (38c),
-then iPhone builds again (section 3).
+Where things stand (22 Nov): Android 1.0.0 (build 3) is PUBLISHED and
+live on Google Play worldwide since 17 Nov. Managed publishing is still
+ON (66; owner: OathLock first). The website's Google Play buttons are
+built and on dev (40a) but NOT live: main was last released 29 Oct, so
+they need a release. iPhone: NOT submitted to App Review yet; the
+account, agreement, bank and tax are all done (12, 38c), so next are
+the in-app purchases, a build and the submission (section 3).
 
 ====================================================================
-0. NEXT UP (in this order) - Android launch
+0. NEXT UP (in this order)
 ====================================================================
 
-[~] 59. Play review (sent 10 Nov; usually 1-7 days for a first health-app
+[x] 59. APPROVED and PUBLISHED 17 Nov (worldwide; 17 changes incl. health
+        apps declaration, ads, target audience 18+, privacy policy).
+        Play review (sent 10 Nov; usually 1-7 days for a first health-app
         release). It also clears the old 1 Oct rejection (health app on the
         personal account). If Google rejects anything, send Claude the
         Policy status page. Don't untick the medical features in the health
         declaration (a false declaration can close the account).
-[ ] 47b. While it's in review, phone checks on the Play install: Internal
-        testing > Testers tab > tick list "Testers" > Save > open the "Join
-        on the web" link on the phone (msiddiq17328) > install from Play
-        (uninstall the debug build first: different signing key). Then:
+[ ] 47b. Phone checks on the Play install (now from the public store page:
+        https://play.google.com/store/apps/details?id=com.palnacare.app;
+        uninstall the debug build first: different signing key). Then:
         - Continue with Google signs in (Play signing SHA-1 clients added
           10 Nov);
         - with a Free account, Settings > Palna Pro shows Yearly (7-day
@@ -44,9 +47,12 @@ then iPhone builds again (section 3).
           customer; cancel in Play Store > Payments & subscriptions (test
           subscriptions renew every 5 minutes);
         - the other checks in section 5 (47, 54) as time allows.
-[ ] 61. When Google approves AND 47b is fine: Publishing overview > Publish.
-        Then (Claude): codemagic.yaml submit_as_draft: false, website Play
-        button (40a).
+[x] 61. PUBLISHED 17 Nov (Publishing overview > Publish 17 changes).
+        [ ] Claude: codemagic.yaml still uploads to internal testing as a
+            draft; switch to Production + sent for review together with 66
+            (as OathLock did 20 Nov).
+        [~] Website Play buttons (40a): merged into dev 17 Nov (#19),
+            waiting for a release dev -> main.
 
 ====================================================================
 1. CODE CHANGES (Claude builds them; one branch from dev per batch)
@@ -95,8 +101,10 @@ Waiting on something
 [ ] 15c. Codemagic: turn on submit_to_testflight + beta_groups ["Ext-Test"]
         in codemagic.yaml, so every iPhone build goes to outside testers.
         Waits on Apple approving the first external build (15b).
-[ ] 40a. Website: swap "Coming soon" for the Play / App Store buttons.
-        Waits on the apps being live.
+[~] 40a. Website: swap "Coming soon" for the Play / App Store buttons.
+        Play part BUILT 17 Nov (bf581c3: store buttons, FAQ, switch guides;
+        EN/UR/Roman Urdu), on dev, goes live with the next release. App
+        Store button: after Apple approves (46b).
 [ ] 37b. iPhone widget + Live Activities for the timers: the widget (Swift,
         WidgetKit), data sharing, Codemagic signing; 2-4 TestFlight builds.
         Waits on the App Group and widget App ID (section 3).
@@ -122,7 +130,9 @@ Ideas: need content or a decision before any code
 ====================================================================
 
 [ ] 66. AFTER THE iPHONE APPS ARE APPROVED (owner, 17 Nov): auto-publish
-        for all 3 apps (Palna, OathLock, API Toolbox).
+        for all 3 apps (Palna, OathLock, API Toolbox). OathLock's Android
+        side is DONE (21 Nov, app-block todo 56); owner: Palna and API
+        Toolbox later. Same steps:
         - Play Console -> each app -> Publishing overview -> Managed
           publishing -> OFF. Updates then go live as soon as Google
           approves them.
@@ -177,8 +187,9 @@ The steps to production are in section 0. Background:
         (SMC-PRIVATE) LIMITED (case 103011473705, enrollment 5UBCZ4Q9X7).
         Apps, TestFlight and keys stayed. Record and Apple's consent text:
         business/apple-account/2026-11-13-apple-migration-done.txt.
-        - [ ] Check Certificates, Identifiers & Profiles is open again and
-          run one Codemagic iPhone build (signing was blocked during it).
+        - [x] Signing works again: OathLock's Codemagic iPhone builds
+          (same team) signed and uploaded after the move (15 and 20 Nov).
+          Palna's first build after the move is part of 46b.
         - [ ] Close Apple's duplicate case 103012994526.
         - [ ] By 13 Dec (Apple's 30-day rule): Copyright (46) for every app.
 [~] 15b. TestFlight for outside testers. Internal group "Int-Test" gets every
@@ -197,10 +208,9 @@ The steps to production are in section 0. Background:
         - [ ] Description: paste the PALNA PRO paragraph from
           store/app-store.md (mentions Lifetime).
         - [ ] Copyright -> 2026 Toolbox Services (SMC-Private) Limited.
-[~] 38c. Business > Paid Applications Agreement, company bank account and
-        tax forms: all submitted 13 Nov (EU DSA = trader, Askari PKR bank,
-        W-8BEN-E with treaty Article III(2) 0%); banking "processing ~24 h",
-        check it shows Active. Then the in-app purchases exactly as in
+[~] 38c. Agreement part DONE: Paid Applications Agreement, bank and tax
+        all ACTIVE since 14 Nov (one per account; app-block todo 13b).
+        NEXT: the in-app purchases exactly as in
         store/app-store.md "In-App Purchases" (palna_pro_monthly,
         palna_pro_yearly with a 7-day trial, palna_pro_lifetime; Pakistan
         prices by hand). Review screenshot: flutter test tool/screenshots
@@ -209,11 +219,27 @@ The steps to production are in section 0. Background:
         most 45 characters: "More babies, photos, reports and doctor PDF".
         App Privacy > Purchases > Purchase History. Then RevenueCat:
         import the 3 products into "pro" and the default offering.
-[ ] 46c. After 12: App Information > Digital Services Act: trader, with the
-        company's address, phone and hello@palnacare.com.
-[ ] 46d. After 12: Small Business Program (15% fee); then turn it on in
-        RevenueCat > Apps > Palna (App Store).
-[ ] 46b. Submit version 1.0 for App Store review (after 46, 12, 38c).
+[ ] 46c. App Information > Digital Services Act: the account is a trader
+        since 13 Nov (company address, support@, phone); check Palna shows
+        it, with hello@palnacare.com if Apple allows a per-app email.
+[~] 46d. Small Business Program (15% fee): APPLIED 15 Nov for the whole
+        account (app-block todo 37); when Apple's email approves it, turn it
+        on in RevenueCat > Apps > Palna (App Store).
+[ ] 46b. Submit version 1.0 for App Store review: NOT SUBMITTED YET (22
+        Nov). Needs 38c's in-app purchases, 46's checks and a new iPhone
+        build from main (the first since the account move; a release that
+        changes app/ starts it). Lessons from OathLock's two rejections
+        (app-block todo 36), check before sending:
+        - the app icon must not look like a placeholder (2.3.8);
+        - buttons before a system permission prompt (notifications,
+          photos, camera) must say "Continue" / "Next", never "Allow"
+          (5.1.1(iv));
+        - Review Notes: sign-in details, and say what each permission is
+          for;
+        - Palna is iPhone-only (TARGETED_DEVICE_FAMILY 1), so no iPad
+          screenshots; Apple may still open it on an iPad in iPhone mode
+          (they reviewed OathLock on an iPad Air), so check that it looks
+          right there.
 
 Only when we build those features
 [ ] 37b. (Apple part) App Group group.com.palnacare.app on the app's App ID,
