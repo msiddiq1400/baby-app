@@ -18,6 +18,11 @@
 #   npm ci
 #   npm test
 #
+# A third job, app-release, runs tools/check_app_release.py on the release
+# pull request (see the job). Locally:
+#   python -I tools/test_check_app_release.py
+#   python -I tools/check_app_release.py origin/main dev
+#
 # Branches: feature branches -> pull request into dev (tested) -> dev is the
 # source of truth -> once or twice a day a release pull request dev -> main
 # (tested again) -> merging it deploys.
@@ -109,6 +114,25 @@ jobs:
 
       - name: Server tests
         run: npm test
+
+  # Release pull requests only: what the merge brings into main (HEAD^1 is
+  # main, HEAD the merge commit). Once codemagic.yaml sends iPhone builds to
+  # App Review by itself, a release that changes app/ must raise the version
+  # in app/pubspec.yaml and update release_notes.json (the App Store's
+  # "What's New"). The check's own tests run on every pull request.
+  app-release:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: App release check (its own tests)
+        run: python3 -I tools/test_check_app_release.py
+      - name: App release check
+        if: github.base_ref == 'main'
+        run: python3 -I tools/check_app_release.py HEAD^1 HEAD
 
   # Only for a push to main (a merged release pull request, already tested):
   # puts new migrations and the Edge Function live. One deploy at a time.

@@ -80,7 +80,7 @@ Copy each part into App Store Connect > Palna. Character limits are Apple's.
 | Marketing URL | https://palnacare.com |
 | Privacy Policy URL (App Privacy page) | https://palnacare.com/privacy |
 
-**Copyright:** 2026 followed by your legal name, exactly as on your Apple developer account (change it to Toolbox Services (SMC-Private) Limited after the move to an organization)
+**Copyright:** 2026 Toolbox Services (SMC-Private) Limited (the account is the company's since 13 Nov 2026; Apple wants it updated by 13 Dec)
 
 **Screenshots:** App Store Connect (2026) asks for the "iPhone with Dynamic Island (medium display)" size, **1206 x 2622**: scale the 6.9" renders down (same proportions; `out/upload-iphone-6.3/`, RGB, 01-08 in order).
 **Source renders (6.9" iPhone):** `app/tool/screenshots/out/iphone/` (1320 x 2868, git-ignored; made with
@@ -107,6 +107,10 @@ App Store Connect rejects images with an alpha channel). Suggested order: timer_
 > Palna Pro (optional subscription, Settings > Palna Pro): the demo account already has Pro for free, so every Pro feature (more babies, more photos, 30-day reports, the PDF summary, colour themes) can be checked without buying.
 >
 > Palna shows general guidance from WHO, NHS and national vaccine programmes and always tells parents to confirm with their doctor; it does not diagnose or give treatment.
+>
+> Permissions (iOS's own prompts; there are no extra screens before them): Notifications, asked after sign-in, for updates from family members ("Grandma logged a feed"), vaccine and medicine reminders and the running feed / sleep timer; each kind can be switched off in Settings > Notifications. Camera and Photos: only when the parent adds a monthly photo of the baby. No location, contacts, tracking or health-data access.
+>
+> Palna is not a medical device; the app says so in Settings, and the description and terms say the same.
 
 **Demo account:** Supabase > Authentication > Users > Add user > Create new user: email `review@palnacare.com`, a strong password, tick "Auto Confirm User". Then sign in with it on your phone and add a sample baby with a few feeds, sleeps, diapers and a vaccine, so the reviewer sees a real app. Keep the account; Apple reuses it for every update.
 
@@ -161,12 +165,20 @@ in Settings > Palna Pro." Needs the Paid Applications Agreement, bank and tax fi
 
 ## Age rating
 
-Answer **None** to everything except:
+App Information > Age Ratings > Edit (Apple's 2026 questions). Answer **None / No** to everything
+except:
 
 | Question | Answer |
 |---|---|
 | Medical or treatment information | Infrequent/Mild (general baby-care guidance, not treatment) |
+| Health or wellness topics | Yes |
 | Made for kids | No (it's for parents) |
+
+Explicitly **No**: unrestricted web access (links open the browser outside the app), user-generated
+content (logs are only seen by invited family), messaging and chat, advertising, location sharing,
+dating, contests, gambling. Calculated rating: 13+. Then step 7 > **Override to Higher Age Rating:
+18+**, because the terms of use require account holders to be 18 or older (Apple: a EULA's age
+minimum must match the rating; Play's target audience is 18+ too). Set 26 Nov 2026.
 
 ## Other questions
 
@@ -174,6 +186,6 @@ Answer **None** to everything except:
 |---|---|
 | Export compliance / encryption | Already answered in the app (standard HTTPS only) |
 | Advertising identifier (IDFA) | No |
-| EU Digital Services Act trader status | Not a trader (free app, no payments), while the account is individual |
+| EU Digital Services Act trader status | Trader (the company account since 13 Nov 2026: address, support email, phone; todos 46c) |
 | Price | Free |
 | Availability | All countries |

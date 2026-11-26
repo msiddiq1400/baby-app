@@ -2469,6 +2469,12 @@ abstract class AppLocalizations {
   /// **'Version {version} (build {build})'**
   String appVersion(String version, String build);
 
+  /// No description provided for @notMedicalDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Palna is not a medical device and doesn\'t replace advice from your doctor.'**
+  String get notMedicalDevice;
+
   /// No description provided for @deleteAccountFailed.
   ///
   /// In en, this message translates to:

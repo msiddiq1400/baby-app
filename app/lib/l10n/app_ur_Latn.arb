@@ -830,6 +830,7 @@
   "deleteAccountTypeHint": "Confirm karne ke liye DELETE likhein",
   "deleteAccountButton": "Hamesha ke liye delete karein",
   "appVersion": "Version {version} (build {build})",
+  "notMedicalDevice": "Palna medical device nahi aur aap ke doctor ke mashware ki jagah nahi leta.",
   "deleteAccountFailed": "Account delete nahi ho saka. Internet check kar ke dobara koshish karein.",
   "startFeedTimer": "Timer shuru karein",
   "lastSide": "Pichli dafa: {side} side",
