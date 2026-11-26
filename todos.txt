@@ -2,7 +2,7 @@ PALNA (baby-app): TO-DO LIST
 Claude keeps this up to date. Open items only, most urgent first; finished
 work lives in git history (and a few useful facts in REFERENCE at the end).
 Item numbers never change (code comments refer to some of them), so they
-aren't in order. Last tidied 11 Nov 2026.
+aren't in order. Last tidied 26 Nov 2026.
 
 Sections: 0 next up / 1 code changes (Claude) / 2 Google Play / 3 Apple /
 4 other setup and security / 5 testing on a phone / 6 content and legal
@@ -16,58 +16,44 @@ families" wording in the store listings, website, invites or new copy;
 Pakistan's EPI, desi foods and 1122 can still be named as highlights.
 App Store subtitle and website top line: "Baby tracker for the family".
 
-Where things stand (22 Nov): Android 1.0.0 (build 3) is PUBLISHED and
-live on Google Play worldwide since 17 Nov. Managed publishing is still
-ON (66; owner: OathLock first). The website's Google Play buttons are
-built and on dev (40a) but NOT live: main was last released 29 Oct, so
-they need a release. iPhone (26 Nov): getting ready for App Review, the
-steps are 67a-67e below; the account, agreement, bank and tax are done
-(12, 38c).
+Where things stand (26 Nov): Android 1.0.0 (build 3) is PUBLISHED and
+live on Google Play worldwide since 17 Nov; managed publishing still ON
+(66). iPhone 1.0 (build 1.0.0 (9)) SUBMITTED to App Review 26 Nov at
+about 12:15 PM, with the 2 subscriptions and Lifetime;
+"Automatically release this version" is on, so it goes live once
+approved (67e next).
+Released to main 26 Nov (#21): the "not a medical device" line, the
+website's Google Play buttons (live), auto-submit set up but off.
 
 ====================================================================
 0. NEXT UP (in this order)
 ====================================================================
 
-iPhone 1.0 to App Review (started 26 Nov):
-[~] 67a. Claude, BUILT 26 Nov on feat/baby-app-app-store-v1 (not merged):
-        "not a medical device" line at the bottom of Settings (63), the
-        App Review auto-submit set up but still off (46e), review notes
-        with a permissions paragraph, copyright and DSA rows fixed in
-        store/app-store.md. Checked for Apple's OathLock rejections: no
-        "Allow" button before any permission prompt (Palna has no custom
-        screen before them), the icon is the finished cradle design, the
-        Palna Pro screen has prices, renewal text, Terms, Privacy and
-        Restore. Owner: try the branch on the phone, then OK the pull
-        request into dev, then "release": the release changes app/, so
-        Codemagic builds a new iPhone build to TestFlight (the first since
-        the account move) and Android to internal testing (draft). The
-        release also puts the website's Play buttons live (40a).
-[x] 67b. ALL DONE 26 Nov (incl. Codemagic REVENUECAT_APPLE_KEY, same as
-        env/prod.json). Owner, App Store Connect, while that builds (details in 38c, 46,
-        46c). DONE 26 Nov: the 2 subscriptions and the Lifetime purchase
-        created. Still: the rest below. The 3 in-app purchases (subscription group Palna Pro:
-        palna_pro_monthly, palna_pro_yearly with the 7-day trial;
-        palna_pro_lifetime non-consumable; Pakistan prices by hand), each
-        "Ready to Submit" with its review screenshot; then RevenueCat >
-        Palna (App Store): import them into "pro" and the default
-        offering. Check: Regulated Medical Devices, App Store Server
-        Notifications (RevenueCat URL), Digital Services Act, Copyright,
-        and the description's PALNA PRO paragraph. Also check Codemagic >
-        Team settings > palna_prod has REVENUECAT_APPLE_KEY filled in (the
-        appl_... public key from RevenueCat), or the paywall can't load
-        prices on iPhone.
-[ ] 67c. Owner: when the new build shows in TestFlight (about 30 min after
-        the release, then Apple's processing), install it on an iPhone
-        and try sign-in, a feed, and Settings > Palna Pro (prices shown,
-        a sandbox purchase if possible).
-[ ] 67d. Owner: version 1.0 page > Build: pick the new build (if it isn't
-        offered, set the version number on the page to 1.0.0, like the
-        build); "In-App Purchases and Subscriptions": add all 3 (the first
-        ones must go with a version); Version Release: "Automatically
-        release this version"; App Review Information: notes from
-        store/app-store.md. Then Add for Review > Submit. Tell Claude the
-        result; a rejection: paste Apple's message.
-[ ] 67e. After approval: 46e (auto-submit on), 40a App Store button, 66.
+iPhone 1.0 to App Review:
+[x] 67a. DONE 26 Nov: "not a medical device" line in Settings (63),
+        App Review auto-submit set up but off (46e), review notes with a
+        permissions paragraph; PR #20 into dev, release #21 into main
+        (4c5a303). Codemagic built iPhone build 9 (signing fine after the
+        account move) and Android to internal testing (draft).
+[x] 67b. DONE 26 Nov (owner): in-app purchases created (Palna Pro group:
+        palna_pro_monthly, palna_pro_yearly; palna_pro_lifetime);
+        RevenueCat products on "pro" and in the default offering; server
+        notifications "configured correctly"; App Compliance (not a
+        medical device, DSA trader); category Health & Fitness /
+        Lifestyle; China mainland off; copyright; App Privacy >
+        Purchases; age rating (13+ calculated, override 18+ per the
+        terms); price Free (US base); Codemagic REVENUECAT_APPLE_KEY
+        checked (same as env/prod.json).
+[x] 67d. SUBMITTED 26 Nov ~12:15 PM: iOS App 1.0 with build 1.0.0 (9),
+        subscription group Palna Pro, the 2 subscriptions and Palna Pro
+        Lifetime (5 items). Waiting for review (first review usually
+        1-3 days). A rejection: paste Apple's message to Claude.
+[ ] 67c. Owner, while waiting: TestFlight build 9 on an iPhone: sign-in,
+        a feed, Settings > Palna Pro (3 prices; a sandbox purchase if
+        possible).
+[ ] 67e. After approval: 46e (auto-submit on, in the
+        1.0.1 release), 40a App Store button on the site, 66 (Play
+        auto-publish), 15c, and the 1.0.1 description (46).
 
 [x] 59. APPROVED and PUBLISHED 17 Nov (worldwide; 17 changes incl. health
         apps declaration, ads, target audience 18+, privacy policy).
@@ -92,8 +78,7 @@ iPhone 1.0 to App Review (started 26 Nov):
         [ ] Claude: codemagic.yaml still uploads to internal testing as a
             draft; switch to Production + sent for review together with 66
             (as OathLock did 20 Nov).
-        [~] Website Play buttons (40a): merged into dev 17 Nov (#19),
-            waiting for a release dev -> main.
+        [x] Website Play buttons (40a): LIVE 26 Nov (release #21).
 
 ====================================================================
 1. CODE CHANGES (Claude builds them; one branch from dev per batch)
@@ -106,8 +91,6 @@ iPhone 1.0 to App Review (started 26 Nov):
         already has an "Awake for 1h 5m" line; check with the owner where
         else it should show (the card after Woke up, the timeline, the
         notification). Owner's idea, 11 Nov; not started.
-[~] 63. "Not a medical device" line inside the app: BUILT 26 Nov at the
-        bottom of Settings, above the version (67a); live with the release.
 [ ] 56. Found while making the pediatrician review pack (28 Oct); fix after
         the doctor answers, or sooner where obvious:
         - "verified" flag on schedules isn't shown anywhere in the app.
@@ -141,11 +124,12 @@ iPhone 1.0 to App Review (started 26 Nov):
 Waiting on something
 [ ] 15c. Codemagic: turn on submit_to_testflight + beta_groups ["Ext-Test"]
         in codemagic.yaml, so every iPhone build goes to outside testers.
-        Waits on Apple approving the first external build (15b).
+        Unblocked 26 Nov (build 7 approved for Ext-Test, 15b); do it with
+        46e in the 1.0.1 release.
 [~] 40a. Website: swap "Coming soon" for the Play / App Store buttons.
-        Play part BUILT 17 Nov (bf581c3: store buttons, FAQ, switch guides;
-        EN/UR/Roman Urdu), on dev, goes live with the next release. App
-        Store button: after Apple approves (46b).
+        Play part LIVE 26 Nov (release #21: store buttons, FAQ, switch
+        guides; EN/UR/Roman Urdu). App Store button: after Apple approves
+        1.0 (67e).
 [ ] 37b. iPhone widget + Live Activities for the timers: the widget (Swift,
         WidgetKit), data sharing, Codemagic signing; 2-4 TestFlight builds.
         Waits on the App Group and widget App ID (section 3).
@@ -230,15 +214,15 @@ The steps to production are in section 0. Background:
         business/apple-account/2026-11-13-apple-migration-done.txt.
         - [x] Signing works again: OathLock's Codemagic iPhone builds
           (same team) signed and uploaded after the move (15 and 20 Nov).
-          Palna's first build after the move is part of 46b.
+          Palna's too: build 9 (26 Nov).
         - [ ] Close Apple's duplicate case 103012994526.
         - [~] By 13 Dec (Apple's 30-day rule): Copyright (46) for every app.
           Palna done 26 Nov; check OathLock and API Toolbox.
 [~] 15b. TestFlight for outside testers. Internal group "Int-Test" gets every
-        build. External group "Ext-Test": build 7 submitted to Beta App
-        Review 27 Oct. Public link (limit 100):
-        https://testflight.apple.com/join/TNv2mUxa. When approved: send the
-        iPhone invite in store/tester-invite.md, and tell Claude (15c).
+        build. External group "Ext-Test": build 7 APPROVED (seen 26 Nov).
+        Public link (limit 100): https://testflight.apple.com/join/TNv2mUxa.
+        Owner: send the iPhone invite in store/tester-invite.md when
+        wanted; Claude: 15c.
 [~] 46. App Store listing (done 27 Oct: App Information, age rating, 1.0
         text, screenshots, App Privacy, review login, manual release). Still
         to do:
@@ -251,28 +235,20 @@ The steps to production are in section 0. Background:
         - [x] App Store Server Notifications: RevenueCat > Palna (App Store)
           shows "configured correctly" and its App Store Connect API key
           QXFF6P5D3S valid (owner, 26 Nov).
-        - [ ] Build: add the first build that has Pro (after 12).
-        - [ ] Description: paste the PALNA PRO paragraph from
-          store/app-store.md (mentions Lifetime).
+        - [x] Build: 1.0.0 (9), submitted 26 Nov.
+        - [ ] Description on the 1.0.1 page: replace the PALNA PRO
+          paragraph with the one in store/app-store.md (1.0 went out with
+          the older "monthly or yearly" one, no Lifetime; Terms / Privacy
+          links are there, checked 26 Nov).
         - [x] Copyright -> 2026 Toolbox Services (SMC-Private) Limited
           (26 Nov).
-[~] 38c. In-app purchases CREATED 26 Nov (owner: subscriptions + Lifetime);
-        RevenueCat: Apple products in the default offering's
-        Lifetime / Monthly / Annual packages and on "pro" (checked 26 Nov).
-        RevenueCat side DONE. Agreement part DONE: Paid Applications Agreement, bank and tax
-        all ACTIVE since 14 Nov (one per account; app-block todo 13b).
-        NEXT: the in-app purchases exactly as in
-        store/app-store.md "In-App Purchases" (palna_pro_monthly,
-        palna_pro_yearly with a 7-day trial, palna_pro_lifetime; Pakistan
-        prices by hand). Review screenshot: flutter test tool/screenshots
-        --update-goldens --dart-define=SHOT_DEVICE=iphone --plain-name
-        paywall (out/iphone/paywall_en.png). Subscription description at
-        most 45 characters: "More babies, photos, reports and doctor PDF".
-        App Privacy > Purchases > Purchase History. Then RevenueCat:
-        import the 3 products into "pro" and the default offering.
-[ ] 46c. App Information > Digital Services Act: the account is a trader
-        since 13 Nov (company address, support@, phone); check Palna shows
-        it, with hello@palnacare.com if Apple allows a per-app email.
+[x] 38c. DONE 26 Nov: Paid Applications Agreement, bank and tax ACTIVE
+        since 14 Nov (app-block todo 13b); the 3 in-app purchases created
+        as in store/app-store.md "In-App Purchases" and submitted with 1.0;
+        RevenueCat: Apple products on "pro" and in the default offering.
+        Review screenshot: tool/screenshots/out/iphone/paywall_en.png.
+[x] 46c. Digital Services Act: App Compliance shows Palna's developer as
+        a trader (checked 26 Nov).
 [~] 46d. Small Business Program (15% fee): APPLIED 15 Nov for the whole
         account (app-block todo 37); when Apple's email approves it, turn it
         on in RevenueCat > Apps > Palna (App Store).
@@ -288,7 +264,7 @@ The steps to production are in section 0. Background:
         starts every Codemagic build. Then every iPhone release goes to
         review by itself and out to everyone once approved. Android (66):
         Play upload to Production + sent for review, like OathLock.
-[ ] 46b. Submit version 1.0 for App Store review: steps 67a-67d (26 Nov).
+[x] 46b. Version 1.0 SUBMITTED for App Store review 26 Nov (67d).
         Lessons from OathLock's two rejections (app-block todo 36):
         - [x] the app icon must not look like a placeholder (2.3.8):
           Palna's is the finished cradle design;
@@ -543,6 +519,8 @@ Done items that code comments still refer to
   52 Palna Pro prices; Q1 country lock (only the person who added the baby
   changes the country); Q2 17 more countries (schedules, emergency
   numbers); Q5 optional RSV / flu. All released 28 Oct.
+- 63 "not a medical device" line at the bottom of Settings (released 26
+  Nov, #21).
 
 How to
 - New synced table: migration in supabase/migrations (dry run, then
