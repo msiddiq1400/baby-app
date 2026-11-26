@@ -1372,6 +1372,10 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
+  String get notMedicalDevice =>
+      'پالنا طبی آلہ نہیں اور آپ کے ڈاکٹر کے مشورے کی جگہ نہیں لیتا۔';
+
+  @override
   String get deleteAccountFailed =>
       'اکاؤنٹ حذف نہیں ہو سکا۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔';
 
@@ -3848,6 +3852,10 @@ class AppLocalizationsUrLatn extends AppLocalizationsUr {
   String appVersion(String version, String build) {
     return 'Version $version (build $build)';
   }
+
+  @override
+  String get notMedicalDevice =>
+      'Palna medical device nahi aur aap ke doctor ke mashware ki jagah nahi leta.';
 
   @override
   String get deleteAccountFailed =>

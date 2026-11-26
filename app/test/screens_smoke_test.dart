@@ -463,6 +463,15 @@ void main() {
     }
   }
 
+  // App Store / Play health apps: the app itself says it isn't a medical
+  // device (todos 63), at the bottom of Settings.
+  testWidgets('Settings says Palna is not a medical device', (tester) async {
+    await pumpScreen(tester, screens['Settings']!(), const Locale('en'));
+    final line = find.text("Palna is not a medical device and doesn't replace advice from your doctor.");
+    await tester.scrollUntilVisible(line, 300, scrollable: find.byType(Scrollable).first);
+    expect(line, findsOneWidget);
+  });
+
   testWidgets('Sign in has no Apple button on Android', (tester) async {
     await pumpScreen(tester, const SignInScreen(), const Locale('en'));
     expect(find.text('Continue with Apple'), findsNothing);

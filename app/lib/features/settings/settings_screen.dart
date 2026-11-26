@@ -175,9 +175,18 @@ class SettingsScreen extends ConsumerWidget {
             title: Text(l10n.deleteAccount, style: TextStyle(color: theme.colorScheme.error)),
             onTap: () => showDeleteAccountDialog(context),
           ),
+          // Shown in the app as well as the stores, site and terms (todos 63).
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+            child: Text(
+              l10n.notMedicalDevice,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+            ),
+          ),
           if (ref.watch(_packageInfoProvider).value case final info?)
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
               child: Text(
                 l10n.appVersion(info.version, info.buildNumber),
                 textAlign: TextAlign.center,
