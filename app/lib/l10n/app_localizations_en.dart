@@ -1402,6 +1402,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get notMedicalDevice =>
+      'Palna is not a medical device and doesn\'t replace advice from your doctor.';
+
+  @override
   String get deleteAccountFailed =>
       'Couldn\'t delete your account. Check your internet connection and try again.';
 

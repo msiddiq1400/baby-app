@@ -960,6 +960,7 @@
       }
     }
   },
+  "notMedicalDevice": "Palna is not a medical device and doesn't replace advice from your doctor.",
   "deleteAccountFailed": "Couldn't delete your account. Check your internet connection and try again.",
   "startFeedTimer": "Start a timer",
   "lastSide": "Last feed: {side} side",

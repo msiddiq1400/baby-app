@@ -62,6 +62,11 @@ Palna: Flutter app (`app/`), Supabase backend (`supabase/`), PowerSync, and the 
 - Codemagic (free plan: Mac machines only, 500 minutes a month shared with
   OathLock and API Toolbox): iPhone to TestFlight and Android to Google Play
   (internal, draft) start on every push to `main` that changes `app/` (or
-  `codemagic.yaml`).
+  `codemagic.yaml`). Once iPhone 1.0 is approved, the iPhone build also goes
+  to App Review and is released once approved (todos 46e): from then on a
+  release that changes `app/` must raise the version in `app/pubspec.yaml`
+  and update `release_notes.json` (the App Store's "What's New"); the
+  release pull request's app-release check (`tools/check_app_release.py`)
+  fails otherwise. Locally: `python -I tools/test_check_app_release.py`.
 - `[skip ci]` in the merge commit message skips the GitHub and Codemagic
   runs (use it for docs-only merges; Cloudflare still rebuilds the site).

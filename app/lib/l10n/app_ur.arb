@@ -830,6 +830,7 @@
   "deleteAccountTypeHint": "تصدیق کے لیے DELETE لکھیں",
   "deleteAccountButton": "ہمیشہ کے لیے حذف کریں",
   "appVersion": "ورژن {version} (بلڈ {build})",
+  "notMedicalDevice": "پالنا طبی آلہ نہیں اور آپ کے ڈاکٹر کے مشورے کی جگہ نہیں لیتا۔",
   "deleteAccountFailed": "اکاؤنٹ حذف نہیں ہو سکا۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔",
   "startFeedTimer": "ٹائمر شروع کریں",
   "lastSide": "پچھلی بار: {side} طرف",

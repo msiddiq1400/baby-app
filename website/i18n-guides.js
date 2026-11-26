@@ -66,7 +66,7 @@
     'sw.faq.4.q': 'اگر ایک ہی فائل دو بار امپورٹ ہو جائے تو؟',
     'sw.faq.4.a': 'کچھ بھی دوہرا نہیں ہوگا۔ جو اندراج پہلے سے پالنا میں ہیں وہ چھوڑ دیے جاتے ہیں، اس لیے بعد میں نئی ایکسپورٹ فائل امپورٹ کر کے درمیان کے دن بھی لا سکتے ہیں۔',
     'sw.cta.title': 'اپنا ریکارڈ ساتھ لے آئیں۔',
-    'sw.cta.sub': 'پالنا جلد گوگل پلے اور ایپ اسٹور پر آ رہا ہے۔ ابھی اپنی فائل ایکسپورٹ کر لیں، اور لانچ کے دن ہم آپ کو ای میل کر دیں گے۔',
+    'sw.cta.sub': 'پالنا اب گوگل پلے پر دستیاب ہے، اور آئی فون ایپ جلد آ رہی ہے۔ ابھی اپنی فائل ایکسپورٹ کر لیں اور اپنی ہسٹری ساتھ لے آئیں۔',
     'sw.more.title': 'مزید مدد',
 
     // Switch from Nara Baby
@@ -191,7 +191,7 @@
     'sw.faq.4.q': 'Agar ek hi file do baar import ho jaye to?',
     'sw.faq.4.a': 'Kuch bhi dohra nahi hoga. Jo entries pehle se Palna mein hain woh chhor di jaati hain, is liye baad mein nayi export file import kar ke darmiyan ke din bhi la sakte hain.',
     'sw.cta.title': 'Apna record saath le aayein.',
-    'sw.cta.sub': 'Palna jald Google Play aur App Store par aa raha hai. Abhi apni file export kar lein, aur launch ke din hum aap ko email kar denge.',
+    'sw.cta.sub': 'Palna ab Google Play par mojood hai, aur iPhone app jald aa rahi hai. Abhi apni file export kar lein aur apni history saath le aayein.',
     'sw.more.title': 'Mazeed madad',
 
     // Switch from Nara Baby

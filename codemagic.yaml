@@ -7,8 +7,14 @@
 # be started by hand: Codemagic > baby-app > Start new build. Feature branches
 # never build.
 #
+# iPhone builds go to TestFlight (internal testers). Once version 1.0 is
+# approved they will also go to App Review and out to everyone by themselves
+# (see the iPhone publishing block; todos 46e).
+#
 # Versioning: the version name (1.0.0) comes from app/pubspec.yaml; raise it
-# there for each store release. The build number is set here: the store's
+# there for each store release (the release pull request's app-release check,
+# tools/check_app_release.py, insists on it, and on new release_notes.json,
+# once App Review auto-submit is on). The build number is set here: the store's
 # latest build + 1, or pubspec's +N if that is higher. So every upload gets a
 # new number and nothing needs bumping by hand for Codemagic builds.
 #
@@ -91,6 +97,13 @@ workflows:
             --build-number=$BUILD \
             --dart-define-from-file=env/prod.json \
             --export-options-plist=/Users/builder/export_options.plist
+      - name: What's New text
+        # Codemagic reads release_notes.json from the working directory (app/)
+        # for the App Store's "What's New" field. Its source is the repo root,
+        # so editing it alone doesn't count as an app change and starts no
+        # builds. The format is checked on the release pull request
+        # (tools/check_app_release.py).
+        script: cp ../release_notes.json release_notes.json
     artifacts:
       - "**/build/ios/ipa/*.ipa"
       - /tmp/xcodebuild_logs/*.log
@@ -101,6 +114,23 @@ workflows:
         # (and add beta_groups) once TestFlight > Test Information is filled in
         # and there is an external group with a public link.
         submit_to_testflight: false
+        # App Review by itself (todos 46e). OFF until version 1.0 is approved:
+        # the first version goes to review by hand in App Store Connect,
+        # because Apple wants the first in-app purchases sent on the version
+        # page together with it, and Codemagic can't attach them.
+        # After the approval, uncomment these four lines in the next release
+        # that changes app/ (with pubspec's version raised, e.g. 1.0.1, and
+        # new release_notes.json; the release check then insists on both).
+        # Each build then goes to App Review in a new App Store version named
+        # after pubspec's version, with "What's New" from release_notes.json,
+        # and goes to everyone once approved (AFTER_APPROVAL, no phased
+        # rollout). A build still waiting for review is pulled out in favour
+        # of the newer one. Runs on Codemagic's side after the build (no Mac
+        # minutes), up to 2 hours; the result shows on the build page.
+        # submit_to_app_store: true
+        # release_type: AFTER_APPROVAL
+        # phased_release: false
+        # cancel_previous_submissions: true
 
   android-play:
     name: Android to Google Play
